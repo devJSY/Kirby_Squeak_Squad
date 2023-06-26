@@ -21,6 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="wingdi.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">

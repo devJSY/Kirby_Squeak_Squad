@@ -1,8 +1,6 @@
 ﻿// Client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
-int a = 0;
-
 #include "framework.h"
 #include "Client.h"
 
@@ -47,7 +45,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 기본 메시지 루프입니다:
     while (true)
     {
-
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             if (msg.message == WM_QUIT) break;
@@ -60,14 +57,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
+            // TODO:
 
+            
         }
-
     }
 
     return (int) msg.wParam;
 }
-
 
 
 //
@@ -162,7 +159,41 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
 
             Rectangle(hdc, 100, 100, 200, 200);
-            Ellipse(hdc, 300, 300, 500, 500);
+            Ellipse(hdc, 100, 100, 200, 200);
+
+            // Create an array of TRIVERTEX structures that describe
+            // positional and color values for each vertex.
+            TRIVERTEX vertex[3];
+            vertex[0].x = 150;
+            vertex[0].y = 0;
+            vertex[0].Red = 0xff00;
+            vertex[0].Green = 0x8000;
+            vertex[0].Blue = 0x0000;
+            vertex[0].Alpha = 0x0000;
+
+            vertex[1].x = 0;
+            vertex[1].y = 150;
+            vertex[1].Red = 0x9000;
+            vertex[1].Green = 0x0000;
+            vertex[1].Blue = 0x9000;
+            vertex[1].Alpha = 0x0000;
+
+            vertex[2].x = 300;
+            vertex[2].y = 150;
+            vertex[2].Red = 0x9000;
+            vertex[2].Green = 0x0000;
+            vertex[2].Blue = 0x9000;
+            vertex[2].Alpha = 0x0000;
+
+            // Create a GRADIENT_TRIANGLE structure that
+            // references the TRIVERTEX vertices.
+            GRADIENT_TRIANGLE gTriangle;
+            gTriangle.Vertex1 = 0;
+            gTriangle.Vertex2 = 1;
+            gTriangle.Vertex3 = 2;
+
+            // Draw a shaded triangle.
+            GradientFill(hdc, vertex, 3, &gTriangle, 1, GRADIENT_FILL_TRIANGLE);
 
             EndPaint(hWnd, &ps);
         }
