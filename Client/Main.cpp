@@ -1,6 +1,8 @@
 ﻿// Client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
+int a = 0;
+
 #include "framework.h"
 #include "Client.h"
 
@@ -158,6 +160,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+            Rectangle(hdc, 100, 100, 200, 200);
+            Ellipse(hdc, 300, 300, 500, 500);
+
             EndPaint(hWnd, &ps);
         }
         break;
