@@ -7,6 +7,15 @@
     <Filter Include="Header">
       <UniqueIdentifier>{94f19941-4d14-43fd-8d62-a95d42508c58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{ee03f056-4170-4e50-92b4-263813a18329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{4eaf651b-e76f-4894-b2cb-e3d51350af87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High Level Interface">
+      <UniqueIdentifier>{2db8ecd6-d25b-464b-9a68-d272aff4d95a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -21,7 +30,15 @@
     <ClInclude Include="targetver.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="wingdi.h" />
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="syMath.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="syApplication.h">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -33,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="syApplication.cpp">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
