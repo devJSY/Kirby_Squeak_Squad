@@ -20,7 +20,7 @@ namespace sy
 		HWND mHwnd;
 		HDC mHdc;
 
-		math::Vector2 mPos;
+		Vector2 mPos;
 	};
 
 }

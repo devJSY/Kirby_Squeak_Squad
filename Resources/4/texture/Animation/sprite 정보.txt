@@ -1,0 +1,1 @@
+sprite 0 ofset Y 5
