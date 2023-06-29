@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{aa2c909e-25e9-4b20-9b2f-3ccd975cecce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header">
-      <UniqueIdentifier>{94f19941-4d14-43fd-8d62-a95d42508c58}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{ee03f056-4170-4e50-92b4-263813a18329}</UniqueIdentifier>
     </Filter>
@@ -16,19 +10,31 @@
     <Filter Include="Engine\High Level Interface">
       <UniqueIdentifier>{2db8ecd6-d25b-464b-9a68-d272aff4d95a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{b0f4f547-0681-430a-8175-50a94e10dc78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Resource">
+      <UniqueIdentifier>{aa2c909e-25e9-4b20-9b2f-3ccd975cecce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Header">
+      <UniqueIdentifier>{94f19941-4d14-43fd-8d62-a95d42508c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{2c5e8050-feb8-454b-808d-52f589dd8255}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
-      <Filter>Header</Filter>
+      <Filter>Windows\Header</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>Header</Filter>
+      <Filter>Windows\Header</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header</Filter>
+      <Filter>Windows\Header</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header</Filter>
+      <Filter>Windows\Header</Filter>
     </ClInclude>
     <ClInclude Include="CommonInclude.h">
       <Filter>Engine\Common</Filter>
@@ -39,13 +45,16 @@
     <ClInclude Include="syApplication.h">
       <Filter>Engine\High Level Interface</Filter>
     </ClInclude>
+    <ClInclude Include="syInput.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
-      <Filter>Resource</Filter>
+      <Filter>Windows\Resource</Filter>
     </Image>
     <Image Include="small.ico">
-      <Filter>Resource</Filter>
+      <Filter>Windows\Resource</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +62,13 @@
     <ClCompile Include="syApplication.cpp">
       <Filter>Engine\High Level Interface</Filter>
     </ClCompile>
+    <ClCompile Include="syInput.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
-      <Filter>Resource</Filter>
+      <Filter>Windows\Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

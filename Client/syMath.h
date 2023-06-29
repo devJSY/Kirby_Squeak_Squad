@@ -9,8 +9,6 @@ namespace sy::math
 			, y(0.0f)
 		{}
 
-
-
 		float x;
 		float y;
 	};

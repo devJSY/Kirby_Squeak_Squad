@@ -22,5 +22,4 @@ namespace sy
 
 		Vector2 mPos;
 	};
-
 }
