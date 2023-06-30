@@ -22,6 +22,9 @@
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{2c5e8050-feb8-454b-808d-52f589dd8255}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{07b4520e-3616-4bf2-bc7b-6775ee2ab6af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="syInput.h">
       <Filter>Engine\Input</Filter>
     </ClInclude>
+    <ClInclude Include="syTime.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="syInput.cpp">
       <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="syTime.cpp">
+      <Filter>Engine\Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

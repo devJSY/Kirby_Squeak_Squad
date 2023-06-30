@@ -136,12 +136,14 @@
     <ClInclude Include="syApplication.h" />
     <ClInclude Include="syInput.h" />
     <ClInclude Include="syMath.h" />
+    <ClInclude Include="syTime.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="syApplication.cpp" />
     <ClCompile Include="syInput.cpp" />
+    <ClCompile Include="syTime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

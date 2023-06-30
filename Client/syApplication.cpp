@@ -1,5 +1,6 @@
 #include "syApplication.h"
 #include "syInput.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -19,6 +20,7 @@ namespace sy
 		mHwnd = hwnd;
 		mHdc = GetDC(mHwnd);
 
+		Time::Initailize();
 		Input::Initailize();
 	}
 
@@ -30,31 +32,34 @@ namespace sy
 
 	void Application::Update()
 	{
+		Time::Update();
 		Input::Update();
 
 		if (Input::GetKeyPressed(eKeyCode::W))
 		{
-			mPos.y -= 0.01f;
+			mPos.y -= 300.0f * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyPressed(eKeyCode::A))
 		{
-			mPos.x -= 0.01f;
+			mPos.x -= 300.0f * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyPressed(eKeyCode::S))
 		{
-			mPos.y += 0.01f;
+			mPos.y += 300.0f * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyPressed(eKeyCode::D))
 		{
-			mPos.x += 0.01f;
+			mPos.x += 300.0f * Time::DeltaTime();
 		}
 	}
 
 	void Application::Render()
 	{
+		Time::Render(mHdc);
+
 		Ellipse(mHdc
 			, int(100 + mPos.x), int(100 + mPos.y)
 			, int(200 + mPos.x), int(200 + mPos.y));
