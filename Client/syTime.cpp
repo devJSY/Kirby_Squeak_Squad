@@ -38,7 +38,7 @@ namespace sy
 			float fps = 1.f / mDeltaTime;
 
 			swprintf_s(szFloat, 50, L"fps : %f", fps);
-			int strLen = wcsnlen_s(szFloat, 50);
+			int strLen = (int)wcsnlen_s(szFloat, 50);
 
 			TextOut(hdc, 10, 10, szFloat, strLen);
 

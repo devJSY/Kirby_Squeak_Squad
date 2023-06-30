@@ -119,7 +119,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    // 해상도 256, 384
-   application.Initialize(hWnd);
+   application.Initialize(hWnd, { 900, 600 });
 
    if (!hWnd)
    {
