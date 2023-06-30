@@ -127,27 +127,27 @@ namespace sy
 	void Application::CreateBall()
 	{
 		Ball ball = {};
-		ball.Pos.x = float(mResolution.x / 2);
-		ball.Pos.y = float(mResolution.y / 2);
 
-		// 100 ~ 500 random speed set
-		ball.Speed.x = float(rand() % 400) + 100;
-		ball.Speed.y = float(rand() % 400) + 100;
-
+		// ball 크기 설정
 		ball.Scale.x = 100.f;
 		ball.Scale.y = 100.f;
 
-		// 시드 값을 설정하여 난수 생성기 초기화
+		// mResolution 범위 내의 랜덤위치 생성
+		ball.Pos.x = float(rand() % int(mResolution.x - ball.Scale.x) + int(ball.Scale.x / 2));
+		ball.Pos.y = float(rand() % int(mResolution.y - ball.Scale.y) + int(ball.Scale.y / 2));
+
+		ball.Speed.x = 300;
+		ball.Speed.y = 300;
+
+		//// 100 ~ 500 random speed set
+		//ball.Speed.x = float(rand() % 400) + 100;
+		//ball.Speed.y = float(rand() % 400) + 100;
+
+		// 랜덤 방향 설정
 		std::random_device rd;
 		std::mt19937 gen(rd());
-
-		// 균일 분포를 사용하여 0과 1 사이의 실수값 생성
 		std::uniform_real_distribution<> dis(0, 1);
-
-		// 첫 번째 bool 값 생성
 		ball.DirectionX = dis(gen) < 0.5;
-
-		// 두 번째 bool 값 생성
 		ball.DirectionY = dis(gen) < 0.5;
 
 		Balls.push_back(ball);
