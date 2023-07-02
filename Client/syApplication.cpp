@@ -51,8 +51,8 @@ namespace sy
 		static float fTime = 0.0f;
 		fTime += Time::DeltaTime();
 
-		// 1초에 한번씩 생성
-		if (fTime >= 1.0f)
+		// 2초에 한번씩 생성
+		if (fTime >= 2.0f)
 		{
 			CreateBall();
 			fTime = 0.0f;
