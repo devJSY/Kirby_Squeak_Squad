@@ -51,8 +51,8 @@ namespace sy
 		static float fTime = 0.0f;
 		fTime += Time::DeltaTime();
 
-		// 2초에 한번씩 생성
-		if (fTime >= 2.f)
+		// 1초에 한번씩 생성
+		if (fTime >= 1.0f)
 		{
 			CreateBall();
 			fTime = 0.0f;
@@ -66,6 +66,7 @@ namespace sy
 	{
 		Time::Render(mHdc);
 
+		// Balls 렌더링
 		for (int i = 0; i < Balls.size(); i++)
 		{
 			Ellipse(mHdc,
@@ -95,32 +96,24 @@ namespace sy
 
 	void Application::BallsDirectionCheck()
 	{
-		// Balls 방향 체크
+		// Ball의 위치가 화면밖으로 나가는지 체크하여 방향 변경
 		for (int i = 0; i < Balls.size(); i++)
 		{
 			// 좌측 X
 			if (Balls[i].Pos.x - (Balls[i].Scale.x / 2) <= 0)
-			{
-				Balls[i].DirectionX = true;
-			}
+				Balls[i].DirectionX = true;			
 
 			// 우측 X
 			if (Balls[i].Pos.x + (Balls[i].Scale.x / 2) >= mResolution.x)
-			{
 				Balls[i].DirectionX = false;
-			}
 
 			// 상단 Y
 			if (Balls[i].Pos.y - (Balls[i].Scale.y / 2) <= 0)
-			{
 				Balls[i].DirectionY = true;
-			}
-
+			
 			// 하단 Y
 			if (Balls[i].Pos.y + (Balls[i].Scale.y / 2) >= mResolution.y)
-			{
 				Balls[i].DirectionY = false;
-			}
 		}
 	}
 
@@ -133,15 +126,12 @@ namespace sy
 		ball.Scale.y = 100.f;
 
 		// mResolution 범위 내의 랜덤위치 생성
-		ball.Pos.x = float(rand() % int(mResolution.x - ball.Scale.x) + int(ball.Scale.x / 2));
-		ball.Pos.y = float(rand() % int(mResolution.y - ball.Scale.y) + int(ball.Scale.y / 2));
+		ball.Pos.x = float(rand() % int(mResolution.x - ball.Scale.x)) + int(ball.Scale.x / 2);
+		ball.Pos.y = float(rand() % int(mResolution.y - ball.Scale.y)) + int(ball.Scale.y / 2);
 
-		ball.Speed.x = 300;
-		ball.Speed.y = 300;
-
-		//// 100 ~ 500 random speed set
-		//ball.Speed.x = float(rand() % 400) + 100;
-		//ball.Speed.y = float(rand() % 400) + 100;
+		// 100 ~ 500 random speed set
+		ball.Speed.x = float(rand() % 400) + 100;
+		ball.Speed.y = float(rand() % 400) + 100;
 
 		// 랜덤 방향 설정
 		std::random_device rd;
