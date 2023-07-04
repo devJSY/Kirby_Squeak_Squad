@@ -39,9 +39,11 @@ namespace sy
 		// 새로 생성한 비트맵을 가리키는 DC 생성
 		mBackHdc = CreateCompatibleDC(mHdc);
 
-		// 새로 생성한 비트매과 DC를 서로 연결
+		// 새로 생성한 비트맵과 DC를 서로 연결
 		HBITMAP defaultBitmap =
 			(HBITMAP)SelectObject(mBackHdc, mBackBuffer);
+
+		// mBackHdc 의 기본 비트맵 삭제
 		DeleteObject(defaultBitmap);
 
 		Time::Initailize();
@@ -90,6 +92,7 @@ namespace sy
 			, int(mPos.x + 50)
 			, int(mPos.y + 50.f));
 
+		// Back 버퍼 비트맵을 front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,
 			mBackHdc, 0, 0, SRCCOPY);
 	}
