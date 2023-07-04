@@ -4,12 +4,13 @@
 
 namespace sy
 {
-	std::vector<Application::Ball> Application::Balls = {};
-
 	Application::Application()
 		: mHwnd(NULL)
 		, mHdc(NULL)
 		, mResolution(POINT{})
+		, mBackHdc(NULL)
+		, mBackBuffer(NULL)
+		, mPos(Vector2())
 	{
 	}
 
@@ -19,22 +20,32 @@ namespace sy
 
 	void Application::Initialize(HWND hwnd, POINT Resolution)
 	{
+		mPos.x = 100.f;
+		mPos.y = 100.f;
+
 		mHwnd = hwnd;
 		mHdc = GetDC(mHwnd);
 
 		// 윈도우 크기 지정
 		mResolution = Resolution;
+
 		RECT rect = { 0, 0, mResolution.x, mResolution.y };
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, true);
 		SetWindowPos(mHwnd, nullptr, 100, 100, rect.right - rect.left, rect.bottom - rect.top, 0);
 
+		// 윈도우 해상도와 동일한 비트맵 생성
+		mBackBuffer = CreateCompatibleBitmap(mHdc, mResolution.x, mResolution.y);
+
+		// 새로 생성한 비트맵을 가리키는 DC 생성
+		mBackHdc = CreateCompatibleDC(mHdc);
+
+		// 새로 생성한 비트매과 DC를 서로 연결
+		HBITMAP defaultBitmap =
+			(HBITMAP)SelectObject(mBackHdc, mBackBuffer);
+		DeleteObject(defaultBitmap);
+
 		Time::Initailize();
 		Input::Initailize();
-
-		// 랜덤함수 초기화
-		srand(unsigned(time(NULL)));
-
-		CreateBall();
 	}
 
 	void Application::Run()
@@ -48,98 +59,38 @@ namespace sy
 		Time::Update();
 		Input::Update();		
 
-		static float fTime = 0.0f;
-		fTime += Time::DeltaTime();
-
-		// 2초에 한번씩 생성
-		if (fTime >= 2.0f)
+		if (Input::GetKeyPressed(eKeyCode::W))
 		{
-			CreateBall();
-			fTime = 0.0f;
+			mPos.y -= 500.0f * Time::DeltaTime();
 		}
-
-		BallsDirectionCheck();
-		BallsMove();
+		if (Input::GetKeyPressed(eKeyCode::A))
+		{
+			mPos.x -= 500.0f * Time::DeltaTime();
+		}
+		if (Input::GetKeyPressed(eKeyCode::S))
+		{
+			mPos.y += 500.0f * Time::DeltaTime();
+		}
+		if (Input::GetKeyPressed(eKeyCode::D))
+		{
+			mPos.x += 500.0f * Time::DeltaTime();
+		}
 	}
 
 	void Application::Render()
 	{
 		Time::Render(mHdc);
 
-		// Balls 렌더링
-		for (int i = 0; i < Balls.size(); i++)
-		{
-			Ellipse(mHdc,
-				  int(Balls[i].Pos.x - Balls[i].Scale.x / 2)
-				, int(Balls[i].Pos.y - Balls[i].Scale.y / 2)
-				, int(Balls[i].Pos.x + Balls[i].Scale.x / 2)
-				, int(Balls[i].Pos.y + Balls[i].Scale.y / 2));
-		}
-	}
+		// 테두리 제거용 1증감
+		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
-	void Application::BallsMove()
-	{
-		// Balls 이동
-		for (int i = 0; i < Balls.size(); i++)
-		{
-			if (Balls[i].DirectionX)
-				Balls[i].Pos.x += Balls[i].Speed.x * Time::DeltaTime();
-			else
-				Balls[i].Pos.x -= Balls[i].Speed.x * Time::DeltaTime();
+		Ellipse(mBackHdc
+			, int(mPos.x - 50)
+			, int(mPos.y - 50)
+			, int(mPos.x + 50)
+			, int(mPos.y + 50.f));
 
-			if (Balls[i].DirectionY)
-				Balls[i].Pos.y += Balls[i].Speed.y * Time::DeltaTime();
-			else
-				Balls[i].Pos.y -= Balls[i].Speed.y * Time::DeltaTime();
-		}
-	}
-
-	void Application::BallsDirectionCheck()
-	{
-		// Ball의 위치가 화면밖으로 나가는지 체크하여 방향 변경
-		for (int i = 0; i < Balls.size(); i++)
-		{
-			// 좌측 X
-			if (Balls[i].Pos.x - (Balls[i].Scale.x / 2) <= 0)
-				Balls[i].DirectionX = true;			
-
-			// 우측 X
-			if (Balls[i].Pos.x + (Balls[i].Scale.x / 2) >= mResolution.x)
-				Balls[i].DirectionX = false;
-
-			// 상단 Y
-			if (Balls[i].Pos.y - (Balls[i].Scale.y / 2) <= 0)
-				Balls[i].DirectionY = true;
-			
-			// 하단 Y
-			if (Balls[i].Pos.y + (Balls[i].Scale.y / 2) >= mResolution.y)
-				Balls[i].DirectionY = false;
-		}
-	}
-
-	void Application::CreateBall()
-	{
-		Ball ball = {};
-
-		// ball 크기 설정
-		ball.Scale.x = 100.f;
-		ball.Scale.y = 100.f;
-
-		// mResolution 범위 내의 랜덤위치 생성
-		ball.Pos.x = float(rand() % int(mResolution.x - ball.Scale.x)) + int(ball.Scale.x / 2);
-		ball.Pos.y = float(rand() % int(mResolution.y - ball.Scale.y)) + int(ball.Scale.y / 2);
-
-		// 100 ~ 500 random speed set
-		ball.Speed.x = float(rand() % 400) + 100;
-		ball.Speed.y = float(rand() % 400) + 100;
-
-		// 랜덤 방향 설정
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_real_distribution<> dis(0, 1);
-		ball.DirectionX = dis(gen) < 0.5;
-		ball.DirectionY = dis(gen) < 0.5;
-
-		Balls.push_back(ball);
+		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,
+			mBackHdc, 0, 0, SRCCOPY);
 	}
 }

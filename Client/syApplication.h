@@ -7,15 +7,6 @@ namespace sy
 
 	class Application
 	{
-		struct Ball
-		{
-			Vector2 Pos;
-			Vector2 Scale;
-			Vector2 Speed;
-			bool DirectionX;
-			bool DirectionY;
-		};
-
 	public:
 		Application();
 		~Application();
@@ -25,15 +16,14 @@ namespace sy
 		void Update();
 		void Render();
 
-		void BallsMove();
-		void BallsDirectionCheck();
-		void CreateBall();
-
 	private:
 		HWND mHwnd;
 		HDC mHdc;
-
 		POINT mResolution;
-		static std::vector<Ball> Balls;
+		
+		HDC mBackHdc;
+		HBITMAP mBackBuffer;
+
+		Vector2 mPos;
 	};
 }
