@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonInclude.h"
+#include "syScene.h"
 
 namespace sy
 {
@@ -24,6 +25,6 @@ namespace sy
 		HDC mBackHdc;
 		HBITMAP mBackBuffer;
 
-		Vector2 mPos;
+		Scene* mScene;
 	};
 }

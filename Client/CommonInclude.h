@@ -4,10 +4,30 @@
 #include <map>
 #include <set>
 #include <functional>
+#include <string>
 
 #include "framework.h"
 #include "syMath.h"
 
-// 랜덤 함수용 헤더
-#include <time.h>
-#include <random>
+// Assert() 함수
+#include <cassert>
+
+namespace sy::enums
+{
+	enum class eLayerType
+	{
+		BackGround,
+		Player,
+		Monster,
+		Effect,
+		UI,
+		End,
+	};
+
+	enum class eComponentType
+	{
+		Transform,
+		SpriteRenderer,
+		End,
+	};
+}

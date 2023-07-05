@@ -10,7 +10,6 @@ namespace sy
 		, mResolution(POINT{})
 		, mBackHdc(NULL)
 		, mBackBuffer(NULL)
-		, mPos(Vector2())
 	{
 	}
 
@@ -20,9 +19,6 @@ namespace sy
 
 	void Application::Initialize(HWND hwnd, POINT Resolution)
 	{
-		mPos.x = 100.f;
-		mPos.y = 100.f;
-
 		mHwnd = hwnd;
 		mHdc = GetDC(mHwnd);
 
@@ -46,8 +42,11 @@ namespace sy
 		// mBackHdc 의 기본 비트맵 삭제
 		DeleteObject(defaultBitmap);
 
-		Time::Initailize();
-		Input::Initailize();
+		Time::Initialize();
+		Input::Initialize();
+
+		mScene = new Scene();
+		mScene->Initialize();
 	}
 
 	void Application::Run()
@@ -60,37 +59,17 @@ namespace sy
 	{
 		Time::Update();
 		Input::Update();		
-
-		if (Input::GetKeyPressed(eKeyCode::W))
-		{
-			mPos.y -= 500.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::A))
-		{
-			mPos.x -= 500.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::S))
-		{
-			mPos.y += 500.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::D))
-		{
-			mPos.x += 500.0f * Time::DeltaTime();
-		}
+		mScene->Update();
 	}
 
 	void Application::Render()
 	{
-		Time::Render(mHdc);
+		Time::Render(mBackHdc);
 
 		// 테두리 제거용 1증감
 		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
-		Ellipse(mBackHdc
-			, int(mPos.x - 50)
-			, int(mPos.y - 50)
-			, int(mPos.x + 50)
-			, int(mPos.y + 50.f));
+		mScene->Render(mBackHdc);
 
 		// Back 버퍼 비트맵을 front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,

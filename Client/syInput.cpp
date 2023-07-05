@@ -11,7 +11,7 @@ namespace sy
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
 	};
 
-	void Input::Initailize()
+	void Input::Initialize()
 	{
 		for (size_t i = 0; i < (size_t)eKeyCode::End; i++)
 		{

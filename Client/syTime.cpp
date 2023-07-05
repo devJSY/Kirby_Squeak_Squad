@@ -7,7 +7,7 @@ namespace sy
 	LARGE_INTEGER Time::mCurFrequency = {};
 	float Time::mDeltaTime = 0.0f;
 
-	void Time::Initailize()
+	void Time::Initialize()
 	{
 		// CPU 고유 진동수를 가져온다.
 		QueryPerformanceFrequency(&mCpuFrequency);

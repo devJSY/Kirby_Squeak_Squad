@@ -25,6 +25,27 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{07b4520e-3616-4bf2-bc7b-6775ee2ab6af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{eabab9a3-c01c-48fd-9fea-3a9307dbe6d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{b98eac82-a631-4fe1-8365-d885c7ef5c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Layer">
+      <UniqueIdentifier>{e4a6f586-3a64-4c8b-a7d3-2227ea5dc11a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{91c784e2-cd54-4878-a649-45e1755c8832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{0e24e48b-1c54-4836-96c7-6d85d278e6f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\SpriteRenderer">
+      <UniqueIdentifier>{88e2c895-f10d-47e0-b8c1-1c57943d8c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{98413686-2467-4ca4-9749-fa0bb9e3d17d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -54,6 +75,27 @@
     <ClInclude Include="syTime.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
+    <ClInclude Include="syEntity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="syScene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="syLayer.h">
+      <Filter>Engine\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="syGameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="syComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="syTransform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="sySpriteRenderer.h">
+      <Filter>Engine\Component\SpriteRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -73,6 +115,27 @@
     </ClCompile>
     <ClCompile Include="syTime.cpp">
       <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="syEntity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="syScene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="syLayer.cpp">
+      <Filter>Engine\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="syGameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="syComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="syTransform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="sySpriteRenderer.cpp">
+      <Filter>Engine\Component\SpriteRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

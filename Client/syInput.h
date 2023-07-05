@@ -29,7 +29,7 @@ namespace sy
 			bool bPrevPressed;
 		};
 
-		static void Initailize();
+		static void Initialize();
 		static void Update();
 
 		__forceinline static bool GetKeyDown(eKeyCode code) 
