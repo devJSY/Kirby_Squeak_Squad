@@ -1,4 +1,5 @@
 #include "syInput.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -26,29 +27,51 @@ namespace sy
 
 	void Input::Update()
 	{
-		for (size_t i = 0; i < (size_t)eKeyCode::End; i++)
+		HWND hWnd = Application::GetHwnd();
+		HWND nowHwnd = GetFocus();
+
+		if (hWnd == nowHwnd)
 		{
-			// 해당키가 눌려졌다.
-			if (GetAsyncKeyState(ASCII[i]) & 0x8000)
+			for (size_t i = 0; i < (size_t)eKeyCode::End; i++)
 			{
-				// 이전 프레임에도 눌러져 있었다.
-				if (mKeys[i].bPrevPressed == true)
-					mKeys[i].state = eKeyState::Pressed;
-				else
-					mKeys[i].state = eKeyState::Down;
+				// 해당키가 눌려졌다.
+				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
+				{
+					// 이전 프레임에도 눌러져 있었다.
+					if (mKeys[i].bPrevPressed == true)
+						mKeys[i].state = eKeyState::Pressed;
+					else
+						mKeys[i].state = eKeyState::Down;
 
-				mKeys[i].bPrevPressed = true;
+					mKeys[i].bPrevPressed = true;
+				}
+				// 해당키가 안눌러져 있다.
+				else
+				{
+					// 이전 프레임에 눌러져 있었다
+					if (mKeys[i].bPrevPressed == true)
+						mKeys[i].state = eKeyState::Up;
+					else
+						mKeys[i].state = eKeyState::None;
+
+					mKeys[i].bPrevPressed = false;
+				}
 			}
-			// 해당키가 안눌러져 있다.
-			else 
+		}
+		else
+		{
+			for (UINT i = 0; i < (UINT)eKeyCode::End; i++)
 			{
-				// 이전 프레임에 눌러져 있었다
-				if (mKeys[i].bPrevPressed == true)
-					mKeys[i].state = eKeyState::Up;
-				else
-					mKeys[i].state = eKeyState::None;
-
 				mKeys[i].bPrevPressed = false;
+
+				if (mKeys[i].state == eKeyState::Down || mKeys[i].state == eKeyState::Pressed)
+				{
+					mKeys[i].state = eKeyState::Up;
+				}
+				else if (mKeys[i].state == eKeyState::Up)
+				{
+					mKeys[i].state = eKeyState::None;
+				}
 			}
 		}
 	}

@@ -10,19 +10,22 @@ namespace sy
 	{
 	public:
 		Application();
-		~Application();
+		virtual ~Application();
 
-		void Initialize(HWND hwnd, POINT Resolution);
-		void Run();
-		void Update();
-		void Render();
+		static void Initialize(HWND hwnd, POINT Resolution);
+		static void Run();
+		static void Update();
+		static void Render();
+
+	public:
+		static HWND GetHwnd() { return mHwnd; }
 
 	private:
-		HWND mHwnd;
-		HDC mHdc;
-		POINT mResolution;
+		static HWND mHwnd;
+		static HDC mHdc;
+		static POINT mResolution;
 		
-		HDC mBackHdc;
-		HBITMAP mBackBuffer;
+		static HDC mBackHdc;
+		static HBITMAP mBackBuffer;
 	};
 }

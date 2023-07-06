@@ -5,12 +5,14 @@
 
 namespace sy
 {
+	HWND		 Application::mHwnd		 = NULL;
+	HDC			Application::mHdc		 = NULL;
+	POINT		Application::mResolution = POINT{};
+
+	HDC			Application::mBackHdc	 = NULL;
+	HBITMAP		Application::mBackBuffer = NULL;
+
 	Application::Application()
-		: mHwnd(NULL)
-		, mHdc(NULL)
-		, mResolution(POINT{})
-		, mBackHdc(NULL)
-		, mBackBuffer(NULL)
 	{
 	}
 
