@@ -22,5 +22,6 @@ namespace sy
 	void StageScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+		ShowSceneName(hdc, GetName());
 	}
 }

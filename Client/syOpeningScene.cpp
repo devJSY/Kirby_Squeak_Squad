@@ -22,5 +22,6 @@ namespace sy
 	void OpeningScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+		ShowSceneName(hdc, GetName());
 	}
 }

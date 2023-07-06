@@ -1,5 +1,10 @@
 #include "sySceneManager.h"
 #include "syTitleScene.h"
+#include "syLevelSelectScene.h"
+#include "syEndingScene.h"
+#include "syOpeningScene.h"
+#include "syStageScene.h"
+#include "syWorldTunnelScene.h"
 
 namespace sy
 {
@@ -9,9 +14,13 @@ namespace sy
 	void SceneManager::Initialize()
 	{
 		CreateScene<TitleScene>(L"TitleScene");
+		CreateScene<LevelSelectScene>(L"LevelSelectScene");
+		CreateScene<EndingScene>(L"EndingScene");
+		CreateScene<OpeningScene>(L"OpeningScene");
+		CreateScene<StageScene>(L"StageScene");
+		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
 
-
-		LoadScene(L"TitleScene");
+		LoadScene(L"LevelSelectScene");
 	}
 
 	void SceneManager::Update()
