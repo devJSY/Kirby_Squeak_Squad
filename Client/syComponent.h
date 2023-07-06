@@ -17,6 +17,9 @@ namespace sy
 		void SetOwner(class GameObject* owner) { mOwner = owner; }
 		class GameObject* GetOwner() { return mOwner; }
 
+	public:
+		enums::eComponentType GetCompType() { return mType; }
+
 	private:
 		const eComponentType mType;
 		class GameObject* mOwner;

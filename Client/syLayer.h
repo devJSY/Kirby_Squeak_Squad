@@ -17,6 +17,8 @@ namespace sy
 		void AddGameObject()
 		{
 			GameObject* obj = new GameObject();
+			std::wstring str = L"GameObejct";
+			obj->SetName(str);
 			mGameObjects.push_back(obj);		
 		}
 

@@ -8,22 +8,29 @@ namespace sy
 		: Component(eComponentType::SpriteRenderer)
 	{
 	}
+
 	SpriteRenderer::~SpriteRenderer()
 	{
 	}
+
 	void SpriteRenderer::Initialize()
 	{
 	}
+
 	void SpriteRenderer::Update()
 	{
 	}
+
 	void SpriteRenderer::Render(HDC hdc)
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
+
+		//Transform* tr = (Transform*)(GetOwner()->GetComp(enums::eComponentType::Transform));
+
 		assert(tr); // tr이 nullptr 이면 에러
 		Vector2 pos = tr->GetPosition();
 
-		Ellipse(hdc, int(100 + pos.x), int(100 + pos.y)
-			, int(200 + pos.x), int(200 + pos.y));
+		Ellipse(hdc, int(pos.x - 50), int(pos.y - 50)
+			, int(pos.x + 50), int(pos.y + 50));
 	}
 }

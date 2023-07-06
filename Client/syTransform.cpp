@@ -8,12 +8,15 @@ namespace sy
 		: Component(eComponentType::Transform)
 	{
 	}
+
 	Transform::~Transform()
 	{
 	}
+
 	void Transform::Initialize()
 	{
 	}
+
 	void Transform::Update()
 	{
 		if (Input::GetKeyPressed(eKeyCode::W))
@@ -33,6 +36,7 @@ namespace sy
 			mPosition.x += 500.0f * Time::DeltaTime();
 		}
 	}
+
 	void Transform::Render(HDC hdc)
 	{
 	}

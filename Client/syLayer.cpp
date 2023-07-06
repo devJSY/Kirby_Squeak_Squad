@@ -5,12 +5,15 @@ namespace sy
 	Layer::Layer()
 	{
 	}
+
 	Layer::~Layer()
 	{
 	}
+
 	void Layer::Initialize()
 	{
 	}
+
 	void Layer::Update()
 	{
 		for (GameObject* obj : mGameObjects)
@@ -18,6 +21,7 @@ namespace sy
 			obj->Update();
 		}
 	}
+
 	void Layer::Render(HDC hdc)
 	{
 		for (GameObject* obj : mGameObjects)

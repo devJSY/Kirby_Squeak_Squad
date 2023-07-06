@@ -28,6 +28,17 @@ namespace sy
             return comp;
         }
 
+    public:
+        Component* GetComp(enums::eComponentType ctype)
+        {
+            for (Component* c : mComponents)
+            {
+                if (c->GetCompType() == ctype)
+                    return c;
+            }
+            return nullptr;
+        }
+
     private:
         std::vector<Component*> mComponents;
     };

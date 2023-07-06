@@ -8,6 +8,7 @@ namespace sy
 	{
 		mComponents.push_back(new Transform());
 		mComponents[0]->SetOwner(this);
+		((Transform*)mComponents[0])->SetPosition(Vector2(100.f, 100.f));
 
 		mComponents.push_back(new SpriteRenderer());
 		mComponents[1]->SetOwner(this);
