@@ -26,4 +26,15 @@ namespace sy
 			layer.Render(hdc);
 		}
 	}
+
+	void Scene::ShowSceneName(HDC hdc, std::wstring& str)
+	{	
+		wchar_t szFloat[50];
+		wcscpy_s(szFloat, str.c_str());
+
+		swprintf_s(szFloat, 50, L"%s", szFloat);
+		int strLen = (int)wcsnlen_s(szFloat, 50);
+
+		TextOut(hdc, 10, 10, szFloat, strLen);
+	}
 }

@@ -16,9 +16,11 @@ namespace sy
 
 	void EndingScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void EndingScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 }

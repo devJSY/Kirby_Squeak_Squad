@@ -16,9 +16,11 @@ namespace sy
 
 	void WorldTunnelScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void WorldTunnelScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 }

@@ -21,6 +21,9 @@ namespace sy
 			mLayers[(int)type].AddGameObject(gameObj);
 		}
 
+	public:
+		void ShowSceneName(HDC hdc, std::wstring& str);
+
 	private:
 		std::vector<Layer> mLayers;
 	};

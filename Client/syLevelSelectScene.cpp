@@ -16,9 +16,11 @@ namespace sy
 
 	void LevelSelectScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void LevelSelectScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 }

@@ -7,6 +7,8 @@ namespace sy
 	GameObject::GameObject()
 	{
 		AddComponent<Transform>();
+		Transform* tr = GetComponent<Transform>();
+		tr->SetPosition(Vector2(100.f, 100.f));
 	}
 
 	GameObject::~GameObject()

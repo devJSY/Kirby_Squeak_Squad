@@ -16,9 +16,11 @@ namespace sy
 
 	void OpeningScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void OpeningScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 }

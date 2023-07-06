@@ -3,7 +3,6 @@
 #include "sySpriteRenderer.h"
 #include "syObject.h"
 
-
 namespace sy
 {
 	TitleScene::TitleScene()
@@ -28,5 +27,6 @@ namespace sy
 	void TitleScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+		ShowSceneName(hdc, GetName());
 	}
 }
