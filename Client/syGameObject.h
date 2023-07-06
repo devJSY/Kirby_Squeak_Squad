@@ -28,15 +28,13 @@ namespace sy
             return comp;
         }
 
-    public:
-        Component* GetComp(enums::eComponentType ctype)
+        template <typename T>
+        T* AddComponent()
         {
-            for (Component* c : mComponents)
-            {
-                if (c->GetCompType() == ctype)
-                    return c;
-            }
-            return nullptr;
+            T* comp = new T();
+            mComponents.push_back(comp);
+            comp->SetOwner(this);
+            return comp;
         }
 
     private:

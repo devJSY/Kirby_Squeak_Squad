@@ -14,12 +14,9 @@ namespace sy
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
-		void AddGameObject()
+		void AddGameObject(GameObject* gameObj)
 		{
-			GameObject* obj = new GameObject();
-			std::wstring str = L"GameObejct";
-			obj->SetName(str);
-			mGameObjects.push_back(obj);		
+			mGameObjects.push_back(gameObj);
 		}
 
 	private:

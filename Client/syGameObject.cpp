@@ -6,19 +6,17 @@ namespace sy
 {
 	GameObject::GameObject()
 	{
-		mComponents.push_back(new Transform());
-		mComponents[0]->SetOwner(this);
-		((Transform*)mComponents[0])->SetPosition(Vector2(100.f, 100.f));
-
-		mComponents.push_back(new SpriteRenderer());
-		mComponents[1]->SetOwner(this);
+		AddComponent<Transform>();
 	}
+
 	GameObject::~GameObject()
 	{
 	}
+
 	void GameObject::Initialize()
 	{
 	}
+
 	void GameObject::Update()
 	{
 		for (Component* comp : mComponents)
@@ -26,6 +24,7 @@ namespace sy
 			comp->Update();
 		}
 	}
+
 	void GameObject::Render(HDC hdc)
 	{
 		for (Component* comp : mComponents)

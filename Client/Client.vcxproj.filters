@@ -46,6 +46,21 @@
     <Filter Include="Engine\Scene">
       <UniqueIdentifier>{98413686-2467-4ca4-9749-fa0bb9e3d17d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Scene\SceneManager">
+      <UniqueIdentifier>{682f2d96-d79a-4bb9-a518-77768b4ab173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{f59544d7-ffb3-4dab-a33c-12a2f2f67682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\syGameObject">
+      <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\syGameObject\Player">
+      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{a1fad098-22a4-42c0-a554-9af5639048a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -84,9 +99,6 @@
     <ClInclude Include="syLayer.h">
       <Filter>Engine\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="syGameObject.h">
-      <Filter>Engine\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="syComponent.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
@@ -95,6 +107,21 @@
     </ClInclude>
     <ClInclude Include="sySpriteRenderer.h">
       <Filter>Engine\Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="syObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="sySceneManager.h">
+      <Filter>Engine\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="syGameObject.h">
+      <Filter>Contents\syGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="syPlayer.h">
+      <Filter>Contents\syGameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="syTitleScene.h">
+      <Filter>Contents\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +152,6 @@
     <ClCompile Include="syLayer.cpp">
       <Filter>Engine\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="syGameObject.cpp">
-      <Filter>Engine\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="syComponent.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
@@ -136,6 +160,18 @@
     </ClCompile>
     <ClCompile Include="sySpriteRenderer.cpp">
       <Filter>Engine\Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sySceneManager.cpp">
+      <Filter>Engine\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="syGameObject.cpp">
+      <Filter>Contents\syGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="syPlayer.cpp">
+      <Filter>Contents\syGameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="syTitleScene.cpp">
+      <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

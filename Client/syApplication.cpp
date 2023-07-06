@@ -1,6 +1,7 @@
 #include "syApplication.h"
 #include "syInput.h"
 #include "syTime.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
@@ -10,7 +11,6 @@ namespace sy
 		, mResolution(POINT{})
 		, mBackHdc(NULL)
 		, mBackBuffer(NULL)
-		, mScene(nullptr)
 	{
 	}
 
@@ -45,11 +45,7 @@ namespace sy
 
 		Time::Initialize();
 		Input::Initialize();
-
-		mScene = new Scene();
-		mScene->Initialize();
-		std::wstring str = L"Test Scene";
-		mScene->SetName(str);
+		SceneManager::Initialize();		
 	}
 
 	void Application::Run()
@@ -62,7 +58,7 @@ namespace sy
 	{
 		Time::Update();
 		Input::Update();		
-		mScene->Update();
+		SceneManager::Update();
 	}
 
 	void Application::Render()
@@ -71,8 +67,7 @@ namespace sy
 		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
 		Time::Render(mBackHdc);
-
-		mScene->Render(mBackHdc);
+		SceneManager::Render(mBackHdc);		
 
 		// Back 버퍼 비트맵을 Front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,

@@ -24,9 +24,6 @@ namespace sy
 	void SpriteRenderer::Render(HDC hdc)
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-
-		//Transform* tr = (Transform*)(GetOwner()->GetComp(enums::eComponentType::Transform));
-
 		assert(tr); // tr이 nullptr 이면 에러
 		Vector2 pos = tr->GetPosition();
 

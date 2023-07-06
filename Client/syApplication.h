@@ -24,7 +24,5 @@ namespace sy
 		
 		HDC mBackHdc;
 		HBITMAP mBackBuffer;
-
-		Scene* mScene;
 	};
 }
