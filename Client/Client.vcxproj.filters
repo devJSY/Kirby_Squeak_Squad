@@ -34,9 +34,6 @@
     <Filter Include="Engine\Layer">
       <UniqueIdentifier>{e4a6f586-3a64-4c8b-a7d3-2227ea5dc11a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject">
-      <UniqueIdentifier>{91c784e2-cd54-4878-a649-45e1755c8832}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\Transform">
       <UniqueIdentifier>{0e24e48b-1c54-4836-96c7-6d85d278e6f5}</UniqueIdentifier>
     </Filter>
@@ -52,14 +49,35 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{f59544d7-ffb3-4dab-a33c-12a2f2f67682}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\syGameObject">
-      <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\syGameObject\Player">
-      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene">
       <UniqueIdentifier>{a1fad098-22a4-42c0-a554-9af5639048a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\TitleScene">
+      <UniqueIdentifier>{addb92de-1800-4390-ab3a-f196944b8ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelSelectScene">
+      <UniqueIdentifier>{4dad836d-06b9-4f2e-8633-02f3566063a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\WorldTunnelScene">
+      <UniqueIdentifier>{3bcb7d38-7761-410e-8df9-9a1c81c142b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene">
+      <UniqueIdentifier>{9993070b-c195-40ca-89e1-be39df79adbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\OpeningScene">
+      <UniqueIdentifier>{00a5c3d9-74bf-4153-971f-7f1dfa156564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\EndingScene">
+      <UniqueIdentifier>{0ac4766b-4850-4d62-94c4-8a53b45b5b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object">
+      <UniqueIdentifier>{91c784e2-cd54-4878-a649-45e1755c8832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject">
+      <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player">
+      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,19 +127,34 @@
       <Filter>Engine\Component\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="syObject.h">
-      <Filter>Engine\GameObject</Filter>
+      <Filter>Engine\Object</Filter>
     </ClInclude>
     <ClInclude Include="sySceneManager.h">
       <Filter>Engine\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="syGameObject.h">
-      <Filter>Contents\syGameObject</Filter>
+      <Filter>Contents\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="syPlayer.h">
-      <Filter>Contents\syGameObject\Player</Filter>
+      <Filter>Contents\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="syTitleScene.h">
-      <Filter>Contents\Scene</Filter>
+      <Filter>Contents\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syLevelSelectScene.h">
+      <Filter>Contents\Scene\LevelSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syEndingScene.h">
+      <Filter>Contents\Scene\EndingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syOpeningScene.h">
+      <Filter>Contents\Scene\OpeningScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syStageScene.h">
+      <Filter>Contents\Scene\StageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syWorldTunnelScene.h">
+      <Filter>Contents\Scene\WorldTunnelScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,13 +198,28 @@
       <Filter>Engine\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="syGameObject.cpp">
-      <Filter>Contents\syGameObject</Filter>
+      <Filter>Contents\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="syPlayer.cpp">
-      <Filter>Contents\syGameObject\Player</Filter>
+      <Filter>Contents\GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="syTitleScene.cpp">
-      <Filter>Contents\Scene</Filter>
+      <Filter>Contents\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syLevelSelectScene.cpp">
+      <Filter>Contents\Scene\LevelSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syEndingScene.cpp">
+      <Filter>Contents\Scene\EndingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syOpeningScene.cpp">
+      <Filter>Contents\Scene\OpeningScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syStageScene.cpp">
+      <Filter>Contents\Scene\StageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syWorldTunnelScene.cpp">
+      <Filter>Contents\Scene\WorldTunnelScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

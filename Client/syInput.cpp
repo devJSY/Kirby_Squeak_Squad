@@ -28,9 +28,9 @@ namespace sy
 	void Input::Update()
 	{
 		HWND hWnd = Application::GetHwnd();
-		HWND nowHwnd = GetFocus();
+		HWND NowHwnd = GetFocus();
 
-		if (hWnd == nowHwnd)
+		if (hWnd == NowHwnd)
 		{
 			for (size_t i = 0; i < (size_t)eKeyCode::End; i++)
 			{
@@ -58,7 +58,7 @@ namespace sy
 				}
 			}
 		}
-		else
+		else // 현재 포커스중이 아니다
 		{
 			for (UINT i = 0; i < (UINT)eKeyCode::End; i++)
 			{

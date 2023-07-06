@@ -132,9 +132,12 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="syComponent.h" />
+    <ClInclude Include="syEndingScene.h" />
     <ClInclude Include="syEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="syLevelSelectScene.h" />
+    <ClInclude Include="syOpeningScene.h" />
     <ClInclude Include="syPlayer.h" />
     <ClInclude Include="syScene.h" />
     <ClInclude Include="syApplication.h" />
@@ -144,16 +147,21 @@
     <ClInclude Include="syMath.h" />
     <ClInclude Include="sySceneManager.h" />
     <ClInclude Include="sySpriteRenderer.h" />
+    <ClInclude Include="syStageScene.h" />
     <ClInclude Include="syTime.h" />
     <ClInclude Include="syTitleScene.h" />
     <ClInclude Include="syTransform.h" />
+    <ClInclude Include="syWorldTunnelScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="syComponent.cpp" />
+    <ClCompile Include="syEndingScene.cpp" />
     <ClCompile Include="syEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="syLevelSelectScene.cpp" />
+    <ClCompile Include="syOpeningScene.cpp" />
     <ClCompile Include="syPlayer.cpp" />
     <ClCompile Include="syScene.cpp" />
     <ClCompile Include="syApplication.cpp" />
@@ -162,9 +170,11 @@
     <ClCompile Include="syLayer.cpp" />
     <ClCompile Include="sySceneManager.cpp" />
     <ClCompile Include="sySpriteRenderer.cpp" />
+    <ClCompile Include="syStageScene.cpp" />
     <ClCompile Include="syTime.cpp" />
     <ClCompile Include="syTitleScene.cpp" />
     <ClCompile Include="syTransform.cpp" />
+    <ClCompile Include="syWorldTunnelScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
