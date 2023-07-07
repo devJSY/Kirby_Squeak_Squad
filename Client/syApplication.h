@@ -19,6 +19,7 @@ namespace sy
 
 	public:
 		static HWND GetHwnd() { return mHwnd; }
+		static POINT GetResolution() { return mResolution; }
 
 	private:
 		static HWND mHwnd;

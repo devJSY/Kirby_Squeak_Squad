@@ -21,6 +21,10 @@ namespace sy
 		Player* player = object::Instantiate<Player>(eLayerType::Player);
 		assert(player);
 		assert(player->AddComponent<SpriteRenderer>());
+		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
+		assert(PlayerRenderer);
+		PlayerRenderer->SetPenRGB(255, 0, 0);
+		PlayerRenderer->SetBrushRGB(255, 0, 0);
 	}
 
 	void StageScene::Update()

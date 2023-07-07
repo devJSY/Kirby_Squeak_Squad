@@ -23,7 +23,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::W) || Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"LevelSelectScene");
 		}
@@ -32,6 +32,6 @@ namespace sy
 	void TitleScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : W");
+		ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : W or Mouse RBTN");
 	}
 }

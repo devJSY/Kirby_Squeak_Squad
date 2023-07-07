@@ -4,6 +4,7 @@
 namespace sy
 {
 	std::vector<Input::Key> Input::mKeys = {};
+	math::Vector2 Input::mMousePos = {};
 
 	int ASCII[(UINT)eKeyCode::End] =
 	{
@@ -58,6 +59,14 @@ namespace sy
 					mKeys[i].bPrevPressed = false;
 				}
 			}
+
+			POINT MousePos = {};
+			// 현재 마우스 Pos 를 받아온다
+			GetCursorPos(&MousePos);
+			// 마우스 Pos 를 스크린 좌표에서 특정 클라이언트 좌표로 바꿔준다
+			ScreenToClient(hWnd, &MousePos);
+			mMousePos.x = MousePos.x;
+			mMousePos.y = MousePos.y;
 		}
 		else // 현재 포커스중이 아니다
 		{

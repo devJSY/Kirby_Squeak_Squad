@@ -48,5 +48,6 @@ namespace sy
 
 	private:
 		static std::vector<Key> mKeys;
+		static math::Vector2 mMousePos;
 	};
 }

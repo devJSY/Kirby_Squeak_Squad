@@ -20,7 +20,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::Q))
+		if (Input::GetKeyDown(eKeyCode::Q) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}
@@ -29,6 +29,6 @@ namespace sy
 	void OpeningScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to TitleScene : Q");
+		ShowSceneName(hdc, GetName(), L"Change to TitleScene : Q or Mouse LBTN");
 	}
 }

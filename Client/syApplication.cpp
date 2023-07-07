@@ -68,7 +68,7 @@ namespace sy
 		// 테두리 제거용 1증감
 		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
-		Time::Render(mBackHdc);
+		//Time::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);		
 
 		// Back 버퍼 비트맵을 Front 버퍼 윈도우에 덮어씌운다
