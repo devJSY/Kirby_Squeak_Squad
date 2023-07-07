@@ -14,11 +14,14 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+	public:
 		void SetPenRGB(BYTE r, BYTE g, BYTE b) { mPenRGB = RGB(r,g,b); };
 		void SetBrushRGB(BYTE r, BYTE g, BYTE b) { mBrushRGB = RGB(r,g,b); };
+		void SetRenderType(eRenderType type) { mRenderType = type; }
 
     private:
 		COLORREF mPenRGB;
 		COLORREF mBrushRGB;
+		eRenderType mRenderType;
     };
 }

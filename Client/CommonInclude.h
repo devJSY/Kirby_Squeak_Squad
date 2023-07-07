@@ -30,4 +30,20 @@ namespace sy::enums
 		SpriteRenderer,
 		End,
 	};
+
+
+
+
+
+
+
+
+
+
+	enum class eRenderType
+	{
+		Rectangle,
+		Ellipse,
+		End,
+	};
 }

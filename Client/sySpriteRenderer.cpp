@@ -8,6 +8,7 @@ namespace sy
 		: Component(eComponentType::SpriteRenderer)
 		, mPenRGB(RGB(0,0,0)) // default Black
 		, mBrushRGB(RGB(0,0,0)) // default Black
+		, mRenderType(eRenderType::Rectangle)
 	{
 	}
 
@@ -35,8 +36,16 @@ namespace sy
 		HBRUSH hNewBrush = CreateSolidBrush(mBrushRGB); // 새로운 브러쉬 생성
 		HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush); // 생성한 브러쉬로 설정
 
-		Ellipse(hdc, int(pos.x - 50), int(pos.y - 50)
-			, int(pos.x + 50), int(pos.y + 50));
+		if (mRenderType == eRenderType::Rectangle)
+		{
+			Rectangle(hdc, int(pos.x - 50), int(pos.y - 50)
+				, int(pos.x + 50), int(pos.y + 50));
+		}
+		else if (mRenderType == eRenderType::Ellipse)
+		{
+			Ellipse(hdc, int(pos.x - 50), int(pos.y - 50)
+				, int(pos.x + 50), int(pos.y + 50));
+		}		
 
 
 		SelectObject(hdc, hOldPen); // 기존에 사용하던것(Newpen)을 리턴함  

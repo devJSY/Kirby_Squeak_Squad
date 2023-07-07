@@ -25,6 +25,7 @@ namespace sy
 		assert(PlayerRenderer);
 		PlayerRenderer->SetPenRGB(255, 0, 0);
 		PlayerRenderer->SetBrushRGB(255, 0, 0);
+		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
 	}
 
 	void StageScene::Update()
