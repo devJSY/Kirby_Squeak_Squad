@@ -1,6 +1,9 @@
 #include "syLevelSelectScene.h"
 #include "syInput.h"
 #include "sySceneManager.h"
+#include "syPlayer.h"
+#include "syObject.h"
+#include "sySpriteRenderer.h"
 
 namespace sy
 {
@@ -14,6 +17,14 @@ namespace sy
 
 	void LevelSelectScene::Initialize()
 	{
+		Player* player = object::Instantiate<Player>(eLayerType::Player);
+		assert(player);
+		assert(player->AddComponent<SpriteRenderer>());
+		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
+		assert(PlayerRenderer);
+		PlayerRenderer->SetPenRGB(255, 255, 0);		// yellow
+		PlayerRenderer->SetBrushRGB(255, 255, 0);   // yellow
+		PlayerRenderer->SetRenderType(eRenderType::Ellipse);
 	}
 
 	void LevelSelectScene::Update()

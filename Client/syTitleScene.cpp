@@ -4,6 +4,8 @@
 #include "syObject.h"
 #include "syInput.h"
 #include "sySceneManager.h"
+#include "syPlayer.h"
+#include "sySpriteRenderer.h"
 
 namespace sy
 {
@@ -17,6 +19,14 @@ namespace sy
 
 	void TitleScene::Initialize()
 	{
+		Player* player = object::Instantiate<Player>(eLayerType::Player);
+		assert(player);
+		assert(player->AddComponent<SpriteRenderer>());
+		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
+		assert(PlayerRenderer);
+		PlayerRenderer->SetPenRGB(255, 128, 0);		// Orange
+		PlayerRenderer->SetBrushRGB(255, 128, 0);   // Orange
+		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
 	}
 
 	void TitleScene::Update()

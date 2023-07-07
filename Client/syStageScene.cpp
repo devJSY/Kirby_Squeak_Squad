@@ -23,8 +23,8 @@ namespace sy
 		assert(player->AddComponent<SpriteRenderer>());
 		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
 		assert(PlayerRenderer);
-		PlayerRenderer->SetPenRGB(255, 0, 0);
-		PlayerRenderer->SetBrushRGB(255, 0, 0);
+		PlayerRenderer->SetPenRGB(0, 255, 0);	// Green
+		PlayerRenderer->SetBrushRGB(0, 255, 0); // Green
 		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
 	}
 

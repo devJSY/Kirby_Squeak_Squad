@@ -1,6 +1,9 @@
 #include "syWorldTunnelScene.h"
 #include "syInput.h"
 #include "sySceneManager.h"
+#include "syObject.h"
+#include "sySpriteRenderer.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -14,6 +17,14 @@ namespace sy
 
 	void WorldTunnelScene::Initialize()
 	{
+		Player* player = object::Instantiate<Player>(eLayerType::Player);
+		assert(player);
+		assert(player->AddComponent<SpriteRenderer>());
+		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
+		assert(PlayerRenderer);
+		PlayerRenderer->SetPenRGB(0, 128, 255);		// blue
+		PlayerRenderer->SetBrushRGB(0, 128, 255);   // blue
+		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
 	}
 
 	void WorldTunnelScene::Update()

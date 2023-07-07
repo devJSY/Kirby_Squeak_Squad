@@ -36,6 +36,7 @@ namespace sy
 		HBRUSH hNewBrush = CreateSolidBrush(mBrushRGB); // 새로운 브러쉬 생성
 		HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush); // 생성한 브러쉬로 설정
 
+
 		if (mRenderType == eRenderType::Rectangle)
 		{
 			Rectangle(hdc, int(pos.x - 50), int(pos.y - 50)
