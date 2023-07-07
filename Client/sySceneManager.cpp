@@ -13,14 +13,14 @@ namespace sy
 
 	void SceneManager::Initialize()
 	{
-		CreateScene<TitleScene>(L"TitleScene");
-		CreateScene<LevelSelectScene>(L"LevelSelectScene");
-		CreateScene<EndingScene>(L"EndingScene");
-		CreateScene<OpeningScene>(L"OpeningScene");
-		CreateScene<StageScene>(L"StageScene");
-		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
+		assert(CreateScene<TitleScene>(L"TitleScene"));
+		assert(CreateScene<LevelSelectScene>(L"LevelSelectScene"));
+		assert(CreateScene<EndingScene>(L"EndingScene"));
+		assert(CreateScene<OpeningScene>(L"OpeningScene"));
+		assert(CreateScene<StageScene>(L"StageScene"));
+		assert(CreateScene<WorldTunnelScene>(L"WorldTunnelScene"));
 
-		LoadScene(L"LevelSelectScene");
+		assert(LoadScene(L"OpeningScene"));
 	}
 
 	void SceneManager::Update()

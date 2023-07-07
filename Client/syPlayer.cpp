@@ -24,19 +24,19 @@ namespace sy
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
 
-		if (Input::GetKeyPressed(eKeyCode::W))
+		if (Input::GetKeyPressed(eKeyCode::UP))
 		{
 			pos.y -= 500.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::A))
+		if (Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			pos.x -= 500.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::S))
+		if (Input::GetKeyPressed(eKeyCode::DOWN))
 		{
 			pos.y += 500.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::D))
+		if (Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
 			pos.x += 500.0f * Time::DeltaTime();
 		}

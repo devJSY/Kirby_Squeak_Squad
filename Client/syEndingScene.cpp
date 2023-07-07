@@ -1,4 +1,6 @@
 #include "syEndingScene.h"
+#include "syInput.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
@@ -17,11 +19,16 @@ namespace sy
 	void EndingScene::Update()
 	{
 		Scene::Update();
+
+		if (Input::GetKeyDown(eKeyCode::Y))
+		{
+			SceneManager::LoadScene(L"OpeningScene");
+		}
 	}
 
 	void EndingScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName());
+		ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Y");
 	}
 }

@@ -22,7 +22,7 @@ namespace sy
 		}
 
 	public:
-		void ShowSceneName(HDC hdc, std::wstring& str);
+		void ShowSceneName(HDC hdc, std::wstring& name, const wchar_t* ChangeKey);
 
 	private:
 		std::vector<Layer> mLayers;
