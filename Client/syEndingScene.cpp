@@ -4,6 +4,7 @@
 #include "syObject.h"
 #include "sySpriteRenderer.h"
 #include "syPlayer.h"
+#include "syTransform.h"
 
 namespace sy
 {
@@ -24,7 +25,11 @@ namespace sy
 		assert(PlayerRenderer);
 		PlayerRenderer->SetPenRGB(128, 0, 255);		// purple
 		PlayerRenderer->SetBrushRGB(128, 0, 255);   // purple
-		PlayerRenderer->SetRenderType(eRenderType::Ellipse);
+		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
+
+		Transform* PlayerTrans = player->GetComponent<Transform>();
+		assert(PlayerTrans);
+		PlayerTrans->SetPosition(Vector2(450.f, 450.f));
 	}
 
 	void EndingScene::Update()

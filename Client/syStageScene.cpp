@@ -5,6 +5,7 @@
 #include "sySpriteRenderer.h"
 #include "syInput.h"
 #include "sySceneManager.h"
+#include "syTransform.h"
 
 namespace sy
 {
@@ -26,6 +27,10 @@ namespace sy
 		PlayerRenderer->SetPenRGB(0, 255, 0);	// Green
 		PlayerRenderer->SetBrushRGB(0, 255, 0); // Green
 		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
+
+		Transform* PlayerTrans = player->GetComponent<Transform>();
+		assert(PlayerTrans);
+		PlayerTrans->SetPosition(Vector2(350.f, 350.f));
 	}
 
 	void StageScene::Update()

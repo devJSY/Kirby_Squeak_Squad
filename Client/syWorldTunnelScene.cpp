@@ -4,6 +4,7 @@
 #include "syObject.h"
 #include "sySpriteRenderer.h"
 #include "syPlayer.h"
+#include "syTransform.h"
 
 namespace sy
 {
@@ -24,7 +25,11 @@ namespace sy
 		assert(PlayerRenderer);
 		PlayerRenderer->SetPenRGB(0, 128, 255);		// blue
 		PlayerRenderer->SetBrushRGB(0, 128, 255);   // blue
-		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
+		PlayerRenderer->SetRenderType(eRenderType::Ellipse);
+
+		Transform* PlayerTrans = player->GetComponent<Transform>();
+		assert(PlayerTrans);
+		PlayerTrans->SetPosition(Vector2(400.f, 400.f));
 	}
 
 	void WorldTunnelScene::Update()

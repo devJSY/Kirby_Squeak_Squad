@@ -8,7 +8,6 @@ namespace sy
 	{
 		AddComponent<Transform>();
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPosition(Vector2(200.f, 200.f));
 	}
 
 	GameObject::~GameObject()

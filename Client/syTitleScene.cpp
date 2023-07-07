@@ -6,6 +6,7 @@
 #include "sySceneManager.h"
 #include "syPlayer.h"
 #include "sySpriteRenderer.h"
+#include "syTransform.h"
 
 namespace sy
 {
@@ -27,6 +28,10 @@ namespace sy
 		PlayerRenderer->SetPenRGB(255, 128, 0);		// Orange
 		PlayerRenderer->SetBrushRGB(255, 128, 0);   // Orange
 		PlayerRenderer->SetRenderType(eRenderType::Rectangle);
+
+		Transform* PlayerTrans = player->GetComponent<Transform>();
+		assert(PlayerTrans);
+		PlayerTrans->SetPosition(Vector2(250.f, 250.f));
 	}
 
 	void TitleScene::Update()
