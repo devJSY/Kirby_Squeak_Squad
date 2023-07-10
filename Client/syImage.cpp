@@ -22,7 +22,7 @@ namespace sy
 			, LR_LOADFROMFILE | LR_CREATEDIBSECTION);
 
 		if (mBitmap == nullptr)
-			return S_FALSE;
+			return E_FAIL;
 
 		// 받아온 mBitmap의 정보를 info 에 저장
 		BITMAP info = {};

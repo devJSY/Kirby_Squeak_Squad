@@ -20,7 +20,7 @@ namespace sy
 		assert(CreateScene<StageScene>(L"StageScene"));
 		assert(CreateScene<WorldTunnelScene>(L"WorldTunnelScene"));
 
-		assert(LoadScene(L"TitleScene"));
+		assert(LoadScene(L"OpeningScene"));
 	}
 
 	void SceneManager::Update()
