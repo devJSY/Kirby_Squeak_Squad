@@ -28,10 +28,6 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"OpeningImage", L"..\\Resources\\Video\\Opening\\Opening000001.436.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-
-		Transform* BgTrans = Bg->GetComponent<Transform>();
-		assert(BgTrans);
-		BgTrans->SetPosition(Vector2(0.f, 0.f));
 	}
 
 	void OpeningScene::Update()

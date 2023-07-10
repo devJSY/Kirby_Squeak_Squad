@@ -30,10 +30,6 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-
-		Transform* BgTrans = Bg->GetComponent<Transform>();
-		assert(BgTrans);
-		BgTrans->SetPosition(Vector2(0.f, 0.f));
 	}
 
 	void TitleScene::Update()

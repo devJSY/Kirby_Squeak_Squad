@@ -6,6 +6,8 @@
 #include "syInput.h"
 #include "sySceneManager.h"
 #include "syTransform.h"
+#include "syResourceManager.h"
+#include "syImage.h"
 
 namespace sy
 {
@@ -19,6 +21,13 @@ namespace sy
 
 	void StageScene::Initialize()
 	{
+		GameObject* Bg = object::Instantiate<GameObject>(eLayerType::BackGround);
+		assert(Bg);
+		assert(Bg->AddComponent<SpriteRenderer>());
+		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
+		assert(BgRenderer);
+		BgRenderer->SetImage(ResourceManager::Load<Image>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp")); // 이미지 설정
+		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 	}
 
 	void StageScene::Update()

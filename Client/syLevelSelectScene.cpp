@@ -20,6 +20,7 @@ namespace sy
 
 	void LevelSelectScene::Initialize()
 	{
+		// 상단 화면 오브젝트 생성 
 		GameObject* Bg = object::Instantiate<GameObject>(eLayerType::BackGround);
 		assert(Bg);
 		assert(Bg->AddComponent<SpriteRenderer>());
@@ -28,9 +29,18 @@ namespace sy
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
-		Transform* BgTrans = Bg->GetComponent<Transform>();
-		assert(BgTrans);
-		BgTrans->SetPosition(Vector2(0.f, 0.f));
+		// 하단 화면 오브젝트 생성 
+		GameObject* TouchScreen = object::Instantiate<GameObject>(eLayerType::BackGround);
+		assert(TouchScreen);
+		assert(TouchScreen->AddComponent<SpriteRenderer>());
+		SpriteRenderer* TSRenderer = TouchScreen->GetComponent<SpriteRenderer>();
+		assert(TSRenderer);
+		TSRenderer->SetImage(ResourceManager::Load<Image>(L"TouchScreen", L"..\\Resources\\Video\\Non\\None000009.462.bmp")); // 이미지 설정
+		TSRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+
+		Transform* TSTransform = TouchScreen->GetComponent<Transform>();
+		TSTransform->SetPosition(Vector2(0.f, 192.f));
+
 	}
 
 	void LevelSelectScene::Update()
