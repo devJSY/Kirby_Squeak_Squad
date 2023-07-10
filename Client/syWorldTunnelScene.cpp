@@ -36,7 +36,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::T))
+		if (Input::GetKeyDown(eKeyCode::T) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"EndingScene");
 		}
@@ -45,6 +45,6 @@ namespace sy
 	void WorldTunnelScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to EndingScene : T");
+		ShowSceneName(hdc, GetName(), L"Change to EndingScene : T or Mouse LBTN");
 	}
 }

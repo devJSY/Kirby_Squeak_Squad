@@ -30,16 +30,16 @@ namespace sy
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
 		// 하단 화면 오브젝트 생성 
-		GameObject* TouchScreen = object::Instantiate<GameObject>(eLayerType::BackGround);
-		assert(TouchScreen);
-		assert(TouchScreen->AddComponent<SpriteRenderer>());
-		SpriteRenderer* TSRenderer = TouchScreen->GetComponent<SpriteRenderer>();
-		assert(TSRenderer);
-		TSRenderer->SetImage(ResourceManager::Load<Image>(L"TouchScreen", L"..\\Resources\\Video\\Non\\None000009.462.bmp")); // 이미지 설정
-		TSRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+		GameObject* Inventory = object::Instantiate<GameObject>(eLayerType::BackGround);
+		assert(Inventory);
+		assert(Inventory->AddComponent<SpriteRenderer>());
+		SpriteRenderer* InvenRenderer = Inventory->GetComponent<SpriteRenderer>();
+		assert(InvenRenderer);
+		InvenRenderer->SetImage(ResourceManager::Load<Image>(L"Inventory", L"..\\Resources\\Inventory\\Inventory.bmp")); // 이미지 설정
+		InvenRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
-		Transform* TSTransform = TouchScreen->GetComponent<Transform>();
-		TSTransform->SetPosition(Vector2(0.f, 192.f));
+		Transform* InvenTransform = Inventory->GetComponent<Transform>();
+		InvenTransform->SetPosition(Vector2(0.f, 192.f));
 
 		Scene::Initialize();
 	}
@@ -48,7 +48,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::E))
+		if (Input::GetKeyDown(eKeyCode::E) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"StageScene");
 		}
@@ -57,6 +57,6 @@ namespace sy
 	void LevelSelectScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to StageScene : E");
+		ShowSceneName(hdc, GetName(), L"Change to StageScene : E or Mouse LBTN");
 	}
 }

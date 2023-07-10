@@ -35,7 +35,7 @@ namespace sy
 	void StageScene::Update()
 	{
 		Scene::Update();
-		if (Input::GetKeyDown(eKeyCode::R))
+		if (Input::GetKeyDown(eKeyCode::R) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"WorldTunnelScene");
 		}
@@ -44,6 +44,6 @@ namespace sy
 	void StageScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to WorldTunnelScene : R");
+		ShowSceneName(hdc, GetName(), L"Change to WorldTunnelScene : R or Mouse LBTN");
 	}
 }

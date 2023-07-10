@@ -35,7 +35,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::Y))
+		if (Input::GetKeyDown(eKeyCode::Y) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"OpeningScene");
 		}
@@ -44,6 +44,6 @@ namespace sy
 	void EndingScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Y");
+		ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Y or Mouse LBTN");
 	}
 }
