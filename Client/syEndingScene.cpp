@@ -27,6 +27,8 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"EndingImage", L"..\\Resources\\Video\\Ending\\Ending000017.304.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+
+		Scene::Initialize();
 	}
 
 	void EndingScene::Update()

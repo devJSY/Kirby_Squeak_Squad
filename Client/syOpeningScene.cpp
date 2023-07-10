@@ -28,6 +28,8 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"OpeningImage", L"..\\Resources\\Video\\Opening\\Opening000001.436.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+
+		Scene::Initialize();
 	}
 
 	void OpeningScene::Update()

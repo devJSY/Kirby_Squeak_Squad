@@ -28,6 +28,8 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetImage(ResourceManager::Load<Image>(L"WorldTunnels", L"..\\Resources\\Map\\WorldTunnels.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+
+		Scene::Initialize();
 	}
 
 	void WorldTunnelScene::Update()

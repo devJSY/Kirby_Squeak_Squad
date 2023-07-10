@@ -41,6 +41,7 @@ namespace sy
 		Transform* TSTransform = TouchScreen->GetComponent<Transform>();
 		TSTransform->SetPosition(Vector2(0.f, 192.f));
 
+		Scene::Initialize();
 	}
 
 	void LevelSelectScene::Update()
