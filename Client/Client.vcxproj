@@ -136,9 +136,12 @@
     <ClInclude Include="syEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="syImage.h" />
     <ClInclude Include="syLevelSelectScene.h" />
     <ClInclude Include="syOpeningScene.h" />
     <ClInclude Include="syPlayer.h" />
+    <ClInclude Include="syResource.h" />
+    <ClInclude Include="syResourceManager.h" />
     <ClInclude Include="syScene.h" />
     <ClInclude Include="syApplication.h" />
     <ClInclude Include="syGameObject.h" />
@@ -160,9 +163,12 @@
     <ClCompile Include="syEndingScene.cpp" />
     <ClCompile Include="syEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="syImage.cpp" />
     <ClCompile Include="syLevelSelectScene.cpp" />
     <ClCompile Include="syOpeningScene.cpp" />
     <ClCompile Include="syPlayer.cpp" />
+    <ClCompile Include="syResource.cpp" />
+    <ClCompile Include="syResourceManager.cpp" />
     <ClCompile Include="syScene.cpp" />
     <ClCompile Include="syApplication.cpp" />
     <ClCompile Include="syGameObject.cpp" />

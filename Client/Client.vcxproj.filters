@@ -79,6 +79,15 @@
     <Filter Include="Contents\GameObject\Player">
       <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{17ee2a1d-c686-4230-8bfb-6c376e0098dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\ResourceManager">
+      <UniqueIdentifier>{147a5744-bee9-44c2-9ac3-86a32bc4ca76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Image">
+      <UniqueIdentifier>{cddfe35e-ecd5-4fb2-97f1-dac59f02b96f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -156,6 +165,15 @@
     <ClInclude Include="syWorldTunnelScene.h">
       <Filter>Contents\Scene\WorldTunnelScene</Filter>
     </ClInclude>
+    <ClInclude Include="syResource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="syResourceManager.h">
+      <Filter>Engine\Resource\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="syImage.h">
+      <Filter>Engine\Resource\Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -220,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="syWorldTunnelScene.cpp">
       <Filter>Contents\Scene\WorldTunnelScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syResource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="syResourceManager.cpp">
+      <Filter>Engine\Resource\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="syImage.cpp">
+      <Filter>Engine\Resource\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

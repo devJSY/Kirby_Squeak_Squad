@@ -17,8 +17,8 @@ namespace sy
 		static void Update();
 		static void Render();
 
-	public:
 		static HWND GetHwnd() { return mHwnd; }
+		static HDC GetHdc() { return mHdc; }
 		static POINT GetResolution() { return mResolution; }
 
 	private:

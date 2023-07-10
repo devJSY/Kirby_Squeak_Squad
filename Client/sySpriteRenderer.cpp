@@ -6,9 +6,8 @@ namespace sy
 {
 	SpriteRenderer::SpriteRenderer()
 		: Component(eComponentType::SpriteRenderer)
-		, mPenRGB(RGB(0,0,0)) // default Black
-		, mBrushRGB(RGB(0,0,0)) // default Black
-		, mRenderType(eRenderType::Rectangle)
+		, mImage(nullptr)
+		, mBMPRGB(RGB(0, 0, 0)) // default Black
 	{
 	}
 
@@ -29,30 +28,15 @@ namespace sy
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		assert(tr); // tr이 nullptr 이면 에러
 		Vector2 pos = tr->GetPosition();
-	 
-		HPEN hNewPen = CreatePen(PS_SOLID, 1, mPenRGB); // 새로운 펜 생성
-		HPEN hOldPen = (HPEN)SelectObject(hdc, hNewPen); // 생성한 펜으로 설정
-
-		HBRUSH hNewBrush = CreateSolidBrush(mBrushRGB); // 새로운 브러쉬 생성
-		HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush); // 생성한 브러쉬로 설정
 
 
-		if (mRenderType == eRenderType::Rectangle)
-		{
-			Rectangle(hdc, int(pos.x - 50), int(pos.y - 50)
-				, int(pos.x + 50), int(pos.y + 50));
-		}
-		else if (mRenderType == eRenderType::Ellipse)
-		{
-			Ellipse(hdc, int(pos.x - 50), int(pos.y - 50)
-				, int(pos.x + 50), int(pos.y + 50));
-		}		
-
-
-		SelectObject(hdc, hOldPen); // 기존에 사용하던것(Newpen)을 리턴함  
-		DeleteObject(hNewPen);
-
-		SelectObject(hdc, hOldBrush); // 기존에 사용하던것(Newpen)을 리턴함  
-		DeleteObject(hNewBrush);
+		assert(mImage); // mImage이 nullptr 이면 에러
+		TransparentBlt(hdc								// 옮겨 그려질 dc
+			, (int)pos.x, (int)pos.y					// hdc 의 렌더 시작 위치
+			, mImage->GetWidth(), mImage->GetHeight()	// hdc 의 렌더 시작 위치 부터 어디까지 그릴것 인지	
+			, mImage->GetHdc()							// 이미지를 가져올 hdc
+			, 0, 0										// 이미지 시작점
+			, mImage->GetWidth(), mImage->GetHeight()	// 자를 이미지 사이즈
+			, mBMPRGB);									// 이미지에서 삭제할 색상
 	}
 }

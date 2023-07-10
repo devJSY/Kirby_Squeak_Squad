@@ -1,6 +1,6 @@
 #pragma once
 #include "syComponent.h"
-
+#include "syImage.h"
 
 namespace sy
 {
@@ -15,13 +15,11 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	public:
-		void SetPenRGB(BYTE r, BYTE g, BYTE b) { mPenRGB = RGB(r,g,b); };
-		void SetBrushRGB(BYTE r, BYTE g, BYTE b) { mBrushRGB = RGB(r,g,b); };
-		void SetRenderType(eRenderType type) { mRenderType = type; }
-
-    private:
-		COLORREF mPenRGB;
-		COLORREF mBrushRGB;
-		eRenderType mRenderType;
+		void SetImage(Image* image) { mImage = image; }
+		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
+	
+	private:
+		Image*		mImage;
+		COLORREF	mBMPRGB;
     };
 }

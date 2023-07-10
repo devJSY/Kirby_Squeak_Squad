@@ -18,18 +18,6 @@ namespace sy
 
 	void LevelSelectScene::Initialize()
 	{
-		Player* player = object::Instantiate<Player>(eLayerType::Player);
-		assert(player);
-		assert(player->AddComponent<SpriteRenderer>());
-		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
-		assert(PlayerRenderer);
-		PlayerRenderer->SetPenRGB(255, 255, 0);		// yellow
-		PlayerRenderer->SetBrushRGB(255, 255, 0);   // yellow
-		PlayerRenderer->SetRenderType(eRenderType::Ellipse);
-
-		Transform* PlayerTrans = player->GetComponent<Transform>();
-		assert(PlayerTrans);
-		PlayerTrans->SetPosition(Vector2(300.f, 300.f));
 	}
 
 	void LevelSelectScene::Update()

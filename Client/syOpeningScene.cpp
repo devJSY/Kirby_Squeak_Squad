@@ -6,6 +6,7 @@
 #include "syPlayer.h"
 #include "syTransform.h"
 
+
 namespace sy
 {
 	OpeningScene::OpeningScene()
@@ -18,18 +19,6 @@ namespace sy
 
 	void OpeningScene::Initialize()
 	{
-		Player* player = object::Instantiate<Player>(eLayerType::Player);
-		assert(player);
-		assert(player->AddComponent<SpriteRenderer>());
-		SpriteRenderer* PlayerRenderer = player->GetComponent<SpriteRenderer>();
-		assert(PlayerRenderer);
-		PlayerRenderer->SetPenRGB(255, 0, 0);	// Red
-		PlayerRenderer->SetBrushRGB(255, 0, 0); // Red
-		PlayerRenderer->SetRenderType(eRenderType::Ellipse);
-
-		Transform* PlayerTrans = player->GetComponent<Transform>();
-		assert(PlayerTrans);
-		PlayerTrans->SetPosition(Vector2(200.f, 200.f));
 	}
 
 	void OpeningScene::Update()
