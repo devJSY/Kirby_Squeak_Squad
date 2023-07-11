@@ -74,6 +74,17 @@ namespace sy
 		//Time::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);		
 
+
+		// 화면 비율 맞추기
+		RECT rect;
+		SetMapMode(mHdc, MM_ISOTROPIC); // MM_ISOTROPIC 원본 그림이 비율에 따다 모양 변화가 없이 사용자정의(가로세로 동일)
+
+		GetClientRect(mHwnd, &rect);
+		SetViewportOrgEx(mHdc, rect.right / 2 - ((rect.bottom / mResolution.y * mResolution.x) / 2), 0, NULL);
+		SetWindowExtEx(mHdc, mResolution.x, mResolution.y, NULL);
+		SetViewportExtEx(mHdc, rect.right, rect.bottom, NULL);
+
+
 		// Back 버퍼 비트맵을 Front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,
 			mBackHdc, 0, 0, SRCCOPY);
