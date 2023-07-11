@@ -21,6 +21,11 @@ namespace sy
 		static HDC GetHdc() { return mHdc; }
 		static POINT GetResolution() { return mResolution; }
 
+	public:
+		static void DockMenu();
+		static void DividMenu();
+		static void ChangeWindowSize(POINT Resolution, bool bMenu);
+
 	private:
 		static HWND mHwnd;
 		static HDC mHdc;
@@ -28,5 +33,7 @@ namespace sy
 		
 		static HDC mBackHdc;
 		static HBITMAP mBackBuffer;
+
+		static HMENU	m_hMenu;
 	};
 }

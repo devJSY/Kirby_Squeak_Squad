@@ -2,15 +2,17 @@
 #include "syInput.h"
 #include "syTime.h"
 #include "sySceneManager.h"
+#include "resource.h"	// LoadMenu()
 
 namespace sy
 {
-	HWND		 Application::mHwnd		 = NULL;
+	HWND		Application::mHwnd		 = NULL;
 	HDC			Application::mHdc		 = NULL;
 	POINT		Application::mResolution = POINT{};
 
 	HDC			Application::mBackHdc	 = NULL;
 	HBITMAP		Application::mBackBuffer = NULL;
+	HMENU		Application::m_hMenu	 = LoadMenu(nullptr, MAKEINTRESOURCEW(IDC_CLIENT)); // 메뉴바 생성
 
 	Application::Application()
 	{
@@ -24,17 +26,14 @@ namespace sy
 	{
 		mHwnd = hwnd;
 		mHdc = GetDC(mHwnd);
-
 		// 윈도우 크기 지정
 		mResolution = Resolution;
 
-		SetMenu(mHwnd, nullptr); // 메뉴바 off
-		int menuBarHeight = 0; 
-		menuBarHeight =  GetSystemMetrics(SM_CYMENU); // 메뉴바 높이 
+		// 해상도에 맞게 윈도우 크기 조정
+		ChangeWindowSize(mResolution, false);
 
-		RECT rect = { 0, 0, mResolution.x, mResolution.y - menuBarHeight };
-		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, true);
-		SetWindowPos(mHwnd, nullptr, 100, 100, rect.right - rect.left, rect.bottom - rect.top, 0);		
+		// 메뉴바 디폴트 off
+		DividMenu();
 
 		// 윈도우 해상도와 동일한 비트맵 생성
 		mBackBuffer = CreateCompatibleBitmap(mHdc, mResolution.x, mResolution.y);
@@ -78,5 +77,24 @@ namespace sy
 		// Back 버퍼 비트맵을 Front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,
 			mBackHdc, 0, 0, SRCCOPY);
+	}
+
+	void Application::DockMenu()
+	{
+		SetMenu(mHwnd, m_hMenu); // 메뉴바 On
+		ChangeWindowSize(mResolution, true);
+	}
+
+	void Application::DividMenu()
+	{
+		SetMenu(mHwnd, nullptr); // 메뉴바 Off
+		ChangeWindowSize(mResolution, false);
+	}
+
+	void Application::ChangeWindowSize(POINT Resolution, bool bMenu)
+	{
+		RECT rect = { 0, 0, Resolution.x, Resolution.y};
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, bMenu);
+		SetWindowPos(mHwnd, nullptr, 100, 100, rect.right - rect.left, rect.bottom - rect.top, 0);
 	}
 }
