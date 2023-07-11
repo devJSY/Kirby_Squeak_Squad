@@ -1,9 +1,10 @@
 #pragma once
 #include "syComponent.h"
-#include "syImage.h"
+#include "syTexture.h"
 
 namespace sy
 {
+	using namespace math;
     class SpriteRenderer : public Component
     {
 	public:
@@ -14,11 +15,13 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void SetImage(Image* image) { mImage = image; }
+		void SetTexture(Texture* tex) { mTex = tex; }
 		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
+		void SetScale(Vector2 scale) { mScale = scale; }		
 	
 	private:
-		Image*		mImage;
+		Texture*	mTex;
 		COLORREF	mBMPRGB;
+		Vector2		mScale;
     };
 }

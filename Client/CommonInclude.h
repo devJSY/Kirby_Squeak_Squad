@@ -5,9 +5,6 @@
 #include <set>
 #include <functional>
 #include <string>
-//#include <gdiplus.h>
-//
-//#pragma comment(lib, "Gdiplus.lib")
 
 #include "framework.h"
 #include "syMath.h"
@@ -34,5 +31,12 @@ namespace sy::enums
 		Transform,
 		SpriteRenderer,
 		End,
+	};
+
+	enum class eTextureType
+	{
+		Bmp,
+		Png,
+		None,
 	};
 }

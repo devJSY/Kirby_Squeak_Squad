@@ -6,7 +6,8 @@
 #include "sySpriteRenderer.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
-#include "syImage.h"
+#include "syTexture.h"
+#include "syBackGround.h"
 
 namespace sy
 {
@@ -21,21 +22,21 @@ namespace sy
 	void LevelSelectScene::Initialize()
 	{
 		// 상단 화면 오브젝트 생성 
-		GameObject* Bg = object::Instantiate<GameObject>(eLayerType::BackGround);
+		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		assert(Bg);
 		assert(Bg->AddComponent<SpriteRenderer>());
 		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
 		assert(BgRenderer);
-		BgRenderer->SetImage(ResourceManager::Load<Image>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
+		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
 		// 하단 화면 오브젝트 생성 
-		GameObject* Inventory = object::Instantiate<GameObject>(eLayerType::BackGround);
+		BackGround* Inventory = object::Instantiate<BackGround>(eLayerType::BackGround);
 		assert(Inventory);
 		assert(Inventory->AddComponent<SpriteRenderer>());
 		SpriteRenderer* InvenRenderer = Inventory->GetComponent<SpriteRenderer>();
 		assert(InvenRenderer);
-		InvenRenderer->SetImage(ResourceManager::Load<Image>(L"Inventory", L"..\\Resources\\Inventory\\Inventory.bmp")); // 이미지 설정
+		InvenRenderer->SetTexture(ResourceManager::Load<Texture>(L"Inventory", L"..\\Resources\\Inventory\\Inventory.bmp")); // 이미지 설정
 		InvenRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
 		Transform* InvenTransform = Inventory->GetComponent<Transform>();

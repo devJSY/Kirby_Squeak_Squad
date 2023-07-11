@@ -19,6 +19,9 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+// GDIplus 용 객체
+ULONG_PTR gdiplusToken;
+Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -65,11 +68,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             application.Run();            
         }
     }
-
-    if (msg.message == WM_QUIT)
-    {
-        //
-    }
+    
+    // GDIplus 메모리 해제
+    Gdiplus::GdiplusShutdown(gdiplusToken);
 
     return (int) msg.wParam;
 }
@@ -118,8 +119,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
+   // GDIplus 초기화
+   Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
    // 해상도 256, 384
-   application.Initialize(hWnd, { 1200, 700 });
+   application.Initialize(hWnd, { 256, 384});
 
    if (!hWnd)
    {

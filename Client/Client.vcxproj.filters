@@ -85,8 +85,11 @@
     <Filter Include="Engine\Resource\ResourceManager">
       <UniqueIdentifier>{147a5744-bee9-44c2-9ac3-86a32bc4ca76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resource\Image">
+    <Filter Include="Engine\Resource\Texture">
       <UniqueIdentifier>{cddfe35e-ecd5-4fb2-97f1-dac59f02b96f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround">
+      <UniqueIdentifier>{f16894f5-8de3-4347-a66d-311beb75330a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,8 +174,11 @@
     <ClInclude Include="syResourceManager.h">
       <Filter>Engine\Resource\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="syImage.h">
-      <Filter>Engine\Resource\Image</Filter>
+    <ClInclude Include="syTexture.h">
+      <Filter>Engine\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="syBackGround.h">
+      <Filter>Contents\GameObject\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,8 +251,14 @@
     <ClCompile Include="syResourceManager.cpp">
       <Filter>Engine\Resource\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="syImage.cpp">
-      <Filter>Engine\Resource\Image</Filter>
+    <ClCompile Include="syTexture.cpp">
+      <Filter>Engine\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="syMath.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="syBackGround.cpp">
+      <Filter>Contents\GameObject\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

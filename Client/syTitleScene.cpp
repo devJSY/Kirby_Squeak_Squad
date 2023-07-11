@@ -8,8 +8,8 @@
 #include "sySpriteRenderer.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
-#include "syImage.h"
-
+#include "syTexture.h"
+#include "syBackGround.h"
 
 namespace sy
 {
@@ -23,12 +23,12 @@ namespace sy
 
 	void TitleScene::Initialize()
 	{
-		GameObject* Bg = object::Instantiate<GameObject>(eLayerType::BackGround);
+		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		assert(Bg);
 		assert(Bg->AddComponent<SpriteRenderer>());
 		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
 		assert(BgRenderer);
-		BgRenderer->SetImage(ResourceManager::Load<Image>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
+		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
 		Scene::Initialize();
