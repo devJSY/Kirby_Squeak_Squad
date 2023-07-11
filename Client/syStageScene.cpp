@@ -30,6 +30,14 @@ namespace sy
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
+		Player* player = object::Instantiate<Player>(eLayerType::Player);
+		assert(player);
+		assert(player->AddComponent<SpriteRenderer>());
+		SpriteRenderer* playerRenderer = player->GetComponent<SpriteRenderer>();
+		assert(playerRenderer);
+		playerRenderer->SetTexture(ResourceManager::Load<Texture>(L"sword_kirby_change", L"..\\Resources\\Kirby\\SwordKirby\\sword kirby change.png")); // 이미지 설정
+
+
 		Scene::Initialize();
 	}
 

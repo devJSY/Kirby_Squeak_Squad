@@ -2,6 +2,7 @@
 #include "syTransform.h"
 #include "syInput.h"
 #include "syTime.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -23,22 +24,23 @@ namespace sy
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		POINT Resolution = Application::GetResolution();
 
-		if (Input::GetKeyPressed(eKeyCode::UP))
+		if (Input::GetKeyPressed(eKeyCode::UP) && pos.y >= 0)
 		{
-			pos.y -= 500.0f * Time::DeltaTime();
+			pos.y -= 300.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::LEFT))
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && pos.x >= 0)
 		{
-			pos.x -= 500.0f * Time::DeltaTime();
+			pos.x -= 300.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::DOWN))
+		if (Input::GetKeyPressed(eKeyCode::DOWN) && pos.y <= (Resolution.y / 2))
 		{
-			pos.y += 500.0f * Time::DeltaTime();
+			pos.y += 300.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::RIGHT))
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && pos.x <= Resolution.x / 2)
 		{
-			pos.x += 500.0f * Time::DeltaTime();
+			pos.x += 300.0f * Time::DeltaTime();
 		}
 
 		tr->SetPosition(pos);

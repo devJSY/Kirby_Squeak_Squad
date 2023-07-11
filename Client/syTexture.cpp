@@ -30,6 +30,7 @@ namespace sy
 		if (ext == L"bmp")
 		{
 			mType = eTextureType::Bmp;
+
 			// 인자로 들어온 경로로 부터 이미지파일을 Load 한다
 			mBitmap = (HBITMAP)LoadImageW(nullptr, path.c_str(), IMAGE_BITMAP, 0, 0
 				, LR_LOADFROMFILE | LR_CREATEDIBSECTION);
