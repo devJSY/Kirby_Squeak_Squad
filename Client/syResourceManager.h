@@ -5,6 +5,11 @@ namespace sy
 {
 	class ResourceManager
 	{
+	private:
+		// 객체 생성 차단
+		ResourceManager();
+		~ResourceManager();
+
 	public:
 		template <typename T>
 		static T* Find(const std::wstring& name)

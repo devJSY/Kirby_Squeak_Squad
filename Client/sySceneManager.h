@@ -5,7 +5,13 @@ namespace sy
 {
 	class SceneManager
 	{
+	private:
+		// 객체 생성 차단
+		SceneManager();
+		~SceneManager();
+
 	public:
+
 		static void Initialize();
 		static void Update();
 		static void Render(HDC hdc);

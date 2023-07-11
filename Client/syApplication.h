@@ -8,10 +8,12 @@ namespace sy
 
 	class Application
 	{
-	public:
+	private:
+		// 객체 생성 차단
 		Application();
-		virtual ~Application();
+		~Application();
 
+	public:
 		static void Initialize(HWND hwnd, POINT Resolution);
 		static void Run();
 		static void Update();

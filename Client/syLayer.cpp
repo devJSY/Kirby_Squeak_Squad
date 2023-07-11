@@ -8,6 +8,14 @@ namespace sy
 
 	Layer::~Layer()
 	{
+		for (GameObject* obj : mGameObjects)
+		{
+			if (nullptr != obj)
+			{
+				delete obj;
+				obj = nullptr;
+			}
+		}
 	}
 
 	void Layer::Initialize()

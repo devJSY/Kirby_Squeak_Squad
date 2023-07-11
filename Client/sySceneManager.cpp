@@ -11,6 +11,24 @@ namespace sy
 	std::map<std::wstring, Scene*> SceneManager::mScenes = {};
 	Scene* SceneManager::mActiveScene = nullptr;
 
+	SceneManager::SceneManager()
+	{
+	}
+
+	SceneManager::~SceneManager()
+	{
+		for (auto iter : mScenes)
+		{
+			if (nullptr != iter.second)
+			{
+				delete iter.second;
+				iter.second = nullptr;
+			}
+		}
+
+		mScenes.clear();
+	}
+
 	void SceneManager::Initialize()
 	{
 		assert(CreateScene<TitleScene>(L"TitleScene"));

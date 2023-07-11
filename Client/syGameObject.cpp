@@ -12,6 +12,14 @@ namespace sy
 
 	GameObject::~GameObject()
 	{
+		for (Component* comp : mComponents)
+		{
+			if (nullptr != comp)
+			{
+				delete comp;
+				comp = nullptr;
+			}
+		}
 	}
 
 	void GameObject::Initialize()
