@@ -26,7 +26,10 @@ namespace sy
 	public:
 		static void DockMenu();
 		static void DividMenu();
+
+	private:
 		static void ChangeWindowSize(POINT Resolution, bool bMenu);
+		static void SetWindowRatio();
 
 	private:
 		static HWND mHwnd;

@@ -1,4 +1,6 @@
 #include "syTime.h"
+#include "syApplication.h"
+#include "Resource.h"
 
 namespace sy
 {
@@ -34,16 +36,17 @@ namespace sy
 
 		if (timeCheck >= 1.f)
 		{
-			wchar_t szFloat[50] = {};
 			float fps = 1.f / mDeltaTime;
 
-			swprintf_s(szFloat, 50, L"fps : %f", fps);
-			int strLen = (int)wcsnlen_s(szFloat, 50);
+			// 윈도우 이름 값 받아오기
+			wchar_t strBuffer[255] = {};
+			LoadString(nullptr, IDC_CLIENT, strBuffer, 255);
 
-			TextOut(hdc, 10, 10, szFloat, strLen);
+			wchar_t szBuffer[255] = {};
+			swprintf_s(szBuffer, L"%s FPS : %f", strBuffer, fps);
+			SetWindowText(Application::GetHwnd(), szBuffer);
 
 			timeCheck = 0.0f;
-
 		}
 	}
 }

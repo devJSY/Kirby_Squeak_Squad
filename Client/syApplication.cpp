@@ -76,19 +76,11 @@ namespace sy
 		// 테두리 제거용 1증감
 		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
-		//Time::Render(mBackHdc);
+		Time::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);		
 
-
 		// 화면 비율 맞추기
-		RECT rect;
-		SetMapMode(mHdc, MM_ISOTROPIC); // MM_ISOTROPIC 원본 그림이 비율에 따다 모양 변화가 없이 사용자정의(가로세로 동일)
-
-		GetClientRect(mHwnd, &rect);
-		SetViewportOrgEx(mHdc, rect.right / 2 - ((rect.bottom / mResolution.y * mResolution.x) / 2), 0, NULL);
-		SetWindowExtEx(mHdc, mResolution.x, mResolution.y, NULL);
-		SetViewportExtEx(mHdc, rect.right, rect.bottom, NULL);
-
+		SetWindowRatio();
 
 		// Back 버퍼 비트맵을 Front 버퍼 윈도우에 덮어씌운다
 		BitBlt(mHdc, 0, 0, mResolution.x, mResolution.y,
@@ -112,5 +104,16 @@ namespace sy
 		RECT rect = { 0, 0, Resolution.x, Resolution.y};
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, bMenu);
 		SetWindowPos(mHwnd, nullptr, 100, 100, rect.right - rect.left, rect.bottom - rect.top, 0);
+	}
+
+	void Application::SetWindowRatio()
+	{
+		RECT rect;
+		SetMapMode(mHdc, MM_ISOTROPIC); // MM_ISOTROPIC 원본 그림이 비율에 따다 모양 변화가 없이 사용자정의(가로세로 동일)
+										// 논리적인 출력좌표를 뷰포트로 변환하는 방식 설정
+		GetClientRect(mHwnd, &rect);
+		SetViewportOrgEx(mHdc, rect.right / 2 - ((rect.bottom / mResolution.y * mResolution.x) / 2), 0, NULL); // 뷰포트의 원점설정 (1920기준 대략 600)
+		SetWindowExtEx(mHdc, mResolution.x, mResolution.y, NULL); // 논리적 좌표 설정
+		SetViewportExtEx(mHdc, rect.right, rect.bottom, NULL);  // 뷰포트 크기 설정
 	}
 }
