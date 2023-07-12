@@ -8,6 +8,7 @@
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -30,6 +31,10 @@ namespace sy
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
+		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.y /= 2.f;
+		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
+
 		// 하단 화면 오브젝트 생성 
 		BackGround* Inventory = object::Instantiate<BackGround>(eLayerType::BackGround);
 		assert(Inventory);
@@ -40,7 +45,11 @@ namespace sy
 		InvenRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 
 		Transform* InvenTransform = Inventory->GetComponent<Transform>();
-		InvenTransform->SetPosition(Vector2(0.f, 192.f));
+		vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.x += vec.x;	// 임시로 설정
+		vec.y += vec.y / 2.f;
+		InvenTransform->SetPosition(vec); // 중점 설정
+		InvenTransform->SetPosition(vec);
 
 		Scene::Initialize();
 	}

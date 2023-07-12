@@ -91,6 +91,9 @@
     <Filter Include="Contents\GameObject\BackGround">
       <UniqueIdentifier>{f16894f5-8de3-4347-a66d-311beb75330a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{d9366b87-af53-4be5-96eb-0d332ddacb1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="syBackGround.h">
       <Filter>Contents\GameObject\BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="syCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="syBackGround.cpp">
       <Filter>Contents\GameObject\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="syCamera.cpp">
+      <Filter>Engine\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

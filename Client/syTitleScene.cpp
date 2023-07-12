@@ -10,6 +10,7 @@
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -30,6 +31,7 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 
 		Scene::Initialize();
 	}

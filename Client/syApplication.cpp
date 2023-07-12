@@ -3,6 +3,7 @@
 #include "syTime.h"
 #include "sySceneManager.h"
 #include "resource.h"	// LoadMenu()
+#include "syCamera.h"
 
 namespace sy
 {
@@ -50,6 +51,8 @@ namespace sy
 
 		Time::Initialize();
 		Input::Initialize();
+		Camera::Initalize();
+
 		SceneManager::Initialize();		
 	}
 
@@ -63,6 +66,8 @@ namespace sy
 	{
 		Time::Update();
 		Input::Update();		
+		Camera::Update();
+
 		SceneManager::Update();
 	}
 

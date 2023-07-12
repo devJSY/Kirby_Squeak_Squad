@@ -9,6 +9,8 @@
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
+#include "syApplication.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -29,6 +31,10 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+		BgRenderer->SetAffectCamera(true);
+		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		
+
 
 		Player* player = object::Instantiate<Player>(eLayerType::Player);
 		assert(player);
@@ -36,7 +42,9 @@ namespace sy
 		SpriteRenderer* playerRenderer = player->GetComponent<SpriteRenderer>();
 		assert(playerRenderer);
 		playerRenderer->SetTexture(ResourceManager::Load<Texture>(L"sword_kirby_change", L"..\\Resources\\Kirby\\SwordKirby\\sword kirby change.png")); // 이미지 설정
+		playerRenderer->SetAffectCamera(true);
 
+		Camera::SetTarget(player);
 
 		Scene::Initialize();
 	}

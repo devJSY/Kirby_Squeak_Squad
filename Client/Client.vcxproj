@@ -132,6 +132,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="syBackGround.h" />
+    <ClInclude Include="syCamera.h" />
     <ClInclude Include="syComponent.h" />
     <ClInclude Include="syEndingScene.h" />
     <ClInclude Include="syEntity.h" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="syBackGround.cpp" />
+    <ClCompile Include="syCamera.cpp" />
     <ClCompile Include="syComponent.cpp" />
     <ClCompile Include="syEndingScene.cpp" />
     <ClCompile Include="syEntity.cpp" />

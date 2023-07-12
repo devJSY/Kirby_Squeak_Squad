@@ -1,4 +1,8 @@
 #include "syBackGround.h"
+#include "syTransform.h"
+#include "syInput.h"
+#include "syTime.h"
+#include "sySpriteRenderer.h"
 
 namespace sy
 {
@@ -16,7 +20,13 @@ namespace sy
 
 	void BackGround::Update()
 	{
-		GameObject::Update();
+		//GameObject::Update();
+
+		//SpriteRenderer* sr = GetComponent<SpriteRenderer>();
+
+		//float alpha = sr->GetAlpha();
+		//alpha -= 0.2f * Time::DeltaTime();
+		//sr->SetAlpha(alpha);
 	}
 
 	void BackGround::Render(HDC hdc)
