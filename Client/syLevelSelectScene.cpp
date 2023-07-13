@@ -9,6 +9,9 @@
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
+#include "syAnimator.h"
+#include "syInventory.h"
+
 
 namespace sy
 {
@@ -25,8 +28,7 @@ namespace sy
 		// 상단 화면 오브젝트 생성 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		assert(Bg);
-		assert(Bg->AddComponent<SpriteRenderer>());
-		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
 		assert(BgRenderer);
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
@@ -36,20 +38,21 @@ namespace sy
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
 
 		// 하단 화면 오브젝트 생성 
-		BackGround* Inventory = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Inventory);
-		assert(Inventory->AddComponent<SpriteRenderer>());
-		SpriteRenderer* InvenRenderer = Inventory->GetComponent<SpriteRenderer>();
-		assert(InvenRenderer);
-		InvenRenderer->SetTexture(ResourceManager::Load<Texture>(L"Inventory", L"..\\Resources\\Inventory\\Inventory.bmp")); // 이미지 설정
-		InvenRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-
-		Transform* InvenTransform = Inventory->GetComponent<Transform>();
+		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
+		Inven->SetName(L"Inventory");
+		assert(Inven);
 		vec = Vector2(Application::GetResolution()) / 2.f;
-		vec.x += vec.x;	// 임시로 설정
 		vec.y += vec.y / 2.f;
-		InvenTransform->SetPosition(vec); // 중점 설정
-		InvenTransform->SetPosition(vec);
+		(Inven->GetComponent<Transform>())->SetPosition(vec);
+		Animator* InvenAt = Inven->AddComponent<Animator>();
+
+		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
+			, L"..\\Resources\\\Inventory\\Inventory.bmp");
+
+		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
+			, Vector2(0.f, 0.f), 16, 0.1f);
+		InvenAt->PlayAnimation(L"Inventory", true);
+		//InvenAt->SetAffectedCamera(true);
 
 		Scene::Initialize();
 	}

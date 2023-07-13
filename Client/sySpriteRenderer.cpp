@@ -7,7 +7,8 @@
 namespace sy
 {
 	SpriteRenderer::SpriteRenderer()
-		: Component(eComponentType::SpriteRenderer)
+		: mbAffectCamera(true)
+		, Component(eComponentType::SpriteRenderer)
 		, mTex(nullptr)
 		, mBMPRGB(RGB(0, 0, 0)) // default Black
 		, mScale(Vector2::One)
@@ -42,6 +43,18 @@ namespace sy
 		{
 			if (mAlpha < 1.0f)
 			{
+				TransparentBlt(hdc											// 옮겨 그려질 dc
+					, int(pos.x - ((mTex->GetWidth() * mScale.x) / 2.0f))	// hdc 의 렌더 시작 위치
+					, int(pos.y - ((mTex->GetHeight() * mScale.y) / 2.0f))	// 원점을 중앙으로 설정
+					, int(mTex->GetWidth() * mScale.x)
+					, int(mTex->GetHeight() * mScale.y)						// hdc 의 렌더 시작 위치 부터 어디까지 그릴것 인지	
+					, mTex->GetHdc()										// 이미지를 가져올 hdc
+					, 0, 0													// 이미지 시작점
+					, mTex->GetWidth(), mTex->GetHeight()					// 자를 이미지 사이즈
+					, mBMPRGB);
+			}
+			else if (mTex->GetType() == eTextureType::AlphaBmp)
+			{
 				BLENDFUNCTION func = {};
 				func.BlendOp = AC_SRC_OVER;
 				func.BlendFlags = 0;
@@ -65,7 +78,7 @@ namespace sy
 			else
 			{
 				TransparentBlt(hdc											// 옮겨 그려질 dc
-					, int(pos.x - ((mTex->GetWidth() * mScale.x) / 2.0f))		// hdc 의 렌더 시작 위치
+					, int(pos.x - ((mTex->GetWidth() * mScale.x) / 2.0f))	// hdc 의 렌더 시작 위치
 					, int(pos.y - ((mTex->GetHeight() * mScale.y) / 2.0f))	// 원점을 중앙으로 설정
 					, int(mTex->GetWidth() * mScale.x)
 					, int(mTex->GetHeight() * mScale.y)						// hdc 의 렌더 시작 위치 부터 어디까지 그릴것 인지	

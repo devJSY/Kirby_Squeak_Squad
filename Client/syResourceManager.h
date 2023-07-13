@@ -46,6 +46,13 @@ namespace sy
 			return resource;
 		}
 
+		template <typename T>
+		static void Insert(const std::wstring& name, T* resource)
+		{
+			resource->SetName(name);
+			mResources.insert(std::make_pair(name, resource));
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> mResources;
 	};

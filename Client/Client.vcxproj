@@ -131,6 +131,8 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syAnimation.h" />
+    <ClInclude Include="syAnimator.h" />
     <ClInclude Include="syBackGround.h" />
     <ClInclude Include="syCamera.h" />
     <ClInclude Include="syComponent.h" />
@@ -138,6 +140,7 @@
     <ClInclude Include="syEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="syInventory.h" />
     <ClInclude Include="syTexture.h" />
     <ClInclude Include="syLevelSelectScene.h" />
     <ClInclude Include="syOpeningScene.h" />
@@ -161,12 +164,15 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syAnimation.cpp" />
+    <ClCompile Include="syAnimator.cpp" />
     <ClCompile Include="syBackGround.cpp" />
     <ClCompile Include="syCamera.cpp" />
     <ClCompile Include="syComponent.cpp" />
     <ClCompile Include="syEndingScene.cpp" />
     <ClCompile Include="syEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syTexture.cpp" />
     <ClCompile Include="syLevelSelectScene.cpp" />
     <ClCompile Include="syMath.cpp" />

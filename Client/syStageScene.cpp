@@ -32,7 +32,7 @@ namespace sy
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 		BgRenderer->SetAffectCamera(true);
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		//Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 		
 
 
@@ -44,7 +44,7 @@ namespace sy
 		playerRenderer->SetTexture(ResourceManager::Load<Texture>(L"sword_kirby_change", L"..\\Resources\\Kirby\\SwordKirby\\sword kirby change.png")); // 이미지 설정
 		playerRenderer->SetAffectCamera(true);
 
-		Camera::SetTarget(player);
+		//Camera::SetTarget(player); //오브젝트생성은 씬진입시 해야함 여기서 설정한 오브젝트가 다른씬에 영향을 줘선안됨
 
 		Scene::Initialize();
 	}

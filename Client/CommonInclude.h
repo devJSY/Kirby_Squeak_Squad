@@ -19,9 +19,12 @@ namespace sy::enums
 	enum class eLayerType
 	{
 		BackGround,
+		Stage,
+		Inventory,
 		Player,
 		Monster,
 		Effect,
+		Item,
 		UI,
 		End,
 	};
@@ -30,12 +33,14 @@ namespace sy::enums
 	{
 		Transform,
 		SpriteRenderer,
+		Animator,
 		End,
 	};
 
 	enum class eTextureType
 	{
 		Bmp,
+		AlphaBmp,
 		Png,
 		None,
 	};

@@ -94,6 +94,15 @@
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{d9366b87-af53-4be5-96eb-0d332ddacb1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource\Animation">
+      <UniqueIdentifier>{ea9a0af9-3219-40e9-9232-6f0091c6f116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Animator">
+      <UniqueIdentifier>{42a9af73-1855-4446-80b6-41768aebf3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Inventory">
+      <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -186,6 +195,15 @@
     <ClInclude Include="syCamera.h">
       <Filter>Engine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="syAnimation.h">
+      <Filter>Engine\Resource\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="syAnimator.h">
+      <Filter>Engine\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="syInventory.h">
+      <Filter>Contents\GameObject\Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -268,6 +286,15 @@
     </ClCompile>
     <ClCompile Include="syCamera.cpp">
       <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="syAnimation.cpp">
+      <Filter>Engine\Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="syAnimator.cpp">
+      <Filter>Engine\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="syInventory.cpp">
+      <Filter>Contents\GameObject\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

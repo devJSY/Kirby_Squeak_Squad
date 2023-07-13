@@ -42,6 +42,10 @@ namespace sy
 			BITMAP info = {};
 			GetObject(mBitmap, sizeof(BITMAP), &info);
 
+			// 32bit 비트맵 파일인경우 AlphaBmp 타입으로 설정한다
+			if (info.bmBitsPixel == 32)
+				mType = eTextureType::AlphaBmp;
+
 			mWidth = info.bmWidth;
 			mHeight = info.bmHeight;
 
