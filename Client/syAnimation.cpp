@@ -56,15 +56,15 @@ namespace sy
 		if (mTexture->GetType() == eTextureType::Bmp)
 		{
 			TransparentBlt(hdc
-				, (int)pos.x - (mSpriteSheet[mIndex].size.x / 2.0f) // 스프라이트의 중점기준 렌더링
-				, (int)pos.y - (mSpriteSheet[mIndex].size.y / 2.0f) // 스프라이트의 중점기준 렌더링
-				, mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y
+				, (int)(pos.x - (mSpriteSheet[mIndex].size.x / 2.0f)) // 스프라이트의 중점기준 렌더링
+				, (int)(pos.y - (mSpriteSheet[mIndex].size.y / 2.0f)) // 스프라이트의 중점기준 렌더링
+				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)mSpriteSheet[mIndex].size.y
 				, mTexture->GetHdc()				// Sprite를 가져올 텍스쳐 설정
-				, mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
-				, mSpriteSheet[mIndex].leftTop.y
-				, mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y
+				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
+				, (int)mSpriteSheet[mIndex].leftTop.y
+				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)mSpriteSheet[mIndex].size.y
 				, RGB(255, 0, 255));				// 마젠타색상 고정 필요하면 변수화
 		}
 		else if (mTexture->GetType() == eTextureType::AlphaBmp)
@@ -81,15 +81,15 @@ namespace sy
 			func.SourceConstantAlpha = alpha; // 0 ~ 255
 
 			AlphaBlend(hdc
-				, (int)pos.x - (mSpriteSheet[mIndex].size.x / 2.0f) // 스프라이트의 중점기준 렌더링
-				, (int)pos.y - (mSpriteSheet[mIndex].size.y / 2.0f) // 스프라이트의 중점기준 렌더링
-				, mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y
+				, (int)(pos.x - (mSpriteSheet[mIndex].size.x / 2.0f)) // 스프라이트의 중점기준 렌더링
+				, (int)(pos.y - (mSpriteSheet[mIndex].size.y / 2.0f)) // 스프라이트의 중점기준 렌더링
+				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)mSpriteSheet[mIndex].size.y
 				, mTexture->GetHdc()				// Sprite를 가져올 텍스쳐 설정
-				, mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
-				, mSpriteSheet[mIndex].leftTop.y
-				, mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y
+				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
+				, (int)mSpriteSheet[mIndex].leftTop.y
+				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)mSpriteSheet[mIndex].size.y
 				, func);
 		}
 		else if (mTexture->GetType() == eTextureType::Png)

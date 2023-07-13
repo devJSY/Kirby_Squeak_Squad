@@ -12,7 +12,6 @@
 #include "syAnimator.h"
 #include "syInventory.h"
 
-
 namespace sy
 {
 	LevelSelectScene::LevelSelectScene()
@@ -32,6 +31,7 @@ namespace sy
 		assert(BgRenderer);
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+		BgRenderer->SetAffectCamera(false);
 
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
@@ -39,20 +39,22 @@ namespace sy
 
 		// 하단 화면 오브젝트 생성 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
-		Inven->SetName(L"Inventory");
 		assert(Inven);
+
+		// 인벤토리 클래스 위치 설정
 		vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y += vec.y / 2.f;
 		(Inven->GetComponent<Transform>())->SetPosition(vec);
-		Animator* InvenAt = Inven->AddComponent<Animator>();
 
+		// 인벤토리 애니메이션 설정
+		Animator* InvenAt = Inven->AddComponent<Animator>();
 		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
 			, L"..\\Resources\\\Inventory\\Inventory.bmp");
 
 		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
 			, Vector2(0.f, 0.f), 16, 0.1f);
 		InvenAt->PlayAnimation(L"Inventory", true);
-		//InvenAt->SetAffectedCamera(true);
+		InvenAt->SetAffectedCamera(false);
 
 		Scene::Initialize();
 	}
