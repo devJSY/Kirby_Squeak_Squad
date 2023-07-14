@@ -19,7 +19,7 @@ namespace sy::enums
 	enum class eLayerType
 	{
 		BackGround,
-		Stage,
+		ForeGround,
 		Inventory,
 		Player,
 		Monster,

@@ -49,10 +49,10 @@ namespace sy
 		// 인벤토리 애니메이션 설정
 		Animator* InvenAt = Inven->AddComponent<Animator>();
 		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
-			, L"..\\Resources\\\Inventory\\Inventory.bmp");
+			, L"..\\Resources\\Inventory\\Inventory.bmp");
 
 		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
-			, Vector2(0.f, 0.f), 16, 0.1f);
+			, Vector2(0.f, 0.f), 16, 0.2f);
 		InvenAt->PlayAnimation(L"Inventory", true);
 		InvenAt->SetAffectedCamera(false);
 
@@ -63,7 +63,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::E) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"StageScene");
 		}
@@ -72,6 +72,6 @@ namespace sy
 	void LevelSelectScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to StageScene : E or Mouse LBTN");
+		//ShowSceneName(hdc, GetName(), L"Change to StageScene : Mouse LBTN");
 	}
 }

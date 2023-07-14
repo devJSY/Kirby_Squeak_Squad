@@ -103,6 +103,21 @@
     <Filter Include="Contents\GameObject\Inventory">
       <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\ForeGround">
+      <UniqueIdentifier>{f22905b9-5aa3-428f-a66b-7635d12e0af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI">
+      <UniqueIdentifier>{61b761af-e4ce-495f-93c1-fd53d59e5cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\HPbar">
+      <UniqueIdentifier>{a0fc58eb-84c7-4f1d-9d9e-ccaca0fcde91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\AbilityUI">
+      <UniqueIdentifier>{d5b39543-b939-42f6-b487-97ac7476a333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\LifeUI">
+      <UniqueIdentifier>{427e8896-2838-4266-b067-792a79df1fa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -204,6 +219,21 @@
     <ClInclude Include="syInventory.h">
       <Filter>Contents\GameObject\Inventory</Filter>
     </ClInclude>
+    <ClInclude Include="syForeGround.h">
+      <Filter>Contents\GameObject\ForeGround</Filter>
+    </ClInclude>
+    <ClInclude Include="syUI.h">
+      <Filter>Contents\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="syAbilityUI.h">
+      <Filter>Contents\GameObject\UI\AbilityUI</Filter>
+    </ClInclude>
+    <ClInclude Include="syHPbarUI.h">
+      <Filter>Contents\GameObject\UI\HPbar</Filter>
+    </ClInclude>
+    <ClInclude Include="syLifeUI.h">
+      <Filter>Contents\GameObject\UI\LifeUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -295,6 +325,21 @@
     </ClCompile>
     <ClCompile Include="syInventory.cpp">
       <Filter>Contents\GameObject\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="syForeGround.cpp">
+      <Filter>Contents\GameObject\ForeGround</Filter>
+    </ClCompile>
+    <ClCompile Include="syUI.cpp">
+      <Filter>Contents\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="syAbilityUI.cpp">
+      <Filter>Contents\GameObject\UI\AbilityUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syHPbarUI.cpp">
+      <Filter>Contents\GameObject\UI\HPbar</Filter>
+    </ClCompile>
+    <ClCompile Include="syLifeUI.cpp">
+      <Filter>Contents\GameObject\UI\LifeUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

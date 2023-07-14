@@ -24,6 +24,11 @@ namespace sy::math
 			, y(_y)
 		{}
 
+		Vector2(UINT _x, UINT _y)
+			: x((float)_x)
+			, y((float)_y)
+		{}
+
 		Vector2(POINT _pt)
 			: x((float)_pt.x)
 			, y((float)_pt.y)

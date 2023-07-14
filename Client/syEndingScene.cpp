@@ -30,6 +30,7 @@ namespace sy
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"EndingImage", L"..\\Resources\\Video\\Ending\\Ending000017.304.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		BgRenderer->SetAffectCamera(false);
 
 		Scene::Initialize();
 	}
@@ -38,7 +39,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::Y) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"OpeningScene");
 		}
@@ -47,6 +48,6 @@ namespace sy
 	void EndingScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Y or Mouse LBTN");
+		//ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Mouse LBTN");
 	}
 }

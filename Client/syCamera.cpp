@@ -19,23 +19,23 @@ namespace sy
 
 	void Camera::Update()
 	{
-		//// 카메라 이동
-		//if (Input::GetKeyPressed(eKeyCode::UP))
-		//{
-		//	mLookPosition.y -= 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::LEFT))
-		//{
-		//	mLookPosition.x -= 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::DOWN))
-		//{
-		//	mLookPosition.y += 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::RIGHT))
-		//{
-		//	mLookPosition.x += 300.0f * Time::DeltaTime();
-		//}
+		// 카메라 이동
+		if (Input::GetKeyPressed(eKeyCode::UP))
+		{
+			mLookPosition.y -= 300.0f * Time::DeltaTime();
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			mLookPosition.x -= 300.0f * Time::DeltaTime();
+		}
+		if (Input::GetKeyPressed(eKeyCode::DOWN))
+		{
+			mLookPosition.y += 300.0f * Time::DeltaTime();
+		}
+		if (Input::GetKeyPressed(eKeyCode::RIGHT))
+		{
+			mLookPosition.x += 300.0f * Time::DeltaTime();
+		}
 
 		if (mTarget)
 		{

@@ -32,6 +32,7 @@ namespace sy
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		BgRenderer->SetAffectCamera(false);
 
 		Scene::Initialize();
 	}
@@ -40,7 +41,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::W) || Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			SceneManager::LoadScene(L"LevelSelectScene");
 		}
@@ -49,6 +50,6 @@ namespace sy
 	void TitleScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : W or Mouse LBTN");
+		//ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : Mouse LBTN");
 	}
 }

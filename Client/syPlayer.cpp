@@ -2,6 +2,7 @@
 #include "syTransform.h"
 #include "syInput.h"
 #include "syTime.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -24,21 +25,21 @@ namespace sy
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
 
-		if (Input::GetKeyPressed(eKeyCode::UP))
+		if (Input::GetKeyPressed(eKeyCode::W))
 		{
-			pos.y -= 300.0f * Time::DeltaTime();
+			pos.y -= 200.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::LEFT))
+		if (Input::GetKeyPressed(eKeyCode::A))
 		{
-			pos.x -= 300.0f * Time::DeltaTime();
+			pos.x -= 200.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::DOWN))
+		if (Input::GetKeyPressed(eKeyCode::S))
 		{
-			pos.y += 300.0f * Time::DeltaTime();
+			pos.y += 200.0f * Time::DeltaTime();
 		}
-		if (Input::GetKeyPressed(eKeyCode::RIGHT))
+		if (Input::GetKeyPressed(eKeyCode::D))
 		{
-			pos.x += 300.0f * Time::DeltaTime();
+			pos.x += 200.0f * Time::DeltaTime();
 		}
 
 		tr->SetPosition(pos);

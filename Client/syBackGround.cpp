@@ -16,11 +16,12 @@ namespace sy
 
 	void BackGround::Initialize()
 	{
+		GameObject::Initialize();
 	}
 
 	void BackGround::Update()
 	{
-		//GameObject::Update();
+		GameObject::Update();
 
 		//SpriteRenderer* sr = GetComponent<SpriteRenderer>();
 
