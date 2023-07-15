@@ -3,12 +3,13 @@
 #include "sySceneManager.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -47,12 +48,17 @@ namespace sy
 	void WorldTunnelScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to EndingScene : Mouse LBTN");
 	}
+
 	void WorldTunnelScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
 	}
+
 	void WorldTunnelScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
 	}
 }

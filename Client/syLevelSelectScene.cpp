@@ -1,7 +1,7 @@
 #include "syLevelSelectScene.h"
 #include "syInput.h"
 #include "sySceneManager.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
 #include "syTransform.h"
@@ -14,6 +14,7 @@
 #include "syAbilityUI.h"
 #include "syHPbarUI.h"
 #include "syLifeUI.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -94,12 +95,17 @@ namespace sy
 	void LevelSelectScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to StageScene : Mouse LBTN");
 	}
+
 	void LevelSelectScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
 	}
+
 	void LevelSelectScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
 	}
 }

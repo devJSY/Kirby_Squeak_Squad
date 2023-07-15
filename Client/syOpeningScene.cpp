@@ -3,13 +3,14 @@
 #include "sySceneManager.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
 #include "syAnimator.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -24,6 +25,7 @@ namespace sy
 
 	void OpeningScene::Initialize()
 	{
+		// 비디오 생성
 		mVideo = object::Instantiate<Video>(eLayerType::Video);
 		assert(mVideo);
 		assert(mVideo->AddComponent<Animator>());
@@ -43,7 +45,8 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (mVideo->GetComponent<Animator>()->IsComplete())
+		// 비디오 재생이 끝나면 다음 씬으로 이동
+		if ( mVideo != nullptr && mVideo->GetComponent<Animator>()->IsComplete())
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}
@@ -58,16 +61,21 @@ namespace sy
 	void OpeningScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to TitleScene : Mouse LBTN");
 	}
 
 	void OpeningScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
+
+		// 비디오 재생
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"OpeningVideo", false);
 	}
 
 	void OpeningScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
 	}
 }

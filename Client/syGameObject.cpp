@@ -20,6 +20,8 @@ namespace sy
 				comp = nullptr;
 			}
 		}
+
+		mComponents.clear();
 	}
 
 	void GameObject::Initialize()

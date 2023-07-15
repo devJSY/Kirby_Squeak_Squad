@@ -76,9 +76,6 @@
     <Filter Include="Contents\GameObject">
       <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player">
-      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resource">
       <UniqueIdentifier>{17ee2a1d-c686-4230-8bfb-6c376e0098dc}</UniqueIdentifier>
     </Filter>
@@ -120,6 +117,21 @@
     </Filter>
     <Filter Include="Contents\GameObject\Video">
       <UniqueIdentifier>{44c76270-b015-4769-8885-dfa3f0c2cc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enermy">
+      <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enermy\Boss">
+      <UniqueIdentifier>{d0fd2dd9-7253-418c-ae3d-3b3bf2e15dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enermy\Boss\Dedede">
+      <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enermy\Boss\MetaKnight">
+      <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Kirby">
+      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,8 +189,8 @@
     <ClInclude Include="syGameObject.h">
       <Filter>Contents\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="syPlayer.h">
-      <Filter>Contents\GameObject\Player</Filter>
+    <ClInclude Include="syKirby.h">
+      <Filter>Contents\GameObject\Kirby</Filter>
     </ClInclude>
     <ClInclude Include="syTitleScene.h">
       <Filter>Contents\Scene\TitleScene</Filter>
@@ -284,8 +296,8 @@
     <ClCompile Include="syGameObject.cpp">
       <Filter>Contents\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="syPlayer.cpp">
-      <Filter>Contents\GameObject\Player</Filter>
+    <ClCompile Include="syKirby.cpp">
+      <Filter>Contents\GameObject\Kirby</Filter>
     </ClCompile>
     <ClCompile Include="syTitleScene.cpp">
       <Filter>Contents\Scene\TitleScene</Filter>

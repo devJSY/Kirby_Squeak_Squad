@@ -31,6 +31,21 @@ namespace sy
 		}
 	}
 
+	void Scene::DeleteLayer(eLayerType type)
+	{
+		// 해당 레이어 안의 오브젝트를 삭제
+		mLayers[(int)type].DeleteObjects();
+	}
+
+	void Scene::DeleteAllLayer()
+	{
+		// 모든 레이어의 오브젝트 삭제
+		for (size_t i = 0; i < mLayers.size(); i++)
+		{
+			DeleteLayer((eLayerType)i);
+		}
+	}
+
 	void Scene::ShowSceneName(HDC hdc, std::wstring& name, const wchar_t* ChangeKey)
 	{	
 		// Scene 이름 렌더링

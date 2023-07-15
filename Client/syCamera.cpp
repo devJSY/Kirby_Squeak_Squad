@@ -14,6 +14,9 @@ namespace sy
 	void Camera::Initalize()
 	{
 		mResolution = Application::GetResolution();
+		// 전체 해상도의 위쪽 화면기준으로 설정
+		mResolution.y /= 2.f;
+
 		mLookPosition = mResolution / 2.0f;
 	}
 

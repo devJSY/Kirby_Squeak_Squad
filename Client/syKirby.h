@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class Player : public GameObject
+	class Kirby : public GameObject
 	{
 	public:
-		Player();
-		virtual ~Player();
+		Kirby();
+		virtual ~Kirby();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

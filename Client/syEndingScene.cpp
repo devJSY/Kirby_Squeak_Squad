@@ -3,13 +3,14 @@
 #include "sySceneManager.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
 #include "syAnimator.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -52,16 +53,20 @@ namespace sy
 	void EndingScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Mouse LBTN");
 	}
 
 	void EndingScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
+
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"EndingVideo", false);
 	}
 
 	void EndingScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
 	}
 }

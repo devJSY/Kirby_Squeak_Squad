@@ -1,4 +1,4 @@
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syTransform.h"
 #include "syInput.h"
 #include "syTime.h"
@@ -6,19 +6,19 @@
 
 namespace sy
 {
-	Player::Player()
+	Kirby::Kirby()
 	{
 	}
 
-	Player::~Player()
+	Kirby::~Kirby()
 	{
 	}
 
-	void Player::Initialize()
+	void Kirby::Initialize()
 	{
 	}
 
-	void Player::Update()
+	void Kirby::Update()
 	{
 		GameObject::Update();
 
@@ -45,7 +45,7 @@ namespace sy
 		tr->SetPosition(pos);
 	}
 
-	void Player::Render(HDC hdc)
+	void Kirby::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 	}

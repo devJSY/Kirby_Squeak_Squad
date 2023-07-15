@@ -16,6 +16,8 @@ namespace sy
 				obj = nullptr;
 			}
 		}
+
+		mGameObjects.clear();
 	}
 
 	void Layer::Initialize()
@@ -36,5 +38,19 @@ namespace sy
 		{
 			obj->Render(hdc);
 		}
+	}
+
+	void Layer::DeleteObjects()
+	{
+		for (GameObject* obj : mGameObjects)
+		{
+			if (nullptr != obj)
+			{
+				delete obj;
+				obj = nullptr;
+			}
+		}
+
+		mGameObjects.clear();
 	}
 }

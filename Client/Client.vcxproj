@@ -148,7 +148,7 @@
     <ClInclude Include="syTexture.h" />
     <ClInclude Include="syLevelSelectScene.h" />
     <ClInclude Include="syOpeningScene.h" />
-    <ClInclude Include="syPlayer.h" />
+    <ClInclude Include="syKirby.h" />
     <ClInclude Include="syResource.h" />
     <ClInclude Include="syResourceManager.h" />
     <ClInclude Include="syScene.h" />
@@ -187,7 +187,7 @@
     <ClCompile Include="syLevelSelectScene.cpp" />
     <ClCompile Include="syMath.cpp" />
     <ClCompile Include="syOpeningScene.cpp" />
-    <ClCompile Include="syPlayer.cpp" />
+    <ClCompile Include="syKirby.cpp" />
     <ClCompile Include="syResource.cpp" />
     <ClCompile Include="syResourceManager.cpp" />
     <ClCompile Include="syScene.cpp" />

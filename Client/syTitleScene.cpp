@@ -1,10 +1,10 @@
 #include "syTitleScene.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "sySpriteRenderer.h"
 #include "syObject.h"
 #include "syInput.h"
 #include "sySceneManager.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "sySpriteRenderer.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
@@ -12,6 +12,7 @@
 #include "syBackGround.h"
 #include "syApplication.h"
 #include "syAnimator.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -45,11 +46,6 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (mVideo->GetComponent<Animator>()->IsComplete())
-		{
-			SceneManager::LoadScene(L"LevelSelectScene");
-		}
-
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"LevelSelectScene");
@@ -59,15 +55,19 @@ namespace sy
 	void TitleScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : Mouse LBTN");
 	}
 	void TitleScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
+
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"TitleVideo", true);
 	}
 
 	void TitleScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
 	}
 }

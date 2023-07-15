@@ -1,5 +1,5 @@
 #include "syStageScene.h"
-#include "syPlayer.h"
+#include "syKirby.h"
 #include "syObject.h"
 #include "syGameObject.h"
 #include "sySpriteRenderer.h"
@@ -53,24 +53,14 @@ namespace sy
 		FgRenderer->SetAffectCamera(true);
 
 		// 플레이어 설정
-		Player* player = object::Instantiate<Player>(eLayerType::Player);
-		assert(player);
-		assert(player->AddComponent<SpriteRenderer>());
-		SpriteRenderer* playerRenderer = player->GetComponent<SpriteRenderer>();
+		mPlayer = object::Instantiate<Kirby>(eLayerType::Player);
+		assert(mPlayer);
+		assert(mPlayer->AddComponent<SpriteRenderer>());
+		SpriteRenderer* playerRenderer = mPlayer->GetComponent<SpriteRenderer>();
 		assert(playerRenderer);
 		playerRenderer->SetTexture(ResourceManager::Load<Texture>(L"sword_kirby_change", L"..\\Resources\\Kirby\\SwordKirby\\sword kirby change.png")); // 이미지 설정
 		playerRenderer->SetAffectCamera(true);
-
-		//Camera::SetTarget(player); //오브젝트생성은 씬진입시 해야함 여기서 설정한 오브젝트가 다른씬에 영향을 줘선안됨
-
-
-
-
-
-
-
-
-
+		playerRenderer->SetScale(Vector2(0.5f, 0.5f));
 
 
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하도록 수정해야함
@@ -108,12 +98,16 @@ namespace sy
 	void StageScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		//ShowSceneName(hdc, GetName(), L"Change to WorldTunnelScene : Mouse LBTN");
 	}
 	void StageScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(mPlayer);
 	}
 	void StageScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
+
 	}
 }
