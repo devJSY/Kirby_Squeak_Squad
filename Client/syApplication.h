@@ -39,6 +39,6 @@ namespace sy
 		static HDC mBackHdc;
 		static HBITMAP mBackBuffer;
 
-		static HMENU	m_hMenu;
+		static HMENU	mhMenu;
 	};
 }

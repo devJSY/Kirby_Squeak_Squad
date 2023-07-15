@@ -13,7 +13,7 @@ namespace sy
 
 	HDC			Application::mBackHdc	 = NULL;
 	HBITMAP		Application::mBackBuffer = NULL;
-	HMENU		Application::m_hMenu	 = LoadMenu(nullptr, MAKEINTRESOURCEW(IDC_CLIENT)); // 메뉴바 생성
+	HMENU		Application::mhMenu	 = LoadMenu(nullptr, MAKEINTRESOURCEW(IDC_CLIENT)); // 메뉴바 생성
 
 	Application::Application()
 	{
@@ -21,6 +21,10 @@ namespace sy
 
 	Application::~Application()
 	{
+		// 윈도우핸들, DC 삭제
+		ReleaseDC(mHwnd, mHdc);
+
+		DestroyMenu(mhMenu);
 	}
 
 	void Application::Initialize(HWND hwnd, POINT Resolution)
@@ -89,7 +93,7 @@ namespace sy
 
 	void Application::DockMenu()
 	{
-		SetMenu(mHwnd, m_hMenu); // 메뉴바 On
+		SetMenu(mHwnd, mhMenu); // 메뉴바 On
 		ChangeWindowSize(mResolution, true);
 	}
 

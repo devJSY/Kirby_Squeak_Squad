@@ -27,7 +27,8 @@ namespace sy
 	{
 		mVideo = object::Instantiate<Video>(eLayerType::Video);
 		assert(mVideo);
-		assert(mVideo->AddComponent<Animator>());
+		Animator* VideoAni = mVideo->AddComponent<Animator>();
+		assert(VideoAni);
 		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 		mVideo->SetSpeed(5.f); // 재생속도 5배 설정
 
