@@ -24,11 +24,12 @@ namespace sy
 
 		Texture* tex = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
 		mAni->CreateAnimation(L"RightMove", tex, Vector2(253.f, 8.f), Vector2(21.0f, 22.f), 10, Vector2::Zero, 0.1f);
-		mAni->SetAffectedCamera(true);
+		mAni->SetAniScale(L"RightMove", Vector2(4.f, 4.f));
+
+
+
 
 		mAni->PlayAnimation(L"RightMove", true);
-
-
 
 		GameObject::Initialize();
 	}

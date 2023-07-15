@@ -154,4 +154,13 @@ namespace sy
 		mbLoop = loop;
 		mbComplete = false;
 	}
+
+	void Animator::SetAniScale(const std::wstring& name, Vector2 scale)
+	{
+		Animation* animation = FindAnimation(name);
+		if (animation == nullptr)
+			return;
+
+		animation->SetScale(scale);
+	}
 }

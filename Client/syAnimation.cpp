@@ -15,6 +15,7 @@ namespace sy
 		, mIndex(-1)
 		, mTime(0.0f)
 		, mbComplete(false)
+		, mScale(Vector2::One)
 	{
 	}
 
@@ -56,10 +57,10 @@ namespace sy
 		if (mTexture->GetType() == eTextureType::Bmp)
 		{
 			TransparentBlt(hdc
-				, (int)(pos.x - (mSpriteSheet[mIndex].size.x / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
-				, (int)(pos.y - (mSpriteSheet[mIndex].size.y / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
-				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)mSpriteSheet[mIndex].size.y
+				, (int)(pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
+				, (int)(pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
+				, (int)(mSpriteSheet[mIndex].size.x * mScale.x)		// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)(mSpriteSheet[mIndex].size.y * mScale.y)
 				, mTexture->GetHdc()				// Sprite를 가져올 텍스쳐 설정
 				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
 				, (int)mSpriteSheet[mIndex].leftTop.y
@@ -81,10 +82,10 @@ namespace sy
 			func.SourceConstantAlpha = alpha; // 0 ~ 255
 
 			AlphaBlend(hdc
-				, (int)(pos.x - (mSpriteSheet[mIndex].size.x / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
-				, (int)(pos.y - (mSpriteSheet[mIndex].size.y / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
-				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)mSpriteSheet[mIndex].size.y
+				, (int)(pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
+				, (int)(pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
+				, (int)(mSpriteSheet[mIndex].size.x * mScale.x)	// 현재 Sprite 사이즈만큼 잘라냄
+				, (int)(mSpriteSheet[mIndex].size.y * mScale.y)
 				, mTexture->GetHdc()					// Sprite를 가져올 텍스쳐 설정
 				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
 				, (int)mSpriteSheet[mIndex].leftTop.y
@@ -96,10 +97,10 @@ namespace sy
 		{
 			Gdiplus::Graphics graphics(hdc);
 			graphics.DrawImage(mTexture->GetImage()
-				, (int)pos.x - (mSpriteSheet[mIndex].size.x / 2.0f) + mSpriteSheet[mIndex].offset.x	 // 스프라이트의 중점기준 렌더링
-				, (int)pos.y - (mSpriteSheet[mIndex].size.y / 2.0f) + mSpriteSheet[mIndex].offset.y
-				, mSpriteSheet[mIndex].size.x						 // 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y);
+				, (int)pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x	 // 스프라이트의 중점기준 렌더링
+				, (int)pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y
+				, mSpriteSheet[mIndex].size.x * mScale.x						 // 현재 Sprite 사이즈만큼 잘라냄
+				, mSpriteSheet[mIndex].size.y * mScale.y);
 		}
 	}
 
