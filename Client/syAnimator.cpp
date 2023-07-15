@@ -1,5 +1,6 @@
 #include "syAnimator.h"
 #include "syResourceManager.h"
+#include "syTexture.h"
 
 namespace sy
 {
@@ -40,7 +41,11 @@ namespace sy
 			mActiveAnimation->Render(hdc);
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name, Texture* texture, Vector2 leftTop, Vector2 size, Vector2 offset, UINT spriteLength, float duration)
+	void Animator::CreateAnimation(const std::wstring& name
+		, Texture* texture
+		, Vector2 leftTop, Vector2 size
+		, UINT spriteLength, Vector2 offset
+		, float duration)
 	{
 		Animation* animation = nullptr;
 		animation = ResourceManager::Find<Animation>(name); // ResourceManager 에서 만든 리소스가 있는지 먼저 확인
@@ -55,6 +60,60 @@ namespace sy
 
 		mAnimations.insert(std::make_pair(name, animation)); // mAnimations에 생성한 애니메이션 추가
 		ResourceManager::Insert<Animation>(name, animation); // ResourceManager 에 추가
+	}
+
+	void Animator::CreateAnimationFolder(const std::wstring& name
+		, const std::wstring& path, Vector2 offset, float duration)
+	{
+		UINT width = 0;
+		UINT height = 0;
+		UINT fileCount = 0;
+
+		std::filesystem::path fs(path);
+		std::vector<Texture*> images = {};
+		// 디렉토리 파일중에 width 와 height 가 제일 큰값 구하기, 파일갯수 저장
+		for (auto& p : std::filesystem::recursive_directory_iterator(path))
+		{
+			std::wstring fileName = p.path().filename();
+			std::wstring fullName = p.path();
+
+			// 확장자가 png인 경우 스킵
+			const std::wstring ext = p.path().extension();
+			if (ext == L".png")
+				continue;
+
+			Texture* image = ResourceManager::Load<Texture>(fileName, fullName);
+			images.push_back(image);
+
+			if (width < image->GetWidth())
+				width = image->GetWidth();
+
+			if (height < image->GetHeight())
+				height = image->GetHeight();
+
+			fileCount++;
+		}
+
+		// 구한 크기값으로 Texture 생성
+		Texture* spriteSheet = Texture::Create(name, width * fileCount, height);
+		spriteSheet->SetType(eTextureType::Bmp); // Video 기본 타입 Bmp로 설정
+
+		// Texture 에 Load 해두었던 image 붙여넣기
+		int idx = 0;
+		for (Texture* image : images)
+		{
+			BitBlt(spriteSheet->GetHdc(), width * idx, 0
+				, image->GetWidth(), image->GetHeight()
+				, image->GetHdc(), 0, 0, SRCCOPY);
+
+			idx++;
+		}
+
+		// 생성한 spriteSheet로 애니메이션 생성
+		CreateAnimation(name
+			, spriteSheet, Vector2(0.0f, 0.0f)
+			, Vector2(width, height), fileCount
+			, offset, duration);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)

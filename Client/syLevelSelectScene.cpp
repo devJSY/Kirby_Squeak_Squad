@@ -11,6 +11,9 @@
 #include "syApplication.h"
 #include "syAnimator.h"
 #include "syInventory.h"
+#include "syAbilityUI.h"
+#include "syHPbarUI.h"
+#include "syLifeUI.h"
 
 namespace sy
 {
@@ -52,9 +55,28 @@ namespace sy
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
 
 		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
-			, Vector2(0.f, 0.f), 16, 0.2f);
+			, 16, Vector2(0.f, 0.f), 0.2f);
 		InvenAt->PlayAnimation(L"Inventory", true);
 		InvenAt->SetAffectedCamera(false);
+
+
+		//// UI »ý¼º
+		//AbilityUI* Ability = object::Instantiate<AbilityUI>(eLayerType::UI);
+		//assert(Ability);
+		//SpriteRenderer* AbilityRenderer = Ability->AddComponent<SpriteRenderer>();
+		//assert(AbilityRenderer);
+		//AbilityRenderer->SetAffectCamera(false);
+		//Texture* Abilityimage = ResourceManager::Load<Texture>(L"AbilityUI"
+		//	, L"..\\Resources\\UI\\Ability_UI.bmp");
+		//AbilityRenderer->SetBmpRGB(255, 0, 255);
+		//AbilityRenderer->SetTexture(Abilityimage);
+		//Ability->GetComponent<Transform>()->SetPosition(Vector2(100.f,100.f)); 
+
+
+		//HPbarUI* HPbar = object::Instantiate<HPbarUI>(eLayerType::UI);
+		//assert(HPbar);
+		//SpriteRenderer* HPbarRenderer = HPbar->AddComponent<SpriteRenderer>();
+		//assert(AbilityRenderer);
 
 		Scene::Initialize();
 	}
@@ -63,7 +85,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"StageScene");
 		}

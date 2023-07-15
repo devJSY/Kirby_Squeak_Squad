@@ -39,7 +39,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"OpeningScene");
 		}

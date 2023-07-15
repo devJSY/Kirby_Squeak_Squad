@@ -1,5 +1,6 @@
 #include "syTexture.h"
 #include "syApplication.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -20,6 +21,35 @@ namespace sy
 
 		DeleteObject(mBitmap);
 		mBitmap = NULL;
+	}
+
+	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
+	{
+		// 생성할 이미지가 이미 만들어져있는 리소스인지 확인
+		Texture* image = ResourceManager::Find<Texture>(name);
+		if (image != nullptr)
+			return image;
+
+		// 인자로 들어온 크기로 텍스쳐 생성
+		image = new Texture();
+		image->SetWidth(width);
+		image->SetHeight(height);
+
+		HDC hdc = Application::GetHdc();
+		HBITMAP bitmap = CreateCompatibleBitmap(hdc, width, height);
+		image->SetHBitmap(bitmap);
+
+		HDC bitmapHdc = CreateCompatibleDC(hdc);
+		image->SetHdc(bitmapHdc);
+
+		HBITMAP defaultBitmap = (HBITMAP)SelectObject(bitmapHdc, bitmap);
+		DeleteObject(defaultBitmap);
+
+		// 생성한 텍스쳐를 ResourceManager에 넣어서 관리
+		image->SetName(name);
+		ResourceManager::Insert<Texture>(name, image);
+
+		return image;
 	}
 
 	HRESULT Texture::Load(const std::wstring& path)

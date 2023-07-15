@@ -5,6 +5,7 @@
 #include <set>
 #include <functional>
 #include <string>
+#include <filesystem>
 
 #include "framework.h"
 #include "syMath.h"

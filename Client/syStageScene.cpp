@@ -44,6 +44,7 @@ namespace sy
 		assert(Fg);
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		assert(FgRenderer);
+
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정
 		assert(tex);
 		FgRenderer->SetTexture(tex);
@@ -88,11 +89,9 @@ namespace sy
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
 
 		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
-			, Vector2(0.f, 0.f), 16, 0.2f);
+			, 16, Vector2(0.f, 0.f), 0.2f);
 		InvenAt->PlayAnimation(L"Inventory", true);
 		InvenAt->SetAffectedCamera(false);
-
-		Scene::Initialize();
 
 		Scene::Initialize();
 	}
@@ -100,7 +99,7 @@ namespace sy
 	void StageScene::Update()
 	{
 		Scene::Update();
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"WorldTunnelScene");
 		}

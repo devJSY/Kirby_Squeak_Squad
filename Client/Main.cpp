@@ -122,7 +122,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
    // 해상도 256, 384
-   sy::Application::Initialize(hWnd, { 256, 384});
+   sy::Application::Initialize(hWnd, { 256, 384 });
 
    if (!hWnd)
    {
