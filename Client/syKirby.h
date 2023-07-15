@@ -1,5 +1,6 @@
 #pragma once
 #include "syGameObject.h"
+#include "syAnimator.h"
 
 namespace sy
 {
@@ -14,6 +15,7 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	private:
+		Animator* mAni;
 	};
 }
 

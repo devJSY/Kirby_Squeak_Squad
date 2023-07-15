@@ -8,7 +8,7 @@ namespace sy
 		: Component(eComponentType::Animator)
 		, mActiveAnimation(nullptr)
 		, mbLoop(false)					
-		, mbAffectedCamera(false)			
+		, mbAffectedCamera(true)			
 		, mAlpha(1.0f)
 		, mbComplete(false)
 	{

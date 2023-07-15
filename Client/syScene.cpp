@@ -13,6 +13,10 @@ namespace sy
 
 	void Scene::Initialize()
 	{
+		for (Layer& layer : mLayers)
+		{
+			layer.Initialize();
+		}
 	}
 
 	void Scene::Update()

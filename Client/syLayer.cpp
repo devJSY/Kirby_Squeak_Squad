@@ -22,6 +22,10 @@ namespace sy
 
 	void Layer::Initialize()
 	{
+		for (GameObject* obj : mGameObjects)
+		{
+			obj->Initialize();
+		}
 	}
 
 	void Layer::Update()

@@ -3,10 +3,13 @@
 #include "syInput.h"
 #include "syTime.h"
 #include "syCamera.h"
+#include "syResourceManager.h"
+#include "syTexture.h"
 
 namespace sy
 {
 	Kirby::Kirby()
+		: mAni(nullptr)
 	{
 	}
 
@@ -16,6 +19,18 @@ namespace sy
 
 	void Kirby::Initialize()
 	{
+		mAni = AddComponent<Animator>();
+		assert(mAni);
+
+		Texture* tex = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
+		mAni->CreateAnimation(L"RightMove", tex, Vector2(253.f, 8.f), Vector2(21.0f, 22.f), 10, Vector2::Zero, 0.1f);
+		mAni->SetAffectedCamera(true);
+
+		mAni->PlayAnimation(L"RightMove", true);
+
+
+
+		GameObject::Initialize();
 	}
 
 	void Kirby::Update()

@@ -18,6 +18,7 @@
 namespace sy
 {
 	StageScene::StageScene()
+		: mPlayer(nullptr)
 	{
 	}
 
@@ -55,12 +56,6 @@ namespace sy
 		// 플레이어 설정
 		mPlayer = object::Instantiate<Kirby>(eLayerType::Player);
 		assert(mPlayer);
-		assert(mPlayer->AddComponent<SpriteRenderer>());
-		SpriteRenderer* playerRenderer = mPlayer->GetComponent<SpriteRenderer>();
-		assert(playerRenderer);
-		playerRenderer->SetTexture(ResourceManager::Load<Texture>(L"sword_kirby_change", L"..\\Resources\\Kirby\\SwordKirby\\sword kirby change.png")); // 이미지 설정
-		playerRenderer->SetAffectCamera(true);
-		playerRenderer->SetScale(Vector2(0.5f, 0.5f));
 
 
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하도록 수정해야함
@@ -89,6 +84,7 @@ namespace sy
 	void StageScene::Update()
 	{
 		Scene::Update();
+
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"WorldTunnelScene");
@@ -99,11 +95,13 @@ namespace sy
 	{
 		Scene::Render(hdc);
 	}
+
 	void StageScene::Enter()
 	{
 		// 카메라 설정 
 		Camera::SetTarget(mPlayer);
 	}
+
 	void StageScene::Exit()
 	{
 		// 카메라 설정 해제
