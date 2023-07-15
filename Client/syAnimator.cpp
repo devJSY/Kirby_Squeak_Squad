@@ -57,8 +57,8 @@ namespace sy
 			mActiveAnimation->Render(hdc);
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name
-		, Texture* texture
+	void Animator::CreateAnimation(Texture* texture
+		, const std::wstring& name
 		, Vector2 leftTop
 		, Vector2 size, Vector2 Interbal
 		, float duration, UINT spriteLength
@@ -70,7 +70,7 @@ namespace sy
 			return;
 
 		animation = new Animation();
-		animation->Create(name, texture
+		animation->Create(texture, name
 			, leftTop, size, Interbal
 			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
@@ -134,8 +134,8 @@ namespace sy
 		}
 
 		// 积己茄 spriteSheet肺 局聪皋捞记 积己
-		CreateAnimation(name
-			, spriteSheet, Vector2(0.0f, 0.0f)
+		CreateAnimation(spriteSheet, name
+			, Vector2(0.0f, 0.0f)
 			, Vector2(width, height), Vector2(width, 0), duration
 			,fileCount, offset);
 	}

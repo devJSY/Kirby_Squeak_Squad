@@ -33,7 +33,7 @@ namespace sy
 
 		virtual HRESULT Load(const std::wstring& path) { return E_FAIL; }
 
-		void Create(const std::wstring& name, Texture* texture
+		void Create(Texture* texture, const std::wstring& name
 			, Vector2 leftTop, Vector2 size, Vector2 Interbal
 			, float duration, UINT spriteLength, Vector2 offset);
 
