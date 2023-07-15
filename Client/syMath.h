@@ -34,12 +34,14 @@ namespace sy::math
 			, y((float)_pt.y)
 		{}
 
+		Vector2 operator+(const Vector2 other)
+		{
+			return Vector2(x + other.x, y + other.y);
+		}
+
 		Vector2 operator-(const Vector2 other)
 		{
-			Vector2 temp;
-			temp.x = x - other.x;
-			temp.y = y - other.y;
-			return temp;
+			return Vector2(x - other.x, y - other.y);
 		}
 
 		Vector2 operator/(const float value)
@@ -51,11 +53,17 @@ namespace sy::math
 			return temp;
 		}
 
+		Vector2 operator* (float value)
+		{
+			return Vector2(x * value, y * value);
+		}
+
 		Vector2& operator = (POINT _pt)
 		{
 			x = (float)_pt.x;
 			y = (float)_pt.y;
 			return *this;
 		}
+
 	};
 }

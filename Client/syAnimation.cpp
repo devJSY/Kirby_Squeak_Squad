@@ -1,5 +1,4 @@
 #include "syAnimation.h"
-#include "syTexture.h"
 #include "syAnimator.h"
 #include "syTime.h"
 #include "syTransform.h"
@@ -21,7 +20,6 @@ namespace sy
 
 	Animation::~Animation()
 	{
-		int a = 0;
 	}
 
 	void Animation::Update()
@@ -105,7 +103,7 @@ namespace sy
 		}
 	}
 
-	void Animation::Create(const std::wstring& name, Texture* texture, Vector2 leftTop, Vector2 size, Vector2 offset, UINT spriteLength, float duration)
+	void Animation::Create(const std::wstring& name, Texture* texture, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)
 	{	
 		// 텍스쳐 설정
 		mTexture = texture;
@@ -115,8 +113,9 @@ namespace sy
 		{
 			Sprite sprite = {};
 
-			sprite.leftTop.x = leftTop.x + (size.x * i);
-			sprite.leftTop.y = leftTop.y;
+			/*sprite.leftTop.x = leftTop.x + (size.x * i);
+			sprite.leftTop.y = leftTop.y;*/
+			sprite.leftTop = leftTop + (Interbal * (float)i);
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;

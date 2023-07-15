@@ -33,7 +33,7 @@ namespace sy
 		assert(videoAnimator);
 		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 		mVideo->SetSpeed(3.f); // 재생속도 3배 설정
-		videoAnimator->CreateAnimationFolder(L"TitleVideo", L"..\\Resources\\Video\\Title", Vector2::Zero, 0.033224f / mVideo->GetSpeed());
+		videoAnimator->CreateAnimationFolder(L"TitleVideo", L"..\\Resources\\Video\\Title", 0.033224f / mVideo->GetSpeed());
 		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"TitleVideo", true);
 

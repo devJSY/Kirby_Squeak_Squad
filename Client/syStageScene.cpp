@@ -73,8 +73,7 @@ namespace sy
 		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
 
-		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f)
-			, 16, Vector2(0.f, 0.f), 0.2f);
+		InvenAt->CreateAnimation(L"Inventory", image, Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
 		InvenAt->PlayAnimation(L"Inventory", true);
 		InvenAt->SetAffectedCamera(false);
 

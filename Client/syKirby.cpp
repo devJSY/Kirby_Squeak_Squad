@@ -19,17 +19,32 @@ namespace sy
 
 	void Kirby::Initialize()
 	{
+		// 애니메이터 생성
 		mAni = AddComponent<Animator>();
 		assert(mAni);
 
-		Texture* tex = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
-		mAni->CreateAnimation(L"RightMove", tex, Vector2(253.f, 8.f), Vector2(21.0f, 22.f), 10, Vector2::Zero, 0.1f);
-		mAni->SetAniScale(L"RightMove", Vector2(4.f, 4.f));
+		// 텍스쳐 로드
+		Texture* DefaultKirby_Right_Tex = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
+		Texture* DefaultKirby_Left_Tex = ResourceManager::Load<Texture>(L"DefaultKirby_Left", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
+		
+		// 애니메이션 생성
+		mAni->CreateAnimation(L"Choice", DefaultKirby_Right_Tex, Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);
+		mAni->CreateAnimation(L"Enter", DefaultKirby_Right_Tex, Vector2(738.f, 7.f), Vector2(19.f, 22.f), Vector2(19.f, 0.f), 0.6f, 1);
+
+
+	
 
 
 
 
-		mAni->PlayAnimation(L"RightMove", true);
+
+
+
+
+
+
+
+		mAni->PlayAnimation(L"Choice", true);
 
 		GameObject::Initialize();
 	}

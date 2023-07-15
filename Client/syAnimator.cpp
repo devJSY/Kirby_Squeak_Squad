@@ -18,8 +18,11 @@ namespace sy
 	{
 		for (auto iter : mAnimations)
 		{
-			delete iter.second;
-			iter.second = nullptr;
+			if (nullptr != iter.second)
+			{
+				delete iter.second;
+				iter.second = nullptr;
+			}
 		}
 	}
 
@@ -56,9 +59,10 @@ namespace sy
 
 	void Animator::CreateAnimation(const std::wstring& name
 		, Texture* texture
-		, Vector2 leftTop, Vector2 size
-		, UINT spriteLength, Vector2 offset
-		, float duration)
+		, Vector2 leftTop
+		, Vector2 size, Vector2 Interbal
+		, float duration, UINT spriteLength
+		, Vector2 offset)
 	{
 		Animation* animation = nullptr;
 		animation = ResourceManager::Find<Animation>(name); // ResourceManager 에서 만든 리소스가 있는지 먼저 확인
@@ -67,15 +71,14 @@ namespace sy
 
 		animation = new Animation();
 		animation->Create(name, texture
-			, leftTop, size, offset
-			, spriteLength, duration);
+			, leftTop, size, Interbal
+			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation)); // mAnimations에 생성한 애니메이션 추가
 	}
 
-	void Animator::CreateAnimationFolder(const std::wstring& name
-		, const std::wstring& path, Vector2 offset, float duration)
+	void Animator::CreateAnimationFolder(const std::wstring& name, const std::wstring& path, float duration, Vector2 offset)
 	{
 		UINT width = 0;
 		UINT height = 0;
@@ -133,8 +136,8 @@ namespace sy
 		// 생성한 spriteSheet로 애니메이션 생성
 		CreateAnimation(name
 			, spriteSheet, Vector2(0.0f, 0.0f)
-			, Vector2(width, height), fileCount
-			, offset, duration);
+			, Vector2(width, height), Vector2(width, 0), duration
+			,fileCount, offset);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)
