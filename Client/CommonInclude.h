@@ -46,4 +46,10 @@ namespace sy::enums
 		Png,
 		None,
 	};
+
+	enum class eDirection
+	{
+		RIGHT = 0,
+		LEFT = 1,
+	};
 }

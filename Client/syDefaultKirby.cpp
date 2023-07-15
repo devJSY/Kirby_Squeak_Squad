@@ -5,11 +5,14 @@
 #include "syCamera.h"
 #include "syResourceManager.h"
 #include "syTexture.h"
+#include "syInput.h"
 
 namespace sy
 {
 	DefaultKirby::DefaultKirby()
 		: mAni(nullptr)
+		, mState(eDefaultKirbyState::Idle)
+		, mDir(eDirection::RIGHT)
 	{
 	}
 
@@ -115,33 +118,199 @@ namespace sy
 
 	void DefaultKirby::Update()
 	{
+		Update_State();
+		Update_Move();
+		Update_Animation();
+
 		Player::Update();
-
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::W))
-		{
-			pos.y -= 200.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::A))
-		{
-			pos.x -= 200.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::S))
-		{
-			pos.y += 200.0f * Time::DeltaTime();
-		}
-		if (Input::GetKeyPressed(eKeyCode::D))
-		{
-			pos.x += 200.0f * Time::DeltaTime();
-		}
-
-		tr->SetPosition(pos);
 	}
 
 	void DefaultKirby::Render(HDC hdc)
 	{
 		Player::Render(hdc);
+	}
+
+	void DefaultKirby::Update_State()
+	{
+		// 방향 설정
+		// 입력 체크
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mDir = eDirection::RIGHT;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mDir = eDirection::LEFT;
+		}
+
+		// 예외처리 한쪽 키가 눌린상태에서 반대쪽키가 눌렸다면 방향변경
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (Input::GetKeyUp(eKeyCode::RIGHT))
+			{
+				mDir = eDirection::LEFT;
+			}
+			
+			if (Input::GetKeyUp(eKeyCode::LEFT))
+			{
+				mDir = eDirection::RIGHT;
+			}
+		}
+
+		// 상태에 따라 행동 설정
+		switch (mState)
+		{
+		case eDefaultKirbyState::Idle:
+		{
+			if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+			{
+				mState = eDefaultKirbyState::Walk;
+			}
+		}
+		break;
+
+		case eDefaultKirbyState::Walk:
+		{
+			static float time = 0.0f;
+
+			time += Time::DeltaTime();
+
+			if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+			{
+				mState = eDefaultKirbyState::Run;
+				time = 0.0f;
+			}
+
+			if (time > 0.3f)
+			{
+				// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+				if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
+				{
+					mState = eDefaultKirbyState::Idle;
+					time = 0.0f;
+				}
+			}
+		}
+		break;
+
+		case eDefaultKirbyState::Run:
+		{
+			// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+			if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				mState = eDefaultKirbyState::Idle;
+			}
+		}
+		break;
+
+		case eDefaultKirbyState::Jump:
+		{
+
+		}
+		break;
+
+		case eDefaultKirbyState::Turn:
+		{
+
+		}
+		break;
+		}
+	}
+
+	void DefaultKirby::Update_Move()
+	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		switch (mState)
+		{
+		case eDefaultKirbyState::Idle:
+		{
+		}
+		break;
+
+		case eDefaultKirbyState::Walk:
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+		break;
+
+		case eDefaultKirbyState::Run:
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 200.f * Time::DeltaTime();
+			else
+				pos.x -= 200.f * Time::DeltaTime();
+		}
+		break;
+
+		case eDefaultKirbyState::Jump:
+		{
+		}
+		break;
+
+		case eDefaultKirbyState::Turn:
+		{
+		}
+		break;
+		}
+
+		tr->SetPosition(pos);
+	}
+
+	void DefaultKirby::Update_Animation()
+	{
+		// 상태에 따라 행동 설정
+		switch (mState)
+		{
+		case eDefaultKirbyState::Idle:
+		{
+			if (mDir == eDirection::RIGHT)	
+				mAni->PlayAnimation(L"DefaultKirby_Right_Idle", true);		
+			else 	
+				mAni->PlayAnimation(L"DefaultKirby_Left_Idle", true);	
+		}
+		break;
+
+		case eDefaultKirbyState::Walk:
+		{
+			if (mDir == eDirection::RIGHT)		
+				mAni->PlayAnimation(L"DefaultKirby_Right_Walk", true);		
+			else		
+				mAni->PlayAnimation(L"DefaultKirby_Left_Walk", true);		
+		}
+		break;
+
+		case eDefaultKirbyState::Run:
+		{
+			if (mDir == eDirection::RIGHT)
+				mAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
+			else	
+				mAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
+		}
+		break;
+
+		case eDefaultKirbyState::Jump:
+		{
+			if (mDir == eDirection::RIGHT)
+				mAni->PlayAnimation(L"DefaultKirby_Right_Jump", false);	
+			else
+				mAni->PlayAnimation(L"DefaultKirby_Left_Jump", false);
+		}
+		break;
+
+		case eDefaultKirbyState::Turn:
+		{
+			if (mDir == eDirection::RIGHT)
+				mAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+			else
+				mAni->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+		}
+		break;
+		}
 	}
 }

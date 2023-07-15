@@ -35,6 +35,7 @@ namespace sy
 		bool IsComplete() { return mbComplete; }
 
 		void SetAniScale(const std::wstring& name, Vector2 scale);
+		void AnimationReset() { mActiveAnimation->Reset(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장

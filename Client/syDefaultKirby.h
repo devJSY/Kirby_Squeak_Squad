@@ -4,6 +4,16 @@
 
 namespace sy
 {
+	enum class eDefaultKirbyState
+	{
+		Idle,
+		Walk,
+		Run,
+		Jump,
+		Turn,
+		End,
+	};
+
 	class DefaultKirby : public Player
 	{
 	public:
@@ -15,7 +25,14 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	private:
+		void Update_State();
+		void Update_Move();
+		void Update_Animation();
+
+	private:
 		Animator* mAni;
+		eDefaultKirbyState mState;
+		eDirection mDir;
 	};
 }
 

@@ -41,7 +41,7 @@ namespace sy
 			{
 				if (mbLoop)
 				{
-					mActiveAnimation->Reset();
+					AnimationReset();
 				}
 				else
 				{
@@ -157,9 +157,9 @@ namespace sy
 			return;
 
 		mActiveAnimation = animation;
-		mActiveAnimation->Reset();
 		mbLoop = loop;
 		mbComplete = false;
+		//mActiveAnimation->Reset();
 	}
 
 	void Animator::SetAniScale(const std::wstring& name, Vector2 scale)

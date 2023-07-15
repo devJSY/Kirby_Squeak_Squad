@@ -37,7 +37,7 @@ namespace sy
 		assert(tex);
 		BgRenderer->SetTexture(tex);
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
-		BgRenderer->SetAffectCamera(true);
+		BgRenderer->SetAffectCamera(false);
 
 
 		// 스테이지 설정
@@ -56,6 +56,9 @@ namespace sy
 		// 플레이어 설정
 		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);
 		assert(mPlayer);
+		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
+		assert(PlayerTrans);
+		PlayerTrans->SetPosition(Vector2(150.f, 100.f));
 
 
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하도록 수정해야함
