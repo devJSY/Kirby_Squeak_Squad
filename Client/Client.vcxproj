@@ -164,6 +164,7 @@
     <ClInclude Include="syTitleScene.h" />
     <ClInclude Include="syTransform.h" />
     <ClInclude Include="syUI.h" />
+    <ClInclude Include="syVideo.h" />
     <ClInclude Include="syWorldTunnelScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="syTitleScene.cpp" />
     <ClCompile Include="syTransform.cpp" />
     <ClCompile Include="syUI.cpp" />
+    <ClCompile Include="syVideo.cpp" />
     <ClCompile Include="syWorldTunnelScene.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,9 @@ namespace sy
 		virtual void Initialize();
 		virtual void Update();
 		virtual void Render(HDC hdc);
+
+		virtual void Enter() override;
+		virtual void Exit() override;
 		
 	private:
 	};

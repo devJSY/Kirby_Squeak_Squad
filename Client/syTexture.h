@@ -24,6 +24,7 @@ namespace sy
 		void SetType(eTextureType type) { mType = type; }
 		Gdiplus::Image* GetImage() { return mImage; }
 		void SetHBitmap(HBITMAP bitmap) { mBitmap = bitmap; }
+		HBITMAP GetBitmap() { return mBitmap; }
 		void SetHdc(HDC hdc) { mHdc = hdc; }
 
 	private:

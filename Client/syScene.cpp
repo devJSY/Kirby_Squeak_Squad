@@ -6,12 +6,15 @@ namespace sy
 	{
 		mLayers.resize((int)eLayerType::End); 
 	}
+
 	Scene::~Scene()
 	{
 	}
+
 	void Scene::Initialize()
 	{
 	}
+
 	void Scene::Update()
 	{
 		for (Layer& layer : mLayers)
@@ -19,6 +22,7 @@ namespace sy
 			layer.Update();
 		}
 	}
+
 	void Scene::Render(HDC hdc)
 	{
 		for (Layer& layer : mLayers)

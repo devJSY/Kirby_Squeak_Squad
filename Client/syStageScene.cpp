@@ -110,4 +110,10 @@ namespace sy
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to WorldTunnelScene : Mouse LBTN");
 	}
+	void StageScene::Enter()
+	{
+	}
+	void StageScene::Exit()
+	{
+	}
 }

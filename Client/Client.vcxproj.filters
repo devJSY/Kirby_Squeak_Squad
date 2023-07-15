@@ -118,6 +118,9 @@
     <Filter Include="Contents\GameObject\UI\LifeUI">
       <UniqueIdentifier>{427e8896-2838-4266-b067-792a79df1fa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Video">
+      <UniqueIdentifier>{44c76270-b015-4769-8885-dfa3f0c2cc26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -234,6 +237,9 @@
     <ClInclude Include="syLifeUI.h">
       <Filter>Contents\GameObject\UI\LifeUI</Filter>
     </ClInclude>
+    <ClInclude Include="syVideo.h">
+      <Filter>Contents\GameObject\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -340,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="syLifeUI.cpp">
       <Filter>Contents\GameObject\UI\LifeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syVideo.cpp">
+      <Filter>Contents\GameObject\Video</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

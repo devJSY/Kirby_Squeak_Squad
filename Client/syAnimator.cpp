@@ -10,6 +10,7 @@ namespace sy
 		, mbLoop(false)					
 		, mbAffectedCamera(false)			
 		, mAlpha(1.0f)
+		, mbComplete(false)
 	{
 	}
 
@@ -28,9 +29,16 @@ namespace sy
 			mActiveAnimation->Update();
 
 			// 애니메이션이 한 루프를 돌고난뒤 mbLoop설정이 되어있다면 리셋호출하여 다시 재생하도록 설정
-			if (mActiveAnimation->IsComplete() && mbLoop) 
+			if (mActiveAnimation->IsComplete()) 
 			{
-				mActiveAnimation->Reset();
+				if (mbLoop)
+				{
+					mActiveAnimation->Reset();
+				}
+				else
+				{
+					mbComplete = true; // 반복설정이 되어있지않고 한 루프를 끝난경우 완료로 설정
+				}
 			}
 		}
 	}
@@ -96,7 +104,16 @@ namespace sy
 
 		// 구한 크기값으로 Texture 생성
 		Texture* spriteSheet = Texture::Create(name, width * fileCount, height);
-		spriteSheet->SetType(eTextureType::Bmp); // Video 기본 타입 Bmp로 설정
+
+		// Video 기본 타입 Bmp로 설정
+		spriteSheet->SetType(eTextureType::Bmp); 
+
+		// 32bit 비트맵 파일인경우 AlphaBmp 타입으로 설정한다
+		BITMAP info = {};
+		GetObject(spriteSheet->GetBitmap(), sizeof(BITMAP), &info);		
+		if (info.bmBitsPixel == 32)
+			spriteSheet->SetType(eTextureType::AlphaBmp);
+
 
 		// Texture 에 Load 해두었던 image 붙여넣기
 		int idx = 0;
@@ -135,5 +152,6 @@ namespace sy
 		mActiveAnimation = animation;
 		mActiveAnimation->Reset();
 		mbLoop = loop;
+		mbComplete = false;
 	}
 }

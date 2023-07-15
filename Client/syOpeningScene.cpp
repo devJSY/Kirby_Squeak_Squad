@@ -14,6 +14,7 @@
 namespace sy
 {
 	OpeningScene::OpeningScene()
+		: mVideo(nullptr)
 	{
 	}
 
@@ -23,17 +24,17 @@ namespace sy
 
 	void OpeningScene::Initialize()
 	{
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Bg);
-		assert(Bg->AddComponent<Animator>());
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		mVideo = object::Instantiate<Video>(eLayerType::Video);
+		assert(mVideo);
+		assert(mVideo->AddComponent<Animator>());
+		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		mVideo->SetSpeed(3.f); // 재생속도 3배 설정
 
-		Animator* BgAnimator = Bg->GetComponent<Animator>();
-		assert(BgAnimator);	
-		BgAnimator->CreateAnimationFolder(L"OpeningScene", L"..\\Resources\\Video\\Opening", Vector2(), 0.03196546f);
-		BgAnimator->SetAffectedCamera(false);
-		BgAnimator->PlayAnimation(L"OpeningScene", false);
-
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		assert(videoAnimator);
+		videoAnimator->CreateAnimationFolder(L"OpeningVideo", L"..\\Resources\\Video\\Opening", Vector2::Zero, 0.03196546f / mVideo->GetSpeed());
+		videoAnimator->SetAffectedCamera(false);
+		videoAnimator->PlayAnimation(L"OpeningVideo", false);
 
 		Scene::Initialize();
 	}
@@ -42,15 +43,31 @@ namespace sy
 	{
 		Scene::Update();
 
+		if (mVideo->GetComponent<Animator>()->IsComplete())
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
+
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}
+
 	}
 
 	void OpeningScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to TitleScene : Mouse LBTN");
+	}
+
+	void OpeningScene::Enter()
+	{
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		videoAnimator->PlayAnimation(L"OpeningVideo", false);
+	}
+
+	void OpeningScene::Exit()
+	{
 	}
 }

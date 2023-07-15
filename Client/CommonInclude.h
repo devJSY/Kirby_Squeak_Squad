@@ -22,6 +22,7 @@ namespace sy::enums
 		BackGround,
 		ForeGround,
 		Inventory,
+		Video,
 		Player,
 		Monster,
 		Effect,

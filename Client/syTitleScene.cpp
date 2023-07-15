@@ -11,10 +11,12 @@
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
+#include "syAnimator.h"
 
 namespace sy
 {
 	TitleScene::TitleScene()
+		: mVideo(nullptr)
 	{
 	}
 
@@ -24,15 +26,17 @@ namespace sy
 
 	void TitleScene::Initialize()
 	{
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Bg);
-		assert(Bg->AddComponent<SpriteRenderer>());
-		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
-		assert(BgRenderer);
-		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"TitleImage", L"..\\Resources\\Video\\Title\\Title.mp4_000000.267.bmp")); // 이미지 설정
-		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
-		BgRenderer->SetAffectCamera(false);
+		mVideo = object::Instantiate<Video>(eLayerType::Video);
+		assert(mVideo);
+		assert(mVideo->AddComponent<Animator>());
+		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		mVideo->SetSpeed(3.f); // 재생속도 3배 설정
+
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		assert(videoAnimator);
+		videoAnimator->CreateAnimationFolder(L"TitleVideo", L"..\\Resources\\Video\\Title", Vector2::Zero, 0.033224f / mVideo->GetSpeed());
+		videoAnimator->SetAffectedCamera(false);
+		videoAnimator->PlayAnimation(L"TitleVideo", true);
 
 		Scene::Initialize();
 	}
@@ -40,6 +44,11 @@ namespace sy
 	void TitleScene::Update()
 	{
 		Scene::Update();
+
+		if (mVideo->GetComponent<Animator>()->IsComplete())
+		{
+			SceneManager::LoadScene(L"LevelSelectScene");
+		}
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
@@ -51,5 +60,14 @@ namespace sy
 	{
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to LevelSelectScene : Mouse LBTN");
+	}
+	void TitleScene::Enter()
+	{
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		videoAnimator->PlayAnimation(L"TitleVideo", true);
+	}
+
+	void TitleScene::Exit()
+	{
 	}
 }

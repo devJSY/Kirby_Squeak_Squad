@@ -1,5 +1,6 @@
 #pragma once
 #include "syScene.h"
+#include "syVideo.h"
 
 namespace sy
 {
@@ -13,7 +14,11 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void Enter() override;
+		virtual void Exit() override;
+
 	private:
+		Video* mVideo;
 
 	};
 }

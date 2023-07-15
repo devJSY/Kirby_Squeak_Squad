@@ -96,4 +96,10 @@ namespace sy
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to StageScene : Mouse LBTN");
 	}
+	void LevelSelectScene::Enter()
+	{
+	}
+	void LevelSelectScene::Exit()
+	{
+	}
 }

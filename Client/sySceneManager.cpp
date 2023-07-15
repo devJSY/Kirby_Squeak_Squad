@@ -53,6 +53,9 @@ namespace sy
 
 	Scene* SceneManager::LoadScene(const std::wstring& name)
 	{
+		// 변경전 기존 Scene Exit 호출
+		mActiveScene->Exit();
+
 		// 파라메타로 들어온 name 의 Scene 을 찾아 ActiveScene으로 설정해준다
 		std::map<std::wstring, Scene*>::iterator iter = mScenes.find(name);
 
@@ -60,6 +63,8 @@ namespace sy
 			return nullptr;
 
 		mActiveScene = iter->second;
+		mActiveScene->Enter();
+
 		return iter->second;
 	}
 }

@@ -49,4 +49,10 @@ namespace sy
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to EndingScene : Mouse LBTN");
 	}
+	void WorldTunnelScene::Enter()
+	{
+	}
+	void WorldTunnelScene::Exit()
+	{
+	}
 }

@@ -9,10 +9,12 @@
 #include "syTexture.h"
 #include "syBackGround.h"
 #include "syApplication.h"
+#include "syAnimator.h"
 
 namespace sy
 {
 	EndingScene::EndingScene()
+		: mVideo(nullptr)
 	{
 	}
 
@@ -22,15 +24,17 @@ namespace sy
 
 	void EndingScene::Initialize()
 	{
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Bg);
-		assert(Bg->AddComponent<SpriteRenderer>());
-		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
-		assert(BgRenderer);
-		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"EndingImage", L"..\\Resources\\Video\\Ending\\Ending000017.304.bmp")); // 이미지 설정
-		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
-		BgRenderer->SetAffectCamera(false);
+		mVideo = object::Instantiate<Video>(eLayerType::Video);
+		assert(mVideo);
+		assert(mVideo->AddComponent<Animator>());
+		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		mVideo->SetSpeed(5.f); // 재생속도 5배 설정
+
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		assert(videoAnimator);
+		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", Vector2::Zero, 0.0444931f / mVideo->GetSpeed());
+		videoAnimator->SetAffectedCamera(false);
+		videoAnimator->PlayAnimation(L"EndingVideo", true);
 
 		Scene::Initialize();
 	}
@@ -49,5 +53,15 @@ namespace sy
 	{
 		Scene::Render(hdc);
 		//ShowSceneName(hdc, GetName(), L"Change to OpeningScene : Mouse LBTN");
+	}
+
+	void EndingScene::Enter()
+	{
+		Animator* videoAnimator = mVideo->GetComponent<Animator>();
+		videoAnimator->PlayAnimation(L"EndingVideo", false);
+	}
+
+	void EndingScene::Exit()
+	{
 	}
 }
