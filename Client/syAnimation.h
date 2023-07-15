@@ -25,7 +25,7 @@ namespace sy
 		};
 
 		Animation();
-		~Animation();
+		virtual ~Animation();
 
 		void Update();
 		void Render(HDC hdc);

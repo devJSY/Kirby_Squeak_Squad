@@ -19,10 +19,15 @@ namespace sy
 	{
 	}
 
-	Application::~Application()
+	void Application::Release()
 	{
+		// 매니저 클래스들은 객체가 생성이 되지않기 때문에 소멸자가 호출되지않음 해제 함수를 따로 만들어서 처리해야함
+		// 
 		// 윈도우핸들, DC 삭제
 		ReleaseDC(mHwnd, mHdc);
+
+		DeleteDC(mBackHdc);
+		DeleteObject(mBackBuffer);
 
 		DestroyMenu(mhMenu);
 	}

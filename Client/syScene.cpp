@@ -9,6 +9,7 @@ namespace sy
 
 	Scene::~Scene()
 	{
+		mLayers.clear();
 	}
 
 	void Scene::Initialize()

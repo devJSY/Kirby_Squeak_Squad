@@ -7,7 +7,8 @@ namespace sy
 	ResourceManager::ResourceManager()
 	{
 	}
-	ResourceManager::~ResourceManager()
+
+	void ResourceManager::Release()
 	{
 		for (auto iter : mResources)
 		{

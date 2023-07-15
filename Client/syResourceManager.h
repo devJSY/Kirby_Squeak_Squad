@@ -8,9 +8,11 @@ namespace sy
 	private:
 		// 객체 생성 차단
 		ResourceManager();
-		~ResourceManager();
+		~ResourceManager() {};
 
 	public:
+		static void Release();
+
 		template <typename T>
 		static T* Find(const std::wstring& name)
 		{

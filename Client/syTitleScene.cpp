@@ -29,13 +29,10 @@ namespace sy
 	{
 		mVideo = object::Instantiate<Video>(eLayerType::Video);
 		assert(mVideo);
-		Animator* VideoAni = mVideo->AddComponent<Animator>();
-		assert(VideoAni);
+		Animator* videoAnimator = mVideo->AddComponent<Animator>();
+		assert(videoAnimator);
 		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 		mVideo->SetSpeed(3.f); // 재생속도 3배 설정
-
-		Animator* videoAnimator = mVideo->GetComponent<Animator>();
-		assert(videoAnimator);
 		videoAnimator->CreateAnimationFolder(L"TitleVideo", L"..\\Resources\\Video\\Title", Vector2::Zero, 0.033224f / mVideo->GetSpeed());
 		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"TitleVideo", true);

@@ -11,9 +11,10 @@ namespace sy
 	private:
 		// 객체 생성 차단
 		Application();
-		~Application();
+		~Application() {};
 
 	public:
+		static void Release();
 		static void Initialize(HWND hwnd, POINT Resolution);
 		static void Run();
 		static void Update();

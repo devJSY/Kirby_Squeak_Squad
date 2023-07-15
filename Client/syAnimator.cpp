@@ -16,6 +16,11 @@ namespace sy
 
 	Animator::~Animator()
 	{
+		for (auto iter : mAnimations)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
 	}
 
 	void Animator::Initialize()
@@ -67,7 +72,6 @@ namespace sy
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation)); // mAnimations에 생성한 애니메이션 추가
-		ResourceManager::Insert<Animation>(name, animation); // ResourceManager 에 추가
 	}
 
 	void Animator::CreateAnimationFolder(const std::wstring& name

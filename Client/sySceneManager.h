@@ -8,10 +8,10 @@ namespace sy
 	private:
 		// 객체 생성 차단
 		SceneManager();
-		~SceneManager();
+		~SceneManager() {};
 
 	public:
-
+		static void Release();
 		static void Initialize();
 		static void Update();
 		static void Render(HDC hdc);

@@ -16,11 +16,11 @@ namespace sy
 
 	Texture::~Texture()
 	{
-		delete mImage;
-		mImage = nullptr;
+		//delete mImage;
+		//mImage = nullptr;
 
-		DeleteObject(mBitmap);
-		mBitmap = NULL;
+		//DeleteObject(mBitmap);
+		//mBitmap = NULL;
 	}
 
 	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)

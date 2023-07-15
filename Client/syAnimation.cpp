@@ -21,6 +21,7 @@ namespace sy
 
 	Animation::~Animation()
 	{
+		int a = 0;
 	}
 
 	void Animation::Update()

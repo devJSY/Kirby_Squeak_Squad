@@ -15,7 +15,7 @@ namespace sy
 	{
 	}
 
-	SceneManager::~SceneManager()
+	void SceneManager::Release()
 	{
 		for (auto iter : mScenes)
 		{
@@ -31,22 +31,23 @@ namespace sy
 
 	void SceneManager::Initialize()
 	{
-		Scene* check = CreateScene<TitleScene>(L"TitleScene");
+
+		Scene* check = CreateScene<OpeningScene>(L"OpeningScene");
+		assert(check);
+
+		check = CreateScene<TitleScene>(L"TitleScene");
 		assert(check);
 
 		check = CreateScene<LevelSelectScene>(L"LevelSelectScene");
-		assert(check);
-
-		check = CreateScene<EndingScene>(L"EndingScene");
-		assert(check);
-
-		check = CreateScene<OpeningScene>(L"OpeningScene");
 		assert(check);
 
 		check = CreateScene<StageScene>(L"StageScene");
 		assert(check);
 
 		check = CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
+		assert(check);
+
+		check = CreateScene<EndingScene>(L"EndingScene");
 		assert(check);
 
 		check = LoadScene(L"OpeningScene");
