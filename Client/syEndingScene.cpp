@@ -3,7 +3,7 @@
 #include "sySceneManager.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
-#include "syKirby.h"
+#include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
 #include "syTexture.h"

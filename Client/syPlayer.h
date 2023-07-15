@@ -1,22 +1,19 @@
 #pragma once
 #include "syGameObject.h"
-#include "syAnimator.h"
 
 namespace sy
 {
-	class Kirby : public GameObject
+	class Player : public GameObject
 	{
 	public:
-		Kirby();
-		virtual ~Kirby();
+		Player();
+		virtual ~Player();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
 	private:
-		Animator* mAni;
+
 	};
 }
-
-

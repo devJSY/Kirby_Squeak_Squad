@@ -1,6 +1,6 @@
 #pragma once
 #include "syScene.h"
-#include "syKirby.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -18,7 +18,7 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-		Kirby* mPlayer;
+		Player* mPlayer;
 
 	};
 }

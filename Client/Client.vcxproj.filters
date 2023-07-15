@@ -130,7 +130,10 @@
     <Filter Include="Contents\GameObject\Enermy\Boss\MetaKnight">
       <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Kirby">
+    <Filter Include="Contents\GameObject\Player">
+      <UniqueIdentifier>{e181023e-aad4-4200-a419-93547baf32cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\Kirby">
       <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -188,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="syGameObject.h">
       <Filter>Contents\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="syKirby.h">
-      <Filter>Contents\GameObject\Kirby</Filter>
     </ClInclude>
     <ClInclude Include="syTitleScene.h">
       <Filter>Contents\Scene\TitleScene</Filter>
@@ -252,6 +252,12 @@
     <ClInclude Include="syVideo.h">
       <Filter>Contents\GameObject\Video</Filter>
     </ClInclude>
+    <ClInclude Include="syDefaultKirby.h">
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
+    </ClInclude>
+    <ClInclude Include="syPlayer.h">
+      <Filter>Contents\GameObject\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -295,9 +301,6 @@
     </ClCompile>
     <ClCompile Include="syGameObject.cpp">
       <Filter>Contents\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="syKirby.cpp">
-      <Filter>Contents\GameObject\Kirby</Filter>
     </ClCompile>
     <ClCompile Include="syTitleScene.cpp">
       <Filter>Contents\Scene\TitleScene</Filter>
@@ -361,6 +364,12 @@
     </ClCompile>
     <ClCompile Include="syVideo.cpp">
       <Filter>Contents\GameObject\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="syDefaultKirby.cpp">
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
+    </ClCompile>
+    <ClCompile Include="syPlayer.cpp">
+      <Filter>Contents\GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

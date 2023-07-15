@@ -1,5 +1,5 @@
 #include "syStageScene.h"
-#include "syKirby.h"
+#include "syDefaultKirby.h"
 #include "syObject.h"
 #include "syGameObject.h"
 #include "sySpriteRenderer.h"
@@ -54,7 +54,7 @@ namespace sy
 		FgRenderer->SetAffectCamera(true);
 
 		// 플레이어 설정
-		mPlayer = object::Instantiate<Kirby>(eLayerType::Player);
+		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);
 		assert(mPlayer);
 
 

@@ -1,7 +1,7 @@
 #include "syLevelSelectScene.h"
 #include "syInput.h"
 #include "sySceneManager.h"
-#include "syKirby.h"
+#include "syDefaultKirby.h"
 #include "syObject.h"
 #include "sySpriteRenderer.h"
 #include "syTransform.h"

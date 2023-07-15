@@ -1,4 +1,4 @@
-#include "syKirby.h"
+#include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syInput.h"
 #include "syTime.h"
@@ -8,16 +8,16 @@
 
 namespace sy
 {
-	Kirby::Kirby()
+	DefaultKirby::DefaultKirby()
 		: mAni(nullptr)
 	{
 	}
 
-	Kirby::~Kirby()
+	DefaultKirby::~DefaultKirby()
 	{
 	}
 
-	void Kirby::Initialize()
+	void DefaultKirby::Initialize()
 	{
 		// 애니메이터 생성
 		mAni = AddComponent<Animator>();
@@ -110,12 +110,12 @@ namespace sy
 
 		mAni->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 
-		GameObject::Initialize();
+		Player::Initialize();
 	}
 
-	void Kirby::Update()
+	void DefaultKirby::Update()
 	{
-		GameObject::Update();
+		Player::Update();
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
@@ -140,8 +140,8 @@ namespace sy
 		tr->SetPosition(pos);
 	}
 
-	void Kirby::Render(HDC hdc)
+	void DefaultKirby::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
+		Player::Render(hdc);
 	}
 }
