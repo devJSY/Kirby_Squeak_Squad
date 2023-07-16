@@ -1,5 +1,6 @@
 #include "syInput.h"
 #include "syApplication.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -22,6 +23,8 @@ namespace sy
 			key.code = (eKeyCode)i;
 			key.state = eKeyState::None;
 			key.bPrevPressed = false;
+			key.TakenPressedTime = 0.0f;
+			key.Time = 0.0f;
 
 			mKeys.push_back(key);
 		}
@@ -36,14 +39,21 @@ namespace sy
 		{
 			for (size_t i = 0; i < (size_t)eKeyCode::End; i++)
 			{
+				// 각Key 경과한 시간 누적
+				mKeys[i].TakenPressedTime += Time::DeltaTime();
+
 				// 해당키가 눌려졌다.
 				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
 				{
 					// 이전 프레임에도 눌러져 있었다.
 					if (mKeys[i].bPrevPressed == true)
-						mKeys[i].state = eKeyState::Pressed;
+						mKeys[i].state = eKeyState::Pressed;							
 					else
+					{
 						mKeys[i].state = eKeyState::Down;
+						mKeys[i].Time = mKeys[i].TakenPressedTime;
+						mKeys[i].TakenPressedTime = 0.0f;		// 처음 눌린경우 눌린시간 0.0f로 초기화
+					}						
 
 					mKeys[i].bPrevPressed = true;
 				}
@@ -52,9 +62,9 @@ namespace sy
 				{
 					// 이전 프레임에 눌러져 있었다
 					if (mKeys[i].bPrevPressed == true)
-						mKeys[i].state = eKeyState::Up;
+						mKeys[i].state = eKeyState::Up;								
 					else
-						mKeys[i].state = eKeyState::None;
+						mKeys[i].state = eKeyState::None;					
 
 					mKeys[i].bPrevPressed = false;
 				}
@@ -82,7 +92,18 @@ namespace sy
 				{
 					mKeys[i].state = eKeyState::None;
 				}
-			}
+			}			
 		}
+	}
+
+	bool Input::IsDoubleKeyPressed(eKeyCode code)
+	{
+		// 0.2초 안에 다시눌린경우
+		if (mKeys[(int)code].Time < 0.2f && Input::GetKeyDown(code))
+		{
+			return true;
+		}					
+
+		return false;
 	}
 }

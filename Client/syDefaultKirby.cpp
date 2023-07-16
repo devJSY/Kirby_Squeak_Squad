@@ -167,31 +167,28 @@ namespace sy
 			{
 				mState = eDefaultKirbyState::Walk;
 			}
+
+			if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT) || Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+			{
+				mState = eDefaultKirbyState::Run;
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Walk:
 		{
-			static float time = 0.0f;
-
-			time += Time::DeltaTime();
-
-			if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+			if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT) || Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 			{
 				mState = eDefaultKirbyState::Run;
-				time = 0.0f;
 			}
 
-			if (time > 0.3f)
+			// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+			if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
 			{
-				// 좌우 어느 키입력도 없으면 Idle 상태로 변경
-				if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
-				{
-					mState = eDefaultKirbyState::Idle;
-					time = 0.0f;
-				}
+				mState = eDefaultKirbyState::Idle;
 			}
 		}
+
 		break;
 
 		case eDefaultKirbyState::Run:

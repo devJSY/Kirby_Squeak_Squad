@@ -14,6 +14,7 @@
 #include "syForeGround.h"
 #include "syInventory.h"
 #include "syAnimator.h"
+#include "syPlayer.h"
 
 namespace sy
 {

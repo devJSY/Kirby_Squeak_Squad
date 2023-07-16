@@ -28,6 +28,8 @@ namespace sy
 			eKeyCode code;
 			eKeyState state;
 			bool bPrevPressed;
+			float Time;			// 이전 TakenPressedTime 계산한 값
+			float TakenPressedTime;
 		};
 
 		static void Initialize();
@@ -45,6 +47,8 @@ namespace sy
 		{
 			return mKeys[(int)code].state == eKeyState::Pressed;
 		}
+
+		static bool IsDoubleKeyPressed(eKeyCode code);
 
 	private:
 		static std::vector<Key> mKeys;
