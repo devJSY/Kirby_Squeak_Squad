@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class Brown : public Enemy
+	class BlockEnemy : public Enemy
 	{
 	public:
-		Brown();
-		virtual ~Brown();
+		BlockEnemy();
+		virtual ~BlockEnemy();
 
 		virtual void Initialize();
 		virtual void Update();

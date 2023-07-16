@@ -15,7 +15,10 @@
 #include "syInventory.h"
 #include "syAnimator.h"
 #include "syPlayer.h"
+
 #include "syWaddleDee.h"
+#include "syBlockEnemy.h"
+#include "syFlower.h"
 
 namespace sy
 {
@@ -61,9 +64,21 @@ namespace sy
 		assert(PlayerTrans);
 		PlayerTrans->SetPosition(Vector2(150.f, 100.f));
 
+
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+
+		BlockEnemy* Block = object::Instantiate<BlockEnemy>(eLayerType::Enemy);
+		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
+
+		Flower* flower = object::Instantiate<Flower>(eLayerType::Enemy);
+		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
+
+
+
+
+
 
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하도록 수정해야함
 		// 하단 화면 오브젝트 생성 

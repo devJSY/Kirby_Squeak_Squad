@@ -3,11 +3,11 @@
 
 namespace sy
 {
-    class Yellow : public Enemy
+    class Flower : public Enemy
     {
     public:
-        Yellow();
-        virtual ~Yellow();
+        Flower();
+        virtual ~Flower();
 
         virtual void Initialize();
         virtual void Update();
