@@ -60,6 +60,7 @@ namespace sy
 
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"EndingVideo", false);
+		videoAnimator->ActiveAnimationReset();
 	}
 
 	void EndingScene::Exit()

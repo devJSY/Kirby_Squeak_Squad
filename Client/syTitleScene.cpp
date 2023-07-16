@@ -61,6 +61,7 @@ namespace sy
 
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"TitleVideo", true);
+		videoAnimator->ActiveAnimationReset();
 	}
 
 	void TitleScene::Exit()

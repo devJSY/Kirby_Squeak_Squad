@@ -43,8 +43,8 @@ namespace sy
 		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Run", Vector2(569.f, 306.f), Vector2(24.f, 19.f), Vector2(24.f, 0.f), 0.043f, 8);
 		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Run", Vector2(407.f, 306.f), Vector2(24.f, 19.f), Vector2(-24.f, 0.f), 0.043f, 8);
 		
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 0.35f, 1);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 0.35f, 1);
+		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
+		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
 
 		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.035f, 6);
 		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.035f, 6);
@@ -219,16 +219,21 @@ namespace sy
 
 		case eDefaultKirbyState::Jump:
 		{
-			if(mAni->IsComplete())
+			// 키를 누른시간에 따라서 Jump상태 지속
+			static float JumpTime = 0.0f;
+			JumpTime += Time::DeltaTime();
+
+			if (Input::GetKeyUp(eKeyCode::A) || Input::GetKeyUp(eKeyCode::D) || JumpTime > 0.5f)
 			{
 				mState = eDefaultKirbyState::Turn;
+				JumpTime = 0.0f;
 			}
 		}
 		break;
 
 		case eDefaultKirbyState::Turn:
 		{
-			if (mAni->IsComplete())
+			if (mAni->IsActiveAniComplete())
 			{
 				mState = eDefaultKirbyState::Idle;
 			}
@@ -282,6 +287,9 @@ namespace sy
 				else
 					pos.x -= 50.f * Time::DeltaTime();
 			}
+
+			pos.y -= 300.f * Time::DeltaTime();
+
 		}
 		break;
 
@@ -294,6 +302,8 @@ namespace sy
 				else
 					pos.x -= 50.f * Time::DeltaTime();
 			}
+
+			pos.y += 150.f * Time::DeltaTime();
 		}
 		break;
 		}

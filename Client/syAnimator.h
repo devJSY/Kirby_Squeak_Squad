@@ -32,9 +32,10 @@ namespace sy
 		float GetAlpha() { return mAlpha; }
 		void SetAlpha(float alpha) { mAlpha = alpha; }
 
-		bool IsComplete() { return mActiveAnimation->IsComplete(); }
+		bool IsActiveAniComplete() { return mActiveAnimation->IsComplete(); }
 
 		void SetAniScale(const std::wstring& name, Vector2 scale);
+		void ActiveAnimationReset() { mActiveAnimation->Reset(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
