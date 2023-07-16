@@ -10,7 +10,6 @@ namespace sy
 		, mbLoop(false)					
 		, mbAffectedCamera(true)			
 		, mAlpha(1.0f)
-		, mbComplete(false)
 	{
 	}
 
@@ -37,16 +36,9 @@ namespace sy
 			mActiveAnimation->Update();
 
 			// 애니메이션이 한 루프를 돌고난뒤 mbLoop설정이 되어있다면 리셋호출하여 다시 재생하도록 설정
-			if (mActiveAnimation->IsComplete()) 
+			if (mActiveAnimation->IsComplete() && mbLoop)
 			{
-				if (mbLoop)
-				{
-					AnimationReset();
-				}
-				else
-				{
-					mbComplete = true; // 반복설정이 되어있지않고 한 루프를 끝난경우 완료로 설정
-				}
+				mActiveAnimation->Reset();
 			}
 		}
 	}
@@ -156,10 +148,12 @@ namespace sy
 		if (animation == nullptr)
 			return;
 
+		// 애니메이션이 변경되는 경우에만 Reset() 적용
+		if (mActiveAnimation != animation)		
+			animation->Reset();		
+
 		mActiveAnimation = animation;
-		mbLoop = loop;
-		mbComplete = false;
-		//mActiveAnimation->Reset();
+		mbLoop = loop;			
 	}
 
 	void Animator::SetAniScale(const std::wstring& name, Vector2 scale)

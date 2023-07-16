@@ -11,7 +11,7 @@ namespace sy
 		: mAnimator(nullptr)
 		, mTexture(nullptr)
 		, mSpriteSheet{}
-		, mIndex(0)
+		, mIndex(-1)
 		, mTime(0.0f)
 		, mbComplete(false)
 		, mScale(Vector2::One)

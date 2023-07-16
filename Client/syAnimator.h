@@ -32,10 +32,9 @@ namespace sy
 		float GetAlpha() { return mAlpha; }
 		void SetAlpha(float alpha) { mAlpha = alpha; }
 
-		bool IsComplete() { return mbComplete; }
+		bool IsComplete() { return mActiveAnimation->IsComplete(); }
 
 		void SetAniScale(const std::wstring& name, Vector2 scale);
-		void AnimationReset() { mActiveAnimation->Reset(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
@@ -44,8 +43,6 @@ namespace sy
 		bool mbLoop;					// 애니메이션 반복 여부
 		bool mbAffectedCamera;			// 카메라 영향여부
 		float mAlpha;					// 알파 블랜드값 0 ~ 1
-		bool mbComplete;					// 애니메이션 재생중인지 여부
-
 	};
 }
 

@@ -43,8 +43,8 @@ namespace sy
 		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Run", Vector2(569.f, 306.f), Vector2(24.f, 19.f), Vector2(24.f, 0.f), 0.043f, 8);
 		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Run", Vector2(407.f, 306.f), Vector2(24.f, 19.f), Vector2(-24.f, 0.f), 0.043f, 8);
 		
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
+		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 0.35f, 1);
+		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 0.35f, 1);
 
 		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.035f, 6);
 		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.035f, 6);
@@ -70,13 +70,13 @@ namespace sy
 		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyUp", Vector2(785.f, 36.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 0.07f, 4);
 		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyUp", Vector2(189.f, 36.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 0.07f, 4);
 
-		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_X_1", Vector2(796.f, 179.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.08f, 2);
-		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_X_1", Vector2(181.f, 179.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.08f, 2);
-		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_X_2", Vector2(842.f, 179.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.08f, 2);
-		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_X_2", Vector2(135.f, 179.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.08f, 2);
+		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_B_1", Vector2(796.f, 179.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.08f, 2);
+		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_B_1", Vector2(181.f, 179.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.08f, 2);
+		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_B_2", Vector2(842.f, 179.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.08f, 2);
+		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_B_2", Vector2(135.f, 179.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.08f, 2);
 
-		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_X_3", Vector2(896.f, 184.f), Vector2(26.f, 17.f), Vector2(26.f, 0.f), 0.1f, 4);
-		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_X_3", Vector2(78.f, 184.f), Vector2(26.f, 17.f), Vector2(-26.f, 0.f), 0.1f, 4);
+		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_B_3", Vector2(896.f, 184.f), Vector2(26.f, 17.f), Vector2(26.f, 0.f), 0.1f, 4);
+		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_B_3", Vector2(78.f, 184.f), Vector2(26.f, 17.f), Vector2(-26.f, 0.f), 0.1f, 4);
 
 		//mAni->CreateAnimation(DefaultKirby_Right, L"iDefaultKirby_Right_Idle", Vector2(8.f, 218.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 1.f, 1);
 		//mAni->CreateAnimation(DefaultKirby_Left, L"iDefaultKirby_Left_Idle", Vector2(967.f, 218.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 1.f, 1);
@@ -163,7 +163,8 @@ namespace sy
 		{
 		case eDefaultKirbyState::Idle:
 		{
-			if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+			if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT)
+				|| Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
 			{
 				mState = eDefaultKirbyState::Walk;
 			}
@@ -171,6 +172,11 @@ namespace sy
 			if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT) || Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 			{
 				mState = eDefaultKirbyState::Run;
+			}
+
+			if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+			{
+				mState = eDefaultKirbyState::Jump;
 			}
 		}
 		break;
@@ -187,6 +193,11 @@ namespace sy
 			{
 				mState = eDefaultKirbyState::Idle;
 			}
+
+			if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+			{
+				mState = eDefaultKirbyState::Jump;
+			}
 		}
 
 		break;
@@ -198,18 +209,29 @@ namespace sy
 			{
 				mState = eDefaultKirbyState::Idle;
 			}
+
+			if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+			{
+				mState = eDefaultKirbyState::Jump;
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Jump:
 		{
-
+			if(mAni->IsComplete())
+			{
+				mState = eDefaultKirbyState::Turn;
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Turn:
 		{
-
+			if (mAni->IsComplete())
+			{
+				mState = eDefaultKirbyState::Idle;
+			}
 		}
 		break;
 		}
@@ -229,29 +251,49 @@ namespace sy
 
 		case eDefaultKirbyState::Walk:
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 50.f * Time::DeltaTime();
+				else
+					pos.x -= 50.f * Time::DeltaTime();
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Run:
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 200.f * Time::DeltaTime();
-			else
-				pos.x -= 200.f * Time::DeltaTime();
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 150.f * Time::DeltaTime();
+				else
+					pos.x -= 150.f * Time::DeltaTime();
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Jump:
 		{
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 50.f * Time::DeltaTime();
+				else
+					pos.x -= 50.f * Time::DeltaTime();
+			}
 		}
 		break;
 
 		case eDefaultKirbyState::Turn:
 		{
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 50.f * Time::DeltaTime();
+				else
+					pos.x -= 50.f * Time::DeltaTime();
+			}
 		}
 		break;
 		}
@@ -294,7 +336,8 @@ namespace sy
 		case eDefaultKirbyState::Jump:
 		{
 			if (mDir == eDirection::RIGHT)
-				mAni->PlayAnimation(L"DefaultKirby_Right_Jump", false);	
+				mAni->PlayAnimation(L"DefaultKirby_Right_Jump", false);
+	
 			else
 				mAni->PlayAnimation(L"DefaultKirby_Left_Jump", false);
 		}
@@ -306,6 +349,7 @@ namespace sy
 				mAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 			else
 				mAni->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+				
 		}
 		break;
 		}

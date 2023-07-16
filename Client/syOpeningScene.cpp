@@ -31,7 +31,7 @@ namespace sy
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
 		assert(videoAnimator);
 		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
-		mVideo->SetSpeed(3.f); // 재생속도 3배 설정
+		mVideo->SetSpeed(5.f); // 재생속도 설정
 		videoAnimator->CreateAnimationFolder(L"OpeningVideo", L"..\\Resources\\Video\\Opening", 0.03196546f / mVideo->GetSpeed());
 		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"OpeningVideo", false);

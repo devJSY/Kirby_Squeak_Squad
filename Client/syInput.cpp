@@ -95,15 +95,4 @@ namespace sy
 			}			
 		}
 	}
-
-	bool Input::IsDoubleKeyPressed(eKeyCode code)
-	{
-		// 0.2초 안에 다시눌린경우
-		if (mKeys[(int)code].Time < 0.2f && Input::GetKeyDown(code))
-		{
-			return true;
-		}					
-
-		return false;
-	}
 }
