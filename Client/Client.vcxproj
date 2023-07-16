@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
     <ClInclude Include="syAnimation.h" />
     <ClInclude Include="syAnimator.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="syBlockEnemy.h" />
     <ClInclude Include="syCamera.h" />
     <ClInclude Include="syComponent.h" />
+    <ClInclude Include="syEffects.h" />
     <ClInclude Include="syEndingScene.h" />
     <ClInclude Include="syEnemy.h" />
     <ClInclude Include="syEntity.h" />
@@ -192,6 +194,7 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
     <ClCompile Include="syAnimation.cpp" />
     <ClCompile Include="syAnimator.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="syBlockEnemy.cpp" />
     <ClCompile Include="syCamera.cpp" />
     <ClCompile Include="syComponent.cpp" />
+    <ClCompile Include="syEffects.cpp" />
     <ClCompile Include="syEndingScene.cpp" />
     <ClCompile Include="syEnemy.cpp" />
     <ClCompile Include="syEntity.cpp" />

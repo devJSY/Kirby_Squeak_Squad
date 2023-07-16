@@ -136,23 +136,29 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight">
       <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Ice">
+    <Filter Include="Contents\GameObject\Enemy\Normal">
+      <UniqueIdentifier>{169ac7fe-c859-4764-8d97-051e57d6637a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Ice">
       <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\SirKibble">
-      <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\HotHead">
-      <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\WaddleDee">
-      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\BlockEnemy">
+    <Filter Include="Contents\GameObject\Enemy\Normal\BlockEnemy">
       <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Flower">
+    <Filter Include="Contents\GameObject\Enemy\Normal\HotHead">
+      <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Flower">
       <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
+      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble">
+      <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Effects">
+      <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -280,22 +286,28 @@
       <Filter>Contents\GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="syBlockEnemy.h">
-      <Filter>Contents\GameObject\Enemy\BlockEnemy</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
     </ClInclude>
     <ClInclude Include="syIce.h">
-      <Filter>Contents\GameObject\Enemy\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead.h">
-      <Filter>Contents\GameObject\Enemy\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClInclude>
     <ClInclude Include="sySirKibble.h">
-      <Filter>Contents\GameObject\Enemy\SirKibble</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClInclude>
     <ClInclude Include="syFlower.h">
-      <Filter>Contents\GameObject\Enemy\Flower</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
     </ClInclude>
     <ClInclude Include="syWaddleDee.h">
-      <Filter>Contents\GameObject\Enemy\WaddleDee</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
+    </ClInclude>
+    <ClInclude Include="syEffects.h">
+      <Filter>Contents\GameObject\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="syHotHead_Fire.h">
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -414,22 +426,28 @@
       <Filter>Contents\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="syBlockEnemy.cpp">
-      <Filter>Contents\GameObject\Enemy\BlockEnemy</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
     </ClCompile>
     <ClCompile Include="syIce.cpp">
-      <Filter>Contents\GameObject\Enemy\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead.cpp">
-      <Filter>Contents\GameObject\Enemy\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClCompile>
     <ClCompile Include="sySirKibble.cpp">
-      <Filter>Contents\GameObject\Enemy\SirKibble</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClCompile>
     <ClCompile Include="syFlower.cpp">
-      <Filter>Contents\GameObject\Enemy\Flower</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
     </ClCompile>
     <ClCompile Include="syWaddleDee.cpp">
-      <Filter>Contents\GameObject\Enemy\WaddleDee</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
+    </ClCompile>
+    <ClCompile Include="syEffects.cpp">
+      <Filter>Contents\GameObject\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="syHotHead_Fire.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

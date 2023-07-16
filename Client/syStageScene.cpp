@@ -19,6 +19,8 @@
 #include "syWaddleDee.h"
 #include "syBlockEnemy.h"
 #include "syFlower.h"
+#include "syHotHead.h"
+#include "syHotHead_Fire.h"
 
 namespace sy
 {
@@ -75,8 +77,15 @@ namespace sy
 		Flower* flower = object::Instantiate<Flower>(eLayerType::Enemy);
 		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
 
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		Transform* tr = hotHead->GetComponent<Transform>();
+		tr->SetPosition(Vector2(250.f, 100.f));
 
-
+		//// 현재 HotHead 위치 기준 더해준 위치로 생성
+		//Vector2 pos = tr->GetPosition();
+		//pos += Vector2(10.f, 0.f);
+		//HotHead_Fire* skill = object::Instantiate<HotHead_Fire>(eLayerType::Effect);
+		//skill->GetComponent<Transform>()->SetPosition(pos);
 
 
 

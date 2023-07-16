@@ -39,6 +39,13 @@ namespace sy::math
 			return Vector2(x + other.x, y + other.y);
 		}
 
+		Vector2& operator+=(const Vector2 other)
+		{
+			x += other.x;
+			y += other.y;
+			return *this;
+		}
+
 		Vector2 operator-(const Vector2 other)
 		{
 			return Vector2(x - other.x, y - other.y);
