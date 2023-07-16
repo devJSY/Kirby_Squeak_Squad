@@ -21,11 +21,11 @@ namespace sy::enums
 	{
 		BackGround,
 		ForeGround,
-		Inventory,
 		Video,		
 		Enemy,
 		Player,
 		Effect,
+		Inventory,
 		Item,
 		UI,
 		End,
