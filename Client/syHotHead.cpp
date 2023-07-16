@@ -40,6 +40,7 @@ namespace sy
 	{
 		Enemy::Update();
 
+		// 특정 조건일때 스킬 생성
 		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			Transform* tr = GetComponent<Transform>();
@@ -48,6 +49,7 @@ namespace sy
 			pos += Vector2(10.f, 0.f);
 			HotHead_Fire* skill = object::Instantiate<HotHead_Fire>(eLayerType::Effect);
 			skill->GetComponent<Transform>()->SetPosition(pos);
+			skill->SetOwner(this);
 		}
 	}
 

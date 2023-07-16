@@ -1,10 +1,19 @@
 #include "syIce.h"
+#include "syTexture.h"
+#include "syResourceManager.h"
+#include "syAnimator.h"
 
 namespace sy
 {
 	Ice::Ice()
 		: Enemy(eAbilityType::Ice)
 	{
+		Texture* Monster_Ice = ResourceManager::Load<Texture>(L"Monster_Ice", L"..\\Resources\\Enemy\\Monster_Ice.bmp");
+
+		mAnimator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 0.f), 1.f, 1);
+
+		mAnimator->PlayAnimation(L"SmallIce");
 	}
 
 	Ice::~Ice()

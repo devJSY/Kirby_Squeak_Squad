@@ -160,6 +160,15 @@
     <Filter Include="Contents\GameObject\Effects">
       <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Flower\Skill">
+      <UniqueIdentifier>{1ad66a98-29f6-4b07-996f-18906f137c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\HotHead\Skill">
+      <UniqueIdentifier>{1534f389-2884-4a7a-a0b1-19f2b7030493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble\Skill">
+      <UniqueIdentifier>{a0990413-da2a-4805-b608-bf6a1d29f8ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -306,8 +315,14 @@
     <ClInclude Include="syEffects.h">
       <Filter>Contents\GameObject\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="syFlower_Skill.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+    </ClInclude>
     <ClInclude Include="syHotHead_Fire.h">
-      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="sySirKibble_Skill.h">
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -446,8 +461,14 @@
     <ClCompile Include="syEffects.cpp">
       <Filter>Contents\GameObject\Effects</Filter>
     </ClCompile>
+    <ClCompile Include="syFlower_Skill.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+    </ClCompile>
     <ClCompile Include="syHotHead_Fire.cpp">
-      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="sySirKibble_Skill.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

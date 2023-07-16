@@ -21,6 +21,8 @@
 #include "syFlower.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
+#include "syIce.h"
+#include "sySirKibble.h"
 
 namespace sy
 {
@@ -64,7 +66,7 @@ namespace sy
 		assert(mPlayer);
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
 		assert(PlayerTrans);
-		PlayerTrans->SetPosition(Vector2(150.f, 100.f));
+		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
 
 
 		// 적 생성
@@ -78,14 +80,14 @@ namespace sy
 		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		Transform* tr = hotHead->GetComponent<Transform>();
-		tr->SetPosition(Vector2(250.f, 100.f));
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.f));
 
-		//// 현재 HotHead 위치 기준 더해준 위치로 생성
-		//Vector2 pos = tr->GetPosition();
-		//pos += Vector2(10.f, 0.f);
-		//HotHead_Fire* skill = object::Instantiate<HotHead_Fire>(eLayerType::Effect);
-		//skill->GetComponent<Transform>()->SetPosition(pos);
+		Ice* ice = object::Instantiate<Ice>(eLayerType::Enemy);
+		ice->GetComponent<Transform>()->SetPosition(Vector2(300.f, 100.f));
+
+		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
+
 
 
 

@@ -10,7 +10,7 @@ namespace sy
 		: mbAffectCamera(true)
 		, Component(eComponentType::SpriteRenderer)
 		, mTex(nullptr)
-		, mBMPRGB(RGB(0, 0, 0)) // default Black
+		, mBMPRGB(RGB(255, 0, 255)) // default Magenta
 		, mScale(Vector2::One)
 		, mAlpha(1.0f)
 	{
