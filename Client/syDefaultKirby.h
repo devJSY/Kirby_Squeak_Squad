@@ -10,6 +10,7 @@ namespace sy
 		Run,
 		Jump,
 		Turn,
+		Damage,
 		End,
 	};
 

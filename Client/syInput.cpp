@@ -10,7 +10,7 @@ namespace sy
 	int ASCII[(UINT)eKeyCode::End] =
 	{
 		VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN,
-		'Q', 'W', 'E', 'R', 'T', 'Y', 'A', 'S', 'D',
+		'W','A','S','D',
 		VK_RETURN, VK_ESCAPE, 
 		VK_LBUTTON, VK_RBUTTON,
 	};

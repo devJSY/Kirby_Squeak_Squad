@@ -6,7 +6,7 @@ namespace sy
 	enum class eKeyCode
 	{
 		LEFT, RIGHT, UP, DOWN,
-		Q, W, E, R, T, Y, A, S, D,
+		W,A,S,D,
 		ENTER, ESC,
 		MOUSE_LBTN, MOUSE_RBTN,
 		End,
