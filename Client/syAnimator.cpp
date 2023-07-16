@@ -108,10 +108,10 @@ namespace sy
 		spriteSheet->SetType(eTextureType::Bmp); 
 
 		// 32bit 비트맵 파일인경우 AlphaBmp 타입으로 설정한다
-		BITMAP info = {};
-		GetObject(spriteSheet->GetBitmap(), sizeof(BITMAP), &info);		
-		if (info.bmBitsPixel == 32)
-			spriteSheet->SetType(eTextureType::AlphaBmp);
+		//BITMAP info = {};
+		//GetObject(spriteSheet->GetBitmap(), sizeof(BITMAP), &info);		
+		//if (info.bmBitsPixel == 32)
+		//	spriteSheet->SetType(eTextureType::AlphaBmp);
 
 
 		// Texture 에 Load 해두었던 image 붙여넣기

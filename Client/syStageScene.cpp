@@ -40,7 +40,6 @@ namespace sy
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
 		BgRenderer->SetAffectCamera(false);
 
-
 		// 스테이지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
 		assert(Fg);
@@ -60,7 +59,6 @@ namespace sy
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
 		assert(PlayerTrans);
 		PlayerTrans->SetPosition(Vector2(150.f, 100.f));
-
 
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하도록 수정해야함
 		// 하단 화면 오브젝트 생성 
@@ -109,6 +107,5 @@ namespace sy
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
-
 	}
 }

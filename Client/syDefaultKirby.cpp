@@ -6,12 +6,12 @@
 #include "syResourceManager.h"
 #include "syTexture.h"
 #include "syInput.h"
+#include "syAnimator.h"
 
 namespace sy
 {
 	DefaultKirby::DefaultKirby()
-		: mAni(nullptr)
-		, mState(eDefaultKirbyState::Idle)
+		: mState(eDefaultKirbyState::Idle)
 		, mDir(eDirection::RIGHT)
 	{
 	}
@@ -22,32 +22,28 @@ namespace sy
 
 	void DefaultKirby::Initialize()
 	{
-		// 애니메이터 생성
-		mAni = AddComponent<Animator>();
-		assert(mAni);
-
 		// 텍스쳐 로드
 		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
 		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
 		
 		// 애니메이션 생성
-		mAni->CreateAnimation(DefaultKirby_Right, L"Choice", Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);
-		mAni->CreateAnimation(DefaultKirby_Right, L"Enter", Vector2(738.f, 7.f), Vector2(19.f, 22.f), Vector2(19.f, 0.f), 0.6f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"Choice", Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"Enter", Vector2(738.f, 7.f), Vector2(19.f, 22.f), Vector2(19.f, 0.f), 0.6f, 1);
 
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Idle", Vector2(8.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Idle", Vector2(972.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Idle", Vector2(8.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Idle", Vector2(972.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
 
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Walk", Vector2(253.f, 10.f), Vector2(21.f, 19.f), Vector2(21.f, 0.f), 0.07f, 10);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Walk", Vector2(726.f, 10.f), Vector2(21.f, 19.f), Vector2(-21.f, 0.f), 0.07f, 10);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Walk", Vector2(253.f, 10.f), Vector2(21.f, 19.f), Vector2(21.f, 0.f), 0.07f, 10);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Walk", Vector2(726.f, 10.f), Vector2(21.f, 19.f), Vector2(-21.f, 0.f), 0.07f, 10);
 
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Run", Vector2(569.f, 306.f), Vector2(24.f, 19.f), Vector2(24.f, 0.f), 0.043f, 8);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Run", Vector2(407.f, 306.f), Vector2(24.f, 19.f), Vector2(-24.f, 0.f), 0.043f, 8);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Run", Vector2(569.f, 306.f), Vector2(24.f, 19.f), Vector2(24.f, 0.f), 0.043f, 8);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Run", Vector2(407.f, 306.f), Vector2(24.f, 19.f), Vector2(-24.f, 0.f), 0.043f, 8);
 		
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
 
-		mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.035f, 6);
-		mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.035f, 6);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.035f, 6);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.035f, 6);
 
 		//mAni->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Damage", Vector2(0.f, 179.f), Vector2(22.f, 22.f), Vector2(22.f, 0.f), 0.04f, 10);
 		//mAni->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Damage", Vector2(978.f, 179.f), Vector2(22.f, 22.f), Vector2(-22.f, 0.f), 0.04f, 10);
@@ -111,7 +107,7 @@ namespace sy
 		//mAni->CreateAnimation(DefaultKirby_Right, L"iDefaultKirby_Right_Skill", Vector2(764.f, 305.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 0.07f, 5);
 		//mAni->CreateAnimation(DefaultKirby_Left, L"iDefaultKirby_Left_Skill", Vector2(211.f, 305.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.07f, 5);
 
-		mAni->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+		mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 
 		Player::Initialize();
 	}
@@ -132,7 +128,7 @@ namespace sy
 
 	void DefaultKirby::Update_State()
 	{
-		// 방향 설정
+		//////////////////////// 방향 설정 /////////////////////////////////////////////// 
 		// 입력 체크
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
@@ -158,7 +154,7 @@ namespace sy
 			}
 		}
 
-		// 상태에 따라 행동 설정
+		//////////////////////// 행동에 따라 상태설정 /////////////////////////////////////////////// 
 		switch (mState)
 		{
 		case eDefaultKirbyState::Idle:
@@ -233,7 +229,7 @@ namespace sy
 
 		case eDefaultKirbyState::Turn:
 		{
-			if (mAni->IsActiveAniComplete())
+			if (mAnimator->IsActiveAniComplete())
 			{
 				mState = eDefaultKirbyState::Idle;
 			}
@@ -319,46 +315,46 @@ namespace sy
 		case eDefaultKirbyState::Idle:
 		{
 			if (mDir == eDirection::RIGHT)	
-				mAni->PlayAnimation(L"DefaultKirby_Right_Idle", true);		
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 			else 	
-				mAni->PlayAnimation(L"DefaultKirby_Left_Idle", true);	
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
 		}
 		break;
 
 		case eDefaultKirbyState::Walk:
 		{
 			if (mDir == eDirection::RIGHT)		
-				mAni->PlayAnimation(L"DefaultKirby_Right_Walk", true);		
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
 			else		
-				mAni->PlayAnimation(L"DefaultKirby_Left_Walk", true);		
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
 		}
 		break;
 
 		case eDefaultKirbyState::Run:
 		{
 			if (mDir == eDirection::RIGHT)
-				mAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
 			else	
-				mAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 		}
 		break;
 
 		case eDefaultKirbyState::Jump:
 		{
 			if (mDir == eDirection::RIGHT)
-				mAni->PlayAnimation(L"DefaultKirby_Right_Jump", false);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Jump", false);
 	
 			else
-				mAni->PlayAnimation(L"DefaultKirby_Left_Jump", false);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
 		}
 		break;
 
 		case eDefaultKirbyState::Turn:
 		{
 			if (mDir == eDirection::RIGHT)
-				mAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 			else
-				mAni->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 				
 		}
 		break;

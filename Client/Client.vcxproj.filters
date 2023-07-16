@@ -118,23 +118,41 @@
     <Filter Include="Contents\GameObject\Video">
       <UniqueIdentifier>{44c76270-b015-4769-8885-dfa3f0c2cc26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enermy">
-      <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enermy\Boss">
-      <UniqueIdentifier>{d0fd2dd9-7253-418c-ae3d-3b3bf2e15dac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enermy\Boss\Dedede">
-      <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enermy\Boss\MetaKnight">
-      <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Player">
       <UniqueIdentifier>{e181023e-aad4-4200-a419-93547baf32cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Player\Kirby">
       <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy">
+      <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss">
+      <UniqueIdentifier>{d0fd2dd9-7253-418c-ae3d-3b3bf2e15dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Dedede">
+      <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight">
+      <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Ice">
+      <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\SirKibble">
+      <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Brown">
+      <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\HotHead">
+      <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Red">
+      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Yellow">
+      <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +276,27 @@
     <ClInclude Include="syPlayer.h">
       <Filter>Contents\GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="syEnemy.h">
+      <Filter>Contents\GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="syBrown.h">
+      <Filter>Contents\GameObject\Enemy\Brown</Filter>
+    </ClInclude>
+    <ClInclude Include="syIce.h">
+      <Filter>Contents\GameObject\Enemy\Ice</Filter>
+    </ClInclude>
+    <ClInclude Include="syHotHead.h">
+      <Filter>Contents\GameObject\Enemy\HotHead</Filter>
+    </ClInclude>
+    <ClInclude Include="sySirKibble.h">
+      <Filter>Contents\GameObject\Enemy\SirKibble</Filter>
+    </ClInclude>
+    <ClInclude Include="syYellow.h">
+      <Filter>Contents\GameObject\Enemy\Yellow</Filter>
+    </ClInclude>
+    <ClInclude Include="syRed.h">
+      <Filter>Contents\GameObject\Enemy\Red</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -370,6 +409,27 @@
     </ClCompile>
     <ClCompile Include="syPlayer.cpp">
       <Filter>Contents\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="syEnemy.cpp">
+      <Filter>Contents\GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="syBrown.cpp">
+      <Filter>Contents\GameObject\Enemy\Brown</Filter>
+    </ClCompile>
+    <ClCompile Include="syIce.cpp">
+      <Filter>Contents\GameObject\Enemy\Ice</Filter>
+    </ClCompile>
+    <ClCompile Include="syHotHead.cpp">
+      <Filter>Contents\GameObject\Enemy\HotHead</Filter>
+    </ClCompile>
+    <ClCompile Include="sySirKibble.cpp">
+      <Filter>Contents\GameObject\Enemy\SirKibble</Filter>
+    </ClCompile>
+    <ClCompile Include="syYellow.cpp">
+      <Filter>Contents\GameObject\Enemy\Yellow</Filter>
+    </ClCompile>
+    <ClCompile Include="syRed.cpp">
+      <Filter>Contents\GameObject\Enemy\Red</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

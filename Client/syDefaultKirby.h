@@ -1,6 +1,5 @@
 #pragma once
 #include "syPlayer.h"
-#include "syAnimator.h"
 
 namespace sy
 {
@@ -34,7 +33,6 @@ namespace sy
 		void Update_Animation();
 
 	private:
-		Animator* mAni;
 		eDefaultKirbyState mState;
 		eDirection mDir;
 	};

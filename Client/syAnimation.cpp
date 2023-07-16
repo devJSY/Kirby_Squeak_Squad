@@ -51,8 +51,7 @@ namespace sy
 
 		if (mAnimator->GetAffectedCamera())
 			pos = Camera::CalculatePosition(pos);
-
-		
+				
 		if (mTexture->GetType() == eTextureType::Bmp)
 		{
 			TransparentBlt(hdc

@@ -149,17 +149,23 @@
     <ClInclude Include="syAnimation.h" />
     <ClInclude Include="syAnimator.h" />
     <ClInclude Include="syBackGround.h" />
+    <ClInclude Include="syBrown.h" />
     <ClInclude Include="syCamera.h" />
     <ClInclude Include="syComponent.h" />
     <ClInclude Include="syEndingScene.h" />
+    <ClInclude Include="syEnemy.h" />
     <ClInclude Include="syEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="syForeGround.h" />
+    <ClInclude Include="syHotHead.h" />
     <ClInclude Include="syHPbarUI.h" />
+    <ClInclude Include="syIce.h" />
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syPlayer.h" />
+    <ClInclude Include="syRed.h" />
+    <ClInclude Include="sySirKibble.h" />
     <ClInclude Include="syTexture.h" />
     <ClInclude Include="syLevelSelectScene.h" />
     <ClInclude Include="syOpeningScene.h" />
@@ -181,6 +187,7 @@
     <ClInclude Include="syUI.h" />
     <ClInclude Include="syVideo.h" />
     <ClInclude Include="syWorldTunnelScene.h" />
+    <ClInclude Include="syYellow.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
   </ItemGroup>
@@ -189,16 +196,22 @@
     <ClCompile Include="syAnimation.cpp" />
     <ClCompile Include="syAnimator.cpp" />
     <ClCompile Include="syBackGround.cpp" />
+    <ClCompile Include="syBrown.cpp" />
     <ClCompile Include="syCamera.cpp" />
     <ClCompile Include="syComponent.cpp" />
     <ClCompile Include="syEndingScene.cpp" />
+    <ClCompile Include="syEnemy.cpp" />
     <ClCompile Include="syEntity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="syForeGround.cpp" />
+    <ClCompile Include="syHotHead.cpp" />
     <ClCompile Include="syHPbarUI.cpp" />
+    <ClCompile Include="syIce.cpp" />
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syPlayer.cpp" />
+    <ClCompile Include="syRed.cpp" />
+    <ClCompile Include="sySirKibble.cpp" />
     <ClCompile Include="syTexture.cpp" />
     <ClCompile Include="syLevelSelectScene.cpp" />
     <ClCompile Include="syMath.cpp" />
@@ -220,6 +233,7 @@
     <ClCompile Include="syUI.cpp" />
     <ClCompile Include="syVideo.cpp" />
     <ClCompile Include="syWorldTunnelScene.cpp" />
+    <ClCompile Include="syYellow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

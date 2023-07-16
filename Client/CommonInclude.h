@@ -24,11 +24,29 @@ namespace sy::enums
 		Inventory,
 		Video,
 		Player,
-		Monster,
+		Enemy,
 		Effect,
 		Item,
 		UI,
 		End,
+	};
+
+	enum class eAbilityType
+	{
+		Cutter,
+		Fire,
+		Hammer,
+		Ice,
+		Metal,
+		Ninja,
+		Sleep,
+		Spark,
+		Sword,
+		Throw,
+		Tornado,
+		TripleStar,
+		Wheel,		
+		None,
 	};
 
 	enum class eComponentType
