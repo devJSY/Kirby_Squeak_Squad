@@ -148,11 +148,11 @@
     <Filter Include="Contents\GameObject\Enemy\HotHead">
       <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Red">
-      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Yellow">
       <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\WaddleDee">
+      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -294,8 +294,8 @@
     <ClInclude Include="syYellow.h">
       <Filter>Contents\GameObject\Enemy\Yellow</Filter>
     </ClInclude>
-    <ClInclude Include="syRed.h">
-      <Filter>Contents\GameObject\Enemy\Red</Filter>
+    <ClInclude Include="syWaddleDee.h">
+      <Filter>Contents\GameObject\Enemy\WaddleDee</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -428,8 +428,8 @@
     <ClCompile Include="syYellow.cpp">
       <Filter>Contents\GameObject\Enemy\Yellow</Filter>
     </ClCompile>
-    <ClCompile Include="syRed.cpp">
-      <Filter>Contents\GameObject\Enemy\Red</Filter>
+    <ClCompile Include="syWaddleDee.cpp">
+      <Filter>Contents\GameObject\Enemy\WaddleDee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

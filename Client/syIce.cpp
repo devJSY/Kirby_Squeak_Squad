@@ -13,13 +13,16 @@ namespace sy
 
 	void Ice::Initialize()
 	{
+		Enemy::Initialize();
 	}
 
 	void Ice::Update()
 	{
+		Enemy::Update();
 	}
 
 	void Ice::Render(HDC hdc)
 	{
+		Enemy::Render(hdc);
 	}
 }

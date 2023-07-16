@@ -13,13 +13,16 @@ namespace sy
 
 	void Yellow::Initialize()
 	{
+		Enemy::Initialize();
 	}
 
 	void Yellow::Update()
 	{
+		Enemy::Update();
 	}
 
 	void Yellow::Render(HDC hdc)
 	{
+		Enemy::Render(hdc);
 	}
 }

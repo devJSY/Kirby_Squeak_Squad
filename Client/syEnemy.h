@@ -12,6 +12,11 @@ namespace sy
 		virtual void Initialize();
 		virtual void Update();
 		virtual void Render(HDC hdc);
+		
+		eAbilityType GetAbilityType() { return mAbilityType; }
+
+	protected:
+		class Animator* mAnimator;
 
 	private:
 		enums::eAbilityType mAbilityType;

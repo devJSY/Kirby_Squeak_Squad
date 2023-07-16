@@ -1,12 +1,14 @@
 #include "syEnemy.h"
-#include "syAnimator.h"
 
 namespace sy
 {
 	Enemy::Enemy(eAbilityType type)
-		: mAbilityType(type)
+		: mAnimator(nullptr)
+		, mAbilityType(type)
 	{
-		AddComponent<Animator>();
+		// 애니메이터 생성
+		mAnimator = AddComponent<Animator>();
+		assert(mAnimator);
 	}
 
 	Enemy::~Enemy()
@@ -15,13 +17,16 @@ namespace sy
 
 	void Enemy::Initialize()
 	{
+		GameObject::Initialize();
 	}
 
 	void Enemy::Update()
 	{
+		GameObject::Update();
 	}
 
 	void Enemy::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
 	}
 }

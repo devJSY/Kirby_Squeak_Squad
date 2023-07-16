@@ -13,13 +13,16 @@ namespace sy
 
 	void HotHead::Initialize()
 	{
+		Enemy::Initialize();
 	}
 
 	void HotHead::Update()
 	{
+		Enemy::Update();
 	}
 
 	void HotHead::Render(HDC hdc)
 	{
+		Enemy::Render(hdc);
 	}
 }

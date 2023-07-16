@@ -284,7 +284,7 @@ namespace sy
 					pos.x -= 50.f * Time::DeltaTime();
 			}
 
-			pos.y -= 300.f * Time::DeltaTime();
+			//pos.y -= 300.f * Time::DeltaTime();
 
 		}
 		break;
@@ -299,7 +299,7 @@ namespace sy
 					pos.x -= 50.f * Time::DeltaTime();
 			}
 
-			pos.y += 150.f * Time::DeltaTime();
+			//pos.y += 150.f * Time::DeltaTime();
 		}
 		break;
 		}

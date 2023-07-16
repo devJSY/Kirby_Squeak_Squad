@@ -164,7 +164,7 @@
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syPlayer.h" />
-    <ClInclude Include="syRed.h" />
+    <ClInclude Include="syWaddleDee.h" />
     <ClInclude Include="sySirKibble.h" />
     <ClInclude Include="syTexture.h" />
     <ClInclude Include="syLevelSelectScene.h" />
@@ -210,7 +210,7 @@
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syPlayer.cpp" />
-    <ClCompile Include="syRed.cpp" />
+    <ClCompile Include="syWaddleDee.cpp" />
     <ClCompile Include="sySirKibble.cpp" />
     <ClCompile Include="syTexture.cpp" />
     <ClCompile Include="syLevelSelectScene.cpp" />

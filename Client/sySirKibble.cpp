@@ -13,13 +13,16 @@ namespace sy
 
 	void SirKibble::Initialize()
 	{
+		Enemy::Initialize();
 	}
 
 	void SirKibble::Update()
 	{
+		Enemy::Update();
 	}
 
 	void SirKibble::Render(HDC hdc)
 	{
+		Enemy::Render(hdc);
 	}
 }
