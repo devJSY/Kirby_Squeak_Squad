@@ -110,7 +110,8 @@ namespace sy
 		, Vector2 RightBottom
 		, bool AffectedCamera
 		, Vector2 scale
-		, float Alpha)
+		, float Alpha
+		, COLORREF rgb)
 	{
 		// Animation or SpriteRenderer ø°º≠ »£√‚µ 
 		if (mBitmap == nullptr && mImage == nullptr)
@@ -127,7 +128,7 @@ namespace sy
 				, int(size.y * scale.y)
 				, mHdc
 				, int(LeftTop.x), int(LeftTop.y), int(RightBottom.x), int(RightBottom.y)
-				, RGB(255, 0, 255));
+				, rgb);
 		}
 		else if (mType == eTextureType::AlphaBmp)
 		{

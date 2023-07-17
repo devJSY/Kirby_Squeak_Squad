@@ -22,7 +22,8 @@ namespace sy
 			, Vector2 RightBottom
 			, bool AffectedCamera
 			, Vector2 scale = Vector2::One
-			, float Alpha = 1.0f);
+			, float Alpha = 1.0f
+			, COLORREF rgb = RGB(255,0,255));
 
 		UINT GetWidth() { return mWidth; }
 		void SetWidth(UINT width) { mWidth = width; }

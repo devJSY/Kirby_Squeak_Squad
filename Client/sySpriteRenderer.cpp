@@ -39,6 +39,7 @@ namespace sy
 			, Vector2(mTex->GetWidth(), mTex->GetHeight())
 			, mbAffectedCamera
 			, mScale
-			, mAlpha);		
+			, mAlpha
+			, mBMPRGB);
 	}
 }
