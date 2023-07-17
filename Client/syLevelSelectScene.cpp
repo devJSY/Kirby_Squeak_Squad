@@ -39,22 +39,16 @@ namespace sy
 		vec.y /= 2.f;
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
 
-		// 하단 화면 오브젝트 생성 
+
+
+
+		// Inventory 생성 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
 
-		// 인벤토리 클래스 위치 설정
+		// Inventory 위치 설정
 		vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y += vec.y / 2.f;
-		(Inven->GetComponent<Transform>())->SetPosition(vec);
-
-		// 인벤토리 애니메이션 설정
-		Animator* InvenAt = Inven->AddComponent<Animator>();
-		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
-			, L"..\\Resources\\Inventory\\Inventory.bmp");
-
-		InvenAt->CreateAnimation(image, L"Inventory", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
-		InvenAt->PlayAnimation(L"Inventory", true);
-		InvenAt->SetAffectedCamera(false);
+		Inven->GetComponent<Transform>()->SetPosition(vec);
 
 
 		//// UI 생성

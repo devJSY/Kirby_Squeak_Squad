@@ -5,6 +5,7 @@ namespace sy
 	Effects::Effects()
 		: mOwner(nullptr)
 		, mAnimator(nullptr)
+		, mDir(eDirection::RIGHT)
 	{
 		mAnimator = AddComponent<Animator>();
 		assert(mAnimator);

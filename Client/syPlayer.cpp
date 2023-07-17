@@ -4,6 +4,7 @@ namespace sy
 {
 	Player::Player()
 		: mAnimator(nullptr)
+		, mDir(eDirection::RIGHT)
 	{
 		// 애니메이터 생성
 		mAnimator = AddComponent<Animator>();

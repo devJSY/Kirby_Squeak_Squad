@@ -18,6 +18,7 @@ namespace sy
 
     protected:
         class Animator* mAnimator;
+        eDirection mDir;
 
     private:
         GameObject* mOwner; // 이펙트를 생성한 오브젝트

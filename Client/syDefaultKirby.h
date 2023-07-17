@@ -35,7 +35,6 @@ namespace sy
 
 	private:
 		eDefaultKirbyState mState;
-		eDirection mDir;
 	};
 }
 

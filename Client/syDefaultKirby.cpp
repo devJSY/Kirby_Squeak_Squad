@@ -12,7 +12,6 @@ namespace sy
 {
 	DefaultKirby::DefaultKirby()
 		: mState(eDefaultKirbyState::Idle)
-		, mDir(eDirection::RIGHT)
 	{
 	}
 

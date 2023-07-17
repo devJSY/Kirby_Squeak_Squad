@@ -15,6 +15,7 @@ namespace sy
 
 	protected:
 		class Animator* mAnimator;
+		eDirection mDir;
 
 	private:
 

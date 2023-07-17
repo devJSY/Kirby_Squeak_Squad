@@ -82,9 +82,6 @@ namespace sy
 		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
 
-
-
-
 		/////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하거나 복사해서 전달해주는 방식으로 수정해야함
 		// 하단 화면 오브젝트 생성 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);	
@@ -96,8 +93,6 @@ namespace sy
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
-		// 초기화가 끝난 오브젝트들은 Delete 객체생성은 Enter에서 이루어짐
-		//DeleteAllLayer();
 	}
 
 	void StageScene::Update()
@@ -125,6 +120,5 @@ namespace sy
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
-		//DeleteAllLayer();
 	}
 }
