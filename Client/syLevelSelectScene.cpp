@@ -53,7 +53,25 @@ namespace sy
 
 		// UI 생성
 		AbilityUI* AbilityUi = object::Instantiate<AbilityUI>(eLayerType::UI);
-		AbilityUi->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f);
+		Vector2 Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 20.0f; 
+		Uivec.y -= 25.f; 
+		AbilityUi->GetComponent<Transform>()->SetPosition(Uivec);
+		AbilityUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+
+		HPbarUI* HPbarUi = object::Instantiate<HPbarUI>(eLayerType::UI);
+		Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 85.0f;
+		Uivec.y -= 12.f;
+		HPbarUi->GetComponent<Transform>()->SetPosition(Uivec);
+		HPbarUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+
+		LifeUI* LifeUi = object::Instantiate<LifeUI>(eLayerType::UI);
+		Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 65.0f;
+		Uivec.y -= 27.f;
+		LifeUi->GetComponent<Transform>()->SetPosition(Uivec);
+		LifeUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
 
 		Scene::Initialize();
 	}

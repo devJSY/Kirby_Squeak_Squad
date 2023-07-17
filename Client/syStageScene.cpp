@@ -23,6 +23,10 @@
 #include "syHotHead_Fire.h"
 #include "syIce.h"
 #include "sySirKibble.h"
+#include "syAbilityUI.h"
+#include "syHPbarUI.h"
+#include "syLifeUI.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -62,6 +66,7 @@ namespace sy
 		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);	
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
 		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
+		
 
 
 		// 적 생성
@@ -91,6 +96,29 @@ namespace sy
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y += vec.y / 2.f;
 		Inven->GetComponent<Transform>()->SetPosition(vec);
+
+
+		// UI 생성
+		AbilityUI* AbilityUi = object::Instantiate<AbilityUI>(eLayerType::UI);
+		Vector2 Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 20.0f;
+		Uivec.y -= 25.f;
+		AbilityUi->GetComponent<Transform>()->SetPosition(Uivec);
+		AbilityUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+
+		HPbarUI* HPbarUi = object::Instantiate<HPbarUI>(eLayerType::UI);
+		Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 85.0f;
+		Uivec.y -= 12.f;
+		HPbarUi->GetComponent<Transform>()->SetPosition(Uivec);
+		HPbarUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+
+		LifeUI* LifeUi = object::Instantiate<LifeUI>(eLayerType::UI);
+		Uivec = Vector2(Application::GetResolution()) / 2.f;
+		Uivec.x = 65.0f;
+		Uivec.y -= 27.f;
+		LifeUi->GetComponent<Transform>()->SetPosition(Uivec);
+		LifeUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();

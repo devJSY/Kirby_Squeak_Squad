@@ -6,7 +6,7 @@
 namespace sy
 {
 	WaddleDee::WaddleDee()
-		: Enemy(eAbilityType::None)
+		: Enemy(eAbilityType::Normal)
 	{
 	}
 

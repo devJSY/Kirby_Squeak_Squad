@@ -10,7 +10,7 @@
 namespace sy
 {
 	Flower::Flower()
-		: Enemy(eAbilityType::None)
+		: Enemy(eAbilityType::Normal)
 	{
 	}
 

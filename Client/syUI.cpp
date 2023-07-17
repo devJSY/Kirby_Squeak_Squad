@@ -3,6 +3,7 @@
 namespace sy
 {
 	UI::UI()
+		: mAnimator(nullptr)
 	{
 	}
 

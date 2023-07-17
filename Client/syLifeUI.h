@@ -14,7 +14,10 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-	private:
+		void SetOwner(Player* owner) { mOwner = owner; }
 
+	private:
+		Player* mOwner;
+		class SpriteRenderer* mSpriteRenderer;
 	};
 }

@@ -3,6 +3,8 @@
 
 namespace sy
 {
+	class Player;
+
 	class AbilityUI :
 		public UI
 	{
@@ -17,6 +19,6 @@ namespace sy
 		void SetOwner(Player* owner) { mOwner = owner; }
 
 	private:
-		class Player* mOwner;
+		Player* mOwner;
 	};
 }

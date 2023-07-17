@@ -6,7 +6,7 @@
 namespace sy
 {
 	BlockEnemy::BlockEnemy()
-		: Enemy(eAbilityType::None)
+		: Enemy(eAbilityType::Normal)
 	{
 	}
 

@@ -1,4 +1,6 @@
 #include "syScene.h"
+#include "syObject.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
