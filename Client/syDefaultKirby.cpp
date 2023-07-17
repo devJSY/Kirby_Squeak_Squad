@@ -11,7 +11,8 @@
 namespace sy
 {
 	DefaultKirby::DefaultKirby()
-		: mState(eDefaultKirbyState::Idle)
+		: Player(eAbilityType::Normal)
+		, mState(eDefaultKirbyState::Idle)
 	{
 	}
 

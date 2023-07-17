@@ -46,7 +46,7 @@ namespace sy::enums
 		Tornado,
 		TripleStar,
 		Wheel,		
-		None,
+		Normal,
 	};
 
 	enum class eComponentType

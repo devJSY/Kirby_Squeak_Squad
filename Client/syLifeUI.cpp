@@ -12,6 +12,8 @@ namespace sy
 
 	void LifeUI::Initialize()
 	{
+
+
 		UI::Initialize();
 	}
 

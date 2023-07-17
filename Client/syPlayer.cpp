@@ -2,9 +2,10 @@
 
 namespace sy
 {
-	Player::Player()
+	Player::Player(eAbilityType type)
 		: mAnimator(nullptr)
 		, mDir(eDirection::RIGHT)
+		, mAbilityType(type)
 	{
 		// 애니메이터 생성
 		mAnimator = AddComponent<Animator>();

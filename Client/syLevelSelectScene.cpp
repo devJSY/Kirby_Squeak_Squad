@@ -42,8 +42,6 @@ namespace sy
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 吝痢 汲沥
 
 
-
-
 		// Inventory 积己 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
 
@@ -53,23 +51,9 @@ namespace sy
 		Inven->GetComponent<Transform>()->SetPosition(vec);
 
 
-		//// UI 积己
-		//AbilityUI* Ability = object::Instantiate<AbilityUI>(eLayerType::UI);
-		//assert(Ability);
-		//SpriteRenderer* AbilityRenderer = Ability->AddComponent<SpriteRenderer>();
-		//assert(AbilityRenderer);
-		//AbilityRenderer->SetAffectCamera(false);
-		//Texture* Abilityimage = ResourceManager::Load<Texture>(L"AbilityUI"
-		//	, L"..\\Resources\\UI\\Ability_UI.bmp");
-		//AbilityRenderer->SetBmpRGB(255, 0, 255);
-		//AbilityRenderer->SetTexture(Abilityimage);
-		//Ability->GetComponent<Transform>()->SetPosition(Vector2(100.f,100.f)); 
-
-
-		//HPbarUI* HPbar = object::Instantiate<HPbarUI>(eLayerType::UI);
-		//assert(HPbar);
-		//SpriteRenderer* HPbarRenderer = HPbar->AddComponent<SpriteRenderer>();
-		//assert(AbilityRenderer);
+		// UI 积己
+		AbilityUI* AbilityUi = object::Instantiate<AbilityUI>(eLayerType::UI);
+		AbilityUi->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f);
 
 		Scene::Initialize();
 	}
