@@ -12,6 +12,14 @@ namespace sy
 	SirKibble::SirKibble()
 		: Enemy(eAbilityType::Cutter)
 	{
+	}
+
+	SirKibble::~SirKibble()
+	{
+	}
+
+	void SirKibble::Initialize()
+	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left", L"..\\Resources\\Enemies_Left.bmp");
 
@@ -28,14 +36,7 @@ namespace sy
 		mAnimator->CreateAnimation(Enemies_Left, L"SirKibble_Left_Death", Vector2(429.f, 2663.f), Vector2(24.f, 20.f), Vector2(-24.f, 0.f), 1.f, 1);
 
 		mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
-	}
 
-	SirKibble::~SirKibble()
-	{
-	}
-
-	void SirKibble::Initialize()
-	{
 		Enemy::Initialize();
 	}
 

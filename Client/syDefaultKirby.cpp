@@ -14,6 +14,14 @@ namespace sy
 		: mState(eDefaultKirbyState::Idle)
 		, mDir(eDirection::RIGHT)
 	{
+	}
+
+	DefaultKirby::~DefaultKirby()
+	{
+	}
+
+	void DefaultKirby::Initialize()
+	{			
 		// 텍스쳐 로드
 		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
 		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
@@ -100,14 +108,7 @@ namespace sy
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"iDefaultKirby_Left_Skill", Vector2(211.f, 305.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.07f, 5);
 
 		mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
-	}
 
-	DefaultKirby::~DefaultKirby()
-	{
-	}
-
-	void DefaultKirby::Initialize()
-	{
 		Player::Initialize();
 	}
 

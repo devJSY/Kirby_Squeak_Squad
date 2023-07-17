@@ -24,15 +24,12 @@ namespace sy
 	void WorldTunnelScene::Initialize()
 	{
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Bg);
-		SpriteRenderer* BgSprite = Bg->AddComponent<SpriteRenderer>();
-		assert(BgSprite);
-		SpriteRenderer* BgRenderer = Bg->GetComponent<SpriteRenderer>();
-		assert(BgRenderer);
-		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"WorldTunnels", L"..\\Resources\\Map\\WorldTunnels.bmp")); // 이미지 설정
-		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
 
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();	
+		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"WorldTunnels", L"..\\Resources\\Map\\WorldTunnels.bmp")); // 이미지 설정
+		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
+		
 		Scene::Initialize();
 	}
 

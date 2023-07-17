@@ -8,6 +8,14 @@ namespace sy
 	WaddleDee::WaddleDee()
 		: Enemy(eAbilityType::None)
 	{
+	}
+
+	WaddleDee::~WaddleDee()
+	{
+	}
+
+	void WaddleDee::Initialize()
+	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
@@ -18,14 +26,7 @@ namespace sy
 		mAnimator->CreateAnimation(Enemies_Left, L"Red_Left_Death", Vector2(432.f, 722.f), Vector2(23.f, 23.f), Vector2(-23.f, 0.f), 1.f, 1);
 
 		mAnimator->PlayAnimation(L"Red_Right_Walk", true);
-	}
 
-	WaddleDee::~WaddleDee()
-	{
-	}
-
-	void WaddleDee::Initialize()
-	{
 		Enemy::Initialize();
 	}
 

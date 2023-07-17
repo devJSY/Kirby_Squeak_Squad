@@ -27,11 +27,12 @@ namespace sy
 	{
 		// 비디오 생성
 		mVideo = object::Instantiate<Video>(eLayerType::Video);
-		assert(mVideo);
-		Animator* videoAnimator = mVideo->AddComponent<Animator>();
-		assert(videoAnimator);
-		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		
+		// 위치 설정
+		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f);
 		mVideo->SetSpeed(1.f); // 재생속도 설정
+		
+		Animator* videoAnimator = mVideo->AddComponent<Animator>();
 		videoAnimator->CreateAnimationFolder(L"OpeningVideo", L"..\\Resources\\Video\\Opening", 0.03196546f / mVideo->GetSpeed());
 		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"OpeningVideo", false);

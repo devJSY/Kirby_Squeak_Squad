@@ -8,6 +8,14 @@ namespace sy
 	BlockEnemy::BlockEnemy()
 		: Enemy(eAbilityType::None)
 	{
+	}
+
+	BlockEnemy::~BlockEnemy()
+	{
+	}
+
+	void BlockEnemy::Initialize()
+	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
@@ -23,14 +31,7 @@ namespace sy
 		mAnimator->CreateAnimation(Enemies_Left, L"BlockEnemy_Left_Death", Vector2(435.f, 653.f), Vector2(21.f, 20.f), Vector2(-21.f, 0.f), 1.f, 1);
 
 		mAnimator->PlayAnimation(L"BlockEnemy_Right_Appear", true);
-	}
 
-	BlockEnemy::~BlockEnemy()
-	{
-	}
-
-	void BlockEnemy::Initialize()
-	{
 		Enemy::Initialize();
 	}
 

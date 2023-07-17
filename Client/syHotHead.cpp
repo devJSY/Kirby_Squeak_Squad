@@ -12,6 +12,14 @@ namespace sy
 	HotHead::HotHead()
 		: Enemy(eAbilityType::Fire)
 	{
+	}
+
+	HotHead::~HotHead()
+	{
+	}
+
+	void HotHead::Initialize()
+	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
@@ -25,14 +33,7 @@ namespace sy
 		mAnimator->CreateAnimation(Enemies_Left, L"HotHead_Left_Attack", Vector2(450.f, 3284.f), Vector2(24.f, 21.f), Vector2(-24.f, 0.f), 0.2f, 3);
 
 		mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
-	}
 
-	HotHead::~HotHead()
-	{
-	}
-
-	void HotHead::Initialize()
-	{
 		Enemy::Initialize();
 	}
 

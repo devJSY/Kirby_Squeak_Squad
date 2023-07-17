@@ -30,9 +30,7 @@ namespace sy
 	{
 		// 상단 화면 오브젝트 생성 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		assert(Bg);
 		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
-		assert(BgRenderer);
 		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
 		BgRenderer->SetAffectCamera(false);
@@ -43,7 +41,6 @@ namespace sy
 
 		// 하단 화면 오브젝트 생성 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
-		assert(Inven);
 
 		// 인벤토리 클래스 위치 설정
 		vec = Vector2(Application::GetResolution()) / 2.f;
