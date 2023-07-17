@@ -36,8 +36,8 @@ namespace sy
 
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
 		videoAnimator->CreateAnimationFolder(L"TitleVideo", L"..\\Resources\\Video\\Title", 0.033224f / mVideo->GetSpeed());
-		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"TitleVideo", true);
+		videoAnimator->SetAffectedCamera(false);
 
 		Scene::Initialize();
 	}

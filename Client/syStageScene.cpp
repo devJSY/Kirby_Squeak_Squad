@@ -43,19 +43,20 @@ namespace sy
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
 
-		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();		
-		BgRenderer->SetTexture(tex);		
-		BgRenderer->SetAffectCamera(false);
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();				
+		BgRenderer->SetAffectedCamera(false);
+		BgRenderer->SetTexture(tex);
+
 
 		// 스테이지 설정
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정
-
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
 		Fg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
 
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
+		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
-		FgRenderer->SetAffectCamera(true);
+
 
 		// 플레이어 설정
 		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);	

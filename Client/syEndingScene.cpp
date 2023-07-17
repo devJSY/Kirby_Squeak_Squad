@@ -33,8 +33,8 @@ namespace sy
 
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
 		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0444931f / mVideo->GetSpeed());
-		videoAnimator->SetAffectedCamera(false);
 		videoAnimator->PlayAnimation(L"EndingVideo", true);
+		videoAnimator->SetAffectedCamera(false);
 
 		Scene::Initialize();
 	}

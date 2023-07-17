@@ -4,6 +4,7 @@
 namespace sy
 {
 	using namespace enums;
+	using namespace math;
 	class Texture : public Resource
 	{
 	public:
@@ -13,6 +14,15 @@ namespace sy
 		static Texture* Create(const std::wstring& name, UINT width, UINT height);
 
 		virtual HRESULT Load(const std::wstring& path) override;
+
+		void Render(HDC hdc
+			, Vector2 pos
+			, Vector2 size
+			, Vector2 LeftTop
+			, Vector2 RightBottom
+			, bool AffectedCamera
+			, Vector2 scale = Vector2::One
+			, float Alpha = 1.0f);
 
 		UINT GetWidth() { return mWidth; }
 		void SetWidth(UINT width) { mWidth = width; }
@@ -31,9 +41,9 @@ namespace sy
 		eTextureType mType;		// 확장자 타입
 		Gdiplus::Image* mImage;	// png 객체
 
-		HBITMAP mBitmap;	// 리소스 비트맵
-		HDC mHdc;			// 리소스 비트맵의 dc
-		UINT mWidth;		// 리소스 가로
-		UINT mHeight;		// 리소스 세로
+		HBITMAP mBitmap;	 // 리소스 비트맵
+		HDC mHdc;			 // 리소스 비트맵의 dc
+		UINT mWidth;		 // 리소스 가로
+		UINT mHeight;		 // 리소스 세로
 	};
 }

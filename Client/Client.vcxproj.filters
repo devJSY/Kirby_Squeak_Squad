@@ -25,20 +25,11 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{07b4520e-3616-4bf2-bc7b-6775ee2ab6af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component">
-      <UniqueIdentifier>{eabab9a3-c01c-48fd-9fea-3a9307dbe6d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Entity">
       <UniqueIdentifier>{b98eac82-a631-4fe1-8365-d885c7ef5c3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Layer">
       <UniqueIdentifier>{e4a6f586-3a64-4c8b-a7d3-2227ea5dc11a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\Transform">
-      <UniqueIdentifier>{0e24e48b-1c54-4836-96c7-6d85d278e6f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\SpriteRenderer">
-      <UniqueIdentifier>{88e2c895-f10d-47e0-b8c1-1c57943d8c58}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Scene">
       <UniqueIdentifier>{98413686-2467-4ca4-9749-fa0bb9e3d17d}</UniqueIdentifier>
@@ -93,9 +84,6 @@
     </Filter>
     <Filter Include="Engine\Resource\Animation">
       <UniqueIdentifier>{ea9a0af9-3219-40e9-9232-6f0091c6f116}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\Animator">
-      <UniqueIdentifier>{42a9af73-1855-4446-80b6-41768aebf3fa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Inventory">
       <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
@@ -168,6 +156,18 @@
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble\Skill">
       <UniqueIdentifier>{a0990413-da2a-4805-b608-bf6a1d29f8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{eabab9a3-c01c-48fd-9fea-3a9307dbe6d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{0e24e48b-1c54-4836-96c7-6d85d278e6f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\SpriteRenderer">
+      <UniqueIdentifier>{88e2c895-f10d-47e0-b8c1-1c57943d8c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Animator">
+      <UniqueIdentifier>{42a9af73-1855-4446-80b6-41768aebf3fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

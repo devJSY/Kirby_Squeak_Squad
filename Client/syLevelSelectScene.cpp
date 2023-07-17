@@ -31,9 +31,11 @@ namespace sy
 		// 상단 화면 오브젝트 생성 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
-		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp")); // 이미지 설정
+		Texture* tex = ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\Level_Select.bmp");
+		
+		BgRenderer->SetAffectedCamera(false);
+		BgRenderer->SetTexture(tex); // 이미지 설정
 		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-		BgRenderer->SetAffectCamera(false);
 
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;

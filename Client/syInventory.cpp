@@ -23,9 +23,9 @@ namespace sy
 
 		InvenAt->CreateAnimation(image, L"Inventory", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
 		InvenAt->CreateAnimation(Damaged, L"Inventory_Damage", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
-		
-		InvenAt->PlayAnimation(L"Inventory", true);
 		InvenAt->SetAffectedCamera(false);
+
+		InvenAt->PlayAnimation(L"Inventory", true);
 
 		GameObject::Initialize();
 	}

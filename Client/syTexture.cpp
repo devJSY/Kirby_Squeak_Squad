@@ -1,7 +1,7 @@
 #include "syTexture.h"
 #include "syApplication.h"
 #include "syResourceManager.h"
-
+#include "syCamera.h"
 namespace sy
 {
 	Texture::Texture()
@@ -101,5 +101,77 @@ namespace sy
 		}
 
 		return S_OK;
+	}
+
+	void Texture::Render(HDC hdc
+		, Vector2 pos
+		, Vector2 size
+		, Vector2 LeftTop
+		, Vector2 RightBottom
+		, bool AffectedCamera
+		, Vector2 scale
+		, float Alpha)
+	{
+		// Animation or SpriteRenderer 에서 호출됨
+		if (mBitmap == nullptr && mImage == nullptr)
+			return;
+
+		if (AffectedCamera)
+			pos = Camera::CalculatePosition(pos);
+
+		if (mType == eTextureType::Bmp)
+		{
+			TransparentBlt(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
+				, (int)(pos.y - (size.y * scale.y / 2.0f))
+				, int(size.x * scale.x)
+				, int(size.y * scale.y)
+				, mHdc
+				, int(LeftTop.x), int(LeftTop.y), int(RightBottom.x), int(RightBottom.y)
+				, RGB(255, 0, 255));
+		}
+		else if (mType == eTextureType::AlphaBmp)
+		{
+			BLENDFUNCTION func = {};
+			func.BlendOp = AC_SRC_OVER;
+			func.BlendFlags = 0;
+			func.AlphaFormat = AC_SRC_ALPHA;
+			// 0.0f ~ 1.0f -> 0 ~ 255
+			int alpha = (int)(Alpha * 255.0f);
+
+			if (alpha <= 0)
+				alpha = 0;
+			func.SourceConstantAlpha = alpha; // 0 ~ 255
+
+			AlphaBlend(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
+				, (int)(pos.y - (size.y * scale.y / 2.0f))
+				, int(size.x * scale.x)
+				, int(size.y * scale.y)
+				, mHdc
+				, int(LeftTop.x), int(LeftTop.y)
+				, int(RightBottom.x), int(RightBottom.y)
+				, func);
+		}
+		else if (mType == eTextureType::Png)
+		{
+			//// 내가 원하는 픽셀을 투명화 시킬떄
+			Gdiplus::ImageAttributes imageAtt = {};
+			//// 투명화 시킬 픽셀 색 범위
+			imageAtt.SetColorKey(Gdiplus::Color(100, 100, 100)
+				, Gdiplus::Color(255, 255, 255));
+
+			Gdiplus::Graphics graphics(hdc);
+			graphics.DrawImage(mImage
+				, Gdiplus::Rect
+				(
+					(int)(pos.x - (size.x * scale.x / 2.0f))
+					, (int)(pos.y - (size.y * scale.y / 2.0f))
+					, (int)(size.x * scale.x)
+					, (int)(size.y * scale.y)
+				)
+				, INT(LeftTop.x), INT(LeftTop.y)
+				, INT(RightBottom.x), INT(RightBottom.y)
+				, Gdiplus::UnitPixel
+				, nullptr);
+		}
 	}
 }

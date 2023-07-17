@@ -27,23 +27,28 @@ namespace sy
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false); // 루프 기본값 false
 
-		bool GetAffectedCamera() { return mbAffectedCamera; }
-		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
 		float GetAlpha() { return mAlpha; }
 		void SetAlpha(float alpha) { mAlpha = alpha; }
+
+		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
+		bool GetAffectedCamera() { return mbAffectedCamera; }
 
 		bool IsActiveAniComplete() { return mActiveAnimation->IsComplete(); }
 
 		void SetAniScale(const std::wstring& name, Vector2 scale);
 		void ActiveAnimationReset() { mActiveAnimation->Reset(); }
+		Vector2 GetScale() { return mScale; }
+		void SetScale(Vector2 scale) { mScale = scale; }
+		
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
 
 		Animation* mActiveAnimation;	// 현재 애니메이션
 		bool mbLoop;					// 애니메이션 반복 여부
-		bool mbAffectedCamera;			// 카메라 영향여부
+		bool mbAffectedCamera;			// 카메라 영향 여부
 		float mAlpha;					// 알파 블랜드값 0 ~ 1
+		Vector2 mScale;
 	};
 }
 

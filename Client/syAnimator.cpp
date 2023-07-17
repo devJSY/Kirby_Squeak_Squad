@@ -7,9 +7,10 @@ namespace sy
 	Animator::Animator()
 		: Component(eComponentType::Animator)
 		, mActiveAnimation(nullptr)
-		, mbLoop(false)					
-		, mbAffectedCamera(true)			
+		, mbLoop(false)			
+		, mbAffectedCamera(true)
 		, mAlpha(1.0f)
+		, mScale(Vector2::One)
 	{
 	}
 
@@ -70,7 +71,11 @@ namespace sy
 		mAnimations.insert(std::make_pair(name, animation)); // mAnimations에 생성한 애니메이션 추가
 	}
 
-	void Animator::CreateAnimationFolder(const std::wstring& name, const std::wstring& path, float duration, Vector2 offset)
+	void Animator::CreateAnimationFolder(
+		const std::wstring& name
+		, const std::wstring& path
+		, float duration
+		, Vector2 offset)
 	{
 		UINT width = 0;
 		UINT height = 0;

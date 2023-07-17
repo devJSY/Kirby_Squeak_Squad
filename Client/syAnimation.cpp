@@ -46,60 +46,19 @@ namespace sy
 	{
 		assert(mTexture); // mTexture이 nullptr 이면 에러
 
+		Sprite sprite = mSpriteSheet[mIndex];
+
 		Transform* tr = mAnimator->GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
+		Vector2 pos = tr->GetPosition() + sprite.offset;
 
-		if (mAnimator->GetAffectedCamera())
-			pos = Camera::CalculatePosition(pos);
-				
-		if (mTexture->GetType() == eTextureType::Bmp)
-		{
-			TransparentBlt(hdc
-				, (int)(pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
-				, (int)(pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
-				, (int)(mSpriteSheet[mIndex].size.x * mScale.x)		// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)(mSpriteSheet[mIndex].size.y * mScale.y)
-				, mTexture->GetHdc()				// Sprite를 가져올 텍스쳐 설정
-				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
-				, (int)mSpriteSheet[mIndex].leftTop.y
-				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)mSpriteSheet[mIndex].size.y
-				, RGB(255, 0, 255));				// 마젠타색상 고정 필요하면 변수화
-		}
-		else if (mTexture->GetType() == eTextureType::AlphaBmp)
-		{
-			// mAnimator로 부터 알파값을 받아와서 알파값 셋팅
-			BLENDFUNCTION func = {};
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = AC_SRC_ALPHA;
-			// 0.0f ~ 1.0f -> 0 ~ 255
-			int alpha = (int)(mAnimator->GetAlpha() * 255.0f);
-			if (alpha <= 0)
-				alpha = 0;
-			func.SourceConstantAlpha = alpha; // 0 ~ 255
-
-			AlphaBlend(hdc
-				, (int)(pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x) // 스프라이트의 중점기준 렌더링
-				, (int)(pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y) // 스프라이트의 중점기준 렌더링
-				, (int)(mSpriteSheet[mIndex].size.x * mScale.x)	// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)(mSpriteSheet[mIndex].size.y * mScale.y)
-				, mTexture->GetHdc()					// Sprite를 가져올 텍스쳐 설정
-				, (int)mSpriteSheet[mIndex].leftTop.x	// 현재 Sprite의 좌상단 좌표 설정
-				, (int)mSpriteSheet[mIndex].leftTop.y
-				, (int)mSpriteSheet[mIndex].size.x		// 현재 Sprite 사이즈만큼 잘라냄
-				, (int)mSpriteSheet[mIndex].size.y
-				, func);
-		}
-		else if (mTexture->GetType() == eTextureType::Png)
-		{
-			Gdiplus::Graphics graphics(hdc);
-			graphics.DrawImage(mTexture->GetImage()
-				, (int)pos.x - ((mSpriteSheet[mIndex].size.x * mScale.x) / 2.0f) + mSpriteSheet[mIndex].offset.x	 // 스프라이트의 중점기준 렌더링
-				, (int)pos.y - ((mSpriteSheet[mIndex].size.y * mScale.y) / 2.0f) + mSpriteSheet[mIndex].offset.y
-				, mSpriteSheet[mIndex].size.x * mScale.x						 // 현재 Sprite 사이즈만큼 잘라냄
-				, mSpriteSheet[mIndex].size.y * mScale.y);
-		}
+		mTexture->Render(hdc
+			, pos
+			, sprite.size
+			, sprite.leftTop
+			, sprite.size
+			, mAnimator->GetAffectedCamera()
+			, mAnimator->GetScale()
+			, mAnimator->GetAlpha());
 	}
 
 	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)
