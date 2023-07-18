@@ -49,16 +49,10 @@ namespace sy
 		}
 
 		template <typename T>
-		static bool Insert(const std::wstring& name, T* resource)
+		static void Insert(const std::wstring& name, T* resource)
 		{
-			int size = mResources.size();
 			resource->SetName(name);
 			mResources.insert(std::make_pair(name, resource));
-			if (size == mResources.size())
-			{
-				return true;
-			}
-			else return false;
 		}
 
 	private:

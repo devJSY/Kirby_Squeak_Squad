@@ -18,7 +18,7 @@ namespace sy
 
 	private:
 		Player* mOwner;
-
+		class Animator* mAnimator;
 	};
 
 }

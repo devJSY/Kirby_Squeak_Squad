@@ -19,5 +19,6 @@ namespace sy
 	private:
 		Player* mOwner;
 		class SpriteRenderer* mSpriteRenderer;
+		class Animator* mAnimator;			
 	};
 }

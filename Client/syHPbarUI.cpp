@@ -7,6 +7,8 @@
 namespace sy
 {
 	HPbarUI::HPbarUI()
+		: mOwner(nullptr)
+		, mAnimator(nullptr)
 	{
 	}
 

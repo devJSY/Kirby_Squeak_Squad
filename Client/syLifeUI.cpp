@@ -10,6 +10,7 @@ namespace sy
 	LifeUI::LifeUI()
 		: mOwner(nullptr)
 		, mSpriteRenderer(nullptr)
+		, mAnimator(nullptr)
 	{
 	}
 

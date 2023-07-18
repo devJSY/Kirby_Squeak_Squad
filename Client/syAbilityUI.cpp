@@ -7,6 +7,8 @@
 namespace sy
 {
 	AbilityUI::AbilityUI()
+		: mOwner(nullptr)
+		, mAnimator(nullptr)
 	{
 	}
 
