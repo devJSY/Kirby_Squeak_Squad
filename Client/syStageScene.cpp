@@ -42,10 +42,10 @@ namespace sy
 	void StageScene::Initialize()
 	{
 		// 백그라운드 설정
-		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Stage_BackGround.bmp"); // 이미지 설정
+		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
+		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2 - 2, tex->GetHeight() / 2 - 2)); // 중점 설정
 
 		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();				
 		BgRenderer->SetAffectedCamera(false);
