@@ -44,8 +44,6 @@ namespace sy
 
 		// Inventory 생성 
 		Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
-
-		// Inventory 위치 설정
 		vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y += vec.y / 2.f;
 		Inven->GetComponent<Transform>()->SetPosition(vec);
@@ -72,6 +70,12 @@ namespace sy
 		Uivec.y -= 27.f;
 		LifeUi->GetComponent<Transform>()->SetPosition(Uivec);
 		LifeUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+
+		//// StageScene에 객체 전달
+		//Scene* NextScene = SceneManager::GetScene(L"StageScene");
+		//NextScene->AddGameObject(eLayerType::UI, AbilityUi);
+		//NextScene->AddGameObject(eLayerType::UI, HPbarUi);
+		//NextScene->AddGameObject(eLayerType::UI, LifeUi);
 
 		Scene::Initialize();
 	}

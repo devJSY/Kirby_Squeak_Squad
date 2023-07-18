@@ -57,18 +57,15 @@ namespace sy
 		, float duration, UINT spriteLength
 		, Vector2 offset)
 	{
-		Animation* animation = nullptr;
-		animation = ResourceManager::Find<Animation>(name); // ResourceManager 에서 만든 리소스가 있는지 먼저 확인
-		if (animation != nullptr)
-			return;
+		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
+		Animation* animation = new Animation();
 
-		animation = new Animation();
 		animation->Create(texture, name
 			, leftTop, size, Interbal
 			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
 
-		mAnimations.insert(std::make_pair(name, animation)); // mAnimations에 생성한 애니메이션 추가
+		mAnimations.insert(std::make_pair(name, animation));
 	}
 
 	void Animator::CreateAnimationFolder(

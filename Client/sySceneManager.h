@@ -23,13 +23,13 @@ namespace sy
 			Scene->SetName(name);
 			mScenes.insert(std::make_pair(name, Scene));
 			mActiveScene = Scene;
-			Scene->Initialize();
 
 			return Scene;
 		}
 
 		static Scene* LoadScene(const std::wstring& name);
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static Scene* GetScene(const std::wstring& name);
 
 	private:
 		// 트리 자료구조

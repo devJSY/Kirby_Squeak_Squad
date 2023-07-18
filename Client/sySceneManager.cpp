@@ -31,28 +31,21 @@ namespace sy
 
 	void SceneManager::Initialize()
 	{
+		CreateScene<OpeningScene>(L"OpeningScene");
+		CreateScene<TitleScene>(L"TitleScene");
+		CreateScene<LevelSelectScene>(L"LevelSelectScene");
+		CreateScene<StageScene>(L"StageScene");
+		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
+		CreateScene<EndingScene>(L"EndingScene");
 
-		Scene* check = CreateScene<OpeningScene>(L"OpeningScene");
-		assert(check);
+		for (auto scene : mScenes)
+		{
+			mActiveScene = scene.second;
+			scene.second->Initialize();
+		}
 
-		check = CreateScene<TitleScene>(L"TitleScene");
-		assert(check);
+		LoadScene(L"OpeningScene");
 
-		check = CreateScene<LevelSelectScene>(L"LevelSelectScene");
-		assert(check);
-
-		check = CreateScene<StageScene>(L"StageScene");
-		assert(check);
-
-		check = CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
-		assert(check);
-
-		check = CreateScene<EndingScene>(L"EndingScene");
-		assert(check);
-
-		check = LoadScene(L"OpeningScene");
-
-		assert(check);
 	}
 
 	void SceneManager::Update()
@@ -78,6 +71,16 @@ namespace sy
 
 		mActiveScene = iter->second;
 		mActiveScene->Enter();
+
+		return iter->second;
+	}
+
+	Scene* SceneManager::GetScene(const std::wstring& name)
+	{
+		std::map<std::wstring, Scene*>::iterator iter = mScenes.find(name);
+
+		if (iter == mScenes.end())
+			return nullptr;
 
 		return iter->second;
 	}
