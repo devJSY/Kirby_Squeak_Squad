@@ -8,7 +8,6 @@ namespace sy
 		, mDir(eDirection::RIGHT)
 	{
 		mAnimator = AddComponent<Animator>();
-		assert(mAnimator);
 	}
 
 	Effects::~Effects()

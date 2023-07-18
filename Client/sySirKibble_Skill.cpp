@@ -9,8 +9,10 @@ namespace sy
 	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemies_Right.bmp");
 
-		mAnimator->CreateAnimation(Enemies_Right, L"SirKibble_Skill", Vector2(179.f, 2640.f), Vector2(23.f, 16.f), Vector2(23.f, 0.f), 0.05f, 4);
-		mAnimator->PlayAnimation(L"SirKibble_Skill", true);
+		Animator* animator = GetAnimator();
+
+		animator->CreateAnimation(Enemies_Right, L"SirKibble_Skill", Vector2(179.f, 2640.f), Vector2(23.f, 16.f), Vector2(23.f, 0.f), 0.05f, 4);
+		animator->PlayAnimation(L"SirKibble_Skill", true);
 	}
 
 	SirKibble_Skill::~SirKibble_Skill()
