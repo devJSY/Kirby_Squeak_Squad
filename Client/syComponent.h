@@ -13,7 +13,7 @@ namespace sy
 		virtual void Initialize();
 		virtual void Update();
 		virtual void Render(HDC hdc);
-
+		
 		void SetOwner(class GameObject* owner) { mOwner = owner; }
 		class GameObject* GetOwner() { return mOwner; }
 
