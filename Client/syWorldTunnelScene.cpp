@@ -2,7 +2,6 @@
 #include "syInput.h"
 #include "sySceneManager.h"
 #include "syObject.h"
-#include "sySpriteRenderer.h"
 #include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
@@ -10,6 +9,8 @@
 #include "syBackGround.h"
 #include "syApplication.h"
 #include "syCamera.h"
+#include "syAnimator.h"
+#include "syWorldTunnel.h"
 
 namespace sy
 {
@@ -23,13 +24,12 @@ namespace sy
 
 	void WorldTunnelScene::Initialize()
 	{
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); // 중점 설정
+		WorldTunnel* Bg = object::Instantiate<WorldTunnel>(eLayerType::BackGround);
+		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.y /= 2.f;
 
-		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();	
-		BgRenderer->SetTexture(ResourceManager::Load<Texture>(L"WorldTunnels", L"..\\Resources\\Map\\WorldTunnels.bmp")); // 이미지 설정
-		BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-		
+		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
+
 		Scene::Initialize();
 	}
 

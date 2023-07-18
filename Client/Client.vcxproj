@@ -190,6 +190,7 @@
     <ClInclude Include="syTransform.h" />
     <ClInclude Include="syUI.h" />
     <ClInclude Include="syVideo.h" />
+    <ClInclude Include="syWorldTunnel.h" />
     <ClInclude Include="syWorldTunnelScene.h" />
     <ClInclude Include="syFlower.h" />
     <ClInclude Include="targetver.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="syTransform.cpp" />
     <ClCompile Include="syUI.cpp" />
     <ClCompile Include="syVideo.cpp" />
+    <ClCompile Include="syWorldTunnel.cpp" />
     <ClCompile Include="syWorldTunnelScene.cpp" />
     <ClCompile Include="syFlower.cpp" />
   </ItemGroup>

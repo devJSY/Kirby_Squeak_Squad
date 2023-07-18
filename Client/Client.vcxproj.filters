@@ -169,6 +169,9 @@
     <Filter Include="Engine\Component\Animator">
       <UniqueIdentifier>{42a9af73-1855-4446-80b6-41768aebf3fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\BackGround\WorldTunnel">
+      <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -324,6 +327,9 @@
     <ClInclude Include="sySirKibble_Skill.h">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="syWorldTunnel.h">
+      <Filter>Contents\GameObject\BackGround\WorldTunnel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -469,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="sySirKibble_Skill.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="syWorldTunnel.cpp">
+      <Filter>Contents\GameObject\BackGround\WorldTunnel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
