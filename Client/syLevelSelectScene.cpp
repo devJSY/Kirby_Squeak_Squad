@@ -15,6 +15,7 @@
 #include "syHPbarUI.h"
 #include "syLifeUI.h"
 #include "syCamera.h"
+#include "syLevel_BG.h"
 
 namespace sy
 {
@@ -29,22 +30,11 @@ namespace sy
 	void LevelSelectScene::Initialize()
 	{
 		// 상단 화면 오브젝트 생성 
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		//SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
-		Texture* tex = ResourceManager::Load<Texture>(L"LevelSelectImage", L"..\\Resources\\Map\\LevelSelect.png");
-		//
-		//BgRenderer->SetAffectedCamera(false);
-		//BgRenderer->SetTexture(tex); // 이미지 설정
-		//BgRenderer->SetBmpRGB(255, 0, 255); // 마젠타 색상
-
-		Animator* Bgani = Bg->AddComponent<Animator>();
-		Bgani->CreateAnimation(tex, L"LevelSelectImage", Vector2(260.f,2.f), Vector2(256.f, 208.f), Vector2(256.f, 0.f), 1.f, 1);
-		Bgani->SetAffectedCamera(false);
-		Bgani->PlayAnimation(L"LevelSelectImage");
-
+		Level_BG* Bg = object::Instantiate<Level_BG>(eLayerType::BackGround);
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
+		
 
 
 		// Inventory 생성 

@@ -169,7 +169,13 @@
     <Filter Include="Engine\Component\Animator">
       <UniqueIdentifier>{42a9af73-1855-4446-80b6-41768aebf3fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\BackGround\WorldTunnel">
+    <Filter Include="Contents\Scene\LevelScene">
+      <UniqueIdentifier>{9f338203-f573-4408-8483-8d1946d5a37c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround\Level_BG">
+      <UniqueIdentifier>{7a908f7c-d363-499f-ba48-c23f111dcbe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround\WorldTunnel_BG">
       <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -327,8 +333,11 @@
     <ClInclude Include="sySirKibble_Skill.h">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="syWorldTunnel.h">
-      <Filter>Contents\GameObject\BackGround\WorldTunnel</Filter>
+    <ClInclude Include="syWorldTunnel_BG.h">
+      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+    </ClInclude>
+    <ClInclude Include="syLevel_BG.h">
+      <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -476,8 +485,11 @@
     <ClCompile Include="sySirKibble_Skill.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="syWorldTunnel.cpp">
-      <Filter>Contents\GameObject\BackGround\WorldTunnel</Filter>
+    <ClCompile Include="syWorldTunnel_BG.cpp">
+      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+    </ClCompile>
+    <ClCompile Include="syLevel_BG.cpp">
+      <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

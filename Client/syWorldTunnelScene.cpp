@@ -10,7 +10,7 @@
 #include "syApplication.h"
 #include "syCamera.h"
 #include "syAnimator.h"
-#include "syWorldTunnel.h"
+#include "syWorldTunnel_BG.h"
 #include "syInventory.h"
 #include "syAbilityUI.h"
 #include "syHPbarUI.h"
@@ -28,7 +28,7 @@ namespace sy
 
 	void WorldTunnelScene::Initialize()
 	{
-		WorldTunnel* Bg = object::Instantiate<WorldTunnel>(eLayerType::BackGround);
+		WorldTunnel_BG* Bg = object::Instantiate<WorldTunnel_BG>(eLayerType::BackGround);
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
