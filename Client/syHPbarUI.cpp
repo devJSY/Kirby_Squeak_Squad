@@ -65,7 +65,7 @@ namespace sy
 		mAnimator->CreateAnimation(HpBar_110, L"HpBar_110", Vector2::Zero, Vector2(84, 12.f), Vector2(84, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(HpBar_120, L"HpBar_120", Vector2::Zero, Vector2(84, 12.f), Vector2(84, 0.f), 1.f, 1);
 
-		mAnimator->PlayAnimation(L"HpBar_120", false);
+		mAnimator->PlayAnimation(L"HpBar_10", false);
 		mAnimator->SetAffectedCamera(false);
 
 		UI::Initialize();

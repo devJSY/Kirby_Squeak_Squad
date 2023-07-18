@@ -28,9 +28,6 @@ namespace sy
 		virtual void Enter() = 0;
 		virtual void Exit() = 0;
 
-	public:
-		void ShowSceneName(HDC hdc, std::wstring& name, const wchar_t* ChangeKey);
-
 	private:
 		std::vector<Layer> mLayers;
 	};

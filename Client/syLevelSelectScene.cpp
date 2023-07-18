@@ -48,7 +48,6 @@ namespace sy
 		vec.y += vec.y / 2.f;
 		Inven->GetComponent<Transform>()->SetPosition(vec);
 
-
 		// UI »ý¼º
 		AbilityUI* AbilityUi = object::Instantiate<AbilityUI>(eLayerType::UI);
 		Vector2 Uivec = Vector2(Application::GetResolution()) / 2.f;
@@ -76,6 +75,7 @@ namespace sy
 		//NextScene->AddGameObject(eLayerType::UI, AbilityUi);
 		//NextScene->AddGameObject(eLayerType::UI, HPbarUi);
 		//NextScene->AddGameObject(eLayerType::UI, LifeUi);
+		//NextScene->AddGameObject(eLayerType::Inventory, Inven);
 
 		Scene::Initialize();
 	}

@@ -38,10 +38,10 @@ namespace sy
 		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");
 
-		for (auto scene : mScenes)
+		for (auto iter : mScenes)
 		{
-			mActiveScene = scene.second;
-			scene.second->Initialize();
+			mActiveScene = iter.second;
+			iter.second->Initialize();
 		}
 
 		LoadScene(L"OpeningScene");
