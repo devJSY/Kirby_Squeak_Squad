@@ -1,6 +1,6 @@
 #include "syAnimator.h"
-#include "syResourceManager.h"
 #include "syTexture.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -16,14 +16,14 @@ namespace sy
 
 	Animator::~Animator()
 	{
-		//for (auto iter : mAnimations)
-		//{
-		//	if (nullptr != iter.second)
-		//	{
-		//		delete iter.second;
-		//		iter.second = nullptr;
-		//	}
-		//}
+		for (auto iter : mAnimations)
+		{
+			if (nullptr != iter.second)
+			{
+				delete iter.second;
+				iter.second = nullptr;
+			}
+		}
 	}
 
 	void Animator::Initialize()
@@ -58,24 +58,13 @@ namespace sy
 		, Vector2 offset)
 	{
 		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
-		Animation* animation = nullptr;
-		animation = ResourceManager::Find<Animation>(name);
-		if (animation != nullptr)
-		{
-			animation->SetAnimator(this);
-			mAnimations.insert(std::make_pair(name, animation));
-			return animation;
-		}
-
-		animation = new Animation();
+		Animation* animation = new Animation();
 		animation->Create(texture, name
 			, leftTop, size, Interbal
 			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
-		ResourceManager::Insert<Animation>(name, animation);
-
 		return animation;
 	}
 
