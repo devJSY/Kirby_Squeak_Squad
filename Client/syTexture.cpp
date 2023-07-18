@@ -91,9 +91,9 @@ namespace sy
 			mType = eTextureType::Png;
 
 			// GDIplus 로 Gdiplus::Image 객체를 생성
-			mImage = Gdiplus::Image::FromFile(path.c_str());
-
-			if (mImage == nullptr)
+			mImage = Gdiplus::Image::FromFile(path.c_str());			
+			
+			if (mImage == nullptr || mImage->GetLastStatus() != Gdiplus::Status::Ok)
 				return E_FAIL;
 
 			mWidth = mImage->GetWidth();
@@ -154,11 +154,11 @@ namespace sy
 		}
 		else if (mType == eTextureType::Png)
 		{
-			//// 내가 원하는 픽셀을 투명화 시킬떄
-			Gdiplus::ImageAttributes imageAtt = {};
-			//// 투명화 시킬 픽셀 색 범위
-			imageAtt.SetColorKey(Gdiplus::Color(100, 100, 100)
-				, Gdiplus::Color(255, 255, 255));
+			////// 내가 원하는 픽셀을 투명화 시킬떄
+			//Gdiplus::ImageAttributes imageAtt = {};
+			////// 투명화 시킬 픽셀 색 범위
+			//imageAtt.SetColorKey(Gdiplus::Color(100, 100, 100)
+			//	, Gdiplus::Color(255, 255, 255));
 
 			Gdiplus::Graphics graphics(hdc);
 			graphics.DrawImage(mImage
