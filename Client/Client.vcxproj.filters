@@ -178,6 +178,30 @@
     <Filter Include="Contents\GameObject\BackGround\WorldTunnel_BG">
       <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level1">
+      <UniqueIdentifier>{28234f0d-953b-44d6-b4b8-6d5670c58ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level2">
+      <UniqueIdentifier>{ebf7f182-08dc-43e9-9d39-274f12bec8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level3">
+      <UniqueIdentifier>{76bb728c-a905-47f8-acf7-d1942289b649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level4">
+      <UniqueIdentifier>{a48aba91-a80a-4585-a371-25e60639e537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level5">
+      <UniqueIdentifier>{73440996-7bed-4368-89f7-35d10cc37ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level6">
+      <UniqueIdentifier>{a8522d26-18fb-4abf-8d21-4a993781816d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level7">
+      <UniqueIdentifier>{ca347463-8b08-4d2b-870c-f9c707974cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level8">
+      <UniqueIdentifier>{5f9fe897-8f69-41b0-b451-6dd3017d7946}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -339,6 +363,30 @@
     <ClInclude Include="syLevel_BG.h">
       <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
     </ClInclude>
+    <ClInclude Include="syPrismPlainsScene.h">
+      <Filter>Contents\Scene\LevelScene\Level1</Filter>
+    </ClInclude>
+    <ClInclude Include="syJamJungleScene.h">
+      <Filter>Contents\Scene\LevelScene\Level4</Filter>
+    </ClInclude>
+    <ClInclude Include="syCushyCloudScene.h">
+      <Filter>Contents\Scene\LevelScene\Level3</Filter>
+    </ClInclude>
+    <ClInclude Include="syGambleGalaxyScene.h">
+      <Filter>Contents\Scene\LevelScene\Level8</Filter>
+    </ClInclude>
+    <ClInclude Include="syIceIslandScene.h">
+      <Filter>Contents\Scene\LevelScene\Level6</Filter>
+    </ClInclude>
+    <ClInclude Include="syNatureNotchScene.h">
+      <Filter>Contents\Scene\LevelScene\Level2</Filter>
+    </ClInclude>
+    <ClInclude Include="sySecretSeaScene.h">
+      <Filter>Contents\Scene\LevelScene\Level7</Filter>
+    </ClInclude>
+    <ClInclude Include="syVocalVolcanoScene.h">
+      <Filter>Contents\Scene\LevelScene\Level5</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -490,6 +538,30 @@
     </ClCompile>
     <ClCompile Include="syLevel_BG.cpp">
       <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
+    </ClCompile>
+    <ClCompile Include="syPrismPlainsScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="syJamJungleScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level4</Filter>
+    </ClCompile>
+    <ClCompile Include="syCushyCloudScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level3</Filter>
+    </ClCompile>
+    <ClCompile Include="syGambleGalaxyScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level8</Filter>
+    </ClCompile>
+    <ClCompile Include="syIceIslandScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level6</Filter>
+    </ClCompile>
+    <ClCompile Include="syNatureNotchScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level2</Filter>
+    </ClCompile>
+    <ClCompile Include="sySecretSeaScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level7</Filter>
+    </ClCompile>
+    <ClCompile Include="syVocalVolcanoScene.cpp">
+      <Filter>Contents\Scene\LevelScene\Level5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

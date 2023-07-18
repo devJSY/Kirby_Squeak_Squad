@@ -145,7 +145,9 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syCushyCloudScene.h" />
     <ClInclude Include="syFlower_Skill.h" />
+    <ClInclude Include="syGambleGalaxyScene.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
     <ClInclude Include="syAnimation.h" />
@@ -164,11 +166,17 @@
     <ClInclude Include="syHotHead.h" />
     <ClInclude Include="syHPbarUI.h" />
     <ClInclude Include="syIce.h" />
+    <ClInclude Include="syIceIslandScene.h" />
     <ClInclude Include="syInventory.h" />
+    <ClInclude Include="syJamJungleScene.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
+    <ClInclude Include="syNatureNotchScene.h" />
     <ClInclude Include="syPlayer.h" />
+    <ClInclude Include="syPrismPlainsScene.h" />
+    <ClInclude Include="sySecretSeaScene.h" />
     <ClInclude Include="sySirKibble_Skill.h" />
+    <ClInclude Include="syVocalVolcanoScene.h" />
     <ClInclude Include="syWaddleDee.h" />
     <ClInclude Include="sySirKibble.h" />
     <ClInclude Include="syTexture.h" />
@@ -198,7 +206,9 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syCushyCloudScene.cpp" />
     <ClCompile Include="syFlower_Skill.cpp" />
+    <ClCompile Include="syGambleGalaxyScene.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
     <ClCompile Include="syAnimation.cpp" />
@@ -216,11 +226,17 @@
     <ClCompile Include="syHotHead.cpp" />
     <ClCompile Include="syHPbarUI.cpp" />
     <ClCompile Include="syIce.cpp" />
+    <ClCompile Include="syIceIslandScene.cpp" />
     <ClCompile Include="syInventory.cpp" />
+    <ClCompile Include="syJamJungleScene.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
+    <ClCompile Include="syNatureNotchScene.cpp" />
     <ClCompile Include="syPlayer.cpp" />
+    <ClCompile Include="syPrismPlainsScene.cpp" />
+    <ClCompile Include="sySecretSeaScene.cpp" />
     <ClCompile Include="sySirKibble_Skill.cpp" />
+    <ClCompile Include="syVocalVolcanoScene.cpp" />
     <ClCompile Include="syWaddleDee.cpp" />
     <ClCompile Include="sySirKibble.cpp" />
     <ClCompile Include="syTexture.cpp" />
