@@ -62,6 +62,7 @@ namespace sy
 		animation = ResourceManager::Find<Animation>(name);
 		if (animation != nullptr)
 		{
+			animation->SetAnimator(this);
 			mAnimations.insert(std::make_pair(name, animation));
 			return animation;
 		}
