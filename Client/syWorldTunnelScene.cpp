@@ -65,6 +65,12 @@ namespace sy
 		LifeUi->GetComponent<Transform>()->SetPosition(Uivec);
 		LifeUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
 
+
+		// 플레이어 설정
+		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);
+		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
+		PlayerTrans->SetPosition(Vector2(Application::GetResolution()) / 2.f);
+
 		Scene::Initialize();
 	}
 
@@ -86,7 +92,8 @@ namespace sy
 	void WorldTunnelScene::Enter()
 	{
 		// 카메라 설정 
-		Camera::SetTarget(nullptr);
+		//Camera::SetTarget(nullptr);
+		Camera::SetTarget(mPlayer);
 	}
 
 	void WorldTunnelScene::Exit()

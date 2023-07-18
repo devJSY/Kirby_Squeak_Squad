@@ -109,6 +109,7 @@ namespace sy
 		//animator->CreateAnimation(DefaultKirby_Right, L"iDefaultKirby_Right_Skill", Vector2(764.f, 305.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 0.07f, 5);
 		//animator->CreateAnimation(DefaultKirby_Left, L"iDefaultKirby_Left_Skill", Vector2(211.f, 305.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.07f, 5);
 
+		animator->SetAffectedCamera(true);
 		animator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 
 		Player::Initialize();
@@ -159,6 +160,7 @@ namespace sy
 			}
 		}
 
+		// 변경된 방향 설정
 		SetDirection(Dir);
 
 		//////////////////////// 행동에 따라 상태설정 /////////////////////////////////////////////// 

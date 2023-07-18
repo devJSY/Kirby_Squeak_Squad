@@ -18,7 +18,7 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-		Player* mPlayer;
+		class Player* mPlayer;
 
 	};
 }
