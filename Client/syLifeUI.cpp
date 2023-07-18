@@ -19,7 +19,7 @@ namespace sy
 
 	void LifeUI::Initialize()
 	{
-		Texture* Life_Icon = ResourceManager::Load<Texture>(L"Life_Icon", L"..\\Resources\\UI\\Life_Icon.bmp");
+		Texture* Life_Icon = ResourceManager::Load<Texture>(L"Life_Icon_Tex", L"..\\Resources\\UI\\Life_Icon.bmp");
 		Life_Icon->SetType(eTextureType::Bmp);
 		mSpriteRenderer = AddComponent<SpriteRenderer>();
 		mSpriteRenderer->SetTexture(Life_Icon);
@@ -27,16 +27,16 @@ namespace sy
 
 		mAnimator = AddComponent<Animator>();
 
-		Texture* LifeCount_0 = ResourceManager::Load<Texture>(L"LifeCount_0", L"..\\Resources\\UI\\LifeCount\\LifeCount_0.bmp");
-		Texture* LifeCount_1 = ResourceManager::Load<Texture>(L"LifeCount_1", L"..\\Resources\\UI\\LifeCount\\LifeCount_1.bmp");
-		Texture* LifeCount_2 = ResourceManager::Load<Texture>(L"LifeCount_2", L"..\\Resources\\UI\\LifeCount\\LifeCount_2.bmp");
-		Texture* LifeCount_3 = ResourceManager::Load<Texture>(L"LifeCount_3", L"..\\Resources\\UI\\LifeCount\\LifeCount_3.bmp");
-		Texture* LifeCount_4 = ResourceManager::Load<Texture>(L"LifeCount_4", L"..\\Resources\\UI\\LifeCount\\LifeCount_4.bmp");
-		Texture* LifeCount_5 = ResourceManager::Load<Texture>(L"LifeCount_5", L"..\\Resources\\UI\\LifeCount\\LifeCount_5.bmp");
-		Texture* LifeCount_6 = ResourceManager::Load<Texture>(L"LifeCount_6", L"..\\Resources\\UI\\LifeCount\\LifeCount_6.bmp");
-		Texture* LifeCount_7 = ResourceManager::Load<Texture>(L"LifeCount_7", L"..\\Resources\\UI\\LifeCount\\LifeCount_7.bmp");
-		Texture* LifeCount_8 = ResourceManager::Load<Texture>(L"LifeCount_8", L"..\\Resources\\UI\\LifeCount\\LifeCount_8.bmp");
-		Texture* LifeCount_9 = ResourceManager::Load<Texture>(L"LifeCount_9", L"..\\Resources\\UI\\LifeCount\\LifeCount_9.bmp");
+		Texture* LifeCount_0 = ResourceManager::Load<Texture>(L"LifeCount_0_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_0.bmp");
+		Texture* LifeCount_1 = ResourceManager::Load<Texture>(L"LifeCount_1_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_1.bmp");
+		Texture* LifeCount_2 = ResourceManager::Load<Texture>(L"LifeCount_2_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_2.bmp");
+		Texture* LifeCount_3 = ResourceManager::Load<Texture>(L"LifeCount_3_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_3.bmp");
+		Texture* LifeCount_4 = ResourceManager::Load<Texture>(L"LifeCount_4_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_4.bmp");
+		Texture* LifeCount_5 = ResourceManager::Load<Texture>(L"LifeCount_5_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_5.bmp");
+		Texture* LifeCount_6 = ResourceManager::Load<Texture>(L"LifeCount_6_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_6.bmp");
+		Texture* LifeCount_7 = ResourceManager::Load<Texture>(L"LifeCount_7_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_7.bmp");
+		Texture* LifeCount_8 = ResourceManager::Load<Texture>(L"LifeCount_8_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_8.bmp");
+		Texture* LifeCount_9 = ResourceManager::Load<Texture>(L"LifeCount_9_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_9.bmp");
 
 
 		// AlphaBmp 안그려짐 Bmp로 강제 타입변환		

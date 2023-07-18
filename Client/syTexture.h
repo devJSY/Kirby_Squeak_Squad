@@ -23,7 +23,8 @@ namespace sy
 			, bool AffectedCamera
 			, Vector2 scale = Vector2::One
 			, float Alpha = 1.0f
-			, COLORREF rgb = RGB(255,0,255));
+			, COLORREF rgb = RGB(255,0,255)
+			, float rotate = 0.0f);
 
 		UINT GetWidth() { return mWidth; }
 		void SetWidth(UINT width) { mWidth = width; }

@@ -18,7 +18,7 @@ namespace sy
 	{
 		mAnimator = AddComponent<Animator>();
 
-		Texture* tex = ResourceManager::Load<Texture>(L"Ability_UI", L"..\\Resources\\UI\\Ability_UI.bmp");
+		Texture* tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
 
 		mAnimator->CreateAnimation(tex, L"Ability_UI_Normal", Vector2::Zero, Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(tex, L"Ability_UI_Fire", Vector2(40.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);

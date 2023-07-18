@@ -111,7 +111,8 @@ namespace sy
 		, bool AffectedCamera
 		, Vector2 scale
 		, float Alpha
-		, COLORREF rgb)
+		, COLORREF rgb
+		, float rotate)
 	{
 		// Animation or SpriteRenderer 에서 호출됨
 		if (mBitmap == nullptr && mImage == nullptr)
@@ -161,6 +162,12 @@ namespace sy
 			//	, Gdiplus::Color(255, 255, 255));
 
 			Gdiplus::Graphics graphics(hdc);
+
+			// 회전적용 
+			graphics.TranslateTransform((float)pos.x, (float)pos.y);	// 회전시킬 기준위치 지정
+			graphics.RotateTransform(rotate);
+			graphics.TranslateTransform(-(float)pos.x, -(float)pos.y);	// 회전시킬 기준위치 복구
+
 			graphics.DrawImage(mImage
 				, Gdiplus::Rect
 				(

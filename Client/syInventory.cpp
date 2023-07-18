@@ -16,16 +16,16 @@ namespace sy
 	void Inventory::Initialize()
 	{
 		Animator* InvenAt = AddComponent<Animator>();
-		Texture* image = ResourceManager::Load<Texture>(L"Inventory"
+		Texture* image = ResourceManager::Load<Texture>(L"Inventory_Tex"
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
-		Texture* Damaged = ResourceManager::Load<Texture>(L"Inventory_Damage"
+		Texture* Damaged = ResourceManager::Load<Texture>(L"Inventory_Damage_Tex"
 			, L"..\\Resources\\Inventory\\Inventory_Damage.bmp");
 
-		InvenAt->CreateAnimation(image, L"Inventory", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
-		InvenAt->CreateAnimation(Damaged, L"Inventory_Damage", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
+		InvenAt->CreateAnimation(image, L"Inventory_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
+		InvenAt->CreateAnimation(Damaged, L"Inventory_Damage_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
 		InvenAt->SetAffectedCamera(false);
 
-		InvenAt->PlayAnimation(L"Inventory", true);
+		InvenAt->PlayAnimation(L"Inventory_Animation", true);
 
 		GameObject::Initialize();
 	}

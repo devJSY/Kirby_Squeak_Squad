@@ -15,7 +15,7 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void CreateAnimation(class Texture* texture 
+		Animation* CreateAnimation(class Texture* texture
 			, const std::wstring& name
 			, Vector2 leftTop, Vector2 size, Vector2 Interbal
 			, float duration = 0.1f, UINT spriteLength = 0, Vector2 offset = Vector2::Zero);

@@ -58,7 +58,9 @@ namespace sy
 			, sprite.size
 			, mAnimator->GetAffectedCamera()
 			, mAnimator->GetScale()
-			, mAnimator->GetAlpha());
+			, mAnimator->GetAlpha()
+			, RGB(255,0,255)
+			, tr->GetRotation());
 	}
 
 	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)

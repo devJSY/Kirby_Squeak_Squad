@@ -16,14 +16,14 @@ namespace sy
 
 	Animator::~Animator()
 	{
-		for (auto iter : mAnimations)
-		{
-			if (nullptr != iter.second)
-			{
-				delete iter.second;
-				iter.second = nullptr;
-			}
-		}
+		//for (auto iter : mAnimations)
+		//{
+		//	if (nullptr != iter.second)
+		//	{
+		//		delete iter.second;
+		//		iter.second = nullptr;
+		//	}
+		//}
 	}
 
 	void Animator::Initialize()
@@ -50,7 +50,7 @@ namespace sy
 			mActiveAnimation->Render(hdc);
 	}
 
-	void Animator::CreateAnimation(Texture* texture
+	Animation* Animator::CreateAnimation(Texture* texture
 		, const std::wstring& name
 		, Vector2 leftTop
 		, Vector2 size, Vector2 Interbal
@@ -58,14 +58,24 @@ namespace sy
 		, Vector2 offset)
 	{
 		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
-		Animation* animation = new Animation();
+		Animation* animation = nullptr;
+		animation = ResourceManager::Find<Animation>(name);
+		if (animation != nullptr)
+		{
+			mAnimations.insert(std::make_pair(name, animation));
+			return animation;
+		}
 
+		animation = new Animation();
 		animation->Create(texture, name
 			, leftTop, size, Interbal
 			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
+		ResourceManager::Insert<Animation>(name, animation);
+
+		return animation;
 	}
 
 	void Animator::CreateAnimationFolder(
@@ -103,8 +113,9 @@ namespace sy
 			fileCount++;
 		}
 
+		std::wstring spriteSheetName = name + L"SpriteSheet";
 		// 구한 크기값으로 Texture 생성
-		Texture* spriteSheet = Texture::Create(name, width * fileCount, height);
+		Texture* spriteSheet = Texture::Create(spriteSheetName, width * fileCount, height);
 
 		// Video 기본 타입 Bmp로 설정
 		spriteSheet->SetType(eTextureType::Bmp); 
@@ -120,7 +131,8 @@ namespace sy
 		int idx = 0;
 		for (Texture* image : images)
 		{
-			BitBlt(spriteSheet->GetHdc(), width * idx, 0
+			// 이미지 중상단에 붙여넣기
+			BitBlt(spriteSheet->GetHdc(), int((width * idx) + ((width - image->GetWidth()) / 2.0f)), 0
 				, image->GetWidth(), image->GetHeight()
 				, image->GetHdc(), 0, 0, SRCCOPY);
 

@@ -32,6 +32,9 @@ namespace sy
 	{
 		assert(mTex); // mTex이 nullptr 이면 에러
 
+		GameObject* gameObj = GetOwner();
+		Transform* tr = gameObj->GetComponent<Transform>();
+
 		mTex->Render(hdc
 			, GetOwner()->GetComponent<Transform>()->GetPosition()
 			, Vector2(mTex->GetWidth(), mTex->GetHeight())
@@ -40,6 +43,7 @@ namespace sy
 			, mbAffectedCamera
 			, mScale
 			, mAlpha
-			, mBMPRGB);
+			, mBMPRGB
+			, tr->GetRotation());
 	}
 }

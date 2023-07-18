@@ -23,8 +23,8 @@ namespace sy
 	void DefaultKirby::Initialize()
 	{			
 		// 텍스쳐 로드
-		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
-		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
+		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
+		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
 
 		// 애니메이션 생성
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"Choice", Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);

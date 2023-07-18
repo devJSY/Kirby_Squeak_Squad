@@ -7,7 +7,7 @@ namespace sy
 {
 	FlowerSkill::FlowerSkill()
 	{
-		Texture* tex = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
+		Texture* tex = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 
 		mAnimator->CreateAnimation(tex, L"Flower_Skill", Vector2(109.f, 2959.f), Vector2(8.f, 8.f), Vector2(8.f, 0.f), 1.f, 1);
 		mAnimator->PlayAnimation(L"Flower_Skill", true);

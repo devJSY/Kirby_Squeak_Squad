@@ -16,8 +16,8 @@ namespace sy
 
 	void BlockEnemy::Initialize()
 	{
-		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
-		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
+		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
+		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
 		mAnimator->CreateAnimation(Enemies_Right, L"BlockEnemy_Right_Idle", Vector2(1.f, 611.f), Vector2(16.f, 16.f), Vector2(16.f, 0.f), 1.f, 1);
 
