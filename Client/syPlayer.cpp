@@ -9,7 +9,6 @@ namespace sy
 	{
 		// 애니메이터 생성
 		mAnimator = AddComponent<Animator>();
-		assert(mAnimator);
 	}
 
 	Player::~Player()
