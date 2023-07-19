@@ -21,6 +21,13 @@ namespace sy
 			mLayers[(int)type].AddGameObject(gameObj);
 		}
 
+		void RemoveGameObject(eLayerType type, GameObject* gameObj)
+		{
+			mLayers[(int)type].RemoveGameObject(gameObj);
+		}
+
+		void PassGameObject(const std::wstring& name, eLayerType type, GameObject* gameObj);
+
 		void DeleteLayer(eLayerType type);
 		void DeleteAllLayer();
 

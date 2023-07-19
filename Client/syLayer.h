@@ -19,6 +19,8 @@ namespace sy
 			mGameObjects.push_back(gameObj);
 		}
 
+		void RemoveGameObject(GameObject* gameObj);
+
 		void DeleteObjects();
 
 	private:

@@ -15,4 +15,7 @@ namespace sy::object
 		scene->AddGameObject(type, gameObject);
 		return gameObject;
 	}
+
+
+
 }

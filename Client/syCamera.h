@@ -4,6 +4,8 @@
 namespace sy
 {
 	using namespace math;
+
+	// 카메라는 기본적으로 화면의 정중앙에 렌더링하도록 하고 맵의 끝부분에 도달했을땐 이동한값만큼 계산해줘야함
 	class Camera
 	{
 	public:
