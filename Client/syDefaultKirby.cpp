@@ -117,29 +117,26 @@ namespace sy
 
 	void DefaultKirby::Update()
 	{
-		// 방향 업데이트
-		eDirection Dir = DirectionUpdate();
-
 		// 상태처리
 		switch (mState)
 		{
 		case sy::eDefaultKirbyState::Idle:
-			Idle(Dir);
+			Idle();
 			break;
 		case sy::eDefaultKirbyState::Walk:
-			Walk(Dir);
+			Walk();
 			break;
 		case sy::eDefaultKirbyState::Run:
-			Run(Dir);
+			Run();
 			break;
 		case sy::eDefaultKirbyState::Jump:
-			Jump(Dir);
+			Jump();
 			break;
 		case sy::eDefaultKirbyState::Turn:
-			Turn(Dir);
+			Turn();
 			break;
 		case sy::eDefaultKirbyState::Damage:
-			Damage(Dir);
+			Damage();
 			break;
 		case sy::eDefaultKirbyState::End:
 			break;
@@ -155,84 +152,52 @@ namespace sy
 		Player::Render(hdc);
 	}
 
-	eDirection DefaultKirby::DirectionUpdate()
+	void DefaultKirby::Idle()
 	{
-		eDirection Dir = GetDirection();
-
-		//////////////////////// 방향 설정 /////////////////////////////////////////////// 
-		// 입력 체크
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
-		{
-			Dir = eDirection::RIGHT;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			Dir = eDirection::LEFT;
-		}
-
-		// 예외처리 한쪽 키가 눌린상태에서 반대쪽키가 눌렸다면 방향변경
-		if (Input::GetKeyPressed(eKeyCode::RIGHT))
-		{
-			if (Input::GetKeyUp(eKeyCode::LEFT))
-			{
-				Dir = eDirection::RIGHT;
-			}
-		}
-		else if (Input::GetKeyPressed(eKeyCode::LEFT))
-		{
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
-			{
-				Dir = eDirection::LEFT;
-			}
-		}
-
-		//// 변경된 방향 설정
-		SetDirection(Dir);
-
-		return Dir;
-	}
-
-	void DefaultKirby::Idle(eDirection Dir)
-	{
-		// 애니메이션
+		// 애니메이션, 키입력 방향 설정
 		Animator* animator = GetAnimator();
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT)
-			|| Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			if(Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
-
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
 			mState = eDefaultKirbyState::Walk;
 		}
 
-
-		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT) || Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			if (Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
+			mState = eDefaultKirbyState::Walk;
+		}
 
+		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
+		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
+			mState = eDefaultKirbyState::Run;
+		}
+
+		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 			mState = eDefaultKirbyState::Run;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
-			if (Dir == eDirection::RIGHT)
+			if (GetDirection() == eDirection::RIGHT)
 				animator->PlayAnimation(L"DefaultKirby_Right_Jump", false);
 			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
-
+				animator->PlayAnimation(L"DefaultKirby_Left_Jump", false);			
+			
 			mState = eDefaultKirbyState::Jump;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
-			if (Dir == eDirection::RIGHT)
+			if (GetDirection() == eDirection::RIGHT)
 				animator->PlayAnimation(L"DefaultKirby_Right_Damage", false);
 			else
 				animator->PlayAnimation(L"DefaultKirby_Left_Damage", false);
@@ -241,58 +206,47 @@ namespace sy
 		}
 	}
 
-	void DefaultKirby::Walk(eDirection Dir)
+	void DefaultKirby::Walk()
 	{
-		// 이동
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
-		{
-			if (Dir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
-
-		tr->SetPosition(pos);
-
-		// 애니메이션
+		// 애니메이션, 방향 설정
 		Animator* animator = GetAnimator();
-
-		if (Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
-		}
+		eDirection Dir = GetDirection();
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::LEFT);
 			animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
 		}
 
-
-		// 반대반향 키가 눌렸다면 애니메이션변경
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || (Input::GetKeyPressed(eKeyCode::LEFT)))
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
-			if (Input::GetKeyUp(eKeyCode::LEFT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
-			}
-
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
-			}
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
 		}		
-
-
-		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT) || Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
-			if (Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
+		}
 
+		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
+		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
+			mState = eDefaultKirbyState::Run;
+		}
+
+		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 			mState = eDefaultKirbyState::Run;
 		}
 
@@ -316,10 +270,72 @@ namespace sy
 
 			mState = eDefaultKirbyState::Jump;
 		}
+
+
+		// 이동
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		if (Dir == eDirection::RIGHT)
+			pos.x += 50.f * Time::DeltaTime();
+		else
+			pos.x -= 50.f * Time::DeltaTime();
+
+		tr->SetPosition(pos);
 	}
 
-	void DefaultKirby::Run(eDirection Dir)
+	void DefaultKirby::Run()
 	{
+		// 애니메이션
+		Animator* animator = GetAnimator();
+		eDirection Dir = GetDirection();
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
+		}
+
+		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (Dir == eDirection::RIGHT)
+				animator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				animator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (Dir == eDirection::RIGHT)
+				animator->PlayAnimation(L"DefaultKirby_Right_Jump", false);
+			else
+				animator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
+
+			mState = eDefaultKirbyState::Jump;
+		}
+
+
 		// 이동
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
@@ -333,82 +349,36 @@ namespace sy
 		}
 
 		tr->SetPosition(pos);
-
-		// 애니메이션
-		Animator* animator = GetAnimator();
-
-		if (Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-		}
-
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
-		{
-			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
-		}
-
-		// 반대반향 키가 눌렸다면 애니메이션변경
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || (Input::GetKeyPressed(eKeyCode::LEFT)))
-		{
-			if (Input::GetKeyUp(eKeyCode::LEFT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			}
-
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
-			}
-		}
-		
-		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
-		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
-		{
-			if (Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
-
-			mState = eDefaultKirbyState::Idle;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
-		{
-			if (Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Jump", false);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
-
-			mState = eDefaultKirbyState::Jump;
-		}
 	}
 
-	void DefaultKirby::Jump(eDirection Dir)
+	void DefaultKirby::Jump()
 	{
 		// 애니메이션
 		Animator* animator = GetAnimator();
-
-		if (Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			animator->PlayAnimation(L"DefaultKirby_Right_Jump", true);
-		}
+		eDirection Dir = GetDirection();
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Jump", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			SetDirection(eDirection::LEFT);
 			animator->PlayAnimation(L"DefaultKirby_Left_Jump", true);
 		}
 
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || (Input::GetKeyPressed(eKeyCode::LEFT)))
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
-			if (Input::GetKeyUp(eKeyCode::LEFT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Right_Jump", true);
-			}
-
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Left_Jump", true);
-			}
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Jump", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Jump", true);
 		}
 
 		// 키를 누른시간에 따라서 Jump상태 지속
@@ -443,35 +413,23 @@ namespace sy
 		tr->SetPosition(pos);
 	}
 
-	void DefaultKirby::Turn(eDirection Dir)
+	void DefaultKirby::Turn()
 	{
 		// 애니메이션
 		Animator* animator = GetAnimator();
+		eDirection Dir = GetDirection();
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			animator->PlayAnimation(L"DefaultKirby_Right_Turn", true);
+			animator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			animator->PlayAnimation(L"DefaultKirby_Left_Turn", true);
+			animator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 		}
 
-		// 반대반향 키가 눌렸다면 키변경
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || (Input::GetKeyPressed(eKeyCode::LEFT)))
-		{
-			if (Input::GetKeyUp(eKeyCode::LEFT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Right_Turn", true);
-			}
-
-			if (Input::GetKeyUp(eKeyCode::RIGHT))
-			{
-				animator->PlayAnimation(L"DefaultKirby_Left_Turn", true);
-			}
-		}
-
+		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (animator->IsActiveAnimationComplete())
 		{
 			if (Dir == eDirection::RIGHT)
@@ -499,10 +457,13 @@ namespace sy
 		tr->SetPosition(pos);
 	}
 
-	void DefaultKirby::Damage(eDirection Dir)
+	void DefaultKirby::Damage()
 	{
 		// 애니메이션
 		Animator* animator = GetAnimator();
+		eDirection Dir = GetDirection();
+
+		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (animator->IsActiveAnimationComplete())
 		{
 			if (Dir == eDirection::RIGHT)
@@ -513,9 +474,9 @@ namespace sy
 			mState = eDefaultKirbyState::Idle;
 		}
 
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
 
-		tr->SetPosition(pos);
+		//tr->SetPosition(pos);
 	}
 }

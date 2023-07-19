@@ -63,7 +63,7 @@ namespace sy
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
 		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
 		Collider* col = mPlayer->AddComponent<Collider>();
-		col->SetSize(Vector2(100.f, 100.f));
+		col->SetSize(Vector2(10.f, 10.f));
 
 		// Àû »ý¼º
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);

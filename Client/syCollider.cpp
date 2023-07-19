@@ -36,7 +36,7 @@ namespace sy
 		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
 
-		HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(50, 255, 50));
+		HPEN greenPen = CreatePen(PS_SOLID, 1, RGB(50, 255, 50));
 		HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
 
 		pos = Camera::CalculatePosition(pos);
