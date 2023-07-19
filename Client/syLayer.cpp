@@ -47,9 +47,10 @@ namespace sy
 	void Layer::RemoveGameObject(GameObject* gameObj)
 	{
 		// mGameObjects 내에서 해당 오브젝트의 iterator 를 찾아온다
-		auto it = find(mGameObjects.begin(), mGameObjects.end(), gameObj);
-		// mGameObjects벡터 에서 해당 오브젝트를 제외한다
-		mGameObjects.erase(it);
+		std::vector<GameObject*>::iterator iter = find(mGameObjects.begin(), mGameObjects.end(), gameObj);
+		// mGameObjects벡터 에서 해당 오브젝트가 존재한다면 제외한다
+		if (iter != mGameObjects.end())
+			mGameObjects.erase(iter);			
 	}
 
 	void Layer::DeleteObjects()

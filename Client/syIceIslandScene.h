@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class IceIslandScene :
-        public Scene
+    class IceIslandScene : public Scene
     {
 	public:
 		IceIslandScene();

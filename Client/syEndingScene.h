@@ -1,6 +1,5 @@
 #pragma once
 #include "syScene.h"
-#include "syVideo.h"
 
 namespace sy
 {
@@ -18,6 +17,6 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-		Video* mVideo;
+		class Video* mVideo;
 	};
 }

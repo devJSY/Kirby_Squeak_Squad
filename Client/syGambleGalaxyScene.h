@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class GambleGalaxyScene :
-        public Scene
+    class GambleGalaxyScene : public Scene
     {
 	public:
 		GambleGalaxyScene();

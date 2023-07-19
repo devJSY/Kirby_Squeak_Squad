@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class SecretSeaScene :
-        public Scene
+    class SecretSeaScene : public Scene
     {
 	public:
 		SecretSeaScene();

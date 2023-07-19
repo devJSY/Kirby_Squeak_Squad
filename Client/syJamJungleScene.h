@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class JamJungleScene :
-        public Scene
+    class JamJungleScene : public Scene
     {
 	public:
 		JamJungleScene();

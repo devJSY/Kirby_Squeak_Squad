@@ -3,6 +3,11 @@
 
 namespace sy
 {
+	class Inventory;
+	class AbilityUI;
+	class HPbarUI;
+	class LifeUI;
+
 	class SceneManager
 	{
 	private:
@@ -32,6 +37,10 @@ namespace sy
 		static Scene* GetScene(const std::wstring& name);
 
 	private:
+		static void UIInitialize();
+
+
+	private:
 		// 트리 자료구조
 		// Key Value 구조로 이루어져 있다
 		// Key는 데이터를 검색하는 용도
@@ -39,5 +48,10 @@ namespace sy
 		static std::map<std::wstring, Scene*> mScenes;
 		static Scene* mActiveScene;
 
+		// UI 객체는 게임에 1개만 존재하기때문에 SceneManager에서 관리
+		static Inventory* mInventory;
+		static AbilityUI* mAbilityUI;
+		static HPbarUI* mHPbarUI;
+		static LifeUI* mLifeUI;
 	};
 }

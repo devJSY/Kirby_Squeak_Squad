@@ -2,15 +2,12 @@
 #include "syInput.h"
 #include "sySceneManager.h"
 #include "syObject.h"
-#include "sySpriteRenderer.h"
-#include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
-#include "syTexture.h"
-#include "syBackGround.h"
 #include "syApplication.h"
 #include "syAnimator.h"
 #include "syCamera.h"
+#include "syVideo.h"
 
 namespace sy
 {

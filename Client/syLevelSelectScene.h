@@ -17,9 +17,5 @@ namespace sy
 		virtual void Exit() override;
 		
 	private:
-		class Inventory* mInventory;
-		class AbilityUI* mAbilityUI;
-		class HPbarUI* mHPbarUI;
-		class LifeUI* mLifeUI;
 	};
 }

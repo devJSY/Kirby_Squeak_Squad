@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class NatureNotchScene :
-        public Scene
+    class NatureNotchScene : public Scene
     {
 	public:
 		NatureNotchScene();

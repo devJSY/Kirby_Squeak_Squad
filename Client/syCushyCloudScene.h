@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class CushyCloudScene :
-        public Scene
+    class CushyCloudScene : public Scene
     {
 	public:
 		CushyCloudScene();

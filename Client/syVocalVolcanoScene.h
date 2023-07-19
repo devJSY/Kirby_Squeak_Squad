@@ -3,8 +3,7 @@
 
 namespace sy
 {
-    class VocalVolcanoScene :
-        public Scene
+    class VocalVolcanoScene : public Scene
     {
 	public:
 		VocalVolcanoScene();

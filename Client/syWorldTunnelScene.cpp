@@ -5,16 +5,11 @@
 #include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
-#include "syTexture.h"
-#include "syBackGround.h"
 #include "syApplication.h"
 #include "syCamera.h"
 #include "syAnimator.h"
 #include "syWorldTunnel_BG.h"
-#include "syInventory.h"
-#include "syAbilityUI.h"
-#include "syHPbarUI.h"
-#include "syLifeUI.h"
+#include "syPlayer.h"
 
 #include "syWaddleDee.h"
 #include "syBlockEnemy.h"
@@ -23,14 +18,12 @@
 #include "syHotHead_Fire.h"
 #include "syIce.h"
 #include "sySirKibble.h"
-#include "syAbilityUI.h"
-#include "syHPbarUI.h"
-#include "syLifeUI.h"
-#include "syCamera.h"
+
 
 namespace sy
 {
 	WorldTunnelScene::WorldTunnelScene()
+		: mPlayer(nullptr)
 	{
 	}
 
@@ -45,37 +38,31 @@ namespace sy
 		vec.y /= 2.f;
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
 
-		///////////////// Inventory 객체는 나중에 모든 씬에서 하나만 생성하거나 복사해서 전달해주는 방식으로 수정해야함
-		//// 하단 화면 오브젝트 생성 
-		//Inventory* Inven = object::Instantiate<Inventory>(eLayerType::Inventory);
-
-		//// 인벤토리 클래스 위치 설정
-		//vec = Vector2(Application::GetResolution()) / 2.f;
-		//vec.y += vec.y / 2.f;
-		//Inven->GetComponent<Transform>()->SetPosition(vec);
+		// 플레이어 설정
+		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);
+		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
+		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
 
 
-		//// UI 생성
-		//AbilityUI* AbilityUi = object::Instantiate<AbilityUI>(eLayerType::UI);
-		//Vector2 Uivec = Vector2(Application::GetResolution()) / 2.f;
-		//Uivec.x = 20.0f;
-		//Uivec.y -= 25.f;
-		//AbilityUi->GetComponent<Transform>()->SetPosition(Uivec);
-		//AbilityUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
 
-		//HPbarUI* HPbarUi = object::Instantiate<HPbarUI>(eLayerType::UI);
-		//Uivec = Vector2(Application::GetResolution()) / 2.f;
-		//Uivec.x = 85.0f;
-		//Uivec.y -= 12.f;
-		//HPbarUi->GetComponent<Transform>()->SetPosition(Uivec);
-		//HPbarUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+		// 적 생성
+		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
 
-		//LifeUI* LifeUi = object::Instantiate<LifeUI>(eLayerType::UI);
-		//Uivec = Vector2(Application::GetResolution()) / 2.f;
-		//Uivec.x = 65.0f;
-		//Uivec.y -= 27.f;
-		//LifeUi->GetComponent<Transform>()->SetPosition(Uivec);
-		//LifeUi->SetOwner(nullptr); // 오너설정 나중에 설정예정
+		BlockEnemy* Block = object::Instantiate<BlockEnemy>(eLayerType::Enemy);
+		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
+
+		Flower* flower = object::Instantiate<Flower>(eLayerType::Enemy);
+		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
+
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.f));
+
+		Ice* ice = object::Instantiate<Ice>(eLayerType::Enemy);
+		ice->GetComponent<Transform>()->SetPosition(Vector2(300.f, 100.f));
+
+		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
 
 		Scene::Initialize();
 	}
