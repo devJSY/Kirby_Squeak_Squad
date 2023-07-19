@@ -14,6 +14,7 @@
 #include "syForeGround.h"
 #include "syAnimator.h"
 #include "syPlayer.h"
+#include "syCollider.h"
 
 #include "syWaddleDee.h"
 #include "syBlockEnemy.h"
@@ -61,8 +62,8 @@ namespace sy
 		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);	
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
 		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
-		
-
+		Collider* col = mPlayer->AddComponent<Collider>();
+		col->SetSize(Vector2(100.f, 100.f));
 
 		// Àû »ý¼º
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);

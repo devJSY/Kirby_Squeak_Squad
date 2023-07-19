@@ -41,7 +41,7 @@ namespace sy
 		Scene::Update();
 
 		// 비디오 재생이 끝나면 다음 씬으로 이동
-		if ( mVideo != nullptr && mVideo->GetComponent<Animator>()->IsActiveAniComplete())
+		if ( mVideo != nullptr && mVideo->GetComponent<Animator>()->IsActiveAnimationComplete())
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}

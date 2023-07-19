@@ -58,13 +58,19 @@ namespace sy
 		, Vector2 offset)
 	{
 		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
-		Animation* animation = new Animation();
+		Animation* animation = nullptr;
+		animation = FindAnimation(name); // Animator 에서 같은 이름의 애니메이션이 있다면 생성하지않고 리턴
+		if (animation != nullptr)
+			return animation;
+
+		animation = new Animation();
 		animation->Create(texture, name
 			, leftTop, size, Interbal
 			, duration, spriteLength, offset);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
+
 		return animation;
 	}
 
@@ -152,10 +158,11 @@ namespace sy
 		if (animation == nullptr)
 			return;
 
-		// 애니메이션이 변경되는 경우에만 Reset() 적용
-		if (mActiveAnimation != animation)		
-			animation->Reset();		
+		//// 애니메이션이 변경되는 경우에만 Reset() 적용
+		//if (mActiveAnimation != animation)		
+		//	animation->Reset();		
 
+		animation->Reset();
 		mActiveAnimation = animation;
 		mbLoop = loop;			
 	}

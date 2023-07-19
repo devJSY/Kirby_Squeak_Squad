@@ -202,6 +202,12 @@
     <Filter Include="Contents\Scene\LevelScene\Level8">
       <UniqueIdentifier>{5f9fe897-8f69-41b0-b451-6dd3017d7946}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Collider">
+      <UniqueIdentifier>{6c293f55-b09d-4b74-8286-0af4cc285691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Collision">
+      <UniqueIdentifier>{45ed0335-b526-4020-83b3-de52d1e36088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -387,6 +393,12 @@
     <ClInclude Include="syVocalVolcanoScene.h">
       <Filter>Contents\Scene\LevelScene\Level5</Filter>
     </ClInclude>
+    <ClInclude Include="syCollider.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="syCollisionManager.h">
+      <Filter>Engine\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -562,6 +574,12 @@
     </ClCompile>
     <ClCompile Include="syVocalVolcanoScene.cpp">
       <Filter>Contents\Scene\LevelScene\Level5</Filter>
+    </ClCompile>
+    <ClCompile Include="syCollider.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="syCollisionManager.cpp">
+      <Filter>Engine\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

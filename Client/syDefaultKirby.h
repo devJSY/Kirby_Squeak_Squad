@@ -29,9 +29,14 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	private:
-		void Update_State();
-		void Update_Move();
-		void Update_Animation();
+		eDirection DirectionUpdate();
+		
+		void Idle(eDirection Dir);
+		void Walk(eDirection Dir);
+		void Run(eDirection Dir);
+		void Jump(eDirection Dir);
+		void Turn(eDirection Dir);
+		void Damage(eDirection Dir);
 
 	private:
 		eDefaultKirbyState mState;

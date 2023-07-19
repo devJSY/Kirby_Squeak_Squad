@@ -73,9 +73,14 @@ namespace sy
 		{
 			Sprite sprite = {};
 
-			/*sprite.leftTop.x = leftTop.x + (size.x * i);
-			sprite.leftTop.y = leftTop.y;*/
-			sprite.leftTop = leftTop + (Interbal * (float)i);
+			sprite.leftTop.x = leftTop.x + (Interbal.x * (float)i);
+			sprite.leftTop.y = leftTop.y;
+			// 스프라이트 X값이 넘어가면 Y축을 한칸 내린 위치부터 잘라온다
+			if (sprite.leftTop.x >= texture->GetWidth())
+			{
+				sprite.leftTop.x = sprite.leftTop.x - texture->GetWidth();
+				sprite.leftTop.y = leftTop.y + size.y;
+			}
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;

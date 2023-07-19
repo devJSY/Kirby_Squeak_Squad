@@ -54,6 +54,7 @@ namespace sy::enums
 		Transform,
 		SpriteRenderer,
 		Animator,
+		Collider,
 		End,
 	};
 

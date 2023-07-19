@@ -33,7 +33,7 @@ namespace sy
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
 		bool GetAffectedCamera() { return mbAffectedCamera; }
 
-		bool IsActiveAniComplete() { return mActiveAnimation->IsComplete(); }
+		bool IsActiveAnimationComplete() { return mActiveAnimation->IsComplete(); }
 
 		void SetAniScale(const std::wstring& name, Vector2 scale);
 		void ActiveAnimationReset() { mActiveAnimation->Reset(); }
