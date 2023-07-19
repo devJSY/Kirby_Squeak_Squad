@@ -6,6 +6,7 @@ namespace sy
 	enum class eDefaultKirbyState
 	{
 		Idle,
+		Stop,
 		Walk,
 		Run,
 		Jump,
@@ -30,6 +31,7 @@ namespace sy
 
 	private:
 		void Idle();
+		void Stop();
 		void Walk();
 		void Run();
 		void Jump();
