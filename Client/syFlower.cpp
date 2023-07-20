@@ -55,4 +55,13 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void Flower::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Flower::OnCollisionStay(Collider* other)
+	{
+	}
+	void Flower::OnCollisionExit(Collider* other)
+	{
+	}
 }

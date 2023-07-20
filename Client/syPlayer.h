@@ -13,12 +13,18 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void OnCollisionEnter(class Collider* other) {};
+		virtual void OnCollisionStay(class Collider* other) {};
+		virtual void OnCollisionExit(class Collider* other) {};
+
 		eAbilityType GetAbilityType() { return mAbilityType; }
 
 		eDirection GetDirection() { return mDir; }
 		void SetDirection(eDirection dir) { mDir = dir; }
 
 		class Animator* GetAnimator() { return mAnimator; }
+
+
 
 	private:
 		class Animator* mAnimator;

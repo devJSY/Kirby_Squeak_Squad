@@ -37,6 +37,10 @@ namespace sy
             return comp;
         }
 
+        virtual void OnCollisionEnter(class Collider* other) {};
+        virtual void OnCollisionStay(class Collider* other) {};
+        virtual void OnCollisionExit(class Collider* other) {};
+
     private:
         std::vector<Component*> mComponents;
     };

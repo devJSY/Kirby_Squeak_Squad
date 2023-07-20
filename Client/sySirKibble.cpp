@@ -63,4 +63,13 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void SirKibble::OnCollisionEnter(Collider* other)
+	{
+	}
+	void SirKibble::OnCollisionStay(Collider* other)
+	{
+	}
+	void SirKibble::OnCollisionExit(Collider* other)
+	{
+	}
 }

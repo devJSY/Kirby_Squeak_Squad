@@ -33,4 +33,13 @@ namespace sy
 	{
 		Effects::Render(hdc);
 	}
+	void FlowerSkill::OnCollisionEnter(Collider* other)
+	{
+	}
+	void FlowerSkill::OnCollisionStay(Collider* other)
+	{
+	}
+	void FlowerSkill::OnCollisionExit(Collider* other)
+	{
+	}
 }

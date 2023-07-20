@@ -10,6 +10,7 @@
 #include "syAnimator.h"
 #include "syWorldTunnel_BG.h"
 #include "syPlayer.h"
+#include "syCollisionManager.h"
 
 #include "syWaddleDee.h"
 #include "syBlockEnemy.h"
@@ -93,5 +94,6 @@ namespace sy
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

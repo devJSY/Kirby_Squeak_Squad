@@ -36,4 +36,13 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void Ice::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Ice::OnCollisionStay(Collider* other)
+	{
+	}
+	void Ice::OnCollisionExit(Collider* other)
+	{
+	}
 }

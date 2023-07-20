@@ -60,4 +60,13 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void HotHead::OnCollisionEnter(Collider* other)
+	{
+	}
+	void HotHead::OnCollisionStay(Collider* other)
+	{
+	}
+	void HotHead::OnCollisionExit(Collider* other)
+	{
+	}
 }

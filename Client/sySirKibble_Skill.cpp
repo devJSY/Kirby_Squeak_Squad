@@ -33,4 +33,13 @@ namespace sy
 	{
 		Effects::Render(hdc);
 	}
+	void SirKibble_Skill::OnCollisionEnter(Collider* other)
+	{
+	}
+	void SirKibble_Skill::OnCollisionStay(Collider* other)
+	{
+	}
+	void SirKibble_Skill::OnCollisionExit(Collider* other)
+	{
+	}
 }

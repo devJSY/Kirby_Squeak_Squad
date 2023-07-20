@@ -4,6 +4,7 @@
 #include "sySceneManager.h"
 #include "resource.h"	// LoadMenu()
 #include "syCamera.h"
+#include "syCollisionManager.h"
 
 namespace sy
 {
@@ -62,6 +63,7 @@ namespace sy
 		Input::Initialize();
 		Camera::Initalize();
 
+		CollisionManager::Initialize();
 		SceneManager::Initialize();		
 	}
 
@@ -77,6 +79,7 @@ namespace sy
 		Input::Update();		
 		Camera::Update();
 
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
@@ -86,6 +89,8 @@ namespace sy
 		Rectangle(mBackHdc, -1, -1, mResolution.x + 1, mResolution.y + 1);
 
 		Time::Render(mBackHdc);
+
+		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);		
 
 		// 화면 비율 맞추기

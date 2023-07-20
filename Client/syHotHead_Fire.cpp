@@ -36,4 +36,13 @@ namespace sy
 	{
 		Effects::Render(hdc);
 	}
+	void HotHead_Fire::OnCollisionEnter(Collider* other)
+	{
+	}
+	void HotHead_Fire::OnCollisionStay(Collider* other)
+	{
+	}
+	void HotHead_Fire::OnCollisionExit(Collider* other)
+	{
+	}
 }

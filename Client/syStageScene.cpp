@@ -15,6 +15,7 @@
 #include "syAnimator.h"
 #include "syPlayer.h"
 #include "syCollider.h"
+#include "syCollisionManager.h"
 
 #include "syWaddleDee.h"
 #include "syBlockEnemy.h"
@@ -47,7 +48,6 @@ namespace sy
 		BgRenderer->SetAffectedCamera(false);
 		BgRenderer->SetTexture(tex);
 
-
 		// 스테이지 설정
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
@@ -63,11 +63,13 @@ namespace sy
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
 		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
 		Collider* col = mPlayer->AddComponent<Collider>();
-		col->SetSize(Vector2(10.f, 10.f));
+		col->SetSize(Vector2(50.f, 50.f));
 
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+		col = waddleDee->AddComponent<Collider>();
+		col->SetSize(Vector2(50.f, 50.f));
 
 		BlockEnemy* Block = object::Instantiate<BlockEnemy>(eLayerType::Enemy);
 		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
@@ -83,7 +85,6 @@ namespace sy
 
 		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
-
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
@@ -108,11 +109,13 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(mPlayer);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 	}
 
 	void StageScene::Exit()
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

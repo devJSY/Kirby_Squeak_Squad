@@ -15,14 +15,26 @@ namespace sy
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
+		void OncollisionEnter(Collider* other);
+		void OncollisionStay(Collider* other);
+		void OncollisionExit(Collider* other);
+
 		Vector2 GetSize() { return mSize; }
 		void SetSize(Vector2 size) { mSize = size; }
 		Vector2 GetOffset() { return mOffset; }
 		void SetOffset(Vector2 offset) { mOffset = offset; }
+		Vector2 GetPosition() { return mPosition; }
+		UINT GetCollisionNumber() { return mCollisionNumber; }
 
 	private:
+		static UINT mCollisionCount;
+
 		Vector2 mSize;
 		Vector2 mOffset;
+		Vector2 mPosition;
+
+		UINT mCollisionNumber;
+		bool mbIsCollision;
 	};
 }
 

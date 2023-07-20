@@ -31,6 +31,8 @@ namespace sy
 		void DeleteLayer(eLayerType type);
 		void DeleteAllLayer();
 
+		Layer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
+
 		// Scene 진입과 Scene 변경시 해야할일들을 여기서 처리
 		virtual void Enter() = 0;
 		virtual void Exit() = 0;

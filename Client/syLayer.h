@@ -19,8 +19,9 @@ namespace sy
 			mGameObjects.push_back(gameObj);
 		}
 
-		void RemoveGameObject(GameObject* gameObj);
+		std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }
 
+		void RemoveGameObject(GameObject* gameObj);
 		void DeleteObjects();
 
 	private:

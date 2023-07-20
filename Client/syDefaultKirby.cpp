@@ -126,9 +126,6 @@ namespace sy
 		case sy::eDefaultKirbyState::Idle:
 			Idle();
 			break;
-		case sy::eDefaultKirbyState::Stop:
-			Stop();
-			break;
 		case sy::eDefaultKirbyState::Walk:
 			Walk();
 			break;
@@ -156,6 +153,21 @@ namespace sy
 	void DefaultKirby::Render(HDC hdc)
 	{
 		Player::Render(hdc);
+	}
+
+	void DefaultKirby::OnCollisionEnter(Collider* other)
+	{
+
+	}
+
+	void DefaultKirby::OnCollisionStay(Collider* other)
+	{
+
+	}
+
+	void DefaultKirby::OnCollisionExit(Collider* other)
+	{
+
 	}
 
 	void DefaultKirby::Idle()
@@ -212,24 +224,6 @@ namespace sy
 		}
 	}
 
-	void DefaultKirby::Stop()
-	{
-		// 애니메이션
-		Animator* animator = GetAnimator();
-		eDirection Dir = GetDirection();
-
-		// 애니메이션이 끝나면 Idle 상태로 변경
-		if (animator->IsActiveAnimationComplete())
-		{
-			if (Dir == eDirection::RIGHT)
-				animator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
-			else
-				animator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
-
-			mState = eDefaultKirbyState::Idle;
-		}
-	}
-
 	void DefaultKirby::Walk()
 	{
 		// 애니메이션, 방향 설정
@@ -238,34 +232,14 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			// 방향 전환시 Stop 애니메이션 실행
-			if (Dir == eDirection::LEFT)
-			{
-				SetDirection(eDirection::RIGHT);
-				animator->PlayAnimation(L"DefaultKirby_Left_Stop", false);
-				mState = eDefaultKirbyState::Stop;
-			}
-			else
-			{
-				SetDirection(eDirection::RIGHT);
-				animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
-			}
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			// 방향 전환시 Stop 애니메이션 실행
-			if (Dir == eDirection::RIGHT)
-			{
-				SetDirection(eDirection::LEFT);
-				animator->PlayAnimation(L"DefaultKirby_Right_Stop", false);
-				mState = eDefaultKirbyState::Stop;
-			}
-			else
-			{
-				SetDirection(eDirection::LEFT);
-				animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
-			}
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
 		}
 
 		// 키 동시 입력 예외처리
@@ -336,34 +310,14 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			// 방향 전환시 Stop 애니메이션 실행
-			if (Dir == eDirection::LEFT)
-			{
-				SetDirection(eDirection::RIGHT);
-				animator->PlayAnimation(L"DefaultKirby_Left_Stop", false);
-				mState = eDefaultKirbyState::Stop;
-			}
-			else
-			{
-				SetDirection(eDirection::RIGHT);
-				animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			}
+			SetDirection(eDirection::RIGHT);
+			animator->PlayAnimation(L"DefaultKirby_Right_Run", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			// 방향 전환시 Stop 애니메이션 실행
-			if (Dir == eDirection::RIGHT)
-			{
-				SetDirection(eDirection::LEFT);
-				animator->PlayAnimation(L"DefaultKirby_Right_Stop", false);
-				mState = eDefaultKirbyState::Stop;
-			}
-			else
-			{
-				SetDirection(eDirection::LEFT);
-				animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
-			}
+			SetDirection(eDirection::LEFT);
+			animator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 		}
 
 		// 키 동시 입력 예외처리

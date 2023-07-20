@@ -46,4 +46,13 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void BlockEnemy::OnCollisionEnter(Collider* other)
+	{
+	}
+	void BlockEnemy::OnCollisionStay(Collider* other)
+	{
+	}
+	void BlockEnemy::OnCollisionExit(Collider* other)
+	{
+	}
 }

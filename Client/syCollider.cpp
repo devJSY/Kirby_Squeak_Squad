@@ -5,8 +5,14 @@
 
 namespace sy
 {
+	UINT Collider::mCollisionCount = 0;
+
 	Collider::Collider()
-		: Component(eComponentType::Collider)
+		:Component(eComponentType::Collider)
+		, mSize(Vector2::Zero)
+		, mOffset(Vector2::Zero)
+		, mCollisionNumber(mCollisionCount++)
+		, mbIsCollision(false)
 	{
 	}
 
@@ -28,18 +34,29 @@ namespace sy
 
 		// pos ÁÂ»ó´Ü ¼³Á¤
 		Vector2 pos = tr->GetPosition();
+		mPosition = pos + mOffset;
+
 		pos.x -= mSize.x / 2.0f;
 		pos.y -= mSize.y / 2.0f;
 		pos.x += mOffset.x;
 		pos.y += mOffset.y;
 
+		pos = Camera::CalculatePosition(pos);
+
 		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
 
-		HPEN greenPen = CreatePen(PS_SOLID, 1, RGB(50, 255, 50));
-		HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
+		HPEN ColorPen = NULL;
+		if (mbIsCollision)
+		{
+			ColorPen = CreatePen(PS_SOLID, 2, RGB(255, 50, 50)); // Red
+		}
+		else
+		{
+			ColorPen = CreatePen(PS_SOLID, 2, RGB(50, 255, 50)); // Green
+		}
 
-		pos = Camera::CalculatePosition(pos);
+		HPEN oldPen = (HPEN)SelectObject(hdc, ColorPen);
 
 		Rectangle(hdc
 			, int(pos.x), int(pos.y)
@@ -49,6 +66,23 @@ namespace sy
 		DeleteObject(transparentBrush);
 
 		SelectObject(hdc, oldPen);
-		DeleteObject(greenPen);
+		DeleteObject(ColorPen);
+	}
+
+	void Collider::OncollisionEnter(Collider* other)
+	{
+		mbIsCollision = true;
+		GetOwner()->OnCollisionEnter(other);
+	}
+
+	void Collider::OncollisionStay(Collider* other)
+	{
+		GetOwner()->OnCollisionStay(other);
+	}
+
+	void Collider::OncollisionExit(Collider* other)
+	{
+		mbIsCollision = false;
+		GetOwner()->OnCollisionExit(other);
 	}
 }

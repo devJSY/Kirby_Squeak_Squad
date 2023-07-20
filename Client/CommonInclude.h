@@ -6,6 +6,7 @@
 #include <functional>
 #include <string>
 #include <filesystem>
+#include <bitset>
 
 #include "framework.h"
 #include "syMath.h"

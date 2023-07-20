@@ -7,6 +7,7 @@
 #include "syAnimator.h"
 #include "syCamera.h"
 #include "syLevel_BG.h"
+#include "syCollisionManager.h"
 
 namespace sy
 {
@@ -54,5 +55,6 @@ namespace sy
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

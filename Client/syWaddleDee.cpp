@@ -41,4 +41,14 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+	void WaddleDee::OnCollisionEnter(Collider* other)
+	{
+	}
+	void WaddleDee::OnCollisionStay(Collider* other)
+	{
+
+	}
+	void WaddleDee::OnCollisionExit(Collider* other)
+	{
+	}
 }

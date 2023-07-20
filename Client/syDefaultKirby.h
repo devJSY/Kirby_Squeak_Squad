@@ -6,7 +6,6 @@ namespace sy
 	enum class eDefaultKirbyState
 	{
 		Idle,
-		Stop,
 		Walk,
 		Run,
 		Jump,
@@ -29,9 +28,12 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
 	private:
 		void Idle();
-		void Stop();
 		void Walk();
 		void Run();
 		void Jump();
