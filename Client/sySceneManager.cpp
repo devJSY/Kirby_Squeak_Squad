@@ -5,6 +5,15 @@
 #include "syOpeningScene.h"
 #include "syStageScene.h"
 #include "syWorldTunnelScene.h"
+#include "syPrismPlainsScene.h"
+#include "syNatureNotchScene.h"
+#include "syCushyCloudScene.h"
+#include "syJamJungleScene.h"
+#include "syVocalVolcanoScene.h"
+#include "syIceIslandScene.h"
+#include "sySecretSeaScene.h"
+#include "syGambleGalaxyScene.h"
+
 #include "syObject.h"
 #include "syApplication.h"
 #include "syTransform.h"
@@ -63,6 +72,14 @@ namespace sy
 	{
 		CreateScene<OpeningScene>(L"OpeningScene");
 		CreateScene<TitleScene>(L"TitleScene");
+		CreateScene<PrismPlainsScene>(L"PrismPlainsScene");
+		CreateScene<NatureNotchScene>(L"NatureNotchScene");
+		CreateScene<CushyCloudScene>(L"CushyCloudScene");
+		CreateScene<JamJungleScene>(L"JamJungleScene");
+		CreateScene<VocalVolcanoScene>(L"VocalVolcanoScene");
+		CreateScene<IceIslandScene>(L"IceIslandScene");
+		CreateScene<SecretSeaScene>(L"SecretSeaScene");
+		CreateScene<GambleGalaxyScene>(L"GambleGalaxyScene");
 		CreateScene<LevelSelectScene>(L"LevelSelectScene");
 		CreateScene<StageScene>(L"StageScene");
 		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");

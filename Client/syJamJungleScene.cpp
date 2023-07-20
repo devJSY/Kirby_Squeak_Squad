@@ -12,14 +12,17 @@ namespace sy
 
 	void JamJungleScene::Initialize()
 	{
+		Scene::Initialize();
 	}
 
 	void JamJungleScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void JamJungleScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 
 	void JamJungleScene::Enter()

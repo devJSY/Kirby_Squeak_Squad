@@ -1,4 +1,5 @@
 #include "syCushyCloudScene.h"
+
 namespace sy
 {
 	CushyCloudScene::CushyCloudScene()
@@ -11,14 +12,17 @@ namespace sy
 
 	void CushyCloudScene::Initialize()
 	{
+		Scene::Initialize();
 	}
 
 	void CushyCloudScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void CushyCloudScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 
 	void CushyCloudScene::Enter()

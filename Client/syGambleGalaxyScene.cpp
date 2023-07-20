@@ -11,14 +11,17 @@ namespace sy
 
 	void GambleGalaxyScene::Initialize()
 	{
+		Scene::Initialize();
 	}
 
 	void GambleGalaxyScene::Update()
 	{
+		Scene::Update();
 
 	}
 	void GambleGalaxyScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 
 	void GambleGalaxyScene::Enter()

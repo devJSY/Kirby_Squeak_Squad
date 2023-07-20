@@ -9,6 +9,15 @@
 #include "syLevel_BG.h"
 #include "syCollisionManager.h"
 
+#include "syPrismPlainsScene.h"
+#include "syNatureNotchScene.h"
+#include "syCushyCloudScene.h"
+#include "syJamJungleScene.h"
+#include "syVocalVolcanoScene.h"
+#include "syIceIslandScene.h"
+#include "sySecretSeaScene.h"
+#include "syGambleGalaxyScene.h"
+
 namespace sy
 {
 	LevelSelectScene::LevelSelectScene()
@@ -34,9 +43,25 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
-			SceneManager::LoadScene(L"StageScene");
+			// 특정 조건에 따라 Level 설정
+			if (true)
+				SceneManager::LoadScene(L"PrismPlainsScene");
+			else if (false)
+				SceneManager::LoadScene(L"NatureNotchScene");
+			else if (false)
+				SceneManager::LoadScene(L"CushyCloudScene");
+			else if (false)
+				SceneManager::LoadScene(L"JamJungleScene");
+			else if (false)
+				SceneManager::LoadScene(L"VocalVolcanoScene");
+			else if (false)
+				SceneManager::LoadScene(L"IceIslandScene");
+			else if (false)
+				SceneManager::LoadScene(L"SecretSeaScene");
+			else if (false)
+				SceneManager::LoadScene(L"GambleGalaxyScene");
 		}
 	}
 

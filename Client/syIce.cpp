@@ -15,7 +15,7 @@ namespace sy
 		animator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 5.f), 1.f, 1);
 		animator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 5.f), 1.f, 1, Vector2(-1.f, -5.f));
 
-		animator->PlayAnimation(L"BigIce");
+		animator->PlayAnimation(L"SmallIce");
 		//GetComponent<Collider>()->SetSize(Vector2(15.f, 15.f)); // Small
 		//GetComponent<Collider>()->SetSize(Vector2(25.f, 25.f)); // Big
 	}

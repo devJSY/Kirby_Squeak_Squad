@@ -11,14 +11,17 @@ namespace sy
 
 	void SecretSeaScene::Initialize()
 	{
+		Scene::Initialize();
 	}
 
 	void SecretSeaScene::Update()
 	{
+		Scene::Update();
 	}
 
 	void SecretSeaScene::Render(HDC hdc)
 	{
+		Scene::Render(hdc);
 	}
 
 	void SecretSeaScene::Enter()
