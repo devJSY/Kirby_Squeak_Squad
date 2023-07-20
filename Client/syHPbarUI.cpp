@@ -3,6 +3,8 @@
 #include "syAnimator.h"
 #include "syResourceManager.h"
 #include "syPlayer.h"
+#include "syTransform.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -18,6 +20,11 @@ namespace sy
 
 	void HPbarUI::Initialize()
 	{
+		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.x = 85.0f;
+		vec.y -= 12.f;
+		GetComponent<Transform>()->SetPosition(vec);
+
 		mAnimator = AddComponent<Animator>();
 
 		Texture* HP_Red = ResourceManager::Load<Texture>(L"HP_Red_Tex", L"..\\Resources\\UI\\HpBar\\HP_Red.bmp");

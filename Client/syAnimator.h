@@ -35,11 +35,7 @@ namespace sy
 
 		bool IsActiveAnimationComplete() { return mActiveAnimation->IsComplete(); }
 
-		void SetAniScale(const std::wstring& name, Vector2 scale);
-		void ActiveAnimationReset() { mActiveAnimation->Reset(); }
-		Vector2 GetScale() { return mScale; }
-		void SetScale(Vector2 scale) { mScale = scale; }
-		
+		void ActiveAnimationReset() { mActiveAnimation->Reset(); }		
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
@@ -48,7 +44,6 @@ namespace sy
 		bool mbLoop;					// 애니메이션 반복 여부
 		bool mbAffectedCamera;			// 카메라 영향 여부
 		float mAlpha;					// 알파 블랜드값 0 ~ 1
-		Vector2 mScale;
 	};
 }
 

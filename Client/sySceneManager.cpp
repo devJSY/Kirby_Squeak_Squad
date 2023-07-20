@@ -151,28 +151,9 @@ namespace sy
 
 	void SceneManager::UIInitialize()
 	{
-		// UI 위치 설정
-		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
-		vec.y += vec.y / 2.f;
-		mInventory->GetComponent<Transform>()->SetPosition(vec);
-
-		Vector2 Uivec = Vector2(Application::GetResolution()) / 2.f;
-		Uivec.x = 20.0f;
-		Uivec.y -= 25.f;
-		mAbilityUI->GetComponent<Transform>()->SetPosition(Uivec);
-		mAbilityUI->SetOwner(nullptr); // 오너설정 나중에 설정예정
-
-		Uivec = Vector2(Application::GetResolution()) / 2.f;
-		Uivec.x = 85.0f;
-		Uivec.y -= 12.f;
-		mHPbarUI->GetComponent<Transform>()->SetPosition(Uivec);
-		mHPbarUI->SetOwner(nullptr); // 오너설정 나중에 설정예정
-
-		Uivec = Vector2(Application::GetResolution()) / 2.f;
-		Uivec.x = 65.0f;
-		Uivec.y -= 27.f;
-		mLifeUI->GetComponent<Transform>()->SetPosition(Uivec);
-		mLifeUI->SetOwner(nullptr); // 오너설정 나중에 설정예정
+		mAbilityUI->SetOwner(nullptr);  // 오너설정 추후에 설정예정
+		mHPbarUI->SetOwner(nullptr);	// 오너설정 추후에 설정예정
+		mLifeUI->SetOwner(nullptr);		// 오너설정 추후에 설정예정
 
 		mInventory->Initialize();
 		mAbilityUI->Initialize();

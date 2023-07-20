@@ -13,6 +13,7 @@ namespace sy
 		'W','A','S','D',
 		VK_RETURN, VK_ESCAPE, 
 		VK_LBUTTON, VK_RBUTTON,
+		'T',
 	};
 
 	void Input::Initialize()

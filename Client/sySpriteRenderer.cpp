@@ -10,7 +10,6 @@ namespace sy
 		: Component(eComponentType::SpriteRenderer)
 		, mTex(nullptr)
 		, mBMPRGB(RGB(255, 0, 255)) // default Magenta
-		, mScale(Vector2::One)
 		, mAlpha(1.0f)
 		, mbAffectedCamera(true)
 	{
@@ -41,7 +40,7 @@ namespace sy
 			, Vector2::Zero
 			, Vector2(mTex->GetWidth(), mTex->GetHeight())
 			, mbAffectedCamera
-			, mScale
+			, tr->GetScale()
 			, mAlpha
 			, mBMPRGB
 			, tr->GetRotation());

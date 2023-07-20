@@ -9,6 +9,7 @@ namespace sy
 		W,A,S,D,
 		ENTER, ESC,
 		MOUSE_LBTN, MOUSE_RBTN,
+		T,
 		End,
 	};
 

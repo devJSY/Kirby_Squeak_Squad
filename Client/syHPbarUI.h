@@ -3,8 +3,7 @@
 
 namespace sy
 {
-	class HPbarUI :
-		public UI
+	class HPbarUI : public UI
 	{
 	public:
 		HPbarUI();

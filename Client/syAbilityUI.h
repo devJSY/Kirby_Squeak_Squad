@@ -5,8 +5,7 @@ namespace sy
 {
 	class Player;
 
-	class AbilityUI :
-		public UI
+	class AbilityUI : public UI
 	{
 	public:
 		AbilityUI();

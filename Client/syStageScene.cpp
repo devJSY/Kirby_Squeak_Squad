@@ -109,6 +109,8 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(mPlayer);
+
+		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
 	}

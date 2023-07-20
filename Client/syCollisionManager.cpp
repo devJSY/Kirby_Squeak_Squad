@@ -38,7 +38,11 @@ namespace sy
 	void CollisionManager::Clear()
 	{
 		// mLayerMasks의 비트값 초기화
-		mLayerMasks->reset();
+		for (size_t i = 0; i < LAYER_MAX; i++)
+		{
+			mLayerMasks[i].reset();
+		}
+
 		mCollisionMap.clear(); // Collider 충돌상태 초기화
 	}
 

@@ -88,6 +88,9 @@ namespace sy
 		// 카메라 설정 
 		//Camera::SetTarget(nullptr);
 		Camera::SetTarget(mPlayer);
+
+		// 레이어 충돌 설정
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 	}
 
 	void WorldTunnelScene::Exit()

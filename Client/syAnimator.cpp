@@ -10,7 +10,6 @@ namespace sy
 		, mbLoop(false)			
 		, mbAffectedCamera(true)
 		, mAlpha(1.0f)
-		, mScale(Vector2::One)
 	{
 	}
 
@@ -165,14 +164,5 @@ namespace sy
 		animation->Reset();
 		mActiveAnimation = animation;
 		mbLoop = loop;			
-	}
-
-	void Animator::SetAniScale(const std::wstring& name, Vector2 scale)
-	{
-		Animation* animation = FindAnimation(name);
-		if (animation == nullptr)
-			return;
-
-		animation->SetScale(scale);
 	}
 }

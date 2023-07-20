@@ -73,4 +73,21 @@ namespace sy::enums
 		LEFT = 1,
 	};
 
+	enum class eLevelType
+	{
+		AllClear_LevelSelect
+		, LevelSelect
+		, Level1_Clear
+		, Level1
+		, Level2
+		, Level3
+		, Level4
+		, Level5
+		, Level6_Clear
+		, Level6
+		, Level7
+		, Level8
+		, Bosses
+		, None
+	};
 }

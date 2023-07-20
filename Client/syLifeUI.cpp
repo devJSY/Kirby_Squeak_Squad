@@ -4,6 +4,8 @@
 #include "syResourceManager.h"
 #include "syPlayer.h"
 #include "sySpriteRenderer.h"
+#include "syTransform.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -20,6 +22,11 @@ namespace sy
 
 	void LifeUI::Initialize()
 	{
+		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.x = 65.0f;
+		vec.y -= 27.f;
+		GetComponent<Transform>()->SetPosition(vec);
+
 		Texture* Life_Icon = ResourceManager::Load<Texture>(L"Life_Icon_Tex", L"..\\Resources\\UI\\Life_Icon.bmp");
 		Life_Icon->SetType(eTextureType::Bmp);
 		mSpriteRenderer = AddComponent<SpriteRenderer>();

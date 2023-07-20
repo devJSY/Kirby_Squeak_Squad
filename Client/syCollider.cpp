@@ -58,6 +58,7 @@ namespace sy
 
 		HPEN oldPen = (HPEN)SelectObject(hdc, ColorPen);
 
+		// Collider ·»´õ¸µ
 		Rectangle(hdc
 			, int(pos.x), int(pos.y)
 			, int(pos.x + mSize.x), int(pos.y + mSize.y));

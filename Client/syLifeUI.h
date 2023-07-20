@@ -3,8 +3,7 @@
 
 namespace sy
 {
-	class LifeUI :
-		public UI
+	class LifeUI : public UI
 	{
 	public:
 		LifeUI();

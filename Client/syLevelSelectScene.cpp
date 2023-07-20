@@ -31,12 +31,11 @@ namespace sy
 	void LevelSelectScene::Initialize()
 	{
 		// 상단 화면 오브젝트 생성 
-		Level_BG* Bg = object::Instantiate<Level_BG>(eLayerType::BackGround);
-		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
-		vec.y /= 2.f;
-		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정		
+		Level_BG* Bg = object::Instantiate<Level_BG>(eLayerType::BackGround);		
 
 		Scene::Initialize();
+
+		Bg->SetLevelType(eLevelType::LevelSelect);
 	}
 
 	void LevelSelectScene::Update()

@@ -3,6 +3,8 @@
 #include "syAnimator.h"
 #include "syResourceManager.h"
 #include "syPlayer.h"
+#include "syTransform.h"
+#include "syApplication.h"
 
 namespace sy
 {
@@ -18,6 +20,12 @@ namespace sy
 
 	void AbilityUI::Initialize()
 	{
+		// AbilityUI 기본 위치 설정 
+		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
+		vec.x = 20.0f;
+		vec.y -= 25.f;
+		GetComponent<Transform>()->SetPosition(vec);
+
 		mAnimator = AddComponent<Animator>();
 
 		Texture* tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");

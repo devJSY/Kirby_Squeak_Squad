@@ -8,6 +8,7 @@ namespace sy
 		: Component(eComponentType::Transform)
 		, mPosition(Vector2::Zero)
 		, mRotation(0.f)
+		, mScale(Vector2::One)
 		, mDir(eDirection::RIGHT)
 	{
 	}

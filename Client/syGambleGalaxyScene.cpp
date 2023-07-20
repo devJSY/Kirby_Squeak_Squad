@@ -19,6 +19,7 @@ namespace sy
 		Scene::Update();
 
 	}
+
 	void GambleGalaxyScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);

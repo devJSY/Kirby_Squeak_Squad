@@ -57,7 +57,7 @@ namespace sy
 			, sprite.leftTop
 			, sprite.size
 			, mAnimator->GetAffectedCamera()
-			, mAnimator->GetScale()
+			, tr->GetScale()
 			, mAnimator->GetAlpha()
 			, RGB(255,0,255)
 			, tr->GetRotation());

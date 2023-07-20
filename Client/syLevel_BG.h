@@ -13,6 +13,10 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		void SetLevelType(eLevelType type);
+
 	private:
+		class Animator* mAnimator;
+		eLevelType mtype;		
 	};
 }
