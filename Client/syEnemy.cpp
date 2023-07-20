@@ -4,7 +4,6 @@ namespace sy
 {
 	Enemy::Enemy(eAbilityType type)
 		: mAnimator(nullptr)
-		, mDir(eDirection::RIGHT)
 		, mAbilityType(type)
 	{
 		// 애니메이터 생성

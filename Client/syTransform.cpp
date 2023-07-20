@@ -6,6 +6,9 @@ namespace sy
 {
 	Transform::Transform()
 		: Component(eComponentType::Transform)
+		, mPosition(Vector2::Zero)
+		, mRotation(0.f)
+		, mDir(eDirection::RIGHT)
 	{
 	}
 

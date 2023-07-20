@@ -19,16 +19,7 @@ namespace sy
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
 
-		eDirection GetDirection() { return mDir; }
-		void SetDirection(eDirection dir) { mDir = dir; }
-
-		class Animator* GetAnimator() { return mAnimator; }
-
-
-
 	private:
-		class Animator* mAnimator;
-		eDirection mDir;
 		enums::eAbilityType mAbilityType;
 	};
 }

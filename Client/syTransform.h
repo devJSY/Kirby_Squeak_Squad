@@ -20,9 +20,13 @@ namespace sy
 		void SetRotation(float rotate) { mRotation = rotate; }
 		float GetRotation() { return mRotation; }
 
+		eDirection GetDirection() { return mDir; }
+		void SetDirection(eDirection dir) { mDir = dir; }
+
 	private:
 		Vector2 mPosition;
 		float	mRotation;
+		eDirection mDir;
 	};
 }
 

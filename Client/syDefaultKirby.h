@@ -42,6 +42,8 @@ namespace sy
 
 	private:
 		eDefaultKirbyState mState;
+		class Animator* mAnimator;
+		class Transform* mTransform;
 	};
 }
 

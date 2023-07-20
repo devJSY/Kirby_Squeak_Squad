@@ -72,4 +72,5 @@ namespace sy::enums
 		RIGHT = 0,
 		LEFT = 1,
 	};
+
 }

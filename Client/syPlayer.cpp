@@ -1,15 +1,14 @@
 #include "syPlayer.h"
+#include "syAnimator.h"
 #include "syCollider.h"
 
 namespace sy
 {
 	Player::Player(eAbilityType type)
-		: mAnimator(nullptr)
-		, mDir(eDirection::RIGHT)
-		, mAbilityType(type)
+		: mAbilityType(type)
 	{
 		// 애니메이터 생성
-		mAnimator = AddComponent<Animator>();
+		AddComponent<Animator>();
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(15.f, 15.f));
 	}
