@@ -17,6 +17,9 @@ namespace sy
 		virtual void Exit();
 
 	private:
+		eLevelType mType;
+		class Level_BG* mlevelBG;
+
     };
 }
 

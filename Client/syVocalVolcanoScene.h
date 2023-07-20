@@ -17,5 +17,7 @@ namespace sy
 		virtual void Exit();
 
 	private:
+		eLevelType mType;
+
     };
 }

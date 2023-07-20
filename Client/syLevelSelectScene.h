@@ -17,5 +17,8 @@ namespace sy
 		virtual void Exit() override;
 		
 	private:
+		eLevelType mType;
+		class Level_BG* mlevelBG;
+
 	};
 }

@@ -34,7 +34,6 @@ namespace sy
 			SceneManager::LoadScene(L"StageScene");
 		}
 
-
 		// 스테이지 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{

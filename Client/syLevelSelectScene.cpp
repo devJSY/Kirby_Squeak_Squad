@@ -21,6 +21,8 @@
 namespace sy
 {
 	LevelSelectScene::LevelSelectScene()
+		: mType(eLevelType::LevelSelect)
+		, mlevelBG(nullptr)
 	{
 	}
 
@@ -31,37 +33,46 @@ namespace sy
 	void LevelSelectScene::Initialize()
 	{
 		// 상단 화면 오브젝트 생성 
-		Level_BG* Bg = object::Instantiate<Level_BG>(eLayerType::BackGround);		
+		mlevelBG = object::Instantiate<Level_BG>(eLayerType::BackGround);
 
 		Scene::Initialize();
 
-		Bg->SetLevelType(eLevelType::LevelSelect);
+		mlevelBG->SetLevelType(eLevelType::LevelSelect);
 	}
 
 	void LevelSelectScene::Update()
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			// 특정 조건에 따라 Level 설정
-			if (true)
+			if (0)
 				SceneManager::LoadScene(L"PrismPlainsScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"NatureNotchScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"CushyCloudScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"JamJungleScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"VocalVolcanoScene");
-			else if (false)
+			else if (1)
 				SceneManager::LoadScene(L"IceIslandScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"SecretSeaScene");
-			else if (false)
+			else if (0)
 				SceneManager::LoadScene(L"GambleGalaxyScene");
 		}
+
+
+		// 스테이지 전부 클리어 시 배경화면 변경
+		if (Input::GetKeyDown(eKeyCode::T))
+		{
+			mType = eLevelType::AllClear_LevelSelect;
+			mlevelBG->SetLevelType(mType);
+		}
+
 	}
 
 	void LevelSelectScene::Render(HDC hdc)
