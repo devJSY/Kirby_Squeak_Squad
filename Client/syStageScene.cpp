@@ -44,7 +44,7 @@ namespace sy
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2 - 2, tex->GetHeight() / 2 - 2)); // 중점 설정
 
-		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();				
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();		
 		BgRenderer->SetAffectedCamera(false);
 		BgRenderer->SetTexture(tex);
 
@@ -62,14 +62,14 @@ namespace sy
 		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);	
 		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
 		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
-		Collider* col = mPlayer->AddComponent<Collider>();
-		col->SetSize(Vector2(50.f, 50.f));
+		//Collider* col = mPlayer->GetComponent<Collider>();
+		//col->SetSize(Vector2(50.f, 50.f));
 
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
-		col = waddleDee->AddComponent<Collider>();
-		col->SetSize(Vector2(50.f, 50.f));
+		//col = waddleDee->GetComponent<Collider>();
+		//col->SetSize(Vector2(50.f, 50.f));
 
 		BlockEnemy* Block = object::Instantiate<BlockEnemy>(eLayerType::Enemy);
 		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
@@ -110,6 +110,7 @@ namespace sy
 		// 카메라 설정 
 		Camera::SetTarget(mPlayer);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
 	}
 
 	void StageScene::Exit()

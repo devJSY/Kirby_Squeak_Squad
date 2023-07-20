@@ -2,7 +2,7 @@
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
-
+#include "syCollider.h"
 namespace sy
 {
 	Ice::Ice()
@@ -12,10 +12,12 @@ namespace sy
 
 		Animator* animator = GetAnimator();
 
-		animator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 0.f), 1.f, 1);
-		animator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 0.f), 1.f, 1);
+		animator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 5.f), 1.f, 1);
+		animator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 5.f), 1.f, 1, Vector2(-1.f, -5.f));
 
-		animator->PlayAnimation(L"SmallIce");
+		animator->PlayAnimation(L"BigIce");
+		//GetComponent<Collider>()->SetSize(Vector2(15.f, 15.f)); // Small
+		//GetComponent<Collider>()->SetSize(Vector2(25.f, 25.f)); // Big
 	}
 
 	Ice::~Ice()

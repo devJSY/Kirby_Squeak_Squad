@@ -1,4 +1,6 @@
 #include "syEffects.h"
+#include "syAnimator.h"
+#include "syCollider.h"
 
 namespace sy
 {
@@ -8,6 +10,8 @@ namespace sy
 		, mDir(eDirection::RIGHT)
 	{
 		mAnimator = AddComponent<Animator>();
+		Collider* col = AddComponent<Collider>();
+		col->SetSize(Vector2(10.f, 10.f));
 	}
 
 	Effects::~Effects()

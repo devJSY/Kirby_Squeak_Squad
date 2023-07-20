@@ -13,6 +13,10 @@ namespace sy
         virtual void Update();
         virtual void Render(HDC hdc);
 
+        virtual void OnCollisionEnter(class Collider* other) {};
+        virtual void OnCollisionStay(class Collider* other) {};
+        virtual void OnCollisionExit(class Collider* other) {};
+
         void SetOwner(GameObject* owner) { mOwner = owner; }
         GameObject* GetOwner() { return mOwner; }
 
@@ -25,6 +29,5 @@ namespace sy
         GameObject* mOwner; // 이펙트를 생성한 오브젝트
         class Animator* mAnimator;
         eDirection mDir;
-
     };
 }

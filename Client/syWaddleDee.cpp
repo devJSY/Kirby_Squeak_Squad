@@ -46,7 +46,6 @@ namespace sy
 	}
 	void WaddleDee::OnCollisionStay(Collider* other)
 	{
-
 	}
 	void WaddleDee::OnCollisionExit(Collider* other)
 	{

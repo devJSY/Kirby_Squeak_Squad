@@ -49,11 +49,11 @@ namespace sy
 		HPEN ColorPen = NULL;
 		if (mbIsCollision)
 		{
-			ColorPen = CreatePen(PS_SOLID, 2, RGB(255, 50, 50)); // Red
+			ColorPen = CreatePen(PS_SOLID, 1, RGB(255, 50, 50)); // Red
 		}
 		else
 		{
-			ColorPen = CreatePen(PS_SOLID, 2, RGB(50, 255, 50)); // Green
+			ColorPen = CreatePen(PS_SOLID, 1, RGB(50, 255, 50)); // Green
 		}
 
 		HPEN oldPen = (HPEN)SelectObject(hdc, ColorPen);
