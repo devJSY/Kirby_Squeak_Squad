@@ -48,12 +48,14 @@ namespace sy
 		LevelAni->CreateAnimation(Tex, L"Level", Vector2(222.f, 850.f), Vector2(113.f, 17.f),Vector2(113.f, 0.f), 1, 1);
 		LevelAni->SetBmpRGB(L"Level", 0, 128, 0);
 		LevelAni->PlayAnimation(L"Level");
+		LevelAni->SetAffectedCamera(false);
 
 		BackGround* LevelName = object::Instantiate<BackGround>(eLayerType::BackGround);
 		Animator* LevelNameAni = LevelName->AddComponent<Animator>();
 		LevelNameAni->CreateAnimation(Tex, L"LevelName", Vector2(2.f, 1148.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
 		LevelNameAni->SetBmpRGB(L"LevelName", 0, 128, 128);
 		LevelNameAni->PlayAnimation(L"LevelName");
+		LevelNameAni->SetAffectedCamera(false);
 
 		vec.x = 101.f;
 		vec.y = 16.f;
