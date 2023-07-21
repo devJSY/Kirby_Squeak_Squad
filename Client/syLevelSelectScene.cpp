@@ -12,6 +12,7 @@
 #include "syResourceManager.h"
 #include "syNumberUI.h"
 #include "syPlacardUI.h"
+#include "syStarUI.h"
 #include "syPrismPlainsScene.h"
 #include "syNatureNotchScene.h"
 #include "syCushyCloudScene.h"
@@ -60,16 +61,24 @@ namespace sy
 		LevelNameAni->SetAffectedCamera(false);
 
 
+
+		// Level 1
 		PlacardUI* placardUI = object::Instantiate<PlacardUI>(eLayerType::UI);
-		placardUI->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+		placardUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+
+		StarUI* starUI = object::Instantiate<StarUI>(eLayerType::UI);
+		starUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		
 
 		NumberUI* numUI = object::Instantiate<NumberUI>(eLayerType::UI);
-		numUI->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+		numUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
 
 
 		Scene::Initialize();
 
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
+		starUI->SetAllClear();
+		
 	}
 
 	void LevelSelectScene::Update()

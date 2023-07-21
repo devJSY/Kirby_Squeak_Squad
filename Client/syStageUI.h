@@ -14,5 +14,6 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	private:
+
 	};
 }

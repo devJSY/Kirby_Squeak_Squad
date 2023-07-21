@@ -13,7 +13,18 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		void SetAllClear()
+		{
+			mbAllClear = true;
+			if(nullptr != mAnimator)
+			mAnimator->PlayAnimation(L"StarUI", true);
+		}
+
+		bool IsAllClear() { return mbAllClear; }
+
 	private:
+		class Animator* mAnimator;
+		bool mbAllClear;
 
 	};
 }
