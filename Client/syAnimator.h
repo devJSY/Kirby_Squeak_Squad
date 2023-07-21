@@ -37,6 +37,12 @@ namespace sy
 
 		void ActiveAnimationReset() { mActiveAnimation->Reset(); }		
 
+		void SetBmpRGB(const std::wstring& name, BYTE r, BYTE g, BYTE b)
+		{
+			Animation* ani = FindAnimation(name);
+			if (ani != nullptr) ani->SetBmpRGB(r, g, b);
+		}
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
 

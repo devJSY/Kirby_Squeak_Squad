@@ -43,6 +43,8 @@ namespace sy
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
 		void SetScale(Vector2 scale) { mScale = scale; }
 
+		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
+
 	private:
 		Animator* mAnimator;
 		Texture* mTexture;
@@ -53,5 +55,7 @@ namespace sy
 
 		bool mbComplete;
 		Vector2 mScale;
+
+		COLORREF	mBMPRGB;
 	};
 }

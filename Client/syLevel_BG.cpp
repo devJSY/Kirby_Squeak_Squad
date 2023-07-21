@@ -23,7 +23,7 @@ namespace sy
 
 	void Level_BG::Initialize()
 	{
-		Texture* tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.png");
+		Texture* tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(tex, L"AllClear_LevelSelect", Vector2(2, 2.f), Vector2(256.f, 208.f), Vector2(256.f, 0.f), 1.f, 1);

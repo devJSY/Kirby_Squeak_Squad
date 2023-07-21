@@ -208,6 +208,12 @@
     <Filter Include="Engine\Collision">
       <UniqueIdentifier>{45ed0335-b526-4020-83b3-de52d1e36088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\UI\LevelUI">
+      <UniqueIdentifier>{84971b82-98f2-4d35-8661-f7d22544f832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\LevelSelectUI">
+      <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

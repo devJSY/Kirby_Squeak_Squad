@@ -15,6 +15,7 @@ namespace sy
 		, mTime(0.0f)
 		, mbComplete(false)
 		, mScale(Vector2::One)
+		, mBMPRGB(RGB(255, 0, 255)) // 기본값 마젠타
 	{
 	}
 
@@ -59,7 +60,7 @@ namespace sy
 			, mAnimator->GetAffectedCamera()
 			, tr->GetScale()
 			, mAnimator->GetAlpha()
-			, RGB(255,0,255)
+			, mBMPRGB
 			, tr->GetRotation());
 	}
 
