@@ -73,149 +73,146 @@
     <Filter Include="Engine\Collision">
       <UniqueIdentifier>{45ed0335-b526-4020-83b3-de52d1e36088}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Contents">
-      <UniqueIdentifier>{f59544d7-ffb3-4dab-a33c-12a2f2f67682}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene">
-      <UniqueIdentifier>{a1fad098-22a4-42c0-a554-9af5639048a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\TitleScene">
-      <UniqueIdentifier>{addb92de-1800-4390-ab3a-f196944b8ea6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelSelectScene">
-      <UniqueIdentifier>{4dad836d-06b9-4f2e-8633-02f3566063a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\WorldTunnelScene">
-      <UniqueIdentifier>{3bcb7d38-7761-410e-8df9-9a1c81c142b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\StageScene">
-      <UniqueIdentifier>{9993070b-c195-40ca-89e1-be39df79adbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\OpeningScene">
-      <UniqueIdentifier>{00a5c3d9-74bf-4153-971f-7f1dfa156564}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\EndingScene">
-      <UniqueIdentifier>{0ac4766b-4850-4d62-94c4-8a53b45b5b1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene">
-      <UniqueIdentifier>{9f338203-f573-4408-8483-8d1946d5a37c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level1">
-      <UniqueIdentifier>{28234f0d-953b-44d6-b4b8-6d5670c58ba2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level2">
-      <UniqueIdentifier>{ebf7f182-08dc-43e9-9d39-274f12bec8bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level3">
-      <UniqueIdentifier>{76bb728c-a905-47f8-acf7-d1942289b649}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level4">
-      <UniqueIdentifier>{a48aba91-a80a-4585-a371-25e60639e537}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level5">
-      <UniqueIdentifier>{73440996-7bed-4368-89f7-35d10cc37ff1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level6">
-      <UniqueIdentifier>{a8522d26-18fb-4abf-8d21-4a993781816d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level7">
-      <UniqueIdentifier>{ca347463-8b08-4d2b-870c-f9c707974cb2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\Scene\LevelScene\Level8">
-      <UniqueIdentifier>{5f9fe897-8f69-41b0-b451-6dd3017d7946}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject">
-      <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\BackGround">
-      <UniqueIdentifier>{f16894f5-8de3-4347-a66d-311beb75330a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\BackGround\Level_BG">
-      <UniqueIdentifier>{7a908f7c-d363-499f-ba48-c23f111dcbe2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\BackGround\WorldTunnel_BG">
-      <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Inventory">
-      <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\ForeGround">
-      <UniqueIdentifier>{f22905b9-5aa3-428f-a66b-7635d12e0af3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI">
-      <UniqueIdentifier>{61b761af-e4ce-495f-93c1-fd53d59e5cb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI\HPbar">
-      <UniqueIdentifier>{a0fc58eb-84c7-4f1d-9d9e-ccaca0fcde91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI\AbilityUI">
-      <UniqueIdentifier>{d5b39543-b939-42f6-b487-97ac7476a333}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI\LifeUI">
-      <UniqueIdentifier>{427e8896-2838-4266-b067-792a79df1fa6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI\LevelUI">
-      <UniqueIdentifier>{84971b82-98f2-4d35-8661-f7d22544f832}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\UI\LevelSelectUI">
-      <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Video">
-      <UniqueIdentifier>{44c76270-b015-4769-8885-dfa3f0c2cc26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Player">
-      <UniqueIdentifier>{e181023e-aad4-4200-a419-93547baf32cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Player\Kirby">
-      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy">
-      <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Boss">
-      <UniqueIdentifier>{d0fd2dd9-7253-418c-ae3d-3b3bf2e15dac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Boss\Dedede">
-      <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Boss\MetaKnight">
-      <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal">
-      <UniqueIdentifier>{169ac7fe-c859-4764-8d97-051e57d6637a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\Ice">
-      <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\BlockEnemy">
-      <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\HotHead">
-      <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\HotHead\Skill">
-      <UniqueIdentifier>{1534f389-2884-4a7a-a0b1-19f2b7030493}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\Flower">
-      <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\Flower\Skill">
-      <UniqueIdentifier>{1ad66a98-29f6-4b07-996f-18906f137c5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\WaddleDee">
-      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\SirKibble">
-      <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Enemy\Normal\SirKibble\Skill">
-      <UniqueIdentifier>{a0990413-da2a-4805-b608-bf6a1d29f8ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Contents\GameObject\Effects">
-      <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\RigidBody">
       <UniqueIdentifier>{73befaab-d94a-4489-80e1-b1978659f618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{f59544d7-ffb3-4dab-a33c-12a2f2f67682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{a1fad098-22a4-42c0-a554-9af5639048a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\TitleScene">
+      <UniqueIdentifier>{addb92de-1800-4390-ab3a-f196944b8ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelSelectScene">
+      <UniqueIdentifier>{4dad836d-06b9-4f2e-8633-02f3566063a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\WorldTunnelScene">
+      <UniqueIdentifier>{3bcb7d38-7761-410e-8df9-9a1c81c142b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene">
+      <UniqueIdentifier>{9993070b-c195-40ca-89e1-be39df79adbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\OpeningScene">
+      <UniqueIdentifier>{00a5c3d9-74bf-4153-971f-7f1dfa156564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\EndingScene">
+      <UniqueIdentifier>{0ac4766b-4850-4d62-94c4-8a53b45b5b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene">
+      <UniqueIdentifier>{9f338203-f573-4408-8483-8d1946d5a37c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level1">
+      <UniqueIdentifier>{28234f0d-953b-44d6-b4b8-6d5670c58ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level2">
+      <UniqueIdentifier>{ebf7f182-08dc-43e9-9d39-274f12bec8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level3">
+      <UniqueIdentifier>{76bb728c-a905-47f8-acf7-d1942289b649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level4">
+      <UniqueIdentifier>{a48aba91-a80a-4585-a371-25e60639e537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level5">
+      <UniqueIdentifier>{73440996-7bed-4368-89f7-35d10cc37ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level6">
+      <UniqueIdentifier>{a8522d26-18fb-4abf-8d21-4a993781816d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level7">
+      <UniqueIdentifier>{ca347463-8b08-4d2b-870c-f9c707974cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\LevelScene\Level8">
+      <UniqueIdentifier>{5f9fe897-8f69-41b0-b451-6dd3017d7946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject">
+      <UniqueIdentifier>{ac703717-46c9-474e-98b1-b75998f33580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround">
+      <UniqueIdentifier>{f16894f5-8de3-4347-a66d-311beb75330a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround\Level_BG">
+      <UniqueIdentifier>{7a908f7c-d363-499f-ba48-c23f111dcbe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround\WorldTunnel_BG">
+      <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Inventory">
+      <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\ForeGround">
+      <UniqueIdentifier>{f22905b9-5aa3-428f-a66b-7635d12e0af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI">
+      <UniqueIdentifier>{61b761af-e4ce-495f-93c1-fd53d59e5cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\HPbar">
+      <UniqueIdentifier>{a0fc58eb-84c7-4f1d-9d9e-ccaca0fcde91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\AbilityUI">
+      <UniqueIdentifier>{d5b39543-b939-42f6-b487-97ac7476a333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\LifeUI">
+      <UniqueIdentifier>{427e8896-2838-4266-b067-792a79df1fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Video">
+      <UniqueIdentifier>{44c76270-b015-4769-8885-dfa3f0c2cc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player">
+      <UniqueIdentifier>{e181023e-aad4-4200-a419-93547baf32cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\Kirby">
+      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy">
+      <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss">
+      <UniqueIdentifier>{d0fd2dd9-7253-418c-ae3d-3b3bf2e15dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Dedede">
+      <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight">
+      <UniqueIdentifier>{e205bf88-515b-4076-aafd-e32b198ae3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal">
+      <UniqueIdentifier>{169ac7fe-c859-4764-8d97-051e57d6637a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Ice">
+      <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\BlockEnemy">
+      <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\HotHead">
+      <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\HotHead\Skill">
+      <UniqueIdentifier>{1534f389-2884-4a7a-a0b1-19f2b7030493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Flower">
+      <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Flower\Skill">
+      <UniqueIdentifier>{1ad66a98-29f6-4b07-996f-18906f137c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
+      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble">
+      <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble\Skill">
+      <UniqueIdentifier>{a0990413-da2a-4805-b608-bf6a1d29f8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Effects">
+      <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\SelectUI">
+      <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -271,25 +268,25 @@
       <Filter>Engine\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="syGameObject.h">
-      <Filter>Engine\Contents\GameObject</Filter>
+      <Filter>Contents\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="syTitleScene.h">
-      <Filter>Engine\Contents\Scene\TitleScene</Filter>
+      <Filter>Contents\Scene\TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="syLevelSelectScene.h">
-      <Filter>Engine\Contents\Scene\LevelSelectScene</Filter>
+      <Filter>Contents\Scene\LevelSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="syEndingScene.h">
-      <Filter>Engine\Contents\Scene\EndingScene</Filter>
+      <Filter>Contents\Scene\EndingScene</Filter>
     </ClInclude>
     <ClInclude Include="syOpeningScene.h">
-      <Filter>Engine\Contents\Scene\OpeningScene</Filter>
+      <Filter>Contents\Scene\OpeningScene</Filter>
     </ClInclude>
     <ClInclude Include="syStageScene.h">
-      <Filter>Engine\Contents\Scene\StageScene</Filter>
+      <Filter>Contents\Scene\StageScene</Filter>
     </ClInclude>
     <ClInclude Include="syWorldTunnelScene.h">
-      <Filter>Engine\Contents\Scene\WorldTunnelScene</Filter>
+      <Filter>Contents\Scene\WorldTunnelScene</Filter>
     </ClInclude>
     <ClInclude Include="syResource.h">
       <Filter>Engine\Resource</Filter>
@@ -301,7 +298,7 @@
       <Filter>Engine\Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="syBackGround.h">
-      <Filter>Engine\Contents\GameObject\BackGround</Filter>
+      <Filter>Contents\GameObject\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="syCamera.h">
       <Filter>Engine\Camera</Filter>
@@ -313,94 +310,94 @@
       <Filter>Engine\Component\Animator</Filter>
     </ClInclude>
     <ClInclude Include="syInventory.h">
-      <Filter>Engine\Contents\GameObject\Inventory</Filter>
+      <Filter>Contents\GameObject\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="syForeGround.h">
-      <Filter>Engine\Contents\GameObject\ForeGround</Filter>
+      <Filter>Contents\GameObject\ForeGround</Filter>
     </ClInclude>
     <ClInclude Include="syUI.h">
-      <Filter>Engine\Contents\GameObject\UI</Filter>
+      <Filter>Contents\GameObject\UI</Filter>
     </ClInclude>
     <ClInclude Include="syAbilityUI.h">
-      <Filter>Engine\Contents\GameObject\UI\AbilityUI</Filter>
+      <Filter>Contents\GameObject\UI\AbilityUI</Filter>
     </ClInclude>
     <ClInclude Include="syHPbarUI.h">
-      <Filter>Engine\Contents\GameObject\UI\HPbar</Filter>
+      <Filter>Contents\GameObject\UI\HPbar</Filter>
     </ClInclude>
     <ClInclude Include="syLifeUI.h">
-      <Filter>Engine\Contents\GameObject\UI\LifeUI</Filter>
+      <Filter>Contents\GameObject\UI\LifeUI</Filter>
     </ClInclude>
     <ClInclude Include="syVideo.h">
-      <Filter>Engine\Contents\GameObject\Video</Filter>
+      <Filter>Contents\GameObject\Video</Filter>
     </ClInclude>
     <ClInclude Include="syDefaultKirby.h">
-      <Filter>Engine\Contents\GameObject\Player\Kirby</Filter>
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
     </ClInclude>
     <ClInclude Include="syPlayer.h">
-      <Filter>Engine\Contents\GameObject\Player</Filter>
+      <Filter>Contents\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="syEnemy.h">
-      <Filter>Engine\Contents\GameObject\Enemy</Filter>
+      <Filter>Contents\GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="syBlockEnemy.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
     </ClInclude>
     <ClInclude Include="syIce.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClInclude>
     <ClInclude Include="sySirKibble.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\SirKibble</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClInclude>
     <ClInclude Include="syFlower.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Flower</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
     </ClInclude>
     <ClInclude Include="syWaddleDee.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
     </ClInclude>
     <ClInclude Include="syEffects.h">
-      <Filter>Engine\Contents\GameObject\Effects</Filter>
+      <Filter>Contents\GameObject\Effects</Filter>
     </ClInclude>
     <ClInclude Include="syFlower_Skill.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead_Fire.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
     </ClInclude>
     <ClInclude Include="sySirKibble_Skill.h">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClInclude>
     <ClInclude Include="syWorldTunnel_BG.h">
-      <Filter>Engine\Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
     </ClInclude>
     <ClInclude Include="syLevel_BG.h">
-      <Filter>Engine\Contents\GameObject\BackGround\Level_BG</Filter>
+      <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
     </ClInclude>
     <ClInclude Include="syPrismPlainsScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level1</Filter>
+      <Filter>Contents\Scene\LevelScene\Level1</Filter>
     </ClInclude>
     <ClInclude Include="syJamJungleScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level4</Filter>
+      <Filter>Contents\Scene\LevelScene\Level4</Filter>
     </ClInclude>
     <ClInclude Include="syCushyCloudScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level3</Filter>
+      <Filter>Contents\Scene\LevelScene\Level3</Filter>
     </ClInclude>
     <ClInclude Include="syGambleGalaxyScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level8</Filter>
+      <Filter>Contents\Scene\LevelScene\Level8</Filter>
     </ClInclude>
     <ClInclude Include="syIceIslandScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level6</Filter>
+      <Filter>Contents\Scene\LevelScene\Level6</Filter>
     </ClInclude>
     <ClInclude Include="syNatureNotchScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level2</Filter>
+      <Filter>Contents\Scene\LevelScene\Level2</Filter>
     </ClInclude>
     <ClInclude Include="sySecretSeaScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level7</Filter>
+      <Filter>Contents\Scene\LevelScene\Level7</Filter>
     </ClInclude>
     <ClInclude Include="syVocalVolcanoScene.h">
-      <Filter>Engine\Contents\Scene\LevelScene\Level5</Filter>
+      <Filter>Contents\Scene\LevelScene\Level5</Filter>
     </ClInclude>
     <ClInclude Include="syCollider.h">
       <Filter>Engine\Component\Collider</Filter>
@@ -410,6 +407,18 @@
     </ClInclude>
     <ClInclude Include="syRigidbody.h">
       <Filter>Engine\Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="syNumberUI.h">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClInclude>
+    <ClInclude Include="syPlacardUI.h">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClInclude>
+    <ClInclude Include="syStarUI.h">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClInclude>
+    <ClInclude Include="syStageUI.h">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -453,25 +462,25 @@
       <Filter>Engine\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="syGameObject.cpp">
-      <Filter>Engine\Contents\GameObject</Filter>
+      <Filter>Contents\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="syTitleScene.cpp">
-      <Filter>Engine\Contents\Scene\TitleScene</Filter>
+      <Filter>Contents\Scene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="syLevelSelectScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelSelectScene</Filter>
+      <Filter>Contents\Scene\LevelSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="syEndingScene.cpp">
-      <Filter>Engine\Contents\Scene\EndingScene</Filter>
+      <Filter>Contents\Scene\EndingScene</Filter>
     </ClCompile>
     <ClCompile Include="syOpeningScene.cpp">
-      <Filter>Engine\Contents\Scene\OpeningScene</Filter>
+      <Filter>Contents\Scene\OpeningScene</Filter>
     </ClCompile>
     <ClCompile Include="syStageScene.cpp">
-      <Filter>Engine\Contents\Scene\StageScene</Filter>
+      <Filter>Contents\Scene\StageScene</Filter>
     </ClCompile>
     <ClCompile Include="syWorldTunnelScene.cpp">
-      <Filter>Engine\Contents\Scene\WorldTunnelScene</Filter>
+      <Filter>Contents\Scene\WorldTunnelScene</Filter>
     </ClCompile>
     <ClCompile Include="syResource.cpp">
       <Filter>Engine\Resource</Filter>
@@ -486,7 +495,7 @@
       <Filter>Engine\Common</Filter>
     </ClCompile>
     <ClCompile Include="syBackGround.cpp">
-      <Filter>Engine\Contents\GameObject\BackGround</Filter>
+      <Filter>Contents\GameObject\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="syCamera.cpp">
       <Filter>Engine\Camera</Filter>
@@ -498,94 +507,94 @@
       <Filter>Engine\Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="syInventory.cpp">
-      <Filter>Engine\Contents\GameObject\Inventory</Filter>
+      <Filter>Contents\GameObject\Inventory</Filter>
     </ClCompile>
     <ClCompile Include="syForeGround.cpp">
-      <Filter>Engine\Contents\GameObject\ForeGround</Filter>
+      <Filter>Contents\GameObject\ForeGround</Filter>
     </ClCompile>
     <ClCompile Include="syUI.cpp">
-      <Filter>Engine\Contents\GameObject\UI</Filter>
+      <Filter>Contents\GameObject\UI</Filter>
     </ClCompile>
     <ClCompile Include="syAbilityUI.cpp">
-      <Filter>Engine\Contents\GameObject\UI\AbilityUI</Filter>
+      <Filter>Contents\GameObject\UI\AbilityUI</Filter>
     </ClCompile>
     <ClCompile Include="syHPbarUI.cpp">
-      <Filter>Engine\Contents\GameObject\UI\HPbar</Filter>
+      <Filter>Contents\GameObject\UI\HPbar</Filter>
     </ClCompile>
     <ClCompile Include="syLifeUI.cpp">
-      <Filter>Engine\Contents\GameObject\UI\LifeUI</Filter>
+      <Filter>Contents\GameObject\UI\LifeUI</Filter>
     </ClCompile>
     <ClCompile Include="syVideo.cpp">
-      <Filter>Engine\Contents\GameObject\Video</Filter>
+      <Filter>Contents\GameObject\Video</Filter>
     </ClCompile>
     <ClCompile Include="syDefaultKirby.cpp">
-      <Filter>Engine\Contents\GameObject\Player\Kirby</Filter>
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
     </ClCompile>
     <ClCompile Include="syPlayer.cpp">
-      <Filter>Engine\Contents\GameObject\Player</Filter>
+      <Filter>Contents\GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="syEnemy.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy</Filter>
+      <Filter>Contents\GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="syBlockEnemy.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
     </ClCompile>
     <ClCompile Include="syIce.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\HotHead</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
     </ClCompile>
     <ClCompile Include="sySirKibble.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\SirKibble</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClCompile>
     <ClCompile Include="syFlower.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Flower</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
     </ClCompile>
     <ClCompile Include="syWaddleDee.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
     </ClCompile>
     <ClCompile Include="syEffects.cpp">
-      <Filter>Engine\Contents\GameObject\Effects</Filter>
+      <Filter>Contents\GameObject\Effects</Filter>
     </ClCompile>
     <ClCompile Include="syFlower_Skill.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead_Fire.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
     </ClCompile>
     <ClCompile Include="sySirKibble_Skill.cpp">
-      <Filter>Engine\Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClCompile>
     <ClCompile Include="syWorldTunnel_BG.cpp">
-      <Filter>Engine\Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
     </ClCompile>
     <ClCompile Include="syLevel_BG.cpp">
-      <Filter>Engine\Contents\GameObject\BackGround\Level_BG</Filter>
+      <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
     </ClCompile>
     <ClCompile Include="syPrismPlainsScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level1</Filter>
+      <Filter>Contents\Scene\LevelScene\Level1</Filter>
     </ClCompile>
     <ClCompile Include="syJamJungleScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level4</Filter>
+      <Filter>Contents\Scene\LevelScene\Level4</Filter>
     </ClCompile>
     <ClCompile Include="syCushyCloudScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level3</Filter>
+      <Filter>Contents\Scene\LevelScene\Level3</Filter>
     </ClCompile>
     <ClCompile Include="syGambleGalaxyScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level8</Filter>
+      <Filter>Contents\Scene\LevelScene\Level8</Filter>
     </ClCompile>
     <ClCompile Include="syIceIslandScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level6</Filter>
+      <Filter>Contents\Scene\LevelScene\Level6</Filter>
     </ClCompile>
     <ClCompile Include="syNatureNotchScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level2</Filter>
+      <Filter>Contents\Scene\LevelScene\Level2</Filter>
     </ClCompile>
     <ClCompile Include="sySecretSeaScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level7</Filter>
+      <Filter>Contents\Scene\LevelScene\Level7</Filter>
     </ClCompile>
     <ClCompile Include="syVocalVolcanoScene.cpp">
-      <Filter>Engine\Contents\Scene\LevelScene\Level5</Filter>
+      <Filter>Contents\Scene\LevelScene\Level5</Filter>
     </ClCompile>
     <ClCompile Include="syCollider.cpp">
       <Filter>Engine\Component\Collider</Filter>
@@ -595,6 +604,18 @@
     </ClCompile>
     <ClCompile Include="syRigidbody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="syNumberUI.cpp">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syPlacardUI.cpp">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syStarUI.cpp">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syStageUI.cpp">
+      <Filter>Contents\GameObject\UI\SelectUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

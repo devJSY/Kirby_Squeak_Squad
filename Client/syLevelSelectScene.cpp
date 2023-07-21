@@ -10,7 +10,8 @@
 #include "syCollisionManager.h"
 #include "syBackGround.h"
 #include "syResourceManager.h"
-
+#include "syNumberUI.h"
+#include "syPlacardUI.h"
 #include "syPrismPlainsScene.h"
 #include "syNatureNotchScene.h"
 #include "syCushyCloudScene.h"
@@ -57,7 +58,15 @@ namespace sy
 		LevelNameAni->SetBmpRGB(L"LevelName", 0, 128, 128);
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
-		
+
+
+		PlacardUI* placardUI = object::Instantiate<PlacardUI>(eLayerType::UI);
+		placardUI->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+
+		NumberUI* numUI = object::Instantiate<NumberUI>(eLayerType::UI);
+		numUI->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+
+
 
 		Scene::Initialize();
 
