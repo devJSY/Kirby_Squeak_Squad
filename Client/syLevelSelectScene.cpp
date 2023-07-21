@@ -37,13 +37,12 @@ namespace sy
 		// 상단 화면 오브젝트 생성 
 		mlevelBG = object::Instantiate<Level_BG>(eLayerType::BackGround);
 
+		// UI 생성 
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 
 		BackGround* Level = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Vector2 vec;
-		vec.x = 80.f;
-		vec.y = 7.f;
-		Level->GetComponent<Transform>()->SetPosition(vec);
+		Level->GetComponent<Transform>()->SetPosition(Vector2(80.f, 7.f));
+
 		Animator* LevelAni = Level->AddComponent<Animator>();
 		LevelAni->CreateAnimation(Tex, L"Level", Vector2(222.f, 850.f), Vector2(113.f, 17.f),Vector2(113.f, 0.f), 1, 1);
 		LevelAni->SetBmpRGB(L"Level", 0, 128, 0);
@@ -51,16 +50,14 @@ namespace sy
 		LevelAni->SetAffectedCamera(false);
 
 		BackGround* LevelName = object::Instantiate<BackGround>(eLayerType::BackGround);
+		LevelName->GetComponent<Transform>()->SetPosition(Vector2(101.f, 16.f));
+
 		Animator* LevelNameAni = LevelName->AddComponent<Animator>();
 		LevelNameAni->CreateAnimation(Tex, L"LevelName", Vector2(2.f, 1148.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
 		LevelNameAni->SetBmpRGB(L"LevelName", 0, 128, 128);
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
-
-		vec.x = 101.f;
-		vec.y = 16.f;
-
-		LevelName->GetComponent<Transform>()->SetPosition(vec);
+		
 
 		Scene::Initialize();
 
