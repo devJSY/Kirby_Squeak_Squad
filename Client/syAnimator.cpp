@@ -85,6 +85,7 @@ namespace sy
 
 		std::filesystem::path fs(path);
 		std::vector<Texture*> images = {};
+		eTextureType TempType = eTextureType::None;
 		// 디렉토리 파일중에 width 와 height 가 제일 큰값 구하기, 파일갯수 저장
 		for (auto& p : std::filesystem::recursive_directory_iterator(path))
 		{
@@ -97,6 +98,7 @@ namespace sy
 				continue;
 
 			Texture* image = ResourceManager::Load<Texture>(fileName, fullName);
+			TempType = image->GetType();
 			images.push_back(image);
 
 			if (width < image->GetWidth())
@@ -112,15 +114,8 @@ namespace sy
 		// 구한 크기값으로 Texture 생성
 		Texture* spriteSheet = Texture::Create(spriteSheetName, width * fileCount, height);
 
-		// Video 기본 타입 Bmp로 설정
-		spriteSheet->SetType(eTextureType::Bmp); 
-
-		// 32bit 비트맵 파일인경우 AlphaBmp 타입으로 설정한다
-		BITMAP info = {};
-		GetObject(spriteSheet->GetBitmap(), sizeof(BITMAP), &info);		
-		if (info.bmBitsPixel == 32)
-			spriteSheet->SetType(eTextureType::AlphaBmp);
-
+		// 읽은 파일의 타입으로 spriteSheet의 타입을 생성한다
+		spriteSheet->SetType(TempType);
 
 		// Texture 에 Load 해두었던 image 붙여넣기
 		int idx = 0;

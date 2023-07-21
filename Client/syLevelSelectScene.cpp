@@ -67,7 +67,6 @@ namespace sy
 		numUI->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
 
 
-
 		Scene::Initialize();
 
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
