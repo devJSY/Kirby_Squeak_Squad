@@ -176,6 +176,7 @@
     <ClInclude Include="syNatureNotchScene.h" />
     <ClInclude Include="syPlayer.h" />
     <ClInclude Include="syPrismPlainsScene.h" />
+    <ClInclude Include="syRigidbody.h" />
     <ClInclude Include="sySecretSeaScene.h" />
     <ClInclude Include="sySirKibble_Skill.h" />
     <ClInclude Include="syVocalVolcanoScene.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="syNatureNotchScene.cpp" />
     <ClCompile Include="syPlayer.cpp" />
     <ClCompile Include="syPrismPlainsScene.cpp" />
+    <ClCompile Include="syRigidbody.cpp" />
     <ClCompile Include="sySecretSeaScene.cpp" />
     <ClCompile Include="sySirKibble_Skill.cpp" />
     <ClCompile Include="syVocalVolcanoScene.cpp" />

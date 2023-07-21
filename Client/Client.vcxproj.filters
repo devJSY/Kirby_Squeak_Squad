@@ -408,6 +408,9 @@
     <ClInclude Include="syCollisionManager.h">
       <Filter>Engine\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="syRigidbody.h">
+      <Filter>Engine\Component\RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -589,6 +592,9 @@
     </ClCompile>
     <ClCompile Include="syCollisionManager.cpp">
       <Filter>Engine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="syRigidbody.cpp">
+      <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

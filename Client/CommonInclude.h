@@ -56,6 +56,7 @@ namespace sy::enums
 		SpriteRenderer,
 		Animator,
 		Collider,
+		Rigidbody,
 		End,
 	};
 

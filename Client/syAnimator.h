@@ -9,7 +9,7 @@ namespace sy
 	{
 	public:
 		Animator();
-		~Animator();
+		virtual ~Animator();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
