@@ -7,6 +7,7 @@
 #include "syResourceManager.h"
 #include "syTransform.h"
 #include "syAnimator.h"
+#include "syStageUI.h"
 
 namespace sy
 {
@@ -45,7 +46,13 @@ namespace sy
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
 
+		// Stage UI 생성
+		StageUI* stageUI = object::Instantiate<StageUI>(eLayerType::UI);
+		stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
+
 		Scene::Initialize();
+
+		stageUI->GetComponent<Animator>()->PlayAnimation(L"NormalStage", true);
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mType);

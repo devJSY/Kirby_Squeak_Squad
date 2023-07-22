@@ -211,7 +211,16 @@
     <Filter Include="Contents\GameObject\Effects">
       <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\UI\LeveltUI">
+    <Filter Include="Contents\GameObject\UI\StarUI">
+      <UniqueIdentifier>{b581e051-673e-4783-9ea7-079a1cf95b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\NumberUI">
+      <UniqueIdentifier>{5b6afe2f-b5ad-4304-af34-dcad8aaac7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\PlacardUI">
+      <UniqueIdentifier>{1b0aed68-4182-4036-b09c-33b2ee078e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\StageUI">
       <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -408,17 +417,17 @@
     <ClInclude Include="syRigidbody.h">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
-    <ClInclude Include="syNumberUI.h">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
-    </ClInclude>
-    <ClInclude Include="syPlacardUI.h">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+    <ClInclude Include="syStageUI.h">
+      <Filter>Contents\GameObject\UI\StageUI</Filter>
     </ClInclude>
     <ClInclude Include="syStarUI.h">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+      <Filter>Contents\GameObject\UI\StarUI</Filter>
     </ClInclude>
-    <ClInclude Include="syStageUI.h">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+    <ClInclude Include="syNumberUI.h">
+      <Filter>Contents\GameObject\UI\NumberUI</Filter>
+    </ClInclude>
+    <ClInclude Include="syPlacardUI.h">
+      <Filter>Contents\GameObject\UI\PlacardUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -605,17 +614,17 @@
     <ClCompile Include="syRigidbody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
-    <ClCompile Include="syNumberUI.cpp">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
-    </ClCompile>
-    <ClCompile Include="syPlacardUI.cpp">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+    <ClCompile Include="syStageUI.cpp">
+      <Filter>Contents\GameObject\UI\StageUI</Filter>
     </ClCompile>
     <ClCompile Include="syStarUI.cpp">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+      <Filter>Contents\GameObject\UI\StarUI</Filter>
     </ClCompile>
-    <ClCompile Include="syStageUI.cpp">
-      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
+    <ClCompile Include="syNumberUI.cpp">
+      <Filter>Contents\GameObject\UI\NumberUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syPlacardUI.cpp">
+      <Filter>Contents\GameObject\UI\PlacardUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
