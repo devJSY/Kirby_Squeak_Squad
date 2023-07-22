@@ -20,9 +20,7 @@ namespace sy
 
 	private:
 		void CreateDot();
-		void CreateLevelUI();
-
-		
+		void CreateLevelUI();		
 		
 	private:
 		eLevelType mType;

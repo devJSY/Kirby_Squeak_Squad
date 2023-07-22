@@ -73,7 +73,7 @@ namespace sy
 
 		Scene::Initialize();
 
-		// Level1 UI 활성화
+		// 기본 Level1 UI 활성화
 		mbActiveUI[1] = true;
 		mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
 		mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
@@ -288,47 +288,101 @@ namespace sy
 	{
 		// Create DotUI don't use index zero, one
 
-		// Level2
+		DotUI* dot;
+
+		/////////// Level2 ///////////
+
 		for (size_t i = 0; i < 6; i++)
 		{
-			DotUI* dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(200.f - (8.f * i), 42.f));
 
 			mDots[2].push_back(dot);
 		}
 
-		DotUI* dot = object::Instantiate<DotUI>(eLayerType::UI);
+		dot = object::Instantiate<DotUI>(eLayerType::UI);
 		dot->GetComponent<Transform>()->SetPosition(Vector2(200.f, 50.f));
 
 		mDots[2].push_back(dot);
 
-		// Level3
+		/////////// Level3 ///////////
+
+		//Top
+		for (size_t i = 0; i < 4; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 65.f));
+
+			mDots[3].push_back(dot);
+		}
+
+		// Middle
+		for (size_t i = 0; i < 5; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f, 73.f + (8.f * i)));
+
+			mDots[3].push_back(dot);
+		}
+
+		//Bottom
+		for (size_t i = 0; i < 2; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 113.f));
+
+			mDots[3].push_back(dot);
+		}
+
+		/////////// Level4 ///////////
+		for (size_t i = 0; i < 5; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(215.f, 153.f - (8.f * i)));
+
+			mDots[4].push_back(dot);
+		}
+
+		dot = object::Instantiate<DotUI>(eLayerType::UI);
+		dot->GetComponent<Transform>()->SetPosition(Vector2(207.f, 153.f));
+
+		mDots[4].push_back(dot);
 
 
-		// Level4
+		/////////// Level5 ///////////
+		for (size_t i = 0; i < 6; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(170.f - (8.f * i), 153.f));
 
+			mDots[5].push_back(dot);
+		}
 
-		// Level5
+		/////////// Level6 ///////////
+		for (size_t i = 0; i < 7; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(100.f - (8.f * i), 153.f));
 
+			mDots[6].push_back(dot);
+		}
 
-		// Level6
+		/////////// Level7 ///////////
+		for (size_t i = 0; i < 5; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 140.f - (8.f * i)));
 
+			mDots[7].push_back(dot);
+		}
 
-		// Level7
+		/////////// Level8 ///////////
+		for (size_t i = 0; i < 5; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 90.f - (8.f * i)));
 
-
-		// Level8
-
-
-
-
-
-
-
-
-
-
-
-
+			mDots[8].push_back(dot);
+		}
 	}
 }
