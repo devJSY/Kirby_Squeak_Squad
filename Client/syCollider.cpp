@@ -13,6 +13,7 @@ namespace sy
 		, mOffset(Vector2::Zero)
 		, mCollisionNumber(mCollisionCount++)
 		, mbIsCollision(false)
+		, mbAffectedCamera(true)
 	{
 	}
 
@@ -41,7 +42,8 @@ namespace sy
 		pos.x += mOffset.x;
 		pos.y += mOffset.y;
 
-		pos = Camera::CalculatePosition(pos);
+		if(mbAffectedCamera)
+			pos = Camera::CalculatePosition(pos);
 
 		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);

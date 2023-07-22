@@ -24,7 +24,6 @@
 namespace sy
 {
 	WorldTunnelScene::WorldTunnelScene()
-		: mPlayer(nullptr)
 	{
 	}
 
@@ -38,13 +37,6 @@ namespace sy
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
 		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
-
-		// 플레이어 설정
-		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);
-		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();
-		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
-
-
 
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
@@ -85,9 +77,18 @@ namespace sy
 
 	void WorldTunnelScene::Enter()
 	{
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		Transform* playerTrans = player->GetComponent<Transform>();
+		playerTrans->SetPosition(Vector2(275.f, 100.f));
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(true);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(true);
+
 		// 카메라 설정 
 		//Camera::SetTarget(nullptr);
-		Camera::SetTarget(mPlayer);
+		Camera::SetTarget(player);
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);

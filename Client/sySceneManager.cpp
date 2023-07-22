@@ -21,12 +21,17 @@
 #include "syAbilityUI.h"
 #include "syHPbarUI.h"
 #include "syLifeUI.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
 	std::map<std::wstring, Scene*> SceneManager::mScenes = {};
 	Scene* SceneManager::mActiveScene = nullptr;
 
+	// SceneManager에서 Player객체 생성
+	Player* SceneManager::mPlayer = new DefaultKirby;
+
+	// SceneManager에서 UI객체 생성
 	Inventory* SceneManager::mInventory = new Inventory;
 	AbilityUI* SceneManager::mAbilityUI = new AbilityUI;
 	HPbarUI* SceneManager::mHPbarUI = new HPbarUI;
@@ -43,6 +48,9 @@ namespace sy
 		// 삭제당시 씬이 UI를 추가하지 않은 씬이라면 직접 UI 메모리 해제 해줘야함
 		if (SceneName == L"OpeningScene" || SceneName == L"TitleScene" || SceneName == L"EndingScene")
 		{
+			delete mPlayer;
+			mPlayer = nullptr;
+
 			delete mInventory;
 			mInventory = nullptr;
 
@@ -91,7 +99,13 @@ namespace sy
 			iter.second->Initialize();
 		}
 
-		UIInitialize();
+		mPlayer->Initialize();
+		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(275.f, 100.f));
+
+		mInventory->Initialize();
+		mAbilityUI->Initialize();
+		mHPbarUI->Initialize();
+		mLifeUI->Initialize();
 
 		LoadScene(L"OpeningScene");
 	}
@@ -111,6 +125,9 @@ namespace sy
 		// 변경전 기존 Scene Exit 호출
 		mActiveScene->Exit();
 
+		// 현재 씬에 Player가 존재한다면 삭제
+		mActiveScene->RemoveGameObject(eLayerType::Player, mPlayer);
+
 		// 현재 씬에 UI가 존재한다면 삭제
 		mActiveScene->RemoveGameObject(eLayerType::Inventory, mInventory);
 		mActiveScene->RemoveGameObject(eLayerType::UI, mAbilityUI);
@@ -128,6 +145,7 @@ namespace sy
 		// 설정한 씬을 제외한 씬에 UI 추가
 		if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
 		{
+			mActiveScene->AddGameObject(eLayerType::Player, mPlayer);
 			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);
 			mActiveScene->AddGameObject(eLayerType::UI, mAbilityUI);
 			mActiveScene->AddGameObject(eLayerType::UI, mHPbarUI);
@@ -147,17 +165,5 @@ namespace sy
 			return nullptr;
 
 		return iter->second;
-	}
-
-	void SceneManager::UIInitialize()
-	{
-		mAbilityUI->SetOwner(nullptr);  // 오너설정 추후에 설정예정
-		mHPbarUI->SetOwner(nullptr);	// 오너설정 추후에 설정예정
-		mLifeUI->SetOwner(nullptr);		// 오너설정 추후에 설정예정
-
-		mInventory->Initialize();
-		mAbilityUI->Initialize();
-		mHPbarUI->Initialize();
-		mLifeUI->Initialize();
 	}
 }

@@ -10,8 +10,7 @@
 namespace sy
 {
 	LifeUI::LifeUI()
-		: mOwner(nullptr)
-		, mSpriteRenderer(nullptr)
+		: mSpriteRenderer(nullptr)
 		, mAnimator(nullptr)
 	{
 	}
@@ -24,7 +23,7 @@ namespace sy
 	{
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.x = 65.0f;
-		vec.y -= 27.f;
+		vec.y -= 23.f;
 		GetComponent<Transform>()->SetPosition(vec);
 
 		Texture* Life_Icon = ResourceManager::Load<Texture>(L"Life_Icon_Tex", L"..\\Resources\\UI\\Life_Icon.bmp");

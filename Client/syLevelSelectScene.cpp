@@ -22,6 +22,9 @@
 #include "sySecretSeaScene.h"
 #include "syGambleGalaxyScene.h"
 #include "syDotUI.h"
+#include "sySceneManager.h"
+#include "syPlayer.h"
+#include "syGameObject.h"
 
 namespace sy
 {
@@ -136,6 +139,15 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
+
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		Transform* playerTrans = player->GetComponent<Transform>();
+		playerTrans->SetPosition(Vector2(140.f, 22.f));
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(false);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(false);
 	}
 
 	void LevelSelectScene::Exit()

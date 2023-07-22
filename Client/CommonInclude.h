@@ -22,13 +22,13 @@ namespace sy::enums
 	{
 		BackGround,
 		ForeGround,
-		Video,		
-		Enemy,
-		Player,
-		Effect,
+		Video,	
 		Inventory,
 		Item,
 		UI,
+		Enemy,
+		Player,
+		Effect,
 		End,
 	};
 

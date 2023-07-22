@@ -28,7 +28,6 @@
 namespace sy
 {
 	StageScene::StageScene()
-		: mPlayer(nullptr)
 	{
 	}
 
@@ -56,14 +55,6 @@ namespace sy
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
-
-
-		// 플레이어 설정
-		mPlayer = object::Instantiate<DefaultKirby>(eLayerType::Player);	
-		Transform* PlayerTrans = mPlayer->GetComponent<Transform>();	
-		PlayerTrans->SetPosition(Vector2(275.f, 100.f));
-		//Collider* col = mPlayer->GetComponent<Collider>();
-		//col->SetSize(Vector2(50.f, 50.f));
 
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
@@ -107,8 +98,18 @@ namespace sy
 
 	void StageScene::Enter()
 	{
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		Transform* playerTrans = player->GetComponent<Transform>();
+		playerTrans->SetPosition(Vector2(275.f, 100.f));
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(true);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(true);
+		//playerCol->SetSize(Vector2(50.f, 50.f));
+
 		// 카메라 설정 
-		Camera::SetTarget(mPlayer);
+		Camera::SetTarget(player);
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);

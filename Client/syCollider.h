@@ -26,6 +26,9 @@ namespace sy
 		Vector2 GetPosition() { return mPosition; }
 		UINT GetCollisionNumber() { return mCollisionNumber; }
 
+		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
+		bool GetAffectedCamera() { return mbAffectedCamera; }
+
 	private:
 		static UINT mCollisionCount;
 
@@ -35,6 +38,7 @@ namespace sy
 
 		UINT mCollisionNumber;
 		bool mbIsCollision;
+		bool mbAffectedCamera;			// 카메라 영향 여부
 	};
 }
 

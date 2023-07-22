@@ -3,6 +3,7 @@
 
 namespace sy
 {
+	class Player;
 	class Inventory;
 	class AbilityUI;
 	class HPbarUI;
@@ -36,9 +37,7 @@ namespace sy
 		static Scene* GetActiveScene() { return mActiveScene; }
 		static Scene* GetScene(const std::wstring& name);
 
-	private:
-		static void UIInitialize();
-
+		static Player* GetPlayer() { return mPlayer; }
 
 	private:
 		// 트리 자료구조
@@ -47,6 +46,8 @@ namespace sy
 		// Value 는 실제 저장할 데이터
 		static std::map<std::wstring, Scene*> mScenes;
 		static Scene* mActiveScene;
+
+		static Player* mPlayer;
 
 		// UI 객체는 게임에 1개만 존재하기때문에 SceneManager에서 관리
 		static Inventory* mInventory;

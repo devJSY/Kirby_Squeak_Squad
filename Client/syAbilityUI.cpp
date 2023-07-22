@@ -5,12 +5,12 @@
 #include "syPlayer.h"
 #include "syTransform.h"
 #include "syApplication.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
 	AbilityUI::AbilityUI()
-		: mOwner(nullptr)
-		, mAnimator(nullptr)
+		:mAnimator(nullptr)
 	{
 	}
 
@@ -23,7 +23,7 @@ namespace sy
 		// AbilityUI 기본 위치 설정 
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.x = 20.0f;
-		vec.y -= 25.f;
+		vec.y -= 22.f;
 		GetComponent<Transform>()->SetPosition(vec);
 
 		mAnimator = AddComponent<Animator>();
@@ -47,10 +47,11 @@ namespace sy
 	{
 		UI::Update();
 
+		Player* player = SceneManager::GetPlayer();
 		// Owner 의 상태에 따라서 현재 애니메이션 설정
-		if (nullptr != mOwner)
+		if (nullptr != player)
 		{
-			eAbilityType type = mOwner->GetAbilityType();
+			eAbilityType type = player->GetAbilityType();
 		
 			if (type == eAbilityType::Normal)
 				mAnimator->PlayAnimation(L"Ability_UI_Normal", false);		
