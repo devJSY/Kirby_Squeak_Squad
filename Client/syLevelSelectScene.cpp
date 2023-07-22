@@ -35,6 +35,7 @@ namespace sy
 		, mPlacardUI{}
 		, mStarUI{}
 		, mNumberUI{}
+		, mDots{}
 	{
 	}
 
