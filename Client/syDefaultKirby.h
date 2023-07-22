@@ -11,6 +11,11 @@ namespace sy
 		Jump,
 		Turn,
 		Damage,
+		Drop,
+		Down,
+		Inhale_1,
+		Inhale_2,
+		Inhale_3,
 		End,
 	};
 
@@ -39,6 +44,11 @@ namespace sy
 		void Jump();
 		void Turn();
 		void Damage();
+		void Drop();
+		void Down();
+		void Inhale_1();
+		void Inhale_2();
+		void Inhale_3();
 
 	private:
 		eDefaultKirbyState mState;
