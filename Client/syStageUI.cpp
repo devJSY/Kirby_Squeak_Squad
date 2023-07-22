@@ -39,9 +39,7 @@ namespace sy
 		mAnimator->SetBmpRGB(L"BossStageClearFlash", 0, 128, 0);
 		mAnimator->SetBmpRGB(L"BossStageFlash", 0, 128, 0);
 
-
 		mAnimator->SetAffectedCamera(false);
-		//mAnimator->PlayAnimation(L"One");		
 
 		UI::Initialize();
 	}

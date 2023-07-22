@@ -24,7 +24,6 @@ namespace sy
 		mAnimator->SetBmpRGB(L"PlacardUI", 0, 128, 0);
 
 		mAnimator->SetAffectedCamera(false);
-		//animator->PlayAnimation(L"PlacardUI");
 
 		UI::Initialize();
 	}

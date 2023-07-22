@@ -26,7 +26,6 @@ namespace sy
 		mAnimator->CreateAnimation(StageStarTex, L"StageStar", Vector2::Zero, Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.1f, 1);
 
 		mAnimator->SetAffectedCamera(false);
-		//mAnimator->PlayAnimation(L"StarUI");
 
 		UI::Initialize();
 	}

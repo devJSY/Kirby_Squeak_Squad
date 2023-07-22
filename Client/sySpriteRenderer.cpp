@@ -12,6 +12,7 @@ namespace sy
 		, mBMPRGB(RGB(255, 0, 255)) // default Magenta
 		, mAlpha(1.0f)
 		, mbAffectedCamera(true)
+		, mRenderTrig(true)
 	{
 	}
 
@@ -34,15 +35,18 @@ namespace sy
 		GameObject* gameObj = GetOwner();
 		Transform* tr = gameObj->GetComponent<Transform>();
 
-		mTex->Render(hdc
-			, GetOwner()->GetComponent<Transform>()->GetPosition()
-			, Vector2(mTex->GetWidth(), mTex->GetHeight())
-			, Vector2::Zero
-			, Vector2(mTex->GetWidth(), mTex->GetHeight())
-			, mbAffectedCamera
-			, tr->GetScale()
-			, mAlpha
-			, mBMPRGB
-			, tr->GetRotation());
+		if (mRenderTrig)
+		{
+			mTex->Render(hdc
+				, GetOwner()->GetComponent<Transform>()->GetPosition()
+				, Vector2(mTex->GetWidth(), mTex->GetHeight())
+				, Vector2::Zero
+				, Vector2(mTex->GetWidth(), mTex->GetHeight())
+				, mbAffectedCamera
+				, tr->GetScale()
+				, mAlpha
+				, mBMPRGB
+				, tr->GetRotation());
+		}
 	}
 }
