@@ -223,6 +223,9 @@
     <Filter Include="Contents\GameObject\UI\StageUI">
       <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\UI\DotUI">
+      <UniqueIdentifier>{f2caf8e6-36bf-4fdc-81c4-64aa7e1c40d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -429,6 +432,9 @@
     <ClInclude Include="syPlacardUI.h">
       <Filter>Contents\GameObject\UI\PlacardUI</Filter>
     </ClInclude>
+    <ClInclude Include="syDotUI.h">
+      <Filter>Contents\GameObject\UI\DotUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -625,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="syPlacardUI.cpp">
       <Filter>Contents\GameObject\UI\PlacardUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syDotUI.cpp">
+      <Filter>Contents\GameObject\UI\DotUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

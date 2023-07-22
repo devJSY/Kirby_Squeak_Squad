@@ -148,6 +148,7 @@
     <ClInclude Include="syCollider.h" />
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
+    <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syFlower_Skill.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
     <ClInclude Include="syHotHead_Fire.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="syCollider.cpp" />
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
+    <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syFlower_Skill.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />

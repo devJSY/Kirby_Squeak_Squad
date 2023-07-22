@@ -17,7 +17,6 @@ namespace sy
 
 	void PlacardUI::Initialize()
 	{
-		// UI »ý¼º 
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 		mAnimator = AddComponent<Animator>();
 

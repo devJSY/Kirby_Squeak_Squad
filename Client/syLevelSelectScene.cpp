@@ -21,6 +21,7 @@
 #include "syIceIslandScene.h"
 #include "sySecretSeaScene.h"
 #include "syGambleGalaxyScene.h"
+#include "syDotUI.h"
 
 namespace sy
 {
@@ -64,6 +65,15 @@ namespace sy
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
 
+
+		
+
+		for (size_t i = 0; i < 100; i++)
+		{			
+			object::Instantiate<DotUI>(eLayerType::UI)->GetComponent<Transform>()->SetPosition(Vector2(10.f + (10.f * i), 37.f));
+		}
+	
+
 		// Create LevelUI don't use index zero
 		for (size_t i = 1; i <= 8 ; i++)
 		{
@@ -104,6 +114,7 @@ namespace sy
 		mPlacardUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 45.f));
 		mStarUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 42.f));
 		mNumberUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 43.f));
+
 
 		Scene::Initialize();
 
