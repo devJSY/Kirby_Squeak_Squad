@@ -3,8 +3,6 @@
 
 namespace sy
 {
-	class Player;
-
 	class AbilityUI : public UI
 	{
 	public:
