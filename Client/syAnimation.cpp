@@ -66,6 +66,8 @@ namespace sy
 
 	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)
 	{	
+		SetName(name);
+
 		// 텍스쳐 설정
 		mTexture = texture;
 
