@@ -20,5 +20,9 @@ namespace sy
 		eLevelType mType;
 		class Level_BG* mlevelBG;
 
+		class PlacardUI* mPlacardUI[9];
+		class StarUI* mStarUI[9];
+		class NumberUI* mNumberUI[9];
+
 	};
 }

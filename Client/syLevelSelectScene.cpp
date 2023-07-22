@@ -27,6 +27,9 @@ namespace sy
 	LevelSelectScene::LevelSelectScene()
 		: mType(eLevelType::LevelSelect)
 		, mlevelBG(nullptr)
+		, mPlacardUI{}
+		, mStarUI{}
+		, mNumberUI{}
 	{
 	}
 
@@ -60,25 +63,50 @@ namespace sy
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
 
+		// Create Level UI 
+		for (size_t i = 1; i <= 8 ; i++)
+		{
+			mPlacardUI[i] = object::Instantiate<PlacardUI>(eLayerType::UI);
+			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::UI);
+			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::UI);
+		}
 
-
-		// Level 1
-		PlacardUI* placardUI = object::Instantiate<PlacardUI>(eLayerType::UI);
-		placardUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-
-		StarUI* starUI = object::Instantiate<StarUI>(eLayerType::UI);
-		starUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		//mPlacardUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		//mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		//mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
 		
-
-		NumberUI* numUI = object::Instantiate<NumberUI>(eLayerType::UI);
-		numUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-
+		for (size_t i = 1; i <= 8; i++)
+		{
+			mPlacardUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
+			mStarUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
+			mNumberUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
+		}
 
 		Scene::Initialize();
 
+		for (size_t i = 1; i <= 8; i++)
+		{
+			mPlacardUI[i]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"StarUI", true);
+			if(i == 1)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"One");
+			else if (i == 2)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Two");
+			else if (i == 3)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Three");
+			else if (i == 4)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Four");
+			else if (i == 5)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Five");
+			else if (i == 6)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Six");
+			else if (i == 7)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Seven");
+			else if (i == 8)
+				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Eight");
+		}
+
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
-		starUI->SetAllClear();
-		
 	}
 
 	void LevelSelectScene::Update()

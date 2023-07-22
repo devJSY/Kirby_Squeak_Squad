@@ -8,7 +8,6 @@ namespace sy
 {
 	StarUI::StarUI()
 		: mAnimator(nullptr)
-		, mbAllClear(false)
 	{
 	}
 
@@ -26,6 +25,7 @@ namespace sy
 		mAnimator->SetBmpRGB(L"StarUI", 0, 128, 0);
 
 		mAnimator->SetAffectedCamera(false);
+		//mAnimator->PlayAnimation(L"StarUI");
 
 		UI::Initialize();
 	}
