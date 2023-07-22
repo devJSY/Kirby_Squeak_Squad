@@ -27,6 +27,7 @@ namespace sy
 	LevelSelectScene::LevelSelectScene()
 		: mType(eLevelType::LevelSelect)
 		, mlevelBG(nullptr)
+		, mbActiveUI{}
 		, mPlacardUI{}
 		, mStarUI{}
 		, mNumberUI{}
@@ -42,7 +43,7 @@ namespace sy
 		// 상단 화면 오브젝트 생성 
 		mlevelBG = object::Instantiate<Level_BG>(eLayerType::BackGround);
 
-		// UI 생성 
+		// 좌상단 UI 생성 
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 
 		BackGround* Level = object::Instantiate<BackGround>(eLayerType::BackGround);
@@ -63,7 +64,7 @@ namespace sy
 		LevelNameAni->PlayAnimation(L"LevelName");
 		LevelNameAni->SetAffectedCamera(false);
 
-		// Create Level UI 
+		// Create LevelUI don't use index zero
 		for (size_t i = 1; i <= 8 ; i++)
 		{
 			mPlacardUI[i] = object::Instantiate<PlacardUI>(eLayerType::UI);
@@ -71,40 +72,40 @@ namespace sy
 			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::UI);
 		}
 
-		//mPlacardUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-		//mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-		//mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-		
-		for (size_t i = 1; i <= 8; i++)
-		{
-			mPlacardUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
-			mStarUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
-			mNumberUI[i]->GetComponent<Transform>()->SetPosition(Vector2(14.f + (i * 20.f), 40.f));
-		}
+		// LevelUI Position Set
+		mPlacardUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
+		mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 38.f));
+
+		mPlacardUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 63.f));
+		mStarUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 60.f));
+		mNumberUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 61.f));
+
+		mPlacardUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 110.f));
+		mStarUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 107.f));
+		mNumberUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 108.f));
+
+		mPlacardUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 151.f));
+		mStarUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 148.f));
+		mNumberUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 149.f));
+
+		mPlacardUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
+		mStarUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 147.f));
+		mNumberUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 148.f));
+
+		mPlacardUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 151.f));
+		mStarUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 148.f));
+		mNumberUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 149.f));
+
+		mPlacardUI[7]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 100.f));
+		mStarUI[7]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 97.f));
+		mNumberUI[7]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 98.f));
+
+		mPlacardUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 45.f));
+		mStarUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 42.f));
+		mNumberUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 43.f));
 
 		Scene::Initialize();
-
-		for (size_t i = 1; i <= 8; i++)
-		{
-			mPlacardUI[i]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"StarUI", true);
-			if(i == 1)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"One");
-			else if (i == 2)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Two");
-			else if (i == 3)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Three");
-			else if (i == 4)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Four");
-			else if (i == 5)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Five");
-			else if (i == 6)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Six");
-			else if (i == 7)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Seven");
-			else if (i == 8)
-				mNumberUI[i]->GetComponent<Animator>()->PlayAnimation(L"Eight");
-		}
 
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
 	}
@@ -140,6 +141,62 @@ namespace sy
 		{
 			mType = eLevelType::AllClear_LevelSelect;
 			mlevelBG->SetLevelType(mType);
+
+			// 활성화 되어있는 UI의 Star만 Play
+			for (size_t i = 1; i <= 8; i++)
+			{
+				if(mbActiveUI[i]) mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"StarUI", true);
+			}
+		}
+
+		// 특정 조건에 따라 UI 활성화
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			mbActiveUI[1] = true;
+			mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			mbActiveUI[2] = true;
+			mPlacardUI[2]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[2]->GetComponent<Animator>()->PlayAnimation(L"Two");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			mbActiveUI[3] = true;
+			mPlacardUI[3]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[3]->GetComponent<Animator>()->PlayAnimation(L"Three");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			mbActiveUI[4] = true;
+			mPlacardUI[4]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[4]->GetComponent<Animator>()->PlayAnimation(L"Four");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Five))
+		{
+			mbActiveUI[5] = true;
+			mPlacardUI[5]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[5]->GetComponent<Animator>()->PlayAnimation(L"Five");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Six))
+		{
+			mbActiveUI[6] = true;
+			mPlacardUI[6]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[6]->GetComponent<Animator>()->PlayAnimation(L"Six");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Seven))
+		{
+			mbActiveUI[7] = true;
+			mPlacardUI[7]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[7]->GetComponent<Animator>()->PlayAnimation(L"Seven");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Eight))
+		{
+			mbActiveUI[8] = true;
+			mPlacardUI[8]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[8]->GetComponent<Animator>()->PlayAnimation(L"Eight");
 		}
 
 	}
