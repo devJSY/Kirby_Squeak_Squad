@@ -211,7 +211,7 @@
     <Filter Include="Contents\GameObject\Effects">
       <UniqueIdentifier>{9963be6e-a9cd-4c3e-8f3d-4568ca85981a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\UI\SelectUI">
+    <Filter Include="Contents\GameObject\UI\LeveltUI">
       <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -409,16 +409,16 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="syNumberUI.h">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClInclude>
     <ClInclude Include="syPlacardUI.h">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClInclude>
     <ClInclude Include="syStarUI.h">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClInclude>
     <ClInclude Include="syStageUI.h">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -606,16 +606,16 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="syNumberUI.cpp">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClCompile>
     <ClCompile Include="syPlacardUI.cpp">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClCompile>
     <ClCompile Include="syStarUI.cpp">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClCompile>
     <ClCompile Include="syStageUI.cpp">
-      <Filter>Contents\GameObject\UI\SelectUI</Filter>
+      <Filter>Contents\GameObject\UI\LeveltUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

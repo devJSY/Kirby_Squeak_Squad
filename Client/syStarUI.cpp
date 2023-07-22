@@ -18,11 +18,12 @@ namespace sy
 	void StarUI::Initialize()
 	{
 		// UI »ý¼º 
-		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
+		Texture* Portal_StarTex = ResourceManager::Load<Texture>(L"Portal_Star", L"..\\Resources\\UI\\Portal_Star.bmp");
+		Texture* StageStarTex = ResourceManager::Load<Texture>(L"StageStar", L"..\\Resources\\UI\\StageStar.bmp");
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimation(Tex, L"StarUI", Vector2(649.f, 875.f), Vector2(31.f, 23.f), Vector2(34.f, 0.f), 0.1f, 3);
-		mAnimator->SetBmpRGB(L"StarUI", 0, 128, 0);
+		mAnimator->CreateAnimation(Portal_StarTex, L"Portal_Star", Vector2::Zero, Vector2(50.f, 30.f), Vector2(50.f, 0.f), 0.07f, 12);
+		mAnimator->CreateAnimation(StageStarTex, L"StageStar", Vector2::Zero, Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.1f, 1);
 
 		mAnimator->SetAffectedCamera(false);
 		//mAnimator->PlayAnimation(L"StarUI");

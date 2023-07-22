@@ -107,6 +107,11 @@ namespace sy
 
 		Scene::Initialize();
 
+		// 1번 LevelUI 활성화
+		mbActiveUI[1] = true;
+		mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+		mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
+
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
 	}
 
@@ -145,7 +150,7 @@ namespace sy
 			// 활성화 되어있는 UI의 Star만 Play
 			for (size_t i = 1; i <= 8; i++)
 			{
-				if(mbActiveUI[i]) mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"StarUI", true);
+				if(mbActiveUI[i]) mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
 			}
 		}
 
