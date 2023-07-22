@@ -54,6 +54,7 @@ namespace sy
 		eDefaultKirbyState mState;
 		class Animator* mAnimator;
 		class Transform* mTransform;
+		eDirection	mDir;
 	};
 }
 
