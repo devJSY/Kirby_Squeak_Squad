@@ -38,6 +38,14 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) override;
 
 	private:
+		// Level Mode State
+		void Level_Idle();
+		void Level_Jump();
+		void Level_Turn();
+		void Level_Drop();
+
+	private:
+		// Play Mode State
 		void Idle();
 		void Walk();
 		void Run();

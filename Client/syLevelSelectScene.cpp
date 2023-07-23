@@ -149,6 +149,7 @@ namespace sy
 		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(false);
+		player->SetPlayerMode(ePlayerMode::LevelMode);
 	}
 
 	void LevelSelectScene::Exit()

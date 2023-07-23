@@ -11,7 +11,7 @@
 namespace sy
 {
 	DefaultKirby::DefaultKirby()
-		: Player(eAbilityType::Normal)
+		: Player(eAbilityType::Normal, ePlayerMode::LevelMode)
 		, mState(eDefaultKirbyState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
@@ -127,46 +127,72 @@ namespace sy
 		// 방향 설정
 		mDir = mTransform->GetDirection();
 
-		// 상태처리
-		switch (mState)
+		// PlayerMode 에 따라서 상태처리 
+		if (GetPlayerMode() == ePlayerMode::LevelMode)
 		{
-		case sy::eDefaultKirbyState::Idle:
-			Idle();
-			break;
-		case sy::eDefaultKirbyState::Walk:
-			Walk();
-			break;
-		case sy::eDefaultKirbyState::Run:
-			Run();
-			break;
-		case sy::eDefaultKirbyState::Jump:
-			Jump();
-			break;
-		case sy::eDefaultKirbyState::Turn:
-			Turn();
-			break;
-		case sy::eDefaultKirbyState::Damage:
-			Damage();
-			break;
-		case sy::eDefaultKirbyState::Drop:
-			Drop();
-			break;
-		case sy::eDefaultKirbyState::Down:
-			Down();
-			break;
-		case sy::eDefaultKirbyState::Inhale_1:
-			Inhale_1();
-			break;
-		case sy::eDefaultKirbyState::Inhale_2:
-			Inhale_2();
-			break;
-		case sy::eDefaultKirbyState::Inhale_3:
-			Inhale_3();
-			break;
-		case sy::eDefaultKirbyState::End:
-			break;
-		default:
-			break;
+			switch (mState)
+			{
+			case sy::eDefaultKirbyState::Idle:
+				Level_Idle();
+				break;
+			case sy::eDefaultKirbyState::Jump:
+				Level_Jump();
+				break;
+			case sy::eDefaultKirbyState::Turn:
+				Level_Turn();
+				break;
+			case sy::eDefaultKirbyState::Drop:
+				Level_Drop();
+				break;
+			case sy::eDefaultKirbyState::End:
+				break;
+			default:
+				break;
+			}
+		}
+		else if (GetPlayerMode() == ePlayerMode::PlayMode)
+		{
+			// 상태처리
+			switch (mState)
+			{
+			case sy::eDefaultKirbyState::Idle:
+				Idle();
+				break;
+			case sy::eDefaultKirbyState::Walk:
+				Walk();
+				break;
+			case sy::eDefaultKirbyState::Run:
+				Run();
+				break;
+			case sy::eDefaultKirbyState::Jump:
+				Jump();
+				break;
+			case sy::eDefaultKirbyState::Turn:
+				Turn();
+				break;
+			case sy::eDefaultKirbyState::Damage:
+				Damage();
+				break;
+			case sy::eDefaultKirbyState::Drop:
+				Drop();
+				break;
+			case sy::eDefaultKirbyState::Down:
+				Down();
+				break;
+			case sy::eDefaultKirbyState::Inhale_1:
+				Inhale_1();
+				break;
+			case sy::eDefaultKirbyState::Inhale_2:
+				Inhale_2();
+				break;
+			case sy::eDefaultKirbyState::Inhale_3:
+				Inhale_3();
+				break;
+			case sy::eDefaultKirbyState::End:
+				break;
+			default:
+				break;
+			}
 		}
 
 		Player::Update();
@@ -190,6 +216,22 @@ namespace sy
 	void DefaultKirby::OnCollisionExit(Collider* other)
 	{
 
+	}
+
+	void DefaultKirby::Level_Idle()
+	{
+	}
+
+	void DefaultKirby::Level_Jump()
+	{
+	}
+
+	void DefaultKirby::Level_Turn()
+	{
+	}
+
+	void DefaultKirby::Level_Drop()
+	{
 	}
 
 	void DefaultKirby::Idle()

@@ -85,6 +85,7 @@ namespace sy
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
+		player->SetPlayerMode(ePlayerMode::LevelMode);
 
 		// 카메라 설정 
 		//Camera::SetTarget(nullptr);

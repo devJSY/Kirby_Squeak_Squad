@@ -107,6 +107,7 @@ namespace sy
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
 		//playerCol->SetSize(Vector2(50.f, 50.f));
+		player->SetPlayerMode(ePlayerMode::PlayMode);
 
 		// 카메라 설정 
 		Camera::SetTarget(player);

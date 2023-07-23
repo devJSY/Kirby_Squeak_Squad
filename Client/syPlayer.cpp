@@ -4,8 +4,9 @@
 
 namespace sy
 {
-	Player::Player(eAbilityType type)
+	Player::Player(eAbilityType type, ePlayerMode mode)
 		: mAbilityType(type)
+		, mMode(ePlayerMode::LevelMode)
 	{
 		// 애니메이터 생성
 		AddComponent<Animator>();
