@@ -54,7 +54,7 @@ namespace sy
 
 	void VocalVolcanoScene::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			SceneManager::LoadScene(L"IceIslandScene");
 		}

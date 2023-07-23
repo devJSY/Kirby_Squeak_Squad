@@ -47,7 +47,7 @@ namespace sy
 			SceneManager::LoadScene(L"TitleScene");
 		}
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}

@@ -122,7 +122,7 @@ namespace sy
 			break;
 		}
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			// mCurLevel 상태에 따라 진입할 Level 설정
 			if (mCurLevel == eLevelState::Level1)
