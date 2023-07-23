@@ -44,7 +44,7 @@ namespace sy
 		Enemy::Update();
 
 		// 특정 조건일때 스킬 생성
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::T))
 		{
 			Transform* tr = GetComponent<Transform>();
 			// 현재 HotHead 위치 기준 더해준 위치로 생성

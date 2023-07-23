@@ -59,6 +59,8 @@ namespace sy
 			return false;
 		}
 
+		static Vector2 GetMousePos() { return mMousePos; }
+
 	private:
 		static std::vector<Key> mKeys;
 		static math::Vector2 mMousePos;

@@ -8,6 +8,7 @@
 #include "syAnimator.h"
 #include "syCamera.h"
 #include "syCollisionManager.h"
+#include "syApplication.h"
 
 namespace sy
 {
