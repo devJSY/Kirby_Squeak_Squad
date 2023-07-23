@@ -12,11 +12,10 @@
 
 ![mermaid-diagram-2023-07-22-140642](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/6ce6891e-610b-4c9d-8613-0559f6f205d4)
 
-
 ## 🌱 Inheritance Hierarchy Scene
 
-![mermaid-diagram-2023-07-22-140704](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/0bca855e-cd0e-45f8-b288-59faf0c71050)
+![mermaid-diagram-2023-07-23-090936](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/8334c3e1-8c28-4482-8535-cea8d313af7d)
 
 ## 🌱 Inheritance Hierarchy GameObject
 
-![mermaid-diagram-2023-07-22-141220](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/52238b47-0f1a-4ecb-b71c-aace384fde95)
+![mermaid-diagram-2023-07-23-090957](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/cdc3a223-19a9-4af6-8ce5-dbb13515c15c)
