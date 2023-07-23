@@ -8,6 +8,7 @@
 #include "syTransform.h"
 #include "syAnimator.h"
 #include "syStageUI.h"
+#include "syUI.h"
 
 namespace sy
 {
@@ -28,27 +29,28 @@ namespace sy
 		// UI 持失 
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 
-		BackGround* Level = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Level->GetComponent<Transform>()->SetPosition(Vector2(72.f, 8.f));
+		UI* LevelMarkUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		LevelMarkUI->GetComponent<Transform>()->SetPosition(Vector2(72.f, 8.f));
 
-		Animator* LevelAni = Level->AddComponent<Animator>();
-		LevelAni->CreateAnimation(Tex, L"Level", Vector2(222.f, 869.f), Vector2(96.f, 15.f), Vector2(113.f, 0.f), 1, 1);
-		LevelAni->SetBmpRGB(L"Level", 0, 128, 0);
-		LevelAni->PlayAnimation(L"Level");
-		LevelAni->SetAffectedCamera(false);
+		Animator* LevelMarkUIAni = LevelMarkUI->AddComponent<Animator>();
+		LevelMarkUIAni->CreateAnimation(Tex, L"LevelMarkUI", Vector2(222.f, 869.f), Vector2(96.f, 15.f), Vector2(113.f, 0.f), 1, 1);
+		LevelMarkUIAni->SetBmpRGB(L"LevelMarkUI", 0, 128, 0);
+		LevelMarkUIAni->PlayAnimation(L"LevelMarkUI");
+		LevelMarkUIAni->SetAffectedCamera(false);
 
-		BackGround* LevelName = object::Instantiate<BackGround>(eLayerType::BackGround);
-		LevelName->GetComponent<Transform>()->SetPosition(Vector2(101.f, 15.f));
+		UI* LevelNameUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		LevelNameUI->GetComponent<Transform>()->SetPosition(Vector2(101.f, 15.f));
 
-		Animator* LevelNameAni = LevelName->AddComponent<Animator>();
-		LevelNameAni->CreateAnimation(Tex, L"LevelName", Vector2(2.f, 842.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
-		LevelNameAni->SetBmpRGB(L"LevelName", 0, 128, 128);
-		LevelNameAni->PlayAnimation(L"LevelName");
-		LevelNameAni->SetAffectedCamera(false);
+		Animator* LevelNameUIAni = LevelNameUI->AddComponent<Animator>();
+		LevelNameUIAni->CreateAnimation(Tex, L"LevelNameUI", Vector2(2.f, 842.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
+		LevelNameUIAni->SetBmpRGB(L"LevelNameUI", 0, 128, 128);
+		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
+		LevelNameUIAni->SetAffectedCamera(false);
+
 
 		// Stage UI 持失
-		StageUI* stageUI = object::Instantiate<StageUI>(eLayerType::UI);
-		stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
+		StageUI* stageUI = object::Instantiate<StageUI>(eLayerType::LevelUI);
+		stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 30.f));
 
 		Scene::Initialize();
 

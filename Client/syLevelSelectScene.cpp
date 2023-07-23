@@ -51,23 +51,23 @@ namespace sy
 		// 谅惑窜 UI 积己 
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 
-		BackGround* Level = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Level->GetComponent<Transform>()->SetPosition(Vector2(80.f, 7.f));
+		UI* LevelMarkUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		LevelMarkUI->GetComponent<Transform>()->SetPosition(Vector2(80.f, 7.f));
 
-		Animator* LevelAni = Level->AddComponent<Animator>();
-		LevelAni->CreateAnimation(Tex, L"Level", Vector2(222.f, 850.f), Vector2(113.f, 17.f),Vector2(113.f, 0.f), 1, 1);
-		LevelAni->SetBmpRGB(L"Level", 0, 128, 0);
-		LevelAni->PlayAnimation(L"Level");
-		LevelAni->SetAffectedCamera(false);
+		Animator* LevelMarkUIAni = LevelMarkUI->AddComponent<Animator>();
+		LevelMarkUIAni->CreateAnimation(Tex, L"LevelMarkUI", Vector2(222.f, 850.f), Vector2(113.f, 17.f),Vector2(113.f, 0.f), 1, 1);
+		LevelMarkUIAni->SetBmpRGB(L"LevelMarkUI", 0, 128, 0);
+		LevelMarkUIAni->PlayAnimation(L"LevelMarkUI");
+		LevelMarkUIAni->SetAffectedCamera(false);
 
-		BackGround* LevelName = object::Instantiate<BackGround>(eLayerType::BackGround);
-		LevelName->GetComponent<Transform>()->SetPosition(Vector2(101.f, 16.f));
+		UI* LevelNameUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		LevelNameUI->GetComponent<Transform>()->SetPosition(Vector2(101.f, 16.f));
 
-		Animator* LevelNameAni = LevelName->AddComponent<Animator>();
-		LevelNameAni->CreateAnimation(Tex, L"LevelName", Vector2(2.f, 1148.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
-		LevelNameAni->SetBmpRGB(L"LevelName", 0, 128, 128);
-		LevelNameAni->PlayAnimation(L"LevelName");
-		LevelNameAni->SetAffectedCamera(false);
+		Animator* LevelNameUIAni = LevelNameUI->AddComponent<Animator>();
+		LevelNameUIAni->CreateAnimation(Tex, L"LevelNameUI", Vector2(2.f, 1148.f), Vector2(202.f, 32.f), Vector2(202.f, 0.f), 1, 1);
+		LevelNameUIAni->SetBmpRGB(L"LevelNameUI", 0, 128, 128);
+		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
+		LevelNameUIAni->SetAffectedCamera(false);
 						
 		// Dot 积己
 		CreateDot();	
@@ -163,9 +163,9 @@ namespace sy
 		// Create LevelUI don't use index zero
 		for (size_t i = 1; i <= 8; i++)
 		{
-			mPlacardUI[i] = object::Instantiate<PlacardUI>(eLayerType::UI);
-			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::UI);
-			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::UI);
+			mPlacardUI[i] = object::Instantiate<PlacardUI>(eLayerType::LevelUI);
+			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::LevelUI);
+			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::LevelUI);
 		}
 
 		// LevelUI Position Set
@@ -307,13 +307,13 @@ namespace sy
 
 		for (size_t i = 0; i < 6; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(200.f - (8.f * i), 42.f));
 
 			mDots[2].push_back(dot);
 		}
 
-		dot = object::Instantiate<DotUI>(eLayerType::UI);
+		dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 		dot->GetComponent<Transform>()->SetPosition(Vector2(200.f, 50.f));
 
 		mDots[2].push_back(dot);
@@ -323,7 +323,7 @@ namespace sy
 		//Top
 		for (size_t i = 0; i < 4; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 65.f));
 
 			mDots[3].push_back(dot);
@@ -332,7 +332,7 @@ namespace sy
 		// Middle
 		for (size_t i = 0; i < 5; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f, 73.f + (8.f * i)));
 
 			mDots[3].push_back(dot);
@@ -341,7 +341,7 @@ namespace sy
 		//Bottom
 		for (size_t i = 0; i < 2; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 113.f));
 
 			mDots[3].push_back(dot);
@@ -350,13 +350,13 @@ namespace sy
 		/////////// Level4 ///////////
 		for (size_t i = 0; i < 5; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(215.f, 153.f - (8.f * i)));
 
 			mDots[4].push_back(dot);
 		}
 
-		dot = object::Instantiate<DotUI>(eLayerType::UI);
+		dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 		dot->GetComponent<Transform>()->SetPosition(Vector2(207.f, 153.f));
 
 		mDots[4].push_back(dot);
@@ -365,7 +365,7 @@ namespace sy
 		/////////// Level5 ///////////
 		for (size_t i = 0; i < 6; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(170.f - (8.f * i), 153.f));
 
 			mDots[5].push_back(dot);
@@ -374,7 +374,7 @@ namespace sy
 		/////////// Level6 ///////////
 		for (size_t i = 0; i < 7; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(100.f - (8.f * i), 153.f));
 
 			mDots[6].push_back(dot);
@@ -383,7 +383,7 @@ namespace sy
 		/////////// Level7 ///////////
 		for (size_t i = 0; i < 5; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 140.f - (8.f * i)));
 
 			mDots[7].push_back(dot);
@@ -392,7 +392,7 @@ namespace sy
 		/////////// Level8 ///////////
 		for (size_t i = 0; i < 5; i++)
 		{
-			dot = object::Instantiate<DotUI>(eLayerType::UI);
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 90.f - (8.f * i)));
 
 			mDots[8].push_back(dot);
