@@ -25,6 +25,7 @@
 #include "sySceneManager.h"
 #include "syPlayer.h"
 #include "syGameObject.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -204,6 +205,18 @@ namespace sy
 		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(false);		
+
+		player->SetPlayerMode(ePlayerMode::LevelMode);
+		playerTrans->SetDirection(eDirection::RIGHT);		
+		
+		// 플레이어 타입에따라 상태 설정 
+		eAbilityType playerType = player->GetAbilityType();
+		if (playerType == eAbilityType::Normal)
+		{
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
+			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
 	}
 
 	void LevelSelectScene::Exit()

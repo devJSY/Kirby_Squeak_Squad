@@ -52,8 +52,8 @@ namespace sy
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
 
-		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.035f, 6);
-		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.035f, 6);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.05f, 6); // 0.035
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.05f, 6);
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Damage", Vector2(0.f, 179.f), Vector2(22.f, 22.f), Vector2(22.f, 0.f), 0.04f, 10);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Damage", Vector2(978.f, 179.f), Vector2(22.f, 22.f), Vector2(-22.f, 0.f), 0.04f, 10);
@@ -130,6 +130,9 @@ namespace sy
 		// PlayerMode 에 따라서 상태처리 
 		if (GetPlayerMode() == ePlayerMode::LevelMode)
 		{
+			// LevelMode 에선 Rigth 방향 고정
+			mTransform->SetDirection(eDirection::RIGHT);
+
 			switch (mState)
 			{
 			case eDefaultKirbyState::Idle:
@@ -220,6 +223,11 @@ namespace sy
 
 	void DefaultKirby::Level_Idle()
 	{
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+			mState = eDefaultKirbyState::Turn;
+		}
 	}
 
 	void DefaultKirby::Level_Jump()
@@ -227,7 +235,20 @@ namespace sy
 	}
 
 	void DefaultKirby::Level_Turn()
-	{
+	{		
+		// 애니메이션
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
+
+		// 애니메이션이 끝나면 Idle 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+		}
 	}
 
 	void DefaultKirby::Level_Drop()
