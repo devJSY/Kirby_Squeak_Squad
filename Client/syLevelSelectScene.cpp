@@ -36,6 +36,7 @@ namespace sy
 		, mStarUI{}
 		, mNumberUI{}
 		, mDots{}
+		, mCurLevel(eLevelState::Level1)
 	{
 	}
 
@@ -89,24 +90,55 @@ namespace sy
 	{
 		Scene::Update();
 
+		// 현재 레벨상태 지정
+		switch (mCurLevel)
+		{
+		case LevelSelectScene::eLevelState::Level1:
+			Level1();
+			break;
+		case LevelSelectScene::eLevelState::Level2:
+			Level2();
+			break;
+		case LevelSelectScene::eLevelState::Level3:
+			Level3();
+			break;
+		case LevelSelectScene::eLevelState::Level4:
+			Level4();
+			break;
+		case LevelSelectScene::eLevelState::Level5:
+			Level5();
+			break;
+		case LevelSelectScene::eLevelState::Level6:
+			Level6();
+			break;
+		case LevelSelectScene::eLevelState::Level7:
+			Level7();
+			break;
+		case LevelSelectScene::eLevelState::Level8:
+			Level8();
+			break;
+		default:
+			break;
+		}
+
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			// 특정 조건에 따라 Level 설정
-			if (1)
+			// mCurLevel 상태에 따라 진입할 Level 설정
+			if (mCurLevel == eLevelState::Level1)
 				SceneManager::LoadScene(L"PrismPlainsScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level2)
 				SceneManager::LoadScene(L"NatureNotchScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level3)
 				SceneManager::LoadScene(L"CushyCloudScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level4)
 				SceneManager::LoadScene(L"JamJungleScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level5)
 				SceneManager::LoadScene(L"VocalVolcanoScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level6)
 				SceneManager::LoadScene(L"IceIslandScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level7)
 				SceneManager::LoadScene(L"SecretSeaScene");
-			else if (0)
+			else if (mCurLevel == eLevelState::Level8)
 				SceneManager::LoadScene(L"GambleGalaxyScene");
 		}
 
@@ -141,15 +173,37 @@ namespace sy
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
+		Vector2 vec = Vector2::Zero;
+
+		// mCurLevel 상태에 따라 위치 설정
+		if (mCurLevel == eLevelState::Level1)
+			vec = mPlacardUI[1]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level2)
+			vec = mPlacardUI[2]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level3)
+			vec = mPlacardUI[3]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level4)
+			vec = mPlacardUI[4]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level5)
+			vec = mPlacardUI[5]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level6)
+			vec = mPlacardUI[6]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level7)
+			vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevel == eLevelState::Level8)
+			vec = mPlacardUI[8]->GetComponent<Transform>()->GetPosition();
+
+		// Offset값 추가
+		vec.y -= 17.f;
+
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
 		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(140.f, 22.f));
+		playerTrans->SetPosition(vec);
 		Animator* playerAni = player->GetComponent<Animator>();
 		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
-		playerCol->SetAffectedCamera(false);
-		player->SetPlayerMode(ePlayerMode::LevelMode);
+		playerCol->SetAffectedCamera(false);		
 	}
 
 	void LevelSelectScene::Exit()
@@ -201,6 +255,226 @@ namespace sy
 		mPlacardUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 45.f));
 		mStarUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 42.f));
 		mNumberUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 43.f));
+	}
+
+	void LevelSelectScene::Level1()
+	{
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[2] == true)
+			{
+				Vector2 vec = mPlacardUI[2]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level2;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level2()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[1] == true)
+			{
+				Vector2 vec = mPlacardUI[1]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level1;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[3] == true)
+			{
+				Vector2 vec = mPlacardUI[3]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level3;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level3()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[2] == true)
+			{
+				Vector2 vec = mPlacardUI[2]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level2;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[4] == true)
+			{
+				Vector2 vec = mPlacardUI[4]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level4;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level4()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[3] == true)
+			{
+				Vector2 vec = mPlacardUI[3]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level3;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[5] == true)
+			{
+				Vector2 vec = mPlacardUI[5]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level5;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level5()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[4] == true)
+			{
+				Vector2 vec = mPlacardUI[4]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level4;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[6] == true)
+			{
+				Vector2 vec = mPlacardUI[6]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level6;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level6()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[5] == true)
+			{
+				Vector2 vec = mPlacardUI[5]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level5;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[7] == true)
+			{
+				Vector2 vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level7;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level7()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[6] == true)
+			{
+				Vector2 vec = mPlacardUI[6]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level6;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[8] == true)
+			{
+				Vector2 vec = mPlacardUI[8]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level8;
+			}
+		}
+	}
+
+	void LevelSelectScene::Level8()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[7] == true)
+			{
+				Vector2 vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevel = eLevelState::Level7;
+			}
+		}
 	}
 
 	void LevelSelectScene::SetActiveUI(eLevelType type)

@@ -5,6 +5,19 @@ namespace sy
 {
 	class LevelSelectScene : public Scene
 	{
+
+	enum class eLevelState
+	{
+		Level1,
+		Level2,
+		Level3,
+		Level4,
+		Level5,
+		Level6,
+		Level7,
+		Level8,
+	};
+
 	public:
 		LevelSelectScene();
 		virtual ~LevelSelectScene();
@@ -21,6 +34,15 @@ namespace sy
 	private:
 		void CreateDot();
 		void CreateLevelUI();		
+
+		void Level1();
+		void Level2();
+		void Level3();
+		void Level4();
+		void Level5();
+		void Level6();
+		void Level7();
+		void Level8();
 		
 	private:
 		eLevelType mType;
@@ -32,5 +54,7 @@ namespace sy
 		class NumberUI* mNumberUI[9];
 
 		std::vector<DotUI*> mDots[9]; 
+
+		eLevelState mCurLevel;
 	};
 }

@@ -132,19 +132,19 @@ namespace sy
 		{
 			switch (mState)
 			{
-			case sy::eDefaultKirbyState::Idle:
+			case eDefaultKirbyState::Idle:
 				Level_Idle();
 				break;
-			case sy::eDefaultKirbyState::Jump:
+			case eDefaultKirbyState::Jump:
 				Level_Jump();
 				break;
-			case sy::eDefaultKirbyState::Turn:
+			case eDefaultKirbyState::Turn:
 				Level_Turn();
 				break;
-			case sy::eDefaultKirbyState::Drop:
+			case eDefaultKirbyState::Drop:
 				Level_Drop();
 				break;
-			case sy::eDefaultKirbyState::End:
+			case eDefaultKirbyState::End:
 				break;
 			default:
 				break;
@@ -155,40 +155,40 @@ namespace sy
 			// 상태처리
 			switch (mState)
 			{
-			case sy::eDefaultKirbyState::Idle:
+			case eDefaultKirbyState::Idle:
 				Idle();
 				break;
-			case sy::eDefaultKirbyState::Walk:
+			case eDefaultKirbyState::Walk:
 				Walk();
 				break;
-			case sy::eDefaultKirbyState::Run:
+			case eDefaultKirbyState::Run:
 				Run();
 				break;
-			case sy::eDefaultKirbyState::Jump:
+			case eDefaultKirbyState::Jump:
 				Jump();
 				break;
-			case sy::eDefaultKirbyState::Turn:
+			case eDefaultKirbyState::Turn:
 				Turn();
 				break;
-			case sy::eDefaultKirbyState::Damage:
+			case eDefaultKirbyState::Damage:
 				Damage();
 				break;
-			case sy::eDefaultKirbyState::Drop:
+			case eDefaultKirbyState::Drop:
 				Drop();
 				break;
-			case sy::eDefaultKirbyState::Down:
+			case eDefaultKirbyState::Down:
 				Down();
 				break;
-			case sy::eDefaultKirbyState::Inhale_1:
+			case eDefaultKirbyState::Inhale_1:
 				Inhale_1();
 				break;
-			case sy::eDefaultKirbyState::Inhale_2:
+			case eDefaultKirbyState::Inhale_2:
 				Inhale_2();
 				break;
-			case sy::eDefaultKirbyState::Inhale_3:
+			case eDefaultKirbyState::Inhale_3:
 				Inhale_3();
 				break;
-			case sy::eDefaultKirbyState::End:
+			case eDefaultKirbyState::End:
 				break;
 			default:
 				break;

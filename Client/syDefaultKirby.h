@@ -3,6 +3,12 @@
 
 namespace sy
 {
+	// A,D 점프 
+	// S 빨아들이기, 뱉기
+	// W 변신능력 뱉기
+	class DefaultKirby : public Player
+	{
+
 	enum class eDefaultKirbyState
 	{
 		Idle,
@@ -19,12 +25,6 @@ namespace sy
 		End,
 	};
 
-	// A,D 점프 
-	// S 빨아들이기, 뱉기
-	// W 변신능력 뱉기
-
-	class DefaultKirby : public Player
-	{
 	public:
 		DefaultKirby();
 		virtual ~DefaultKirby();
