@@ -256,7 +256,7 @@ namespace sy
 
 	void LevelSelectScene::Level1()
 	{
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[2] == true)
 			{
@@ -273,7 +273,7 @@ namespace sy
 
 	void LevelSelectScene::Level2()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[1] == true)
 			{
@@ -287,7 +287,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[3] == true)
 			{
@@ -304,7 +304,7 @@ namespace sy
 
 	void LevelSelectScene::Level3()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[2] == true)
 			{
@@ -318,7 +318,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[4] == true)
 			{
@@ -335,7 +335,7 @@ namespace sy
 
 	void LevelSelectScene::Level4()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[3] == true)
 			{
@@ -349,7 +349,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[5] == true)
 			{
@@ -366,7 +366,7 @@ namespace sy
 
 	void LevelSelectScene::Level5()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[4] == true)
 			{
@@ -380,7 +380,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[6] == true)
 			{
@@ -397,7 +397,7 @@ namespace sy
 
 	void LevelSelectScene::Level6()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[5] == true)
 			{
@@ -411,7 +411,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[7] == true)
 			{
@@ -428,7 +428,7 @@ namespace sy
 
 	void LevelSelectScene::Level7()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[6] == true)
 			{
@@ -442,7 +442,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[8] == true)
 			{
@@ -459,7 +459,7 @@ namespace sy
 
 	void LevelSelectScene::Level8()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mbActiveUI[7] == true)
 			{

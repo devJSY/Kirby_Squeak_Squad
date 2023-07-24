@@ -223,7 +223,10 @@ namespace sy
 
 	void DefaultKirby::Level_Idle()
 	{
-		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::UP) 
+			|| Input::GetKeyDown(eKeyCode::DOWN)
+			|| Input::GetKeyDown(eKeyCode::RIGHT)
+			|| Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 			mState = eDefaultKirbyState::Turn;
