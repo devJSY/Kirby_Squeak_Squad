@@ -112,7 +112,7 @@ namespace sy
 			{
 				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClear", true);
 				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
-				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"D");
+				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"Number_Dedede");
 			}
 		}
 
