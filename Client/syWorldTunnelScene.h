@@ -17,7 +17,7 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-
+		class WorldTunnel_BG* mBackGround;
 	};
 }
 

@@ -27,7 +27,7 @@ namespace sy
 		animator->CreateAnimation(tex, L"WorldTunnel_8", Vector2(776.f, 202.f), Vector2(256.f, 200.f), Vector2(256.f, 0.f), 1.f, 1);
 
 		animator->SetAffectedCamera(false);
-		animator->PlayAnimation(L"WorldTunnel_1");
+		//animator->PlayAnimation(L"WorldTunnel_1");
 
 		BackGround::Initialize();
 	}

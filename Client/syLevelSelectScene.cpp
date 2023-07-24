@@ -94,28 +94,28 @@ namespace sy
 		// 현재 레벨상태 지정
 		switch (mCurLevel)
 		{
-		case LevelSelectScene::eLevelState::Level1:
+		case eLevelState::Level1:
 			Level1();
 			break;
-		case LevelSelectScene::eLevelState::Level2:
+		case eLevelState::Level2:
 			Level2();
 			break;
-		case LevelSelectScene::eLevelState::Level3:
+		case eLevelState::Level3:
 			Level3();
 			break;
-		case LevelSelectScene::eLevelState::Level4:
+		case eLevelState::Level4:
 			Level4();
 			break;
-		case LevelSelectScene::eLevelState::Level5:
+		case eLevelState::Level5:
 			Level5();
 			break;
-		case LevelSelectScene::eLevelState::Level6:
+		case eLevelState::Level6:
 			Level6();
 			break;
-		case LevelSelectScene::eLevelState::Level7:
+		case eLevelState::Level7:
 			Level7();
 			break;
-		case LevelSelectScene::eLevelState::Level8:
+		case eLevelState::Level8:
 			Level8();
 			break;
 		default:

@@ -11,11 +11,12 @@
 #include "syWorldTunnel_BG.h"
 #include "syPlayer.h"
 #include "syCollisionManager.h"
-
+#include "syLevelSelectScene.h"
 
 namespace sy
 {
 	WorldTunnelScene::WorldTunnelScene()
+		: mBackGround(nullptr)
 	{
 	}
 
@@ -25,10 +26,10 @@ namespace sy
 
 	void WorldTunnelScene::Initialize()
 	{
-		WorldTunnel_BG* Bg = object::Instantiate<WorldTunnel_BG>(eLayerType::BackGround);
+		mBackGround = object::Instantiate<WorldTunnel_BG>(eLayerType::BackGround);
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
-		Bg->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
+		mBackGround->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
 
 		Scene::Initialize();
 	}
@@ -59,6 +60,27 @@ namespace sy
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
 		player->SetPlayerMode(ePlayerMode::LevelMode);
+
+		// BackGround Animator Set
+		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		eLevelState CurLevelState = levelSelectScene->GetCurLevelState();
+
+		if (CurLevelState == eLevelState::Level1)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_1");
+		else if (CurLevelState == eLevelState::Level2)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_2");
+		else if (CurLevelState == eLevelState::Level3)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_3");
+		else if (CurLevelState == eLevelState::Level4)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_4");
+		else if (CurLevelState == eLevelState::Level5)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_5");
+		else if (CurLevelState == eLevelState::Level6)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_6");
+		else if (CurLevelState == eLevelState::Level7)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_7");
+		else if (CurLevelState == eLevelState::Level8)
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_8");
 
 		// 카메라 설정 
 		//Camera::SetTarget(nullptr);

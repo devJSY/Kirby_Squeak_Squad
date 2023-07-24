@@ -3,9 +3,6 @@
 
 namespace sy
 {
-	class LevelSelectScene : public Scene
-	{
-
 	enum class eLevelState
 	{
 		Level1,
@@ -18,6 +15,8 @@ namespace sy
 		Level8,
 	};
 
+	class LevelSelectScene : public Scene
+	{
 	public:
 		LevelSelectScene();
 		virtual ~LevelSelectScene();
@@ -30,6 +29,7 @@ namespace sy
 		virtual void Exit() override;
 
 		void SetActiveUI(eLevelType type);
+		eLevelState GetCurLevelState() { return mCurLevel; }
 
 	private:
 		void CreateDot();
