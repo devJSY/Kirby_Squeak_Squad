@@ -45,7 +45,7 @@ namespace sy
 		void Level8();
 		
 	private:
-		eLevelType mType;
+		eLevelType mLevelType;
 		class Level_BG* mlevelBG;		
 
 		bool mbActiveUI[9];

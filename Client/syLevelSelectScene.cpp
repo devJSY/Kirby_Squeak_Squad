@@ -30,7 +30,7 @@
 namespace sy
 {
 	LevelSelectScene::LevelSelectScene()
-		: mType(eLevelType::LevelSelect)
+		: mLevelType(eLevelType::LevelSelect)
 		, mlevelBG(nullptr)
 		, mbActiveUI{}
 		, mPlacardUI{}
@@ -131,8 +131,8 @@ namespace sy
 		// 스테이지 전부 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			mType = eLevelType::AllClear_LevelSelect;
-			mlevelBG->SetLevelType(mType);
+			mLevelType = eLevelType::AllClear_LevelSelect;
+			mlevelBG->SetLevelType(mLevelType);
 
 			// 활성화 되어있는 UI의 Star만 Play
 			for (size_t i = 1; i <= 8; i++)

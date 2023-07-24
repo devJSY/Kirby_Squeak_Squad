@@ -23,14 +23,15 @@
 namespace sy
 {
 	PrismPlainsScene::PrismPlainsScene()
-		: mType(eLevelType::Level1)
+		: mLevelType(eLevelType::Level1)
 		, mlevelBG(nullptr)
 		, mbActiveUI{}
+		, ExitUI(nullptr)
 		, mStepUI{}
 		, mStarUI{}
 		, mNumberUI{}
 		, mDots{}
-		, eCurStageState(eStageState::StageExit)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -74,33 +75,18 @@ namespace sy
 		//stageUI->GetComponent<Animator>()->PlayAnimation(L"NormalStage", true);
 
 		// mlevelBG 초기화 이후 호출
-		mlevelBG->SetLevelType(mType);
-
-		// ExitUI 고정 활성화
-		mbActiveUI[0] = true;
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void PrismPlainsScene::Update()
 	{
-		switch (eCurStageState)
+		switch (mCurStageState)
 		{
 		case eStageState::StageExit:
 			StageExit();
 			break;
 		case eStageState::Stage1:
 			Stage1();
-			break;
-		case eStageState::Stage2:
-			Stage2();
-			break;
-		case eStageState::Stage3:
-			Stage3();
-			break;
-		case eStageState::Stage4:
-			Stage4();
-			break;
-		case eStageState::Ex:
-			Ex();
 			break;
 		case eStageState::Boss:
 			StageBoss();
@@ -109,28 +95,28 @@ namespace sy
 			break;
 		}
 
-		// Test
-		if (Input::GetKeyDown(eKeyCode::S))
-		{
-			mbActiveUI[0] = true;
-			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStage");
-			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
-			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
-		}
-
-
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
-		{
-			//SceneManager::LoadScene(L"NatureNotchScene");
-			SceneManager::LoadScene(L"StageScene");
-		}
 
 		// 스테이지 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			mType = eLevelType::Level1_Clear;
-			mlevelBG->SetLevelType(mType);
+			mLevelType = eLevelType::Level1_Clear;
+			mlevelBG->SetLevelType(mLevelType);
+
+			if (mCurStageState == eStageState::Stage1)
+			{
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClear", true);
+				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+			}
+			else if (mCurStageState == eStageState::Boss)
+			{
+				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClear", true);
+				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"D");
+			}
 		}
+
+		// 임시로 숫자 키패드로 Stage 활성화
+		SetActiveUI();
 
 		Scene::Update();
 	}
@@ -168,7 +154,7 @@ namespace sy
 			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
 
-		eCurStageState = eStageState::StageExit;
+		mCurStageState = eStageState::StageExit;
 	}
 
 	void PrismPlainsScene::Exit()
@@ -176,6 +162,25 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+	}
+
+	void PrismPlainsScene::SetActiveUI()
+	{
+		// type 에 따라 UI 활성화
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			mbActiveUI[0] = true;
+			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStage");
+			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
+		}
+		else if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			mbActiveUI[1] = true;
+			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStage");
+			mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
+		}
 	}
 
 	void PrismPlainsScene::CreateDot()
@@ -190,11 +195,11 @@ namespace sy
 		SpriteRenderer* ExitUIRenderer = ExitUI->AddComponent<SpriteRenderer>();
 		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
 		ExitUIRenderer->SetAffectedCamera(false);
-		ExitUIRenderer->SetRenderTrig(false);
+		ExitUIRenderer->SetRenderTrig(true);
 		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
 
 		// Create StageUI
-		for (size_t i = 0; i < 7; i++)
+		for (size_t i = 0; i < 2; i++)
 		{
 			mStepUI[i] = object::Instantiate<StepUI>(eLayerType::LevelUI);
 			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::LevelUI);
@@ -203,66 +208,89 @@ namespace sy
 
 		// 위치 설정해야함
 		// StageUI Position Set
-		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
-		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 38.f));
-
-		mStepUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
-		mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
-		mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 38.f));
-
-		mStepUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 63.f));
-		mStarUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 60.f));
-		mNumberUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 61.f));
-
-		mStepUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 110.f));
-		mStarUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 107.f));
-		mNumberUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 108.f));
-
-		mStepUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 151.f));
-		mStarUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 148.f));
-		mNumberUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 149.f));
-
-		// Ex
-		mStepUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
-		mStarUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 147.f));
-		mNumberUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 148.f));
+		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 140.f));
+		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
+		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
 
 		// Boss
-		mStepUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 151.f));
-		mStarUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 148.f));
-		mNumberUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 149.f));
+		mStepUI[1]->GetComponent<Transform>()->SetPosition(Vector2(210.f, 80.f));
+		mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(210.f, 95.f));
+		mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(210.f, 95.f));
 	}
 
 	void PrismPlainsScene::StageExit()
 	{
-	}
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mbActiveUI[0] == true)
+			{
+				Vector2 vec = mStepUI[0]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 10.f;
 
-	void PrismPlainsScene::Ex()
-	{
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurStageState = eStageState::Stage1;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		{
+			SceneManager::LoadScene(L"LevelSelectScene");
+		}
 	}
 
 	void PrismPlainsScene::Stage1()
 	{
-	}
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			Vector2 vec = Vector2(35.f, 70.f);
 
-	void PrismPlainsScene::Stage2()
-	{
-	}
+			Player* player = SceneManager::GetPlayer();
+			Transform* playerTrans = player->GetComponent<Transform>();
+			playerTrans->SetPosition(vec);
+			mCurStageState = eStageState::StageExit;			
+		}
 
-	void PrismPlainsScene::Stage3()
-	{
-	}
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
+		{
+			if (mbActiveUI[1] == true)
+			{
+				Vector2 vec = mStepUI[1]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 10.f;
 
-	void PrismPlainsScene::Stage4()
-	{
-	}
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurStageState = eStageState::Boss;
+			}
+		}
 
-	void PrismPlainsScene::Stage5()
-	{
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		{
+			SceneManager::LoadScene(L"StageScene");
+		}
 	}
 
 	void PrismPlainsScene::StageBoss()
 	{
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mbActiveUI[0] == true)
+			{
+				Vector2 vec = mStepUI[0]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 10.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurStageState = eStageState::Stage1;
+			}
+		}
+
+		//if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		//{
+		//	SceneManager::LoadScene(L"보스방 진입");
+		//}
 	}
 }
