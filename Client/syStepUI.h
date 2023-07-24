@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class StageUI : public UI
+	class StepUI : public UI
 	{
 	public:
-		StageUI();
-		virtual ~StageUI();
+		StepUI();
+		virtual ~StepUI();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

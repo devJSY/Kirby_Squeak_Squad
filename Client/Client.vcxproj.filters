@@ -220,11 +220,11 @@
     <Filter Include="Contents\GameObject\UI\PlacardUI">
       <UniqueIdentifier>{1b0aed68-4182-4036-b09c-33b2ee078e9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\UI\StageUI">
-      <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\UI\DotUI">
       <UniqueIdentifier>{f2caf8e6-36bf-4fdc-81c4-64aa7e1c40d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\UI\StepUI">
+      <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -420,8 +420,8 @@
     <ClInclude Include="syRigidbody.h">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
-    <ClInclude Include="syStageUI.h">
-      <Filter>Contents\GameObject\UI\StageUI</Filter>
+    <ClInclude Include="syStepUI.h">
+      <Filter>Contents\GameObject\UI\StepUI</Filter>
     </ClInclude>
     <ClInclude Include="syStarUI.h">
       <Filter>Contents\GameObject\UI\StarUI</Filter>
@@ -620,8 +620,8 @@
     <ClCompile Include="syRigidbody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
-    <ClCompile Include="syStageUI.cpp">
-      <Filter>Contents\GameObject\UI\StageUI</Filter>
+    <ClCompile Include="syStepUI.cpp">
+      <Filter>Contents\GameObject\UI\StepUI</Filter>
     </ClCompile>
     <ClCompile Include="syStarUI.cpp">
       <Filter>Contents\GameObject\UI\StarUI</Filter>

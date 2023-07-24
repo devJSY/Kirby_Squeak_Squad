@@ -182,7 +182,7 @@
     <ClInclude Include="syRigidbody.h" />
     <ClInclude Include="sySecretSeaScene.h" />
     <ClInclude Include="sySirKibble_Skill.h" />
-    <ClInclude Include="syStageUI.h" />
+    <ClInclude Include="syStepUI.h" />
     <ClInclude Include="syStarUI.h" />
     <ClInclude Include="syVocalVolcanoScene.h" />
     <ClInclude Include="syWaddleDee.h" />
@@ -250,7 +250,7 @@
     <ClCompile Include="syRigidbody.cpp" />
     <ClCompile Include="sySecretSeaScene.cpp" />
     <ClCompile Include="sySirKibble_Skill.cpp" />
-    <ClCompile Include="syStageUI.cpp" />
+    <ClCompile Include="syStepUI.cpp" />
     <ClCompile Include="syStarUI.cpp" />
     <ClCompile Include="syVocalVolcanoScene.cpp" />
     <ClCompile Include="syWaddleDee.cpp" />

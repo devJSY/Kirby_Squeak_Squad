@@ -8,6 +8,9 @@
 #include "syTransform.h"
 #include "syAnimator.h"
 #include "syUI.h"
+#include "syCamera.h"
+#include "syCollisionManager.h"
+
 
 namespace sy
 {
@@ -69,9 +72,14 @@ namespace sy
 
 	void CushyCloudScene::Enter()
 	{
+		// 카메라 설정
+		Camera::SetTarget(nullptr);
 	}
 
 	void CushyCloudScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

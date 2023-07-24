@@ -7,8 +7,11 @@
 #include "syResourceManager.h"
 #include "syTransform.h"
 #include "syAnimator.h"
-#include "syStageUI.h"
+#include "syStepUI.h"
 #include "syUI.h"
+#include "sySpriteRenderer.h"
+#include "syCamera.h"
+#include "syCollisionManager.h"
 
 namespace sy
 {
@@ -47,14 +50,22 @@ namespace sy
 		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
 		LevelNameUIAni->SetAffectedCamera(false);
 
+		//// Stage UI 생성
+		//StepUI* stageUI = object::Instantiate<StepUI>(eLayerType::LevelUI);
+		//stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 30.f));
 
-		// Stage UI 생성
-		StageUI* stageUI = object::Instantiate<StageUI>(eLayerType::LevelUI);
-		stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 30.f));
+		// UI 생성 
+		Texture* Exit_StageScene_Tex = ResourceManager::Load<Texture>(L"Exit_StageScene_Tex", L"..\\Resources\\UI\\Exit_StageScene.bmp");
+		UI* ExitUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		SpriteRenderer* ExitUIRenderer = ExitUI->AddComponent<SpriteRenderer>();
+		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
+		ExitUIRenderer->SetAffectedCamera(false);
+		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
+
 
 		Scene::Initialize();
 
-		stageUI->GetComponent<Animator>()->PlayAnimation(L"NormalStage", true);
+		//stageUI->GetComponent<Animator>()->PlayAnimation(L"NormalStage", true);
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mType);
@@ -85,9 +96,14 @@ namespace sy
 
 	void PrismPlainsScene::Enter()
 	{
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
 	}
 
 	void PrismPlainsScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

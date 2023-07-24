@@ -8,6 +8,8 @@
 #include "syTransform.h"
 #include "syAnimator.h"
 #include "syUI.h"
+#include "syCamera.h"
+#include "syCollisionManager.h"
 
 namespace sy
 {
@@ -69,9 +71,14 @@ namespace sy
 
 	void SecretSeaScene::Enter()
 	{
+		// 카메라 설정
+		Camera::SetTarget(nullptr);
 	}
 
 	void SecretSeaScene::Exit()
 	{
+		// 카메라 설정 해제
+		Camera::SetTarget(nullptr);
+		CollisionManager::Clear();
 	}
 }

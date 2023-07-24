@@ -1,4 +1,4 @@
-#include "syStageUI.h"
+#include "syStepUI.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
@@ -6,16 +6,16 @@
 
 namespace sy
 {
-	StageUI::StageUI()
+	StepUI::StepUI()
 		: mAnimator(nullptr)
 	{
 	}
 
-	StageUI::~StageUI()
+	StepUI::~StepUI()
 	{
 	}
 
-	void StageUI::Initialize()
+	void StepUI::Initialize()
 	{
 		Texture* Tex = ResourceManager::Load<Texture>(L"LevelSelectImage_Tex", L"..\\Resources\\Map\\LevelSelect.bmp");
 		mAnimator = AddComponent<Animator>();
@@ -29,7 +29,7 @@ namespace sy
 		mAnimator->CreateAnimation(Tex, L"NormalStageFlash", Vector2(649.f, 919.f), Vector2(31.f, 15.f), Vector2(34.f, 0), 0.2f, 2);
 		mAnimator->CreateAnimation(Tex, L"BossStageClearFlash", Vector2(649.f, 937.f), Vector2(31.f, 23.f), Vector2(34.f, 0), 0.2f, 5);
 		mAnimator->CreateAnimation(Tex, L"BossStageFlash", Vector2(649.f, 963.f), Vector2(31.f, 23.f), Vector2(34.f, 0), 0.2f, 2);
-	
+
 		mAnimator->SetBmpRGB(L"NormalStageClear", 0, 128, 0);
 		mAnimator->SetBmpRGB(L"NormalStage", 0, 128, 0);
 		mAnimator->SetBmpRGB(L"BossStageClear", 0, 128, 0);
@@ -44,12 +44,12 @@ namespace sy
 		UI::Initialize();
 	}
 
-	void StageUI::Update()
+	void StepUI::Update()
 	{
 		UI::Update();
 	}
 
-	void StageUI::Render(HDC hdc)
+	void StepUI::Render(HDC hdc)
 	{
 		UI::Render(hdc);
 	}
