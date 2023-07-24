@@ -12,12 +12,25 @@
 #include "sySpriteRenderer.h"
 #include "syCamera.h"
 #include "syCollisionManager.h"
+#include "syCollider.h"
+#include "syPlayer.h"
+#include "syDefaultKirby.h"
+#include "syStepUI.h"
+#include "syStarUI.h"
+#include "syNumberUI.h"
+
 
 namespace sy
 {
 	PrismPlainsScene::PrismPlainsScene()
 		: mType(eLevelType::Level1)
 		, mlevelBG(nullptr)
+		, mbActiveUI{}
+		, mStepUI{}
+		, mStarUI{}
+		, mNumberUI{}
+		, mDots{}
+		, eCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -50,18 +63,11 @@ namespace sy
 		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
 		LevelNameUIAni->SetAffectedCamera(false);
 
-		//// Stage UI 생성
-		//StepUI* stageUI = object::Instantiate<StepUI>(eLayerType::LevelUI);
-		//stageUI->GetComponent<Transform>()->SetPosition(Vector2(140.f, 30.f));
+		// Dot 생성
+		CreateDot();
 
-		// UI 생성 
-		Texture* Exit_StageScene_Tex = ResourceManager::Load<Texture>(L"Exit_StageScene_Tex", L"..\\Resources\\UI\\Exit_StageScene.bmp");
-		UI* ExitUI = object::Instantiate<UI>(eLayerType::LevelUI);
-		SpriteRenderer* ExitUIRenderer = ExitUI->AddComponent<SpriteRenderer>();
-		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
-		ExitUIRenderer->SetAffectedCamera(false);
-		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
-
+		// StageUI생성
+		CreateStageUI();
 
 		Scene::Initialize();
 
@@ -69,10 +75,50 @@ namespace sy
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mType);
+
+		// ExitUI 고정 활성화
+		mbActiveUI[0] = true;
 	}
 
 	void PrismPlainsScene::Update()
 	{
+		switch (eCurStageState)
+		{
+		case eStageState::StageExit:
+			StageExit();
+			break;
+		case eStageState::Stage1:
+			Stage1();
+			break;
+		case eStageState::Stage2:
+			Stage2();
+			break;
+		case eStageState::Stage3:
+			Stage3();
+			break;
+		case eStageState::Stage4:
+			Stage4();
+			break;
+		case eStageState::Ex:
+			Ex();
+			break;
+		case eStageState::Boss:
+			StageBoss();
+			break;
+		default:
+			break;
+		}
+
+		// Test
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mbActiveUI[0] = true;
+			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStage");
+			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
+		}
+
+
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			//SceneManager::LoadScene(L"NatureNotchScene");
@@ -98,6 +144,31 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
+
+		Vector2 vec = Vector2(35.f, 70.f);
+
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		Transform* playerTrans = player->GetComponent<Transform>();
+		playerTrans->SetPosition(vec);
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(false);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(false);
+
+		player->SetPlayerMode(ePlayerMode::LevelMode);
+		playerTrans->SetDirection(eDirection::RIGHT);
+
+		// 플레이어 타입에따라 상태 설정 
+		eAbilityType playerType = player->GetAbilityType();
+		if (playerType == eAbilityType::Normal)
+		{
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
+			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
+
+		eCurStageState = eStageState::StageExit;
 	}
 
 	void PrismPlainsScene::Exit()
@@ -105,5 +176,93 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+	}
+
+	void PrismPlainsScene::CreateDot()
+	{
+	}
+
+	void PrismPlainsScene::CreateStageUI()
+	{
+		// StageExit UI 생성 
+		Texture* Exit_StageScene_Tex = ResourceManager::Load<Texture>(L"Exit_StageScene_Tex", L"..\\Resources\\UI\\Exit_StageScene.bmp");
+		ExitUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		SpriteRenderer* ExitUIRenderer = ExitUI->AddComponent<SpriteRenderer>();
+		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
+		ExitUIRenderer->SetAffectedCamera(false);
+		ExitUIRenderer->SetRenderTrig(false);
+		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
+
+		// Create StageUI
+		for (size_t i = 0; i < 7; i++)
+		{
+			mStepUI[i] = object::Instantiate<StepUI>(eLayerType::LevelUI);
+			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::LevelUI);
+			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::LevelUI);
+		}
+
+		// 위치 설정해야함
+		// StageUI Position Set
+		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
+		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 38.f));
+
+		mStepUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 40.f));
+		mStarUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 37.f));
+		mNumberUI[1]->GetComponent<Transform>()->SetPosition(Vector2(140.f, 38.f));
+
+		mStepUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 63.f));
+		mStarUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 60.f));
+		mNumberUI[2]->GetComponent<Transform>()->SetPosition(Vector2(200.f, 61.f));
+
+		mStepUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 110.f));
+		mStarUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 107.f));
+		mNumberUI[3]->GetComponent<Transform>()->SetPosition(Vector2(215.f, 108.f));
+
+		mStepUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 151.f));
+		mStarUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 148.f));
+		mNumberUI[4]->GetComponent<Transform>()->SetPosition(Vector2(188.f, 149.f));
+
+		// Ex
+		mStepUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
+		mStarUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 147.f));
+		mNumberUI[5]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 148.f));
+
+		// Boss
+		mStepUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 151.f));
+		mStarUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 148.f));
+		mNumberUI[6]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 149.f));
+	}
+
+	void PrismPlainsScene::StageExit()
+	{
+	}
+
+	void PrismPlainsScene::Ex()
+	{
+	}
+
+	void PrismPlainsScene::Stage1()
+	{
+	}
+
+	void PrismPlainsScene::Stage2()
+	{
+	}
+
+	void PrismPlainsScene::Stage3()
+	{
+	}
+
+	void PrismPlainsScene::Stage4()
+	{
+	}
+
+	void PrismPlainsScene::Stage5()
+	{
+	}
+
+	void PrismPlainsScene::StageBoss()
+	{
 	}
 }

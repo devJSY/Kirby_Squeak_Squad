@@ -92,4 +92,16 @@ namespace sy::enums
 		, Bosses
 		, None
 	};
+
+	enum class eStageState
+	{
+		StageExit,
+		Ex,
+		Stage1,
+		Stage2,
+		Stage3,
+		Stage4,
+		Stage5,
+		Boss,
+	};
 }
