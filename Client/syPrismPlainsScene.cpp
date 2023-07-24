@@ -18,6 +18,7 @@
 #include "syStepUI.h"
 #include "syStarUI.h"
 #include "syNumberUI.h"
+#include "syDotUI.h"
 
 
 namespace sy
@@ -174,6 +175,12 @@ namespace sy
 			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStage");
 			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
 			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
+
+			for (size_t i = 0; i < mDots[0].size(); i++)
+			{
+				DotUI* dot = mDots[0][i];
+				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Two))
 		{
@@ -181,11 +188,48 @@ namespace sy
 			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStage");
 			mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
 			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
+
+			for (size_t i = 0; i < mDots[1].size(); i++)
+			{
+				DotUI* dot = mDots[1][i];
+				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+			}
 		}
 	}
 
 	void PrismPlainsScene::CreateDot()
 	{
+		// StageStep 에서 Stage1으로 가는 Dot 8의 간격으로 생성
+		Vector2 vec = Vector2(122.f, 140.f) - Vector2(35.f, 80.f);
+		vec.Normalize();
+		vec *= 8.f;
+
+		DotUI* dot;
+
+		/////////// Stage1 ///////////
+
+		for (size_t i = 2; i <= 12; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f + (vec.x * i), 80.f + (vec.y * i)));
+
+			mDots[0].push_back(dot);
+		}
+
+		/////////// BossStage ///////////
+		
+		// Stage1 에서 BossStage으로 가는 Dot 8의 간격으로 생성
+		vec = Vector2(210.f, 80.f) - Vector2(122.f, 140.f);
+		vec.Normalize();
+		vec *= 8.f;
+
+		for (size_t i = 1; i <= 11; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(122.f + (vec.x * i), 140.f + (vec.y * i)));
+
+			mDots[1].push_back(dot);
+		}
 	}
 
 	void PrismPlainsScene::CreateStageUI()

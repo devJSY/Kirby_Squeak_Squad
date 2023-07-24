@@ -131,7 +131,7 @@ namespace sy::math
 	inline Vector2 Rotate(Vector2 vector, float degree)
 	{
 		float radian = (degree / 180.f) * PI;
-		vector.Normalize();
+		//vector.Normalize(); 원본 벡터의 크기값유지
 		float x = cosf(radian) * vector.x - sinf(radian) * vector.y;
 		float y = sinf(radian) * vector.x + cosf(radian) * vector.y;
 
