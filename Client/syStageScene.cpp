@@ -18,8 +18,8 @@
 #include "syCollisionManager.h"
 
 #include "syWaddleDee.h"
-#include "syBlockEnemy.h"
-#include "syFlower.h"
+#include "syBlockin.h"
+#include "syCrimp.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
 #include "syIce.h"
@@ -62,10 +62,10 @@ namespace sy
 		//col = waddleDee->GetComponent<Collider>();
 		//col->SetSize(Vector2(50.f, 50.f));
 
-		BlockEnemy* Block = object::Instantiate<BlockEnemy>(eLayerType::Enemy);
+		Blockin* Block = object::Instantiate<Blockin>(eLayerType::Enemy);
 		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
 
-		Flower* flower = object::Instantiate<Flower>(eLayerType::Enemy);
+		Crimp* flower = object::Instantiate<Crimp>(eLayerType::Enemy);
 		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);

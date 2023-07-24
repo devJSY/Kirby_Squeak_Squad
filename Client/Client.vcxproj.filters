@@ -184,20 +184,11 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\Ice">
       <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Normal\BlockEnemy">
-      <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\HotHead">
       <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\HotHead\Skill">
       <UniqueIdentifier>{1534f389-2884-4a7a-a0b1-19f2b7030493}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Normal\Flower">
-      <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Normal\Flower\Skill">
-      <UniqueIdentifier>{1ad66a98-29f6-4b07-996f-18906f137c5f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
       <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
@@ -225,6 +216,15 @@
     </Filter>
     <Filter Include="Contents\GameObject\UI\StepUI">
       <UniqueIdentifier>{1be25383-a603-4ee8-93db-e6fd06f32783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Crimp">
+      <UniqueIdentifier>{85cd67ab-45ca-4b2e-ad84-7de57cb4a1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Crimp\Skill">
+      <UniqueIdentifier>{1ad66a98-29f6-4b07-996f-18906f137c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Blockin">
+      <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -351,8 +351,8 @@
     <ClInclude Include="syEnemy.h">
       <Filter>Contents\GameObject\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="syBlockEnemy.h">
-      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
+    <ClInclude Include="syBlockin.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClInclude>
     <ClInclude Include="syIce.h">
       <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
@@ -363,8 +363,8 @@
     <ClInclude Include="sySirKibble.h">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClInclude>
-    <ClInclude Include="syFlower.h">
-      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
+    <ClInclude Include="syCrimp.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Crimp</Filter>
     </ClInclude>
     <ClInclude Include="syWaddleDee.h">
       <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
@@ -372,8 +372,8 @@
     <ClInclude Include="syEffects.h">
       <Filter>Contents\GameObject\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="syFlower_Skill.h">
-      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+    <ClInclude Include="syCrimp_Skill.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Crimp\Skill</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead_Fire.h">
       <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>
@@ -551,8 +551,8 @@
     <ClCompile Include="syEnemy.cpp">
       <Filter>Contents\GameObject\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="syBlockEnemy.cpp">
-      <Filter>Contents\GameObject\Enemy\Normal\BlockEnemy</Filter>
+    <ClCompile Include="syBlockin.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClCompile>
     <ClCompile Include="syIce.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
@@ -563,8 +563,8 @@
     <ClCompile Include="sySirKibble.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble</Filter>
     </ClCompile>
-    <ClCompile Include="syFlower.cpp">
-      <Filter>Contents\GameObject\Enemy\Normal\Flower</Filter>
+    <ClCompile Include="syCrimp.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Crimp</Filter>
     </ClCompile>
     <ClCompile Include="syWaddleDee.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\WaddleDee</Filter>
@@ -572,8 +572,8 @@
     <ClCompile Include="syEffects.cpp">
       <Filter>Contents\GameObject\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="syFlower_Skill.cpp">
-      <Filter>Contents\GameObject\Enemy\Normal\Flower\Skill</Filter>
+    <ClCompile Include="syCrimp_Skill.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Crimp\Skill</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead_Fire.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\HotHead\Skill</Filter>

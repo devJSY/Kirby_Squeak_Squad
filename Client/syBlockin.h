@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class BlockEnemy : public Enemy
+	class Blockin : public Enemy
 	{
 	public:
-		BlockEnemy();
-		virtual ~BlockEnemy();
+		Blockin();
+		virtual ~Blockin();
 
 		virtual void Initialize();
 		virtual void Update();

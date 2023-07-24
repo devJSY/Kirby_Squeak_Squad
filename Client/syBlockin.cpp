@@ -1,20 +1,20 @@
-#include "syBlockEnemy.h"
+#include "syBlockin.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
 
 namespace sy
 {
-	BlockEnemy::BlockEnemy()
+	Blockin::Blockin()
 		: Enemy(eAbilityType::Normal)
 	{
 	}
 
-	BlockEnemy::~BlockEnemy()
+	Blockin::~Blockin()
 	{
 	}
 
-	void BlockEnemy::Initialize()
+	void Blockin::Initialize()
 	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
@@ -37,22 +37,22 @@ namespace sy
 		Enemy::Initialize();
 	}
 
-	void BlockEnemy::Update()
+	void Blockin::Update()
 	{
 		Enemy::Update();
 	}
 
-	void BlockEnemy::Render(HDC hdc)
+	void Blockin::Render(HDC hdc)
 	{
 		Enemy::Render(hdc);
 	}
-	void BlockEnemy::OnCollisionEnter(Collider* other)
+	void Blockin::OnCollisionEnter(Collider* other)
 	{
 	}
-	void BlockEnemy::OnCollisionStay(Collider* other)
+	void Blockin::OnCollisionStay(Collider* other)
 	{
 	}
-	void BlockEnemy::OnCollisionExit(Collider* other)
+	void Blockin::OnCollisionExit(Collider* other)
 	{
 	}
 }

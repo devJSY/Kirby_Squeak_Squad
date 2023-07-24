@@ -1,11 +1,11 @@
-#include "syFlower_Skill.h"
+#include "syCrimp_Skill.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
 
 namespace sy
 {
-	FlowerSkill::FlowerSkill()
+	CrimpSkill::CrimpSkill()
 	{
 		Texture* tex = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 
@@ -15,31 +15,31 @@ namespace sy
 		animator->PlayAnimation(L"Flower_Skill", true);
 	}
 
-	FlowerSkill::~FlowerSkill()
+	CrimpSkill::~CrimpSkill()
 	{
 	}
 
-	void FlowerSkill::Initialize()
+	void CrimpSkill::Initialize()
 	{
 		Effects::Initialize();
 	}
 
-	void FlowerSkill::Update()
+	void CrimpSkill::Update()
 	{
 		Effects::Update();
 	}
 
-	void FlowerSkill::Render(HDC hdc)
+	void CrimpSkill::Render(HDC hdc)
 	{
 		Effects::Render(hdc);
 	}
-	void FlowerSkill::OnCollisionEnter(Collider* other)
+	void CrimpSkill::OnCollisionEnter(Collider* other)
 	{
 	}
-	void FlowerSkill::OnCollisionStay(Collider* other)
+	void CrimpSkill::OnCollisionStay(Collider* other)
 	{
 	}
-	void FlowerSkill::OnCollisionExit(Collider* other)
+	void CrimpSkill::OnCollisionExit(Collider* other)
 	{
 	}
 }

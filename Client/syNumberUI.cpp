@@ -33,13 +33,13 @@ namespace sy
 		mAnimator->CreateAnimation(Tex, L"D", Vector2(829.f, 857.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 
 		mAnimator->CreateAnimation(Tex, L"Number_Dedede", Vector2(649.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_MsMorey", Vector2(667.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_Kracko", Vector2(685.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_4", Vector2(703.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_5", Vector2(721.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_6", Vector2(739.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_7", Vector2(758.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_8", Vector2(777.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_MrsMoley", Vector2(667.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_MechaKracko", Vector2(685.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_Yadgaine", Vector2(703.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_Bohboh", Vector2(721.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_Daroach", Vector2(739.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_MetaKnight", Vector2(758.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_DarkNebula", Vector2(777.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 		mAnimator->CreateAnimation(Tex, L"Number_9", Vector2(795.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 
 	

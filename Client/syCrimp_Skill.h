@@ -3,11 +3,11 @@
 
 namespace sy
 {
-    class FlowerSkill : public Effects
+    class CrimpSkill : public Effects
     {
     public:
-        FlowerSkill();
-        virtual ~FlowerSkill();
+        CrimpSkill();
+        virtual ~CrimpSkill();
 
         virtual void Initialize();
         virtual void Update();

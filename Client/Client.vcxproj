@@ -149,14 +149,14 @@
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
     <ClInclude Include="syDotUI.h" />
-    <ClInclude Include="syFlower_Skill.h" />
+    <ClInclude Include="syCrimp_Skill.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
     <ClInclude Include="syAnimation.h" />
     <ClInclude Include="syAnimator.h" />
     <ClInclude Include="syBackGround.h" />
-    <ClInclude Include="syBlockEnemy.h" />
+    <ClInclude Include="syBlockin.h" />
     <ClInclude Include="syCamera.h" />
     <ClInclude Include="syComponent.h" />
     <ClInclude Include="syEffects.h" />
@@ -209,7 +209,7 @@
     <ClInclude Include="syVideo.h" />
     <ClInclude Include="syWorldTunnel_BG.h" />
     <ClInclude Include="syWorldTunnelScene.h" />
-    <ClInclude Include="syFlower.h" />
+    <ClInclude Include="syCrimp.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
   </ItemGroup>
@@ -218,14 +218,14 @@
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
     <ClCompile Include="syDotUI.cpp" />
-    <ClCompile Include="syFlower_Skill.cpp" />
+    <ClCompile Include="syCrimp_Skill.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
     <ClCompile Include="syAnimation.cpp" />
     <ClCompile Include="syAnimator.cpp" />
     <ClCompile Include="syBackGround.cpp" />
-    <ClCompile Include="syBlockEnemy.cpp" />
+    <ClCompile Include="syBlockin.cpp" />
     <ClCompile Include="syCamera.cpp" />
     <ClCompile Include="syComponent.cpp" />
     <ClCompile Include="syEffects.cpp" />
@@ -277,7 +277,7 @@
     <ClCompile Include="syVideo.cpp" />
     <ClCompile Include="syWorldTunnel_BG.cpp" />
     <ClCompile Include="syWorldTunnelScene.cpp" />
-    <ClCompile Include="syFlower.cpp" />
+    <ClCompile Include="syCrimp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

@@ -1,24 +1,24 @@
-#include "syFlower.h"
+#include "syCrimp.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
 #include "syInput.h"
-#include "syFlower_Skill.h"
+#include "syCrimp_Skill.h"
 #include "syTransform.h"
 #include "syObject.h"
 
 namespace sy
 {
-	Flower::Flower()
+	Crimp::Crimp()
 		: Enemy(eAbilityType::Normal)
 	{
 	}
 
-	Flower::~Flower()
+	Crimp::~Crimp()
 	{
 	}
 
-	void Flower::Initialize()
+	void Crimp::Initialize()
 	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
@@ -34,7 +34,7 @@ namespace sy
 		Enemy::Initialize();
 	}
 
-	void Flower::Update()
+	void Crimp::Update()
 	{
 		Enemy::Update();
 
@@ -45,23 +45,23 @@ namespace sy
 			// 현재 HotHead 위치 기준 더해준 위치로 생성
 			Vector2 pos = tr->GetPosition();
 			pos += Vector2(10.f, 0.f);
-			FlowerSkill* skill = object::Instantiate<FlowerSkill>(eLayerType::Effect);
+			CrimpSkill* skill = object::Instantiate<CrimpSkill>(eLayerType::Effect);
 			skill->GetComponent<Transform>()->SetPosition(pos);
 			skill->SetOwner(this);
 		}
 	}
 
-	void Flower::Render(HDC hdc)
+	void Crimp::Render(HDC hdc)
 	{
 		Enemy::Render(hdc);
 	}
-	void Flower::OnCollisionEnter(Collider* other)
+	void Crimp::OnCollisionEnter(Collider* other)
 	{
 	}
-	void Flower::OnCollisionStay(Collider* other)
+	void Crimp::OnCollisionStay(Collider* other)
 	{
 	}
-	void Flower::OnCollisionExit(Collider* other)
+	void Crimp::OnCollisionExit(Collider* other)
 	{
 	}
 }
