@@ -5,6 +5,8 @@
 
 namespace sy::math
 {
+#define PI 3.141592f
+
 	struct Vector2
 	{
 		static Vector2 Zero;
@@ -56,6 +58,14 @@ namespace sy::math
 		{
 			x -= other.x;
 			y -= other.y;
+
+			return *this;
+		}
+
+		Vector2& operator *=(const float& value)
+		{
+			x *= value;
+			y *= value;
 
 			return *this;
 		}
@@ -116,6 +126,27 @@ namespace sy::math
 
 			return *this;
 		}
-
 	};
+
+	inline Vector2 Rotate(Vector2 vector, float degree)
+	{
+		float radian = (degree / 180.f) * PI;
+		vector.Normalize();
+		float x = cosf(radian) * vector.x - sinf(radian) * vector.y;
+		float y = sinf(radian) * vector.x + cosf(radian) * vector.y;
+
+		return Vector2(x, y);
+	}
+
+	// 내적
+	inline float Dot(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	// 외적
+	inline float Cross(Vector2 v1, Vector2 v2)
+	{
+		return v1.x * v2.y - v1.y * v2.x;
+	}
 }

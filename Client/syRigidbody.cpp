@@ -1,4 +1,4 @@
-#include "syRigidbody.h"
+ï»¿#include "syRigidbody.h"
 #include "syTime.h"
 #include "syGameObject.h"
 #include "syTransform.h"
@@ -9,6 +9,15 @@ namespace sy
 		: Component(eComponentType::Rigidbody)
 		, mMass(1.0f)
 		, mFriction(10.0f)
+		, mStaticFriction(0.f)
+		, mKineticFrction(0.f)
+		, mCoefficentFrction(0.f)
+		, mForce(Vector2::Zero)
+		, mAccelation(Vector2::Zero)
+		, mVelocity(Vector2::Zero)
+		, mGravity(Vector2(0.0f, 800.0f))
+		, mLimitedVelocty(Vector2(200.f, 1000.f))
+		, mbGround(false)
 	{
 	}
 
@@ -22,30 +31,65 @@ namespace sy
 
 	void Rigidbody::Update()
 	{
-		//f(Èû) = m(Áú·®)a °¡¼Óµµ
+		//f(í˜) = m(ì§ˆëŸ‰)a ê°€ì†ë„
 		mAccelation = mForce / mMass;
 
-		// ¼Óµµ¿¡ °¡¼Óµµ¸¦ ´õÇØÁà¾ß ÃÑ ¼Óµµ°¡ ³ª¿Â´Ù
+		// ì†ë„ì— ê°€ì†ë„ë¥¼ ë”í•´ì¤˜ì•¼ ì´ ì†ë„ê°€ ë‚˜ì˜¨ë‹¤
 		mVelocity += mAccelation * Time::DeltaTime();
 
-		// ¼Óµµ°¡ Á¸ÀçÇÏ´Â°æ¿ì¿¡¸¸ °è»ê
+		if (mbGround)
+		{
+			// ë•…ìœ„ì— ìˆì„ë•Œ
+			Vector2 gravity = mGravity;
+			gravity.Normalize();
+			float dot = math::Dot(mVelocity, gravity);	// í”Œë ˆì´ì–´ ë°©í–¥ ê³¼ ì¤‘ë ¥ì‚¬ì´ì˜ CosÎ˜ ê°’
+			mVelocity -= gravity * dot;	// ì¤‘ë ¥ì˜ ë°©í–¥ì„ í”Œë ˆì´ì–´ì˜ ì§„í–‰ë°©í–¥ìœ¼ë¡œ ë³€ê²½í•œë‹¤
+		}
+		else
+		{
+			// ê³µì¤‘ì— ìˆì„ ë•Œ
+			mVelocity += mGravity * Time::DeltaTime();
+		}
+
+		// ìµœëŒ€ ì†ë„ ì œí•œ
+		Vector2 gravity = mGravity;
+		gravity.Normalize();
+		float dot = math::Dot(mVelocity, gravity);
+		gravity = gravity * dot;	// ì¤‘ë ¥ì˜ ë°©í–¥ì„ í”Œë ˆì´ì–´ì˜ ì§„í–‰ë°©í–¥ìœ¼ë¡œ ë³€ê²½í•œë‹¤
+
+		Vector2 sideVelocity = mVelocity - gravity; // ì¤‘ë ¥ì´ ì ìš©ëœí›„ ìˆ˜í‰ë°©í–¥ìœ¼ë¡œì˜ ì†ë„
+		if (mLimitedVelocty.y < gravity.Length())
+		{
+			gravity.Normalize();
+			gravity *= mLimitedVelocty.y;
+		}
+
+		if (mLimitedVelocty.x < sideVelocity.Length())
+		{
+			sideVelocity.Normalize();
+			sideVelocity *= mLimitedVelocty.x;
+		}
+		// ì œí•œëœ ì¤‘ë ¥ê³¼ ìˆ˜í‰ì†ë„ë¥¼ í•©í•˜ì—¬ ì†ë„ ê²°ì •
+		mVelocity = gravity + sideVelocity;
+
+		//ë§ˆì°°ë ¥ ì¡°ê±´ ( ì ìš©ëœ í˜ì´ ì—†ê³ , ì†ë„ê°€ 0 ì´ ì•„ë‹ë•Œ Â‹Âš)
 		if (!(mVelocity == Vector2::Zero))
 		{
-			// ¼Óµµ¿¡ ¹İ´ë ¹æÇâÀ¸·Î ¸¶Âû·Â Àû¿ë
+			// ì†ë„ì— ë°˜ëŒ€ ë°©í–¥ìœ¼ë¡œ ë§ˆì°°ë ¥ ì ìš©
 			Vector2 friction = -mVelocity;
 
-			// ¸¶Âû·Â = ¼ÓµµÀÇ ¹İ´ë ¹æÇâ * ¸¶Âû°è¼ö * Áú·® 
+			// ë§ˆì°°ë ¥ = ì†ë„ì˜ ë°˜ëŒ€ ë°©í–¥ * ë§ˆì°°ê³„ìˆ˜ * ì§ˆëŸ‰ 
 			friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
 
-			// ¸¶Âû·ÂÀ¸·Î ÀÇÇÑ ¼Óµµ °¨¼Ò·®ÀÌ ÇöÀç ¼Óµµº¸´Ù Å« °æ¿ì
+			// ë§ˆì°°ë ¥ìœ¼ë¡œ ì˜í•œ ì†ë„ ê°ì†ŒëŸ‰ì´ í˜„ì¬ ì†ë„ë³´ë‹¤ í° ê²½ìš°
 			if (mVelocity.Length() < friction.Length())
 			{
-				// ¼Óµµº¸´Ù ¸¶Âû·ÂÀÌ ´õ Å«°æ¿ì Á¤Áö
+				// ì†ë„ë³´ë‹¤ ë§ˆì°°ë ¥ì´ ë” í°ê²½ìš° ì •ì§€
 				mVelocity = Vector2::Zero;
 			}
 			else
 			{
-				// ¼Óµµ¿¡ ¸¶Âû·Â Ãß°¡
+				// ì†ë„ì— ë§ˆì°°ë ¥ ì¶”ê°€
 				mVelocity += friction;
 			}
 		}
@@ -53,11 +97,11 @@ namespace sy
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
 
-		// ÇöÀçÀ§Ä¡ = À§Ä¡ * ¼Óµµ
+		// í˜„ì¬ìœ„ì¹˜ = ìœ„ì¹˜ * ì†ë„
 		pos = pos + mVelocity * Time::DeltaTime();
 		tr->SetPosition(pos);
 
-		// ÀÌ¹øÇÁ·¹ÀÓ Èû ÃÊ±âÈ­
+		// ì´ë²ˆí”„ë ˆì„ í˜ ì´ˆê¸°í™”
 		mForce.clear();
 	}
 
