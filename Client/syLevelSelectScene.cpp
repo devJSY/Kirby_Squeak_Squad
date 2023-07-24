@@ -37,7 +37,7 @@ namespace sy
 		, mStarUI{}
 		, mNumberUI{}
 		, mDots{}
-		, mCurLevel(eLevelState::Level1)
+		, mCurLevelState(eLevelState::Level1)
 	{
 	}
 
@@ -92,7 +92,7 @@ namespace sy
 		Scene::Update();
 
 		// 현재 레벨상태 지정
-		switch (mCurLevel)
+		switch (mCurLevelState)
 		{
 		case eLevelState::Level1:
 			Level1();
@@ -124,23 +124,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			// mCurLevel 상태에 따라 진입할 Level 설정
-			if (mCurLevel == eLevelState::Level1)
-				SceneManager::LoadScene(L"PrismPlainsScene");
-			else if (mCurLevel == eLevelState::Level2)
-				SceneManager::LoadScene(L"NatureNotchScene");
-			else if (mCurLevel == eLevelState::Level3)
-				SceneManager::LoadScene(L"CushyCloudScene");
-			else if (mCurLevel == eLevelState::Level4)
-				SceneManager::LoadScene(L"JamJungleScene");
-			else if (mCurLevel == eLevelState::Level5)
-				SceneManager::LoadScene(L"VocalVolcanoScene");
-			else if (mCurLevel == eLevelState::Level6)
-				SceneManager::LoadScene(L"IceIslandScene");
-			else if (mCurLevel == eLevelState::Level7)
-				SceneManager::LoadScene(L"SecretSeaScene");
-			else if (mCurLevel == eLevelState::Level8)
-				SceneManager::LoadScene(L"GambleGalaxyScene");
+			SceneManager::LoadScene(L"WorldTunnelScene");
 		}
 
 
@@ -177,21 +161,21 @@ namespace sy
 		Vector2 vec = Vector2::Zero;
 
 		// mCurLevel 상태에 따라 위치 설정
-		if (mCurLevel == eLevelState::Level1)
+		if (mCurLevelState == eLevelState::Level1)
 			vec = mPlacardUI[1]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level2)
+		else if (mCurLevelState == eLevelState::Level2)
 			vec = mPlacardUI[2]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level3)
+		else if (mCurLevelState == eLevelState::Level3)
 			vec = mPlacardUI[3]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level4)
+		else if (mCurLevelState == eLevelState::Level4)
 			vec = mPlacardUI[4]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level5)
+		else if (mCurLevelState == eLevelState::Level5)
 			vec = mPlacardUI[5]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level6)
+		else if (mCurLevelState == eLevelState::Level6)
 			vec = mPlacardUI[6]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level7)
+		else if (mCurLevelState == eLevelState::Level7)
 			vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
-		else if (mCurLevel == eLevelState::Level8)
+		else if (mCurLevelState == eLevelState::Level8)
 			vec = mPlacardUI[8]->GetComponent<Transform>()->GetPosition();
 
 		// Offset값 추가
@@ -282,7 +266,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level2;
+				mCurLevelState = eLevelState::Level2;
 			}
 		}
 	}
@@ -299,7 +283,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level1;
+				mCurLevelState = eLevelState::Level1;
 			}
 		}
 
@@ -313,7 +297,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level3;
+				mCurLevelState = eLevelState::Level3;
 			}
 		}
 	}
@@ -330,7 +314,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level2;
+				mCurLevelState = eLevelState::Level2;
 			}
 		}
 
@@ -344,7 +328,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level4;
+				mCurLevelState = eLevelState::Level4;
 			}
 		}
 	}
@@ -361,7 +345,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level3;
+				mCurLevelState = eLevelState::Level3;
 			}
 		}
 
@@ -375,7 +359,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level5;
+				mCurLevelState = eLevelState::Level5;
 			}
 		}
 	}
@@ -392,7 +376,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level4;
+				mCurLevelState = eLevelState::Level4;
 			}
 		}
 
@@ -406,7 +390,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level6;
+				mCurLevelState = eLevelState::Level6;
 			}
 		}
 	}
@@ -423,7 +407,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level5;
+				mCurLevelState = eLevelState::Level5;
 			}
 		}
 
@@ -437,7 +421,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level7;
+				mCurLevelState = eLevelState::Level7;
 			}
 		}
 	}
@@ -454,7 +438,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level6;
+				mCurLevelState = eLevelState::Level6;
 			}
 		}
 
@@ -468,7 +452,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level8;
+				mCurLevelState = eLevelState::Level8;
 			}
 		}
 	}
@@ -485,7 +469,7 @@ namespace sy
 				Player* player = SceneManager::GetPlayer();
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
-				mCurLevel = eLevelState::Level7;
+				mCurLevelState = eLevelState::Level7;
 			}
 		}
 	}

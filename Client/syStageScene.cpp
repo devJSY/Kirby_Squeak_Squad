@@ -87,7 +87,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
-			SceneManager::LoadScene(L"WorldTunnelScene");
+			SceneManager::LoadScene(L"EndingScene");
 		}
 	}
 

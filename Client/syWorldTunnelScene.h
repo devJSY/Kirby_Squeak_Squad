@@ -18,6 +18,7 @@ namespace sy
 
 	private:
 		class WorldTunnel_BG* mBackGround;
+		eLevelState mCurLevelState;
 	};
 }
 

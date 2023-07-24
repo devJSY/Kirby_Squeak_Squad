@@ -56,7 +56,8 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"VocalVolcanoScene");
+			//SceneManager::LoadScene(L"VocalVolcanoScene");
+			SceneManager::LoadScene(L"StageScene");
 
 		}
 		Scene::Update();

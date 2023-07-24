@@ -29,7 +29,7 @@ namespace sy
 		virtual void Exit() override;
 
 		void SetActiveUI(eLevelType type);
-		eLevelState GetCurLevelState() { return mCurLevel; }
+		eLevelState GetCurLevelState() { return mCurLevelState; }
 
 	private:
 		void CreateDot();
@@ -53,8 +53,8 @@ namespace sy
 		class StarUI* mStarUI[9];
 		class NumberUI* mNumberUI[9];
 
-		std::vector<DotUI*> mDots[9]; 
+		std::vector<class DotUI*> mDots[9]; 
 
-		eLevelState mCurLevel;
+		eLevelState mCurLevelState;
 	};
 }

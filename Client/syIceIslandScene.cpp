@@ -55,7 +55,8 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"SecretSeaScene");
+			//SceneManager::LoadScene(L"SecretSeaScene");
+			SceneManager::LoadScene(L"StageScene");
 		}
 
 		// 스테이지 클리어 시 배경화면 변경

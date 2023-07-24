@@ -38,9 +38,25 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"EndingScene");
+			// mCurLevel 상태에 따라 진입할 Level 설정
+			if (mCurLevelState == eLevelState::Level1)
+				SceneManager::LoadScene(L"PrismPlainsScene");
+			else if (mCurLevelState == eLevelState::Level2)
+				SceneManager::LoadScene(L"NatureNotchScene");
+			else if (mCurLevelState == eLevelState::Level3)
+				SceneManager::LoadScene(L"CushyCloudScene");
+			else if (mCurLevelState == eLevelState::Level4)
+				SceneManager::LoadScene(L"JamJungleScene");
+			else if (mCurLevelState == eLevelState::Level5)
+				SceneManager::LoadScene(L"VocalVolcanoScene");
+			else if (mCurLevelState == eLevelState::Level6)
+				SceneManager::LoadScene(L"IceIslandScene");
+			else if (mCurLevelState == eLevelState::Level7)
+				SceneManager::LoadScene(L"SecretSeaScene");
+			else if (mCurLevelState == eLevelState::Level8)
+				SceneManager::LoadScene(L"GambleGalaxyScene");
 		}
 	}
 
@@ -63,23 +79,23 @@ namespace sy
 
 		// BackGround Animator Set
 		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
-		eLevelState CurLevelState = levelSelectScene->GetCurLevelState();
+		mCurLevelState = levelSelectScene->GetCurLevelState();
 
-		if (CurLevelState == eLevelState::Level1)
+		if (mCurLevelState == eLevelState::Level1)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_1");
-		else if (CurLevelState == eLevelState::Level2)
+		else if (mCurLevelState == eLevelState::Level2)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_2");
-		else if (CurLevelState == eLevelState::Level3)
+		else if (mCurLevelState == eLevelState::Level3)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_3");
-		else if (CurLevelState == eLevelState::Level4)
+		else if (mCurLevelState == eLevelState::Level4)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_4");
-		else if (CurLevelState == eLevelState::Level5)
+		else if (mCurLevelState == eLevelState::Level5)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_5");
-		else if (CurLevelState == eLevelState::Level6)
+		else if (mCurLevelState == eLevelState::Level6)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_6");
-		else if (CurLevelState == eLevelState::Level7)
+		else if (mCurLevelState == eLevelState::Level7)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_7");
-		else if (CurLevelState == eLevelState::Level8)
+		else if (mCurLevelState == eLevelState::Level8)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_8");
 
 		// 카메라 설정 

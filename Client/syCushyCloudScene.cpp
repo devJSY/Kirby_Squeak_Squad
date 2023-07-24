@@ -55,7 +55,8 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"JamJungleScene");
+			//SceneManager::LoadScene(L"JamJungleScene");
+			SceneManager::LoadScene(L"StageScene");
 		}
 
 		Scene::Update();
