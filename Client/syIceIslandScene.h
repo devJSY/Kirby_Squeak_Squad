@@ -17,9 +17,15 @@ namespace sy
 		virtual void Exit();
 
 	private:
+		void CreateStageUI();
+
+		void StageExit();
+
+	private:
 		eLevelType mLevelType;
 		class Level_BG* mlevelBG;
 
+		class UI* ExitUI;
 		eStageState mCurStageState;
     };
 }

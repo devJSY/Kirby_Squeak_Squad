@@ -23,6 +23,7 @@ namespace sy
 {
 	NatureNotchScene::NatureNotchScene()
 		: mLevelType(eLevelType::Level2)
+		, ExitUI(nullptr)
 		, mCurStageState(eStageState::StageExit)
 	{
 	}
@@ -56,7 +57,7 @@ namespace sy
 		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
 		LevelNameUIAni->SetAffectedCamera(false);
 
-
+		// Stage UI 持失
 		CreateStageUI();
 
 		Scene::Initialize();
@@ -75,7 +76,6 @@ namespace sy
 		default:
 			break;
 		}
-
 
 		Scene::Update();
 	}
@@ -122,6 +122,7 @@ namespace sy
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
 	}
+
 	void NatureNotchScene::CreateStageUI()
 	{
 		// StageExit UI 持失 

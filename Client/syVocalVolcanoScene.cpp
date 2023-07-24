@@ -10,11 +10,16 @@
 #include "syUI.h"
 #include "syCamera.h"
 #include "syCollisionManager.h"
+#include "sySpriteRenderer.h"
+#include "syPlayer.h"
+#include "syTransform.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
 	VocalVolcanoScene::VocalVolcanoScene()
 		: mLevelType(eLevelType::Level5)
+		, ExitUI(nullptr)
 		, mCurStageState(eStageState::StageExit)
 	{
 	}
@@ -49,6 +54,9 @@ namespace sy
 		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
 		LevelNameUIAni->SetAffectedCamera(false);
 
+		// Stage UI 생성
+		CreateStageUI();
+
 		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
@@ -57,10 +65,13 @@ namespace sy
 
 	void VocalVolcanoScene::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		switch (mCurStageState)
 		{
-			//SceneManager::LoadScene(L"IceIslandScene");
-			SceneManager::LoadScene(L"StageScene");
+		case eStageState::StageExit:
+			StageExit();
+			break;
+		default:
+			break;
 		}
 
 		Scene::Update();
@@ -75,6 +86,31 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
+
+		Vector2 vec = Vector2(35.f, 70.f);
+
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		Transform* playerTrans = player->GetComponent<Transform>();
+		playerTrans->SetPosition(vec);
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(false);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(false);
+
+		player->SetPlayerMode(ePlayerMode::LevelMode);
+		playerTrans->SetDirection(eDirection::RIGHT);
+
+		// 플레이어 타입에따라 상태 설정 
+		eAbilityType playerType = player->GetAbilityType();
+		if (playerType == eAbilityType::Normal)
+		{
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
+			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
+
+		mCurStageState = eStageState::StageExit;
 	}
 
 	void VocalVolcanoScene::Exit()
@@ -82,5 +118,25 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+	}
+
+	void VocalVolcanoScene::CreateStageUI()
+	{
+		// StageExit UI 생성 
+		Texture* Exit_StageScene_Tex = ResourceManager::Load<Texture>(L"Exit_StageScene_Tex", L"..\\Resources\\UI\\Exit_StageScene.bmp");
+		ExitUI = object::Instantiate<UI>(eLayerType::LevelUI);
+		SpriteRenderer* ExitUIRenderer = ExitUI->AddComponent<SpriteRenderer>();
+		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
+		ExitUIRenderer->SetAffectedCamera(false);
+		ExitUIRenderer->SetRenderTrig(true);
+		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
+	}
+
+	void VocalVolcanoScene::StageExit()
+	{
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		{
+			SceneManager::LoadScene(L"LevelSelectScene");
+		}
 	}
 }
