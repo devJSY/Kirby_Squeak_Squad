@@ -17,9 +17,10 @@ namespace sy
 		virtual void Exit();
 
 	private:
-		eLevelType mType;
+		eLevelType mLevelType;
 		class Level_BG* mlevelBG;
 
+		eStageState mCurStageState;
     };
 }
 

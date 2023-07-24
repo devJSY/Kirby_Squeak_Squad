@@ -15,7 +15,8 @@
 namespace sy
 {
 	CushyCloudScene::CushyCloudScene()
-		: mType(eLevelType::Level3)
+		: mLevelType(eLevelType::Level3)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -51,7 +52,7 @@ namespace sy
 		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
-		mlevelBG->SetLevelType(mType);
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void CushyCloudScene::Update()

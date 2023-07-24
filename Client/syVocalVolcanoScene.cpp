@@ -14,7 +14,8 @@
 namespace sy
 {
 	VocalVolcanoScene::VocalVolcanoScene()
-		: mType(eLevelType::Level5)
+		: mLevelType(eLevelType::Level5)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -51,7 +52,7 @@ namespace sy
 		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
-		mlevelBG->SetLevelType(mType);
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void VocalVolcanoScene::Update()

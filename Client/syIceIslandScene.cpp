@@ -14,8 +14,9 @@
 namespace sy
 {
 	IceIslandScene::IceIslandScene()
-		: mType(eLevelType::Level6)
+		: mLevelType(eLevelType::Level6)
 		, mlevelBG(nullptr)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -64,8 +65,8 @@ namespace sy
 		// 스테이지 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			mType = eLevelType::Level6_Clear;
-			mlevelBG->SetLevelType(mType);
+			mLevelType = eLevelType::Level6_Clear;
+			mlevelBG->SetLevelType(mLevelType);
 		}
 
 		Scene::Update();

@@ -14,7 +14,8 @@
 namespace sy
 {
 	SecretSeaScene::SecretSeaScene()
-		: mType(eLevelType::Level7)
+		: mLevelType(eLevelType::Level7)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -50,7 +51,7 @@ namespace sy
 		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
-		mlevelBG->SetLevelType(mType);
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void SecretSeaScene::Update()

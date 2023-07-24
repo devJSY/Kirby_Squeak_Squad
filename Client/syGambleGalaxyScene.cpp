@@ -14,7 +14,8 @@
 namespace sy
 {
 	GambleGalaxyScene::GambleGalaxyScene()
-		: mType(eLevelType::Level8)
+		: mLevelType(eLevelType::Level8)
+		, mCurStageState(eStageState::StageExit)
 	{
 	}
 
@@ -50,7 +51,7 @@ namespace sy
 		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
-		mlevelBG->SetLevelType(mType);
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void GambleGalaxyScene::Update()

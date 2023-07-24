@@ -102,6 +102,7 @@ namespace sy
 			mLevelType = eLevelType::Level1_Clear;
 			mlevelBG->SetLevelType(mLevelType);
 
+			// 현재 스테이지 클리어 처리
 			if (mCurStageState == eStageState::Stage1)
 			{
 				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClear", true);
@@ -208,9 +209,9 @@ namespace sy
 
 		// 위치 설정해야함
 		// StageUI Position Set
-		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 140.f));
-		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
-		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(115.f, 150.f));
+		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(122.f, 140.f));
+		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(122.f, 150.f));
+		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(122.f, 150.f));
 
 		// Boss
 		mStepUI[1]->GetComponent<Transform>()->SetPosition(Vector2(210.f, 80.f));
