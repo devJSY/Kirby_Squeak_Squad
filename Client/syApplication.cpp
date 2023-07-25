@@ -16,6 +16,9 @@ namespace sy
 	HBITMAP		Application::mBackBuffer = NULL;
 	HMENU		Application::mhMenu	 = LoadMenu(nullptr, MAKEINTRESOURCEW(IDC_CLIENT)); // 메뉴바 생성
 
+	Vector2 Application::mScreenSize = Vector2::Zero;
+	Vector2 Application::mScreenRenderPos = Vector2::Zero;
+
 	Application::Application()
 	{
 	}
@@ -126,7 +129,32 @@ namespace sy
 		SetMapMode(mHdc, MM_ISOTROPIC); // MM_ISOTROPIC 원본 그림이 비율에 따다 모양 변화가 없이 사용자정의(가로세로 동일)
 										// 논리적인 출력좌표를 뷰포트로 변환하는 방식 설정
 		GetClientRect(mHwnd, &rect);
-		SetViewportOrgEx(mHdc, rect.right / 2 - ((rect.bottom / mResolution.y * mResolution.x) / 2), 0, NULL); // 뷰포트의 원점설정 (1920기준 대략 600)
+
+		// 현재 윈도우 사이즈를 가져온다
+		Vector2 rectVec;
+		rectVec.x = rect.right;
+		rectVec.y = rect.bottom;
+
+		// 원본 해상도와 현재 해상도의 비율값
+		float Xratio = rectVec.x / mResolution.x;
+		float Yratio = rectVec.y / mResolution.y; 
+
+		float MinRatio = 0.f;
+	
+		// MM_ISOTROPIC 모드이므로 같은비율로 늘어나기때문에 작은 비율기준으로 화면크기가 결정됨
+		if (Xratio < Yratio)
+			MinRatio = Xratio;
+		else 
+			MinRatio = Yratio;
+		
+		// 동일한 비율로 증가 1920, 1080 기준 720, 1080 사이즈로 렌더링
+		mScreenSize.x = mResolution.x * MinRatio;
+		mScreenSize.y = mResolution.y * MinRatio;
+		
+		mScreenRenderPos.x = (rectVec.x / 2.f) - (mScreenSize.x / 2.f);
+		mScreenRenderPos.y = 0.f;
+
+		SetViewportOrgEx(mHdc, mScreenRenderPos.x, mScreenRenderPos.y, NULL); // 뷰포트의 원점설정
 		SetWindowExtEx(mHdc, mResolution.x, mResolution.y, NULL); // 논리적 좌표 설정
 		SetViewportExtEx(mHdc, rect.right, rect.bottom, NULL);  // 뷰포트 크기 설정
 	}

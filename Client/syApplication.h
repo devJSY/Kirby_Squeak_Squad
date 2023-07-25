@@ -28,6 +28,9 @@ namespace sy
 		static void DockMenu();
 		static void DividMenu();
 
+		static Vector2 GetScreenSize() { return mScreenSize; }
+		static Vector2 GetScreenRenderPos() { return mScreenRenderPos; }
+
 	private:
 		static void ChangeWindowSize(POINT Resolution, bool bMenu);
 		static void SetWindowRatio();
@@ -41,5 +44,8 @@ namespace sy
 		static HBITMAP mBackBuffer;
 
 		static HMENU	mhMenu;
+
+		static Vector2 mScreenSize;
+		static Vector2 mScreenRenderPos;
 	};
 }
