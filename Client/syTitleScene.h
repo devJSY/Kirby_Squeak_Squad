@@ -18,6 +18,7 @@ namespace sy
 
 	private:
 		class Video* mVideo;
+		float	mRadius;
 
 	};
 }

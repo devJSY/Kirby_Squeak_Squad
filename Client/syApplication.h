@@ -30,6 +30,7 @@ namespace sy
 
 		static Vector2 GetScreenSize() { return mScreenSize; }
 		static Vector2 GetScreenRenderPos() { return mScreenRenderPos; }
+		static float GetScreenMinRatio() { return mMinScreenRatio; }
 
 	private:
 		static void ChangeWindowSize(POINT Resolution, bool bMenu);
@@ -45,7 +46,8 @@ namespace sy
 
 		static HMENU	mhMenu;
 
-		static Vector2 mScreenSize;
-		static Vector2 mScreenRenderPos;
+		static Vector2	mScreenSize;
+		static Vector2	mScreenRenderPos;
+		static float	mMinScreenRatio;
 	};
 }
