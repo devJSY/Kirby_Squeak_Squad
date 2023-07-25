@@ -653,15 +653,18 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 		}
 
+		static float TurnTime = 0.f;
+		TurnTime += Time::DeltaTime();
 
 		// 애니메이션이 끝나면 Idle 상태로 변경
-		if (mAnimator->IsActiveAnimationComplete())
+		if (mAnimator->IsActiveAnimationComplete() || TurnTime > 0.3f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
 			else
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
 
+			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Drop;
 		}
 
@@ -673,6 +676,7 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
+			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 		}
 
