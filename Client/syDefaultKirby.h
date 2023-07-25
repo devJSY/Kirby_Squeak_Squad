@@ -61,12 +61,12 @@ namespace sy
 		void Inhale_3();
 
 	private:
-		eDefaultKirbyState mState;
-		class Animator* mAnimator;
-		class Transform* mTransform;
-		class Rigidbody* mRigidBody;
+		eDefaultKirbyState	mState;
+		class Animator*		mAnimator;
+		class Transform*	mTransform;
+		class Rigidbody*	mRigidBody;
 
-		eDirection	mDir;
+		eDirection			mDir;
 	};
 }
 

@@ -308,6 +308,7 @@ namespace sy
 			
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 		}
 
 		// Damage
@@ -411,6 +412,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 		}
 
 		// Down
@@ -498,6 +500,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 		}
 
 		// Down
@@ -577,44 +580,48 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_1;
 		}
 
-		// 이동
-		Vector2 vec = mTransform->GetPosition();
-		
-		static float PressedTime = 0.f;
-		static float CurHeight = 0.f;
-		static float MaxHeight = 42.f;
+		static float KeyReleaseTime = 0.f;
+		static float KeyPressdTime = 0.f;
 
-		vec.y -= 128.f * Time::DeltaTime() * 2.4f;
-		CurHeight += 64.f * (float)Time::DeltaTime() * 2.4f;
-
+		// 상하 이동
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			PressedTime += (float)Time::DeltaTime();
+			KeyPressdTime += Time::DeltaTime();
+			mRigidBody->AddForce(Vector2(0.f, -400.f));
 
-			if (PressedTime >= 0.25f)
-				MaxHeight = 64.f;
-			else 
-				MaxHeight = 42.f;
+			// 키를 누른 시간이 일정시간이상 지나면 상태변경
+			if (KeyPressdTime > 0.4f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+
+				mState = eDefaultKirbyState::Turn;
+
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+			}
 		}
 
-		if (CurHeight >= MaxHeight)
+		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
-			CurHeight = 0.f;
+			KeyReleaseTime += Time::DeltaTime();
+			
+			// 키를 뗀시간이 일정시간이상 지나면 상태변경
+			if (KeyReleaseTime > 0.125f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+				mState = eDefaultKirbyState::Turn;
 
-			mState = eDefaultKirbyState::Turn;
-
-			PressedTime = 0.f;
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+			}
 		}
-
-
-
-		mTransform->SetPosition(vec);
-
 
 
 		// 좌우 이동
@@ -633,27 +640,26 @@ namespace sy
 
 	void DefaultKirby::Turn()
 	{
-		// 애니메이션
-	
+		// 애니메이션	
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
 
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
 
-			mState = eDefaultKirbyState::Idle;
+			mState = eDefaultKirbyState::Drop;
 		}
 
 		// Inhale_1
@@ -704,6 +710,49 @@ namespace sy
 
 	void DefaultKirby::Drop()
 	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+		}
+
+		// Inhale_1
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhale_1", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
+
+			mState = eDefaultKirbyState::Inhale_1;
+		}
+
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+		}
+
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Down()

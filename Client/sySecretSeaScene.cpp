@@ -14,6 +14,7 @@
 #include "syPlayer.h"
 #include "syTransform.h"
 #include "syDefaultKirby.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -96,6 +97,8 @@ namespace sy
 		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(false);
+		Rigidbody* palyerRigid = player->GetComponent<Rigidbody>();
+		palyerRigid->SetGround(true);
 
 		player->SetPlayerMode(ePlayerMode::LevelMode);
 		playerTrans->SetDirection(eDirection::RIGHT);

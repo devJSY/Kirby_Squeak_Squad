@@ -26,6 +26,7 @@
 #include "syPlayer.h"
 #include "syGameObject.h"
 #include "syDefaultKirby.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -189,9 +190,13 @@ namespace sy
 		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(false);		
+		Rigidbody* palyerRigid = player->GetComponent<Rigidbody>();
+		palyerRigid->SetGround(true);
 
 		player->SetPlayerMode(ePlayerMode::LevelMode);
 		playerTrans->SetDirection(eDirection::RIGHT);		
+
+		
 		
 		// 플레이어 타입에따라 상태 설정 
 		eAbilityType playerType = player->GetAbilityType();
