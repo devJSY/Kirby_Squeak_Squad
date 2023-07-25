@@ -641,7 +641,7 @@ namespace sy
 	void DefaultKirby::Turn()
 	{
 		// 애니메이션	
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
