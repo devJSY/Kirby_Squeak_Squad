@@ -641,15 +641,18 @@ namespace sy
 	void DefaultKirby::Turn()
 	{
 		// 애니메이션	
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
+
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
+			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
-		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-		}
 
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
@@ -710,15 +713,18 @@ namespace sy
 
 	void DefaultKirby::Drop()
 	{
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+		}
+
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
+			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
-		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
-		}
 
 		// Inhale_1
 		if (Input::GetKeyDown(eKeyCode::S))
