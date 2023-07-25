@@ -113,6 +113,8 @@ namespace sy
 	void SceneManager::Update()
 	{
 		mActiveScene->Update();
+
+
 	}
 
 	void SceneManager::Render(HDC hdc)

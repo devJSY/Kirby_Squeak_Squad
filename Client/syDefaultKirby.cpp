@@ -7,6 +7,8 @@
 #include "syTexture.h"
 #include "syInput.h"
 #include "syAnimator.h"
+#include "syRigidbody.h"
+
 
 namespace sy
 {
@@ -15,6 +17,7 @@ namespace sy
 		, mState(eDefaultKirbyState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
+		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
 	{
 	}
@@ -32,6 +35,9 @@ namespace sy
 		// 부모생성자에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
+		
+		mRigidBody = AddComponent<Rigidbody>();
+		mRigidBody->SetGround(true);
 
 		// 애니메이션 생성
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"Choice", Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);
@@ -301,6 +307,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", false);			
 			
 			mState = eDefaultKirbyState::Jump;
+			mRigidBody->SetGround(false);
 		}
 
 		// Damage
@@ -403,6 +410,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
 
 			mState = eDefaultKirbyState::Jump;
+			mRigidBody->SetGround(false);
 		}
 
 		// Down
@@ -480,7 +488,7 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 		}
 
-
+		// Jump
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
@@ -489,6 +497,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", false);
 
 			mState = eDefaultKirbyState::Jump;
+			mRigidBody->SetGround(false);
 		}
 
 		// Down
@@ -556,20 +565,6 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", true);
 		}
 
-		// 키를 누른시간에 따라서 Jump상태 지속
-		static float JumpTime = 0.0f;
-		JumpTime += Time::DeltaTime();
-
-		if (Input::GetKeyUp(eKeyCode::A) || Input::GetKeyUp(eKeyCode::D) || JumpTime > 0.5f)
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
-
-			mState = eDefaultKirbyState::Turn;
-			JumpTime = 0.0f; // 상태를 벗어나는경우 초기화 필요
-		}
 
 		// Inhale_1
 		if (Input::GetKeyDown(eKeyCode::S))
@@ -583,6 +578,46 @@ namespace sy
 		}
 
 		// 이동
+		Vector2 vec = mTransform->GetPosition();
+		
+		static float PressedTime = 0.f;
+		static float CurHeight = 0.f;
+		static float MaxHeight = 42.f;
+
+		vec.y -= 128.f * Time::DeltaTime() * 2.4f;
+		CurHeight += 64.f * (float)Time::DeltaTime() * 2.4f;
+
+		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			PressedTime += (float)Time::DeltaTime();
+
+			if (PressedTime >= 0.25f)
+				MaxHeight = 64.f;
+			else 
+				MaxHeight = 42.f;
+		}
+
+		if (CurHeight >= MaxHeight)
+		{
+			CurHeight = 0.f;
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+
+			mState = eDefaultKirbyState::Turn;
+
+			PressedTime = 0.f;
+		}
+
+
+
+		mTransform->SetPosition(vec);
+
+
+
+		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
@@ -592,8 +627,6 @@ namespace sy
 			else
 				pos.x -= 50.f * Time::DeltaTime();
 		}
-
-		pos.y -= 300.f * Time::DeltaTime();
 
 		mTransform->SetPosition(pos);
 	}
@@ -635,19 +668,17 @@ namespace sy
 		}
 
 		//// 이동
-		//Vector2 pos = mTransform->GetPosition();
+		Vector2 pos = mTransform->GetPosition();
 
-		//if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
-		//{
-		//	if (mDir == eDirection::RIGHT)
-		//		pos.x += 50.f * Time::DeltaTime();
-		//	else
-		//		pos.x -= 50.f * Time::DeltaTime();
-		//}
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
 
-		//pos.y += 150.f * Time::DeltaTime();
-
-		//mTransform->SetPosition(pos);
+		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Damage()

@@ -23,18 +23,18 @@ namespace sy
 	void Camera::Update()
 	{
 		// 카메라 이동
-		//if (Input::GetKeyPressed(eKeyCode::UP))
-		//{
-		//	mLookPosition.y -= 300.0f * Time::DeltaTime();
-		//}
+		if (Input::GetKeyPressed(eKeyCode::UP))
+		{
+			mLookPosition.y -= 300.0f * Time::DeltaTime();
+		}
 		//if (Input::GetKeyPressed(eKeyCode::LEFT))
 		//{
 		//	mLookPosition.x -= 300.0f * Time::DeltaTime();
 		//}
-		//if (Input::GetKeyPressed(eKeyCode::DOWN))
-		//{
-		//	mLookPosition.y += 300.0f * Time::DeltaTime();
-		//}
+		if (Input::GetKeyPressed(eKeyCode::DOWN))
+		{
+			mLookPosition.y += 300.0f * Time::DeltaTime();
+		}
 		//if (Input::GetKeyPressed(eKeyCode::RIGHT))
 		//{
 		//	mLookPosition.x += 300.0f * Time::DeltaTime();
@@ -43,7 +43,7 @@ namespace sy
 		if (mTarget)
 		{
 			Transform* tr = mTarget->GetComponent<Transform>();
-			mLookPosition = tr->GetPosition();			
+			mLookPosition.x = tr->GetPosition().x;			
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);

@@ -14,26 +14,13 @@ namespace sy
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
-		void AddForce(Vector2 force) { mForce += force; }
-		void SetMass(float mass) { mMass = mass; }
 		void SetGround(bool ground) { mbGround = ground; }
-		Vector2 GetVelocity() { return mVelocity; }
-		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
+		float GetmGravityRatio() { return mGravityRatio; }
+		void SetmGravityRatio(float ratio) { mGravityRatio = ratio; }
 
 	private:
-		float mMass;				// 질량
-
-		float mFriction;			// 마찰력 
-		float mStaticFriction;		// 정지 마찰력
-		float mKineticFrction;		// 운동 마찰력
-		float mCoefficentFrction;	// 마찰계수
-
-		Vector2 mForce;				// 힘
-		Vector2 mAccelation;		// 가속도
-		Vector2 mVelocity;			// 속도 = 속력 * 방향
-		Vector2 mGravity;			// 중력
-		Vector2 mLimitedVelocty;	// 최대 속도 제한
-
-		bool mbGround;				// 땅에 닿은 상태인지 체크
+		float mGravity;			// 중력
+		float mGravityRatio;	// 0 ~ 1값
+		bool mbGround;			// 땅에 닿은 상태인지 체크
 	};
 }
