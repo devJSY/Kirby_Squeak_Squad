@@ -19,3 +19,8 @@
 ## 🌱 GameObject
 
 ![mermaid-diagram-2023-07-26-163525](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/196fe8e7-ef32-4c43-9174-6ba9a6e9e512)
+
+# 📍 Player FSM State
+
+![mermaid-diagram-2023-07-26-165507](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/97561e91-4ef4-48f8-b117-e02345d48ad2)
+
