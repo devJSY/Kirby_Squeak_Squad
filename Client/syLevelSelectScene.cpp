@@ -123,6 +123,7 @@ namespace sy
 			break;
 		}
 
+
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			SceneManager::LoadScene(L"WorldTunnelScene");
@@ -203,8 +204,9 @@ namespace sy
 		if (playerType == eAbilityType::Normal)
 		{
 			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
-			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
-			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+			defaultKirby->SetKirbyState(eDefaultKirbyState::Choice);
+			defaultKirby->SetLevelEnter(true);
+			playerAni->PlayAnimation(L"Choice", false);
 		}
 	}
 

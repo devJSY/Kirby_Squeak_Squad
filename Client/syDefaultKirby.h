@@ -16,6 +16,8 @@ namespace sy
 		Inhale_1,
 		Inhale_2,
 		Inhale_3,
+		Choice,
+		Enter,
 		End,
 	};
 
@@ -39,11 +41,14 @@ namespace sy
 		void SetKirbyState(eDefaultKirbyState state) { mState = state; }
 		eDefaultKirbyState GetKirbyState() { return mState; }
 
+		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
+
 	private:
 		// Level Mode State
+		void Choice();
+		void Enter();
 		void Level_Idle();
 		void Level_Jump();
-		void Level_Turn();
 		void Level_Drop();
 
 	private:
@@ -65,8 +70,9 @@ namespace sy
 		class Animator*		mAnimator;
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidBody;
-
 		eDirection			mDir;
+
+		bool				mbLevelEnter; // Level Mode State 첫진입시 설정
 	};
 }
 

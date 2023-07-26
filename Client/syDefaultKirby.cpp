@@ -72,13 +72,13 @@ namespace sy
 
 		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyStart", Vector2(642.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyStart", Vector2(337.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
-
+		//
 		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyEnd", Vector2(705.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyEnd", Vector2(274.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
-
+		//
 		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyDown", Vector2(733.f, 36.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.15f, 2);
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyDown", Vector2(243.f, 36.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.15f, 2);
-
+		//
 		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyUp", Vector2(785.f, 36.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 0.07f, 4);
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyUp", Vector2(189.f, 36.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 0.07f, 4);
 
@@ -89,8 +89,8 @@ namespace sy
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhale_3", Vector2(896.f, 184.f), Vector2(26.f, 17.f), Vector2(26.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhale_3", Vector2(78.f, 184.f), Vector2(26.f, 17.f), Vector2(-26.f, 0.f), 0.1f, 4);
 
-		/*mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled", Vector2(738.f, 68.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 0.05f, 4);
-		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled", Vector2(237.f, 68.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.05f, 4);*/
+		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled", Vector2(738.f, 68.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 0.05f, 4);
+		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled", Vector2(237.f, 68.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.05f, 4);
 
 		//mAnimator->CreateAnimation(DefaultKirby_Right, L"iDefaultKirby_Right_Idle", Vector2(8.f, 218.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 1.f, 1);
 		//mAnimator->CreateAnimation(DefaultKirby_Left, L"iDefaultKirby_Left_Idle", Vector2(967.f, 218.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 1.f, 1);
@@ -141,14 +141,17 @@ namespace sy
 
 			switch (mState)
 			{
+			case eDefaultKirbyState::Choice:
+				Choice();
+				break;
+			case eDefaultKirbyState::Enter:
+				Enter();
+				break;
 			case eDefaultKirbyState::Idle:
 				Level_Idle();
 				break;
 			case eDefaultKirbyState::Jump:
 				Level_Jump();
-				break;
-			case eDefaultKirbyState::Turn:
-				Level_Turn();
 				break;
 			case eDefaultKirbyState::Drop:
 				Level_Drop();
@@ -227,30 +230,34 @@ namespace sy
 
 	}
 
-	void DefaultKirby::Level_Idle()
+	void DefaultKirby::Choice()
 	{
-		if (Input::GetKeyDown(eKeyCode::UP) 
-			|| Input::GetKeyDown(eKeyCode::DOWN)
-			|| Input::GetKeyDown(eKeyCode::RIGHT)
-			|| Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-			mState = eDefaultKirbyState::Turn;
-		}
-	}
-
-	void DefaultKirby::Level_Jump()
-	{
-	}
-
-	void DefaultKirby::Level_Turn()
-	{		
 		// 애니메이션
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-		}
+			mAnimator->PlayAnimation(L"Choice", false);
+		}		
 
+		// 애니메이션이 끝나면 Idle 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			// 씬에 첫진입이라면 Enter애니메이션 재생
+			if (mbLevelEnter)
+			{
+				mAnimator->PlayAnimation(L"Enter", false);
+				mState = eDefaultKirbyState::Enter;
+				mbLevelEnter = false;
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+				mState = eDefaultKirbyState::Idle;
+			}
+		}
+	}
+
+	void DefaultKirby::Enter()
+	{
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
@@ -258,6 +265,30 @@ namespace sy
 
 			mState = eDefaultKirbyState::Idle;
 		}
+	}
+
+	void DefaultKirby::Level_Idle()
+	{
+		if (Input::GetKeyDown(eKeyCode::UP) 
+			|| Input::GetKeyDown(eKeyCode::DOWN)
+			|| Input::GetKeyDown(eKeyCode::RIGHT)
+			|| Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mAnimator->PlayAnimation(L"Choice", false);
+			mState = eDefaultKirbyState::Choice;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::W)
+			|| Input::GetKeyDown(eKeyCode::A)
+			|| Input::GetKeyDown(eKeyCode::D))
+		{
+			mAnimator->PlayAnimation(L"Enter", false);
+			mState = eDefaultKirbyState::Enter;
+		}
+	}
+
+	void DefaultKirby::Level_Jump()
+	{
 	}
 
 	void DefaultKirby::Level_Drop()
@@ -568,7 +599,6 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Jump", true);
 		}
 
-
 		// Inhale_1
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
@@ -587,7 +617,12 @@ namespace sy
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
 			KeyPressdTime += Time::DeltaTime();
-			mRigidBody->AddForce(Vector2(0.f, -500.f));
+
+			// 일정 누른 시간에만 상승
+			if (KeyPressdTime < 0.2f)
+			{
+				mRigidBody->AddForce(Vector2(0.f, -700.f));
+			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
 			if (KeyPressdTime > 0.4f)
