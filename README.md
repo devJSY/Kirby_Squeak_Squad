@@ -18,4 +18,4 @@
 
 ## 🌱 GameObject
 
-![mermaid-diagram-2023-07-25-164311](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/1f254586-8e97-4d9e-8b84-a831010c446c)
+![mermaid-diagram-2023-07-26-163525](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/196fe8e7-ef32-4c43-9174-6ba9a6e9e512)
