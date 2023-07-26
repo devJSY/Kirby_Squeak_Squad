@@ -200,12 +200,16 @@ namespace sy
 				break;
 			case eDefaultKirbyState::Inhale_3:
 				Inhale_3();
+				break;
 			case eDefaultKirbyState::Fly_Start:
 				Fly_Start();
+				break;
 			case eDefaultKirbyState::Fly_End:
 				Fly_End();
+				break;
 			case eDefaultKirbyState::Fly_Down:
 				Fly_Down();
+				break;
 			case eDefaultKirbyState::Fly_Up:
 				Fly_Up();
 				break;
@@ -713,16 +717,14 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		// 애니메이션	
-		if (Input::GetKeyDown(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
 		}
 
 		static float TurnTime = 0.f;
@@ -750,6 +752,18 @@ namespace sy
 
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyStart", false);
+
+			mState = eDefaultKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 		}
 	}
 
@@ -811,6 +825,18 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyStart", false);
+
+			mState = eDefaultKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 		}
 
 		if (mRigidBody->IsGround())
@@ -945,6 +971,17 @@ namespace sy
 
 		mTransform->SetPosition(pos);
 
+		// 방향전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+		}
+
 		// Fly End
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
@@ -970,6 +1007,19 @@ namespace sy
 
 	void DefaultKirby::Fly_End()
 	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
 		// 애니메이션이 끝나면 Drop 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
@@ -1015,17 +1065,6 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
 		}
 
-		// Fly End
-		if (Input::GetKeyDown(eKeyCode::S))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyEnd", false);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
-
-			mState = eDefaultKirbyState::Fly_End;
-		}
-
 		// Fly Start
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D)
 			|| Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
@@ -1036,6 +1075,17 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
 
 			mState = eDefaultKirbyState::Fly_Up;
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
+
+			mState = eDefaultKirbyState::Fly_End;
 		}
 	}
 
@@ -1069,7 +1119,18 @@ namespace sy
 		// 누르고있을때 상승
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			mRigidBody->AddForce(Vector2(0.f, -300.f));
+			mRigidBody->SetVelocity(Vector2(0.f, -130.f));
+		}
+
+		// 키를 누르고있지 않을때 Fly Down
+		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
+
+			mState = eDefaultKirbyState::Fly_Down;
 		}
 
 		// Fly End
@@ -1082,16 +1143,5 @@ namespace sy
 
 			mState = eDefaultKirbyState::Fly_End;
 		}
-
-		//// 키를 누르고있지 않을때 Fly Down
-		//if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
-		//{
-		//	if (mDir == eDirection::RIGHT)
-		//		mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
-		//	else
-		//		mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
-
-		//	mState = eDefaultKirbyState::Fly_Down;
-		//}
 	}
 }
