@@ -32,6 +32,9 @@ namespace sy
 	{
 		for (GameObject* obj : mGameObjects)
 		{
+			if (obj->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+				continue;
+
 			obj->Update();
 		}
 	}
@@ -40,7 +43,27 @@ namespace sy
 	{
 		for (GameObject* obj : mGameObjects)
 		{
+			if (obj->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+				continue;
+
 			obj->Render(hdc);
+		}
+
+		// Dead상태인 오브젝트는 Layer에서 제외한다
+		for (std::vector<GameObject*>::iterator iter = mGameObjects.begin()
+			; iter != mGameObjects.end()
+			; )
+		{
+			if ((*iter)->GetGameObjectState() == GameObject::eGameObjectState::Dead)
+			{
+				GameObject* obj = *iter;
+				iter = mGameObjects.erase(iter);
+				delete obj;
+			}
+			else
+			{
+				iter++;
+			}
 		}
 	}
 

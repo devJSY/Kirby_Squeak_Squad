@@ -8,7 +8,8 @@
 #include "syInput.h"
 #include "syAnimator.h"
 #include "syRigidbody.h"
-
+#include "syCollider.h"
+#include "syGround.h"
 
 namespace sy
 {
@@ -230,7 +231,12 @@ namespace sy
 
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
-
+		GameObject* temp = dynamic_cast<Ground*>(other->GetOwner());
+		if (temp == nullptr)
+		{
+			// Ground객체 이외에 충돌한 객체 삭제
+			Destroy(other->GetOwner());
+		}
 	}
 
 	void DefaultKirby::OnCollisionStay(Collider* other)

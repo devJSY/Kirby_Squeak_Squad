@@ -7,6 +7,16 @@ namespace sy
     class GameObject : public Entity
     {
     public:
+        enum class eGameObjectState
+        {
+            Active,
+            Pause,
+            Dead,
+            End,
+        };
+
+        friend static __forceinline void Destroy(GameObject* gameObject);
+
         GameObject();
         virtual ~GameObject();
 
@@ -51,7 +61,20 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) {};
         virtual void OnCollisionExit(class Collider* other) {};
 
+        eGameObjectState GetGameObjectState() { return mGameObjectState; }
+
+    private:
+        void SetPause() { mGameObjectState = eGameObjectState::Pause; }
+        void SetDeath() { mGameObjectState = eGameObjectState::Dead; }
+
     private:
         std::vector<Component*> mComponents;
+        eGameObjectState mGameObjectState;
     };
+
+    // 외부에서 접근가능하도록 설정
+    static __forceinline void Destroy(GameObject* gameObject)
+    {
+        gameObject->SetDeath();
+    }
 }
