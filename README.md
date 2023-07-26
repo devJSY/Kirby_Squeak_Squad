@@ -6,11 +6,11 @@
 
 ## 🌱 Main
 
-![mermaid-diagram-2023-07-24-162429](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/575c4d52-a1fa-4a9c-8231-43c2d2b54470)
+![mermaid-diagram-2023-07-25-164334](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/0aa85aef-723a-44bf-9a74-9b0464a5b923)
 
 ## 🌱Manager
 
-![mermaid-diagram-2023-07-22-140642](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/6ce6891e-610b-4c9d-8613-0559f6f205d4)
+![mermaid-diagram-2023-07-25-164256](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/06916b1f-8f82-42d4-99d2-6a02c223a51a)
 
 ## 🌱Scene
 
@@ -18,4 +18,4 @@
 
 ## 🌱 GameObject
 
-![mermaid-diagram-2023-07-24-162456](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/262ca7a8-9350-45e0-9a3a-32720ac51846)
+![mermaid-diagram-2023-07-25-164311](https://github.com/devJSY/Kirby_Squeak_Squad/assets/90514882/1f254586-8e97-4d9e-8b84-a831010c446c)
