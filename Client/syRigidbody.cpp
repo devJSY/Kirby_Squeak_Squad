@@ -13,7 +13,7 @@ namespace sy
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 		, mGravity(Vector2(0.0f, 500.0f))
-		, mLimitedVelocty(Vector2(500.f, 500.f))
+		, mLimitedVelocty(Vector2(300.f, 300.f))
 		, mbGround(false)
 	{
 	}
