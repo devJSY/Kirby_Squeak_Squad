@@ -43,7 +43,7 @@ namespace sy
 		if (mTarget)
 		{
 			Transform* tr = mTarget->GetComponent<Transform>();
-			mLookPosition.x = tr->GetPosition().x;			
+			mLookPosition = tr->GetPosition();			
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);

@@ -18,6 +18,10 @@ namespace sy
 		Inhale_3,
 		Choice,
 		Enter,
+		Fly_Start,
+		Fly_End,
+		Fly_Down,
+		Fly_Up,
 		End,
 	};
 
@@ -48,7 +52,7 @@ namespace sy
 		void Choice();
 		void Enter();
 		void Level_Idle();
-		void Level_Jump();
+		void Level_FlyUp();
 		void Level_Drop();
 
 	private:
@@ -64,6 +68,10 @@ namespace sy
 		void Inhale_1();
 		void Inhale_2();
 		void Inhale_3();
+		void Fly_Start();
+		void Fly_End();
+		void Fly_Down();
+		void Fly_Up();
 
 	private:
 		eDefaultKirbyState	mState;

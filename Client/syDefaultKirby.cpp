@@ -19,6 +19,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
+		, mbLevelEnter(false)
 	{
 	}
 
@@ -70,17 +71,17 @@ namespace sy
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Down", Vector2(31.f, 19.f), Vector2(25.f, 10.f), Vector2(25.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Down", Vector2(944.f, 19.f), Vector2(25.f, 10.f), Vector2(-25.f, 0.f), 1.f, 1);
 
-		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyStart", Vector2(642.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
-		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyStart", Vector2(337.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
-		//
-		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyEnd", Vector2(705.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
-		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyEnd", Vector2(274.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
-		//
-		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyDown", Vector2(733.f, 36.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.15f, 2);
-		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyDown", Vector2(243.f, 36.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.15f, 2);
-		//
-		//mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyUp", Vector2(785.f, 36.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 0.07f, 4);
-		//mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyUp", Vector2(189.f, 36.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 0.07f, 4);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyStart", Vector2(642.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyStart", Vector2(337.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
+		
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyEnd", Vector2(705.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyEnd", Vector2(274.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
+		
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyDown", Vector2(733.f, 36.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.15f, 2);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyDown", Vector2(243.f, 36.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.15f, 2);
+		
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyUp", Vector2(785.f, 36.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 0.07f, 4);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyUp", Vector2(189.f, 36.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 0.07f, 4);
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhale_1", Vector2(796.f, 179.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.06f, 2);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhale_1", Vector2(181.f, 179.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.06f, 2);
@@ -150,8 +151,8 @@ namespace sy
 			case eDefaultKirbyState::Idle:
 				Level_Idle();
 				break;
-			case eDefaultKirbyState::Jump:
-				Level_Jump();
+			case eDefaultKirbyState::Fly_Up:
+				Level_FlyUp();
 				break;
 			case eDefaultKirbyState::Drop:
 				Level_Drop();
@@ -199,6 +200,14 @@ namespace sy
 				break;
 			case eDefaultKirbyState::Inhale_3:
 				Inhale_3();
+			case eDefaultKirbyState::Fly_Start:
+				Fly_Start();
+			case eDefaultKirbyState::Fly_End:
+				Fly_End();
+			case eDefaultKirbyState::Fly_Down:
+				Fly_Down();
+			case eDefaultKirbyState::Fly_Up:
+				Fly_Up();
 				break;
 			case eDefaultKirbyState::End:
 				break;
@@ -287,7 +296,7 @@ namespace sy
 		}
 	}
 
-	void DefaultKirby::Level_Jump()
+	void DefaultKirby::Level_FlyUp()
 	{
 	}
 
@@ -378,6 +387,16 @@ namespace sy
 
 	void DefaultKirby::Walk()
 	{
+		// 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (mDir == eDirection::RIGHT)
+			pos.x += 50.f * Time::DeltaTime();
+		else
+			pos.x -= 50.f * Time::DeltaTime();
+
+		mTransform->SetPosition(pos);
+
 		// 애니메이션
 
 		// Idle
@@ -467,23 +486,25 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 		}
-
-
-		// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (mDir == eDirection::RIGHT)
-			pos.x += 50.f * Time::DeltaTime();
-		else
-			pos.x -= 50.f * Time::DeltaTime();
-
-		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Run()
 	{
+		// 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 150.f * Time::DeltaTime();
+			else
+				pos.x -= 150.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
 		// 애니메이션
-		
+
 		// Idle
 		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
 		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
@@ -555,23 +576,74 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 		}
+	}
 
-		// 이동
+	void DefaultKirby::Jump()
+	{
+		// 상하 이동
+		static float KeyReleaseTime = 0.f;
+		static float KeyPressdTime = 0.f;
+
+		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			KeyPressdTime += Time::DeltaTime();
+
+			// 일정 누른 시간에만 상승
+			if (KeyPressdTime < 0.2f)
+			{
+				mRigidBody->AddForce(Vector2(0.f, -700.f));
+			}
+
+			// 키를 누른 시간이 일정시간이상 지나면 상태변경
+			if (KeyPressdTime > 0.4f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+
+				mState = eDefaultKirbyState::Turn;
+
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			}
+		}
+
+		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
+		{
+			KeyReleaseTime += Time::DeltaTime();
+
+			// 키를 뗀시간이 일정시간이상 지나면 상태변경
+			if (KeyReleaseTime > 0.125f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
+
+				mState = eDefaultKirbyState::Turn;
+
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			}
+		}
+
+
+		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			if (mDir == eDirection::RIGHT)
-				pos.x += 150.f * Time::DeltaTime();
+				pos.x += 50.f * Time::DeltaTime();
 			else
-				pos.x -= 150.f * Time::DeltaTime();
+				pos.x -= 50.f * Time::DeltaTime();
 		}
 
 		mTransform->SetPosition(pos);
-	}
 
-	void DefaultKirby::Jump()
-	{
 		// 애니메이션
 
 		// Jump
@@ -610,58 +682,24 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_1;
 		}
 
-		static float KeyReleaseTime = 0.f;
-		static float KeyPressdTime = 0.f;
-
-		// 상하 이동
-		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
-			KeyPressdTime += Time::DeltaTime();
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyStart", false);
 
-			// 일정 누른 시간에만 상승
-			if (KeyPressdTime < 0.2f)
-			{
-				mRigidBody->AddForce(Vector2(0.f, -700.f));
-			}
-
-			// 키를 누른 시간이 일정시간이상 지나면 상태변경
-			if (KeyPressdTime > 0.4f)
-			{
-				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-				else
-					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
-
-				mState = eDefaultKirbyState::Turn;
-
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
-				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			}
+			mState = eDefaultKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+			KeyPressdTime = 0.f;
+			KeyReleaseTime = 0.f;
 		}
+	}
 
-		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
-		{
-			KeyReleaseTime += Time::DeltaTime();
-			
-			// 키를 뗀시간이 일정시간이상 지나면 상태변경
-			if (KeyReleaseTime > 0.125f)
-			{
-				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
-				else
-					mAnimator->PlayAnimation(L"DefaultKirby_Left_Turn", false);
-
-				mState = eDefaultKirbyState::Turn;
-
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
-				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			}
-		}
-
-
-		// 좌우 이동
+	void DefaultKirby::Turn()
+	{
+		//// 이동
 		Vector2 pos = mTransform->GetPosition();
 
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
@@ -673,10 +711,7 @@ namespace sy
 		}
 
 		mTransform->SetPosition(pos);
-	}
 
-	void DefaultKirby::Turn()
-	{
 		// 애니메이션	
 		if (Input::GetKeyDown(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
 		{
@@ -716,23 +751,15 @@ namespace sy
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 		}
-
-		//// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
-		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
-
-		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Damage()
 	{
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
+
+		//tr->SetPosition(pos);
+		// 
 		// 애니메이션
 		
 		// 애니메이션이 끝나면 Idle 상태로 변경
@@ -745,15 +772,23 @@ namespace sy
 
 			mState = eDefaultKirbyState::Idle;
 		}
-
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
-
-		//tr->SetPosition(pos);
 	}
 
 	void DefaultKirby::Drop()
 	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
@@ -787,19 +822,6 @@ namespace sy
 
 			mState = eDefaultKirbyState::Idle;
 		}
-
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
-		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
-
-		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Down()
@@ -907,5 +929,169 @@ namespace sy
 
 			mState = eDefaultKirbyState::Idle;
 		}
+	}
+	void DefaultKirby::Fly_Start()
+	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
+
+			mState = eDefaultKirbyState::Fly_End;
+		}
+
+		// 애니메이션이 끝나면 Fly Down 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
+
+			mState = eDefaultKirbyState::Fly_Down;
+		}
+	}
+
+	void DefaultKirby::Fly_End()
+	{
+		// 애니메이션이 끝나면 Drop 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+
+			mState = eDefaultKirbyState::Drop;
+		}
+	}
+
+	void DefaultKirby::Fly_Down()
+	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
+		// 눌렀을때 상승
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
+
+			mState = eDefaultKirbyState::Fly_End;
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D)
+			|| Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
+
+			mState = eDefaultKirbyState::Fly_Up;
+		}
+	}
+
+	void DefaultKirby::Fly_Up()
+	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 50.f * Time::DeltaTime();
+			else
+				pos.x -= 50.f * Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(pos);
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
+		}
+
+		// 누르고있을때 상승
+		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			mRigidBody->AddForce(Vector2(0.f, -300.f));
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
+
+			mState = eDefaultKirbyState::Fly_End;
+		}
+
+		//// 키를 누르고있지 않을때 Fly Down
+		//if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
+		//{
+		//	if (mDir == eDirection::RIGHT)
+		//		mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
+		//	else
+		//		mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
+
+		//	mState = eDefaultKirbyState::Fly_Down;
+		//}
 	}
 }
