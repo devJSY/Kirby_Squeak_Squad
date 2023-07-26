@@ -587,7 +587,7 @@ namespace sy
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
 			KeyPressdTime += Time::DeltaTime();
-			mRigidBody->AddForce(Vector2(0.f, -400.f));
+			mRigidBody->AddForce(Vector2(0.f, -500.f));
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
 			if (KeyPressdTime > 0.4f)
@@ -601,6 +601,7 @@ namespace sy
 
 				KeyPressdTime = 0.f;
 				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
@@ -620,6 +621,7 @@ namespace sy
 
 				KeyPressdTime = 0.f;
 				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
