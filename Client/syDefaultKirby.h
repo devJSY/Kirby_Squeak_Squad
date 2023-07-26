@@ -83,7 +83,6 @@ namespace sy
 		void Fly_End();
 		void Fly_Down();
 		void Fly_Up();
-
 		void Inhaled();
 		void Inhaled_Idle();
 		void Inhaled_Walk();
