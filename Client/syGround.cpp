@@ -57,5 +57,6 @@ namespace sy
 
 	void Ground::OnCollisionExit(Collider* other)
 	{
+		other->GetOwner()->GetComponent<Rigidbody>()->SetGround(false);
 	}
 }

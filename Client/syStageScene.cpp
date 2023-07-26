@@ -106,7 +106,7 @@ namespace sy
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
 		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(275.f, 100.f));
+		playerTrans->SetPosition(Vector2(275.f, 0.f));
 		Animator* playerAni = player->GetComponent<Animator>();
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
@@ -121,7 +121,7 @@ namespace sy
 		{
 			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
 			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
-			playerAni->PlayAnimation(L"DefaultKirby_Right_Drop", false);
+			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);

@@ -350,7 +350,18 @@ namespace sy
 	void DefaultKirby::Idle()
 	{
 		// 애니메이션 
-	
+		
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+
+			mState = eDefaultKirbyState::Drop;
+		}
+
 		// Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
@@ -1241,6 +1252,17 @@ namespace sy
 	void DefaultKirby::Inhaled_Idle()
 	{
 		// 애니메이션 
+	
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Drop", true);
+
+			mState = eDefaultKirbyState::Inhaled_Drop;
+		}
 
 		// Inhaled_Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
