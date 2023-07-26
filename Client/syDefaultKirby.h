@@ -22,6 +22,17 @@ namespace sy
 		Fly_End,
 		Fly_Down,
 		Fly_Up,
+		InHaled,
+		InHaled_Idle,
+		InHaled_Walk,
+		InHaled_Run,
+		InHaled_Jump,
+		InHaled_Turn,
+		InHaled_Drop,
+		InHaled_Land,
+		InHaled_Damage,
+		InHaled_Down,
+		InHaled_Skill,
 		End,
 	};
 
@@ -72,6 +83,18 @@ namespace sy
 		void Fly_End();
 		void Fly_Down();
 		void Fly_Up();
+
+		void InHaled();
+		void InHaled_Idle();
+		void InHaled_Walk();
+		void InHaled_Run();
+		void InHaled_Jump();
+		void InHaled_Turn();
+		void InHaled_Drop();
+		void InHaled_Land();
+		void InHaled_Damage();
+		void InHaled_Down();
+		void InHaled_Skill();
 
 	private:
 		eDefaultKirbyState	mState;
