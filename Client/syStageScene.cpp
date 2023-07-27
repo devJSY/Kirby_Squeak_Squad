@@ -106,7 +106,7 @@ namespace sy
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
 		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(275.f, 0.f));
+		playerTrans->SetPosition(Vector2(30.f, 100.f));
 		Animator* playerAni = player->GetComponent<Animator>();
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
@@ -128,6 +128,7 @@ namespace sy
 
 		// 카메라 설정 
 		Camera::SetTarget(player);
+		Camera::SetCameraLimit(Vector2(1588.f, 207.f));
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);

@@ -1143,6 +1143,7 @@ namespace sy
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 		}
 
+		// 방향 전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
@@ -1154,6 +1155,19 @@ namespace sy
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
 		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyDown", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyDown", true);
+		}
+
 
 		// Fly Start
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D)
@@ -1193,7 +1207,8 @@ namespace sy
 		}
 
 		mTransform->SetPosition(pos);
-
+		
+		// 방향 전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
@@ -1201,6 +1216,18 @@ namespace sy
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);

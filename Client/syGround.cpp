@@ -8,8 +8,8 @@ namespace sy
 {
 	Ground::Ground()
 	{
-		AddComponent<Collider>()->SetSize(Vector2(2000.f, 50.f));
-		GetComponent<Transform>()->SetPosition(Vector2(100.f, 150.f));
+		AddComponent<Collider>()->SetSize(Vector2(1600.f, 50.f));
+		GetComponent<Transform>()->SetPosition(Vector2(800.f, 170.f));
 	}
 
 	Ground::~Ground()
