@@ -152,7 +152,6 @@
     <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syCrimp_Skill.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
-    <ClInclude Include="syGround.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
     <ClInclude Include="syAnimation.h" />
@@ -223,7 +222,6 @@
     <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syCrimp_Skill.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
-    <ClCompile Include="syGround.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
     <ClCompile Include="syAnimation.cpp" />

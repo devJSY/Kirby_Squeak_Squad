@@ -39,6 +39,8 @@ namespace sy
 		HBITMAP GetBitmap() { return mBitmap; }
 		void SetHdc(HDC hdc) { mHdc = hdc; }
 
+		COLORREF GetTexturePixel(int x, int y) { return GetPixel(mHdc, x, y); }
+
 	private:
 		eTextureType mType;		// 확장자 타입
 		Gdiplus::Image* mImage;	// png 객체

@@ -226,9 +226,6 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\Blockin">
       <UniqueIdentifier>{de301256-95ab-4efb-9ed5-c36b6fa02f62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Ground">
-      <UniqueIdentifier>{3267c201-b6da-4235-bc43-733091dc89cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Effects\Dash_Effect">
       <UniqueIdentifier>{76c73add-b019-4d60-ace8-0714e1758ae3}</UniqueIdentifier>
     </Filter>
@@ -441,9 +438,6 @@
     <ClInclude Include="syDotUI.h">
       <Filter>Contents\GameObject\UI\DotUI</Filter>
     </ClInclude>
-    <ClInclude Include="syGround.h">
-      <Filter>Contents\Ground</Filter>
-    </ClInclude>
     <ClInclude Include="syDash_Effect.h">
       <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>
     </ClInclude>
@@ -646,9 +640,6 @@
     </ClCompile>
     <ClCompile Include="syDotUI.cpp">
       <Filter>Contents\GameObject\UI\DotUI</Filter>
-    </ClCompile>
-    <ClCompile Include="syGround.cpp">
-      <Filter>Contents\Ground</Filter>
     </ClCompile>
     <ClCompile Include="syDash_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>

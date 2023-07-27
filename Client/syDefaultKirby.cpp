@@ -9,7 +9,6 @@
 #include "syAnimator.h"
 #include "syRigidbody.h"
 #include "syCollider.h"
-#include "syGround.h"
 #include "syObject.h"
 #include "syDash_Effect.h"
 
@@ -134,6 +133,8 @@ namespace sy
 
 	void DefaultKirby::Update()
 	{
+		// 픽셀충돌 체크
+
 		// 방향 설정
 		mDir = mTransform->GetDirection();
 
@@ -286,12 +287,7 @@ namespace sy
 
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
-		GameObject* temp = dynamic_cast<Ground*>(other->GetOwner());
-		if (temp == nullptr)
-		{
-			// Ground객체 이외에 충돌한 객체 삭제
-			Destroy(other->GetOwner());
-		}
+		Destroy(other->GetOwner());
 	}
 
 	void DefaultKirby::OnCollisionStay(Collider* other)
@@ -480,6 +476,17 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		// 애니메이션
+		
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+
+			mState = eDefaultKirbyState::Drop;
+		}
 
 		// Idle
 		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
@@ -586,6 +593,17 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		// 애니메이션
+
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+
+			mState = eDefaultKirbyState::Drop;
+		}
 
 		// Idle
 		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
@@ -1308,7 +1326,7 @@ namespace sy
 	{
 		// 애니메이션 
 	
-		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		// 땅에 닿은 상태가 아니라면 Inhaled_Drop으로 변경
 		if (!mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
@@ -1409,6 +1427,17 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		// 애니메이션
+
+		// 땅에 닿은 상태가 아니라면 Inhaled_Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Drop", true);
+
+			mState = eDefaultKirbyState::Inhaled_Drop;
+		}
 
 		// Inhaled_Idle
 		// 좌우 어느 키입력도 없으면 Inhaled_Idle 상태로 변경
@@ -1515,6 +1544,17 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		// 애니메이션
+
+		// 땅에 닿은 상태가 아니라면 Inhaled_Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Drop", true);
+
+			mState = eDefaultKirbyState::Inhaled_Drop;
+		}
 
 		// Inhaled_Idle
 		// 좌우 어느 키입력도 없으면 Inhaled_Idle 상태로 변경

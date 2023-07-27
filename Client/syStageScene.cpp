@@ -26,8 +26,6 @@
 #include "syIce.h"
 #include "sySirKibble.h"
 
-#include "syGround.h"
-
 namespace sy
 {
 	StageScene::StageScene()
@@ -79,8 +77,6 @@ namespace sy
 
 		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
-
-		Ground* ground = object::Instantiate<Ground>(eLayerType::Enemy);
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
