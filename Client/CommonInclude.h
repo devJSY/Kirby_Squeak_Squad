@@ -16,6 +16,14 @@
 
 #pragma comment(lib, "Msimg32.lib")
 
+// Sound 
+#include <mmsystem.h>
+#include <dsound.h>
+#include <dinput.h>
+
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "dsound.lib")
+
 namespace sy::enums
 {
 	enum class eLayerType

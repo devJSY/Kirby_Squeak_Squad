@@ -229,6 +229,12 @@
     <Filter Include="Contents\GameObject\Effects\Dash_Effect">
       <UniqueIdentifier>{76c73add-b019-4d60-ace8-0714e1758ae3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource\Sound">
+      <UniqueIdentifier>{a8953763-ed15-4fe8-b2a2-0404b2628624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SoundManager">
+      <UniqueIdentifier>{59269abe-2e8d-4b6e-96e5-047fd285b958}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -441,6 +447,12 @@
     <ClInclude Include="syDash_Effect.h">
       <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="sySoundManager.h">
+      <Filter>Engine\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="sySound.h">
+      <Filter>Engine\Resource\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -643,6 +655,12 @@
     </ClCompile>
     <ClCompile Include="syDash_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="sySoundManager.cpp">
+      <Filter>Engine\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="sySound.cpp">
+      <Filter>Engine\Resource\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
