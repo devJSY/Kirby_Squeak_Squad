@@ -18,6 +18,7 @@ namespace sy
 		static void SetTarget(GameObject* target) { mTarget = target; }
 
 		static void SetCameraLimit(Vector2 limit) { mCameraLimit = limit; }
+		static Vector2 GetCameraLimit() { return mCameraLimit; }
 
 	private:
 		static Vector2 mResolution;		// 화면 해상도

@@ -252,7 +252,27 @@ namespace sy
 			default:
 				break;
 			}
+		}		
+
+		// 이동제한
+		Vector2 pos = mTransform->GetPosition();
+		if (pos.x < 0)
+		{
+			pos.x = 0;
 		}
+		if (pos.y < 0)
+		{
+			pos.y = 0;
+		}
+		if (pos.x > Camera::GetCameraLimit().x)
+		{
+			pos.x = Camera::GetCameraLimit().x;
+		}
+		if (pos.y > Camera::GetCameraLimit().y)
+		{
+			pos.y = Camera::GetCameraLimit().y;
+		}
+		mTransform->SetPosition(pos);
 
 		Player::Update();
 	}
