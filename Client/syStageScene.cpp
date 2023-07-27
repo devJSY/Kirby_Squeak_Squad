@@ -29,6 +29,7 @@
 namespace sy
 {
 	StageScene::StageScene()
+		: mPixelTex(nullptr)
 	{
 	}
 
@@ -77,6 +78,10 @@ namespace sy
 
 		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
+		
+		// 픽셀 이미지 로드
+		mPixelTex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
+			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();

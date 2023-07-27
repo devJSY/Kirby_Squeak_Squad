@@ -8,11 +8,17 @@
 #include "syAnimator.h"
 #include "syCamera.h"
 #include "syCollisionManager.h"
+#include "sySoundManager.h"
+#include "sySound.h"
+#include "syResourceManager.h"
+#include "syTime.h"
 
 namespace sy
 {
 	OpeningScene::OpeningScene()
 		: mVideo(nullptr)
+		, mPassedTime(0.f)
+		, mbSoundPlay(false)
 	{
 	}
 
@@ -34,12 +40,24 @@ namespace sy
 		videoAnimator->PlayAnimation(L"OpeningVideo", false);
 		videoAnimator->SetAffectedCamera(false);
 
+		// Sound Load
+		ResourceManager::Load<Sound>(L"OpeningSound", L"..\\Resources\\Sound\\Theme\\Opening.wav");
+
 		Scene::Initialize();
 	}
 
 	void OpeningScene::Update()
 	{
 		Scene::Update();
+
+		mPassedTime += Time::DeltaTime();
+
+		if (mPassedTime >= 1.72f && mbSoundPlay == false)
+		{
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"OpeningSound")->Play(false);
+			mbSoundPlay = true;
+		}
 
 		// 비디오 재생이 끝나면 다음 씬으로 이동
 		if ( mVideo != nullptr && mVideo->GetComponent<Animator>()->IsActiveAnimationComplete())
@@ -68,6 +86,9 @@ namespace sy
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"OpeningVideo", false);
 		videoAnimator->ActiveAnimationReset();
+
+		mPassedTime = 0.f;
+		mbSoundPlay = false;
 	}
 
 	void OpeningScene::Exit()
@@ -75,5 +96,11 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"OpeningSound")->Stop(true);
+
+		mPassedTime = 0.f;
+		mbSoundPlay = false;
 	}
 }

@@ -18,6 +18,6 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-
+		Texture* mPixelTex;
 	};
 }

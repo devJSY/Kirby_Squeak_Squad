@@ -5,6 +5,7 @@
 #include "resource.h"	// LoadMenu()
 #include "syCamera.h"
 #include "syCollisionManager.h"
+#include "sySoundManager.h"
 
 namespace sy
 {
@@ -65,6 +66,7 @@ namespace sy
 
 		Time::Initialize();
 		Input::Initialize();
+		SoundManager::Initialize();
 		Camera::Initalize();
 
 		CollisionManager::Initialize();

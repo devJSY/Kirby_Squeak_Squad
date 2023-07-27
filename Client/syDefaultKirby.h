@@ -57,6 +57,7 @@ namespace sy
 		eDefaultKirbyState GetKirbyState() { return mState; }
 
 		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
+		void PixelCheck();
 
 	private:
 		// Level Mode State

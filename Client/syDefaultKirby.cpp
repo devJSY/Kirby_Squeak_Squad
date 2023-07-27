@@ -134,6 +134,7 @@ namespace sy
 	void DefaultKirby::Update()
 	{
 		// 픽셀충돌 체크
+		PixelCheck();
 
 		// 방향 설정
 		mDir = mTransform->GetDirection();
@@ -297,6 +298,14 @@ namespace sy
 
 	void DefaultKirby::OnCollisionExit(Collider* other)
 	{
+
+	}
+
+	void DefaultKirby::PixelCheck()
+	{
+
+
+
 
 	}
 

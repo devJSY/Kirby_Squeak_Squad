@@ -18,6 +18,8 @@ namespace sy
 
 	private:
 		class Video* mVideo;
+		float		mPassedTime;
+		bool		mbSoundPlay;
 
 	};
 }

@@ -9,6 +9,10 @@
 #include "syCamera.h"
 #include "syVideo.h"
 #include "syCollisionManager.h"
+#include "sySoundManager.h"
+#include "sySound.h"
+#include "syResourceManager.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -33,6 +37,9 @@ namespace sy
 		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0444931f / mVideo->GetSpeed());
 		videoAnimator->PlayAnimation(L"EndingVideo", true);
 		videoAnimator->SetAffectedCamera(false);
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"EndingSound", L"..\\Resources\\Sound\\Theme\\Ending.wav");
 
 		Scene::Initialize();
 	}

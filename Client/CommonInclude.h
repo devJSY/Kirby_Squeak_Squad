@@ -20,7 +20,6 @@
 #include <mmsystem.h>
 #include <dsound.h>
 #include <dinput.h>
-
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "dsound.lib")
 
