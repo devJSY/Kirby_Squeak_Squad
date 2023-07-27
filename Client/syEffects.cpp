@@ -4,13 +4,10 @@
 
 namespace sy
 {
-	Effects::Effects()
-		: mOwner(nullptr)
-		, mAnimator(nullptr)
+	Effects::Effects(GameObject* owner)
+		: mOwner(owner)
 	{
-		mAnimator = AddComponent<Animator>();
-		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(10.f, 10.f));
+		AddComponent<Animator>();
 	}
 
 	Effects::~Effects()

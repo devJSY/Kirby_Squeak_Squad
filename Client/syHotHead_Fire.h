@@ -6,7 +6,7 @@ namespace sy
 	class HotHead_Fire : public Effects
 	{
     public:
-        HotHead_Fire();
+        HotHead_Fire(GameObject* owner);
         virtual ~HotHead_Fire();
 
         virtual void Initialize();

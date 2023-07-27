@@ -50,9 +50,10 @@ namespace sy
 			// 현재 HotHead 위치 기준 더해준 위치로 생성
 			Vector2 pos = tr->GetPosition();
 			pos += Vector2(10.f, 0.f);
-			HotHead_Fire* skill = object::Instantiate<HotHead_Fire>(eLayerType::Effect);
-			skill->GetComponent<Transform>()->SetPosition(pos);
-			skill->SetOwner(this);
+
+			HotHead_Fire* Fire = new HotHead_Fire(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Fire);
+			Fire->GetComponent<Transform>()->SetPosition(pos);
 		}
 	}
 

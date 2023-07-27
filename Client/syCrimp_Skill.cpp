@@ -2,14 +2,19 @@
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
+#include "syCollider.h"
 
 namespace sy
 {
-	CrimpSkill::CrimpSkill()
+	CrimpSkill::CrimpSkill(GameObject* owner)
+		: Effects(owner)
 	{
+		Collider* col = AddComponent<Collider>();
+		col->SetSize(Vector2(10.f, 10.f));
+
 		Texture* tex = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 
-		Animator* animator = GetAnimator();
+		Animator* animator = GetComponent<Animator>();
 
 		animator->CreateAnimation(tex, L"Flower_Skill", Vector2(109.f, 2959.f), Vector2(8.f, 8.f), Vector2(8.f, 0.f), 1.f, 1);
 		animator->PlayAnimation(L"Flower_Skill", true);

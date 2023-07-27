@@ -45,9 +45,10 @@ namespace sy
 			// 현재 HotHead 위치 기준 더해준 위치로 생성
 			Vector2 pos = tr->GetPosition();
 			pos += Vector2(10.f, 0.f);
-			CrimpSkill* skill = object::Instantiate<CrimpSkill>(eLayerType::Effect);
-			skill->GetComponent<Transform>()->SetPosition(pos);
-			skill->SetOwner(this);
+
+			CrimpSkill* Skill = new CrimpSkill(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Skill);
+			Skill->GetComponent<Transform>()->SetPosition(pos);
 		}
 	}
 

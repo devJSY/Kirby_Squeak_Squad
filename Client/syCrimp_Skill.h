@@ -6,7 +6,7 @@ namespace sy
     class CrimpSkill : public Effects
     {
     public:
-        CrimpSkill();
+        CrimpSkill(GameObject* owner);
         virtual ~CrimpSkill();
 
         virtual void Initialize();

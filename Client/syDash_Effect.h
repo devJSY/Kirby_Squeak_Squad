@@ -1,13 +1,13 @@
 #pragma once
-#include "syGameObject.h"
+#include "syEffects.h"
 
 namespace sy
 {
-    class Effects : public GameObject
-    {
+	class Dash_Effect :	public Effects
+	{
     public:
-        Effects(GameObject* owner);
-        virtual ~Effects();
+        Dash_Effect(GameObject* owner);
+        virtual ~Dash_Effect();
 
         virtual void Initialize();
         virtual void Update();
@@ -17,9 +17,7 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) {};
         virtual void OnCollisionExit(class Collider* other) {};
 
-        GameObject* GetOwner() { return mOwner; }
-
     private:
-        GameObject* mOwner; // 이펙트를 생성한 오브젝트  
-    };
+        class Animator* mAnimator;
+	};
 }

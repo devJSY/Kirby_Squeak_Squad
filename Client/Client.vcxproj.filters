@@ -229,6 +229,9 @@
     <Filter Include="Contents\Ground">
       <UniqueIdentifier>{3267c201-b6da-4235-bc43-733091dc89cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\Dash_Effect">
+      <UniqueIdentifier>{76c73add-b019-4d60-ace8-0714e1758ae3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -441,6 +444,9 @@
     <ClInclude Include="syGround.h">
       <Filter>Contents\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="syDash_Effect.h">
+      <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -643,6 +649,9 @@
     </ClCompile>
     <ClCompile Include="syGround.cpp">
       <Filter>Contents\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="syDash_Effect.cpp">
+      <Filter>Contents\GameObject\Effects\Dash_Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,8 @@
 #include "syRigidbody.h"
 #include "syCollider.h"
 #include "syGround.h"
+#include "syObject.h"
+#include "syDash_Effect.h"
 
 namespace sy
 {
@@ -403,6 +405,9 @@ namespace sy
 			mTransform->SetDirection(eDirection::RIGHT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
 			mState = eDefaultKirbyState::Run;
+
+			Dash_Effect* DashEffect = new Dash_Effect(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
 		}
 
 		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
@@ -410,6 +415,9 @@ namespace sy
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 			mState = eDefaultKirbyState::Run;
+
+			Dash_Effect* DashEffect = new Dash_Effect(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
 		}
 
 		// Jump

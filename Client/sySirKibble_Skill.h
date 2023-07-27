@@ -6,7 +6,7 @@ namespace sy
 	class SirKibble_Skill : public Effects
 	{
     public:
-        SirKibble_Skill();
+        SirKibble_Skill(GameObject* owner);
         virtual ~SirKibble_Skill();
 
         virtual void Initialize();
