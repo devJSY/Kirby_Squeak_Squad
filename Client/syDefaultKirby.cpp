@@ -325,15 +325,15 @@ namespace sy
 		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 MB = Vector2(ColPos.x, ColPos.y + (ColSize.y / 2.f));
 
-		COLORREF LTColor = PixelTex->GetTexturePixel(LT.x, LT.y);
-		COLORREF RTColor = PixelTex->GetTexturePixel(RT.x, RT.y);
-		COLORREF MTColor = PixelTex->GetTexturePixel(MT.x, MT.y);
-		COLORREF LBColor = PixelTex->GetTexturePixel(LB.x, LB.y);
-		COLORREF RBColor = PixelTex->GetTexturePixel(RB.x, RB.y);
-		COLORREF MBColor = PixelTex->GetTexturePixel(MB.x, MB.y);
+		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
+		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);
+		COLORREF MTColor = PixelTex->GetTexturePixel((int)MT.x, (int)MT.y);
+		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
+		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
+		COLORREF MBColor = PixelTex->GetTexturePixel((int)MB.x, (int)MB.y);
 
 		// 상단 처리
-		COLORREF MTColorOffsetY = PixelTex->GetTexturePixel(MT.x, MT.y + 1);
+		COLORREF MTColorOffsetY = PixelTex->GetTexturePixel((int)MT.x, int(MT.y + 1));
 
 		Vector2 pos = mTransform->GetPosition();
 
@@ -379,9 +379,9 @@ namespace sy
 			}
 		}
 
-		COLORREF LBColorOffsetY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
-		COLORREF RBColorOffsetY = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
-		COLORREF MBColorOffsetY = PixelTex->GetTexturePixel(MB.x, MB.y + 1);
+		COLORREF LBColorOffsetY = PixelTex->GetTexturePixel((int)LB.x, int(LB.y + 1));
+		COLORREF RBColorOffsetY = PixelTex->GetTexturePixel((int)RB.x, int(RB.y + 1));
+		COLORREF MBColorOffsetY = PixelTex->GetTexturePixel((int)MB.x, int(MB.y + 1));
 
 		// 바닥 ~ 바닥 + 1픽셀 범위가 아닐경우 Ground false 처리
 		if (!(LBColor == RGB(0, 0, 255) || LBColorOffsetY == RGB(0, 0, 255)
@@ -398,7 +398,7 @@ namespace sy
 
 		for (size_t i = 0; i < 20; i++)
 		{
-			COLORREF tempColor = PixelTex->GetTexturePixel(LB.x, LB.y + i);
+			COLORREF tempColor = PixelTex->GetTexturePixel((int)LB.x, int(LB.y + i));
 			
 			if (tempColor == RGB(255, 0, 0))
 			{
@@ -409,7 +409,7 @@ namespace sy
 
 
 		// Right Stop Check
-		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(RB.x + 1, RB.y);
+		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(int(RB.x + 1), (int)RB.y);
 		
 		if (RBColor == RGB(0, 255, 0))
 		{
@@ -430,7 +430,7 @@ namespace sy
 		}
 
 		// Left Stop Check
-		COLORREF LBColorOffsetX = PixelTex->GetTexturePixel(LB.x - 1, LB.y);
+		COLORREF LBColorOffsetX = PixelTex->GetTexturePixel(int(LB.x - 1), (int)LB.y);
 
 		if (LBColor == RGB(0, 255, 0))
 		{
@@ -550,7 +550,7 @@ namespace sy
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
 				mState = eDefaultKirbyState::Walk;
-			}	
+			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
@@ -717,22 +717,6 @@ namespace sy
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
 		}
-
-		// Run
-		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
-		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			mState = eDefaultKirbyState::Run;
-		}
-
-		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
-		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
-			mState = eDefaultKirbyState::Run;
-		}
-
 
 		// Jump
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
@@ -1519,7 +1503,19 @@ namespace sy
 		// 누르고있을때 상승
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			mRigidBody->SetVelocity(Vector2(0.f, -130.f));			
+			// 상단에 충돌한 상태면 속도를 0으로 설정하고 고정위치 셋팅
+			if (mbTopStop)
+			{
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				// 좌우 이동
+				Vector2 pos = mTransform->GetPosition();
+				pos.y -= 1.f;
+				mTransform->SetPosition(pos);
+			}
+			else
+			{
+				mRigidBody->SetVelocity(Vector2(0.f, -130.f));
+			}					
 		}
 
 		// 키를 누르고있지 않을때 Fly Down
@@ -1603,6 +1599,9 @@ namespace sy
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
 				mState = eDefaultKirbyState::Inhaled_Run;
+
+				Dash_Effect* DashEffect = new Dash_Effect(this);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 
@@ -1613,6 +1612,9 @@ namespace sy
 				mTransform->SetDirection(eDirection::LEFT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
 				mState = eDefaultKirbyState::Inhaled_Run;
+
+				Dash_Effect* DashEffect = new Dash_Effect(this);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 
@@ -1743,22 +1745,6 @@ namespace sy
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Walk", true);
 		}
-
-		// Inhaled_Run
-		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
-		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
-			mState = eDefaultKirbyState::Inhaled_Run;
-		}
-
-		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
-		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
-			mState = eDefaultKirbyState::Inhaled_Run;
-		}
-
 
 		// Inhaled_Jump
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))

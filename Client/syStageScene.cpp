@@ -81,7 +81,7 @@ namespace sy
 		
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
-			, L"..\\Resources\\Map\\etc\\Stage1_Pixel_Test.bmp");
+			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
 		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정

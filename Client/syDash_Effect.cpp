@@ -61,7 +61,8 @@ namespace sy
 		}
 		
 		// Run 상태가 아니거나 애니메이션이 끝나면 삭제
-		if (mAnimator->IsActiveAnimationComplete() || Owner->GetKirbyState() != eDefaultKirbyState::Run)
+		if (mAnimator->IsActiveAnimationComplete() 
+			|| !(Owner->GetKirbyState() == eDefaultKirbyState::Run || Owner->GetKirbyState() == eDefaultKirbyState::Inhaled_Run))
 		{
 			Destroy(this);
 		}
