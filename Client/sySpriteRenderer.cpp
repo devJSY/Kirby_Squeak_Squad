@@ -12,7 +12,7 @@ namespace sy
 		, mBMPRGB(RGB(255, 0, 255)) // default Magenta
 		, mAlpha(1.0f)
 		, mbAffectedCamera(true)
-		, mRenderTrig(true)
+		, mbRenderTrig(true)
 	{
 	}
 
@@ -35,7 +35,7 @@ namespace sy
 		GameObject* gameObj = GetOwner();
 		Transform* tr = gameObj->GetComponent<Transform>();
 
-		if (mRenderTrig)
+		if (mbRenderTrig)
 		{
 			mTex->Render(hdc
 				, GetOwner()->GetComponent<Transform>()->GetPosition()

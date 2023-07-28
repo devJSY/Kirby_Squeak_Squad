@@ -29,6 +29,7 @@
 namespace sy
 {
 	StageScene::StageScene()
+		: mPixelBG(nullptr)
 	{
 	}
 
@@ -80,14 +81,15 @@ namespace sy
 		
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
-			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
+			, L"..\\Resources\\Map\\etc\\Stage1_Pixel_Test.bmp");
 
-		BackGround* Bg2 = object::Instantiate<BackGround>(eLayerType::Video);
-		Bg2->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
+		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
+		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
 
-		SpriteRenderer* BgRenderer2 = Bg2->AddComponent<SpriteRenderer>();
-		BgRenderer2->SetAffectedCamera(true);
-		BgRenderer2->SetTexture(Pixeltex);
+		SpriteRenderer* PixelBgRenderer = mPixelBG->AddComponent<SpriteRenderer>();
+		PixelBgRenderer->SetAffectedCamera(true);
+		PixelBgRenderer->SetTexture(Pixeltex);
+		PixelBgRenderer->SetRenderTrig(false);
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
@@ -100,6 +102,16 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"EndingScene");
+		}
+
+		if (Input::GetKeyDown(eKeyCode::T))
+		{
+			SpriteRenderer* PixelBgRenderer = mPixelBG->GetComponent<SpriteRenderer>();
+
+			if (PixelBgRenderer->GetRenderTrig())
+				PixelBgRenderer->SetRenderTrig(false);
+			else
+				PixelBgRenderer->SetRenderTrig(true);
 		}
 	}
 

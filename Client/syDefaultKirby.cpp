@@ -24,6 +24,7 @@ namespace sy
 		, mbLevelEnter(false)
 		, mbOnLeftStop(false)
 		, mbOnRightStop(false)
+		, mbTopStop(false)
 		, mbOnSlope(false)
 	{
 	}
@@ -319,25 +320,63 @@ namespace sy
 
 		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
 		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 MT = Vector2(ColPos.x, ColPos.y - (ColSize.y / 2.f));
 		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 MB = Vector2(ColPos.x, ColPos.y + (ColSize.y / 2.f));
 
 		COLORREF LTColor = PixelTex->GetTexturePixel(LT.x, LT.y);
 		COLORREF RTColor = PixelTex->GetTexturePixel(RT.x, RT.y);
+		COLORREF MTColor = PixelTex->GetTexturePixel(MT.x, MT.y);
 		COLORREF LBColor = PixelTex->GetTexturePixel(LB.x, LB.y);
 		COLORREF RBColor = PixelTex->GetTexturePixel(RB.x, RB.y);
 		COLORREF MBColor = PixelTex->GetTexturePixel(MB.x, MB.y);
+
+		// 상단 처리
+		COLORREF MTColorOffsetY = PixelTex->GetTexturePixel(MT.x, MT.y + 1);
+
+		Vector2 pos = mTransform->GetPosition();
+
+		if (MTColor == RGB(0, 255, 0))
+		{
+			pos.y += 1.f;			
+			mbTopStop = true;
+		}
+		else if (MTColorOffsetY == RGB(0, 255, 0))
+		{
+			mbTopStop = true;
+		}
+		else
+		{
+			if (LTColor == RGB(0, 255, 0))
+			{
+				pos.x += 1.f;
+			}
+			else if (RTColor == RGB(0, 255, 0))
+			{
+				pos.x -= 1.f;
+			}
+
+			mbTopStop = false;
+		}
+
+		mTransform->SetPosition(pos);
+
+
 
 		// 바닥 처리
 		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255) || MBColor == RGB(0, 0, 255)
 			|| MBColor == RGB(255, 0, 0))
 		{
-			// 이동
-			Vector2 pos = mTransform->GetPosition();
-			pos.y -= 1.f;
-			mTransform->SetPosition(pos);
-			mRigidBody->SetGround(true);
+			// 특정상태일때는 바닥 무시
+			if (!(mState == eDefaultKirbyState::Jump || mState == eDefaultKirbyState::Fly_Up))
+			{
+				// 이동
+				Vector2 pos = mTransform->GetPosition();
+				pos.y -= 1.f;
+				mTransform->SetPosition(pos);
+				mRigidBody->SetGround(true);
+			}
 		}
 
 		COLORREF LBColorOffsetY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
@@ -354,16 +393,17 @@ namespace sy
 
 
 		// OnSlope Check 
-		// 아래로 5픽셀까지 체크
+		// 아래로 20픽셀까지 체크
 		mbOnSlope = false;
 
-		for (size_t i = 0; i < 5; i++)
+		for (size_t i = 0; i < 20; i++)
 		{
 			COLORREF tempColor = PixelTex->GetTexturePixel(LB.x, LB.y + i);
 			
 			if (tempColor == RGB(255, 0, 0))
 			{
 				mbOnSlope = true;
+				break;
 			}
 		}
 
@@ -1479,7 +1519,7 @@ namespace sy
 		// 누르고있을때 상승
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			mRigidBody->SetVelocity(Vector2(0.f, -130.f));
+			mRigidBody->SetVelocity(Vector2(0.f, -130.f));			
 		}
 
 		// 키를 누르고있지 않을때 Fly Down

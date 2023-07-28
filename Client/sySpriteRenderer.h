@@ -24,13 +24,14 @@ namespace sy
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
 		bool GetAffectedCamera() { return mbAffectedCamera; }
 
-		void SetRenderTrig(bool Trig) { mRenderTrig = Trig; }
+		void SetRenderTrig(bool Trig) { mbRenderTrig = Trig; }
+		bool GetRenderTrig() { return mbRenderTrig; }
 
 	private:
 		Texture*	mTex;
 		COLORREF	mBMPRGB;
 		float		mAlpha;
 		bool		mbAffectedCamera;
-		bool		mRenderTrig;
+		bool		mbRenderTrig;
     };
 }
