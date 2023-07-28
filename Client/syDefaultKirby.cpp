@@ -22,6 +22,8 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mbLevelEnter(false)
+		, mbLeftBlock(false)
+		, mbRightBlock(false)
 	{
 	}
 
@@ -167,7 +169,7 @@ namespace sy
 		}
 		else if (GetPlayerMode() == ePlayerMode::PlayMode)
 		{
-			// PlayMode 상태일땐 픽셀충돌 체크
+			// 픽셀충돌 체크
 			PixelCheck();
 
 			// 상태처리
@@ -258,6 +260,7 @@ namespace sy
 			}
 		}		
 
+
 		// 이동제한
 		Vector2 pos = mTransform->GetPosition();
 		if (pos.x < 0)
@@ -332,70 +335,55 @@ namespace sy
 			mTransform->SetPosition(pos);
 			mRigidBody->SetGround(true);
 
-			return;
+			//return;
 		}
-		
-		// 우측
-		if (LTColor == RGB(0, 255, 0) || LBColor == RGB(0, 255, 0))
+
+		COLORREF LBColorY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
+		COLORREF RBColorY = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
+
+		// 바닥 ~ 바닥 + 1픽셀 범위가 아닐경우 Ground false 처리
+		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
+			|| LBColorY == RGB(0, 0, 255) || RBColorY == RGB(0, 0, 255)))
+		{
+			mRigidBody->SetGround(false);
+		}
+
+
+
+
+		COLORREF RBColorX = PixelTex->GetTexturePixel(RB.x + 1, RB.y);
+
+		// X 축 처리
+		if (RBColor == RGB(0, 255, 0) || RBColorX == RGB(0, 255, 0))
 		{
 			// 이동
 			Vector2 pos = mTransform->GetPosition();
 			pos.x -= 1.f;
 			mTransform->SetPosition(pos);
-
-			return;
 		}
 
-		// 좌측
-		if (RTColor == RGB(0, 255, 0) || RBColor == RGB(0, 255, 0))
+		if (RBColorX == RGB(0, 255, 0))
+		{
+			mbRightBlock = true;
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+		}
+
+
+		COLORREF LBColorX = PixelTex->GetTexturePixel(LB.x - 1, LB.y);
+
+		if (LBColor == RGB(0, 255, 0))
 		{
 			// 이동
 			Vector2 pos = mTransform->GetPosition();
 			pos.x += 1.f;
 			mTransform->SetPosition(pos);
-
-			return;
 		}
 
-		COLORREF LTColor2 = PixelTex->GetTexturePixel(LB.x + 1.f, LB.y);
-		COLORREF LBColor2 = PixelTex->GetTexturePixel(RB.x + 1.f, RB.y);
-
-		if (LTColor2 == RGB(0, 255, 0) || LBColor2 == RGB(0, 255, 0))
+		if (LBColorX == RGB(0, 255, 0))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
-
-			mState = eDefaultKirbyState::Idle;
-
-			return;
+			mbLeftBlock = true;
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
 		}
-
-		COLORREF RTColor2 = PixelTex->GetTexturePixel(LB.x - 1.f, LB.y);
-		COLORREF RBColor2 = PixelTex->GetTexturePixel(RB.x - 1.f, RB.y);
-
-		if (RTColor2 == RGB(0, 255, 0) || RBColor2 == RGB(0, 255, 0))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
-
-			mState = eDefaultKirbyState::Idle;
-			return;
-		}
-
-
-		COLORREF LBColor3 = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
-		COLORREF RBColor3 = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
-
-		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
-			|| LBColor3 == RGB(0, 0, 255) || RBColor3 == RGB(0, 0, 255)))
-		{
-			mRigidBody->SetGround(false);
-		}
-
 
 	}
 
@@ -482,37 +470,67 @@ namespace sy
 		// Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
-			mState = eDefaultKirbyState::Walk;
+			if (!mbRightBlock)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
+				mState = eDefaultKirbyState::Walk;
+			}
+
+			// 반대방향키를 눌르면 Block 상태 해제
+			if (mbLeftBlock)
+				mbLeftBlock = false;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
-			mState = eDefaultKirbyState::Walk;
+			if (!mbLeftBlock)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
+				mState = eDefaultKirbyState::Walk;
+			}
+
+			// 반대방향키를 눌르면 Block 상태 해제
+			if (mbRightBlock)
+				mbRightBlock = false;
 		}
 
 		// Run
 		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
 		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
-			mState = eDefaultKirbyState::Run;
+			if (!mbRightBlock)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
+				mState = eDefaultKirbyState::Run;
 
-			Dash_Effect* DashEffect = new Dash_Effect(this);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				Dash_Effect* DashEffect = new Dash_Effect(this);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+
+			}
+
+			// 반대방향키를 눌르면 Block 상태 해제
+			if (mbLeftBlock)
+				mbLeftBlock = false;
 		}
 
 		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
-			mState = eDefaultKirbyState::Run;
+			if (!mbLeftBlock)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
+				mState = eDefaultKirbyState::Run;
 
-			Dash_Effect* DashEffect = new Dash_Effect(this);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				Dash_Effect* DashEffect = new Dash_Effect(this);
+				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+
+			}
+
+			// 반대방향키를 눌르면 Block 상태 해제
+			if (mbRightBlock)
+				mbRightBlock = false;
 		}
 
 		// Jump
@@ -526,6 +544,9 @@ namespace sy
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			mbRightBlock = false;
+			mbLeftBlock = false;
 		}
 
 		// Damage
@@ -564,6 +585,11 @@ namespace sy
 
 	void DefaultKirby::Walk()
 	{
+		if (mbRightBlock || mbLeftBlock)
+		{
+			mState = eDefaultKirbyState::Idle;
+		}
+
 		// 이동
 		Vector2 pos = mTransform->GetPosition();
 
@@ -678,6 +704,11 @@ namespace sy
 
 	void DefaultKirby::Run()
 	{
+		if (mbRightBlock || mbLeftBlock)
+		{
+			mState = eDefaultKirbyState::Idle;
+		}
+
 		// 이동
 		Vector2 pos = mTransform->GetPosition();
 

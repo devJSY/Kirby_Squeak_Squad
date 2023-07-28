@@ -83,7 +83,7 @@ namespace sy
 			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
 
 		BackGround* Bg2 = object::Instantiate<BackGround>(eLayerType::Video);
-		Bg2->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2 - 2, Pixeltex->GetHeight() / 2 - 2)); // 중점 설정
+		Bg2->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
 
 		SpriteRenderer* BgRenderer2 = Bg2->AddComponent<SpriteRenderer>();
 		BgRenderer2->SetAffectedCamera(true);

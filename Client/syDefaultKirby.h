@@ -105,6 +105,8 @@ namespace sy
 		eDirection			mDir;
 
 		bool				mbLevelEnter; // Level Mode State 첫진입시 설정
+		bool				mbLeftBlock;
+		bool				mbRightBlock;
 	};
 }
 

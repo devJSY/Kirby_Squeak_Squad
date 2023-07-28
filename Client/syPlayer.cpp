@@ -11,7 +11,7 @@ namespace sy
 		// 애니메이터 생성
 		AddComponent<Animator>();
 		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(15.f, 15.f));
+		col->SetSize(Vector2(20.f, 20.f));
 	}
 
 	Player::~Player()
