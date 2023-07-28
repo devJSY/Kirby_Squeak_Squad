@@ -320,11 +320,13 @@ namespace sy
 		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
 		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 MB = Vector2(ColPos.x, ColPos.y + (ColSize.y / 2.f));
 
 		COLORREF LTColor = PixelTex->GetTexturePixel(LT.x, LT.y);
 		COLORREF RTColor = PixelTex->GetTexturePixel(RT.x, RT.y);
 		COLORREF LBColor = PixelTex->GetTexturePixel(LB.x, LB.y);
 		COLORREF RBColor = PixelTex->GetTexturePixel(RB.x, RB.y);
+		COLORREF MBColor = PixelTex->GetTexturePixel(MB.x, MB.y);
 
 		// 바닥 처리
 		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
@@ -340,10 +342,12 @@ namespace sy
 
 		COLORREF LBColorY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
 		COLORREF RBColorY = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
+		COLORREF MBColorY = PixelTex->GetTexturePixel(MB.x, MB.y + 1);
 
 		// 바닥 ~ 바닥 + 1픽셀 범위가 아닐경우 Ground false 처리
-		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
-			|| LBColorY == RGB(0, 0, 255) || RBColorY == RGB(0, 0, 255)))
+		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255) 
+			|| LBColorY == RGB(0, 0, 255) || RBColorY == RGB(0, 0, 255)
+			|| MBColor == RGB(0, 0, 255) || MBColorY == RGB(0, 0, 255)))
 		{
 			mRigidBody->SetGround(false);
 		}
@@ -351,6 +355,9 @@ namespace sy
 
 
 		COLORREF RBColorX = PixelTex->GetTexturePixel(RB.x + 1, RB.y);
+
+
+		// 반대방향키 눌리면 Block 해제시키기
 
 		// X 축 처리
 		if (RBColor == RGB(0, 255, 0))
@@ -392,6 +399,16 @@ namespace sy
 			mbLeftBlock = false;
 		}
 
+		// 반대방향키눌렀을때 Block 해제
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
+		{
+			mbLeftBlock = false;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			mbRightBlock = false;
+		}
 	}
 
 	void DefaultKirby::Choice()
@@ -571,6 +588,7 @@ namespace sy
 
 	void DefaultKirby::Walk()
 	{
+		// Block 상태라면 Idle 로 상태변경
 		if (mbLeftBlock || mbRightBlock)
 		{
 			if (mDir == eDirection::RIGHT)
@@ -696,6 +714,7 @@ namespace sy
 
 	void DefaultKirby::Run()
 	{
+		// Block 상태라면 Idle 로 상태변경
 		if (mbLeftBlock || mbRightBlock)
 		{
 			if (mDir == eDirection::RIGHT)
@@ -1261,6 +1280,7 @@ namespace sy
 
 	void DefaultKirby::Fly_End()
 	{
+
 		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 
@@ -1299,23 +1319,29 @@ namespace sy
 
 	void DefaultKirby::Fly_Down()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Block 상태가 아닌경우에만 이동
+		if (!(mbLeftBlock || mbRightBlock))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 50.f * Time::DeltaTime();
+				else
+					pos.x -= 50.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
 		}
 
-		mTransform->SetPosition(pos);
 
 		// 눌렀을때 상승
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+			mRigidBody->SetGround(false);
 		}
 
 		// 방향 전환
@@ -1469,31 +1495,43 @@ namespace sy
 		// Inhaled_Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Walk", true);
-			mState = eDefaultKirbyState::Inhaled_Walk;
+			if (!mbRightBlock)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Walk", true);
+				mState = eDefaultKirbyState::Inhaled_Walk;
+			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Walk", true);
-			mState = eDefaultKirbyState::Inhaled_Walk;
+			if (!mbLeftBlock)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Walk", true);
+				mState = eDefaultKirbyState::Inhaled_Walk;
+			}
 		}
 
 		// Inhaled_Run
 		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
 		{
-			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
-			mState = eDefaultKirbyState::Inhaled_Run;
+			if (!mbRightBlock)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
+				mState = eDefaultKirbyState::Inhaled_Run;
+			}
 		}
 
 		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 		{
-			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
-			mState = eDefaultKirbyState::Inhaled_Run;
+			if (!mbLeftBlock)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
+				mState = eDefaultKirbyState::Inhaled_Run;
+			}
 		}
 
 		// Inhaled_Jump
@@ -1545,6 +1583,19 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Walk()
 	{
+		// Block 상태라면 Idle 로 상태변경
+		if (mbLeftBlock || mbRightBlock)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Idle", true);
+
+			mState = eDefaultKirbyState::Inhaled_Idle;
+			return;
+		}
+
+
 		// 이동
 		Vector2 pos = mTransform->GetPosition();
 
@@ -1659,6 +1710,18 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Run()
 	{
+		// Block 상태라면 Idle 로 상태변경
+		if (mbLeftBlock || mbRightBlock)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Idle", true);
+
+			mState = eDefaultKirbyState::Inhaled_Idle;
+			return;
+		}
+
 		// 이동
 		Vector2 pos = mTransform->GetPosition();
 
