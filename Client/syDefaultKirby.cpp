@@ -22,8 +22,9 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mbLevelEnter(false)
-		, mbLeftBlock(false)
-		, mbRightBlock(false)
+		, mbOnLeftStop(false)
+		, mbOnRightStop(false)
+		, mbOnSlope(false)
 	{
 	}
 
@@ -329,7 +330,7 @@ namespace sy
 		COLORREF MBColor = PixelTex->GetTexturePixel(MB.x, MB.y);
 
 		// 바닥 처리
-		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
+		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255) || MBColor == RGB(0, 0, 255)
 			|| MBColor == RGB(255, 0, 0))
 		{
 			// 이동
@@ -337,50 +338,59 @@ namespace sy
 			pos.y -= 1.f;
 			mTransform->SetPosition(pos);
 			mRigidBody->SetGround(true);
-
-			//return;
 		}
 
-		COLORREF LBColorY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
-		COLORREF RBColorY = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
-		COLORREF MBColorY = PixelTex->GetTexturePixel(MB.x, MB.y + 1);
+		COLORREF LBColorOffsetY = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
+		COLORREF RBColorOffsetY = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
+		COLORREF MBColorOffsetY = PixelTex->GetTexturePixel(MB.x, MB.y + 1);
 
 		// 바닥 ~ 바닥 + 1픽셀 범위가 아닐경우 Ground false 처리
-		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255) 
-			|| LBColorY == RGB(0, 0, 255) || RBColorY == RGB(0, 0, 255)
-			|| (MBColor == RGB(255, 0, 0) || MBColorY == RGB(255, 0, 0))))
+		if (!(LBColor == RGB(0, 0, 255) || LBColorOffsetY == RGB(0, 0, 255)
+			|| RBColor == RGB(0, 0, 255) || RBColorOffsetY == RGB(0, 0, 255)
+			|| MBColor == RGB(255, 0, 0) || MBColorOffsetY == RGB(255, 0, 0)))
 		{
 			mRigidBody->SetGround(false);
 		}
 
 
-		COLORREF RBColorX = PixelTex->GetTexturePixel(RB.x + 1, RB.y);
+		// OnSlope Check 
+		// 아래로 5픽셀까지 체크
+		mbOnSlope = false;
+
+		for (size_t i = 0; i < 5; i++)
+		{
+			COLORREF tempColor = PixelTex->GetTexturePixel(LB.x, LB.y + i);
+			
+			if (tempColor == RGB(255, 0, 0))
+			{
+				mbOnSlope = true;
+			}
+		}
 
 
-		// 반대방향키 눌리면 Block 해제시키기
-
-		// X 축 처리
+		// Right Stop Check
+		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(RB.x + 1, RB.y);
+		
 		if (RBColor == RGB(0, 255, 0))
 		{
 			// 이동
 			Vector2 pos = mTransform->GetPosition();
 			pos.x -= 1.f;
 			mTransform->SetPosition(pos);
-			mbRightBlock = true;
+			mbOnRightStop = true;
 		}
-		else if (RBColorX == RGB(0, 255, 0))
+		else if (RBColorOffsetX == RGB(0, 255, 0))
 		{
-			mbRightBlock = true;
+			// 한픽셀 Offset 처리
+			mbOnRightStop = true;
 		}
 		else
 		{
-			mbRightBlock = false;
+			mbOnRightStop = false;
 		}
 
-		//mbRightBlock = true;		
-		//mbLeftBlock = true;
-
-		COLORREF LBColorX = PixelTex->GetTexturePixel(LB.x - 1, LB.y);
+		// Left Stop Check
+		COLORREF LBColorOffsetX = PixelTex->GetTexturePixel(LB.x - 1, LB.y);
 
 		if (LBColor == RGB(0, 255, 0))
 		{
@@ -388,26 +398,27 @@ namespace sy
 			Vector2 pos = mTransform->GetPosition();
 			pos.x += 1.f;
 			mTransform->SetPosition(pos);
-			mbLeftBlock = true;
+			mbOnLeftStop = true;
 		}
-		else if (LBColorX == RGB(0, 255, 0))
+		else if (LBColorOffsetX == RGB(0, 255, 0))
 		{
-			mbLeftBlock = true;
+			// 한픽셀 Offset 처리
+			mbOnLeftStop = true;
 		}
 		else
 		{
-			mbLeftBlock = false;
+			mbOnLeftStop = false;
 		}
 
-		// 반대방향키눌렀을때 Block 해제
+		// 반대방향키눌렀을때 Stop 해제
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			mbLeftBlock = false;
+			mbOnLeftStop = false;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			mbRightBlock = false;
+			mbOnRightStop = false;
 		}
 	}
 
@@ -480,7 +491,7 @@ namespace sy
 	{
 		// 애니메이션 
 
-		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경 비탈길에서는 예외처리해줘야함
 		if (!mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
@@ -494,7 +505,7 @@ namespace sy
 		// Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			if (!mbRightBlock)
+			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
@@ -504,7 +515,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			if (!mbLeftBlock)
+			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
@@ -515,7 +526,7 @@ namespace sy
 		// Run
 		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
 		{		
-			if (!mbRightBlock)
+			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
@@ -528,7 +539,7 @@ namespace sy
 
 		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 		{			
-			if (!mbLeftBlock)
+			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
@@ -588,8 +599,8 @@ namespace sy
 
 	void DefaultKirby::Walk()
 	{
-		// Block 상태라면 Idle 로 상태변경
-		if (mbLeftBlock || mbRightBlock)
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
@@ -600,20 +611,27 @@ namespace sy
 			return;
 		}
 
-		// 이동
-		Vector2 pos = mTransform->GetPosition();
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		if (mDir == eDirection::RIGHT)
-			pos.x += 50.f * Time::DeltaTime();
-		else
-			pos.x -= 50.f * Time::DeltaTime();
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
 
-		mTransform->SetPosition(pos);
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션
 		
-		// 땅에 닿은 상태가 아니라면 Drop으로 변경
-		if (!mRigidBody->IsGround())
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
@@ -714,8 +732,8 @@ namespace sy
 
 	void DefaultKirby::Run()
 	{
-		// Block 상태라면 Idle 로 상태변경
-		if (mbLeftBlock || mbRightBlock)
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
@@ -727,23 +745,27 @@ namespace sy
 			return;
 		}
 
-		// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 100.f * Time::DeltaTime();
-			else
-				pos.x -= 100.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 120.f * Time::DeltaTime();
+				else
+					pos.x -= 120.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션
 
-		// 땅에 닿은 상태가 아니라면 Drop으로 변경
-		if (!mRigidBody->IsGround())
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
@@ -878,19 +900,23 @@ namespace sy
 			}
 		}
 
-
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
 		}
 
-		mTransform->SetPosition(pos);
 
 		// 애니메이션
 
@@ -949,18 +975,22 @@ namespace sy
 
 	void DefaultKirby::Turn()
 	{
-		//// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션	
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
@@ -1016,11 +1046,6 @@ namespace sy
 
 	void DefaultKirby::Damage()
 	{
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
-
-		//tr->SetPosition(pos);
-		// 
 		// 애니메이션
 		
 		// 애니메이션이 끝나면 Idle 상태로 변경
@@ -1037,18 +1062,22 @@ namespace sy
 
 	void DefaultKirby::Drop()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
@@ -1158,7 +1187,7 @@ namespace sy
 		}
 
 		// 몬스터를 먹으면 상태변환
-		if (true)
+		if (false)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled", false);
@@ -1231,18 +1260,22 @@ namespace sy
 	}
 	void DefaultKirby::Fly_Start()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 방향전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
@@ -1280,19 +1313,23 @@ namespace sy
 
 	void DefaultKirby::Fly_End()
 	{
-
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
 		}
 
-		mTransform->SetPosition(pos);
 
 		// 방향 전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
@@ -1319,8 +1356,8 @@ namespace sy
 
 	void DefaultKirby::Fly_Down()
 	{
-		// Block 상태가 아닌경우에만 이동
-		if (!(mbLeftBlock || mbRightBlock))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
 			// 좌우 이동
 			Vector2 pos = mTransform->GetPosition();
@@ -1328,9 +1365,9 @@ namespace sy
 			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
 			{
 				if (mDir == eDirection::RIGHT)
-					pos.x += 50.f * Time::DeltaTime();
+					pos.x += 80.f * Time::DeltaTime();
 				else
-					pos.x -= 50.f * Time::DeltaTime();
+					pos.x -= 80.f * Time::DeltaTime();
 			}
 
 			mTransform->SetPosition(pos);
@@ -1396,18 +1433,23 @@ namespace sy
 
 	void DefaultKirby::Fly_Up()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
 		}
 
-		mTransform->SetPosition(pos);
 		
 		// 방향 전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
@@ -1495,7 +1537,7 @@ namespace sy
 		// Inhaled_Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
 		{
-			if (!mbRightBlock)
+			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Walk", true);
@@ -1505,7 +1547,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
-			if (!mbLeftBlock)
+			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Walk", true);
@@ -1516,7 +1558,7 @@ namespace sy
 		// Inhaled_Run
 		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
 		{
-			if (!mbRightBlock)
+			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
@@ -1526,7 +1568,7 @@ namespace sy
 
 		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
 		{
-			if (!mbLeftBlock)
+			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
@@ -1583,8 +1625,8 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Walk()
 	{
-		// Block 상태라면 Idle 로 상태변경
-		if (mbLeftBlock || mbRightBlock)
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
@@ -1595,21 +1637,27 @@ namespace sy
 			return;
 		}
 
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		// 이동
-		Vector2 pos = mTransform->GetPosition();
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
 
-		if (mDir == eDirection::RIGHT)
-			pos.x += 50.f * Time::DeltaTime();
-		else
-			pos.x -= 50.f * Time::DeltaTime();
-
-		mTransform->SetPosition(pos);
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션
 
-		// 땅에 닿은 상태가 아니라면 Inhaled_Drop으로 변경
-		if (!mRigidBody->IsGround())
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Drop", true);
@@ -1710,8 +1758,8 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Run()
 	{
-		// Block 상태라면 Idle 로 상태변경
-		if (mbLeftBlock || mbRightBlock)
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
@@ -1722,23 +1770,27 @@ namespace sy
 			return;
 		}
 
-		// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 70.f * Time::DeltaTime();
-			else
-				pos.x -= 70.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 120.f * Time::DeltaTime();
+				else
+					pos.x -= 120.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션
 
-		// 땅에 닿은 상태가 아니라면 Inhaled_Drop으로 변경
-		if (!mRigidBody->IsGround())
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Drop", true);
@@ -1873,19 +1925,22 @@ namespace sy
 			}
 		}
 
-
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션
 
@@ -1930,18 +1985,22 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Turn()
 	{
-		//// 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		// 애니메이션	
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
@@ -1983,18 +2042,22 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Drop()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
-		}
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
 
-		mTransform->SetPosition(pos);
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
@@ -2046,11 +2109,6 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Damage()
 	{
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
-
-		//tr->SetPosition(pos);
-		// 
 		// 애니메이션
 
 		// 애니메이션이 끝나면 Inhaled_Idle 상태로 변경
@@ -2085,15 +2143,21 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Skill()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
 		{
-			if (mDir == eDirection::RIGHT)
-				pos.x += 50.f * Time::DeltaTime();
-			else
-				pos.x -= 50.f * Time::DeltaTime();
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
 		}
 
 		// 애니메이션이 끝나면 상태 변경

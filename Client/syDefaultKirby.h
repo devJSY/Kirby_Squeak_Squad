@@ -105,8 +105,9 @@ namespace sy
 		eDirection			mDir;
 
 		bool				mbLevelEnter;	// Level Mode State 첫진입시 설정
-		bool				mbLeftBlock;
-		bool				mbRightBlock;
+		bool				mbOnLeftStop;	// 왼쪽 벽에 부딫힌 상태인지
+		bool				mbOnRightStop;	// 오른쪽 벽에 부딫힌 상태인지
+		bool				mbOnSlope;		// 경사로에 올라탄상태인지
 	};
 }
 
