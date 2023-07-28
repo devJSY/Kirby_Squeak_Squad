@@ -4,7 +4,7 @@
 #include "syAnimator.h"
 #include "syGameObject.h"
 #include "syTransform.h"
-
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -42,7 +42,8 @@ namespace sy
 
 	void Dash_Effect::Update()
 	{
-		GameObject* Owner = GetOwner();
+		DefaultKirby* Owner = dynamic_cast<DefaultKirby*>(GetOwner());
+		assert(Owner);
 
 		if (Owner->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
 		{
@@ -59,8 +60,8 @@ namespace sy
 			tr->SetPosition(vec);
 		}
 		
-		// Run 상태가 아니면 삭제하도록 추가해야함
-		if (mAnimator->IsActiveAnimationComplete())
+		// Run 상태가 아니거나 애니메이션이 끝나면 삭제
+		if (mAnimator->IsActiveAnimationComplete() || Owner->GetKirbyState() != eDefaultKirbyState::Run)
 		{
 			Destroy(this);
 		}

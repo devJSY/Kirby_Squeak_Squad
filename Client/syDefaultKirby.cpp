@@ -133,9 +133,6 @@ namespace sy
 
 	void DefaultKirby::Update()
 	{
-		// 픽셀충돌 체크
-		PixelCheck();
-
 		// 방향 설정
 		mDir = mTransform->GetDirection();
 
@@ -170,6 +167,9 @@ namespace sy
 		}
 		else if (GetPlayerMode() == ePlayerMode::PlayMode)
 		{
+			// PlayMode 상태일땐 픽셀충돌 체크
+			PixelCheck();
+
 			// 상태처리
 			switch (mState)
 			{
@@ -303,8 +303,98 @@ namespace sy
 
 	void DefaultKirby::PixelCheck()
 	{
+		// Stage타입에따라 픽셀텍스쳐 변경하기
+		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
+
+		if (PixelTex == nullptr)
+			return;
+
+		Collider* col = GetComponent<Collider>();
+		Vector2 ColPos = col->GetPosition();
+		Vector2 ColSize = col->GetSize();
+
+		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+
+		COLORREF LTColor = PixelTex->GetTexturePixel(LT.x, LT.y);
+		COLORREF RTColor = PixelTex->GetTexturePixel(RT.x, RT.y);
+		COLORREF LBColor = PixelTex->GetTexturePixel(LB.x, LB.y);
+		COLORREF RBColor = PixelTex->GetTexturePixel(RB.x, RB.y);
+
+		// 바닥 처리
+		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.y -= 1.f;
+			mTransform->SetPosition(pos);
+			mRigidBody->SetGround(true);
+
+			return;
+		}
+		
+		// 우측
+		if (LTColor == RGB(0, 255, 0) || LBColor == RGB(0, 255, 0))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x -= 1.f;
+			mTransform->SetPosition(pos);
+
+			return;
+		}
+
+		// 좌측
+		if (RTColor == RGB(0, 255, 0) || RBColor == RGB(0, 255, 0))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x += 1.f;
+			mTransform->SetPosition(pos);
+
+			return;
+		}
+
+		COLORREF LTColor2 = PixelTex->GetTexturePixel(LB.x + 1.f, LB.y);
+		COLORREF LBColor2 = PixelTex->GetTexturePixel(RB.x + 1.f, RB.y);
+
+		if (LTColor2 == RGB(0, 255, 0) || LBColor2 == RGB(0, 255, 0))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+
+			return;
+		}
+
+		COLORREF RTColor2 = PixelTex->GetTexturePixel(LB.x - 1.f, LB.y);
+		COLORREF RBColor2 = PixelTex->GetTexturePixel(RB.x - 1.f, RB.y);
+
+		if (RTColor2 == RGB(0, 255, 0) || RBColor2 == RGB(0, 255, 0))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+			return;
+		}
 
 
+		COLORREF LBColor3 = PixelTex->GetTexturePixel(LB.x, LB.y + 1);
+		COLORREF RBColor3 = PixelTex->GetTexturePixel(RB.x, RB.y + 1);
+
+		if (!(LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
+			|| LBColor3 == RGB(0, 0, 255) || RBColor3 == RGB(0, 0, 255)))
+		{
+			mRigidBody->SetGround(false);
+		}
 
 
 	}

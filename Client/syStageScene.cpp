@@ -29,7 +29,6 @@
 namespace sy
 {
 	StageScene::StageScene()
-		: mPixelTex(nullptr)
 	{
 	}
 
@@ -80,8 +79,15 @@ namespace sy
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
 		
 		// 픽셀 이미지 로드
-		mPixelTex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
+		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
 			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
+
+		BackGround* Bg2 = object::Instantiate<BackGround>(eLayerType::Video);
+		Bg2->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2 - 2, Pixeltex->GetHeight() / 2 - 2)); // 중점 설정
+
+		SpriteRenderer* BgRenderer2 = Bg2->AddComponent<SpriteRenderer>();
+		BgRenderer2->SetAffectedCamera(true);
+		BgRenderer2->SetTexture(Pixeltex);
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
