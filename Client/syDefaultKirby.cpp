@@ -144,9 +144,6 @@ namespace sy
 		// PlayerMode 에 따라서 상태처리 
 		if (GetPlayerMode() == ePlayerMode::LevelMode)
 		{
-			// LevelMode 에선 Rigth 방향 고정
-			mTransform->SetDirection(eDirection::RIGHT);
-
 			switch (mState)
 			{
 			case eDefaultKirbyState::Choice:
@@ -158,13 +155,14 @@ namespace sy
 			case eDefaultKirbyState::Idle:
 				Level_Idle();
 				break;
+			case eDefaultKirbyState::Run:
+				Level_Run();
+				break;
 			case eDefaultKirbyState::Fly_Up:
 				Level_FlyUp();
 				break;
 			case eDefaultKirbyState::Drop:
 				Level_Drop();
-				break;
-			case eDefaultKirbyState::End:
 				break;
 			default:
 				break;
@@ -255,8 +253,6 @@ namespace sy
 				break;
 			case eDefaultKirbyState::Inhaled_Skill:
 				Inhaled_Skill();
-				break;
-			case eDefaultKirbyState::End:
 				break;
 			default:
 				break;
@@ -522,12 +518,41 @@ namespace sy
 		}
 	}
 
+	void DefaultKirby::Level_Run()
+	{
+		Vector2 pos = mTransform->GetPosition();
+
+		if (mDir == eDirection::RIGHT)
+			pos.x += 120.f * Time::DeltaTime();
+		else
+			pos.x -= 120.f * Time::DeltaTime();		
+
+		static float time = 0.f;
+
+		time += Time::DeltaTime();
+
+		if (time > 0.3f)
+		{
+			Dash_Effect* DashEffect = new Dash_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+			time = 0.f;
+		}
+
+		mTransform->SetPosition(pos);
+	}
+
 	void DefaultKirby::Level_FlyUp()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		pos.y -= 120.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Level_Drop()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		pos.y += 120.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
 	}
 
 	void DefaultKirby::Idle()

@@ -12,11 +12,14 @@
 #include "syPlayer.h"
 #include "syCollisionManager.h"
 #include "syLevelSelectScene.h"
-
+#include "syTime.h"
 namespace sy
 {
 	TunnelScene::TunnelScene()
 		: mBackGround(nullptr)
+		, mCurLevelState()
+		, mPassedTime(0.f)
+		, mPrevSceneName()
 	{
 	}
 
@@ -38,25 +41,34 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		mPassedTime += Time::DeltaTime();
+
+		if (mPassedTime > 1.5f)
 		{
-			// mCurLevel 상태에 따라 진입할 Level 설정
-			if (mCurLevelState == eLevelState::Level1)
-				SceneManager::LoadScene(L"PrismPlainsScene");
-			else if (mCurLevelState == eLevelState::Level2)
-				SceneManager::LoadScene(L"NatureNotchScene");
-			else if (mCurLevelState == eLevelState::Level3)
-				SceneManager::LoadScene(L"CushyCloudScene");
-			else if (mCurLevelState == eLevelState::Level4)
-				SceneManager::LoadScene(L"JamJungleScene");
-			else if (mCurLevelState == eLevelState::Level5)
-				SceneManager::LoadScene(L"VocalVolcanoScene");
-			else if (mCurLevelState == eLevelState::Level6)
-				SceneManager::LoadScene(L"IceIslandScene");
-			else if (mCurLevelState == eLevelState::Level7)
-				SceneManager::LoadScene(L"SecretSeaScene");
-			else if (mCurLevelState == eLevelState::Level8)
-				SceneManager::LoadScene(L"GambleGalaxyScene");
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				// mCurLevel 상태에 따라 진입할 Level 설정
+				if (mCurLevelState == eLevelState::Level1)
+					SceneManager::LoadScene(L"PrismPlainsScene");
+				else if (mCurLevelState == eLevelState::Level2)
+					SceneManager::LoadScene(L"NatureNotchScene");
+				else if (mCurLevelState == eLevelState::Level3)
+					SceneManager::LoadScene(L"CushyCloudScene");
+				else if (mCurLevelState == eLevelState::Level4)
+					SceneManager::LoadScene(L"JamJungleScene");
+				else if (mCurLevelState == eLevelState::Level5)
+					SceneManager::LoadScene(L"VocalVolcanoScene");
+				else if (mCurLevelState == eLevelState::Level6)
+					SceneManager::LoadScene(L"IceIslandScene");
+				else if (mCurLevelState == eLevelState::Level7)
+					SceneManager::LoadScene(L"SecretSeaScene");
+				else if (mCurLevelState == eLevelState::Level8)
+					SceneManager::LoadScene(L"GambleGalaxyScene");
+			}
+			else
+			{
+				SceneManager::LoadScene(L"LevelSelectScene");
+			}
 		}
 	}
 
@@ -67,15 +79,7 @@ namespace sy
 
 	void TunnelScene::Enter()
 	{
-		// 플레이어 설정
-		Player* player = SceneManager::GetPlayer();
-		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(275.f, 100.f));
-		Animator* playerAni = player->GetComponent<Animator>();
-		playerAni->SetAffectedCamera(true);
-		Collider* playerCol = player->GetComponent<Collider>();
-		playerCol->SetAffectedCamera(true);
-		player->SetPlayerMode(ePlayerMode::LevelMode);
+		mPassedTime = 0.f;
 
 		// BackGround Animator Set
 		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
@@ -98,12 +102,139 @@ namespace sy
 		else if (mCurLevelState == eLevelState::Level8)
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_8");
 
-		// 카메라 설정 
-		//Camera::SetTarget(nullptr);
-		Camera::SetTarget(player);
+		// 플레이어 설정
+		Player* player = SceneManager::GetPlayer();
+		player->SetPlayerMode(ePlayerMode::LevelMode);
+		Animator* playerAni = player->GetComponent<Animator>();
+		playerAni->SetAffectedCamera(true);
+		Collider* playerCol = player->GetComponent<Collider>();
+		playerCol->SetAffectedCamera(true);
 
-		// 레이어 충돌 설정
-		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
+
+		Transform* playerTrans = player->GetComponent<Transform>();
+
+		Vector2 resolution = Application::GetResolution();		
+
+		if (mCurLevelState == eLevelState::Level1)
+		{
+			resolution.y /= 4.f;
+
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				playerTrans->SetDirection(eDirection::RIGHT);
+				playerTrans->SetPosition(Vector2(0.f, resolution.y));
+			}
+			else
+			{
+				playerTrans->SetDirection(eDirection::LEFT);
+				playerTrans->SetPosition(Vector2(resolution.x, resolution.y));
+			}
+
+		}
+		else if (mCurLevelState == eLevelState::Level2)
+		{
+			resolution.y /= 2.f;
+
+			playerTrans->SetDirection(eDirection::RIGHT);
+
+			if (mPrevSceneName == L"LevelSelectScene")
+			{				
+				playerTrans->SetPosition(Vector2(resolution.x / 2.f, 0.f));
+			}
+			else
+			{
+				playerTrans->SetPosition(Vector2(resolution.x / 2.f, resolution.y));
+			}
+		}
+		else if (mCurLevelState == eLevelState::Level3)
+		{
+
+		}
+		else if (mCurLevelState == eLevelState::Level4)
+		{
+
+		}
+		else if (mCurLevelState == eLevelState::Level5)
+		{
+
+		}
+		else if (mCurLevelState == eLevelState::Level6)
+		{
+
+		}
+		else if (mCurLevelState == eLevelState::Level7)
+		{
+
+		}
+		else if (mCurLevelState == eLevelState::Level8)
+		{
+
+		}
+
+
+
+		// 플레이어 타입에따라 상태 설정 
+		eAbilityType playerType = player->GetAbilityType();
+		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+
+
+		if (playerType == eAbilityType::Normal)
+		{
+			if (mCurLevelState == eLevelState::Level1)
+			{
+				defaultKirby->SetKirbyState(eDefaultKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
+			}
+			else if (mCurLevelState == eLevelState::Level2)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					defaultKirby->SetKirbyState(eDefaultKirbyState::Drop);
+					playerAni->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+				}
+				else
+				{
+					defaultKirby->SetKirbyState(eDefaultKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
+				}
+			}
+			else if (mCurLevelState == eLevelState::Level3)
+			{
+
+			}
+			else if (mCurLevelState == eLevelState::Level4)
+			{
+
+			}
+			else if (mCurLevelState == eLevelState::Level5)
+			{
+
+			}
+			else if (mCurLevelState == eLevelState::Level6)
+			{
+
+			}
+			else if (mCurLevelState == eLevelState::Level7)
+			{
+
+			}
+			else if (mCurLevelState == eLevelState::Level8)
+			{
+
+			}
+		}
+
+
+		Vector2 vec = Application::GetResolution();
+		vec.y /= 2.f;
+
+		// 카메라 설정 
+		Camera::SetTarget(nullptr);
+		Camera::SetCameraLimit(vec);
 	}
 
 	void TunnelScene::Exit()
@@ -111,5 +242,7 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		mPassedTime = 0.f;
 	}
 }

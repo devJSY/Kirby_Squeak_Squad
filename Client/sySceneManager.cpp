@@ -124,6 +124,8 @@ namespace sy
 
 	Scene* SceneManager::LoadScene(const std::wstring& name)
 	{
+		std::wstring& tempStr = mActiveScene->GetName();
+
 		// 변경전 기존 Scene Exit 호출
 		mActiveScene->Exit();
 
@@ -152,6 +154,13 @@ namespace sy
 			mActiveScene->AddGameObject(eLayerType::UI, mAbilityUI);
 			mActiveScene->AddGameObject(eLayerType::UI, mHPbarUI);
 			mActiveScene->AddGameObject(eLayerType::UI, mLifeUI);
+		}
+
+		// TunnelScene 진입전 이전 씬 이름 등록
+		if (name == L"TunnelScene")
+		{
+			TunnelScene* tunnelScene = dynamic_cast<TunnelScene*>(mActiveScene);
+			tunnelScene->SetPrevSceneName(tempStr);
 		}
 
 		mActiveScene->Enter();

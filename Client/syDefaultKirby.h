@@ -66,6 +66,7 @@ namespace sy
 		void Choice();
 		void Enter();
 		void Level_Idle();
+		void Level_Run();
 		void Level_FlyUp();
 		void Level_Drop();
 

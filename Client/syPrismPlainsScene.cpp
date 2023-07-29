@@ -285,7 +285,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"LevelSelectScene");
+			SceneManager::LoadScene(L"TunnelScene");
 		}
 	}
 
