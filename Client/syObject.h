@@ -15,4 +15,10 @@ namespace sy::object
 		scene->AddGameObject(type, gameObject);
 		return gameObject;
 	}
+
+	static __forceinline void ActiveSceneAddGameObject(eLayerType type, GameObject* obj)
+	{
+		Scene* scene = SceneManager::GetActiveScene();
+		scene->AddGameObject(type, obj);
+	}
 }

@@ -1,4 +1,4 @@
-#include "syWorldTunnelScene.h"
+#include "syTunnelScene.h"
 #include "syInput.h"
 #include "sySceneManager.h"
 #include "syObject.h"
@@ -8,25 +8,25 @@
 #include "syApplication.h"
 #include "syCamera.h"
 #include "syAnimator.h"
-#include "syWorldTunnel_BG.h"
+#include "syTunnel_BG.h"
 #include "syPlayer.h"
 #include "syCollisionManager.h"
 #include "syLevelSelectScene.h"
 
 namespace sy
 {
-	WorldTunnelScene::WorldTunnelScene()
+	TunnelScene::TunnelScene()
 		: mBackGround(nullptr)
 	{
 	}
 
-	WorldTunnelScene::~WorldTunnelScene()
+	TunnelScene::~TunnelScene()
 	{
 	}
 
-	void WorldTunnelScene::Initialize()
+	void TunnelScene::Initialize()
 	{
-		mBackGround = object::Instantiate<WorldTunnel_BG>(eLayerType::BackGround);
+		mBackGround = object::Instantiate<Tunnel_BG>(eLayerType::BackGround);
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.y /= 2.f;
 		mBackGround->GetComponent<Transform>()->SetPosition(vec); // 중점 설정
@@ -34,7 +34,7 @@ namespace sy
 		Scene::Initialize();
 	}
 
-	void WorldTunnelScene::Update()
+	void TunnelScene::Update()
 	{
 		Scene::Update();
 
@@ -60,12 +60,12 @@ namespace sy
 		}
 	}
 
-	void WorldTunnelScene::Render(HDC hdc)
+	void TunnelScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
 	}
 
-	void WorldTunnelScene::Enter()
+	void TunnelScene::Enter()
 	{
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
@@ -82,21 +82,21 @@ namespace sy
 		mCurLevelState = levelSelectScene->GetCurLevelState();
 
 		if (mCurLevelState == eLevelState::Level1)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_1");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_1");
 		else if (mCurLevelState == eLevelState::Level2)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_2");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_2");
 		else if (mCurLevelState == eLevelState::Level3)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_3");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_3");
 		else if (mCurLevelState == eLevelState::Level4)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_4");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_4");
 		else if (mCurLevelState == eLevelState::Level5)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_5");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_5");
 		else if (mCurLevelState == eLevelState::Level6)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_6");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_6");
 		else if (mCurLevelState == eLevelState::Level7)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_7");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_7");
 		else if (mCurLevelState == eLevelState::Level8)
-			mBackGround->GetComponent<Animator>()->PlayAnimation(L"WorldTunnel_8");
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Tunnel_8");
 
 		// 카메라 설정 
 		//Camera::SetTarget(nullptr);
@@ -106,7 +106,7 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 	}
 
-	void WorldTunnelScene::Exit()
+	void TunnelScene::Exit()
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);

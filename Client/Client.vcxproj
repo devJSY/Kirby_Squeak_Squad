@@ -210,8 +210,8 @@
     <ClInclude Include="syTransform.h" />
     <ClInclude Include="syUI.h" />
     <ClInclude Include="syVideo.h" />
-    <ClInclude Include="syWorldTunnel_BG.h" />
-    <ClInclude Include="syWorldTunnelScene.h" />
+    <ClInclude Include="syTunnel_BG.h" />
+    <ClInclude Include="syTunnelScene.h" />
     <ClInclude Include="syCrimp.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
@@ -281,8 +281,8 @@
     <ClCompile Include="syTransform.cpp" />
     <ClCompile Include="syUI.cpp" />
     <ClCompile Include="syVideo.cpp" />
-    <ClCompile Include="syWorldTunnel_BG.cpp" />
-    <ClCompile Include="syWorldTunnelScene.cpp" />
+    <ClCompile Include="syTunnel_BG.cpp" />
+    <ClCompile Include="syTunnelScene.cpp" />
     <ClCompile Include="syCrimp.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class WorldTunnel_BG : public BackGround
+	class Tunnel_BG : public BackGround
 	{
 	public:
-		WorldTunnel_BG();
-		virtual ~WorldTunnel_BG();
+		Tunnel_BG();
+		virtual ~Tunnel_BG();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

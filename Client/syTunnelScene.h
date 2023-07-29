@@ -3,11 +3,11 @@
 
 namespace sy
 {
-	class WorldTunnelScene : public Scene
+	class TunnelScene : public Scene
 	{
 	public:
-		WorldTunnelScene();
-		virtual ~WorldTunnelScene();
+		TunnelScene();
+		virtual ~TunnelScene();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -17,7 +17,7 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-		class WorldTunnel_BG* mBackGround;
+		class Tunnel_BG* mBackGround;
 		eLevelState mCurLevelState;
 	};
 }

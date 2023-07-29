@@ -15,6 +15,7 @@ namespace sy
             End,
         };
 
+        // friend 키워드로 Destroy() 에서 SetDeath() 접근가능하도록 설정
         friend static __forceinline void Destroy(GameObject* gameObject);
 
         GameObject();

@@ -11,6 +11,7 @@
 #include "syCollider.h"
 #include "syObject.h"
 #include "syDash_Effect.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -369,7 +370,9 @@ namespace sy
 			|| MBColor == RGB(255, 0, 0))
 		{
 			// 특정상태일때는 바닥 무시
-			if (!(mState == eDefaultKirbyState::Jump || mState == eDefaultKirbyState::Fly_Up))
+			if (!(mState == eDefaultKirbyState::Jump 
+				|| mState == eDefaultKirbyState::Fly_Up
+				|| mState == eDefaultKirbyState::Inhaled_Jump))
 			{
 				// 이동
 				Vector2 pos = mTransform->GetPosition();
@@ -573,7 +576,7 @@ namespace sy
 				mState = eDefaultKirbyState::Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
-				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 
@@ -586,7 +589,7 @@ namespace sy
 				mState = eDefaultKirbyState::Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
-				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 
@@ -1601,7 +1604,7 @@ namespace sy
 				mState = eDefaultKirbyState::Inhaled_Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
-				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 
@@ -1614,7 +1617,7 @@ namespace sy
 				mState = eDefaultKirbyState::Inhaled_Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
-				SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, DashEffect);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			}
 		}
 

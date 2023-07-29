@@ -88,9 +88,6 @@
     <Filter Include="Contents\Scene\LevelSelectScene">
       <UniqueIdentifier>{4dad836d-06b9-4f2e-8633-02f3566063a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\WorldTunnelScene">
-      <UniqueIdentifier>{3bcb7d38-7761-410e-8df9-9a1c81c142b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\StageScene">
       <UniqueIdentifier>{9993070b-c195-40ca-89e1-be39df79adbd}</UniqueIdentifier>
     </Filter>
@@ -135,9 +132,6 @@
     </Filter>
     <Filter Include="Contents\GameObject\BackGround\Level_BG">
       <UniqueIdentifier>{7a908f7c-d363-499f-ba48-c23f111dcbe2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\BackGround\WorldTunnel_BG">
-      <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Inventory">
       <UniqueIdentifier>{9c3637fe-ec9e-4a26-99b2-e877fa731a1f}</UniqueIdentifier>
@@ -235,6 +229,12 @@
     <Filter Include="Engine\SoundManager">
       <UniqueIdentifier>{59269abe-2e8d-4b6e-96e5-047fd285b958}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\TunnelScene">
+      <UniqueIdentifier>{3bcb7d38-7761-410e-8df9-9a1c81c142b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\BackGround\Tunnel_BG">
+      <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -306,8 +306,8 @@
     <ClInclude Include="syStageScene.h">
       <Filter>Contents\Scene\StageScene</Filter>
     </ClInclude>
-    <ClInclude Include="syWorldTunnelScene.h">
-      <Filter>Contents\Scene\WorldTunnelScene</Filter>
+    <ClInclude Include="syTunnelScene.h">
+      <Filter>Contents\Scene\TunnelScene</Filter>
     </ClInclude>
     <ClInclude Include="syResource.h">
       <Filter>Engine\Resource</Filter>
@@ -390,8 +390,8 @@
     <ClInclude Include="sySirKibble_Skill.h">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="syWorldTunnel_BG.h">
-      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+    <ClInclude Include="syTunnel_BG.h">
+      <Filter>Contents\GameObject\BackGround\Tunnel_BG</Filter>
     </ClInclude>
     <ClInclude Include="syLevel_BG.h">
       <Filter>Contents\GameObject\BackGround\Level_BG</Filter>
@@ -512,8 +512,8 @@
     <ClCompile Include="syStageScene.cpp">
       <Filter>Contents\Scene\StageScene</Filter>
     </ClCompile>
-    <ClCompile Include="syWorldTunnelScene.cpp">
-      <Filter>Contents\Scene\WorldTunnelScene</Filter>
+    <ClCompile Include="syTunnelScene.cpp">
+      <Filter>Contents\Scene\TunnelScene</Filter>
     </ClCompile>
     <ClCompile Include="syResource.cpp">
       <Filter>Engine\Resource</Filter>
@@ -599,8 +599,8 @@
     <ClCompile Include="sySirKibble_Skill.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\SirKibble\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="syWorldTunnel_BG.cpp">
-      <Filter>Contents\GameObject\BackGround\WorldTunnel_BG</Filter>
+    <ClCompile Include="syTunnel_BG.cpp">
+      <Filter>Contents\GameObject\BackGround\Tunnel_BG</Filter>
     </ClCompile>
     <ClCompile Include="syLevel_BG.cpp">
       <Filter>Contents\GameObject\BackGround\Level_BG</Filter>

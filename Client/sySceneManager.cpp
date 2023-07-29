@@ -4,7 +4,7 @@
 #include "syEndingScene.h"
 #include "syOpeningScene.h"
 #include "syStageScene.h"
-#include "syWorldTunnelScene.h"
+#include "syTunnelScene.h"
 #include "syPrismPlainsScene.h"
 #include "syNatureNotchScene.h"
 #include "syCushyCloudScene.h"
@@ -90,7 +90,7 @@ namespace sy
 		CreateScene<GambleGalaxyScene>(L"GambleGalaxyScene");
 		CreateScene<LevelSelectScene>(L"LevelSelectScene");
 		CreateScene<StageScene>(L"StageScene");
-		CreateScene<WorldTunnelScene>(L"WorldTunnelScene");
+		CreateScene<TunnelScene>(L"TunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");
 
 		for (auto iter : mScenes)
