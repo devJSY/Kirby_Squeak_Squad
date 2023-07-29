@@ -172,7 +172,7 @@ namespace sy
 		else if (GetPlayerMode() == ePlayerMode::PlayMode)
 		{
 			// 픽셀충돌 체크
-			PixelCheck();
+			CheckPixelCollision();
 
 			// 상태처리
 			switch (mState)
@@ -306,7 +306,7 @@ namespace sy
 
 	}
 
-	void DefaultKirby::PixelCheck()
+	void DefaultKirby::CheckPixelCollision()
 	{
 		// Stage타입에따라 픽셀텍스쳐 변경하기
 		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
