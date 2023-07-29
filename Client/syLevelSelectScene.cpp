@@ -27,6 +27,7 @@
 #include "syGameObject.h"
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -39,6 +40,7 @@ namespace sy
 		, mNumberUI{}
 		, mDots{}
 		, mCurLevelState(eLevelState::Level1)
+		, mEnterTime(0.f)
 	{
 	}
 
@@ -92,41 +94,46 @@ namespace sy
 	{
 		Scene::Update();
 
-		// 현재 레벨상태 지정
-		switch (mCurLevelState)
+		// Enter 애니메이션 재생용
+		mEnterTime += Time::DeltaTime();
+		 
+		if (mEnterTime > 1.f)
 		{
-		case eLevelState::Level1:
-			Level1();
-			break;
-		case eLevelState::Level2:
-			Level2();
-			break;
-		case eLevelState::Level3:
-			Level3();
-			break;
-		case eLevelState::Level4:
-			Level4();
-			break;
-		case eLevelState::Level5:
-			Level5();
-			break;
-		case eLevelState::Level6:
-			Level6();
-			break;
-		case eLevelState::Level7:
-			Level7();
-			break;
-		case eLevelState::Level8:
-			Level8();
-			break;
-		default:
-			break;
-		}
+			// 현재 레벨상태 지정
+			switch (mCurLevelState)
+			{
+			case eLevelState::Level1:
+				Level1();
+				break;
+			case eLevelState::Level2:
+				Level2();
+				break;
+			case eLevelState::Level3:
+				Level3();
+				break;
+			case eLevelState::Level4:
+				Level4();
+				break;
+			case eLevelState::Level5:
+				Level5();
+				break;
+			case eLevelState::Level6:
+				Level6();
+				break;
+			case eLevelState::Level7:
+				Level7();
+				break;
+			case eLevelState::Level8:
+				Level8();
+				break;
+			default:
+				break;
+			}
 
-
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
-		{
-			SceneManager::LoadScene(L"TunnelScene");
+			if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+			{
+				SceneManager::LoadScene(L"TunnelScene");
+			}
 		}
 
 
@@ -157,6 +164,8 @@ namespace sy
 
 	void LevelSelectScene::Enter()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
@@ -212,6 +221,8 @@ namespace sy
 
 	void LevelSelectScene::Exit()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();

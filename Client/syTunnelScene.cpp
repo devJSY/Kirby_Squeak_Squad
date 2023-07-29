@@ -113,7 +113,21 @@ namespace sy
 
 		Transform* playerTrans = player->GetComponent<Transform>();
 
-		if (mCurLevelState == eLevelState::Level1)
+		
+		if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+		{
+			playerTrans->SetDirection(eDirection::RIGHT);
+
+			if (mPrevSceneName == L"LevelSelectScene")
+			{				
+				playerTrans->SetPosition(Vector2(128.f, 0.f));
+			}
+			else
+			{
+				playerTrans->SetPosition(Vector2(128.f, 192.f));
+			}
+		}
+		else if (mCurLevelState == eLevelState::Level1)
 		{
 			if (mPrevSceneName == L"LevelSelectScene")
 			{
@@ -127,19 +141,6 @@ namespace sy
 			}
 
 		}
-		else if (mCurLevelState == eLevelState::Level2)
-		{
-			playerTrans->SetDirection(eDirection::RIGHT);
-
-			if (mPrevSceneName == L"LevelSelectScene")
-			{				
-				playerTrans->SetPosition(Vector2(128.f, 0.f));
-			}
-			else
-			{
-				playerTrans->SetPosition(Vector2(128.f, 192.f));
-			}
-		}
 		else if (mCurLevelState == eLevelState::Level3)
 		{
 
@@ -149,10 +150,6 @@ namespace sy
 
 		}
 		else if (mCurLevelState == eLevelState::Level5)
-		{
-
-		}
-		else if (mCurLevelState == eLevelState::Level6)
 		{
 
 		}
@@ -174,16 +171,7 @@ namespace sy
 
 		if (playerType == eAbilityType::Normal)
 		{
-			if (mCurLevelState == eLevelState::Level1)
-			{
-				defaultKirby->SetKirbyState(eDefaultKirbyState::Run);
-
-				if (playerTrans->GetDirection() == eDirection::RIGHT)
-					playerAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
-				else
-					playerAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
-			}
-			else if (mCurLevelState == eLevelState::Level2)
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
 			{
 				if (mPrevSceneName == L"LevelSelectScene")
 				{
@@ -196,29 +184,14 @@ namespace sy
 					playerAni->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
 				}
 			}
-			else if (mCurLevelState == eLevelState::Level3)
+			else
 			{
+				defaultKirby->SetKirbyState(eDefaultKirbyState::Run);
 
-			}
-			else if (mCurLevelState == eLevelState::Level4)
-			{
-
-			}
-			else if (mCurLevelState == eLevelState::Level5)
-			{
-
-			}
-			else if (mCurLevelState == eLevelState::Level6)
-			{
-
-			}
-			else if (mCurLevelState == eLevelState::Level7)
-			{
-
-			}
-			else if (mCurLevelState == eLevelState::Level8)
-			{
-
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
 			}
 		}
 

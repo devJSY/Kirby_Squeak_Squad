@@ -56,5 +56,7 @@ namespace sy
 		std::vector<class DotUI*> mDots[9]; 
 
 		eLevelState mCurLevelState;
+
+		float		mEnterTime;
 	};
 }

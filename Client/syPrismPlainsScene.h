@@ -38,5 +38,7 @@ namespace sy
 
 		std::vector<class DotUI*> mDots[7];
 		eStageState mCurStageState;
+
+		float mEnterTime;
 	};
 }

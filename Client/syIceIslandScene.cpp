@@ -15,6 +15,7 @@
 #include "syTransform.h"
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -23,6 +24,7 @@ namespace sy
 		, mlevelBG(nullptr)
 		, ExitUI(nullptr)
 		, mCurStageState(eStageState::StageExit)
+		, mEnterTime(0.f)
 	{
 	}
 
@@ -65,14 +67,21 @@ namespace sy
 
 	void IceIslandScene::Update()
 	{
-		switch (mCurStageState)
+		// Enter 애니메이션 재생용
+		mEnterTime += Time::DeltaTime();
+
+		if (mEnterTime > 1.f)
 		{
-		case eStageState::StageExit:
-			StageExit();
-			break;
-		default:
-			break;
+			switch (mCurStageState)
+			{
+			case eStageState::StageExit:
+				StageExit();
+				break;
+			default:
+				break;
+			}
 		}
+
 
 		// 스테이지 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -91,6 +100,8 @@ namespace sy
 
 	void IceIslandScene::Enter()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정
 		Camera::SetTarget(nullptr);
 
@@ -125,6 +136,8 @@ namespace sy
 
 	void IceIslandScene::Exit()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();

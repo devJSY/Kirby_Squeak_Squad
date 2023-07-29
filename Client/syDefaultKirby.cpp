@@ -463,7 +463,7 @@ namespace sy
 	void DefaultKirby::Choice()
 	{
 		// 애니메이션
-		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT))
+		if ((Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT)) && !mbLevelEnter)
 		{
 			mAnimator->PlayAnimation(L"Choice", false);
 		}		

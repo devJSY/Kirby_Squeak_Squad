@@ -27,6 +27,8 @@ namespace sy
 
 		class UI* ExitUI;
 		eStageState mCurStageState;
+
+		float mEnterTime;
     };
 }
 

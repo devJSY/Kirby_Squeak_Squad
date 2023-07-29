@@ -15,6 +15,7 @@
 #include "syTransform.h"
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -22,6 +23,7 @@ namespace sy
 		: mLevelType(eLevelType::Level5)
 		, ExitUI(nullptr)
 		, mCurStageState(eStageState::StageExit)
+		, mEnterTime(0.f)
 	{
 	}
 
@@ -66,14 +68,21 @@ namespace sy
 
 	void VocalVolcanoScene::Update()
 	{
-		switch (mCurStageState)
+		// Enter 애니메이션 재생용
+		mEnterTime += Time::DeltaTime();
+
+		if (mEnterTime > 1.f)
 		{
-		case eStageState::StageExit:
-			StageExit();
-			break;
-		default:
-			break;
+			switch (mCurStageState)
+			{
+			case eStageState::StageExit:
+				StageExit();
+				break;
+			default:
+				break;
+			}
 		}
+
 
 		Scene::Update();
 	}
@@ -85,6 +94,8 @@ namespace sy
 
 	void VocalVolcanoScene::Enter()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
@@ -119,6 +130,8 @@ namespace sy
 
 	void VocalVolcanoScene::Exit()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();

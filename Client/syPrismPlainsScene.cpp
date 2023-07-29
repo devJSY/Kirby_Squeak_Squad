@@ -20,7 +20,7 @@
 #include "syNumberUI.h"
 #include "syDotUI.h"
 #include "syRigidbody.h"
-
+#include "syTime.h"
 
 namespace sy
 {
@@ -34,6 +34,7 @@ namespace sy
 		, mNumberUI{}
 		, mDots{}
 		, mCurStageState(eStageState::StageExit)
+		, mEnterTime(0.f)
 	{
 	}
 
@@ -82,20 +83,27 @@ namespace sy
 
 	void PrismPlainsScene::Update()
 	{
-		switch (mCurStageState)
+		// Enter 애니메이션 재생용
+		mEnterTime += Time::DeltaTime();
+
+		if (mEnterTime > 1.f)
 		{
-		case eStageState::StageExit:
-			StageExit();
-			break;
-		case eStageState::Stage1:
-			Stage1();
-			break;
-		case eStageState::Boss:
-			StageBoss();
-			break;
-		default:
-			break;
+			switch (mCurStageState)
+			{
+			case eStageState::StageExit:
+				StageExit();
+				break;
+			case eStageState::Stage1:
+				Stage1();
+				break;
+			case eStageState::Boss:
+				StageBoss();
+				break;
+			default:
+				break;
+			}
 		}
+
 
 
 		// 스테이지 클리어 시 배경화면 변경
@@ -131,6 +139,8 @@ namespace sy
 
 	void PrismPlainsScene::Enter()
 	{
+		mEnterTime = 0.f;
+		
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
@@ -165,6 +175,8 @@ namespace sy
 
 	void PrismPlainsScene::Exit()
 	{
+		mEnterTime = 0.f;
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
