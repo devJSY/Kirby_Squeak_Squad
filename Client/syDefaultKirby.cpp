@@ -12,6 +12,7 @@
 #include "syObject.h"
 #include "syDash_Effect.h"
 #include "syObject.h"
+#include "syLevelSelectScene.h"
 
 namespace sy
 {
@@ -519,25 +520,80 @@ namespace sy
 
 	void DefaultKirby::Level_Run()
 	{
+
+		// BackGround Animator Set
+		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		eLevelState CurLevelState = levelSelectScene->GetCurLevelState();
+
 		Vector2 pos = mTransform->GetPosition();
 
-		if (mDir == eDirection::RIGHT)
-			pos.x += 120.f * Time::DeltaTime();
-		else
-			pos.x -= 120.f * Time::DeltaTime();		
+		if (CurLevelState == eLevelState::Level1 || CurLevelState == eLevelState::Level5)
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 120.f * Time::DeltaTime();
+			else
+				pos.x -= 120.f * Time::DeltaTime();
+		}
+		else if (CurLevelState == eLevelState::Level3)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(766.f, 202.f) - Vector2(517.f, 77.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}				
+			else
+			{
+				Vector2 vec = Vector2(517.f, 77.f) - Vector2(766.f, 202.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+		else if (CurLevelState == eLevelState::Level4 || CurLevelState == eLevelState::Level7)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(1032.f, 83.f) - Vector2(792.f, 202.f);				
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+			else
+			{
+				Vector2 vec = Vector2(792.f, 202.f) - Vector2(1032.f, 83.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+		else if (CurLevelState == eLevelState::Level8)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(766.f, 202.f) - Vector2(517.f, 77.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+			else
+			{
+				Vector2 vec = Vector2(517.f, 77.f) - Vector2(766.f, 202.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+
+
+		mTransform->SetPosition(pos);
+
+
+
 
 		static float time = 0.f;
-
 		time += Time::DeltaTime();
-
 		if (time > 0.3f)
 		{
 			Dash_Effect* DashEffect = new Dash_Effect(this);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			time = 0.f;
-		}
-
-		mTransform->SetPosition(pos);
+		}		
 	}
 
 	void DefaultKirby::Level_FlyUp()

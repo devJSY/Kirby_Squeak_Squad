@@ -113,7 +113,7 @@ namespace sy
 
 		Transform* playerTrans = player->GetComponent<Transform>();
 
-		
+		// Tunnel 진입 Kirby위치 설정
 		if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
 		{
 			playerTrans->SetDirection(eDirection::RIGHT);
@@ -139,27 +139,58 @@ namespace sy
 				playerTrans->SetDirection(eDirection::LEFT);
 				playerTrans->SetPosition(Vector2(256.f, 125.f));
 			}
-
 		}
 		else if (mCurLevelState == eLevelState::Level3)
 		{
-
-		}
-		else if (mCurLevelState == eLevelState::Level4)
-		{
-
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				playerTrans->SetDirection(eDirection::RIGHT);
+				playerTrans->SetPosition(Vector2(0.f, 70.f));
+			}
+			else
+			{
+				playerTrans->SetDirection(eDirection::LEFT);
+				playerTrans->SetPosition(Vector2(256.f, 192.f));
+			}
 		}
 		else if (mCurLevelState == eLevelState::Level5)
 		{
-
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				playerTrans->SetDirection(eDirection::LEFT);
+				playerTrans->SetPosition(Vector2(256.f, 125.f));
+			}
+			else
+			{
+				playerTrans->SetDirection(eDirection::RIGHT);
+				playerTrans->SetPosition(Vector2(0.f, 125.f));
+			}
 		}
-		else if (mCurLevelState == eLevelState::Level7)
+		else if (mCurLevelState == eLevelState::Level4 || mCurLevelState == eLevelState::Level7)
 		{
-
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				playerTrans->SetDirection(eDirection::LEFT);
+				playerTrans->SetPosition(Vector2(256.f, 70.f));
+			}
+			else
+			{
+				playerTrans->SetDirection(eDirection::RIGHT);
+				playerTrans->SetPosition(Vector2(10.f, 192.f));
+			}
 		}
 		else if (mCurLevelState == eLevelState::Level8)
 		{
-
+			if (mPrevSceneName == L"LevelSelectScene")
+			{
+				playerTrans->SetDirection(eDirection::LEFT);
+				playerTrans->SetPosition(Vector2(245.f, 192.f));
+			}
+			else
+			{
+				playerTrans->SetDirection(eDirection::RIGHT);
+				playerTrans->SetPosition(Vector2(0.f, 70.f));
+			}
 		}
 
 
