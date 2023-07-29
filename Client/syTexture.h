@@ -11,7 +11,7 @@ namespace sy
 		Texture();
 		virtual ~Texture();
 
-		static Texture* Create(const std::wstring& name, UINT width, UINT height);
+		static Texture* Create(const std::wstring& name, UINT width, UINT height, COLORREF rgb = RGB(255, 255, 255));
 
 		virtual HRESULT Load(const std::wstring& path) override;
 

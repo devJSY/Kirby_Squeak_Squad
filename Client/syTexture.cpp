@@ -23,7 +23,7 @@ namespace sy
 		//mBitmap = NULL;
 	}
 
-	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
+	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height, COLORREF rgb)
 	{
 		// 생성할 이미지가 이미 만들어져있는 리소스인지 확인
 		Texture* image = ResourceManager::Find<Texture>(name);
@@ -48,6 +48,13 @@ namespace sy
 		// 생성한 텍스쳐를 ResourceManager에 넣어서 관리
 		image->SetName(name);
 		ResourceManager::Insert<Texture>(name, image);
+
+		// 인자로 들어온 색으로 채움
+		HBRUSH brush = CreateSolidBrush(rgb);
+		HBRUSH oldBrush = (HBRUSH)SelectObject(image->GetHdc(), brush);
+		Rectangle(image->GetHdc(), -1, -1, image->mWidth + 1, image->mHeight + 1);
+		SelectObject(image->GetHdc(), oldBrush);
+		DeleteObject(oldBrush);
 
 		return image;
 	}

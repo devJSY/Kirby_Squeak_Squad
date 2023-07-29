@@ -43,7 +43,7 @@ namespace sy
 
 		mPassedTime += Time::DeltaTime();
 
-		if (mPassedTime > 1.5f)
+		if (mPassedTime > 2.f)
 		{
 			if (mPrevSceneName == L"LevelSelectScene")
 			{
@@ -113,37 +113,31 @@ namespace sy
 
 		Transform* playerTrans = player->GetComponent<Transform>();
 
-		Vector2 resolution = Application::GetResolution();		
-
 		if (mCurLevelState == eLevelState::Level1)
 		{
-			resolution.y /= 4.f;
-
 			if (mPrevSceneName == L"LevelSelectScene")
 			{
 				playerTrans->SetDirection(eDirection::RIGHT);
-				playerTrans->SetPosition(Vector2(0.f, resolution.y));
+				playerTrans->SetPosition(Vector2(0.f, 125.f));
 			}
 			else
 			{
 				playerTrans->SetDirection(eDirection::LEFT);
-				playerTrans->SetPosition(Vector2(resolution.x, resolution.y));
+				playerTrans->SetPosition(Vector2(256.f, 125.f));
 			}
 
 		}
 		else if (mCurLevelState == eLevelState::Level2)
 		{
-			resolution.y /= 2.f;
-
 			playerTrans->SetDirection(eDirection::RIGHT);
 
 			if (mPrevSceneName == L"LevelSelectScene")
 			{				
-				playerTrans->SetPosition(Vector2(resolution.x / 2.f, 0.f));
+				playerTrans->SetPosition(Vector2(128.f, 0.f));
 			}
 			else
 			{
-				playerTrans->SetPosition(Vector2(resolution.x / 2.f, resolution.y));
+				playerTrans->SetPosition(Vector2(128.f, 192.f));
 			}
 		}
 		else if (mCurLevelState == eLevelState::Level3)
@@ -228,13 +222,10 @@ namespace sy
 			}
 		}
 
-
-		Vector2 vec = Application::GetResolution();
-		vec.y /= 2.f;
-
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
-		Camera::SetCameraLimit(vec);
+		Camera::fadeIn(1.f, RGB(0,0,0));
+		Camera::fadeOut(1.f, RGB(255,255,255));
 	}
 
 	void TunnelScene::Exit()

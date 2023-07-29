@@ -98,6 +98,7 @@ namespace sy
 
 		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);		
+		Camera::Render(mBackHdc);
 
 		// 화면 비율 맞추기
 		SetWindowRatio();
