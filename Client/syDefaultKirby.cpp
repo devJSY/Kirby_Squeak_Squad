@@ -968,7 +968,7 @@ namespace sy
 			// 일정 누른 시간에만 상승
 			if (KeyPressdTime < 0.2f)
 			{
-				mRigidBody->AddForce(Vector2(0.f, -700.f));
+				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
@@ -1463,6 +1463,9 @@ namespace sy
 
 	void DefaultKirby::Fly_Down()
 	{
+		// Fly상태에선 속도제한
+		mRigidBody->SetLimitVelocity(Vector2(50.f, 50.f));
+
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
 		{
@@ -1484,7 +1487,7 @@ namespace sy
 		// 눌렀을때 상승
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
-			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+			mRigidBody->SetVelocity(Vector2(0.f, -300.f));
 			mRigidBody->SetGround(false);
 		}
 
@@ -1523,7 +1526,8 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
 
-			mState = eDefaultKirbyState::Fly_Up;
+			mState = eDefaultKirbyState::Fly_Up;			
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 		}
 
 		// Fly End
@@ -1535,6 +1539,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 		}
 	}
 
@@ -1597,7 +1602,7 @@ namespace sy
 			}
 			else
 			{
-				mRigidBody->SetVelocity(Vector2(0.f, -130.f));
+				mRigidBody->SetVelocity(Vector2(0.f, -80.f));
 			}					
 		}
 
@@ -1995,7 +2000,7 @@ namespace sy
 			// 일정 누른 시간에만 상승
 			if (KeyPressdTime < 0.2f)
 			{
-				mRigidBody->AddForce(Vector2(0.f, -700.f));
+				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경

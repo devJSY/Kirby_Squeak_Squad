@@ -20,6 +20,7 @@ namespace sy
 		bool IsGround() { return mbGround; }
 		Vector2 GetVelocity() { return mVelocity; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
+		void SetLimitVelocity(Vector2 velocity) { mLimitedVelocty = velocity; }
 
 	private:
 		float mMass;				// Áú·®
