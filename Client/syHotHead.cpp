@@ -23,7 +23,7 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
-		Animator* animator = GetAnimator();
+		Animator* animator = GetComponent<Animator>();
 
 		animator->CreateAnimation(Enemies_Right, L"HotHead_Right_Walk", Vector2(0.f, 3260.f), Vector2(22.f, 21.f), Vector2(22.f, 0.f), 0.18f, 8);
 		animator->CreateAnimation(Enemies_Left, L"HotHead_Left_Walk", Vector2(460.f, 3260.f), Vector2(22.f, 21.f), Vector2(-22.f, 0.f), 0.18f, 8);
@@ -68,6 +68,9 @@ namespace sy
 	{
 	}
 	void HotHead::OnCollisionExit(Collider* other)
+	{
+	}
+	void HotHead::CheckPixelCollision()
 	{
 	}
 }

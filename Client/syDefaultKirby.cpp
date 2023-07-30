@@ -46,7 +46,7 @@ namespace sy
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		
-		mRigidBody = AddComponent<Rigidbody>();
+		mRigidBody = GetComponent<Rigidbody>();
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己

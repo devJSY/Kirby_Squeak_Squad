@@ -18,6 +18,13 @@ namespace sy
         virtual void OnCollisionExit(class Collider* other);
 
     private:
+        void CheckPixelCollision();
+
+    private:
+        class Animator* mAnimator;
+        class Transform* mTransform;
+        class Rigidbody* mRigidBody;
+
     };
 
 }

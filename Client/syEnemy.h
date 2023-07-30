@@ -18,10 +18,8 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
-		class Animator* GetAnimator() { return mAnimator; }
 
 	private:
-		class Animator* mAnimator;
 		enums::eAbilityType mAbilityType;
 	};
 }

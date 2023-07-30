@@ -10,7 +10,7 @@ namespace sy
 	{
 		Texture* Monster_Ice = ResourceManager::Load<Texture>(L"Monster_Ice_Tex", L"..\\Resources\\Enemy\\Monster_Ice.bmp");
 
-		Animator* animator = GetAnimator();
+		Animator* animator = GetComponent<Animator>();
 
 		animator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 5.f), 1.f, 1);
 		animator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 5.f), 1.f, 1, Vector2(-1.f, -5.f));
@@ -45,6 +45,9 @@ namespace sy
 	{
 	}
 	void Ice::OnCollisionExit(Collider* other)
+	{
+	}
+	void Ice::CheckPixelCollision()
 	{
 	}
 }

@@ -18,6 +18,9 @@ namespace sy
         virtual void OnCollisionExit(class Collider* other);
 
     private:
+        void CheckPixelCollision();
+
+    private:
 	};
 }
 

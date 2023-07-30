@@ -1,6 +1,7 @@
 #include "syPlayer.h"
 #include "syAnimator.h"
 #include "syCollider.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -10,8 +11,8 @@ namespace sy
 	{
 		// 애니메이터 생성
 		AddComponent<Animator>();
-		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(15.f, 15.f));
+		AddComponent<Rigidbody>();
+		AddComponent<Collider>()->SetSize(Vector2(15.f, 15.f));		
 	}
 
 	Player::~Player()

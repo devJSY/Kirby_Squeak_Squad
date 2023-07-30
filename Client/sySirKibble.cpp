@@ -23,7 +23,7 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemies_Left.bmp");
 
-		Animator* animator = GetAnimator();
+		Animator* animator = GetComponent<Animator>();
 
 		animator->CreateAnimation(Enemies_Right, L"SirKibble_Right_Idle", Vector2(3.f, 2582.f), Vector2(23.f, 22.f), Vector2(23.f, 0.f), 0.12f, 5);
 		animator->CreateAnimation(Enemies_Left, L"SirKibble_Left_Idle", Vector2(456.f, 2582.f), Vector2(23.f, 22.f), Vector2(-23.f, 0.f), 0.2f, 3);
@@ -71,6 +71,9 @@ namespace sy
 	{
 	}
 	void SirKibble::OnCollisionExit(Collider* other)
+	{
+	}
+	void SirKibble::CheckPixelCollision()
 	{
 	}
 }

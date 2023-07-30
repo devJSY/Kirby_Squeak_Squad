@@ -23,7 +23,7 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
-		Animator* animator = GetAnimator();
+		Animator* animator = GetComponent<Animator>();
 
 		animator->CreateAnimation(Enemies_Right, L"Flower_Right_Move", Vector2(0.f, 2916.f), Vector2(25.f, 24.f), Vector2(25.f, 0.f), 0.15f, 6);
 		animator->CreateAnimation(Enemies_Right, L"Flower_Right_Death", Vector2(36.f, 3021.f), Vector2(20.f, 32.f), Vector2(20.f, 0.f), 1.f, 1);
@@ -63,6 +63,9 @@ namespace sy
 	{
 	}
 	void Crimp::OnCollisionExit(Collider* other)
+	{
+	}
+	void Crimp::CheckPixelCollision()
 	{
 	}
 }
