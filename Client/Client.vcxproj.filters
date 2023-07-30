@@ -235,6 +235,18 @@
     <Filter Include="Contents\GameObject\BackGround\Tunnel_BG">
       <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\StageScene\Stage1">
+      <UniqueIdentifier>{b740f755-ca6d-4ce6-a450-ecdaa0540f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Stage2">
+      <UniqueIdentifier>{d898b881-a3a0-45f7-8ec6-3c33fad9af93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Stage3">
+      <UniqueIdentifier>{15caa6dc-74f6-4014-96a2-41bc72c771bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Stage4">
+      <UniqueIdentifier>{85e6171e-1709-4021-8716-4f8305000bde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -302,9 +314,6 @@
     </ClInclude>
     <ClInclude Include="syOpeningScene.h">
       <Filter>Contents\Scene\OpeningScene</Filter>
-    </ClInclude>
-    <ClInclude Include="syStageScene.h">
-      <Filter>Contents\Scene\StageScene</Filter>
     </ClInclude>
     <ClInclude Include="syTunnelScene.h">
       <Filter>Contents\Scene\TunnelScene</Filter>
@@ -453,6 +462,18 @@
     <ClInclude Include="sySound.h">
       <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="syStage1Scene.h">
+      <Filter>Contents\Scene\StageScene\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="syStage2Scene.h">
+      <Filter>Contents\Scene\StageScene\Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="syStage3Scene.h">
+      <Filter>Contents\Scene\StageScene\Stage3</Filter>
+    </ClInclude>
+    <ClInclude Include="syStage4Scene.h">
+      <Filter>Contents\Scene\StageScene\Stage4</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -508,9 +529,6 @@
     </ClCompile>
     <ClCompile Include="syOpeningScene.cpp">
       <Filter>Contents\Scene\OpeningScene</Filter>
-    </ClCompile>
-    <ClCompile Include="syStageScene.cpp">
-      <Filter>Contents\Scene\StageScene</Filter>
     </ClCompile>
     <ClCompile Include="syTunnelScene.cpp">
       <Filter>Contents\Scene\TunnelScene</Filter>
@@ -661,6 +679,18 @@
     </ClCompile>
     <ClCompile Include="sySound.cpp">
       <Filter>Engine\Resource\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="syStage1Scene.cpp">
+      <Filter>Contents\Scene\StageScene\Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="syStage2Scene.cpp">
+      <Filter>Contents\Scene\StageScene\Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="syStage3Scene.cpp">
+      <Filter>Contents\Scene\StageScene\Stage3</Filter>
+    </ClCompile>
+    <ClCompile Include="syStage4Scene.cpp">
+      <Filter>Contents\Scene\StageScene\Stage4</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

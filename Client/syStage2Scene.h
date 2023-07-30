@@ -4,11 +4,11 @@
 
 namespace sy
 {
-	class StageScene : public Scene
+	class Stage2Scene : public Scene
 	{
 	public:
-		StageScene();
-		virtual ~StageScene();
+		Stage2Scene();
+		virtual ~Stage2Scene();
 
 		virtual void Initialize();
 		virtual void Update();

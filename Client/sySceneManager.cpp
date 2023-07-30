@@ -3,7 +3,10 @@
 #include "syLevelSelectScene.h"
 #include "syEndingScene.h"
 #include "syOpeningScene.h"
-#include "syStageScene.h"
+#include "syStage1Scene.h"
+#include "syStage2Scene.h"
+#include "syStage3Scene.h"
+#include "syStage4Scene.h"
 #include "syTunnelScene.h"
 #include "syPrismPlainsScene.h"
 #include "syNatureNotchScene.h"
@@ -89,7 +92,10 @@ namespace sy
 		CreateScene<SecretSeaScene>(L"SecretSeaScene");
 		CreateScene<GambleGalaxyScene>(L"GambleGalaxyScene");
 		CreateScene<LevelSelectScene>(L"LevelSelectScene");
-		CreateScene<StageScene>(L"StageScene");
+		CreateScene<Stage1Scene>(L"Stage1Scene");
+		CreateScene<Stage2Scene>(L"Stage2Scene");
+		CreateScene<Stage3Scene>(L"Stage3Scene");
+		CreateScene<Stage4Scene>(L"Stage4Scene");
 		CreateScene<TunnelScene>(L"TunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");
 

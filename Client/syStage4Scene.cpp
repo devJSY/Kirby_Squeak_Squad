@@ -1,4 +1,4 @@
-#include "syStageScene.h"
+#include "syStage4Scene.h"
 #include "syDefaultKirby.h"
 #include "syObject.h"
 #include "syGameObject.h"
@@ -30,16 +30,16 @@
 
 namespace sy
 {
-	StageScene::StageScene()
+	Stage4Scene::Stage4Scene()
 		: mPixelBG(nullptr)
 	{
 	}
 
-	StageScene::~StageScene()
+	Stage4Scene::~Stage4Scene()
 	{
 	}
 
-	void StageScene::Initialize()
+	void Stage4Scene::Initialize()
 	{
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
@@ -47,7 +47,7 @@ namespace sy
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2 - 2, tex->GetHeight() / 2 - 2)); // 중점 설정
 
-		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();		
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
 		BgRenderer->SetAffectedCamera(false);
 		BgRenderer->SetTexture(tex);
 
@@ -80,10 +80,10 @@ namespace sy
 
 		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
-		
+
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
-			, L"..\\Resources\\Map\\etc\\Stage1_Pixel.bmp");
+			, L"..\\Resources\\Map\\Stage1_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
 		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
@@ -100,7 +100,7 @@ namespace sy
 		Scene::Initialize();
 	}
 
-	void StageScene::Update()
+	void Stage4Scene::Update()
 	{
 		Scene::Update();
 
@@ -120,12 +120,12 @@ namespace sy
 		}
 	}
 
-	void StageScene::Render(HDC hdc)
+	void Stage4Scene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
 	}
 
-	void StageScene::Enter()
+	void Stage4Scene::Enter()
 	{
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
@@ -164,7 +164,7 @@ namespace sy
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Play(true);
 	}
 
-	void StageScene::Exit()
+	void Stage4Scene::Exit()
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);

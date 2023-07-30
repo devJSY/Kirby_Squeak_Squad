@@ -52,7 +52,7 @@ namespace sy
 
 		mPassedTime += Time::DeltaTime();
 
-		if (mPassedTime >= 1.72f && mbSoundPlay == false)
+		if (mPassedTime >= 4.f && mbSoundPlay == false)
 		{
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"OpeningSound")->Play(false);

@@ -339,7 +339,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"StageScene");
+			SceneManager::LoadScene(L"Stage1Scene");
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
