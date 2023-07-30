@@ -116,18 +116,18 @@ namespace sy
 		, Vector2 LeftTop
 		, Vector2 RightBottom
 		, bool AffectedCamera
+		, Vector2 CameraSpeedRatio
 		, Vector2 scale
 		, float Alpha
 		, COLORREF rgb
-		, float rotate
-		, Vector2 RenderRatio)
+		, float rotate)
 	{
 		// Animation or SpriteRenderer ø°º≠ »£√‚µ 
 		if (mBitmap == nullptr && mImage == nullptr)
 			return;
 
 		if (AffectedCamera)
-			pos = Camera::CalculatePosition(pos, RenderRatio);
+			pos = Camera::CalculatePosition(pos, CameraSpeedRatio);
 
 		if (mType == eTextureType::Bmp)
 		{

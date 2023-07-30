@@ -50,7 +50,7 @@ namespace sy
 		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();		
 		BgRenderer->SetAffectedCamera(true);
 		BgRenderer->SetTexture(tex);
-		BgRenderer->SetRenderRatio(Vector2(6.f, 1.f));
+		BgRenderer->SetCameraSpeedRatio(Vector2(6.f, 1.f));
 
 		// 스테이지 설정
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정

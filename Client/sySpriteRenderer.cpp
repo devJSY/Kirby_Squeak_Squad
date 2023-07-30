@@ -13,7 +13,7 @@ namespace sy
 		, mAlpha(1.0f)
 		, mbAffectedCamera(true)
 		, mbRenderTrig(true)
-		, mRenderRatio(Vector2::One)
+		, mCameraSpeedRatio(Vector2::One)
 	{
 	}
 
@@ -44,11 +44,11 @@ namespace sy
 				, Vector2::Zero
 				, Vector2(mTex->GetWidth(), mTex->GetHeight())
 				, mbAffectedCamera
+				, mCameraSpeedRatio
 				, tr->GetScale()
 				, mAlpha
 				, mBMPRGB
-				, tr->GetRotation()
-				, mRenderRatio);
+				, tr->GetRotation());
 		}
 	}
 }

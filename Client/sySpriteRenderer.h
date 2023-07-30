@@ -27,7 +27,7 @@ namespace sy
 		void SetRenderTrig(bool Trig) { mbRenderTrig = Trig; }
 		bool GetRenderTrig() { return mbRenderTrig; }
 
-		void SetRenderRatio(Vector2 ratio) { mRenderRatio = ratio; }
+		void SetCameraSpeedRatio(Vector2 ratio) { mCameraSpeedRatio = ratio; }
 
 	private:
 		Texture*	mTex;
@@ -35,6 +35,6 @@ namespace sy
 		float		mAlpha;
 		bool		mbAffectedCamera;
 		bool		mbRenderTrig;
-		Vector2		mRenderRatio;
+		Vector2		mCameraSpeedRatio;
     };
 }
