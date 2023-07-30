@@ -18,8 +18,8 @@ namespace sy
 		void Render(HDC hdc
 			, Vector2 pos
 			, Vector2 size
-			, Vector2 LeftTop
-			, Vector2 RightBottom
+			, Vector2 TexLeftTop
+			, Vector2 TexSize
 			, bool AffectedCamera
 			, Vector2 CameraSpeedRatio
 			, Vector2 scale = Vector2::One

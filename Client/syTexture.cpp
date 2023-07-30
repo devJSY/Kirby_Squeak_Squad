@@ -113,8 +113,8 @@ namespace sy
 	void Texture::Render(HDC hdc
 		, Vector2 pos
 		, Vector2 size
-		, Vector2 LeftTop
-		, Vector2 RightBottom
+		, Vector2 TexLeftTop
+		, Vector2 TexSize
 		, bool AffectedCamera
 		, Vector2 CameraSpeedRatio
 		, Vector2 scale
@@ -136,7 +136,7 @@ namespace sy
 				, int(size.x * scale.x)
 				, int(size.y * scale.y)
 				, mHdc
-				, int(LeftTop.x), int(LeftTop.y), int(RightBottom.x), int(RightBottom.y)
+				, int(TexLeftTop.x), int(TexLeftTop.y), int(TexSize.x), int(TexSize.y)
 				, rgb);
 		}
 		else if (mType == eTextureType::AlphaBmp)
@@ -157,8 +157,8 @@ namespace sy
 				, int(size.x * scale.x)
 				, int(size.y * scale.y)
 				, mHdc
-				, int(LeftTop.x), int(LeftTop.y)
-				, int(RightBottom.x), int(RightBottom.y)
+				, int(TexLeftTop.x), int(TexLeftTop.y)
+				, int(TexSize.x), int(TexSize.y)
 				, func);
 		}
 		else if (mType == eTextureType::Png)
@@ -184,8 +184,8 @@ namespace sy
 					, (int)(size.x * scale.x)
 					, (int)(size.y * scale.y)
 				)
-				, INT(LeftTop.x), INT(LeftTop.y)
-				, INT(RightBottom.x), INT(RightBottom.y)
+				, INT(TexLeftTop.x), INT(TexLeftTop.y)
+				, INT(TexSize.x), INT(TexSize.y)
 				, Gdiplus::UnitPixel
 				, &imageAtt);
 		}

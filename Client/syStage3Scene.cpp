@@ -54,23 +54,28 @@ namespace sy
 		// 스테이지 설정
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Foreground\\Stage1.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
-		Fg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
+		Vector2 pos = Vector2(775.5f, 107.5f);
+		Fg->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
 
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
+		FgRenderer->SetRenderSize(Vector2(1551.f, 215.f));
+		FgRenderer->SetRednerLeftTop(Vector2(0, 679.f));
 
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
 			, L"..\\Resources\\Map\\Foreground\\Stage1_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
-		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
+		mPixelBG->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
 
 		SpriteRenderer* PixelBgRenderer = mPixelBG->AddComponent<SpriteRenderer>();
 		PixelBgRenderer->SetAffectedCamera(true);
 		PixelBgRenderer->SetTexture(Pixeltex);
 		PixelBgRenderer->SetRenderTrig(false);
+		PixelBgRenderer->SetRenderSize(Vector2(1551.f, 215.f));
+		PixelBgRenderer->SetRednerLeftTop(Vector2(0, 679.f));
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");
@@ -131,7 +136,7 @@ namespace sy
 
 		// 카메라 설정 
 		Camera::SetTarget(player);
-		Camera::SetCameraLimit(Vector2(1588.f, 207.f));
+		Camera::SetCameraLimit(Vector2(1551.f, 215.f));
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);

@@ -61,7 +61,7 @@ namespace sy
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
 		FgRenderer->SetRenderSize(Vector2(1455.f, 207.f));
-		FgRenderer->SetRednerPos(Vector2(0, 347.f), Vector2(1455.f, 207.f));
+		FgRenderer->SetRednerLeftTop(Vector2(0, 347.f));
 
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
@@ -75,7 +75,7 @@ namespace sy
 		PixelBgRenderer->SetTexture(Pixeltex);
 		PixelBgRenderer->SetRenderTrig(false);
 		PixelBgRenderer->SetRenderSize(Vector2(1455.f, 207.f));
-		PixelBgRenderer->SetRednerPos(Vector2(0, 347.f), Vector2(1455.f, 207.f));
+		PixelBgRenderer->SetRednerLeftTop(Vector2(0, 347.f));
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");

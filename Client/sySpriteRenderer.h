@@ -29,7 +29,7 @@ namespace sy
 
 		void SetCameraSpeedRatio(Vector2 ratio) { mCameraSpeedRatio = ratio; }
 
-		void SetRednerPos(Vector2 lt, Vector2 rt) { mLeftTop = lt; mRightBottom = rt; }
+		void SetRednerLeftTop(Vector2 lt) { mLeftTop = lt; }
 		void SetRenderSize(Vector2 size) { mSize = size; }
 
 	private:
@@ -41,6 +41,5 @@ namespace sy
 		Vector2		mCameraSpeedRatio;
 		Vector2     mSize;
 		Vector2		mLeftTop;
-		Vector2		mRightBottom;
     };
 }

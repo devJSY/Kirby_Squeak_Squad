@@ -16,7 +16,6 @@ namespace sy
 		, mCameraSpeedRatio(Vector2::One)
 		, mSize(Vector2::Zero)
 		, mLeftTop(Vector2::Zero)
-		, mRightBottom(Vector2::Zero)
 	{
 	}
 
@@ -40,11 +39,6 @@ namespace sy
 		Transform* tr = gameObj->GetComponent<Transform>();
 
 		// 기본값 셋팅
-		if (mLeftTop == Vector2::Zero && mRightBottom == Vector2::Zero)
-		{
-			mRightBottom = Vector2(mTex->GetWidth(), mTex->GetHeight());
-		}
-
 		if (mSize == Vector2::Zero)
 		{
 			mSize = Vector2(mTex->GetWidth(), mTex->GetHeight());
@@ -56,7 +50,7 @@ namespace sy
 				, GetOwner()->GetComponent<Transform>()->GetPosition()
 				, mSize
 				, mLeftTop
-				, mRightBottom
+				, mSize
 				, mbAffectedCamera
 				, mCameraSpeedRatio
 				, tr->GetScale()
