@@ -29,7 +29,7 @@ namespace sy
 		static void Update();
 		static void Render(HDC hdc);
 
-		static Vector2 CalculatePosition(Vector2 pos) { return pos - mDistance; }
+		static Vector2 CalculatePosition(Vector2 pos, Vector2 RenderRatio = Vector2::One) { return pos - (mDistance / RenderRatio); }
 
 		static GameObject* GetTarget() { return mTarget; }
 		static void SetTarget(GameObject* target) { mTarget = target; }

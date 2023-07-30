@@ -13,6 +13,7 @@ namespace sy
 		, mAlpha(1.0f)
 		, mbAffectedCamera(true)
 		, mbRenderTrig(true)
+		, mRenderRatio(Vector2::One)
 	{
 	}
 
@@ -46,7 +47,8 @@ namespace sy
 				, tr->GetScale()
 				, mAlpha
 				, mBMPRGB
-				, tr->GetRotation());
+				, tr->GetRotation()
+				, mRenderRatio);
 		}
 	}
 }

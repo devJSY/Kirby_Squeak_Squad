@@ -89,6 +89,15 @@ namespace sy::math
 			return temp;
 		}
 
+		Vector2 operator/(const Vector2& other)
+		{
+			assert(!(0.f == x || 0.f == y) || !(0.f == other.x || 0.f == other.y));
+			Vector2 temp;
+			temp.x = x / other.x;
+			temp.y = y / other.y;
+			return temp;
+		}
+
 		Vector2 operator*(const Vector2& other)
 		{
 			return Vector2(x * other.x, y * other.y);

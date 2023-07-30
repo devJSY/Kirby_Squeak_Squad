@@ -24,7 +24,8 @@ namespace sy
 			, Vector2 scale = Vector2::One
 			, float Alpha = 1.0f
 			, COLORREF rgb = RGB(255,0,255)
-			, float rotate = 0.0f);
+			, float rotate = 0.0f
+			, Vector2 RenderRatio = Vector2::One);
 
 		UINT GetWidth() { return mWidth; }
 		void SetWidth(UINT width) { mWidth = width; }

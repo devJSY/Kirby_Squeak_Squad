@@ -27,11 +27,14 @@ namespace sy
 		void SetRenderTrig(bool Trig) { mbRenderTrig = Trig; }
 		bool GetRenderTrig() { return mbRenderTrig; }
 
+		void SetRenderRatio(Vector2 ratio) { mRenderRatio = ratio; }
+
 	private:
 		Texture*	mTex;
 		COLORREF	mBMPRGB;
 		float		mAlpha;
 		bool		mbAffectedCamera;
 		bool		mbRenderTrig;
+		Vector2		mRenderRatio;
     };
 }

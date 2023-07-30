@@ -119,14 +119,15 @@ namespace sy
 		, Vector2 scale
 		, float Alpha
 		, COLORREF rgb
-		, float rotate)
+		, float rotate
+		, Vector2 RenderRatio)
 	{
 		// Animation or SpriteRenderer ø°º≠ »£√‚µ 
 		if (mBitmap == nullptr && mImage == nullptr)
 			return;
 
 		if (AffectedCamera)
-			pos = Camera::CalculatePosition(pos);
+			pos = Camera::CalculatePosition(pos, RenderRatio);
 
 		if (mType == eTextureType::Bmp)
 		{
