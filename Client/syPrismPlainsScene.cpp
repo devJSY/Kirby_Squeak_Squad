@@ -21,6 +21,8 @@
 #include "syDotUI.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "sySound.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -73,9 +75,10 @@ namespace sy
 		// StageUI생성
 		CreateStageUI();
 
-		Scene::Initialize();
+		// Sound Load
+		ResourceManager::Load<Sound>(L"StageSelectSound", L"..\\Resources\\Sound\\Theme\\StageSelect.wav");
 
-		//stageUI->GetComponent<Animator>()->PlayAnimation(L"NormalStage", true);
+		Scene::Initialize();
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mLevelType);
@@ -171,6 +174,9 @@ namespace sy
 		}
 
 		mCurStageState = eStageState::StageExit;
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
 	}
 
 	void PrismPlainsScene::Exit()

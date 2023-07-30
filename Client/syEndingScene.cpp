@@ -34,7 +34,7 @@ namespace sy
 		mVideo->SetSpeed(1.f); // 재생속도 설정
 
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
-		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0444931f / mVideo->GetSpeed());
+		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0444931f / mVideo->GetSpeed()); 
 		videoAnimator->PlayAnimation(L"EndingVideo", true);
 		videoAnimator->SetAffectedCamera(false);
 
@@ -67,6 +67,9 @@ namespace sy
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"EndingVideo", false);
 		videoAnimator->ActiveAnimationReset();
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"EndingSound")->Play(false);
 	}
 
 	void EndingScene::Exit()
@@ -74,5 +77,8 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"EndingSound")->Stop(true);
 	}
 }

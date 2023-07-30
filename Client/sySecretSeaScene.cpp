@@ -16,6 +16,8 @@
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "sySound.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -60,6 +62,9 @@ namespace sy
 		CreateStageUI();
 
 		Scene::Initialize();
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"StageSelectSound", L"..\\Resources\\Sound\\Theme\\StageSelect.wav");
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mLevelType);
@@ -124,6 +129,9 @@ namespace sy
 		}
 
 		mCurStageState = eStageState::StageExit;
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
 	}
 
 	void SecretSeaScene::Exit()

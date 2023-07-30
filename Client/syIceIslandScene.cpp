@@ -16,6 +16,8 @@
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "sySound.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -59,6 +61,9 @@ namespace sy
 
 		// Stage UI 생성
 		CreateStageUI();
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"StageSelectSound", L"..\\Resources\\Sound\\Theme\\StageSelect.wav");
 
 		Scene::Initialize();
 
@@ -132,6 +137,9 @@ namespace sy
 		}
 
 		mCurStageState = eStageState::StageExit;
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
 	}
 
 	void IceIslandScene::Exit()

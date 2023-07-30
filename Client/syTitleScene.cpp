@@ -108,6 +108,9 @@ namespace sy
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"TitleVideo", true);
 		videoAnimator->ActiveAnimationReset();
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"TitleSound")->Play(true);
 	}
 
 	void TitleScene::Exit()
@@ -115,5 +118,8 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"TitleSound")->Stop(true);
 	}
 }

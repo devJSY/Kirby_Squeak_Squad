@@ -17,6 +17,8 @@
 #include "syCollider.h"
 #include "syCollisionManager.h"
 #include "syRigidbody.h"
+#include "sySound.h"
+#include "syResourceManager.h"
 
 #include "syWaddleDee.h"
 #include "syBlockin.h"
@@ -91,6 +93,9 @@ namespace sy
 		PixelBgRenderer->SetTexture(Pixeltex);
 		PixelBgRenderer->SetRenderTrig(false);
 
+		// Sound Load
+		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");
+
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
 	}
@@ -152,6 +157,11 @@ namespace sy
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Play(true);
 	}
 
 	void StageScene::Exit()
@@ -159,5 +169,8 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
 	}
 }

@@ -13,6 +13,9 @@
 #include "syCollisionManager.h"
 #include "syLevelSelectScene.h"
 #include "syTime.h"
+#include "sySound.h"
+#include "syResourceManager.h"
+
 namespace sy
 {
 	TunnelScene::TunnelScene()
@@ -239,5 +242,9 @@ namespace sy
 		CollisionManager::Clear();
 
 		mPassedTime = 0.f;
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"WorldSelectSound")->Stop(true);
+		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
 	}
 }

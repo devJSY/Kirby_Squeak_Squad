@@ -28,6 +28,8 @@
 #include "syDefaultKirby.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "sySound.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -79,6 +81,9 @@ namespace sy
 
 		// LevelUI생성
 		CreateLevelUI();
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"WorldSelectSound", L"..\\Resources\\Sound\\Theme\\WorldSelect.wav");
 
 		Scene::Initialize();
 
@@ -217,6 +222,9 @@ namespace sy
 			defaultKirby->SetLevelEnter(true);
 			playerAni->PlayAnimation(L"Choice", false);
 		}
+
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"WorldSelectSound")->Play(true);
 	}
 
 	void LevelSelectScene::Exit()
