@@ -220,6 +220,9 @@ namespace sy
 			}
 			else
 			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
 				defaultKirby->SetKirbyState(eDefaultKirbyState::Run);
 
 				if (playerTrans->GetDirection() == eDirection::RIGHT)

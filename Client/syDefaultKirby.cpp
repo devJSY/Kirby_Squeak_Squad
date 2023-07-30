@@ -13,6 +13,7 @@
 #include "syDash_Effect.h"
 #include "syObject.h"
 #include "syLevelSelectScene.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -133,6 +134,25 @@ namespace sy
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"BreathSound", L"..\\Resources\\Sound\\Effect\\Breath.wav");
+		ResourceManager::Load<Sound>(L"DamageSound", L"..\\Resources\\Sound\\Effect\\Damage.wav");
+		ResourceManager::Load<Sound>(L"FlySound", L"..\\Resources\\Sound\\Effect\\Fly.wav");
+		ResourceManager::Load<Sound>(L"InhaleSkillSound", L"..\\Resources\\Sound\\Effect\\InhaleSkill.wav");
+		ResourceManager::Load<Sound>(L"JumpSound", L"..\\Resources\\Sound\\Effect\\Jump.wav");
+		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
+		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
+		ResourceManager::Load<Sound>(L"StarSpitSound", L"..\\Resources\\Sound\\Effect\\StarSpit.wav");
+		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
+		
+		ResourceManager::Find<Sound>(L"BreathSound")->SetVolume(20.f);
+		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
+		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
+		ResourceManager::Find<Sound>(L"InhaleSkillSound")->SetVolume(80.f);
+		ResourceManager::Find<Sound>(L"LandSound")->SetVolume(10.f);
+		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
+
 
 		Player::Initialize();
 	}
@@ -520,7 +540,6 @@ namespace sy
 
 	void DefaultKirby::Level_Run()
 	{
-
 		// BackGround Animator Set
 		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
 		eLevelState CurLevelState = levelSelectScene->GetCurLevelState();
@@ -657,6 +676,9 @@ namespace sy
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 			}
 		}
 
@@ -670,6 +692,9 @@ namespace sy
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 			}
 		}
 
@@ -684,6 +709,9 @@ namespace sy
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Damage
@@ -717,6 +745,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -812,6 +843,9 @@ namespace sy
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Down
@@ -834,6 +868,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -930,6 +967,9 @@ namespace sy
 			mState = eDefaultKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Down
@@ -952,6 +992,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -1063,6 +1106,9 @@ namespace sy
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1077,6 +1123,9 @@ namespace sy
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
 		}
 	}
 
@@ -1135,6 +1184,9 @@ namespace sy
 
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1148,6 +1200,9 @@ namespace sy
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
 		}
 	}
 
@@ -1208,6 +1263,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1230,6 +1288,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
 
 			mState = eDefaultKirbyState::Idle;
+			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
 		}
 	}
 
@@ -1278,6 +1337,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_2;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// 키입력이없을땐 Idle 로 변경
@@ -1291,6 +1353,9 @@ namespace sy
 			mState = eDefaultKirbyState::Idle;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 몬스터를 먹으면 상태변환
@@ -1304,6 +1369,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}
 
@@ -1323,6 +1391,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_3;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 키입력이없을땐 Idle 로 변경
@@ -1336,6 +1407,9 @@ namespace sy
 			mState = eDefaultKirbyState::Idle;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 몬스터를 먹으면 상태변환
@@ -1349,6 +1423,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}
 
@@ -1483,14 +1560,6 @@ namespace sy
 			mTransform->SetPosition(pos);
 		}
 
-
-		// 눌렀을때 상승
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
-		{
-			mRigidBody->SetVelocity(Vector2(0.f, -300.f));
-			mRigidBody->SetGround(false);
-		}
-
 		// 방향 전환
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
@@ -1517,7 +1586,7 @@ namespace sy
 		}
 
 
-		// Fly Start
+		// Fly Up
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D)
 			|| Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
@@ -1527,7 +1596,12 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyUp", true);
 
 			mState = eDefaultKirbyState::Fly_Up;			
-			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+			mRigidBody->SetVelocity(Vector2(0.f, -300.f));
+			mRigidBody->SetGround(false);
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));		
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
 		}
 
 		// Fly End
@@ -1540,6 +1614,9 @@ namespace sy
 
 			mState = eDefaultKirbyState::Fly_End;
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);
 		}
 	}
 
@@ -1626,6 +1703,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);			
 		}
 	}
 
@@ -1690,6 +1770,9 @@ namespace sy
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 			}
 		}
 
@@ -1703,6 +1786,9 @@ namespace sy
 
 				Dash_Effect* DashEffect = new Dash_Effect(this);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 			}
 		}
 
@@ -1717,6 +1803,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Inhaled_Damage
@@ -1750,6 +1839,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -1845,6 +1937,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Inhaled_Down
@@ -1867,6 +1962,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -1962,6 +2060,9 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
 		// Inhaled_Down
@@ -1984,6 +2085,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2094,6 +2198,9 @@ namespace sy
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2151,6 +2258,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2194,6 +2304,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 
 		if (mRigidBody->IsGround())
@@ -2204,6 +2317,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Land", false);
 
 			mState = eDefaultKirbyState::Inhaled_Land;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
 		}
 	}
 

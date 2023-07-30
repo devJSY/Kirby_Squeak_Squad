@@ -65,6 +65,7 @@ namespace sy
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"StageSelectSound", L"..\\Resources\\Sound\\Theme\\StageSelect.wav");
+		ResourceManager::Load<Sound>(L"Click2Sound", L"..\\Resources\\Sound\\Effect\\Click2.wav");
 
 		// mlevelBG 초기화 이후 호출
 		mlevelBG->SetLevelType(mLevelType);
@@ -160,6 +161,9 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			SceneManager::LoadScene(L"TunnelScene");
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
 		}
 	}
 }
