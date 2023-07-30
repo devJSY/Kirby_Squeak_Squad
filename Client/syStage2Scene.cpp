@@ -52,46 +52,30 @@ namespace sy
 		BgRenderer->SetTexture(tex);
 
 		// 스테이지 설정
-		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정
+		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Foreground\\Stage1.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
-		Fg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
+		Vector2 pos = Vector2(727.5f, 103.5f);
+		Fg->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
 
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
-
-		// 적 생성
-		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
-		//col = waddleDee->GetComponent<Collider>();
-		//col->SetSize(Vector2(50.f, 50.f));
-
-		Blockin* Block = object::Instantiate<Blockin>(eLayerType::Enemy);
-		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
-
-		Crimp* flower = object::Instantiate<Crimp>(eLayerType::Enemy);
-		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
-
-		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.f));
-
-		Ice* ice = object::Instantiate<Ice>(eLayerType::Enemy);
-		ice->GetComponent<Transform>()->SetPosition(Vector2(300.f, 100.f));
-
-		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
-		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
+		FgRenderer->SetRenderSize(Vector2(1455.f, 207.f));
+		FgRenderer->SetRednerPos(Vector2(0, 347.f), Vector2(1455.f, 207.f));
 
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
-			, L"..\\Resources\\Map\\Stage1_Pixel.bmp");
+			, L"..\\Resources\\Map\\Foreground\\Stage1_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
-		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
+		mPixelBG->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
 
 		SpriteRenderer* PixelBgRenderer = mPixelBG->AddComponent<SpriteRenderer>();
 		PixelBgRenderer->SetAffectedCamera(true);
 		PixelBgRenderer->SetTexture(Pixeltex);
 		PixelBgRenderer->SetRenderTrig(false);
+		PixelBgRenderer->SetRenderSize(Vector2(1455.f, 207.f));
+		PixelBgRenderer->SetRednerPos(Vector2(0, 347.f), Vector2(1455.f, 207.f));
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");
@@ -106,7 +90,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			SceneManager::LoadScene(L"EndingScene");
+			SceneManager::LoadScene(L"Stage3Scene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -152,7 +136,7 @@ namespace sy
 
 		// 카메라 설정 
 		Camera::SetTarget(player);
-		Camera::SetCameraLimit(Vector2(1588.f, 207.f));
+		Camera::SetCameraLimit(Vector2(1455.f, 207.f));
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);

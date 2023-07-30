@@ -14,6 +14,9 @@ namespace sy
 		, mbAffectedCamera(true)
 		, mbRenderTrig(true)
 		, mCameraSpeedRatio(Vector2::One)
+		, mSize(Vector2::Zero)
+		, mLeftTop(Vector2::Zero)
+		, mRightBottom(Vector2::Zero)
 	{
 	}
 
@@ -36,13 +39,24 @@ namespace sy
 		GameObject* gameObj = GetOwner();
 		Transform* tr = gameObj->GetComponent<Transform>();
 
+		// 기본값 셋팅
+		if (mLeftTop == Vector2::Zero && mRightBottom == Vector2::Zero)
+		{
+			mRightBottom = Vector2(mTex->GetWidth(), mTex->GetHeight());
+		}
+
+		if (mSize == Vector2::Zero)
+		{
+			mSize = Vector2(mTex->GetWidth(), mTex->GetHeight());
+		}
+
 		if (mbRenderTrig)
 		{
 			mTex->Render(hdc
 				, GetOwner()->GetComponent<Transform>()->GetPosition()
-				, Vector2(mTex->GetWidth(), mTex->GetHeight())
-				, Vector2::Zero
-				, Vector2(mTex->GetWidth(), mTex->GetHeight())
+				, mSize
+				, mLeftTop
+				, mRightBottom
 				, mbAffectedCamera
 				, mCameraSpeedRatio
 				, tr->GetScale()

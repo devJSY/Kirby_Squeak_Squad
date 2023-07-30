@@ -2,6 +2,7 @@
 #include "syTransform.h"
 #include "syGameObject.h"
 #include "syCamera.h"
+#include "syInput.h"
 
 namespace sy
 {
@@ -14,6 +15,7 @@ namespace sy
 		, mCollisionNumber(mCollisionCount++)
 		, mbIsCollision(false)
 		, mbAffectedCamera(true)
+		, mbRenderTrig(false)
 	{
 	}
 
@@ -27,6 +29,10 @@ namespace sy
 
 	void Collider::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			mbRenderTrig = !mbRenderTrig;
+		}
 	}
 
 	void Collider::Render(HDC hdc)
@@ -60,10 +66,13 @@ namespace sy
 
 		HPEN oldPen = (HPEN)SelectObject(hdc, ColorPen);
 
-		// Collider ·»´õ¸µ
-		Rectangle(hdc
-			, int(pos.x), int(pos.y)
-			, int(pos.x + mSize.x), int(pos.y + mSize.y));
+		if (mbRenderTrig)
+		{
+			// Collider ·»´õ¸µ
+			Rectangle(hdc
+				, int(pos.x), int(pos.y)
+				, int(pos.x + mSize.x), int(pos.y + mSize.y));
+		}
 
 		SelectObject(hdc, oldBrush);
 		DeleteObject(transparentBrush);

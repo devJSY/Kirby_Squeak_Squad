@@ -53,7 +53,7 @@ namespace sy
 		BgRenderer->SetCameraSpeedRatio(Vector2(6.f, 1.f));
 
 		// 스테이지 설정
-		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Stage1.bmp"); // 이미지 설정
+		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Foreground\\Stage1.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
 		Fg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2, tex->GetHeight() / 2)); // 중점 설정
 
@@ -64,8 +64,6 @@ namespace sy
 		// 적 생성
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
-		//col = waddleDee->GetComponent<Collider>();
-		//col->SetSize(Vector2(50.f, 50.f));
 
 		Blockin* Block = object::Instantiate<Blockin>(eLayerType::Enemy);
 		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
@@ -84,7 +82,7 @@ namespace sy
 		
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
-			, L"..\\Resources\\Map\\Stage1_Pixel.bmp");
+			, L"..\\Resources\\Map\\Foreground\\Stage1_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
 		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(Pixeltex->GetWidth() / 2, Pixeltex->GetHeight() / 2)); // 중점 설정
@@ -107,7 +105,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			SceneManager::LoadScene(L"EndingScene");
+			SceneManager::LoadScene(L"Stage2Scene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))

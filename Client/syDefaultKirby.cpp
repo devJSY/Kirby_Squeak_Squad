@@ -331,6 +331,28 @@ namespace sy
 		if (PixelTex == nullptr)
 			return;
 
+		// Offset ÇÈ¼¿ ÁÂ»ó´ÜÀ§Ä¡ ¼³Á¤
+		Vector2 offset = Vector2::Zero;
+
+		std::wstring CurSceneName =SceneManager::GetActiveScene()->GetName();
+
+		if (CurSceneName == L"Stage1Scene")
+		{
+			offset = Vector2::Zero;
+		}
+		else if(CurSceneName == L"Stage2Scene")
+		{
+			offset = Vector2(0, 347.f);
+		}
+		else if (CurSceneName == L"Stage3Scene")
+		{
+			offset = Vector2(0, 679.f);
+		}
+		else if (CurSceneName == L"Stage4Scene")
+		{
+			offset = Vector2(1603.f, 137.f);
+		}
+
 		Collider* col = GetComponent<Collider>();
 		Vector2 ColPos = col->GetPosition();
 		Vector2 ColSize = col->GetSize();
@@ -341,6 +363,14 @@ namespace sy
 		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
 		Vector2 MB = Vector2(ColPos.x, ColPos.y + (ColSize.y / 2.f));
+
+		LT += offset;
+		RT += offset;
+		MT += offset;
+		LB += offset;
+		RB += offset;
+		MB += offset;
+
 
 		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
 		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);

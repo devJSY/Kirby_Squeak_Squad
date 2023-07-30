@@ -166,8 +166,8 @@ namespace sy
 			//// 내가 원하는 픽셀을 투명화 시킬떄
 			Gdiplus::ImageAttributes imageAtt = {};
 			//// 투명화 시킬 픽셀 색 범위
-			imageAtt.SetColorKey(Gdiplus::Color(100, 100, 100)
-				, Gdiplus::Color(255, 255, 255));
+			imageAtt.SetColorKey(Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb))
+				, Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb)));
 
 			Gdiplus::Graphics graphics(hdc);
 
@@ -187,7 +187,7 @@ namespace sy
 				, INT(LeftTop.x), INT(LeftTop.y)
 				, INT(RightBottom.x), INT(RightBottom.y)
 				, Gdiplus::UnitPixel
-				, nullptr);
+				, &imageAtt);
 		}
 	}
 }
