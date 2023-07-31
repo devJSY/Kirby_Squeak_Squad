@@ -42,20 +42,23 @@ namespace sy
 	void Stage2Scene::Initialize()
 	{
 		// 백그라운드 설정
-		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
+		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\Stage\\World1_Backgrounds.png"); // 이미지 설정
 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(tex->GetWidth() / 2 - 2, tex->GetHeight() / 2 - 2)); // 중점 설정
+		Vector2 BgPos = Vector2(tex->GetWidth() / 2 - 2, tex->GetHeight() / 2 - 2);
+		BgPos.y -= 196.f;
+		Bg->GetComponent<Transform>()->SetPosition(BgPos); // 중점 설정
 
 		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
-		BgRenderer->SetAffectedCamera(false);
+		BgRenderer->SetAffectedCamera(true);
 		BgRenderer->SetTexture(tex);
+		BgRenderer->SetCameraSpeedRatio(Vector2(5.f, 1.f));
 
 		// 스테이지 설정
 		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Foreground\\Stage1.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
-		Vector2 pos = Vector2(727.5f, 103.5f);
-		Fg->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
+		Vector2 FgPos = Vector2(727.5f, 103.5f);
+		Fg->GetComponent<Transform>()->SetPosition(FgPos); // 중점 설정
 
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		FgRenderer->SetAffectedCamera(true);
@@ -67,8 +70,9 @@ namespace sy
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
 			, L"..\\Resources\\Map\\Foreground\\Stage1_Pixel.bmp");
 
+		Vector2 PixelPos = Vector2(727.5f, 103.5f);
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
-		mPixelBG->GetComponent<Transform>()->SetPosition(pos); // 중점 설정
+		mPixelBG->GetComponent<Transform>()->SetPosition(PixelPos); // 중점 설정
 
 		SpriteRenderer* PixelBgRenderer = mPixelBG->AddComponent<SpriteRenderer>();
 		PixelBgRenderer->SetAffectedCamera(true);
