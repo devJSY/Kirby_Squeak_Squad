@@ -38,19 +38,20 @@ namespace sy
 	{
 		Enemy::Render(hdc);
 	}
+
 	void Ice::OnCollisionEnter(Collider* other)
 	{
 	}
+
 	void Ice::OnCollisionStay(Collider* other)
 	{
 	}
+
 	void Ice::OnCollisionExit(Collider* other)
 	{
 	}
+
 	void Ice::TakeHit(int DamageAmount, math::Vector2 HitDir)
-	{
-	}
-	void Ice::CheckPixelCollision()
 	{
 	}
 }

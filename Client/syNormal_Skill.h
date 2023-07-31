@@ -18,6 +18,11 @@ namespace sy
         virtual void OnCollisionExit(class Collider* other) override;
 
     private:
+        void CheckPixelCollision();
+
+    private:
+        class Transform* mTransform;
+        eDirection       mDir;
       
 	};
 

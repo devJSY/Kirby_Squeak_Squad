@@ -20,8 +20,6 @@ namespace sy
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
 	private:
-		void CheckPixelCollision();
 
-	private:
 	};
 }

@@ -89,7 +89,7 @@ namespace sy
 		else
 			Dir = Vector2(-1.f, 0);
 
-		enemy->TakeHit(1, Dir);
+		enemy->TakeHit(50, Dir);
 
 		Destroy(this);
 	}

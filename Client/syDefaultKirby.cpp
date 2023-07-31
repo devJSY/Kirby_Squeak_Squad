@@ -1877,6 +1877,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2000,6 +2002,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2123,6 +2127,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2236,6 +2242,8 @@ namespace sy
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2296,6 +2304,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2342,6 +2352,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
+			Normal_Skill* NormalSkill = new Normal_Skill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
