@@ -3,6 +3,15 @@
 
 namespace sy
 {
+    enum class eHotHeadState
+    {
+        Walk,
+        Attack,
+        Damage,
+        End,
+    };
+
+
     class HotHead : public Enemy
     {
     public:
@@ -23,6 +32,18 @@ namespace sy
         void CheckPixelCollision();
 
     private:
+        void Walk();
+        void Attack();
+        void Damage();
+
+    private:
+        eHotHeadState	    mState;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+        class Rigidbody*    mRigidBody;
+        eDirection			mDir;
+
+        float               mDirDuration;
     };
 }
 
