@@ -310,7 +310,6 @@ namespace sy
 
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
-		Destroy(other->GetOwner());
 	}
 
 	void DefaultKirby::OnCollisionStay(Collider* other)

@@ -63,7 +63,7 @@ namespace sy
 
 		// Àû »ý¼º
 		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(100.f, 100.f));
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(300.f, 120.f));
 
 		Blockin* Block = object::Instantiate<Blockin>(eLayerType::Enemy);
 		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));

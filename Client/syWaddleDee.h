@@ -3,6 +3,13 @@
 
 namespace sy
 {
+	enum class eWaddleDeeState
+	{
+        Walk,
+        Damage,
+		End,
+	};
+
     class WaddleDee : public Enemy
     {
     public:
@@ -20,13 +27,20 @@ namespace sy
     private:
         void CheckPixelCollision();
 
+    public:
+        void Walk();
+        void Damage();
+
     private:
+        eWaddleDeeState	mState;
         class Animator* mAnimator;
         class Transform* mTransform;
         class Rigidbody* mRigidBody;
+        eDirection			mDir;
+
+        float       mDirDuration;
 
     };
-
 }
 
 
