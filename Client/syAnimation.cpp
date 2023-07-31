@@ -75,16 +75,14 @@ namespace sy
 		// 텍스쳐의 각 스프라이트의 정보를 셋팅하여 Sprite형태로 vector에 저장한다.
 		for (size_t i = 0; i < spriteLength; i++)
 		{
+			size_t mul = i;
+			if (Interbal.x < 0.f)
+				mul++;
+
 			Sprite sprite = {};
 
-			sprite.leftTop.x = leftTop.x + (Interbal.x * (float)i);
+			sprite.leftTop.x = leftTop.x + (Interbal.x * (float)mul);
 			sprite.leftTop.y = leftTop.y;
-			// 스프라이트 X값이 넘어가면 Y축을 한칸 내린 위치부터 잘라온다
-			if (sprite.leftTop.x >= texture->GetWidth())
-			{
-				sprite.leftTop.x = sprite.leftTop.x - texture->GetWidth();
-				sprite.leftTop.y = leftTop.y + size.y;
-			}
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syBreath_Effect.h" />
     <ClInclude Include="syCollider.h" />
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syNatureNotchScene.h" />
+    <ClInclude Include="syNormal_Skill.h" />
     <ClInclude Include="syNumberUI.h" />
     <ClInclude Include="syPlacardUI.h" />
     <ClInclude Include="syPlayer.h" />
@@ -220,6 +222,7 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syBreath_Effect.cpp" />
     <ClCompile Include="syCollider.cpp" />
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
@@ -250,6 +253,7 @@
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syNatureNotchScene.cpp" />
+    <ClCompile Include="syNormal_Skill.cpp" />
     <ClCompile Include="syNumberUI.cpp" />
     <ClCompile Include="syPlacardUI.cpp" />
     <ClCompile Include="syPlayer.cpp" />

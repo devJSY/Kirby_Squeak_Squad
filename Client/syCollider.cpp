@@ -15,7 +15,7 @@ namespace sy
 		, mCollisionNumber(mCollisionCount++)
 		, mbIsCollision(false)
 		, mbAffectedCamera(true)
-		, mbRenderTrig(false)
+		, mbRenderTrig(true)
 	{
 	}
 

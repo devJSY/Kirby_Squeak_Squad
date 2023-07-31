@@ -14,6 +14,8 @@
 #include "syObject.h"
 #include "syLevelSelectScene.h"
 #include "sySound.h"
+#include "syBreath_Effect.h"
+#include "syNormal_Skill.h"
 
 namespace sy
 {
@@ -1510,6 +1512,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 		}
 
 		// 애니메이션이 끝나면 Fly Down 상태로 변경
@@ -1642,6 +1646,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
+
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 
 			// 오디오 재생
@@ -1732,6 +1739,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);			

@@ -37,7 +37,7 @@ namespace sy
 
 	void Dash_Effect::Initialize()
 	{
-		GameObject::Initialize();
+		Effects::Initialize();
 	}
 
 	void Dash_Effect::Update()
@@ -67,11 +67,11 @@ namespace sy
 			Destroy(this);
 		}
 
-		GameObject::Update();
+		Effects::Update();
 	}
 
 	void Dash_Effect::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
+		Effects::Render(hdc);
 	}
 }

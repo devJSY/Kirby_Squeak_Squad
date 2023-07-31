@@ -247,6 +247,12 @@
     <Filter Include="Contents\Scene\StageScene\Stage4">
       <UniqueIdentifier>{85e6171e-1709-4021-8716-4f8305000bde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\Breath_Effect">
+      <UniqueIdentifier>{a1c44ee5-dd8d-4795-aba8-06444b5d24d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Effects\Normal_Skill">
+      <UniqueIdentifier>{eb83a6f2-a892-45a8-9d38-0339bc977b8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -474,6 +480,12 @@
     <ClInclude Include="syStage4Scene.h">
       <Filter>Contents\Scene\StageScene\Stage4</Filter>
     </ClInclude>
+    <ClInclude Include="syBreath_Effect.h">
+      <Filter>Contents\GameObject\Effects\Breath_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="syNormal_Skill.h">
+      <Filter>Contents\GameObject\Effects\Normal_Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -691,6 +703,12 @@
     </ClCompile>
     <ClCompile Include="syStage4Scene.cpp">
       <Filter>Contents\Scene\StageScene\Stage4</Filter>
+    </ClCompile>
+    <ClCompile Include="syBreath_Effect.cpp">
+      <Filter>Contents\GameObject\Effects\Breath_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="syNormal_Skill.cpp">
+      <Filter>Contents\GameObject\Effects\Normal_Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
