@@ -5,13 +5,17 @@
 #include "syTransform.h"
 #include "syCollider.h"
 #include "syTime.h"
+#include "syEnemy.h"
 
 namespace sy
 {
 	Breath_Effect::Breath_Effect(GameObject* owner)
 		: Effects(owner)
 		, mDir(eDirection::RIGHT)
+		, mColOffset(0.f)
 	{
+		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
+
 		Texture* Breath_Effect_Left_tex = ResourceManager::Load<Texture>(L"Breath_Effect_Left", L"..\\Resources\\Effect\\BreathEffect_Left.bmp");
 		Texture* Breath_Effect_Right_tex = ResourceManager::Load<Texture>(L"Breath_Effect_Right", L"..\\Resources\\Effect\\BreathEffect_Right.bmp");
 
@@ -21,20 +25,18 @@ namespace sy
 
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(25.f, 25.f));
-		
 
 		Animator* animator = GetComponent<Animator>();
 
-		animator->CreateAnimation(Breath_Effect_Left_tex, L"Breath_Effect_Left", Vector2(600.f, 0.f), Vector2(100.f, 25.f), Vector2(-100.f, 0.f), 0.1f, 6, Vector2(-50.f, 0.f));
-		animator->CreateAnimation(Breath_Effect_Right_tex, L"Breath_Effect_Right", Vector2(0.f, 0.f), Vector2(100.f, 25.f), Vector2(100.f, 0.f), 0.1f, 6, Vector2(50.f, 0.f));
+		animator->CreateAnimation(Breath_Effect_Left_tex, L"Breath_Effect_Left", Vector2(500.f, 0.f), Vector2(100.f, 25.f), Vector2(-100.f, 0.f), 0.05f, 6, Vector2(-50.f, 0.f));
+		animator->CreateAnimation(Breath_Effect_Right_tex, L"Breath_Effect_Right", Vector2(0.f, 0.f), Vector2(100.f, 25.f), Vector2(100.f, 0.f), 0.05f, 6, Vector2(50.f, 0.f));
 
-		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
-
+		
 		// 방향 설정
 		if (mDir == eDirection::RIGHT)
-			animator->PlayAnimation(L"Breath_Effect_Right", true);
+			animator->PlayAnimation(L"Breath_Effect_Right", false);
 		else
-			animator->PlayAnimation(L"Breath_Effect_Left", true);
+			animator->PlayAnimation(L"Breath_Effect_Left", false);
 
 	}
 
@@ -49,15 +51,21 @@ namespace sy
 
 	void Breath_Effect::Update()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = GetComponent<Transform>()->GetPosition();		
+		// Collider 이동
+		mColOffset += Time::DeltaTime();
 
+		Collider* col = GetComponent<Collider>();
 		if (mDir == eDirection::RIGHT)
-			pos.x += 80.f * Time::DeltaTime();
+			col->SetOffset(Vector2(mColOffset * 200.f, 0.f));
 		else
-			pos.x -= 80.f * Time::DeltaTime();
+			col->SetOffset(Vector2(mColOffset * -200.f, 0.f));
 
-		tr->SetPosition(pos);
+
+		Animator* animator = GetComponent<Animator>();
+		if (animator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
+		}
 
 		Effects::Update();
 	}
@@ -69,13 +77,20 @@ namespace sy
 
 	void Breath_Effect::OnCollisionEnter(Collider* other)
 	{
-	}
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		
+		if (enemy == nullptr)
+			return;
+		
+		Vector2 Dir = Vector2::Zero;
 
-	void Breath_Effect::OnCollisionStay(Collider* other)
-	{
-	}
+		if (mDir == eDirection::RIGHT)
+			Dir = Vector2(1.f, 0);
+		else
+			Dir = Vector2(-1.f, 0);
 
-	void Breath_Effect::OnCollisionExit(Collider* other)
-	{
+		enemy->TakeHit(50, Dir);
+
+		Destroy(this);
 	}
 }

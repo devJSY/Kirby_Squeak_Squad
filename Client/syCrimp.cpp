@@ -65,6 +65,9 @@ namespace sy
 	void Crimp::OnCollisionExit(Collider* other)
 	{
 	}
+	void Crimp::TakeHit(int DamageAmount, Vector2 HitDir)
+	{
+	}
 	void Crimp::CheckPixelCollision()
 	{
 	}

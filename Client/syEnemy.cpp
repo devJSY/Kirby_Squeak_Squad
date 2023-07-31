@@ -7,6 +7,7 @@ namespace sy
 {
 	Enemy::Enemy(eAbilityType type)
 		: mAbilityType(type)
+		, mHP(100)
 	{
 		AddComponent<Animator>();
 		AddComponent<Rigidbody>();

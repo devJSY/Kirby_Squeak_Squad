@@ -18,7 +18,7 @@ namespace sy
 		mAnimator = GetComponent<Animator>();
 
 		mAnimator->CreateAnimation(Dash_Effect_Left_tex, L"Dash_Effect_Left", Vector2(0.f, 0.f), Vector2(57.f, 28.f), Vector2(57.f, 0.f), 0.03f, 19);
-		mAnimator->CreateAnimation(Dash_Effect_Right_tex, L"Dash_Effect_Right", Vector2(1083.f, 0.f), Vector2(57.f, 28.f), Vector2(-57.f, 0.f), 0.03f, 19);
+		mAnimator->CreateAnimation(Dash_Effect_Right_tex, L"Dash_Effect_Right", Vector2(1026.f, 0.f), Vector2(57.f, 28.f), Vector2(-57.f, 0.f), 0.03f, 19);
 		
 
 		if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)

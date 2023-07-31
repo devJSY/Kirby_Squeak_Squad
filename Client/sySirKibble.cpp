@@ -73,6 +73,9 @@ namespace sy
 	void SirKibble::OnCollisionExit(Collider* other)
 	{
 	}
+	void SirKibble::TakeHit(int DamageAmount, Vector2 HitDir)
+	{
+	}
 	void SirKibble::CheckPixelCollision()
 	{
 	}

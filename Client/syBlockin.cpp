@@ -59,6 +59,10 @@ namespace sy
 	{
 	}
 
+	void Blockin::TakeHit(int DamageAmount, Vector2 HitDir)
+	{
+	}
+
 	void Blockin::CheckPixelCollision()
 	{
 	}

@@ -8,7 +8,7 @@ namespace sy
 	Rigidbody::Rigidbody()
 		: Component(eComponentType::Rigidbody)
 		, mMass(1.0f)
-		, mFriction(0.0f)
+		, mFriction(10.0f)
 		, mForce(Vector2::Zero)
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)

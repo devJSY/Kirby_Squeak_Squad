@@ -8,6 +8,8 @@ namespace sy
 	Player::Player(eAbilityType type, ePlayerMode mode)
 		: mAbilityType(type)
 		, mMode(ePlayerMode::LevelMode)
+		, mHP(100)
+		, mLife(3)
 	{
 		// 애니메이터 생성
 		AddComponent<Animator>();
@@ -26,6 +28,20 @@ namespace sy
 
 	void Player::Update()
 	{
+		//if (mHP > 100)
+		//	mHP = 100;
+
+		//if (mHP <= 0)
+		//{
+		//	mHP = 0;
+		//	--mLife;
+		//}
+
+		//if (mLife < 0)
+		//{
+		//	// GameOver
+		//}
+
 		GameObject::Update();
 	}
 

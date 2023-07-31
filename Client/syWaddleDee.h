@@ -24,6 +24,8 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other);
         virtual void OnCollisionExit(class Collider* other);
 
+        virtual void TakeHit(int DamageAmount, Vector2 HitDir) override;
+
     private:
         void CheckPixelCollision();
 
@@ -32,13 +34,13 @@ namespace sy
         void Damage();
 
     private:
-        eWaddleDeeState	mState;
-        class Animator* mAnimator;
-        class Transform* mTransform;
-        class Rigidbody* mRigidBody;
+        eWaddleDeeState	    mState;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+        class Rigidbody*    mRigidBody;
         eDirection			mDir;
 
-        float       mDirDuration;
+        float               mDirDuration;
 
     };
 }

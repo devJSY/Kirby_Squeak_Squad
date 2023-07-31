@@ -14,11 +14,12 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other) override;
-        virtual void OnCollisionStay(class Collider* other) override;
-        virtual void OnCollisionExit(class Collider* other) override;
+        virtual void OnCollisionStay(class Collider* other) {};
+        virtual void OnCollisionExit(class Collider* other) {};
 
     private:
         eDirection mDir;
+        float      mColOffset;
 
 	};
 

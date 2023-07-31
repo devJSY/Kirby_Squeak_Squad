@@ -23,13 +23,22 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other) {};
 		virtual void OnCollisionExit(class Collider* other) {};
 
+		virtual void TakeHit(int DamageAmount, Vector2 HitDir) = 0;
+
 		eAbilityType GetAbilityType() { return mAbilityType; }
 
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
-		ePlayerMode GetPlayerMode() { return mMode; }
+		ePlayerMode GetPlayerMode() { return mMode; }		
+
+	protected:
+		void Damaged(int amount) { mHP -= amount; }
+		void Recovery(int amount) { mHP += amount; }
 
 	private:
 		enums::eAbilityType mAbilityType;
 		ePlayerMode mMode;		
+
+		int			mHP;	// HP 0 ~ 100 ¹üÀ§
+		int			mLife;	
 	};
 }

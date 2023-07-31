@@ -324,6 +324,10 @@ namespace sy
 
 	}
 
+	void DefaultKirby::TakeHit(int DamageAmount, Vector2 HitDir)
+	{
+	}
+
 	void DefaultKirby::CheckPixelCollision()
 	{
 		// Stage타입에따라 픽셀텍스쳐 변경하기

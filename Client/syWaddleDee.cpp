@@ -7,6 +7,7 @@
 #include "syTransform.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "syBreath_Effect.h"
 
 namespace sy
 {
@@ -37,8 +38,8 @@ namespace sy
 		mAnimator->CreateAnimation(Enemies_Right, L"WaddleDee_Right_Walk", Vector2(0.f, 675.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.12f, 8);
 		mAnimator->CreateAnimation(Enemies_Left, L"WaddleDee_Left_Walk", Vector2(460.f, 675.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.12f, 8);
 
-		mAnimator->CreateAnimation(Enemies_Right, L"WaddleDee_Right_Death", Vector2(27.f, 722.f), Vector2(23.f, 23.f), Vector2(23.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(Enemies_Left, L"WaddleDee_Left_Death", Vector2(432.f, 722.f), Vector2(23.f, 23.f), Vector2(-23.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(Enemies_Right, L"WaddleDee_Right_Damage", Vector2(27.f, 722.f), Vector2(23.f, 23.f), Vector2(23.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(Enemies_Left, L"WaddleDee_Left_Damage", Vector2(432.f, 722.f), Vector2(23.f, 23.f), Vector2(-23.f, 0.f), 1.f, 1);
 
 		mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
 
@@ -47,12 +48,12 @@ namespace sy
 
 	void WaddleDee::Update()
 	{
+		// 방향 설정
+		mDir = mTransform->GetDirection();
+
 		// 픽셀충돌 체크
 		CheckPixelCollision();
 
-		// 방향 설정
-		mDir = mTransform->GetDirection();
-		
 		switch (mState)
 		{
 		case eWaddleDeeState::Walk:
@@ -83,6 +84,28 @@ namespace sy
 
 	void WaddleDee::OnCollisionExit(Collider* other)
 	{
+	}
+
+	void WaddleDee::TakeHit(int DamageAmount, Vector2 HitDir)
+	{
+		Damaged(50.f);
+		mState = eWaddleDeeState::Damage;
+
+		HitDir.Normalize();
+		HitDir *= 30.f;
+
+		if (HitDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"WaddleDee_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"WaddleDee_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}			
+
+		mRigidBody->SetVelocity(HitDir);		
 	}
 
 	void WaddleDee::CheckPixelCollision()
@@ -161,13 +184,18 @@ namespace sy
 
 		if (RBColor == RGB(0, 255, 0))
 		{
-			// 이동
+			// 한픽셀 이동
 			Vector2 pos = mTransform->GetPosition();
 			pos.x -= 1.f;
 			mTransform->SetPosition(pos);
 		}
 		else if (RBColorOffsetX == RGB(0, 255, 0))
 		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x -= 1.f;
+			mTransform->SetPosition(pos);
+
 			if (mDir == eDirection::RIGHT)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
@@ -179,6 +207,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
 			}
 
+			mState = eWaddleDeeState::Walk;
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mDirDuration = 0.f;
 		}
 
@@ -194,6 +224,11 @@ namespace sy
 		}
 		else if (LBColorOffsetX == RGB(0, 255, 0))
 		{
+			// 한픽셀 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x += 1.f;
+			mTransform->SetPosition(pos);
+
 			if (mDir == eDirection::RIGHT)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
@@ -205,6 +240,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
 			}
 
+			mState = eWaddleDeeState::Walk;
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mDirDuration = 0.f;
 		}
 
@@ -242,5 +279,19 @@ namespace sy
 
 	void WaddleDee::Damage()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (GetHP() <= 0.f)
+				Destroy(this);	
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
+			else
+				mAnimator->PlayAnimation(L"WaddleDee_Left_Walk", true);
+
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+
+			mState = eWaddleDeeState::Walk;
+		}
 	}
 }
