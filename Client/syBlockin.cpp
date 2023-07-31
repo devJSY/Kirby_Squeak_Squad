@@ -34,7 +34,7 @@ namespace sy
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-		mRigidBody = GetComponent<Rigidbody>();
+		mRigidBody = AddComponent<Rigidbody>();
 
 		mAnimator->CreateAnimation(Enemies_Right, L"BlockEnemy_Right_Idle", Vector2(1.f, 611.f), Vector2(16.f, 16.f), Vector2(16.f, 0.f), 1.f, 1);
 		

@@ -33,7 +33,7 @@ namespace sy
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-		mRigidBody = GetComponent<Rigidbody>();
+		mRigidBody = AddComponent<Rigidbody>();
 
 		mAnimator->CreateAnimation(Enemies_Right, L"WaddleDee_Right_Walk", Vector2(0.f, 675.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.12f, 8);
 		mAnimator->CreateAnimation(Enemies_Left, L"WaddleDee_Left_Walk", Vector2(460.f, 675.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.12f, 8);

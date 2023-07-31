@@ -10,7 +10,6 @@ namespace sy
 		, mHP(100)
 	{
 		AddComponent<Animator>();
-		AddComponent<Rigidbody>();
 		AddComponent<Collider>()->SetSize(Vector2(15.f, 15.f));
 	}
 

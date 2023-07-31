@@ -3,6 +3,14 @@
 
 namespace sy
 {
+    enum class eCrimpState
+    {
+        Move,
+        Attack,
+        Damage,
+        End,
+    };
+
     class Crimp : public Enemy
     {
     public:
@@ -20,11 +28,15 @@ namespace sy
         virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
     private:
-        void CheckPixelCollision();
+        void Move();
+        void Attack();
+        void Damage();
 
     private:
+        eCrimpState	        mState;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+
     };
-
-
 }
 
