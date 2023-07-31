@@ -324,7 +324,7 @@ namespace sy
 
 	}
 
-	void DefaultKirby::TakeHit(int DamageAmount, Vector2 HitDir)
+	void DefaultKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 	}
 
@@ -634,11 +634,7 @@ namespace sy
 			}
 		}
 
-
 		mTransform->SetPosition(pos);
-
-
-
 
 		static float time = 0.f;
 		time += Time::DeltaTime();

@@ -24,12 +24,13 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other);
         virtual void OnCollisionExit(class Collider* other);
 
-        virtual void TakeHit(int DamageAmount, Vector2 HitDir) override;
+        virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
+
 
     private:
         void CheckPixelCollision();
 
-    public:
+    private:
         void Walk();
         void Damage();
 
@@ -41,7 +42,6 @@ namespace sy
         eDirection			mDir;
 
         float               mDirDuration;
-
     };
 }
 

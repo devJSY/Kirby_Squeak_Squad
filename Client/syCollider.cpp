@@ -8,6 +8,8 @@ namespace sy
 {
 	UINT Collider::mCollisionCount = 0;
 
+	bool Collider::mbColliderRenderTrig = false;
+
 	Collider::Collider()
 		:Component(eComponentType::Collider)
 		, mSize(Vector2::Zero)
@@ -15,7 +17,6 @@ namespace sy
 		, mCollisionNumber(mCollisionCount++)
 		, mbIsCollision(false)
 		, mbAffectedCamera(true)
-		, mbRenderTrig(true)
 	{
 	}
 
@@ -31,7 +32,7 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
-			mbRenderTrig = !mbRenderTrig;
+			mbColliderRenderTrig = !mbColliderRenderTrig;
 		}
 	}
 
@@ -66,7 +67,7 @@ namespace sy
 
 		HPEN oldPen = (HPEN)SelectObject(hdc, ColorPen);
 
-		if (mbRenderTrig)
+		if (mbColliderRenderTrig)
 		{
 			// Collider ·»´õ¸µ
 			Rectangle(hdc

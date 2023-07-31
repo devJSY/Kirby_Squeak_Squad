@@ -3,6 +3,15 @@
 
 namespace sy
 {
+    enum class eSirKibbleState
+    {
+        Idle,
+        Attack,
+        Jump,
+        Damage,
+        End,
+    };
+
 	class SirKibble : public Enemy
 	{
     public:
@@ -17,12 +26,23 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other);
         virtual void OnCollisionExit(class Collider* other);
 
-        virtual void TakeHit(int DamageAmount, Vector2 HitDir) override;
+        virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
     private:
         void CheckPixelCollision();
 
     private:
+        void Idle();
+        void Attack();
+        void Jump();
+        void Damage();
+
+    private:
+        eSirKibbleState	    mState;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+        class Rigidbody*    mRigidBody;
+        eDirection			mDir;
 	};
 }
 

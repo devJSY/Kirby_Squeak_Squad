@@ -47,7 +47,7 @@ namespace sy
 	void Ice::OnCollisionExit(Collider* other)
 	{
 	}
-	void Ice::TakeHit(int DamageAmount, Vector2 HitDir)
+	void Ice::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 	}
 	void Ice::CheckPixelCollision()

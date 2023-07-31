@@ -53,7 +53,7 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		virtual void TakeHit(int DamageAmount, Vector2 HitDir) override;
+		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
 		void SetKirbyState(eDefaultKirbyState state) { mState = state; }
 		eDefaultKirbyState GetKirbyState() { return mState; }

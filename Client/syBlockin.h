@@ -3,6 +3,15 @@
 
 namespace sy
 {
+	enum class eBlockinState
+	{
+		Idle,
+		Appear,
+		Walk,
+		Damage,
+		End,
+	};
+
 	class Blockin : public Enemy
 	{
 	public:
@@ -17,11 +26,24 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-		virtual void TakeHit(int DamageAmount, Vector2 HitDir) override;
+		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
 	private:
 		void CheckPixelCollision();
 
 	private:
+		void Idle();
+		void Appear();
+		void Walk();
+		void Damage();
+
+	private:
+		eBlockinState	    mState;
+		class Animator*		mAnimator;
+		class Transform*	mTransform;
+		class Rigidbody*	mRigidBody;
+		eDirection			mDir;
+
+		float               mDirDuration;
 	};
 }

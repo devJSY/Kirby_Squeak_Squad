@@ -86,9 +86,13 @@ namespace sy
 	{
 	}
 
-	void WaddleDee::TakeHit(int DamageAmount, Vector2 HitDir)
+	void WaddleDee::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		Damaged(50.f);
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eWaddleDeeState::Damage)
+			return;
+
+		Damaged(DamageAmount);
 		mState = eWaddleDeeState::Damage;
 
 		HitDir.Normalize();
@@ -184,16 +188,15 @@ namespace sy
 
 		if (RBColor == RGB(0, 255, 0))
 		{
-			// 한픽셀 이동
+			// 이동
 			Vector2 pos = mTransform->GetPosition();
 			pos.x -= 1.f;
 			mTransform->SetPosition(pos);
 		}
 		else if (RBColorOffsetX == RGB(0, 255, 0))
 		{
-			// 이동
 			Vector2 pos = mTransform->GetPosition();
-			pos.x -= 1.f;
+			pos.x -= 3.f;
 			mTransform->SetPosition(pos);
 
 			if (mDir == eDirection::RIGHT)
@@ -224,9 +227,8 @@ namespace sy
 		}
 		else if (LBColorOffsetX == RGB(0, 255, 0))
 		{
-			// 한픽셀 이동
 			Vector2 pos = mTransform->GetPosition();
-			pos.x += 1.f;
+			pos.x += 3.f;
 			mTransform->SetPosition(pos);
 
 			if (mDir == eDirection::RIGHT)
@@ -244,7 +246,6 @@ namespace sy
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mDirDuration = 0.f;
 		}
-
 	}
 
 	void WaddleDee::Walk()

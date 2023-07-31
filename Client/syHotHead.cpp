@@ -70,7 +70,7 @@ namespace sy
 	void HotHead::OnCollisionExit(Collider* other)
 	{
 	}
-	void HotHead::TakeHit(int DamageAmount, Vector2 HitDir)
+	void HotHead::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 	}
 	void HotHead::CheckPixelCollision()
