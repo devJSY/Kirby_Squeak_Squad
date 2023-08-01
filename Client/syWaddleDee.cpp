@@ -31,6 +31,8 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
@@ -40,6 +42,8 @@ namespace sy
 
 		mAnimator->CreateAnimation(Enemies_Right, L"WaddleDee_Right_Damage", Vector2(27.f, 722.f), Vector2(23.f, 23.f), Vector2(23.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(Enemies_Left, L"WaddleDee_Left_Damage", Vector2(432.f, 722.f), Vector2(23.f, 23.f), Vector2(-23.f, 0.f), 1.f, 1);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"WaddleDee_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
 
@@ -61,6 +65,9 @@ namespace sy
 			break;
 		case eWaddleDeeState::Damage:
 			Damage();
+			break;
+		case eWaddleDeeState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -89,7 +96,7 @@ namespace sy
 	void WaddleDee::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eWaddleDeeState::Damage)
+		if (mState == eWaddleDeeState::Damage || (mState == eWaddleDeeState::Dead)
 			return;
 
 		Damaged(DamageAmount);
@@ -283,16 +290,27 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (GetHP() <= 0.f)
-				Destroy(this);	
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
+			{
+				mAnimator->PlayAnimation(L"WaddleDee_Death", false);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eWaddleDeeState::Dead;
+			}
 			else
-				mAnimator->PlayAnimation(L"WaddleDee_Left_Walk", true);
-
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-
-			mState = eWaddleDeeState::Walk;
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
+				else
+					mAnimator->PlayAnimation(L"WaddleDee_Left_Walk", true);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eWaddleDeeState::Walk;
+			}
+		}
+	}
+	void WaddleDee::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
 		}
 	}
 }

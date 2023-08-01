@@ -9,6 +9,7 @@ namespace sy
 		Appear,
 		Walk,
 		Damage,
+		Dead,
 		End,
 	};
 
@@ -36,6 +37,7 @@ namespace sy
 		void Appear();
 		void Walk();
 		void Damage();
+		void Dead();
 
 	private:
 		eBlockinState	    mState;

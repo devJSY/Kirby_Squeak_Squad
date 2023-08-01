@@ -8,6 +8,7 @@ namespace sy
         Move,
         Attack,
         Damage,
+        Dead,
         End,
     };
 
@@ -31,6 +32,7 @@ namespace sy
         void Move();
         void Attack();
         void Damage();
+        void Dead();
 
     private:
         eCrimpState	        mState;

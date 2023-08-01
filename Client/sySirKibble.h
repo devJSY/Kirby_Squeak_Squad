@@ -9,6 +9,7 @@ namespace sy
         Attack,
         Jump,
         Damage,
+        Dead,
         End,
     };
 
@@ -36,6 +37,7 @@ namespace sy
         void Attack();
         void Jump();
         void Damage();
+        void Dead();
 
     private:
         eSirKibbleState	    mState;

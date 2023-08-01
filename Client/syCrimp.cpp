@@ -26,12 +26,16 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
 		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Move", Vector2(0.f, 2916.f), Vector2(25.f, 24.f), Vector2(25.f, 0.f), 0.15f, 6);
 		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Damage", Vector2(36.f, 3021.f), Vector2(20.f, 32.f), Vector2(20.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Attack", Vector2(0.f, 2941.f), Vector2(30.f, 26.f), Vector2(30.f, 0.f), 0.2f, 3);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"Crimp_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"Crimp_Right_Move", true);
 
@@ -52,6 +56,9 @@ namespace sy
 			break;
 		case eCrimpState::Damage:
 			Damage();
+			break;
+		case eCrimpState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -78,7 +85,7 @@ namespace sy
 	void Crimp::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eCrimpState::Damage)
+		if (mState == eCrimpState::Damage || mState == eCrimpState::Dead)
 			return;
 
 		Damaged(DamageAmount);
@@ -112,11 +119,22 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (GetHP() <= 0.f)
-				Destroy(this);
-
-			mAnimator->PlayAnimation(L"Crimp_Right_Move", true);	
-
-			mState = eCrimpState::Move;
+			{
+				mAnimator->PlayAnimation(L"Crimp_Death", false);
+				mState = eCrimpState::Dead;
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"Crimp_Right_Move", true);
+				mState = eCrimpState::Move;
+			}
+		}
+	}
+	void Crimp::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
 		}
 	}
 }

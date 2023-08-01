@@ -31,6 +31,7 @@ namespace sy
 	{
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -46,6 +47,8 @@ namespace sy
 		
 		mAnimator->CreateAnimation(Enemies_Right, L"BlockEnemy_Right_Damage", Vector2(26.f, 653.f), Vector2(21.f, 20.f), Vector2(21.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(Enemies_Left, L"BlockEnemy_Left_Damage", Vector2(435.f, 653.f), Vector2(21.f, 20.f), Vector2(-21.f, 0.f), 1.f, 1);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"BlockEnemy_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 		
 		mAnimator->PlayAnimation(L"BlockEnemy_Right_Idle", true);
 
@@ -74,6 +77,9 @@ namespace sy
 		case eBlockinState::Damage:
 			Damage();
 			break;
+		case eBlockinState::Dead:
+			Dead();
+			break;
 		default:
 			break;
 		}
@@ -101,7 +107,7 @@ namespace sy
 	void Blockin::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eBlockinState::Damage)
+		if (mState == eBlockinState::Damage || mState == eBlockinState::Dead)
 			return;
 
 		Damaged(DamageAmount);
@@ -303,16 +309,30 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (GetHP() <= 0.f)
-				Destroy(this);
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"BlockEnemy_Right_Walk", true);
+			{
+				mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eBlockinState::Dead;
+			}
 			else
-				mAnimator->PlayAnimation(L"BlockEnemy_Left_Walk", true);
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"BlockEnemy_Right_Walk", true);
+				else
+					mAnimator->PlayAnimation(L"BlockEnemy_Left_Walk", true);
 
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 
-			mState = eBlockinState::Walk;
+				mState = eBlockinState::Walk;
+			}
 		}
+	}
+
+	void Blockin::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
+		}		
 	}
 }

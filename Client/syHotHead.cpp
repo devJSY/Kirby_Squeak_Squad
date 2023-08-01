@@ -32,6 +32,8 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
 
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+		
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
@@ -44,6 +46,8 @@ namespace sy
 
 		mAnimator->CreateAnimation(Enemies_Right, L"HotHead_Right_Attack", Vector2(8.f, 3284.f), Vector2(24.f, 21.f), Vector2(24.f, 0.f), 0.2f, 3);
 		mAnimator->CreateAnimation(Enemies_Left, L"HotHead_Left_Attack", Vector2(450.f, 3284.f), Vector2(24.f, 21.f), Vector2(-24.f, 0.f), 0.2f, 3);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"HotHead_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
 
@@ -68,6 +72,9 @@ namespace sy
 			break;
 		case eHotHeadState::Damage:
 			Damage();
+			break;
+		case eHotHeadState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -303,16 +310,30 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (GetHP() <= 0.f)
-				Destroy(this);
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
+			{
+				mAnimator->PlayAnimation(L"HotHead_Death", false);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eHotHeadState::Dead;
+			}
 			else
-				mAnimator->PlayAnimation(L"HotHead_Left_Walk", true);
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
+				else
+					mAnimator->PlayAnimation(L"HotHead_Left_Walk", true);
 
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 
-			mState = eHotHeadState::Walk;
+				mState = eHotHeadState::Walk;
+			}
+		}
+	}
+
+	void HotHead::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
 		}
 	}
 }

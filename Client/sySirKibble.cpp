@@ -30,6 +30,8 @@ namespace sy
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemies_Left.bmp");
 
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
@@ -45,6 +47,8 @@ namespace sy
 
 		mAnimator->CreateAnimation(Enemies_Right, L"SirKibble_Right_Damage", Vector2(29.f, 2663.f), Vector2(24.f, 20.f), Vector2(24.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(Enemies_Left, L"SirKibble_Left_Damage", Vector2(429.f, 2663.f), Vector2(24.f, 20.f), Vector2(-24.f, 0.f), 1.f, 1);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"SirKibble_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
 
@@ -73,6 +77,9 @@ namespace sy
 		case eSirKibbleState::Damage:
 			Damage();
 			break;
+		case eSirKibbleState::Dead:
+			Dead();
+			break;
 		default:
 			break;
 		}
@@ -100,7 +107,7 @@ namespace sy
 	void SirKibble::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eSirKibbleState::Damage)
+		if (mState == eSirKibbleState::Damage || mState == eSirKibbleState::Dead)
 			return;
 
 		Damaged(DamageAmount);
@@ -263,16 +270,28 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (GetHP() <= 0.f)
-				Destroy(this);
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
+			{
+				mAnimator->PlayAnimation(L"SirKibble_Death", false);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eSirKibbleState::Dead;
+			}
 			else
-				mAnimator->PlayAnimation(L"SirKibble_Left_Idle", true);
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"SirKibble_Left_Idle", true);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eSirKibbleState::Idle;
+			}
+		}
+	}
 
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-
-			mState = eSirKibbleState::Idle;
+	void SirKibble::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
 		}
 	}
 }

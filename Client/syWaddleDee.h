@@ -7,6 +7,7 @@ namespace sy
 	{
         Walk,
         Damage,
+        Dead,
 		End,
 	};
 
@@ -33,6 +34,7 @@ namespace sy
     private:
         void Walk();
         void Damage();
+        void Dead();
 
     private:
         eWaddleDeeState	    mState;

@@ -8,6 +8,7 @@ namespace sy
         Walk,
         Attack,
         Damage,
+        Dead,
         End,
     };
 
@@ -35,6 +36,7 @@ namespace sy
         void Walk();
         void Attack();
         void Damage();
+        void Dead();
 
     private:
         eHotHeadState	    mState;
