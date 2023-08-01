@@ -27,6 +27,7 @@ namespace sy
 
 	Inhale_Effect::~Inhale_Effect()
 	{
+
 	}
 
 	void Inhale_Effect::Initialize()
@@ -36,6 +37,8 @@ namespace sy
 
 	void Inhale_Effect::Update()
 	{
+		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+
 		DefaultKirby* player = dynamic_cast<DefaultKirby*>(GetOwner());
 
 		// Inhale 이외의 상태에선 삭제
@@ -68,6 +71,9 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// 피격 애니메이션 설정
+		enemy->TakeHit(0, Vector2::Zero);
+
 		Transform* PlayerTransform = player->GetComponent<Transform>();
 		Transform* EnemyTransform = enemy->GetComponent<Transform>();
 
@@ -84,11 +90,8 @@ namespace sy
 		else
 		{
 			vecDir.Normalize();
-
 			vecDir *= 200.f * Time::DeltaTime();
-
 			vecDir += EnemyTransform->GetPosition();
-
 			EnemyTransform->SetPosition(vecDir);
 		}
 	}

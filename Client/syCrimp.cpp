@@ -95,6 +95,14 @@ namespace sy
 		mTransform->SetDirection(eDirection::RIGHT);
 	}
 
+	void Crimp::InHalded()
+	{
+	}
+
+	void Crimp::ReleaseInHalded()
+	{
+	}
+
 	void Crimp::Move()
 	{
 	}

@@ -80,6 +80,9 @@ namespace sy
 		case eSirKibbleState::Dead:
 			Dead();
 			break;
+		case eSirKibbleState::Inhaled:
+			Inhaled();
+			break;
 		default:
 			break;
 		}
@@ -113,8 +116,12 @@ namespace sy
 		Damaged(DamageAmount);
 		mState = eSirKibbleState::Damage;
 
-		HitDir.Normalize();
-		HitDir *= 30.f;
+		if (HitDir != Vector2::Zero)
+		{
+			HitDir.Normalize();
+			HitDir *= 30.f;
+			mRigidBody->SetVelocity(HitDir);
+		}
 
 		if (HitDir.x < 0.f)
 		{
@@ -126,8 +133,14 @@ namespace sy
 			mAnimator->PlayAnimation(L"SirKibble_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
 		}
+	}
 
-		mRigidBody->SetVelocity(HitDir);
+	void SirKibble::InHalded()
+	{
+	}
+
+	void SirKibble::ReleaseInHalded()
+	{
 	}
 
 
@@ -293,5 +306,10 @@ namespace sy
 		{
 			Destroy(this);
 		}
+	}
+
+	void SirKibble::Inhaled()
+	{
+
 	}
 }

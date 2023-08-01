@@ -102,8 +102,12 @@ namespace sy
 		Damaged(DamageAmount);
 		mState = eWaddleDeeState::Damage;
 
-		HitDir.Normalize();
-		HitDir *= 30.f;
+		if (HitDir != Vector2::Zero)
+		{
+			HitDir.Normalize();
+			HitDir *= 30.f;
+			mRigidBody->SetVelocity(HitDir);
+		}
 
 		if (HitDir.x < 0.f)
 		{
@@ -114,9 +118,15 @@ namespace sy
 		{
 			mAnimator->PlayAnimation(L"WaddleDee_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
-		}			
+		}						
+	}
 
-		mRigidBody->SetVelocity(HitDir);		
+	void WaddleDee::InHalded()
+	{
+	}
+
+	void WaddleDee::ReleaseInHalded()
+	{
 	}
 
 	void WaddleDee::CheckPixelCollision()

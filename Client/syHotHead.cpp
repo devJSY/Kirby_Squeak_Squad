@@ -106,8 +106,12 @@ namespace sy
 		Damaged(DamageAmount);
 		mState = eHotHeadState::Damage;
 
-		HitDir.Normalize();
-		HitDir *= 30.f;
+		if (HitDir != Vector2::Zero)
+		{
+			HitDir.Normalize();
+			HitDir *= 30.f;
+			mRigidBody->SetVelocity(HitDir);
+		}
 
 		if (HitDir.x < 0.f)
 		{
@@ -119,8 +123,14 @@ namespace sy
 			mAnimator->PlayAnimation(L"HotHead_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
 		}
+	}
 
-		mRigidBody->SetVelocity(HitDir);
+	void HotHead::InHalded()
+	{
+	}
+
+	void HotHead::ReleaseInHalded()
+	{
 	}
 
 	void HotHead::CheckPixelCollision()
