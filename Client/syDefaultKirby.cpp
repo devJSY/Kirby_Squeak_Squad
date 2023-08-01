@@ -16,6 +16,8 @@
 #include "sySound.h"
 #include "syBreath_Effect.h"
 #include "syNormal_Skill.h"
+#include "syInhale_Effect.h"
+#include "syEnemy.h"
 
 namespace sy
 {
@@ -31,6 +33,7 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mbInhaleTrig(false)
 	{
 	}
 
@@ -777,6 +780,10 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
+
+
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
@@ -899,6 +906,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
@@ -1024,6 +1034,9 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
+
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
@@ -1138,6 +1151,9 @@ namespace sy
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
+
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
@@ -1215,6 +1231,9 @@ namespace sy
 
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
+
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
@@ -1294,6 +1313,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
 			mState = eDefaultKirbyState::Inhale_1;
+
+			Inhale_Effect* InhaleEffect = new Inhale_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, InhaleEffect);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
@@ -1390,7 +1412,7 @@ namespace sy
 		}
 
 		// 몬스터를 먹으면 상태변환
-		if (false)
+		if (mbInhaleTrig)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled", false);
@@ -1400,6 +1422,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
+			mbInhaleTrig = false;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
@@ -1444,7 +1467,7 @@ namespace sy
 		}
 
 		// 몬스터를 먹으면 상태변환
-		if (true)
+		if (mbInhaleTrig)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled", false);
@@ -1454,6 +1477,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
+			mbInhaleTrig = false;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);

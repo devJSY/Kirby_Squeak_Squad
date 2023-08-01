@@ -59,6 +59,7 @@ namespace sy
 				GameObject* obj = *iter;
 				iter = mGameObjects.erase(iter);
 				delete obj;
+				obj = nullptr;
 			}
 			else
 			{

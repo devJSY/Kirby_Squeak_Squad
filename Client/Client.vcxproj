@@ -172,6 +172,7 @@
     <ClInclude Include="syHPbarUI.h" />
     <ClInclude Include="syIce.h" />
     <ClInclude Include="syIceIslandScene.h" />
+    <ClInclude Include="syInhale_Effect.h" />
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syJamJungleScene.h" />
     <ClInclude Include="syLevel_BG.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="syHPbarUI.cpp" />
     <ClCompile Include="syIce.cpp" />
     <ClCompile Include="syIceIslandScene.cpp" />
+    <ClCompile Include="syInhale_Effect.cpp" />
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syJamJungleScene.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />

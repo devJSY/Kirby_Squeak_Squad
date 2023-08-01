@@ -253,6 +253,9 @@
     <Filter Include="Contents\GameObject\Effects\Normal_Skill">
       <UniqueIdentifier>{eb83a6f2-a892-45a8-9d38-0339bc977b8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\Inhale_Effect">
+      <UniqueIdentifier>{725cbd86-a30a-4e37-b2c5-465f1717e473}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -486,6 +489,9 @@
     <ClInclude Include="syNormal_Skill.h">
       <Filter>Contents\GameObject\Effects\Normal_Skill</Filter>
     </ClInclude>
+    <ClInclude Include="syInhale_Effect.h">
+      <Filter>Contents\GameObject\Effects\Inhale_Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -709,6 +715,9 @@
     </ClCompile>
     <ClCompile Include="syNormal_Skill.cpp">
       <Filter>Contents\GameObject\Effects\Normal_Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="syInhale_Effect.cpp">
+      <Filter>Contents\GameObject\Effects\Inhale_Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
