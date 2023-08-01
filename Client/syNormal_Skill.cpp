@@ -12,14 +12,17 @@ namespace sy
 {
 	Normal_Skill::Normal_Skill(GameObject* owner)
 		: Effects(owner)
+		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mDir(eDirection::RIGHT)
+		, mbDestroy(false)
 	{
 		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
 
 		mTransform = GetComponent<Transform>();
 
 		Texture* Normal_Skill_tex = ResourceManager::Load<Texture>(L"Normal_Skill", L"..\\Resources\\Effect\\Normal_Skill.bmp");
+		Texture* Normal_Skill_Destory_tex = ResourceManager::Load<Texture>(L"Normal_Skill_Destory", L"..\\Resources\\Effect\\Normal_Skill_Destory.bmp");
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 vec = owner->GetComponent<Transform>()->GetPosition();
@@ -28,11 +31,12 @@ namespace sy
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(24.f, 24.f));
 
-		Animator* animator = GetComponent<Animator>();
+		mAnimator = GetComponent<Animator>();
 
-		animator->CreateAnimation(Normal_Skill_tex, L"Normal_Skill", Vector2(72.f, 0.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.03f, 4);
+		mAnimator->CreateAnimation(Normal_Skill_tex, L"Normal_Skill", Vector2(72.f, 0.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.03f, 4);
+		mAnimator->CreateAnimation(Normal_Skill_Destory_tex, L"Normal_Skill_Destory", Vector2(0.f, 0.f), Vector2(40.22f, 42.f), Vector2(42.f, 0.f), 0.03f, 9);
 
-		animator->PlayAnimation(L"Normal_Skill", true);
+		mAnimator->PlayAnimation(L"Normal_Skill", true);
 	}
 
 	Normal_Skill::~Normal_Skill()
@@ -46,15 +50,24 @@ namespace sy
 
 	void Normal_Skill::Update()
 	{
-		CheckPixelCollision();
-
-		Vector2 pos = mTransform->GetPosition();
-		if (mDir == eDirection::RIGHT)
-			pos.x += 200.f * Time::DeltaTime();
+		if (mbDestroy)
+		{
+			if (mAnimator->IsActiveAnimationComplete())
+			{
+				Destroy(this);
+			}
+		}
 		else
-			pos.x -= 200.f * Time::DeltaTime();
-		mTransform->SetPosition(pos);
+		{
+			CheckPixelCollision();
 
+			Vector2 pos = mTransform->GetPosition();
+			if (mDir == eDirection::RIGHT)
+				pos.x += 200.f * Time::DeltaTime();
+			else
+				pos.x -= 200.f * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+		}
 
 		Effects::Update();
 	}
@@ -80,7 +93,8 @@ namespace sy
 
 		enemy->TakeHit(50, Dir);
 
-		Destroy(this);
+		mbDestroy = true;
+		mAnimator->PlayAnimation(L"Normal_Skill_Destory");
 	}
 
 	void Normal_Skill::OnCollisionStay(Collider* other)
@@ -145,7 +159,8 @@ namespace sy
 			|| LBColor == RGB(0, 255, 0) || LBColor == RGB(255, 0, 0)
 			|| RBColor == RGB(0, 255, 0) || RBColor == RGB(255, 0, 0))
 		{
-			Destroy(this);
+			mbDestroy = true;
+			mAnimator->PlayAnimation(L"Normal_Skill_Destory");
 		}
 	}
 }

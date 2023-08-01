@@ -21,8 +21,10 @@ namespace sy
         void CheckPixelCollision();
 
     private:
-        class Transform* mTransform;
-        eDirection       mDir;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+        eDirection          mDir;
+        bool                mbDestroy;
       
 	};
 
