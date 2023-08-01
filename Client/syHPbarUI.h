@@ -18,6 +18,8 @@ namespace sy
 		Texture* mBar;
 		Texture* mPink;
 		Texture* mRed;
+
+		float	mDecreaseHP;
 	};
 
 }
