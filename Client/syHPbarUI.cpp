@@ -11,12 +11,12 @@
 namespace sy
 {
 	HPbarUI::HPbarUI()
-		: mBar(nullptr)
-		, mRed(nullptr)
-		, mPink(nullptr)
+		: mBarTex(nullptr)
+		, mRedTex(nullptr)
+		, mPinkTex(nullptr)
 		, mDecreaseHP(0.f)
 	{
-		mDecreaseHP = SceneManager::GetPlayer()->GetHP();
+		mDecreaseHP = (float)SceneManager::GetPlayer()->GetHP();
 	}
 
 	HPbarUI::~HPbarUI()
@@ -25,9 +25,9 @@ namespace sy
 
 	void HPbarUI::Initialize()
 	{
-		mBar = ResourceManager::Load<Texture>(L"HP_Bar", L"..\\Resources\\UI\\HpBar\\HP_Bar.bmp");
-		mPink = ResourceManager::Load<Texture>(L"HP_Pink", L"..\\Resources\\UI\\HpBar\\HP_Pink.bmp");
-		mRed = ResourceManager::Load<Texture>(L"HP_Red", L"..\\Resources\\UI\\HpBar\\HP_Red.bmp");
+		mBarTex = ResourceManager::Load<Texture>(L"HP_Bar", L"..\\Resources\\UI\\HpBar\\HP_Bar.bmp");
+		mPinkTex = ResourceManager::Load<Texture>(L"HP_Pink", L"..\\Resources\\UI\\HpBar\\HP_Pink.bmp");
+		mRedTex = ResourceManager::Load<Texture>(L"HP_Red", L"..\\Resources\\UI\\HpBar\\HP_Red.bmp");
 
 		UI::Initialize();
 	}
@@ -38,7 +38,7 @@ namespace sy
 
 		time += Time::DeltaTime();
 
-		// 1초뒤에 감소
+		// 1초후에 감소
 		if (time > 1.f)
 		{
 			if ((int)mDecreaseHP >= SceneManager::GetPlayer()->GetHP())
@@ -58,25 +58,15 @@ namespace sy
 		Player* player = SceneManager::GetPlayer();
 		int hp = player->GetHP();
 		float fhp = (float)hp / 100.f;
-
-
-		//TransparentBlt(hdc, 44, 178, mBar->GetWidth(), mBar->GetHeight(), mBar->GetHdc()
-		//	, 0, 0, mBar->GetWidth(), mBar->GetHeight(), RGB(255, 0, 255));
-
-		//TransparentBlt(hdc, 50, 180, (int)(mRed->GetWidth() * mDraw / mMHP), mRed->GetHeight(), mRed->GetHdc()
-		//	, 0, 0, (int)(mRed->GetWidth() * mDraw / mMHP), mRed->GetHeight(), RGB(255, 0, 255));
-
-		//TransparentBlt(hdc, 50, 180, (int)(mPink->GetWidth() * mHP / mMHP), mPink->GetHeight(), mPink->GetHdc()
-		//	, 0, 0, (int)(mPink->GetWidth() * mHP / mMHP), mPink->GetHeight(), RGB(255, 0, 255));
 		
-		TransparentBlt(hdc, 44, 178, mBar->GetWidth(), mBar->GetHeight(), mBar->GetHdc()
-			, 0, 0, mBar->GetWidth(), mBar->GetHeight(), RGB(255, 0, 255));
+		TransparentBlt(hdc, 44, 178, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
+			, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 50, 180, (int)(mRed->GetWidth() * (mDecreaseHP / 100.f)), mRed->GetHeight(), mRed->GetHdc()
-			, 0, 0, (int)(mRed->GetWidth() * (mDecreaseHP / 100.f)), mRed->GetHeight(), RGB(255, 0, 255));
+		TransparentBlt(hdc, 50, 180, (int)(mRedTex->GetWidth() * (mDecreaseHP / 100.f)), mRedTex->GetHeight(), mRedTex->GetHdc()
+			, 0, 0, (int)(mRedTex->GetWidth() * (mDecreaseHP / 100.f)), mRedTex->GetHeight(), RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 50, 180, (int)(mPink->GetWidth() * fhp), mPink->GetHeight(), mPink->GetHdc()
-			, 0, 0, (int)(mPink->GetWidth() * fhp), mPink->GetHeight(), RGB(255, 0, 255));
+		TransparentBlt(hdc, 50, 180, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), mPinkTex->GetHdc()
+			, 0, 0, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), RGB(255, 0, 255));
 
 		UI::Render(hdc);
 	}

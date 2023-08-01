@@ -10,6 +10,8 @@
 #include "syBreath_Effect.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "syEnemyHPbarUI.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -48,6 +50,8 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"WaddleDee_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
+
+		object::Instantiate<EnemyHPbarUI>(eLayerType::UI);
 
 		Enemy::Initialize();
 	}

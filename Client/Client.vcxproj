@@ -152,6 +152,7 @@
     <ClInclude Include="syDash_Effect.h" />
     <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syCrimp_Skill.h" />
+    <ClInclude Include="syEnemyHPbarUI.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="syDash_Effect.cpp" />
     <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syCrimp_Skill.cpp" />
+    <ClCompile Include="syEnemyHPbarUI.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />

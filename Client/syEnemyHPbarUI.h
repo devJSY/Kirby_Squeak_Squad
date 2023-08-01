@@ -4,11 +4,11 @@
 namespace sy
 {
 	class Texture;
-	class HPbarUI : public UI
+	class EnemyHPbarUI : public UI
 	{
 	public:
-		HPbarUI();
-		virtual ~HPbarUI();
+		EnemyHPbarUI();
+		virtual ~EnemyHPbarUI();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,10 +16,9 @@ namespace sy
 
 	private:
 		Texture* mBarTex;
-		Texture* mPinkTex;
-		Texture* mRedTex;
+		Texture* mHPTex;
 
-		float	mDecreaseHP;
+		bool mbRenderTrig;
 	};
 
 }

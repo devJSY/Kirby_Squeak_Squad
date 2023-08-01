@@ -256,6 +256,9 @@
     <Filter Include="Contents\GameObject\Effects\Inhale_Effect">
       <UniqueIdentifier>{725cbd86-a30a-4e37-b2c5-465f1717e473}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\UI\EnemyHPbarUI">
+      <UniqueIdentifier>{1ffa8117-e852-4f41-b692-6ecd4d744687}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -492,6 +495,9 @@
     <ClInclude Include="syInhale_Effect.h">
       <Filter>Contents\GameObject\Effects\Inhale_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="syEnemyHPbarUI.h">
+      <Filter>Contents\GameObject\UI\EnemyHPbarUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -718,6 +724,9 @@
     </ClCompile>
     <ClCompile Include="syInhale_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Inhale_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="syEnemyHPbarUI.cpp">
+      <Filter>Contents\GameObject\UI\EnemyHPbarUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
