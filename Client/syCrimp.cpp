@@ -6,6 +6,9 @@
 #include "syCrimp_Skill.h"
 #include "syTransform.h"
 #include "syObject.h"
+#include "syPlayer.h"
+#include "syCollider.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -72,6 +75,26 @@ namespace sy
 
 	void Crimp::OnCollisionEnter(Collider* other)
 	{
+		if (mState == eCrimpState::Dead)
+			return;
+
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(other->GetOwner());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void Crimp::OnCollisionStay(Collider* other)
@@ -93,14 +116,6 @@ namespace sy
 
 		mAnimator->PlayAnimation(L"Crimp_Right_Damage", false);
 		mTransform->SetDirection(eDirection::RIGHT);
-	}
-
-	void Crimp::InHalded()
-	{
-	}
-
-	void Crimp::ReleaseInHalded()
-	{
 	}
 
 	void Crimp::Move()

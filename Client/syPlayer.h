@@ -30,6 +30,8 @@ namespace sy
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
 		ePlayerMode GetPlayerMode() { return mMode; }		
 
+		int GetHP() { return mHP; }
+
 	protected:
 		void Damaged(int amount) { mHP -= amount; }
 		void Recovery(int amount) { mHP += amount; }

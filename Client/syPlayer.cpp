@@ -8,7 +8,7 @@ namespace sy
 	Player::Player(eAbilityType type, ePlayerMode mode)
 		: mAbilityType(type)
 		, mMode(ePlayerMode::LevelMode)
-		, mHP(100)
+		, mHP(10000000)
 		, mLife(3)
 	{
 		// 애니메이터 생성

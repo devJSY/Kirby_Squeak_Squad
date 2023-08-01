@@ -10,7 +10,6 @@ namespace sy
 		Walk,
 		Damage,
 		Dead,
-		Inhaled,
 		End,
 	};
 
@@ -29,8 +28,6 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other);
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
-		virtual void InHalded() override;
-		virtual void ReleaseInHalded() override;
 
 	private:
 		void CheckPixelCollision();

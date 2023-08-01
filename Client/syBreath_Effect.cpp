@@ -82,12 +82,8 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 		
-		Vector2 Dir = Vector2::Zero;
-
-		if (mDir == eDirection::RIGHT)
-			Dir = Vector2(1.f, 0);
-		else
-			Dir = Vector2(-1.f, 0);
+		// 스킬 → 몬스터 방향
+		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
 		enemy->TakeHit(50, Dir);
 

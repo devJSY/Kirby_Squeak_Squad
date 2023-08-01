@@ -9,6 +9,9 @@
 #include "sySceneManager.h"
 #include "syScene.h"
 #include "syTime.h"
+#include "syPlayer.h"
+#include "syDefaultKirby.h"
+
 
 namespace sy
 {
@@ -94,6 +97,26 @@ namespace sy
 
 	void Blockin::OnCollisionEnter(Collider* other)
 	{
+		if (mState == eBlockinState::Dead)
+			return;
+
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(other->GetOwner());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void Blockin::OnCollisionStay(Collider* other)
@@ -130,14 +153,6 @@ namespace sy
 			mAnimator->PlayAnimation(L"BlockEnemy_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
 		}
-	}
-
-	void Blockin::InHalded()
-	{
-	}
-
-	void Blockin::ReleaseInHalded()
-	{
 	}
 
 	void Blockin::CheckPixelCollision()

@@ -18,8 +18,6 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) = 0;
-		virtual void InHalded() {};
-		virtual void ReleaseInHalded() {};
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
 

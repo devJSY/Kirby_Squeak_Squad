@@ -315,6 +315,15 @@ namespace sy
 
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+
+		if (enemy == nullptr)
+			return;
+
+		// 커비 → 몬스터 방향
+		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		enemy->TakeHit(50, Dir);
 	}
 
 	void DefaultKirby::OnCollisionStay(Collider* other)
@@ -329,6 +338,65 @@ namespace sy
 
 	void DefaultKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eDefaultKirbyState::Damage || mState == eDefaultKirbyState::Inhaled_Damage)
+			return;
+
+		Damaged(DamageAmount);
+
+		if (mState == eDefaultKirbyState::Inhaled
+			|| mState == eDefaultKirbyState::Inhaled_Idle
+			|| mState == eDefaultKirbyState::Inhaled_Walk
+			|| mState == eDefaultKirbyState::Inhaled_Run
+			|| mState == eDefaultKirbyState::Inhaled_Jump
+			|| mState == eDefaultKirbyState::Inhaled_Turn
+			|| mState == eDefaultKirbyState::Inhaled_Drop
+			|| mState == eDefaultKirbyState::Inhaled_Land
+			|| mState == eDefaultKirbyState::Inhaled_Down
+			|| mState == eDefaultKirbyState::Inhaled_Skill)
+		{
+			mState = eDefaultKirbyState::Inhaled_Damage;
+
+			if (HitDir != Vector2::Zero)
+			{
+				HitDir.Normalize();
+				HitDir *= 30.f;
+				mRigidBody->SetVelocity(HitDir);
+			}
+
+			if (HitDir.x < 0.f)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Damage", false);	
+			}
+			else
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Damage", false);
+			}
+		}
+		else
+		{
+			mState = eDefaultKirbyState::Damage;
+
+			if (HitDir != Vector2::Zero)
+			{
+				HitDir.Normalize();
+				HitDir *= 30.f;
+				mRigidBody->SetVelocity(HitDir);
+			}
+
+			if (HitDir.x < 0.f)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Damage", false);
+			}
+			else
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Damage", false);
+			}
+		}
 	}
 
 	void DefaultKirby::CheckPixelCollision()
@@ -1259,17 +1327,23 @@ namespace sy
 	void DefaultKirby::Damage()
 	{
 		// 애니메이션
-		
-		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			if (GetHP() <= 0.f)
+			{
+				// 게임오버
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));				
+			}
 			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
-
-			mState = eDefaultKirbyState::Idle;
-		}
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eDefaultKirbyState::Idle;
+			}
+		}		
 	}
 
 	void DefaultKirby::Drop()
@@ -1536,6 +1610,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
+
 			Breath_Effect* BreathEffect = new Breath_Effect(this);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 		}
@@ -2414,16 +2489,22 @@ namespace sy
 	void DefaultKirby::Inhaled_Damage()
 	{
 		// 애니메이션
-
-		// 애니메이션이 끝나면 Inhaled_Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
+			if (GetHP() <= 0.f)
+			{
+				// 게임오버
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			}
 			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Idle", true);
-
-			mState = eDefaultKirbyState::Inhaled_Idle;
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Idle", true);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eDefaultKirbyState::Inhaled_Idle;
+			}
 		}
 	}
 

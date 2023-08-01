@@ -4,6 +4,7 @@
 #include "syEnemy.h"
 #include "syTime.h"
 #include "syDefaultKirby.h"
+#include "syIce.h"
 
 namespace sy
 {
@@ -16,7 +17,7 @@ namespace sy
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 			
 		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(63.f, 57.f));
+		col->SetSize(Vector2(63.f, 30.f));
 
 		if (mDir == eDirection::RIGHT)
 			col->SetOffset(Vector2(31.5f, 0.f));
@@ -69,6 +70,11 @@ namespace sy
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 
 		if (enemy == nullptr)
+			return;
+
+		// ice 타입이면 무시
+		Ice* ice = dynamic_cast<Ice*>(other->GetOwner());
+		if (ice != nullptr)
 			return;
 
 		// 피격 애니메이션 설정

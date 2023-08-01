@@ -8,6 +8,8 @@
 #include "syInput.h"
 #include "syCollider.h"
 #include "syRigidbody.h"
+#include "syPlayer.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -80,9 +82,6 @@ namespace sy
 		case eSirKibbleState::Dead:
 			Dead();
 			break;
-		case eSirKibbleState::Inhaled:
-			Inhaled();
-			break;
 		default:
 			break;
 		}
@@ -97,6 +96,26 @@ namespace sy
 
 	void SirKibble::OnCollisionEnter(Collider* other)
 	{
+		if (mState == eSirKibbleState::Dead)
+			return;
+
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(other->GetOwner());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void SirKibble::OnCollisionStay(Collider* other)
@@ -134,16 +153,6 @@ namespace sy
 			mTransform->SetDirection(eDirection::LEFT);
 		}
 	}
-
-	void SirKibble::InHalded()
-	{
-	}
-
-	void SirKibble::ReleaseInHalded()
-	{
-	}
-
-
 
 	void SirKibble::CheckPixelCollision()
 	{
