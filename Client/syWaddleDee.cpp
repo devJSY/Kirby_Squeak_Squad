@@ -23,6 +23,7 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mDirDuration(0.f)
 		, mDir(eDirection::RIGHT)
+		, mHPbarUI(nullptr)
 	{
 	}
 
@@ -51,7 +52,8 @@ namespace sy
 
 		mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
 
-		object::Instantiate<EnemyHPbarUI>(eLayerType::UI);
+		mHPbarUI = new EnemyHPbarUI(this);
+		object::ActiveSceneAddGameObject(eLayerType::Effect, mHPbarUI);
 
 		Enemy::Initialize();
 	}
@@ -144,7 +146,9 @@ namespace sy
 		{
 			mAnimator->PlayAnimation(L"WaddleDee_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
-		}						
+		}			
+
+		mHPbarUI->SetRenderTrig(true);
 	}
 
 	void WaddleDee::CheckPixelCollision()

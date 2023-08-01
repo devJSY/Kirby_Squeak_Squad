@@ -10,6 +10,8 @@
 #include "syRigidbody.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "syEnemyHPbarUI.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -20,6 +22,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
+		, mHPbarUI(nullptr)
 	{
 	}
 
@@ -53,6 +56,9 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"SirKibble_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
+
+		mHPbarUI = new EnemyHPbarUI(this);
+		object::ActiveSceneAddGameObject(eLayerType::Effect, mHPbarUI);
 
 		Enemy::Initialize();
 	}
@@ -152,6 +158,8 @@ namespace sy
 			mAnimator->PlayAnimation(L"SirKibble_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
 		}
+
+		mHPbarUI->SetRenderTrig(true);
 	}
 
 	void SirKibble::CheckPixelCollision()

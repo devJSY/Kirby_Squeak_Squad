@@ -7,18 +7,22 @@ namespace sy
 	class EnemyHPbarUI : public UI
 	{
 	public:
-		EnemyHPbarUI();
+		EnemyHPbarUI(class Enemy* owner);
 		virtual ~EnemyHPbarUI();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-	private:
-		Texture* mBarTex;
-		Texture* mHPTex;
+		void SetRenderTrig(bool trig) { mbRenderTrig = trig; }
 
-		bool mbRenderTrig;
+	private:
+		Enemy*		mOwner;
+		Texture*	mBarTex;
+		Texture*	mHPTex;
+
+		float		mRenderHP;
+		bool		mbRenderTrig;
 	};
 
 }
