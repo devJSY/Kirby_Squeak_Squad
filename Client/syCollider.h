@@ -39,7 +39,6 @@ namespace sy
 		UINT mCollisionNumber;
 		bool mbIsCollision;
 		bool mbAffectedCamera;			// 카메라 영향 여부
-		static bool mbColliderRenderTrig;
 	};
 }
 

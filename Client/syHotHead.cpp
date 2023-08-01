@@ -100,7 +100,7 @@ namespace sy
 	void HotHead::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eHotHeadState::Damage)
+		if (mState == eHotHeadState::Damage || mState == eHotHeadState::Dead)
 			return;
 
 		Damaged(DamageAmount);

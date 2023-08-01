@@ -60,6 +60,9 @@ namespace sy
 			m_listCamEffect.push_back(ef);
 		}
 
+	public:
+		static bool GetColliderRenderTrig() { return mbColliderRenderTrig; }
+
 	private:
 		static Vector2 mResolution;			// 화면 해상도
 		static Vector2 mLookPosition;		// 카메라가 바라보고 있는 위치
@@ -71,6 +74,8 @@ namespace sy
 		static std::list<tCamEffect>  m_listCamEffect;	// 카메라 효과 이벤트 리스트
 		static class Texture* mWhiteTex;				// 카메라 효과용 텍스쳐
 		static class Texture* mBlackTex;				// 카메라 효과용 텍스쳐
+
+		static bool mbColliderRenderTrig;
 	};
 }
 

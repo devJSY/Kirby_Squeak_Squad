@@ -16,6 +16,8 @@ namespace sy
 	Texture*				Camera::mWhiteTex = nullptr;				
 	Texture*				Camera::mBlackTex = nullptr;
 
+	bool					Camera::mbColliderRenderTrig = false;
+
 	void Camera::Initalize()
 	{
 		mResolution = Application::GetResolution();
@@ -35,6 +37,12 @@ namespace sy
 
 	void Camera::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			mbColliderRenderTrig = !mbColliderRenderTrig;
+		}
+
+
 		// 카메라 이동
 		//if (Input::GetKeyPressed(eKeyCode::UP))
 		//{

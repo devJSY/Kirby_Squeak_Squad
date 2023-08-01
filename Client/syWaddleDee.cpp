@@ -96,7 +96,7 @@ namespace sy
 	void WaddleDee::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
-		if (mState == eWaddleDeeState::Damage || (mState == eWaddleDeeState::Dead)
+		if (mState == eWaddleDeeState::Damage || mState == eWaddleDeeState::Dead)
 			return;
 
 		Damaged(DamageAmount);
