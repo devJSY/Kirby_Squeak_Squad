@@ -1350,6 +1350,8 @@ namespace sy
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 				mState = eDefaultKirbyState::Idle;
 			}
+
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 		}		
 	}
 
