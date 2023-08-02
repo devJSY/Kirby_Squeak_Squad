@@ -64,7 +64,10 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
+		if (mState != eWaddleDeeState::Inhaled)
+		{			
+			CheckPixelCollision();
+		}
 
 		switch (mState)
 		{
@@ -76,6 +79,9 @@ namespace sy
 			break;
 		case eWaddleDeeState::Dead:
 			Dead();
+			break;
+		case eWaddleDeeState::Inhaled:
+			Inhaled();
 			break;
 		default:
 			break;
@@ -149,6 +155,26 @@ namespace sy
 		}			
 
 		mHPbarUI->SetRenderTrig(true);
+	}
+
+	void WaddleDee::TakeInhaled(math::Vector2 InhaleDir)
+	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eWaddleDeeState::Dead)
+			return;
+
+		mState = eWaddleDeeState::Inhaled;
+
+		if (InhaleDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"WaddleDee_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"WaddleDee_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}
 	}
 
 	void WaddleDee::CheckPixelCollision()
@@ -338,11 +364,25 @@ namespace sy
 			}
 		}
 	}
+
 	void WaddleDee::Dead()
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			Destroy(this);
+		}
+	}
+
+	void WaddleDee::Inhaled()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"WaddleDee_Right_Walk", true);
+			else
+				mAnimator->PlayAnimation(L"WaddleDee_Left_Walk", true);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eWaddleDeeState::Walk;			
 		}
 	}
 }

@@ -69,7 +69,10 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
+		if (mState != eBlockinState::Inhaled)
+		{
+			CheckPixelCollision();
+		}
 
 		switch (mState)
 		{
@@ -87,6 +90,9 @@ namespace sy
 			break;
 		case eBlockinState::Dead:
 			Dead();
+			break;
+		case eBlockinState::Inhaled:
+			Inhaled();
 			break;
 		default:
 			break;
@@ -160,6 +166,26 @@ namespace sy
 		}
 
 		mHPbarUI->SetRenderTrig(true);
+	}
+
+	void Blockin::TakeInhaled(math::Vector2 InhaleDir)
+	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eBlockinState::Dead)
+			return;
+
+		mState = eBlockinState::Inhaled;
+
+		if (InhaleDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"BlockEnemy_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"BlockEnemy_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}
 	}
 
 	void Blockin::CheckPixelCollision()
@@ -366,5 +392,20 @@ namespace sy
 		{
 			Destroy(this);
 		}		
+	}
+
+	void Blockin::Inhaled()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BlockEnemy_Right_Walk", true);
+			else
+				mAnimator->PlayAnimation(L"BlockEnemy_Left_Walk", true);
+
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+
+			mState = eBlockinState::Walk;
+		}
 	}
 }

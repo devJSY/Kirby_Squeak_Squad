@@ -69,6 +69,9 @@ namespace sy
 		case eCrimpState::Dead:
 			Dead();
 			break;
+		case eCrimpState::Inhaled:
+			Inhaled();
+			break;
 		default:
 			break;
 		}
@@ -126,6 +129,18 @@ namespace sy
 		mHPbarUI->SetRenderTrig(true);
 	}
 
+	void Crimp::TakeInhaled(math::Vector2 InhaleDir)
+	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eCrimpState::Dead)
+			return;
+
+		mState = eCrimpState::Inhaled;
+
+		mAnimator->PlayAnimation(L"Crimp_Right_Damage", false);
+		mTransform->SetDirection(eDirection::RIGHT);
+	}
+
 	void Crimp::Move()
 	{
 	}
@@ -166,6 +181,15 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			Destroy(this);
+		}
+	}
+
+	void Crimp::Inhaled()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			mAnimator->PlayAnimation(L"Crimp_Right_Move", true);
+			mState = eCrimpState::Move;			
 		}
 	}
 }

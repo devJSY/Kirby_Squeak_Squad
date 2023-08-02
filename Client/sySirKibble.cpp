@@ -69,7 +69,10 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
+		if (mState != eSirKibbleState::Inhaled)
+		{
+			CheckPixelCollision();
+		}
 
 		switch (mState)
 		{
@@ -87,6 +90,9 @@ namespace sy
 			break;
 		case eSirKibbleState::Dead:
 			Dead();
+			break;
+		case eSirKibbleState::Inhaled:
+			Inhaled();
 			break;
 		default:
 			break;
@@ -160,6 +166,26 @@ namespace sy
 		}
 
 		mHPbarUI->SetRenderTrig(true);
+	}
+
+	void SirKibble::TakeInhaled(math::Vector2 InhaleDir)
+	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eSirKibbleState::Dead)
+			return;
+
+		mState = eSirKibbleState::Inhaled;
+
+		if (InhaleDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"SirKibble_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"SirKibble_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}
 	}
 
 	void SirKibble::CheckPixelCollision()
@@ -327,6 +353,14 @@ namespace sy
 
 	void SirKibble::Inhaled()
 	{
-
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"SirKibble_Left_Idle", true);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eSirKibbleState::Idle;
+		}
 	}
 }

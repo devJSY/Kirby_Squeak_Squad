@@ -77,9 +77,6 @@ namespace sy
 		if (ice != nullptr)
 			return;
 
-		// 피격 애니메이션 설정
-		enemy->TakeHit(0, Vector2::Zero);
-
 		Transform* PlayerTransform = player->GetComponent<Transform>();
 		Transform* EnemyTransform = enemy->GetComponent<Transform>();
 
@@ -95,6 +92,9 @@ namespace sy
 		}
 		else
 		{
+			// Enemy 상태 설정
+			enemy->TakeInhaled(vecDir);
+
 			vecDir.Normalize();
 			vecDir *= 200.f * Time::DeltaTime();
 			vecDir += EnemyTransform->GetPosition();

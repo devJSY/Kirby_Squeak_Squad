@@ -68,7 +68,10 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
+		if (mState != eHotHeadState::Inhaled)
+		{
+			CheckPixelCollision();
+		}
 
 		switch (mState)
 		{
@@ -83,6 +86,9 @@ namespace sy
 			break;
 		case eHotHeadState::Dead:
 			Dead();
+			break;
+		case eHotHeadState::Inhaled:
+			Inhaled();
 			break;
 		default:
 			break;
@@ -156,6 +162,26 @@ namespace sy
 		}
 
 		mHPbarUI->SetRenderTrig(true);
+	}
+
+	void HotHead::TakeInhaled(math::Vector2 InhaleDir)
+	{
+		// 이미 데미지 상태면 처리하지않음
+		if (mState == eHotHeadState::Dead)
+			return;
+
+		mState = eHotHeadState::Inhaled;
+
+		if (InhaleDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"HotHead_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"HotHead_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}
 	}
 
 	void HotHead::CheckPixelCollision()
@@ -369,6 +395,21 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			Destroy(this);
+		}
+	}
+
+	void HotHead::Inhaled()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
+			else
+				mAnimator->PlayAnimation(L"HotHead_Left_Walk", true);
+
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+
+			mState = eHotHeadState::Walk;
 		}
 	}
 }
