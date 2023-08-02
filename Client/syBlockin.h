@@ -50,6 +50,5 @@ namespace sy
 		eDirection			mDir;
 
 		float               mDirDuration;
-		EnemyHPbarUI*		mHPbarUI;
 	};
 }

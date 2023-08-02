@@ -328,7 +328,9 @@ namespace sy
 		// 커비 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
+		SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
+		enemy->SetHPBarUIRenderTrig(true);
 	}
 
 	void DefaultKirby::OnCollisionStay(Collider* other)

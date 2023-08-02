@@ -1,5 +1,6 @@
 #pragma once
 #include "syGameObject.h"
+#include "syEnemyHPbarUI.h"
 
 namespace sy
 {
@@ -22,15 +23,18 @@ namespace sy
 
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
-
 		int GetHP() { return mHP; }
+		
+		EnemyHPbarUI* GetEnemyHPbarUI() { return mHPbarUI; }
+		void SetHPBarUIRenderTrig(bool trig){ mHPbarUI->SetRenderTrig(trig); }
 
 	protected:
 		void Damaged(int amount) { mHP -= amount; }
 		void Recovery(int amount) { mHP += amount; }
 
 	private:
-		enums::eAbilityType mAbilityType;
-		int			mHP;					// HP 0 ~ 100 범위
+		enums::eAbilityType		mAbilityType;
+		int						mHP;					// HP 0 ~ 100 범위
+		EnemyHPbarUI*			mHPbarUI;
 	};
 }

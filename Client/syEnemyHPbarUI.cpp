@@ -3,6 +3,8 @@
 #include "syTexture.h"
 #include "syTime.h"
 #include "syEnemy.h"
+#include "sySceneManager.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -38,9 +40,12 @@ namespace sy
 			UIActivetime += Time::DeltaTime();
 			if (UIActivetime > 3.f)
 			{
-				mbRenderTrig = false;
-				UIActivetime = 0.f;
+				mbRenderTrig = false;				
 			}
+		}
+		else
+		{
+			UIActivetime = 0.f;
 		}
 
 		if ((int)mRenderHP >= mOwner->GetHP())
@@ -52,14 +57,19 @@ namespace sy
 
 	void EnemyHPbarUI::Render(HDC hdc)
 	{
-		if (mbRenderTrig)
-		{
-			TransparentBlt(hdc, 180, 180, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
-				, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
+		Enemy* hitEnemy = SceneManager::GetPlayer()->GetHitEnemy();
 
-			TransparentBlt(hdc, 186, 181, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), mHPTex->GetHdc()
-				, 0, 0, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), RGB(255, 0, 255));
-		}
+		if (hitEnemy != nullptr)
+		{
+			if (mbRenderTrig && hitEnemy->GetEnemyHPbarUI() == this)
+			{
+				TransparentBlt(hdc, 180, 180, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
+					, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
+
+				TransparentBlt(hdc, 186, 181, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), mHPTex->GetHdc()
+					, 0, 0, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), RGB(255, 0, 255));
+			}
+		}		
 
 		UI::Render(hdc);
 	}

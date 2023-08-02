@@ -11,8 +11,7 @@
 #include "syTime.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
-#include "syEnemyHPbarUI.h"
-#include "syObject.h"
+
 
 namespace sy
 {
@@ -24,7 +23,6 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mDirDuration(0.f)
 		, mDir(eDirection::RIGHT)
-		, mHPbarUI(nullptr)
 	{
 	}
 
@@ -55,9 +53,6 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"HotHead_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
-
-		mHPbarUI = new EnemyHPbarUI(this);
-		object::ActiveSceneAddGameObject(eLayerType::Effect, mHPbarUI);
 
 		Enemy::Initialize();
 	}
@@ -160,8 +155,6 @@ namespace sy
 			mAnimator->PlayAnimation(L"HotHead_Left_Damage", false);
 			mTransform->SetDirection(eDirection::LEFT);
 		}
-
-		mHPbarUI->SetRenderTrig(true);
 	}
 
 	void HotHead::TakeInhaled(math::Vector2 InhaleDir)

@@ -7,6 +7,7 @@
 #include "sySceneManager.h"
 #include "syTime.h"
 #include "syEnemy.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -82,7 +83,10 @@ namespace sy
 	{
 		if (mbDestroy)
 			return;
+		Player* player = dynamic_cast<Player*>(GetOwner());
 
+		if (player == nullptr)
+			return;		
 
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 
@@ -92,7 +96,9 @@ namespace sy
 		// 스킬 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
+		player->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
+		enemy->SetHPBarUIRenderTrig(true);
 
 		mbDestroy = true;
 		mAnimator->PlayAnimation(L"Normal_Skill_Destory");

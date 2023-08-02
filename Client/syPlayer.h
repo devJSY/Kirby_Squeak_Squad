@@ -9,6 +9,8 @@ namespace sy
 		PlayMode,
 	};
 
+	class Enemy;
+
 	class Player : public GameObject
 	{
 	public:
@@ -32,15 +34,21 @@ namespace sy
 
 		int GetHP() { return mHP; }
 
+		void SetHitEnemy(class Enemy* enemy) { mHitEnemy = enemy; }
+		Enemy* GetHitEnemy() { return mHitEnemy; }
+
 	protected:
 		void Damaged(int amount) { mHP -= amount; }
 		void Recovery(int amount) { mHP += amount; }
 
 	private:
-		enums::eAbilityType mAbilityType;
-		ePlayerMode mMode;		
+		enums::eAbilityType		mAbilityType;
+		ePlayerMode				mMode;		
 
-		int			mHP;	// HP 0 ~ 100 범위
-		int			mLife;	
+		int						mHP;	// HP 0 ~ 100 범위
+		int						mLife;	
+
+		Enemy*					mHitEnemy;
+
 	};
 }

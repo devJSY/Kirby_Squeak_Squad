@@ -42,8 +42,6 @@ namespace sy
         class Animator*     mAnimator;
         class Transform*    mTransform;
 
-        EnemyHPbarUI*       mHPbarUI;
-
     };
 }
 

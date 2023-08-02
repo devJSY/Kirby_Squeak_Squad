@@ -9,8 +9,6 @@
 #include "syPlayer.h"
 #include "syCollider.h"
 #include "syDefaultKirby.h"
-#include "syEnemyHPbarUI.h"
-#include "syObject.h"
 
 namespace sy
 {
@@ -19,7 +17,6 @@ namespace sy
 		, mState(eCrimpState::Move)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
-		, mHPbarUI(nullptr)
 	{
 	}
 
@@ -44,9 +41,6 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"Crimp_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"Crimp_Right_Move", true);
-
-		mHPbarUI = new EnemyHPbarUI(this);
-		object::ActiveSceneAddGameObject(eLayerType::Effect, mHPbarUI);
 
 		Enemy::Initialize();
 	}
@@ -125,8 +119,6 @@ namespace sy
 
 		mAnimator->PlayAnimation(L"Crimp_Right_Damage", false);
 		mTransform->SetDirection(eDirection::RIGHT);
-
-		mHPbarUI->SetRenderTrig(true);
 	}
 
 	void Crimp::TakeInhaled(math::Vector2 InhaleDir)

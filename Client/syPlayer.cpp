@@ -10,6 +10,7 @@ namespace sy
 		, mMode(ePlayerMode::LevelMode)
 		, mHP(100)
 		, mLife(3)
+		, mHitEnemy(nullptr)
 	{
 		// 애니메이터 생성
 		AddComponent<Animator>();

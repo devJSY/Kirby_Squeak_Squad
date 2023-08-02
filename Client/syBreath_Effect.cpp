@@ -6,6 +6,7 @@
 #include "syCollider.h"
 #include "syTime.h"
 #include "syEnemy.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -81,11 +82,18 @@ namespace sy
 		
 		if (enemy == nullptr)
 			return;
+
+		Player* player = dynamic_cast<Player*>(GetOwner());
+
+		if (player == nullptr)
+			return;
 		
 		// 스킬 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
+		player->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
+		enemy->SetHPBarUIRenderTrig(true);
 
 		Destroy(this);
 	}
