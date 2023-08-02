@@ -19,8 +19,14 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) override;
         virtual void OnCollisionExit(class Collider* other) override;
 
+        bool IsExistTarget() { return mTarget != nullptr; }
+        bool IsInhaled() { return mbInhale; }
+
     private:
-        eDirection  mDir;
+        eDirection               mDir;
+        std::vector<GameObject*> mInhaledObject;
+        GameObject*              mTarget;
+        bool                     mbInhale;
 	};
 }
 

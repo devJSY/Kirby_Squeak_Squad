@@ -80,6 +80,10 @@ namespace sy
 
 	void Normal_Skill::OnCollisionEnter(Collider* other)
 	{
+		if (mbDestroy)
+			return;
+
+
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 
 		if (enemy == nullptr)
@@ -136,25 +140,14 @@ namespace sy
 		Vector2 ColPos = col->GetPosition();
 		Vector2 ColSize = col->GetSize();
 
-		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
-		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
-		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
-		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 MD = Vector2(ColPos.x, ColPos.y);
 
-		LT += offset;
-		RT += offset;
-		LB += offset;
-		RB += offset;
+		MD += offset;
 
-		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
-		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);	
-		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
-		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
+		COLORREF MDColor = PixelTex->GetTexturePixel((int)MD.x, (int)MD.y);
 
-		if (LTColor == RGB(0, 255, 0) || LTColor == RGB(255, 0, 0)
-			|| RTColor == RGB(0, 255, 0) || RTColor == RGB(255, 0, 0)
-			|| LBColor == RGB(0, 255, 0) || LBColor == RGB(255, 0, 0)
-			|| RBColor == RGB(0, 255, 0) || RBColor == RGB(255, 0, 0))
+
+		if (MDColor == RGB(0, 255, 0) || MDColor == RGB(255, 0, 0))
 		{
 			mbDestroy = true;
 			mAnimator->PlayAnimation(L"Normal_Skill_Destory");

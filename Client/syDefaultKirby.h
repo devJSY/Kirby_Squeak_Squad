@@ -60,8 +60,6 @@ namespace sy
 
 		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
 
-		void SetInhaleTrig(bool trig) { mbInhaleTrig = trig; }
-
 	private:
 		void CheckPixelCollision();
 
@@ -105,19 +103,19 @@ namespace sy
 		void Inhaled_Skill();
 
 	private:
-		eDefaultKirbyState	mState;
-		class Animator*		mAnimator;
-		class Transform*	mTransform;
-		class Rigidbody*	mRigidBody;
-		eDirection			mDir;
+		eDefaultKirbyState			mState;
+		class Animator*				mAnimator;
+		class Transform*			mTransform;
+		class Rigidbody*			mRigidBody;
+		eDirection					mDir;
 
-		bool				mbLevelEnter;	// Level Mode State 첫진입시 설정
-		bool				mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
-		bool				mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
-		bool				mbTopStop;		// 상단에 충돌한 상태여부
-		bool				mbOnSlope;		// 경사로에 올라탄 상태여부
+		bool						mbLevelEnter;	// Level Mode State 첫진입시 설정
+		bool						mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
+		bool						mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
+		bool						mbTopStop;		// 상단에 충돌한 상태여부
+		bool						mbOnSlope;		// 경사로에 올라탄 상태여부
 
-		bool				mbInhaleTrig;	
+		class Inhale_Effect*		mInhaleEffect;
 	};
 }
 

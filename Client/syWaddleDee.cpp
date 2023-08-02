@@ -97,7 +97,7 @@ namespace sy
 
 	void WaddleDee::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eWaddleDeeState::Dead)
+		if (mState == eWaddleDeeState::Dead || mState == eWaddleDeeState::Inhaled)
 			return;
 
 		// Inhale 상태에선 무시

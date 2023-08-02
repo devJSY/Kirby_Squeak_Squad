@@ -108,6 +108,24 @@ namespace sy
 			else
 				PixelBgRenderer->SetRenderTrig(true);
 		}
+
+		// 임시 적 생성
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		{
+			Player* player = SceneManager::GetPlayer();
+			Transform* playerTrans = player->GetComponent<Transform>();
+
+			Vector2 pos = playerTrans->GetPosition();
+			pos.x += 50.f;
+			pos.y -= 50.f;
+
+			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee->GetComponent<Transform>()->SetPosition(pos);
+			waddleDee->Initialize();
+		}
+
+
+
 	}
 
 	void Stage1Scene::Render(HDC hdc)
