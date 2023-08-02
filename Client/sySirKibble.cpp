@@ -102,7 +102,7 @@ namespace sy
 
 	void SirKibble::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eSirKibbleState::Dead)
+		if (mState == eSirKibbleState::Dead || mState == eSirKibbleState::Inhaled)
 			return;
 
 		// Inhale 상태에선 무시
@@ -162,7 +162,6 @@ namespace sy
 
 	void SirKibble::TakeInhaled(math::Vector2 InhaleDir)
 	{
-		// 이미 데미지 상태면 처리하지않음
 		if (mState == eSirKibbleState::Dead)
 			return;
 

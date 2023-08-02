@@ -99,7 +99,7 @@ namespace sy
 
 	void HotHead::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eHotHeadState::Dead)
+		if (mState == eHotHeadState::Dead || mState == eHotHeadState::Inhaled)
 			return;
 
 		// Inhale 상태에선 무시
@@ -159,7 +159,6 @@ namespace sy
 
 	void HotHead::TakeInhaled(math::Vector2 InhaleDir)
 	{
-		// 이미 데미지 상태면 처리하지않음
 		if (mState == eHotHeadState::Dead)
 			return;
 

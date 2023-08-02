@@ -25,6 +25,10 @@
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
 
+#include "syBlockin.h"
+#include "sySirKibble.h"
+#include "syCrimp.h"
+
 namespace sy
 {
 	Stage1Scene::Stage1Scene()
@@ -126,6 +130,26 @@ namespace sy
 			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			waddleDee->GetComponent<Transform>()->SetPosition(pos);
 			waddleDee->Initialize();
+
+			pos.x += 10.f;
+			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+			hotHead->GetComponent<Transform>()->SetPosition(pos);
+			hotHead->Initialize();
+
+			pos.x += 10.f;
+			Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+			blockin->GetComponent<Transform>()->SetPosition(pos);
+			blockin->Initialize();
+
+			pos.x += 10.f;
+			SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+			sirKibble->GetComponent<Transform>()->SetPosition(pos);
+			sirKibble->Initialize();
+
+			pos.x += 10.f;
+			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			crimp->GetComponent<Transform>()->SetPosition(pos);
+			crimp->Initialize();
 		}
 
 

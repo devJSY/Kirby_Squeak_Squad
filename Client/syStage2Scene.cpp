@@ -26,6 +26,10 @@
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
 
+#include "syBlockin.h"
+#include "sySirKibble.h"
+
+
 namespace sy
 {
 	Stage2Scene::Stage2Scene()
@@ -124,6 +128,41 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(false);
 			else
 				PixelBgRenderer->SetRenderTrig(true);
+		}
+
+		// 임시 적 생성
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		{
+			Player* player = SceneManager::GetPlayer();
+			Transform* playerTrans = player->GetComponent<Transform>();
+
+			Vector2 pos = playerTrans->GetPosition();
+			pos.x += 50.f;
+			pos.y -= 50.f;
+
+			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee->GetComponent<Transform>()->SetPosition(pos);
+			waddleDee->Initialize();
+
+			pos.x += 10.f;
+			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+			hotHead->GetComponent<Transform>()->SetPosition(pos);
+			hotHead->Initialize();
+
+			pos.x += 10.f;
+			Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+			blockin->GetComponent<Transform>()->SetPosition(pos);
+			blockin->Initialize();
+
+			pos.x += 10.f;
+			SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+			sirKibble->GetComponent<Transform>()->SetPosition(pos);
+			sirKibble->Initialize();
+
+			pos.x += 10.f;
+			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			crimp->GetComponent<Transform>()->SetPosition(pos);
+			crimp->Initialize();
 		}
 	}
 

@@ -102,7 +102,7 @@ namespace sy
 
 	void Blockin::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eBlockinState::Dead)
+		if (mState == eBlockinState::Dead || mState == eBlockinState::Inhaled)
 			return;
 
 		// Inhale 상태에선 무시

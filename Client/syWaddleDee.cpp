@@ -151,7 +151,6 @@ namespace sy
 
 	void WaddleDee::TakeInhaled(math::Vector2 InhaleDir)
 	{
-		// 이미 데미지 상태면 처리하지않음
 		if (mState == eWaddleDeeState::Dead)
 			return;
 
