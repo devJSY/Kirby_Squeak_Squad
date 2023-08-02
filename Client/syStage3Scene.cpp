@@ -22,11 +22,8 @@
 
 #include "syWaddleDee.h"
 #include "syBlockin.h"
-#include "syCrimp.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
-#include "syIce.h"
-#include "sySirKibble.h"
 
 namespace sy
 {
@@ -41,6 +38,23 @@ namespace sy
 
 	void Stage3Scene::Initialize()
 	{
+		// 적 생성
+		Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+		blockin->GetComponent<Transform>()->SetPosition(Vector2(154.f, 141.f));
+
+		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(174.f, 47.f));
+
+		WaddleDee* waddleDee2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee2->GetComponent<Transform>()->SetPosition(Vector2(1025.f, 46.f));
+
+		WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(1279.f, 79.f));
+
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(726.f, 92.f));
+
+
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
 
@@ -145,6 +159,7 @@ namespace sy
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -30,6 +30,7 @@ namespace sy
 
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(24.f, 24.f));
+		col->SetPosition(vec);
 
 		mAnimator = GetComponent<Animator>();
 

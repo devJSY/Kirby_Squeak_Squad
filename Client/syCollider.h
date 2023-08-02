@@ -24,6 +24,7 @@ namespace sy
 		Vector2 GetOffset() { return mOffset; }
 		void SetOffset(Vector2 offset) { mOffset = offset; }
 		Vector2 GetPosition() { return mPosition; }
+		void SetPosition(Vector2 pos) { mPosition = pos; }
 		UINT GetCollisionNumber() { return mCollisionNumber; }
 
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }

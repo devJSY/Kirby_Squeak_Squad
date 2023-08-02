@@ -21,12 +21,8 @@
 #include "syResourceManager.h"
 
 #include "syWaddleDee.h"
-#include "syBlockin.h"
-#include "syCrimp.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
-#include "syIce.h"
-#include "sySirKibble.h"
 
 namespace sy
 {
@@ -41,6 +37,20 @@ namespace sy
 
 	void Stage1Scene::Initialize()
 	{
+		// 적 생성
+		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(430.f, 120.f));
+
+		WaddleDee* waddleDee2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee2->GetComponent<Transform>()->SetPosition(Vector2(620.f, 120.f));
+
+		WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(1350.f, 100.f));
+
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(1050.f, 100.f));
+
+
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\Stage\\World1_Backgrounds.png"); // 이미지 설정
 
@@ -61,25 +71,6 @@ namespace sy
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
 
-		// 적 생성
-		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(300.f, 120.f));
-
-		Blockin* Block = object::Instantiate<Blockin>(eLayerType::Enemy);
-		Block->GetComponent<Transform>()->SetPosition(Vector2(150.f, 100.f));
-
-		Crimp* flower = object::Instantiate<Crimp>(eLayerType::Enemy);
-		flower->GetComponent<Transform>()->SetPosition(Vector2(200.f, 100.f));
-
-		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(250.f, 100.f));
-
-		Ice* ice = object::Instantiate<Ice>(eLayerType::Enemy);
-		ice->GetComponent<Transform>()->SetPosition(Vector2(300.f, 100.f));
-
-		SirKibble* sirkibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
-		sirkibble->GetComponent<Transform>()->SetPosition(Vector2(350.f, 100.f));
-		
 		// 픽셀 이미지 로드
 		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
 			, L"..\\Resources\\Map\\Foreground\\Stage1_Pixel.bmp");

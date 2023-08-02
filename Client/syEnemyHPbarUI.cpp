@@ -31,15 +31,15 @@ namespace sy
 	void EnemyHPbarUI::Update()
 	{
 		// 일정시간 동안만 렌더링
-		static float time = 0.f;
+		static float UIActivetime = 0.f;
 
 		if (mbRenderTrig)
 		{
-			time += Time::DeltaTime();
-			if (time > 3.f)
+			UIActivetime += Time::DeltaTime();
+			if (UIActivetime > 3.f)
 			{
 				mbRenderTrig = false;
-				time = 0.f;
+				UIActivetime = 0.f;
 			}
 		}
 

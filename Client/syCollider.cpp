@@ -37,11 +37,7 @@ namespace sy
 		// pos ÁÂ»ó´Ü ¼³Á¤
 		Vector2 pos = tr->GetPosition();
 		mPosition = pos + mOffset;
-
-		pos.x -= mSize.x / 2.0f;
-		pos.y -= mSize.y / 2.0f;
-		pos.x += mOffset.x;
-		pos.y += mOffset.y;
+		pos += mOffset;
 
 		if(mbAffectedCamera)
 			pos = Camera::CalculatePosition(pos);
@@ -65,8 +61,8 @@ namespace sy
 		{
 			// Collider ·»´õ¸µ
 			Rectangle(hdc
-				, int(pos.x), int(pos.y)
-				, int(pos.x + mSize.x), int(pos.y + mSize.y));
+				, int(pos.x - mSize.x / 2.f), int(pos.y - mSize.y / 2.f)
+				, int(pos.x + mSize.x / 2.f), int(pos.y + mSize.y / 2.f));
 		}
 
 		SelectObject(hdc, oldBrush);

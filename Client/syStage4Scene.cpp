@@ -20,12 +20,6 @@
 #include "sySound.h"
 #include "syResourceManager.h"
 
-#include "syWaddleDee.h"
-#include "syBlockin.h"
-#include "syCrimp.h"
-#include "syHotHead.h"
-#include "syHotHead_Fire.h"
-#include "syIce.h"
 #include "sySirKibble.h"
 
 namespace sy
@@ -41,6 +35,13 @@ namespace sy
 
 	void Stage4Scene::Initialize()
 	{
+		// 적 생성
+		SirKibble* sirKibble1 = object::Instantiate<SirKibble>(eLayerType::Enemy);
+
+		SirKibble* sirKibble2 = object::Instantiate<SirKibble>(eLayerType::Enemy);
+		sirKibble2->GetComponent<Transform>()->SetPosition(Vector2(42.f, 169.f));
+
+
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
 
@@ -84,6 +85,12 @@ namespace sy
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
+
+		// Init 후 적 데이터 셋팅
+		Transform* sirKibble1tr = sirKibble1->GetComponent<Transform>();
+		sirKibble1tr->SetPosition(Vector2(178.f, 122.f));
+		sirKibble1tr->SetDirection(eDirection::LEFT);
+		sirKibble1->GetComponent<Animator>()->PlayAnimation(L"SirKibble_Left_Idle", true);
 	}
 
 	void Stage4Scene::Update()
@@ -116,12 +123,11 @@ namespace sy
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
 		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(30.f, 100.f));
+		playerTrans->SetPosition(Vector2(21.f, 300.f));
 		Animator* playerAni = player->GetComponent<Animator>();
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
-		//playerCol->SetSize(Vector2(50.f, 50.f));
 		player->SetPlayerMode(ePlayerMode::PlayMode);
 		playerTrans->SetDirection(eDirection::RIGHT);
 
@@ -143,6 +149,7 @@ namespace sy
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -2545,6 +2545,17 @@ namespace sy
 			mTransform->SetPosition(pos);
 		}
 
+		// 방향 변경
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+		}
+
 		// 애니메이션이 끝나면 상태 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
