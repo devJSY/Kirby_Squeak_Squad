@@ -125,7 +125,7 @@ namespace sy
 				enemy->TakeInhaled(vecDir);
 
 				vecDir.Normalize();
-				vecDir *= 300.f * Time::DeltaTime();
+				vecDir *= 10.f * Time::DeltaTime();
 				vecDir += EnemyTransform->GetPosition();
 				EnemyTransform->SetPosition(vecDir);
 			}

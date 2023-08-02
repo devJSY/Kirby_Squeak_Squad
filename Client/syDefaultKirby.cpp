@@ -321,6 +321,10 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// 흡수 상태에선 몬스터 충돌 무시
+		if (mState == eDefaultKirbyState::Inhale_1 || mState == eDefaultKirbyState::Inhale_2)
+			return;
+
 		// 커비 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
