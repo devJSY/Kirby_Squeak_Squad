@@ -183,6 +183,7 @@
     <ClInclude Include="syNumberUI.h" />
     <ClInclude Include="syPlacardUI.h" />
     <ClInclude Include="syPlayer.h" />
+    <ClInclude Include="syPortalUI.h" />
     <ClInclude Include="syPrismPlainsScene.h" />
     <ClInclude Include="syRigidbody.h" />
     <ClInclude Include="sySecretSeaScene.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="syNumberUI.cpp" />
     <ClCompile Include="syPlacardUI.cpp" />
     <ClCompile Include="syPlayer.cpp" />
+    <ClCompile Include="syPortalUI.cpp" />
     <ClCompile Include="syPrismPlainsScene.cpp" />
     <ClCompile Include="syRigidbody.cpp" />
     <ClCompile Include="sySecretSeaScene.cpp" />

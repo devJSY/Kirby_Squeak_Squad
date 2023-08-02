@@ -19,6 +19,7 @@
 #include "syRigidbody.h"
 #include "sySound.h"
 #include "syResourceManager.h"
+#include "syPortalUI.h"
 
 #include "syWaddleDee.h"
 #include "syBlockin.h"
@@ -95,6 +96,10 @@ namespace sy
 		PixelBgRenderer->SetRenderSize(Vector2(1551.f, 215.f));
 		PixelBgRenderer->SetRednerLeftTop(Vector2(0, 679.f));
 
+		// Portal
+		PortalUI* portalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
+		portalUI->GetComponent<Transform>()->SetPosition(Vector2(1514.f, 80.f));
+
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");
 
@@ -141,6 +146,7 @@ namespace sy
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 
 		// 오디오 정지

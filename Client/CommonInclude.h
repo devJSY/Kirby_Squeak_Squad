@@ -29,6 +29,7 @@ namespace sy::enums
 	{
 		BackGround,
 		ForeGround,
+		Portal,
 		Pixel,
 		Video,			
 		LevelUI,

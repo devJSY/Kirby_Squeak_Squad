@@ -259,6 +259,9 @@
     <Filter Include="Contents\GameObject\UI\EnemyHPbarUI">
       <UniqueIdentifier>{1ffa8117-e852-4f41-b692-6ecd4d744687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\UI\PortalUI">
+      <UniqueIdentifier>{e81ec016-61dd-408a-a249-f70557fa1dad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -498,6 +501,9 @@
     <ClInclude Include="syEnemyHPbarUI.h">
       <Filter>Contents\GameObject\UI\EnemyHPbarUI</Filter>
     </ClInclude>
+    <ClInclude Include="syPortalUI.h">
+      <Filter>Contents\GameObject\UI\PortalUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -727,6 +733,9 @@
     </ClCompile>
     <ClCompile Include="syEnemyHPbarUI.cpp">
       <Filter>Contents\GameObject\UI\EnemyHPbarUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syPortalUI.cpp">
+      <Filter>Contents\GameObject\UI\PortalUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
