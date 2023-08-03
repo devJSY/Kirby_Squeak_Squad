@@ -262,6 +262,9 @@
     <Filter Include="Contents\GameObject\UI\PortalUI">
       <UniqueIdentifier>{e81ec016-61dd-408a-a249-f70557fa1dad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Block">
+      <UniqueIdentifier>{d1d45a39-3e80-4ace-81c3-3bb24ec6c8ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -504,6 +507,9 @@
     <ClInclude Include="syPortalUI.h">
       <Filter>Contents\GameObject\UI\PortalUI</Filter>
     </ClInclude>
+    <ClInclude Include="syBlock.h">
+      <Filter>Contents\GameObject\Block</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -736,6 +742,9 @@
     </ClCompile>
     <ClCompile Include="syPortalUI.cpp">
       <Filter>Contents\GameObject\UI\PortalUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syBlock.cpp">
+      <Filter>Contents\GameObject\Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

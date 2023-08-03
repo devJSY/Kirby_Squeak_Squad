@@ -5,6 +5,7 @@
 #include "syTime.h"
 #include "syDefaultKirby.h"
 #include "syIce.h"
+#include "syBlock.h"
 
 namespace sy
 {
@@ -86,30 +87,56 @@ namespace sy
 
 
 			// Block 클래스 탐색
-			//if (mTarget == nullptr)
-			//{
-			//	
-			//}
+			if (mTarget == nullptr)
+			{
+				for (GameObject* obj : mInhaledObject)
+				{
+					if (obj == nullptr)
+						continue;
+
+					Transform* PlayerTransform = player->GetComponent<Transform>();
+
+					Block* block = dynamic_cast<Block*>(obj);
+
+					// Enemy가 아니면 적용하지않음
+					if (block == nullptr)
+						continue;
+
+					if (mTarget == nullptr)
+					{
+						mTarget = block;
+					}
+					else
+					{
+						Transform* TargetTransform = mTarget->GetComponent<Transform>();
+						Transform* objTransform = obj->GetComponent<Transform>();
+
+						float TargetLen = (PlayerTransform->GetPosition() - TargetTransform->GetPosition()).Length();
+						float ObjLen = (PlayerTransform->GetPosition() - objTransform->GetPosition()).Length();
+
+						// Player와의 거리가 작은 obj 를 타겟으로 설정
+						if (ObjLen < TargetLen)
+						{
+							mTarget = block;
+						}
+					}
+				}
+			}
 		}		
 
 
 		// Target 의 Inhaled 상태 호출
 		if (mTarget != nullptr)
 		{
-			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
-
-			if (enemy == nullptr)
-				return;
-
 			// ice 타입이면 무시
 			Ice* ice = dynamic_cast<Ice*>(mTarget);
 			if (ice != nullptr)
 				return;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
-			Transform* EnemyTransform = enemy->GetComponent<Transform>();
+			Transform* TargetTransform = mTarget->GetComponent<Transform>();
 
-			Vector2 vecDir = PlayerTransform->GetPosition() - EnemyTransform->GetPosition();
+			Vector2 vecDir = PlayerTransform->GetPosition() - TargetTransform->GetPosition();
 			float Len = vecDir.Length();
 
 			// 특정 거리 이내에 근접하면 삭제
@@ -121,13 +148,19 @@ namespace sy
 			}
 			else
 			{
-				// Enemy 상태 설정
-				enemy->TakeInhaled(vecDir);
+				Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+
+				// Enemy 인지 Block 인지 체크
+				if (enemy != nullptr)
+				{
+					// Enemy 라면 Inhaled 상태 설정
+					enemy->TakeInhaled(vecDir);
+				}
 
 				vecDir.Normalize();
 				vecDir *= 300.f * Time::DeltaTime();
-				vecDir += EnemyTransform->GetPosition();
-				EnemyTransform->SetPosition(vecDir);
+				vecDir += TargetTransform->GetPosition();
+				TargetTransform->SetPosition(vecDir);
 			}
 		}
 

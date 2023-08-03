@@ -186,7 +186,10 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Block, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Block, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Block, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -29,6 +29,8 @@
 #include "sySirKibble.h"
 #include "syCrimp.h"
 
+#include "syBlock.h"
+
 namespace sy
 {
 	Stage1Scene::Stage1Scene()
@@ -150,6 +152,11 @@ namespace sy
 			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
 			crimp->GetComponent<Transform>()->SetPosition(pos);
 			crimp->Initialize();
+
+			pos.y += 50.f;
+			Block* block = object::Instantiate<Block>(eLayerType::Block);
+			block->GetComponent<Transform>()->SetPosition(pos);
+			block->Initialize();
 		}
 
 
@@ -194,7 +201,10 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Block, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Block, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Block, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

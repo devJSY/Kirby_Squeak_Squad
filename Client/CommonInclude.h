@@ -29,10 +29,11 @@ namespace sy::enums
 	{
 		BackGround,
 		ForeGround,
-		Portal,
 		Pixel,
+		Portal,
 		Video,			
 		LevelUI,
+		Block,
 		Enemy,
 		Player,
 		Effect,

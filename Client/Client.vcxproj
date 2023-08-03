@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syBlock.h" />
     <ClInclude Include="syBreath_Effect.h" />
     <ClInclude Include="syCollider.h" />
     <ClInclude Include="syCollisionManager.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syBlock.cpp" />
     <ClCompile Include="syBreath_Effect.cpp" />
     <ClCompile Include="syCollider.cpp" />
     <ClCompile Include="syCollisionManager.cpp" />
