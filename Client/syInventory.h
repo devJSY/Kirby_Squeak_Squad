@@ -28,6 +28,7 @@ namespace sy
 	private:
 		class Animator*			mAnimator;
 		class InventoryItem*	mSlot[5];
+		class InventoryItem*	mFocusItem;
 
 	};
 }

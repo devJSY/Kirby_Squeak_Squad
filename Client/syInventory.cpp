@@ -7,11 +7,16 @@
 #include "syAnimator.h"
 #include "syInventoryItem.h"
 #include "syObject.h"
+#include "syInput.h"
+#include "syCollider.h"
+#include "syApplication.h"
 
 namespace sy
 {
 	Inventory::Inventory()
 		: mAnimator(nullptr)
+		, mSlot{}
+		, mFocusItem(nullptr)
 	{
 	}
 
@@ -43,6 +48,56 @@ namespace sy
 
 	void Inventory::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		{
+			Vector2 mousePos = Input::GetMousePos();
+
+			for (size_t i = 0; i < 5; i++)
+			{
+				if (mSlot[i] != nullptr)
+				{
+					Collider* SlotCollider = mSlot[i]->GetComponent<Collider>();
+
+					// 화면크기 이동한 거리, 화면 비율만큼 계산
+					Vector2 SlotPos = SlotCollider->GetPosition();	
+					SlotPos *= Application::GetScreenMinRatio();
+					SlotPos += Application::GetScreenRenderPos(); 
+
+					// 화면 비율만큼 계산
+					float SlotRadius = SlotCollider->GetRadius();	
+					SlotRadius *= Application::GetScreenMinRatio();
+
+					Vector2 distance = SlotPos - mousePos;
+					float Length = distance.Length();
+
+					// 콜라이더 범위 안에 들어왔다
+					if (Length <= SlotRadius)
+					{
+						mFocusItem = mSlot[i];
+
+
+						// 클릭시 삭제
+						mSlot[i] = nullptr;
+						Destroy(mFocusItem);
+						break;
+					}					
+				}
+			}
+
+
+		}
+		else if (Input::GetKeyPressed(eKeyCode::MOUSE_LBTN))
+		{
+
+		}
+		else if (Input::GetKeyUp(eKeyCode::MOUSE_LBTN))
+		{
+
+		}
+
+
+
+
 		GameObject::Update();
 	}
 

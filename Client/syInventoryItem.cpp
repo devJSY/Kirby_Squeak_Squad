@@ -80,16 +80,4 @@ namespace sy
 	{
 		GameObject::Render(hdc);
 	}
-
-	void InventoryItem::OnCollisionEnter(Collider* other)
-	{
-	}
-
-	void InventoryItem::OnCollisionStay(Collider* other)
-	{
-	}
-
-	void InventoryItem::OnCollisionExit(Collider* other)
-	{
-	}
 }
