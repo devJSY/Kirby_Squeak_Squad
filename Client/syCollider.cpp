@@ -10,8 +10,10 @@ namespace sy
 
 	Collider::Collider()
 		:Component(eComponentType::Collider)
+		, mColliderType(eColliderType::Box)
 		, mSize(Vector2::Zero)
 		, mOffset(Vector2::Zero)
+		, mRadius(0.f)
 		, mCollisionNumber(mCollisionCount++)
 		, mbIsCollision(false)
 		, mbAffectedCamera(true)
@@ -60,9 +62,18 @@ namespace sy
 		if (Camera::GetColliderRenderTrig())
 		{
 			// Collider ·»´õ¸µ
-			Rectangle(hdc
-				, int(pos.x - mSize.x / 2.f), int(pos.y - mSize.y / 2.f)
-				, int(pos.x + mSize.x / 2.f), int(pos.y + mSize.y / 2.f));
+			if (mColliderType == eColliderType::Box)
+			{
+				Rectangle(hdc
+					, int(pos.x - mSize.x / 2.f), int(pos.y - mSize.y / 2.f)
+					, int(pos.x + mSize.x / 2.f), int(pos.y + mSize.y / 2.f));
+			}
+			else if (mColliderType == eColliderType::Sphere)
+			{
+				Ellipse(hdc
+					, int(pos.x - mRadius), int(pos.y - mRadius)
+					, int(pos.x + mRadius), int(pos.y + mRadius));
+			}
 		}
 
 		SelectObject(hdc, oldBrush);

@@ -150,11 +150,65 @@ namespace sy
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
 
-		// 두 충돌체간의 위치차이값 < Left 충돌체의 size의 절반 + Right 충돌체의 size의 절반 이라면 충돌중이다
-		if (fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f) + fabs(rightSize.x / 2.f)
-			&& fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f) + fabs(rightSize.y / 2.f))
+		eColliderType leftType = left->GetColliderType();
+		eColliderType rightType = right->GetColliderType();
+
+		float leftRadius = left->GetRadius();
+		float rightRadius = right->GetRadius();
+
+		if (leftType == eColliderType::Box && rightType == eColliderType::Box)
 		{
-			return true;
+			// 두 충돌체간의 위치차이값 < Left 충돌체의 size의 절반 + Right 충돌체의 size의 절반 이라면 충돌중이다
+			if (fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f) + fabs(rightSize.x / 2.f)
+				&& fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f) + fabs(rightSize.y / 2.f))
+			{
+				return true;
+			}
+		}
+		else if (leftType == eColliderType::Sphere && rightType == eColliderType::Sphere)
+		{
+			// 두 원의 충돌 판단 (피타고라스)
+			float distance = sqrt(pow(rightPos.x - leftPos.x, 2) + pow(rightPos.y - leftPos.y, 2));
+			if (distance <= leftRadius + rightRadius)
+			{
+				return true;
+			}
+		}
+		else if (leftType == eColliderType::Sphere && rightType == eColliderType::Box)
+		{
+			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인 
+			float Left = rightPos.x - (rightSize.x / 2.f) - leftRadius;
+			float Right = rightPos.x + (rightSize.x / 2.f) + leftRadius;
+			float top = rightPos.y + (rightSize.x / 2.f) + leftRadius;
+			float bottom = rightPos.y - (rightSize.x / 2.f) - leftRadius;
+
+			if (Left < leftPos.x
+				&& leftPos.x < Right
+				&& top > leftPos.y
+				&& leftPos.y > bottom)
+			{
+				return true;
+			}
+
+			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
+		}
+		else if (leftType == eColliderType::Box && rightType == eColliderType::Sphere)
+		{
+			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인
+			float Left = leftPos.x - (leftSize.x / 2.f) - rightRadius;
+			float Right = leftPos.x + (leftSize.x / 2.f) + rightRadius;
+			float top = leftPos.y + (leftSize.x / 2.f) + rightRadius;
+			float bottom = leftPos.y - (leftSize.x / 2.f) - rightRadius;
+
+			if (Left < rightPos.x
+				&& rightPos.x < Right
+				&& top > rightPos.y
+				&& rightPos.y > bottom)
+			{
+				return true;
+			}
+
+			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
 		}
 
 		return false;

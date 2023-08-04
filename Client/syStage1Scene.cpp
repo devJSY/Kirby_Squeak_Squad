@@ -20,6 +20,7 @@
 #include "sySound.h"
 #include "syResourceManager.h"
 #include "syPortalUI.h"
+#include "syAbilityItem.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -128,31 +129,53 @@ namespace sy
 
 			Vector2 pos = playerTrans->GetPosition();
 			pos.x += 50.f;
-			pos.y -= 50.f;
 
-			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDee->GetComponent<Transform>()->SetPosition(pos);
-			waddleDee->Initialize();
+			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+			item->GetComponent<Transform>()->SetPosition(pos);
+			item->Initialize();
+			object::ActiveSceneAddGameObject(eLayerType::Item, item);
+			//pos.x += 50.f;
 
-			pos.x += 10.f;
-			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-			hotHead->GetComponent<Transform>()->SetPosition(pos);
-			hotHead->Initialize();
+			//AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+			//item2->GetComponent<Transform>()->SetPosition(pos);
+			//item2->Initialize();
+			//object::ActiveSceneAddGameObject(eLayerType::Item, item2);
+			//pos.x += 50.f;
 
-			pos.x += 10.f;
-			Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
-			blockin->GetComponent<Transform>()->SetPosition(pos);
-			blockin->Initialize();
+			//AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+			//item3->GetComponent<Transform>()->SetPosition(pos);
+			//item3->Initialize();
+			//object::ActiveSceneAddGameObject(eLayerType::Item, item3);
+			//pos.x += 50.f;
 
-			pos.x += 10.f;
-			SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
-			sirKibble->GetComponent<Transform>()->SetPosition(pos);
-			sirKibble->Initialize();
+			//AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+			//item4->GetComponent<Transform>()->SetPosition(pos);
+			//item4->Initialize();
+			//object::ActiveSceneAddGameObject(eLayerType::Item, item4);
 
-			pos.x += 10.f;
-			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
-			crimp->GetComponent<Transform>()->SetPosition(pos);
-			crimp->Initialize();
+			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDee->GetComponent<Transform>()->SetPosition(pos);
+			//waddleDee->Initialize();
+
+			//pos.x += 10.f;
+			//HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+			//hotHead->GetComponent<Transform>()->SetPosition(pos);
+			//hotHead->Initialize();
+
+			//pos.x += 10.f;
+			//Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+			//blockin->GetComponent<Transform>()->SetPosition(pos);
+			//blockin->Initialize();
+
+			//pos.x += 10.f;
+			//SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+			//sirKibble->GetComponent<Transform>()->SetPosition(pos);
+			//sirKibble->Initialize();
+
+			//pos.x += 10.f;
+			//Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			//crimp->GetComponent<Transform>()->SetPosition(pos);
+			//crimp->Initialize();
 		}
 
 
@@ -201,6 +224,9 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Block, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Block, true);
+
+
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Item, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -262,6 +262,9 @@
     <Filter Include="Contents\GameObject\UI\PortalUI">
       <UniqueIdentifier>{e81ec016-61dd-408a-a249-f70557fa1dad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\AbilityItem">
+      <UniqueIdentifier>{2dc5b797-5d1b-48ea-bfb6-6755466090e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -504,6 +507,9 @@
     <ClInclude Include="syPortalUI.h">
       <Filter>Contents\GameObject\UI\PortalUI</Filter>
     </ClInclude>
+    <ClInclude Include="syAbilityItem.h">
+      <Filter>Contents\GameObject\AbilityItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -736,6 +742,9 @@
     </ClCompile>
     <ClCompile Include="syPortalUI.cpp">
       <Filter>Contents\GameObject\UI\PortalUI</Filter>
+    </ClCompile>
+    <ClCompile Include="syAbilityItem.cpp">
+      <Filter>Contents\GameObject\AbilityItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
