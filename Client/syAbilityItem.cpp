@@ -7,6 +7,7 @@
 #include "syInventory.h"
 #include "sySceneManager.h"
 #include "syTransform.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -14,6 +15,7 @@ namespace sy
 		: mType(type)
 		, mBubbleAnimator(nullptr)
 		, mAbilityAnimator(nullptr)
+		, mRigidbody(nullptr)
 	{
 	}
 
@@ -50,6 +52,9 @@ namespace sy
 		col->SetColliderType(eColliderType::Sphere);
 		col->SetRadius(16.f);
 
+		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetFloat(true);
+
 		GameObject::Initialize();
 	}
 
@@ -71,13 +76,27 @@ namespace sy
 		if (plyer == nullptr)
 			return;
 
-		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함
-		Destroy(this);	
-		SceneManager::GetInventory()->AddItem(mType);
+		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함		
+		Inventory* inventory = SceneManager::GetInventory();
+		if (!inventory->IsFullSlot())
+		{
+			Destroy(this);
+			inventory->AddItem(mType);
+		}
 	}
 
 	void AbilityItem::OnCollisionStay(Collider* other)
 	{
+		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함		
+		Inventory* inventory = SceneManager::GetInventory();
+		if (inventory->IsFullSlot())
+		{
+			// 스킬 → 몬스터 방향
+			Vector2 Dir = GetComponent<Transform>()->GetPosition() - other->GetOwner()->GetComponent<Transform>()->GetPosition();
+			Dir.Normalize();
+			Dir *= 30.f;
+			mRigidbody->SetVelocity(Dir);
+		}
 	}
 
 	void AbilityItem::OnCollisionExit(Collider* other)

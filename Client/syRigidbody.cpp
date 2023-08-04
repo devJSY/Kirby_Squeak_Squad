@@ -42,6 +42,10 @@ namespace sy
 			float dot = math::Dot(mVelocity, gravity);	// 플레이어 방향 과 중력사이의 CosΘ 값
 			mVelocity -= gravity * dot;	// 중력의 방향을 플레이어의 진행방향으로 변경한다
 		}
+		else if (mbfloat)
+		{
+
+		}
 		else
 		{
 			// 공중에 있을 때

@@ -22,6 +22,9 @@ namespace sy
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
 		void SetLimitVelocity(Vector2 velocity) { mLimitedVelocty = velocity; }
 
+		void SetFloat(bool _float) { mbfloat = _float; }
+		bool Float() { return mbfloat; }
+
 	private:
 		float mMass;				// 질량
 
@@ -34,5 +37,6 @@ namespace sy
 		Vector2 mLimitedVelocty;	// 최대 속도 제한
 
 		bool mbGround;				// 땅에 닿은 상태인지 체크
+		bool mbfloat;				// 공중에 떠다니는 상태인지 체크
 	};
 }

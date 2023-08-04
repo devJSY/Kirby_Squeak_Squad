@@ -21,6 +21,7 @@ namespace sy
 		eAbilityType		mType;
 		class Animator*		mBubbleAnimator;
 		class Animator*		mAbilityAnimator;
+		class Rigidbody*	mRigidbody;
 	};
 }
 

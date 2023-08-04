@@ -14,6 +14,16 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 		void AddItem(eAbilityType type);
+		bool IsFullSlot()
+		{
+			for (auto iter : mSlot)
+			{
+				if (iter == nullptr)
+					return false;
+			}
+
+			return true;
+		}
 
 	private:
 		class Animator*			mAnimator;
