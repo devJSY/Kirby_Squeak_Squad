@@ -74,25 +74,32 @@ namespace sy
 					if (Length <= SlotRadius)
 					{
 						mFocusItem = mSlot[i];
-
-
-						// 클릭시 삭제
-						mSlot[i] = nullptr;
-						Destroy(mFocusItem);
 						break;
 					}					
 				}
 			}
-
-
 		}
 		else if (Input::GetKeyPressed(eKeyCode::MOUSE_LBTN))
 		{
+			if (mFocusItem != nullptr)
+			{
+				// 화면크기 이동한 거리, 화면 비율만큼 계산
+				Vector2 mousePos = Input::GetMousePos();
+				mousePos -= Application::GetScreenRenderPos();
+				mousePos = mousePos  / Application::GetScreenMinRatio();
 
+				// 마우스위치로 설정
+				Transform* transform = mFocusItem->GetComponent<Transform>();
+				transform->SetPosition(mousePos);
+			}
 		}
 		else if (Input::GetKeyUp(eKeyCode::MOUSE_LBTN))
 		{
-
+			if (mFocusItem != nullptr)
+			{
+				// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
+				mFocusItem = nullptr;
+			}
 		}
 
 

@@ -73,6 +73,8 @@ namespace sy
 
 	void InventoryItem::Update()
 	{
+		// mFocusItem가 아닌경우 슬롯 위치로 이동 리지드바디로 이동하면 흔들거리는효과 나오지않을까
+
 		GameObject::Update();
 	}
 
