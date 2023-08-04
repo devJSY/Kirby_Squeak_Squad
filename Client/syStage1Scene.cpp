@@ -29,8 +29,6 @@
 #include "sySirKibble.h"
 #include "syCrimp.h"
 
-#include "syBlock.h"
-
 namespace sy
 {
 	Stage1Scene::Stage1Scene()
@@ -56,6 +54,9 @@ namespace sy
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(1050.f, 100.f));
+
+
+
 
 
 		// 백그라운드 설정
@@ -152,11 +153,6 @@ namespace sy
 			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
 			crimp->GetComponent<Transform>()->SetPosition(pos);
 			crimp->Initialize();
-
-			pos.y += 50.f;
-			Block* block = object::Instantiate<Block>(eLayerType::Block);
-			block->GetComponent<Transform>()->SetPosition(pos);
-			block->Initialize();
 		}
 
 

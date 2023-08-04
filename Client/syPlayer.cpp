@@ -8,7 +8,7 @@ namespace sy
 	Player::Player(eAbilityType type, ePlayerMode mode)
 		: mAbilityType(type)
 		, mMode(ePlayerMode::LevelMode)
-		, mHP(10000)
+		, mHP(100)
 		, mLife(3)
 		, mHitEnemy(nullptr)
 	{

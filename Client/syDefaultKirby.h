@@ -60,6 +60,9 @@ namespace sy
 
 		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
 
+		void SetOnLeftStop(bool trig) { mbOnLeftStop = trig; }
+		void SetOnRightStop(bool trig) { mbOnRightStop = trig; }
+
 	private:
 		void CheckPixelCollision();
 

@@ -5,7 +5,6 @@
 #include "syTime.h"
 #include "syDefaultKirby.h"
 #include "syIce.h"
-#include "syBlock.h"
 
 namespace sy
 {
@@ -81,44 +80,6 @@ namespace sy
 					if (ObjLen < TargetLen)
 					{
 						mTarget = enemy;
-					}
-				}
-			}
-
-
-			// Block 클래스 탐색
-			if (mTarget == nullptr)
-			{
-				for (GameObject* obj : mInhaledObject)
-				{
-					if (obj == nullptr)
-						continue;
-
-					Transform* PlayerTransform = player->GetComponent<Transform>();
-
-					Block* block = dynamic_cast<Block*>(obj);
-
-					// Enemy가 아니면 적용하지않음
-					if (block == nullptr)
-						continue;
-
-					if (mTarget == nullptr)
-					{
-						mTarget = block;
-					}
-					else
-					{
-						Transform* TargetTransform = mTarget->GetComponent<Transform>();
-						Transform* objTransform = obj->GetComponent<Transform>();
-
-						float TargetLen = (PlayerTransform->GetPosition() - TargetTransform->GetPosition()).Length();
-						float ObjLen = (PlayerTransform->GetPosition() - objTransform->GetPosition()).Length();
-
-						// Player와의 거리가 작은 obj 를 타겟으로 설정
-						if (ObjLen < TargetLen)
-						{
-							mTarget = block;
-						}
 					}
 				}
 			}

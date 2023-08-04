@@ -56,6 +56,9 @@ namespace sy
 		WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(1279.f, 79.f));
 
+		WaddleDee* waddleDee4 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(1218.f, 160.f));
+
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(726.f, 92.f));
 
