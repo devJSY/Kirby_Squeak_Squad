@@ -182,6 +182,20 @@ namespace sy
 			float top = rightPos.y + (rightSize.x / 2.f) + leftRadius;
 			float bottom = rightPos.y - (rightSize.x / 2.f) - leftRadius;
 
+			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
+			// 사각형의 좌상단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, top)) return true;
+
+			// 사각형의 좌하단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, bottom)) return true;
+
+			// 사각형의 우상단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, top)) return true;
+
+			// 사각형의 우하단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, bottom)) return true;
+
+
 			if (Left < leftPos.x
 				&& leftPos.x < Right
 				&& top > leftPos.y
@@ -189,8 +203,6 @@ namespace sy
 			{
 				return true;
 			}
-
-			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
 		}
 		else if (leftType == eColliderType::Box && rightType == eColliderType::Sphere)
 		{
@@ -200,6 +212,19 @@ namespace sy
 			float top = leftPos.y + (leftSize.x / 2.f) + rightRadius;
 			float bottom = leftPos.y - (leftSize.x / 2.f) - rightRadius;
 
+			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
+			// 사각형의 좌상단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, top)) return true;
+
+			// 사각형의 좌하단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, bottom)) return true;
+
+			// 사각형의 우상단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, top)) return true;
+
+			// 사각형의 우하단 포인트가 원안에 있는지 파악
+			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, bottom)) return true;
+
 			if (Left < rightPos.x
 				&& rightPos.x < Right
 				&& top > rightPos.y
@@ -207,10 +232,24 @@ namespace sy
 			{
 				return true;
 			}
-
-			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
 		}
 
 		return false;
+	}
+
+	bool CollisionManager::IsPointInCircle(float cx, float cy, float cr, float px, float py)
+	{
+		// x 변위량
+		float deltaX = cx - px;
+
+		float deltaY = cy - py;
+
+		// 원의 중심과 점과의 거리
+		float length = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+
+		if (length > cr)
+			return false;
+
+		return true;
 	}
 }
