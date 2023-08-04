@@ -38,6 +38,9 @@ namespace sy
 		static Scene* GetScene(const std::wstring& name);
 
 		static Player* GetPlayer() { return mPlayer; }
+		static Inventory* GetInventory() { return mInventory; }
+
+		static void PlayerTransform(eAbilityType type);
 
 	private:
 		// 트리 자료구조

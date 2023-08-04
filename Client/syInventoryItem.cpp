@@ -1,33 +1,28 @@
-#include "syAbilityItem.h"
+#include "syInventoryItem.h"
 #include "syAnimator.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syCollider.h"
 #include "syPlayer.h"
-#include "syInventory.h"
-#include "sySceneManager.h"
 #include "syTransform.h"
 
 namespace sy
 {
-	AbilityItem::AbilityItem(eAbilityType type)
+	InventoryItem::InventoryItem(eAbilityType type, UINT SlotNumber)
 		: mType(type)
 		, mBubbleAnimator(nullptr)
 		, mAbilityAnimator(nullptr)
-	{
-	}
-
-	AbilityItem::~AbilityItem()
-	{
-	}
-
-	void AbilityItem::Initialize()
+		, mTransform(nullptr)
+		, mSlotNumber(SlotNumber)
 	{
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
 		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
 
 		mBubbleAnimator = AddComponent<Animator>();
 		mAbilityAnimator = AddComponent<Animator>();
+
+		mBubbleAnimator->SetAffectedCamera(false);
+		mAbilityAnimator->SetAffectedCamera(false);
 
 		mBubbleAnimator->CreateAnimation(Bubble_Tex, L"BubbleAnimation", Vector2::Zero, Vector2(32.f, 34.f), Vector2(32.f, 0.f), 0.08f, 4, Vector2(0.f, 3.f));
 		mBubbleAnimator->PlayAnimation(L"BubbleAnimation", true);
@@ -39,7 +34,7 @@ namespace sy
 
 		if (mType == eAbilityType::Fire)
 			mAbilityAnimator->PlayAnimation(L"Fire_AbilityItem");
-		else if(mType == eAbilityType::Ice)
+		else if (mType == eAbilityType::Ice)
 			mAbilityAnimator->PlayAnimation(L"Ice_AbilityItem");
 		else if (mType == eAbilityType::Cutter)
 			mAbilityAnimator->PlayAnimation(L"Cutter_AbilityItem");
@@ -47,40 +42,54 @@ namespace sy
 			mAbilityAnimator->PlayAnimation(L"Tornado_AbilityItem");
 
 		Collider* col = AddComponent<Collider>();
+		col->SetAffectedCamera(false);
 		col->SetColliderType(eColliderType::Sphere);
-		col->SetRadius(16.f);
+		col->SetRadius(20.f);
 
+		mTransform = GetComponent<Transform>();
+
+		if (mSlotNumber == 0)
+			mTransform->SetPosition(Vector2(30.f, 270.f));
+		else if(mSlotNumber == 1)
+			mTransform->SetPosition(Vector2(63.f, 330.f));
+		else if (mSlotNumber == 2)
+			mTransform->SetPosition(Vector2(128.f, 353.f));
+		else if (mSlotNumber == 3)
+			mTransform->SetPosition(Vector2(190.f, 330.f));
+		else if (mSlotNumber == 4)
+			mTransform->SetPosition(Vector2(225.f, 270.f));
+
+		mTransform->SetScale(Vector2(1.3f, 1.3f));
+	}
+
+	InventoryItem::~InventoryItem()
+	{
+	}
+
+	void InventoryItem::Initialize()
+	{
 		GameObject::Initialize();
 	}
 
-	void AbilityItem::Update()
+	void InventoryItem::Update()
 	{
 		GameObject::Update();
 	}
 
-	void AbilityItem::Render(HDC hdc)
+	void InventoryItem::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 	}
 
-	void AbilityItem::OnCollisionEnter(Collider* other)
-	{
-		Player* plyer = dynamic_cast<Player*>(other->GetOwner());
-
-		// 플레이어가 아니면 리턴
-		if (plyer == nullptr)
-			return;
-
-		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함
-		Destroy(this);	
-		SceneManager::GetInventory()->AddItem(mType);
-	}
-
-	void AbilityItem::OnCollisionStay(Collider* other)
+	void InventoryItem::OnCollisionEnter(Collider* other)
 	{
 	}
 
-	void AbilityItem::OnCollisionExit(Collider* other)
+	void InventoryItem::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void InventoryItem::OnCollisionExit(Collider* other)
 	{
 	}
 }

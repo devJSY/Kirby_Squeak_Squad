@@ -9,7 +9,7 @@ namespace sy
 		W,A,S,D,
 		ENTER, ESC,
 		MOUSE_LBTN, MOUSE_RBTN,
-		T, C,
+		T, C, R,
 		One, Two, Three, Four, Five, Six, Seven, Eight,
 		End,
 	};

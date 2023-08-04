@@ -58,8 +58,8 @@ namespace sy
 			, sprite.leftTop
 			, sprite.size
 			, mAnimator->GetAffectedCamera()
-			, tr->GetScale()
 			, Vector2::One				// 애니메이션은 카메라속도 비율 1
+			, tr->GetScale()			
 			, mAnimator->GetAlpha()
 			, mBMPRGB
 			, tr->GetRotation());

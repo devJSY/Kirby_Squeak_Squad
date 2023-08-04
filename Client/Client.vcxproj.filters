@@ -265,6 +265,9 @@
     <Filter Include="Contents\GameObject\AbilityItem">
       <UniqueIdentifier>{2dc5b797-5d1b-48ea-bfb6-6755466090e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\InventoryItem">
+      <UniqueIdentifier>{69c749c9-477d-43f3-8493-3b6c668fe1b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -510,6 +513,9 @@
     <ClInclude Include="syAbilityItem.h">
       <Filter>Contents\GameObject\AbilityItem</Filter>
     </ClInclude>
+    <ClInclude Include="syInventoryItem.h">
+      <Filter>Contents\GameObject\InventoryItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -745,6 +751,9 @@
     </ClCompile>
     <ClCompile Include="syAbilityItem.cpp">
       <Filter>Contents\GameObject\AbilityItem</Filter>
+    </ClCompile>
+    <ClCompile Include="syInventoryItem.cpp">
+      <Filter>Contents\GameObject\InventoryItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

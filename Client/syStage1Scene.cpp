@@ -122,7 +122,7 @@ namespace sy
 		}
 
 		// 임시 적 생성
-		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
+		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			Player* player = SceneManager::GetPlayer();
 			Transform* playerTrans = player->GetComponent<Transform>();
@@ -133,25 +133,25 @@ namespace sy
 			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
 			item->GetComponent<Transform>()->SetPosition(pos);
 			item->Initialize();
-			object::ActiveSceneAddGameObject(eLayerType::Item, item);
-			//pos.x += 50.f;
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+			pos.x += 50.f;
 
-			//AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
-			//item2->GetComponent<Transform>()->SetPosition(pos);
-			//item2->Initialize();
-			//object::ActiveSceneAddGameObject(eLayerType::Item, item2);
-			//pos.x += 50.f;
+			AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+			item2->GetComponent<Transform>()->SetPosition(pos);
+			item2->Initialize();
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
+			pos.x += 50.f;
 
-			//AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
-			//item3->GetComponent<Transform>()->SetPosition(pos);
-			//item3->Initialize();
-			//object::ActiveSceneAddGameObject(eLayerType::Item, item3);
-			//pos.x += 50.f;
+			AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+			item3->GetComponent<Transform>()->SetPosition(pos);
+			item3->Initialize();
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
+			pos.x += 50.f;
 
-			//AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
-			//item4->GetComponent<Transform>()->SetPosition(pos);
-			//item4->Initialize();
-			//object::ActiveSceneAddGameObject(eLayerType::Item, item4);
+			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+			item4->GetComponent<Transform>()->SetPosition(pos);
+			item4->Initialize();
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
 
 			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			//waddleDee->GetComponent<Transform>()->SetPosition(pos);
@@ -220,13 +220,11 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Effect, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Block, true);
-		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Block, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
-		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Block, true);
 
 
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Item, true);
+
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::AbilityItem, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -13,7 +13,11 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		void AddItem(eAbilityType type);
+
 	private:
+		class Animator*			mAnimator;
+		class InventoryItem*	mSlot[5];
 
 	};
 }

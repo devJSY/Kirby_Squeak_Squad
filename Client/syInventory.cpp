@@ -4,10 +4,14 @@
 #include "syResourceManager.h"
 #include "syTransform.h"
 #include "syApplication.h"
+#include "syAnimator.h"
+#include "syInventoryItem.h"
+#include "syObject.h"
 
 namespace sy
 {
 	Inventory::Inventory()
+		: mAnimator(nullptr)
 	{
 	}
 
@@ -22,17 +26,17 @@ namespace sy
 		vec.y += vec.y / 2.f;
 		GetComponent<Transform>()->SetPosition(vec);
 
-		Animator* InvenAt = AddComponent<Animator>();
+		mAnimator = AddComponent<Animator>();
 		Texture* image = ResourceManager::Load<Texture>(L"Inventory_Tex"
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
 		Texture* Damaged = ResourceManager::Load<Texture>(L"Inventory_Damage_Tex"
 			, L"..\\Resources\\Inventory\\Inventory_Damage.bmp");
 
-		InvenAt->CreateAnimation(image, L"Inventory_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
-		InvenAt->CreateAnimation(Damaged, L"Inventory_Damage_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
-		InvenAt->SetAffectedCamera(false);
+		mAnimator->CreateAnimation(image, L"Inventory_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
+		mAnimator->CreateAnimation(Damaged, L"Inventory_Damage_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
+		mAnimator->SetAffectedCamera(false);
 
-		InvenAt->PlayAnimation(L"Inventory_Animation", true);
+		mAnimator->PlayAnimation(L"Inventory_Animation", true);
 
 		GameObject::Initialize();
 	}
@@ -45,5 +49,19 @@ namespace sy
 	void Inventory::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+
+	void Inventory::AddItem(eAbilityType type)
+	{
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mSlot[i] == nullptr)
+			{
+				InventoryItem* item = new InventoryItem(type, (UINT)i);
+				mSlot[i] = item;
+				object::ActiveSceneAddGameObject(eLayerType::InventoryItem, item);
+				break;
+			}
+		}
 	}
 }

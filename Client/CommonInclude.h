@@ -32,14 +32,14 @@ namespace sy::enums
 		Pixel,
 		Portal,
 		Video,			
+		AbilityItem,
 		LevelUI,
-		Block,
 		Enemy,
 		Player,
 		Effect,
 		UI,			 
 		Inventory,
-		Item,
+		InventoryItem,
 		End,
 	};
 

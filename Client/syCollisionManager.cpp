@@ -168,7 +168,7 @@ namespace sy
 		else if (leftType == eColliderType::Sphere && rightType == eColliderType::Sphere)
 		{
 			// 두 원의 충돌 판단 (피타고라스)
-			float distance = sqrt(pow(rightPos.x - leftPos.x, 2) + pow(rightPos.y - leftPos.y, 2));
+			float distance = (float)sqrt(pow(rightPos.x - leftPos.x, 2) + pow(rightPos.y - leftPos.y, 2));
 			if (distance <= leftRadius + rightRadius)
 			{
 				return true;

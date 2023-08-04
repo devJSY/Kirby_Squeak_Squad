@@ -119,8 +119,6 @@ namespace sy
 	void SceneManager::Update()
 	{
 		mActiveScene->Update();
-
-
 	}
 
 	void SceneManager::Render(HDC hdc)
@@ -182,5 +180,15 @@ namespace sy
 			return nullptr;
 
 		return iter->second;
+	}
+
+	void SceneManager::PlayerTransform(eAbilityType type)
+	{
+		//delete mPlayer;
+
+		//if (type == eAbilityType::Fire)
+		//{
+		//	mPlayer = new FireKirby;
+		//}
 	}
 }
