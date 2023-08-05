@@ -6,6 +6,7 @@
 #include "syPlayer.h"
 #include "syTransform.h"
 #include "syRigidbody.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -16,6 +17,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
 		, mSlotNumber(SlotNumber)
+		, mEnterTime(0.f)
 	{
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
 		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
@@ -49,22 +51,24 @@ namespace sy
 		col->SetRadius(20.f);
 
 		mTransform = GetComponent<Transform>();
+		mTransform->SetPosition(Vector2(128.f, 192.f));
 
-		if (mSlotNumber == 0)
-			mTransform->SetPosition(Vector2(30.f, 270.f));
-		else if(mSlotNumber == 1)
-			mTransform->SetPosition(Vector2(63.f, 330.f));
-		else if (mSlotNumber == 2)
-			mTransform->SetPosition(Vector2(128.f, 353.f));
-		else if (mSlotNumber == 3)
-			mTransform->SetPosition(Vector2(190.f, 330.f));
-		else if (mSlotNumber == 4)
-			mTransform->SetPosition(Vector2(225.f, 270.f));
+		//if (mSlotNumber == 0)
+		//	mTransform->SetPosition(Vector2(30.f, 270.f));
+		//else if(mSlotNumber == 1)
+		//	mTransform->SetPosition(Vector2(63.f, 330.f));
+		//else if (mSlotNumber == 2)
+		//	mTransform->SetPosition(Vector2(128.f, 353.f));
+		//else if (mSlotNumber == 3)
+		//	mTransform->SetPosition(Vector2(190.f, 330.f));
+		//else if (mSlotNumber == 4)
+		//	mTransform->SetPosition(Vector2(225.f, 270.f));
 
 		mTransform->SetScale(Vector2(1.3f, 1.3f));
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetFloat(true);
+		mRigidbody->SetVelocity(Vector2(0.f, 200.f));
 	}
 
 	InventoryItem::~InventoryItem()
@@ -78,25 +82,40 @@ namespace sy
 
 	void InventoryItem::Update()
 	{
-		// mFocusItem가 아닌경우 떨어진 거리에 비례해서 이동
-		Vector2 CurPos = mTransform->GetPosition();
-		Vector2 SlotPos = Vector2::Zero;
-		
-		if (mSlotNumber == 0)
-			SlotPos = Vector2(30.f, 270.f);
-		else if (mSlotNumber == 1)
-			SlotPos = Vector2(63.f, 330.f);
-		else if (mSlotNumber == 2)
-			SlotPos = Vector2(128.f, 353.f);
-		else if (mSlotNumber == 3)
-			SlotPos = Vector2(190.f, 330.f);
-		else if (mSlotNumber == 4)
-			SlotPos = Vector2(225.f, 270.f);
+		mEnterTime += Time::DeltaTime();
 
-		Vector2 Dir = SlotPos - CurPos;
-		Dir.Length();
+		if (mEnterTime < 1.f)
+		{
+			Transform* transform = GetComponent<Transform>();
+			Vector2 pos = transform->GetPosition();
+			if (pos.y > 384.f)
+			{
+				pos.y = 384.f;
+				mRigidbody->SetVelocity(Vector2(0.f, -30.f));
+				transform->SetPosition(pos);
+			}
+		}
+		else
+		{
+			// mFocusItem가 아닌경우 떨어진 거리에 비례해서 이동
+			Vector2 CurPos = mTransform->GetPosition();
+			Vector2 SlotPos = Vector2::Zero;
 
-		mRigidbody->SetVelocity(Dir);
+			if (mSlotNumber == 0)
+				SlotPos = Vector2(30.f, 270.f);
+			else if (mSlotNumber == 1)
+				SlotPos = Vector2(63.f, 330.f);
+			else if (mSlotNumber == 2)
+				SlotPos = Vector2(128.f, 353.f);
+			else if (mSlotNumber == 3)
+				SlotPos = Vector2(190.f, 330.f);
+			else if (mSlotNumber == 4)
+				SlotPos = Vector2(225.f, 270.f);
+
+			Vector2 Dir = SlotPos - CurPos;
+			Dir.Length();
+			mRigidbody->SetVelocity(Dir);
+		}
 
 		GameObject::Update();
 	}

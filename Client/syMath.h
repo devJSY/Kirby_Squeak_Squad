@@ -70,6 +70,15 @@ namespace sy::math
 			return *this;
 		}
 
+		Vector2& operator /=(const float& value)
+		{
+			assert(!(0.f == x || 0.f == y) || !(0.f == value));
+			x /= value;
+			y /= value;
+
+			return *this;
+		}
+
 		bool operator ==(Vector2 other)
 		{
 			return (x == other.x && y == other.y);

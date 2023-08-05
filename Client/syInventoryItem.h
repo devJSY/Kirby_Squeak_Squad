@@ -20,6 +20,7 @@ namespace sy
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidbody;
 		UINT				mSlotNumber;
+		float				mEnterTime;
 
 	};
 }
