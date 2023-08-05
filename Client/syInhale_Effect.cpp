@@ -6,6 +6,7 @@
 #include "syDefaultKirby.h"
 #include "syIce.h"
 #include "syPlayer.h"
+#include "syAbilityItem.h"
 
 namespace sy
 {
@@ -94,7 +95,7 @@ namespace sy
 			return;
 
 		// 맨처음 영역에 들어온 한번만 타겟 설정
-		if (mTarget == nullptr)
+		if (mTarget != nullptr)
 			return;
 
 
@@ -152,6 +153,19 @@ namespace sy
 			mbInhale = true;
 			Destroy(mTarget);
 			Destroy(this);
+
+			// Player에 흡수한 객체 정보 셋팅
+
+			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
+			if (enemy != nullptr)
+			{
+				player->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
+			}
+			else if (abilityItem != nullptr)
+			{
+				player->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
+			}			
 		}
 		else
 		{

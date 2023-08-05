@@ -36,6 +36,19 @@ namespace sy
 		End,
 	};
 
+	enum class InhaledObjectType
+	{
+		Monster,
+		AbilityItem,
+		End,
+	};
+
+	struct InhaledObjectInfo
+	{
+		eAbilityType			AbilityType;
+		InhaledObjectType		ObjType;
+	};
+
 	// A,D 점프 
 	// S 빨아들이기, 뱉기
 	// W 변신능력 뱉기
@@ -62,6 +75,12 @@ namespace sy
 
 		void SetOnLeftStop(bool trig) { mbOnLeftStop = trig; }
 		void SetOnRightStop(bool trig) { mbOnRightStop = trig; }
+
+		void SetInhaledObjectInfo(eAbilityType ability, InhaledObjectType type)
+		{
+			mInhaledObjectInfo.AbilityType = ability;
+			mInhaledObjectInfo.ObjType = type;
+		}
 
 	private:
 		void CheckPixelCollision();
@@ -119,6 +138,7 @@ namespace sy
 		bool						mbOnSlope;		// 경사로에 올라탄 상태여부
 
 		class Inhale_Effect*		mInhaleEffect;
+		InhaledObjectInfo			mInhaledObjectInfo;
 	};
 }
 

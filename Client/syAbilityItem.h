@@ -17,6 +17,8 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) {};
 
+		eAbilityType GetAbilityType() { return mType; }
+
 	private:
 		void CheckPixelCollision();
 

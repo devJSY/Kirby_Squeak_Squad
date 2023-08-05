@@ -19,6 +19,7 @@
 #include "syInhale_Effect.h"
 #include "syEnemy.h"
 #include "syInhale_Effect.h"
+#include "syInventory.h"
 
 namespace sy
 {
@@ -35,6 +36,7 @@ namespace sy
 		, mbTopStop(false)
 		, mbOnSlope(false)
 		, mInhaleEffect(nullptr)
+		, mInhaledObjectInfo{}
 	{
 	}
 
@@ -1972,6 +1974,23 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Down", false);
 
 			mState = eDefaultKirbyState::Inhaled_Down;
+
+			// 흡수한 객체의 타입으로 상태설정
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
+				{
+					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
+				}
+				else
+				{
+					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
+				}
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
+			}
 		}
 
 		// Inhaled_Skill
@@ -2097,6 +2116,23 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Down", false);
 
 			mState = eDefaultKirbyState::Inhaled_Down;
+
+			// 흡수한 객체의 타입으로 상태설정
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
+				{
+					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
+				}
+				else
+				{
+					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
+				}
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
+			}
 		}
 
 		// Inhaled_Skill
@@ -2222,6 +2258,23 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Down", false);
 
 			mState = eDefaultKirbyState::Inhaled_Down;
+
+			// 흡수한 객체의 타입으로 상태설정
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
+				{
+					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
+				}
+				else
+				{
+					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
+				}
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
+			}
 		}
 
 		// Inhaled_Skill
@@ -2517,11 +2570,12 @@ namespace sy
 
 	void DefaultKirby::Inhaled_Down()
 	{
-		// 흡수한 객체의 타입으로 상태설정
-
-		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
+			// 흡수한 객체정보 초기화
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 			else

@@ -215,6 +215,7 @@ namespace sy
 		//if (type == eAbilityType::Fire)
 		//{
 		//	mPlayer = new FireKirby;
+		// SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
 		//}
 	}
 }
