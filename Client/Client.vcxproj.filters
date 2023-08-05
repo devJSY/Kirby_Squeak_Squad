@@ -271,6 +271,9 @@
     <Filter Include="Contents\GameObject\MixItem">
       <UniqueIdentifier>{d6885d57-56e6-48a3-a365-1643680ee515}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\Landing_Effect">
+      <UniqueIdentifier>{6a543664-a43b-4678-bc78-e2ea02ae28bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -522,6 +525,9 @@
     <ClInclude Include="syMixItem.h">
       <Filter>Contents\GameObject\MixItem</Filter>
     </ClInclude>
+    <ClInclude Include="syLanding_Effect.h">
+      <Filter>Contents\GameObject\Effects\Landing_Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -763,6 +769,9 @@
     </ClCompile>
     <ClCompile Include="syMixItem.cpp">
       <Filter>Contents\GameObject\MixItem</Filter>
+    </ClCompile>
+    <ClCompile Include="syLanding_Effect.cpp">
+      <Filter>Contents\GameObject\Effects\Landing_Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

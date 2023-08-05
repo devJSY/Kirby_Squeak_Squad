@@ -21,6 +21,7 @@
 #include "syInhale_Effect.h"
 #include "syInventory.h"
 #include "syAbilityItem.h"
+#include "syLanding_Effect.h"
 
 namespace sy
 {
@@ -512,6 +513,9 @@ namespace sy
 				pos.y -= 1.f;
 				mTransform->SetPosition(pos);
 				mRigidBody->SetGround(true);
+
+				Landing_Effect* landingEffect = new Landing_Effect(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
 			}
 		}
 
@@ -2631,6 +2635,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Land", false);
 
 			mState = eDefaultKirbyState::Inhaled_Land;
+
+			Landing_Effect* landingEffect = new Landing_Effect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"LandSound")->Play(false);

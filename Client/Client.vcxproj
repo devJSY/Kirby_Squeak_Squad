@@ -178,6 +178,7 @@
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syInventoryItem.h" />
     <ClInclude Include="syJamJungleScene.h" />
+    <ClInclude Include="syLanding_Effect.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syMixItem.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syInventoryItem.cpp" />
     <ClCompile Include="syJamJungleScene.cpp" />
+    <ClCompile Include="syLanding_Effect.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syMixItem.cpp" />
