@@ -88,6 +88,26 @@ namespace sy
 				mousePos -= Application::GetScreenRenderPos();
 				mousePos = mousePos  / Application::GetScreenMinRatio();
 
+
+				// 이동제한
+				if (mousePos.x < 0)
+				{
+					mousePos.x = 0;
+				}
+				if (mousePos.y < 192.f + mFocusItem->GetComponent<Collider>()->GetRadius())
+				{
+					mousePos.y = 192.f + mFocusItem->GetComponent<Collider>()->GetRadius();
+				}
+				if (mousePos.x > 256.f)
+				{
+					mousePos.x = 256.f;
+				}
+				if (mousePos.y > 384.f)
+				{
+					mousePos.y = 384.f;
+				}
+
+
 				// 마우스위치로 설정
 				Transform* transform = mFocusItem->GetComponent<Transform>();
 				transform->SetPosition(mousePos);
@@ -98,6 +118,8 @@ namespace sy
 			if (mFocusItem != nullptr)
 			{
 				// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
+
+
 				mFocusItem = nullptr;
 			}
 		}

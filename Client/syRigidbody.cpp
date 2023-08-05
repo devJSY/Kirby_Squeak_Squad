@@ -15,6 +15,7 @@ namespace sy
 		, mGravity(Vector2(0.0f, 300.0f))
 		, mLimitedVelocty(Vector2(300.f, 300.f))
 		, mbGround(false)
+		, mbfloat(false)
 	{
 	}
 
@@ -44,7 +45,7 @@ namespace sy
 		}
 		else if (mbfloat)
 		{
-
+			// 중력영향 X
 		}
 		else
 		{
