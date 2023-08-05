@@ -75,6 +75,7 @@ namespace sy
 		static class Texture* mWhiteTex;				// 카메라 효과용 텍스쳐
 		static class Texture* mBlackTex;				// 카메라 효과용 텍스쳐
 
+	public:
 		static bool mbColliderRenderTrig;
 	};
 }

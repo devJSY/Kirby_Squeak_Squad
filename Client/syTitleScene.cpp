@@ -86,12 +86,15 @@ namespace sy
 		HPEN GreenPen = CreatePen(PS_SOLID, 1, RGB(50, 255, 50)); // Green
 		HPEN oldPen = (HPEN)SelectObject(hdc, GreenPen);
 
-		// ·»´õ¸µ
-		Ellipse(hdc
-			, int(EllipsePos.x - mRadius)
-			, int(EllipsePos.y - mRadius)
-			, int(EllipsePos.x + mRadius)
-			, int(EllipsePos.y + mRadius));
+		if (Camera::mbColliderRenderTrig)
+		{
+			// ·»´õ¸µ
+			Ellipse(hdc
+				, int(EllipsePos.x - mRadius)
+				, int(EllipsePos.y - mRadius)
+				, int(EllipsePos.x + mRadius)
+				, int(EllipsePos.y + mRadius));
+		}
 
 		// ¿øº» ºê·¯½¬, Ææ ¼³Á¤
 		SelectObject(hdc, oldBrush);
