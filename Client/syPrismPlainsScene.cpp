@@ -119,12 +119,12 @@ namespace sy
 			// 현재 스테이지 클리어 처리
 			if (mCurStageState == eStageState::Stage1)
 			{
-				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClear", true);
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClearFlash", true);
 				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
 			}
 			else if (mCurStageState == eStageState::Boss)
 			{
-				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClear", true);
+				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClearFlash", true);
 				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
 				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"Number_Dedede");
 			}
@@ -195,27 +195,27 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
 			mbActiveUI[0] = true;
-			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStage");
+			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageFlash", true);
 			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
 			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
 
 			for (size_t i = 0; i < mDots[0].size(); i++)
 			{
 				DotUI* dot = mDots[0][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Two))
 		{
 			mbActiveUI[1] = true;
-			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStage");
+			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageFlash", true);
 			mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
 			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
 
 			for (size_t i = 0; i < mDots[1].size(); i++)
 			{
 				DotUI* dot = mDots[1][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 	}
@@ -235,6 +235,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f + (vec.x * i), 80.f + (vec.y * i)));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[0].push_back(dot);
 		}
@@ -250,6 +251,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(122.f + (vec.x * i), 140.f + (vec.y * i)));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[1].push_back(dot);
 		}

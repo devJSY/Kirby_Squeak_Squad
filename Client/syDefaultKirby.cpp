@@ -514,8 +514,12 @@ namespace sy
 				mTransform->SetPosition(pos);
 				mRigidBody->SetGround(true);
 
-				Landing_Effect* landingEffect = new Landing_Effect(this);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
+				// Blue 만 인식하도록 설정
+				if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
+				{
+					Landing_Effect* landingEffect = new Landing_Effect(this);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
+				}
 			}
 		}
 
@@ -727,6 +731,7 @@ namespace sy
 		if (time > 0.3f)
 		{
 			Dash_Effect* DashEffect = new Dash_Effect(this);
+			DashEffect->GetComponent<Animator>()->SetAffectedCamera(false);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			time = 0.f;
 		}		

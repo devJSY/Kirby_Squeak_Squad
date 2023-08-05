@@ -649,7 +649,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 113.f));
-			dot->SetDelayTime(0.45f + (0.05f * i));
+			dot->SetDelayTime(0.55f + (0.05f * i));
 
 			mDots[3].push_back(dot);
 		}

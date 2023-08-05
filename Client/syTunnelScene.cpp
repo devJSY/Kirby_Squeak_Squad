@@ -109,9 +109,9 @@ namespace sy
 		Player* player = SceneManager::GetPlayer();
 		player->SetPlayerMode(ePlayerMode::LevelMode);
 		Animator* playerAni = player->GetComponent<Animator>();
-		playerAni->SetAffectedCamera(true);
+		playerAni->SetAffectedCamera(false);
 		Collider* playerCol = player->GetComponent<Collider>();
-		playerCol->SetAffectedCamera(true);
+		playerCol->SetAffectedCamera(false);
 
 
 		Transform* playerTrans = player->GetComponent<Transform>();
