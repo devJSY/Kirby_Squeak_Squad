@@ -137,6 +137,7 @@ namespace sy
 	{
 		for (size_t i = 0; i < 5; i++)
 		{
+			// 비어있는 슬롯에 생성
 			if (mSlot[i] == nullptr)
 			{
 				InventoryItem* item = new InventoryItem(type, (UINT)i);
