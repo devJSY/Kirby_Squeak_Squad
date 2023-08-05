@@ -21,6 +21,7 @@
 #include "syResourceManager.h"
 #include "syPortalUI.h"
 #include "syAbilityItem.h"
+#include "syMixItem.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -130,7 +131,10 @@ namespace sy
 			Vector2 pos = playerTrans->GetPosition();
 			pos.x += 50.f;
 
-			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+			// 믹스 효과 추가하기
+			object::Instantiate<MixItem>(eLayerType::InventoryItem);
+
+			/*AbilityItem* item = new AbilityItem(eAbilityType::Fire);
 			item->GetComponent<Transform>()->SetPosition(pos);
 			item->Initialize();
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
@@ -151,7 +155,7 @@ namespace sy
 			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
 			item4->GetComponent<Transform>()->SetPosition(pos);
 			item4->Initialize();
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);*/
 
 			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			//waddleDee->GetComponent<Transform>()->SetPosition(pos);

@@ -22,31 +22,34 @@ namespace sy
 
 	void Layer::Initialize()
 	{
-		for (GameObject* obj : mGameObjects)
+		for (size_t i = 0; i < mGameObjects.size(); i++)
 		{
-			obj->Initialize();
+			if (mGameObjects[i]->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+				continue;
+
+			mGameObjects[i]->Initialize();
 		}
 	}
 
 	void Layer::Update()
 	{
-		for (GameObject* obj : mGameObjects)
+		for (size_t i = 0; i < mGameObjects.size(); i++)
 		{
-			if (obj->GetGameObjectState() == GameObject::eGameObjectState::Pause)
-				continue;
+			if (mGameObjects[i]->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+					continue;
 
-			obj->Update();
+			mGameObjects[i]->Update();
 		}
 	}
 
 	void Layer::Render(HDC hdc)
 	{
-		for (GameObject* obj : mGameObjects)
+		for (size_t i = 0; i < mGameObjects.size(); i++)
 		{
-			if (obj->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+			if (mGameObjects[i]->GetGameObjectState() == GameObject::eGameObjectState::Pause)
 				continue;
 
-			obj->Render(hdc);
+			mGameObjects[i]->Render(hdc);
 		}
 
 		// Dead상태인 오브젝트는 Layer에서 제외한다

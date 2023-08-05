@@ -56,9 +56,6 @@ namespace sy
 
 		mAnimator->PlayAnimation(L"Inventory_Animation", true);
 
-
-
-
 		GameObject::Initialize();
 	}
 
