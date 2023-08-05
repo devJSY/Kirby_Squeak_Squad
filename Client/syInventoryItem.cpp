@@ -24,6 +24,7 @@ namespace sy
 		, mSlotNumber(SlotNumber)
 		, mSlotPos(Vector2::Zero)
 		, mEnterTime(0.f)
+		, mTime(0.f)
 	{
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
 		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
@@ -101,6 +102,7 @@ namespace sy
 
 		mEnterTime += Time::DeltaTime();
 
+
 		// 처음먹었을때 효과
 		if (mEnterTime < 1.f)
 		{
@@ -123,7 +125,6 @@ namespace sy
 			Dir.Length();
 			mRigidbody->SetVelocity(Dir);
 		}
-
 
 
 		// Focus 아이템이 있는경우에 마우스범위안에 들어온경우 Mix아이템으로 설정
@@ -149,6 +150,18 @@ namespace sy
 			{
 				SceneManager::GetInventory()->RemoveItemSlot(mSlotNumber);
 				SceneManager::GetInventory()->SetMixItem(this);
+
+				// 위치설정
+				// 화면크기 이동한 거리, 화면 비율만큼 계산
+				Vector2 mousePos = Input::GetMousePos();
+				mousePos -= Application::GetScreenRenderPos();
+				mousePos = mousePos / Application::GetScreenMinRatio();
+
+				mousePos.x += 3.f;
+				mTransform->SetPosition(mousePos);
+
+				mousePos.x -= 6.f;
+				SceneManager::GetInventory()->GetFocusItem()->GetComponent<Transform>()->SetPosition(mousePos);
 			}			
 		}
 

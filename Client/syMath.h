@@ -156,6 +156,23 @@ namespace sy::math
 		return Vector2(x, y);
 	}
 
+	// 임의의 점을 기준으로 회전
+	inline Vector2 RotateBasePoint(Vector2 vector, float degree, Vector2 base)
+	{
+		float radian = (degree / 180.f) * PI;
+		//vector.Normalize(); 원본 벡터의 크기값유지
+		float dx = vector.x - base.x;
+		float dy = vector.y - base.y;
+
+		float x = cosf(radian) * dx - sinf(radian) * dy;
+		float y = sinf(radian) * dx + cosf(radian) * dy;
+
+		x += base.x;
+		y += base.y;
+
+		return Vector2(x, y);
+	}
+
 	// 내적
 	inline float Dot(Vector2& v1, Vector2& v2)
 	{

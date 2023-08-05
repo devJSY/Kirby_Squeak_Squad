@@ -41,5 +41,7 @@ namespace sy
 		float					mFocusTime;
 		InventoryItem*			mMixItem;
 
+		float					mAngle;
+
 	};
 }

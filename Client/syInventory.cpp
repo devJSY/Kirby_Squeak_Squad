@@ -20,6 +20,7 @@ namespace sy
 		, mFocusItem(nullptr)
 		, mFocusTime(0.f)
 		, mMixItem(nullptr)
+		, mAngle(0.f)
 	{
 	}
 
@@ -110,16 +111,36 @@ namespace sy
 					mousePos.y = 384.f;
 				}
 
-				// 마우스위치로 설정
-				Transform* FocusItemtransform = mFocusItem->GetComponent<Transform>();
-				FocusItemtransform->SetPosition(mousePos);
-
 				if (mMixItem != nullptr)
 				{
 					// 위치 회전하도록 설정
+					Transform* FocusItemtransform = mFocusItem->GetComponent<Transform>();
 					Transform* MixItemtransform = mMixItem->GetComponent<Transform>();
-					FocusItemtransform->SetPosition(Vector2(mousePos.x - 10.f, mousePos.y));
-					MixItemtransform->SetPosition(Vector2(mousePos.x + 10.f, mousePos.y));
+					Vector2 ItemPos = FocusItemtransform->GetPosition();
+					Vector2 MixItemPos = MixItemtransform->GetPosition();
+
+					// 초당 15도
+					mAngle += 15.f * (float)Time::DeltaTime();
+
+					// 2π (2.0f * 3.1415f)는 한 바퀴(360도)에 해당하는 각도
+					if (mAngle > 2.0f * 3.1415f)
+					{
+						mAngle -= 2.0f * 3.1415f;
+					}
+
+					ItemPos.x = mousePos.x + 15.f * std::cos(mAngle);
+					ItemPos.y = mousePos.y + 15.f * std::sin(mAngle);
+					MixItemPos.x = mousePos.x - 15.f * std::cos(mAngle);
+					MixItemPos.y = mousePos.y - 15.f * std::sin(mAngle);
+
+					FocusItemtransform->SetPosition(ItemPos);
+					MixItemtransform->SetPosition(MixItemPos);
+				}
+				else
+				{
+					// 마우스위치로 설정
+					Transform* FocusItemtransform = mFocusItem->GetComponent<Transform>();
+					FocusItemtransform->SetPosition(mousePos);
 				}
 
 				mFocusTime += Time::DeltaTime();

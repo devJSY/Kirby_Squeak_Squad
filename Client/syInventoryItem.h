@@ -30,6 +30,7 @@ namespace sy
 		UINT				mSlotNumber;
 		Vector2				mSlotPos;
 		float				mEnterTime;
+		float				mTime;
 
 	};
 }
