@@ -39,8 +39,6 @@ namespace sy
 		mAnimator = AddComponent<Animator>();
 		Texture* image = ResourceManager::Load<Texture>(L"Inventory_Tex"
 			, L"..\\Resources\\Inventory\\Inventory.bmp");
-		Texture* Damaged = ResourceManager::Load<Texture>(L"Inventory_Damage_Tex"
-			, L"..\\Resources\\Inventory\\Inventory_Damage.bmp");
 
 		mAnimator->CreateAnimation(image, L"Inventory_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
 		mAnimator->CreateAnimationFolder(L"Inventory_Damage_Animation", L"..\\Resources\\Video\\InvenDamage", 0.03f);

@@ -120,6 +120,10 @@ namespace sy
 		{
 			iAlpha = (int)(255.f * (1.f - fRatio));
 		}
+		else if (effect.eEffect == CAM_EFFECT::Pause)
+		{
+			iAlpha = (int)255.f;
+		}
 
 		// AlphaBlend 셋팅값 설정
 		BLENDFUNCTION bf = {};

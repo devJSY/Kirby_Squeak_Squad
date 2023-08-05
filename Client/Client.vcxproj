@@ -225,6 +225,7 @@
     <ClInclude Include="syTunnel_BG.h" />
     <ClInclude Include="syTunnelScene.h" />
     <ClInclude Include="syCrimp.h" />
+    <ClInclude Include="syZoom_Effect.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
   </ItemGroup>
@@ -308,6 +309,7 @@
     <ClCompile Include="syTunnel_BG.cpp" />
     <ClCompile Include="syTunnelScene.cpp" />
     <ClCompile Include="syCrimp.cpp" />
+    <ClCompile Include="syZoom_Effect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

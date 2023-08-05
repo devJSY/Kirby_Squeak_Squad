@@ -7,6 +7,7 @@ namespace sy
 	{
 		FADE_IN,
 		FADE_OUT,
+		Pause,
 		NONE,
 	};
 
@@ -60,8 +61,20 @@ namespace sy
 			m_listCamEffect.push_back(ef);
 		}
 
+		static void Pause(float _fDuration, COLORREF color)
+		{
+			tCamEffect ef = {};
+			ef.eEffect = CAM_EFFECT::Pause;
+			ef.fDuration = _fDuration;
+			ef.fCurTime = 0.f;
+			ef.TexColor = color;
+
+			m_listCamEffect.push_back(ef);
+		}
+
 	public:
 		static bool GetColliderRenderTrig() { return mbColliderRenderTrig; }
+		static bool IsEmptyCamEffect() { return m_listCamEffect.empty(); }
 
 	private:
 		static Vector2 mResolution;			// 화면 해상도

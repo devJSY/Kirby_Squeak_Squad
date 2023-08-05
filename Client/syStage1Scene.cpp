@@ -215,6 +215,8 @@ namespace sy
 		// 카메라 설정 
 		Camera::SetTarget(player);
 		Camera::SetCameraLimit(Vector2(1588.f, 207.f));
+		Camera::Pause(1.f, RGB(255, 255, 255));
+		Camera::fadeIn(1.f, RGB(255, 255, 255));
 
 		// 레이어 충돌 설정
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Enemy, true);
