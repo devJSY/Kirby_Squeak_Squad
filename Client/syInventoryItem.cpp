@@ -5,6 +5,7 @@
 #include "syCollider.h"
 #include "syPlayer.h"
 #include "syTransform.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -13,6 +14,7 @@ namespace sy
 		, mBubbleAnimator(nullptr)
 		, mAbilityAnimator(nullptr)
 		, mTransform(nullptr)
+		, mRigidbody(nullptr)
 		, mSlotNumber(SlotNumber)
 	{
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
@@ -60,6 +62,9 @@ namespace sy
 			mTransform->SetPosition(Vector2(225.f, 270.f));
 
 		mTransform->SetScale(Vector2(1.3f, 1.3f));
+
+		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetFloat(true);
 	}
 
 	InventoryItem::~InventoryItem()
@@ -73,7 +78,25 @@ namespace sy
 
 	void InventoryItem::Update()
 	{
-		// mFocusItem가 아닌경우 슬롯 위치로 이동 리지드바디로 이동하면 흔들거리는효과 나오지않을까
+		// mFocusItem가 아닌경우 떨어진 거리에 비례해서 이동
+		Vector2 CurPos = mTransform->GetPosition();
+		Vector2 SlotPos = Vector2::Zero;
+		
+		if (mSlotNumber == 0)
+			SlotPos = Vector2(30.f, 270.f);
+		else if (mSlotNumber == 1)
+			SlotPos = Vector2(63.f, 330.f);
+		else if (mSlotNumber == 2)
+			SlotPos = Vector2(128.f, 353.f);
+		else if (mSlotNumber == 3)
+			SlotPos = Vector2(190.f, 330.f);
+		else if (mSlotNumber == 4)
+			SlotPos = Vector2(225.f, 270.f);
+
+		Vector2 Dir = SlotPos - CurPos;
+		Dir.Length();
+
+		mRigidbody->SetVelocity(Dir);
 
 		GameObject::Update();
 	}

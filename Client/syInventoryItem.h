@@ -18,6 +18,7 @@ namespace sy
 		class Animator*		mBubbleAnimator;
 		class Animator*		mAbilityAnimator;
 		class Transform*	mTransform;
+		class Rigidbody*	mRigidbody;
 		UINT				mSlotNumber;
 
 	};
