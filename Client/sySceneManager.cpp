@@ -145,7 +145,7 @@ namespace sy
 
 		// 인벤토리 아이템 저장
 		InventoryItem* Items[5];
-		for (size_t i = 0; i < 5; i++)
+		for (UINT i = 0; i < 5; i++)
 		{
 			Items[i] = mInventory->GetItem(i);
 			if (Items[i] != nullptr)

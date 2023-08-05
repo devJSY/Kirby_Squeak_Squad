@@ -10,6 +10,7 @@
 #include "syInput.h"
 #include "syCollider.h"
 #include "syApplication.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -17,6 +18,7 @@ namespace sy
 		: mAnimator(nullptr)
 		, mSlot{}
 		, mFocusItem(nullptr)
+		, mFocusTime(0.f)
 	{
 	}
 
@@ -74,6 +76,7 @@ namespace sy
 					if (Length <= SlotRadius)
 					{
 						mFocusItem = mSlot[i];
+						mFocusTime = 0.f;
 						break;
 					}					
 				}
@@ -109,35 +112,32 @@ namespace sy
 				// 마우스위치로 설정
 				Transform* transform = mFocusItem->GetComponent<Transform>();
 				transform->SetPosition(mousePos);
+
+				mFocusTime += Time::DeltaTime();
 			}
 		}
 		else if (Input::GetKeyUp(eKeyCode::MOUSE_LBTN))
 		{
 			if (mFocusItem != nullptr)
 			{
-				// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
-
-				for (size_t i = 0; i < 5; i++)
+				if (mFocusTime < 0.2f)
 				{
-					// 슬롯이 비어있는 경우에만 위치 변경
-					if (mSlot[i] != nullptr)
-						continue;
+					UINT idx = mFocusItem->GetSlotNumber();
 
 					Transform* transform = mFocusItem->GetComponent<Transform>();
 					Vector2 CurPos = transform->GetPosition();
 					Vector2 SlotPos = Vector2::Zero;
 
-					if (i == 0)
+					if (idx == 0)
 						SlotPos = Vector2(30.f, 270.f);
-					else if (i == 1)
+					else if (idx == 1)
 						SlotPos = Vector2(63.f, 330.f);
-					else if (i == 2)
+					else if (idx == 2)
 						SlotPos = Vector2(128.f, 353.f);
-					else if (i == 3)
+					else if (idx == 3)
 						SlotPos = Vector2(190.f, 330.f);
-					else if (i == 4)
+					else if (idx == 4)
 						SlotPos = Vector2(225.f, 270.f);
-
 
 					Vector2 distance = SlotPos - CurPos;
 					float Length = distance.Length();
@@ -146,10 +146,48 @@ namespace sy
 					// 슬롯 반지름 범위 안에 들어왔다
 					if (Length <= SlotRadius)
 					{
-						mSlot[mFocusItem->GetSlotNumber()] = nullptr;
-						mSlot[i] = mFocusItem;
-						mFocusItem->SetSlotNumber(i);
-						break;
+						mSlot[idx] = nullptr;
+						Destroy(mFocusItem);
+					}
+				}
+				else
+				{
+
+					// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
+					for (UINT i = 0; i < 5; i++)
+					{
+						// 슬롯이 비어있는 경우에만 위치 변경
+						if (mSlot[i] != nullptr)
+							continue;
+
+						Transform* transform = mFocusItem->GetComponent<Transform>();
+						Vector2 CurPos = transform->GetPosition();
+						Vector2 SlotPos = Vector2::Zero;
+
+						if (i == 0)
+							SlotPos = Vector2(30.f, 270.f);
+						else if (i == 1)
+							SlotPos = Vector2(63.f, 330.f);
+						else if (i == 2)
+							SlotPos = Vector2(128.f, 353.f);
+						else if (i == 3)
+							SlotPos = Vector2(190.f, 330.f);
+						else if (i == 4)
+							SlotPos = Vector2(225.f, 270.f);
+
+
+						Vector2 distance = SlotPos - CurPos;
+						float Length = distance.Length();
+						float SlotRadius = 20;
+
+						// 슬롯 반지름 범위 안에 들어왔다
+						if (Length <= SlotRadius)
+						{
+							mSlot[mFocusItem->GetSlotNumber()] = nullptr;
+							mSlot[i] = mFocusItem;
+							mFocusItem->SetSlotNumber(i);
+							break;
+						}
 					}
 				}
 			}

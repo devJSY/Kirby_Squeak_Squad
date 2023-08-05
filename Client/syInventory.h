@@ -34,6 +34,7 @@ namespace sy
 		class Animator*			mAnimator;
 		InventoryItem*			mSlot[5];
 		InventoryItem*			mFocusItem;
+		float					mFocusTime;
 
 	};
 }
