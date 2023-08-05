@@ -98,7 +98,48 @@ namespace sy
 		if (mTarget != nullptr)
 			return;
 
+		// 흡수 우선순위 0번째 AbilityItem
+		for (GameObject* obj : mInhaledObject)
+		{
+			if (obj == nullptr)
+				continue;
 
+			Transform* PlayerTransform = player->GetComponent<Transform>();
+
+			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(obj);
+
+			// AbilityItem이 아니면 적용하지않음
+			if (abilityItem == nullptr)
+				continue;
+
+			if (mTarget == nullptr)
+			{
+				mTarget = abilityItem;
+			}
+			else
+			{
+				Transform* TargetTransform = mTarget->GetComponent<Transform>();
+				Transform* objTransform = obj->GetComponent<Transform>();
+
+				float TargetLen = (PlayerTransform->GetPosition() - TargetTransform->GetPosition()).Length();
+				float ObjLen = (PlayerTransform->GetPosition() - objTransform->GetPosition()).Length();
+
+				// Player와의 거리가 작은 obj 를 타겟으로 설정
+				if (ObjLen < TargetLen)
+				{
+					mTarget = abilityItem;
+				}
+			}
+		}
+
+		// AbilityItem을 찾았다면 리턴
+		if (mTarget != nullptr)
+			return;
+
+
+
+
+		// 흡수 우선순위 1번째 Enemy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
@@ -130,7 +171,11 @@ namespace sy
 					mTarget = enemy;
 				}
 			}
-		}		
+		}	
+
+		// Enemy를 찾았다면 리턴
+		if (mTarget != nullptr)
+			return;
 	}
 
 	void Inhale_Effect::TargetUpdate()
@@ -170,12 +215,17 @@ namespace sy
 		else
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
 
 			// Enemy 인지 Block 인지 체크
 			if (enemy != nullptr)
 			{
 				// Enemy 라면 Inhaled 상태 설정
 				enemy->TakeInhaled(vecDir);
+			}
+			else if (abilityItem != nullptr)
+			{
+				abilityItem->TakeInhaled();
 			}
 
 			vecDir.Normalize();

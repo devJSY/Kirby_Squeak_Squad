@@ -17,6 +17,7 @@ namespace sy
 		, mBubbleAnimator(nullptr)
 		, mAbilityAnimator(nullptr)
 		, mRigidbody(nullptr)
+		, mInhaled(false)
 	{
 	}
 
@@ -75,6 +76,10 @@ namespace sy
 
 	void AbilityItem::OnCollisionEnter(Collider* other)
 	{
+		// 흡수상태에선 무시
+		if (mInhaled)
+			return;
+
 		Player* plyer = dynamic_cast<Player*>(other->GetOwner());
 
 		// 플레이어가 아니면 리턴
