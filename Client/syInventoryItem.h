@@ -13,6 +13,9 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		UINT GetSlotNumber() { return mSlotNumber; }
+		void SetSlotNumber(UINT idx) { mSlotNumber = idx; }
+
 	private:
 		eAbilityType		mType;
 		class Animator*		mBubbleAnimator;

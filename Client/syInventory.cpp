@@ -117,13 +117,45 @@ namespace sy
 			{
 				// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
 
+				for (size_t i = 0; i < 5; i++)
+				{
+					// 슬롯이 비어있는 경우에만 위치 변경
+					if (mSlot[i] != nullptr)
+						continue;
 
-				mFocusItem = nullptr;
+					Transform* transform = mFocusItem->GetComponent<Transform>();
+					Vector2 CurPos = transform->GetPosition();
+					Vector2 SlotPos = Vector2::Zero;
+
+					if (i == 0)
+						SlotPos = Vector2(30.f, 270.f);
+					else if (i == 1)
+						SlotPos = Vector2(63.f, 330.f);
+					else if (i == 2)
+						SlotPos = Vector2(128.f, 353.f);
+					else if (i == 3)
+						SlotPos = Vector2(190.f, 330.f);
+					else if (i == 4)
+						SlotPos = Vector2(225.f, 270.f);
+
+
+					Vector2 distance = SlotPos - CurPos;
+					float Length = distance.Length();
+					float SlotRadius = 20;
+
+					// 슬롯 반지름 범위 안에 들어왔다
+					if (Length <= SlotRadius)
+					{
+						mSlot[mFocusItem->GetSlotNumber()] = nullptr;
+						mSlot[i] = mFocusItem;
+						mFocusItem->SetSlotNumber(i);
+						break;
+					}
+				}
 			}
+
+			mFocusItem = nullptr;
 		}
-
-
-
 
 		GameObject::Update();
 	}
