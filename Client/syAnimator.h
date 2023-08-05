@@ -43,6 +43,8 @@ namespace sy
 			if (ani != nullptr) ani->SetBmpRGB(r, g, b);
 		}
 
+		Animation* GetActiveAnimation() { return mActiveAnimation; }
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장
 

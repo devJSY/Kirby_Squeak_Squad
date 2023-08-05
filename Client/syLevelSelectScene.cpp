@@ -522,7 +522,8 @@ namespace sy
 			for (size_t i = 0; i < mDots[2].size(); i++)
 			{
 				DotUI* dot = mDots[2][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				//dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Three) || type == eLevelType::Level3)
@@ -611,12 +612,14 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(200.f - (8.f * i), 42.f));
+			dot->SetDelayTime(0.3f - (0.05f * i));
 
 			mDots[2].push_back(dot);
 		}
 
 		dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 		dot->GetComponent<Transform>()->SetPosition(Vector2(200.f, 50.f));
+		dot->SetDelayTime(0.35f);
 
 		mDots[2].push_back(dot);
 

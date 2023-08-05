@@ -152,10 +152,6 @@ namespace sy
 		if (animation == nullptr)
 			return;
 
-		//// 애니메이션이 변경되는 경우에만 Reset() 적용
-		//if (mActiveAnimation != animation)		
-		//	animation->Reset();		
-
 		animation->Reset();
 		mActiveAnimation = animation;
 		mbLoop = loop;			
