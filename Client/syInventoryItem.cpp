@@ -68,7 +68,7 @@ namespace sy
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetFloat(true);
-		mRigidbody->SetVelocity(Vector2(0.f, 200.f));
+		mRigidbody->SetVelocity(Vector2(0.f, 500.f));
 	}
 
 	InventoryItem::~InventoryItem()
@@ -84,6 +84,7 @@ namespace sy
 	{
 		mEnterTime += Time::DeltaTime();
 
+		// 처음먹었을때 효과
 		if (mEnterTime < 1.f)
 		{
 			Transform* transform = GetComponent<Transform>();
@@ -91,8 +92,9 @@ namespace sy
 			if (pos.y > 384.f)
 			{
 				pos.y = 384.f;
-				mRigidbody->SetVelocity(Vector2(0.f, -30.f));
+				mRigidbody->SetVelocity(Vector2(0.f, -100.f));
 				transform->SetPosition(pos);
+				mEnterTime = 1.f;
 			}
 		}
 		else

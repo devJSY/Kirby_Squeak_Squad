@@ -88,7 +88,6 @@ namespace sy
 				mousePos -= Application::GetScreenRenderPos();
 				mousePos = mousePos  / Application::GetScreenMinRatio();
 
-
 				// 이동제한
 				if (mousePos.x < 0)
 				{
@@ -106,7 +105,6 @@ namespace sy
 				{
 					mousePos.y = 384.f;
 				}
-
 
 				// 마우스위치로 설정
 				Transform* transform = mFocusItem->GetComponent<Transform>();
