@@ -19,6 +19,7 @@ namespace sy
 		, mSlot{}
 		, mFocusItem(nullptr)
 		, mFocusTime(0.f)
+		, mMixItem(nullptr)
 	{
 	}
 
@@ -110,62 +111,44 @@ namespace sy
 				}
 
 				// 마우스위치로 설정
-				Transform* transform = mFocusItem->GetComponent<Transform>();
-				transform->SetPosition(mousePos);
+				Transform* FocusItemtransform = mFocusItem->GetComponent<Transform>();
+				FocusItemtransform->SetPosition(mousePos);
+
+				if (mMixItem != nullptr)
+				{
+					// 위치 회전하도록 설정
+					Transform* MixItemtransform = mMixItem->GetComponent<Transform>();
+					FocusItemtransform->SetPosition(Vector2(mousePos.x - 10.f, mousePos.y));
+					MixItemtransform->SetPosition(Vector2(mousePos.x + 10.f, mousePos.y));
+				}
 
 				mFocusTime += Time::DeltaTime();
 			}
 		}
 		else if (Input::GetKeyUp(eKeyCode::MOUSE_LBTN))
 		{
-			if (mFocusItem != nullptr)
+			// Mix 상태
+			if (mFocusItem != nullptr && mMixItem != nullptr)
 			{
-				// 현재 슬롯위치에서 일정시간내에 눌렀다 뗀경우 아이템 적용
-				if (mFocusTime < 0.2f)
+				mSlot[mFocusItem->GetSlotNumber()] = nullptr;
+				mSlot[mMixItem->GetSlotNumber()] = nullptr;
+				Destroy(mFocusItem);
+				Destroy(mMixItem);
+
+				// 믹스 효과 추가하기
+			}
+			else
+			{
+				if (mFocusItem != nullptr)
 				{
-					UINT idx = mFocusItem->GetSlotNumber();
-
-					Transform* transform = mFocusItem->GetComponent<Transform>();
-					Vector2 CurPos = transform->GetPosition();
-					Vector2 SlotPos = mFocusItem->GetSlotPos();
-
-					Vector2 distance = SlotPos - CurPos;
-					float Length = distance.Length();
-					float SlotRadius = 20;
-
-					// 슬롯 반지름 범위 안에 들어왔다
-					if (Length <= SlotRadius)
+					// 현재 슬롯위치에서 일정시간내에 눌렀다 뗀경우 아이템 적용
+					if (mFocusTime < 0.2f)
 					{
-						mSlot[idx] = nullptr;
-						Destroy(mFocusItem);
-						SceneManager::PlayerTransform(mFocusItem->GetType());
-					}
-				}
-				else
-				{
-
-					// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
-					for (UINT i = 0; i < 5; i++)
-					{
-						// 슬롯이 비어있는 경우에만 위치 변경
-						if (mSlot[i] != nullptr)
-							continue;
+						UINT idx = mFocusItem->GetSlotNumber();
 
 						Transform* transform = mFocusItem->GetComponent<Transform>();
 						Vector2 CurPos = transform->GetPosition();
-						Vector2 SlotPos = Vector2::Zero;
-
-						if (i == 0)
-							SlotPos = Vector2(30.f, 270.f);
-						else if (i == 1)
-							SlotPos = Vector2(63.f, 330.f);
-						else if (i == 2)
-							SlotPos = Vector2(128.f, 353.f);
-						else if (i == 3)
-							SlotPos = Vector2(190.f, 330.f);
-						else if (i == 4)
-							SlotPos = Vector2(225.f, 270.f);
-
+						Vector2 SlotPos = mFocusItem->GetSlotPos();
 
 						Vector2 distance = SlotPos - CurPos;
 						float Length = distance.Length();
@@ -174,16 +157,55 @@ namespace sy
 						// 슬롯 반지름 범위 안에 들어왔다
 						if (Length <= SlotRadius)
 						{
-							mSlot[mFocusItem->GetSlotNumber()] = nullptr;
-							mSlot[i] = mFocusItem;
-							mFocusItem->SetSlotNumber(i);
-							break;
+							mSlot[idx] = nullptr;
+							Destroy(mFocusItem);
+							SceneManager::PlayerTransform(mFocusItem->GetType());
+						}
+					}
+					else
+					{
+						// 놓은 위치가 빈슬롯이었을경우 슬롯번호 변경
+						for (UINT i = 0; i < 5; i++)
+						{
+							// 슬롯이 비어있는 경우에만 위치 변경
+							if (mSlot[i] != nullptr)
+								continue;
+
+							Transform* transform = mFocusItem->GetComponent<Transform>();
+							Vector2 CurPos = transform->GetPosition();
+							Vector2 SlotPos = Vector2::Zero;
+
+							if (i == 0)
+								SlotPos = Vector2(30.f, 270.f);
+							else if (i == 1)
+								SlotPos = Vector2(63.f, 330.f);
+							else if (i == 2)
+								SlotPos = Vector2(128.f, 353.f);
+							else if (i == 3)
+								SlotPos = Vector2(190.f, 330.f);
+							else if (i == 4)
+								SlotPos = Vector2(225.f, 270.f);
+
+
+							Vector2 distance = SlotPos - CurPos;
+							float Length = distance.Length();
+							float SlotRadius = 20;
+
+							// 슬롯 반지름 범위 안에 들어왔다
+							if (Length <= SlotRadius)
+							{
+								mSlot[mFocusItem->GetSlotNumber()] = nullptr;
+								mSlot[i] = mFocusItem;
+								mFocusItem->SetSlotNumber(i);
+								break;
+							}
 						}
 					}
 				}
 			}
 
 			mFocusItem = nullptr;
+			mMixItem = nullptr;
 		}
 
 		GameObject::Update();
@@ -207,5 +229,10 @@ namespace sy
 				break;
 			}
 		}
+	}
+
+	void Inventory::RemoveItemSlot(UINT idx)
+	{
+		mSlot[idx] = nullptr;
 	}
 }

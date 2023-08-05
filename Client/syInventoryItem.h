@@ -25,6 +25,8 @@ namespace sy
 		class Animator*		mAbilityAnimator;
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidbody;
+		class Collider*		mCollider;
+
 		UINT				mSlotNumber;
 		Vector2				mSlotPos;
 		float				mEnterTime;

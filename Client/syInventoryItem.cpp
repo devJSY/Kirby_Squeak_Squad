@@ -7,6 +7,10 @@
 #include "syTransform.h"
 #include "syRigidbody.h"
 #include "syTime.h"
+#include "syInventory.h"
+#include "sySceneManager.h"
+#include "syApplication.h"
+#include "syInput.h"
 
 namespace sy
 {
@@ -16,6 +20,7 @@ namespace sy
 		, mAbilityAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
+		, mCollider(nullptr)
 		, mSlotNumber(SlotNumber)
 		, mSlotPos(Vector2::Zero)
 		, mEnterTime(0.f)
@@ -46,10 +51,10 @@ namespace sy
 		else if (mType == eAbilityType::Tornado)
 			mAbilityAnimator->PlayAnimation(L"Tornado_AbilityItem");
 
-		Collider* col = AddComponent<Collider>();
-		col->SetAffectedCamera(false);
-		col->SetColliderType(eColliderType::Sphere);
-		col->SetRadius(20.f);
+		mCollider = AddComponent<Collider>();
+		mCollider->SetAffectedCamera(false);
+		mCollider->SetColliderType(eColliderType::Sphere);
+		mCollider->SetRadius(20.f);
 
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector2(128.f, 192.f));
@@ -117,6 +122,34 @@ namespace sy
 			Vector2 Dir = mSlotPos - CurPos;
 			Dir.Length();
 			mRigidbody->SetVelocity(Dir);
+		}
+
+
+
+		// Focus 아이템이 있는경우에 마우스범위안에 들어온경우 Mix아이템으로 설정
+		if (SceneManager::GetInventory()->IsExistFocusItem() && !SceneManager::GetInventory()->IsExistmMixItem()
+			&& SceneManager::GetInventory()->GetFocusItem() != this)
+		{
+			Vector2 mousePos = Input::GetMousePos();
+
+			// 화면크기 이동한 거리, 화면 비율만큼 계산
+			Vector2 SlotPos = mCollider->GetPosition();
+			SlotPos *= Application::GetScreenMinRatio();
+			SlotPos += Application::GetScreenRenderPos();
+
+			// 화면 비율만큼 계산
+			float SlotRadius = mCollider->GetRadius();
+			SlotRadius *= Application::GetScreenMinRatio();
+
+			Vector2 distance = SlotPos - mousePos;
+			float Length = distance.Length();
+
+			// 콜라이더 범위 안에 들어왔다
+			if (Length <= SlotRadius)
+			{
+				SceneManager::GetInventory()->RemoveItemSlot(mSlotNumber);
+				SceneManager::GetInventory()->SetMixItem(this);
+			}			
 		}
 
 		GameObject::Update();

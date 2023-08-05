@@ -16,6 +16,8 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 		void AddItem(eAbilityType type);
+		void RemoveItemSlot(UINT idx);
+		void SetMixItem(InventoryItem* item) { mMixItem = item; }
 		bool IsFullSlot()
 		{
 			for (auto iter : mSlot)
@@ -23,18 +25,21 @@ namespace sy
 				if (iter == nullptr)
 					return false;
 			}
-
 			return true;
 		}
 
 		InventoryItem* GetItem(UINT idx) { return mSlot[idx]; }
+		bool IsExistFocusItem() { return mFocusItem != nullptr; }
+		bool IsExistmMixItem() { return mMixItem != nullptr; }
 
+		InventoryItem* GetFocusItem() { return mFocusItem; }
 
 	private:
 		class Animator*			mAnimator;
 		InventoryItem*			mSlot[5];
 		InventoryItem*			mFocusItem;
 		float					mFocusTime;
+		InventoryItem*			mMixItem;
 
 	};
 }
