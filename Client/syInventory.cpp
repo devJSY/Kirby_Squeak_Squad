@@ -11,6 +11,7 @@
 #include "syCollider.h"
 #include "syApplication.h"
 #include "syTime.h"
+#include "syMixItem.h"
 
 namespace sy
 {
@@ -42,10 +43,21 @@ namespace sy
 			, L"..\\Resources\\Inventory\\Inventory_Damage.bmp");
 
 		mAnimator->CreateAnimation(image, L"Inventory_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.2f, 16);
-		mAnimator->CreateAnimation(Damaged, L"Inventory_Damage_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
+		//mAnimator->CreateAnimation(Damaged, L"Inventory_Damage_Animation", Vector2(0.f, 0.f), Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.07f, 15);
+		mAnimator->CreateAnimationFolder(L"Inventory_Damage_Animation", L"..\\Resources\\Video\\InvenDamage", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Cutter", L"..\\Resources\\Video\\Cutter", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Fire", L"..\\Resources\\Video\\Fire", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal", L"..\\Resources\\Video\\Heal", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Ice", L"..\\Resources\\Video\\Ice", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Ninja", L"..\\Resources\\Video\\Ninja", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Non", L"..\\Resources\\Video\\Non", 0.07f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Tornado", L"..\\Resources\\Video\\Tornado", 0.07f);
 		mAnimator->SetAffectedCamera(false);
 
 		mAnimator->PlayAnimation(L"Inventory_Animation", true);
+
+
+
 
 		GameObject::Initialize();
 	}
@@ -157,6 +169,7 @@ namespace sy
 				Destroy(mMixItem);
 
 				// 믹스 효과 추가하기
+				object::Instantiate<MixItem>(eLayerType::InventoryItem);
 			}
 			else
 			{
@@ -250,10 +263,5 @@ namespace sy
 				break;
 			}
 		}
-	}
-
-	void Inventory::RemoveItemSlot(UINT idx)
-	{
-		mSlot[idx] = nullptr;
 	}
 }

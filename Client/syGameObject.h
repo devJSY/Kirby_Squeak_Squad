@@ -42,16 +42,6 @@ namespace sy
         template <typename T>
         T* AddComponent()
         {
-            //// 중복생성 에러처리
-            //for (Component* com : mComponents)
-            //{
-            //    Component* temp = dynamic_cast<T*>(com);
-
-            //    if (temp != nullptr)       
-            //        assert(nullptr);
-            //}            
-
-            //// 없다면 새로생성
             T* comp = new T();
             mComponents.push_back(comp);
             comp->SetOwner(this);

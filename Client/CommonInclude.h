@@ -45,20 +45,21 @@ namespace sy::enums
 
 	enum class eAbilityType
 	{
-		Cutter,
 		Fire,
-		Hammer,
 		Ice,
-		Metal,
+		Cutter,
+		Tornado,
 		Ninja,
+		Hammer,
+		Metal,
 		Sleep,
 		Spark,
 		Sword,
 		Throw,
-		Tornado,
 		TripleStar,
 		Wheel,		
 		Normal,
+		End,
 	};
 
 	enum class eComponentType

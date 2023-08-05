@@ -16,7 +16,6 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 		void AddItem(eAbilityType type);
-		void RemoveItemSlot(UINT idx);
 		void SetMixItem(InventoryItem* item) { mMixItem = item; }
 		bool IsFullSlot()
 		{
@@ -40,7 +39,6 @@ namespace sy
 		InventoryItem*			mFocusItem;
 		float					mFocusTime;
 		InventoryItem*			mMixItem;
-
 		float					mAngle;
 
 	};

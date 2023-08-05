@@ -268,6 +268,9 @@
     <Filter Include="Contents\GameObject\InventoryItem">
       <UniqueIdentifier>{69c749c9-477d-43f3-8493-3b6c668fe1b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\MixItem">
+      <UniqueIdentifier>{d6885d57-56e6-48a3-a365-1643680ee515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -516,6 +519,9 @@
     <ClInclude Include="syInventoryItem.h">
       <Filter>Contents\GameObject\InventoryItem</Filter>
     </ClInclude>
+    <ClInclude Include="syMixItem.h">
+      <Filter>Contents\GameObject\MixItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -754,6 +760,9 @@
     </ClCompile>
     <ClCompile Include="syInventoryItem.cpp">
       <Filter>Contents\GameObject\InventoryItem</Filter>
+    </ClCompile>
+    <ClCompile Include="syMixItem.cpp">
+      <Filter>Contents\GameObject\MixItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -148,20 +148,9 @@ namespace sy
 			// 콜라이더 범위 안에 들어왔다
 			if (Length <= SlotRadius)
 			{
-				SceneManager::GetInventory()->RemoveItemSlot(mSlotNumber);
-				SceneManager::GetInventory()->SetMixItem(this);
-
 				// 위치설정
 				// 화면크기 이동한 거리, 화면 비율만큼 계산
-				Vector2 mousePos = Input::GetMousePos();
-				mousePos -= Application::GetScreenRenderPos();
-				mousePos = mousePos / Application::GetScreenMinRatio();
-
-				mousePos.x += 3.f;
-				mTransform->SetPosition(mousePos);
-
-				mousePos.x -= 6.f;
-				SceneManager::GetInventory()->GetFocusItem()->GetComponent<Transform>()->SetPosition(mousePos);
+				SceneManager::GetInventory()->SetMixItem(this);
 			}			
 		}
 

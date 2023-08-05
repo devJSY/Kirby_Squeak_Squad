@@ -180,6 +180,7 @@
     <ClInclude Include="syJamJungleScene.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
+    <ClInclude Include="syMixItem.h" />
     <ClInclude Include="syNatureNotchScene.h" />
     <ClInclude Include="syNormal_Skill.h" />
     <ClInclude Include="syNumberUI.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="syJamJungleScene.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
+    <ClCompile Include="syMixItem.cpp" />
     <ClCompile Include="syNatureNotchScene.cpp" />
     <ClCompile Include="syNormal_Skill.cpp" />
     <ClCompile Include="syNumberUI.cpp" />
