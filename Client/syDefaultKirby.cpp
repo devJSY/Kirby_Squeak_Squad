@@ -134,8 +134,8 @@ namespace sy
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled_Damage", Vector2(235.f, 177.f), Vector2(26.f, 24.f), Vector2(26.f, 0.f), 0.1f, 3);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled_Damage", Vector2(739.f, 177.f), Vector2(26.f, 24.f), Vector2(-26.f, 0.f), 0.1f, 3);
 
-		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled_Down", Vector2(838.f, 68.f), Vector2(32.f, 22.f), Vector2(32.f, 0.f), 0.15f, 5);
-		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled_Down", Vector2(130.f, 68.f), Vector2(32.f, 22.f), Vector2(-32.f, 0.f), 0.15f, 5);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled_Down", Vector2(838.f, 68.f), Vector2(32.f, 22.f), Vector2(32.f, 0.f), 0.05f, 5);
+		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled_Down", Vector2(130.f, 68.f), Vector2(32.f, 22.f), Vector2(-32.f, 0.f), 0.05f, 5);
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Inhaled_Skill", Vector2(764.f, 305.f), Vector2(25.f, 22.f), Vector2(25.f, 0.f), 0.07f, 5);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Inhaled_Skill", Vector2(211.f, 305.f), Vector2(25.f, 22.f), Vector2(-25.f, 0.f), 0.07f, 5);
@@ -387,6 +387,7 @@ namespace sy
 		else
 		{
 			mState = eDefaultKirbyState::Damage;
+			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Damage_Animation");
 
 			if (HitDir != Vector2::Zero)
 			{
@@ -823,17 +824,6 @@ namespace sy
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
-		}
-
-		// Damage
-		if (Input::GetKeyDown(eKeyCode::W))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Damage", false);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Damage", false);
-
-			mState = eDefaultKirbyState::Damage;
 		}
 
 		// Down
@@ -1978,14 +1968,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
-				{
-					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
-				}
-				else
-				{
-					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
-				}
+				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2120,14 +2103,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
-				{
-					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
-				}
-				else
-				{
-					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
-				}
+				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2262,14 +2238,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				if (mInhaledObjectInfo.AbilityType == eAbilityType::Normal)
-				{
-					SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
-				}
-				else
-				{
-					SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);
-				}
+				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{

@@ -17,6 +17,7 @@
 #include "sySecretSeaScene.h"
 #include "syGambleGalaxyScene.h"
 #include "syInventoryItem.h"
+#include "syAnimator.h"
 
 #include "syObject.h"
 #include "syApplication.h"
@@ -212,10 +213,29 @@ namespace sy
 	{
 		//delete mPlayer;
 
-		//if (type == eAbilityType::Fire)
-		//{
-		//	mPlayer = new FireKirby;
-		// SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
-		//}
+		if (type == eAbilityType::Normal)
+		{
+			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
+		}
+		else if (type == eAbilityType::Fire)
+		{
+			//mPlayer = new FireKirby;
+			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Fire", false);
+		}
+		else if (type == eAbilityType::Ice)
+		{
+			//mPlayer = new ;
+			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Ice", false);
+		}
+		else if (type == eAbilityType::Cutter)
+		{
+			//mPlayer = new ;
+			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Cutter", false);
+		}
+		else if (type == eAbilityType::Tornado)
+		{
+			//mPlayer = new ;
+			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Tornado", false);
+		}		
 	}
 }
