@@ -15,12 +15,16 @@ namespace sy
 
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
-		virtual void OnCollisionExit(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) {};
+
+	private:
+		void CheckPixelCollision();
 
 	private:
 		eAbilityType		mType;
 		class Animator*		mBubbleAnimator;
 		class Animator*		mAbilityAnimator;
+		class Transform*	mTransform;
 		class Rigidbody*	mRigidbody;
 	};
 }

@@ -17,6 +17,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidbody(nullptr)
 		, mSlotNumber(SlotNumber)
+		, mSlotPos(Vector2::Zero)
 		, mEnterTime(0.f)
 	{
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
@@ -53,16 +54,16 @@ namespace sy
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector2(128.f, 192.f));
 
-		//if (mSlotNumber == 0)
-		//	mTransform->SetPosition(Vector2(30.f, 270.f));
-		//else if(mSlotNumber == 1)
-		//	mTransform->SetPosition(Vector2(63.f, 330.f));
-		//else if (mSlotNumber == 2)
-		//	mTransform->SetPosition(Vector2(128.f, 353.f));
-		//else if (mSlotNumber == 3)
-		//	mTransform->SetPosition(Vector2(190.f, 330.f));
-		//else if (mSlotNumber == 4)
-		//	mTransform->SetPosition(Vector2(225.f, 270.f));
+		if (mSlotNumber == 0)
+			mSlotPos = Vector2(30.f, 270.f);
+		else if(mSlotNumber == 1)
+			mSlotPos = Vector2(63.f, 330.f);
+		else if (mSlotNumber == 2)
+			mSlotPos = Vector2(128.f, 353.f);
+		else if (mSlotNumber == 3)
+			mSlotPos = Vector2(190.f, 330.f);
+		else if (mSlotNumber == 4)
+			mSlotPos = Vector2(225.f, 270.f);
 
 		mTransform->SetScale(Vector2(1.3f, 1.3f));
 
@@ -82,6 +83,17 @@ namespace sy
 
 	void InventoryItem::Update()
 	{
+		if (mSlotNumber == 0)
+			mSlotPos = Vector2(30.f, 270.f);
+		else if (mSlotNumber == 1)
+			mSlotPos = Vector2(63.f, 330.f);
+		else if (mSlotNumber == 2)
+			mSlotPos = Vector2(128.f, 353.f);
+		else if (mSlotNumber == 3)
+			mSlotPos = Vector2(190.f, 330.f);
+		else if (mSlotNumber == 4)
+			mSlotPos = Vector2(225.f, 270.f);
+
 		mEnterTime += Time::DeltaTime();
 
 		// 처음먹었을때 효과
@@ -101,20 +113,8 @@ namespace sy
 		{
 			// mFocusItem가 아닌경우 떨어진 거리에 비례해서 이동
 			Vector2 CurPos = mTransform->GetPosition();
-			Vector2 SlotPos = Vector2::Zero;
 
-			if (mSlotNumber == 0)
-				SlotPos = Vector2(30.f, 270.f);
-			else if (mSlotNumber == 1)
-				SlotPos = Vector2(63.f, 330.f);
-			else if (mSlotNumber == 2)
-				SlotPos = Vector2(128.f, 353.f);
-			else if (mSlotNumber == 3)
-				SlotPos = Vector2(190.f, 330.f);
-			else if (mSlotNumber == 4)
-				SlotPos = Vector2(225.f, 270.f);
-
-			Vector2 Dir = SlotPos - CurPos;
+			Vector2 Dir = mSlotPos - CurPos;
 			Dir.Length();
 			mRigidbody->SetVelocity(Dir);
 		}

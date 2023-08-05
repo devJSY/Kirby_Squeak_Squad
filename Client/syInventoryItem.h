@@ -13,8 +13,11 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		eAbilityType GetType() { return mType; }
+
 		UINT GetSlotNumber() { return mSlotNumber; }
 		void SetSlotNumber(UINT idx) { mSlotNumber = idx; }
+		Vector2 GetSlotPos() { return mSlotPos; }
 
 	private:
 		eAbilityType		mType;
@@ -23,6 +26,7 @@ namespace sy
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidbody;
 		UINT				mSlotNumber;
+		Vector2				mSlotPos;
 		float				mEnterTime;
 
 	};

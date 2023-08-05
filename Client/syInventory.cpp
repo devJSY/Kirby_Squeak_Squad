@@ -120,24 +120,14 @@ namespace sy
 		{
 			if (mFocusItem != nullptr)
 			{
+				// 현재 슬롯위치에서 일정시간내에 눌렀다 뗀경우 아이템 적용
 				if (mFocusTime < 0.2f)
 				{
 					UINT idx = mFocusItem->GetSlotNumber();
 
 					Transform* transform = mFocusItem->GetComponent<Transform>();
 					Vector2 CurPos = transform->GetPosition();
-					Vector2 SlotPos = Vector2::Zero;
-
-					if (idx == 0)
-						SlotPos = Vector2(30.f, 270.f);
-					else if (idx == 1)
-						SlotPos = Vector2(63.f, 330.f);
-					else if (idx == 2)
-						SlotPos = Vector2(128.f, 353.f);
-					else if (idx == 3)
-						SlotPos = Vector2(190.f, 330.f);
-					else if (idx == 4)
-						SlotPos = Vector2(225.f, 270.f);
+					Vector2 SlotPos = mFocusItem->GetSlotPos();
 
 					Vector2 distance = SlotPos - CurPos;
 					float Length = distance.Length();
@@ -148,6 +138,7 @@ namespace sy
 					{
 						mSlot[idx] = nullptr;
 						Destroy(mFocusItem);
+						SceneManager::PlayerTransform(mFocusItem->GetType());
 					}
 				}
 				else

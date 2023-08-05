@@ -8,6 +8,7 @@
 #include "sySceneManager.h"
 #include "syTransform.h"
 #include "syRigidbody.h"
+#include "syTransform.h"
 
 namespace sy
 {
@@ -25,6 +26,8 @@ namespace sy
 
 	void AbilityItem::Initialize()
 	{
+		mTransform = GetComponent<Transform>();
+
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
 		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
 
@@ -60,6 +63,8 @@ namespace sy
 
 	void AbilityItem::Update()
 	{
+		CheckPixelCollision();
+
 		GameObject::Update();
 	}
 
@@ -99,7 +104,97 @@ namespace sy
 		}
 	}
 
-	void AbilityItem::OnCollisionExit(Collider* other)
+	void AbilityItem::CheckPixelCollision()
 	{
+		// Stage타입에따라 픽셀텍스쳐 변경하기
+		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
+
+		if (PixelTex == nullptr)
+			return;
+
+		// Offset 픽셀 좌상단위치 설정
+		Vector2 offset = Vector2::Zero;
+
+		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
+
+		if (CurSceneName == L"Stage1Scene")
+		{
+			offset = Vector2::Zero;
+		}
+		else if (CurSceneName == L"Stage2Scene")
+		{
+			offset = Vector2(0, 347.f);
+		}
+		else if (CurSceneName == L"Stage3Scene")
+		{
+			offset = Vector2(0, 679.f);
+		}
+		else if (CurSceneName == L"Stage4Scene")
+		{
+			offset = Vector2(1603.f, 137.f);
+		}
+
+		Collider* col = GetComponent<Collider>();
+		Vector2 ColPos = col->GetPosition();
+		Vector2 ColSize = col->GetSize();
+
+		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+
+		LT += offset;
+		RT += offset;
+		LB += offset;
+		RB += offset;
+
+
+		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
+		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);
+		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
+		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
+
+		// 상단 처리
+		Vector2 pos = mTransform->GetPosition();
+
+		if (LTColor == RGB(0, 255, 0))
+		{
+			pos.x += 1.f;
+		}
+		else if (RTColor == RGB(0, 255, 0))
+		{
+			pos.x -= 1.f;
+		}
+
+		mTransform->SetPosition(pos);
+
+
+
+		// 바닥 처리
+		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.y -= 1.f;
+			mTransform->SetPosition(pos);
+		}
+
+		// Right Stop Check
+		if (RBColor == RGB(0, 255, 0))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x -= 1.f;
+			mTransform->SetPosition(pos);
+		}
+
+		// Left Stop Check
+		if (LBColor == RGB(0, 255, 0))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.x += 1.f;
+			mTransform->SetPosition(pos);
+		}
 	}
 }
