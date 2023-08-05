@@ -20,6 +20,7 @@
 #include "syEnemy.h"
 #include "syInhale_Effect.h"
 #include "syInventory.h"
+#include "syAbilityItem.h"
 
 namespace sy
 {
@@ -1985,11 +1986,31 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{				
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 		}
 	}
 
@@ -2120,8 +2141,31 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2255,8 +2299,31 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2370,8 +2437,31 @@ namespace sy
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2432,8 +2522,31 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
@@ -2480,8 +2593,31 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
-			Normal_Skill* NormalSkill = new Normal_Skill(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
+				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
+			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
+			{
+				AbilityItem* item = new AbilityItem(mInhaledObjectInfo.AbilityType);
+				item->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+				Rigidbody* rigidbody = item->GetComponent<Rigidbody>();
+
+				Vector2 Dir = Vector2::Zero;
+
+				if (mDir == eDirection::RIGHT)
+					Dir = Vector2(50.f, -20.f);
+				else if (mDir == eDirection::LEFT)
+					Dir = Vector2(-50.f, -20.f);
+
+				rigidbody->SetVelocity(Dir);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);

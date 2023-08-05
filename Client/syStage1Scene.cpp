@@ -136,25 +136,21 @@ namespace sy
 
 			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
 			item->GetComponent<Transform>()->SetPosition(pos);
-			item->Initialize();
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
 			pos.x += 50.f;
 
 			AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
 			item2->GetComponent<Transform>()->SetPosition(pos);
-			item2->Initialize();
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
 			pos.x += 50.f;
 
 			AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
 			item3->GetComponent<Transform>()->SetPosition(pos);
-			item3->Initialize();
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
 			pos.x += 50.f;
 
 			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
 			item4->GetComponent<Transform>()->SetPosition(pos);
-			item4->Initialize();
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
 
 			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);

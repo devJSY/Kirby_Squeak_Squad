@@ -9,6 +9,7 @@
 #include "syTransform.h"
 #include "syRigidbody.h"
 #include "syTransform.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -16,16 +17,9 @@ namespace sy
 		: mType(type)
 		, mBubbleAnimator(nullptr)
 		, mAbilityAnimator(nullptr)
+		, mTransform(nullptr)
 		, mRigidbody(nullptr)
 		, mInhaled(false)
-	{
-	}
-
-	AbilityItem::~AbilityItem()
-	{
-	}
-
-	void AbilityItem::Initialize()
 	{
 		mTransform = GetComponent<Transform>();
 
@@ -45,7 +39,7 @@ namespace sy
 
 		if (mType == eAbilityType::Fire)
 			mAbilityAnimator->PlayAnimation(L"Fire_AbilityItem");
-		else if(mType == eAbilityType::Ice)
+		else if (mType == eAbilityType::Ice)
 			mAbilityAnimator->PlayAnimation(L"Ice_AbilityItem");
 		else if (mType == eAbilityType::Cutter)
 			mAbilityAnimator->PlayAnimation(L"Cutter_AbilityItem");
@@ -59,6 +53,14 @@ namespace sy
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetFloat(true);
 
+	}
+
+	AbilityItem::~AbilityItem()
+	{
+	}
+
+	void AbilityItem::Initialize()
+	{
 		GameObject::Initialize();
 	}
 
@@ -85,6 +87,11 @@ namespace sy
 		// 플레이어가 아니면 리턴
 		if (plyer == nullptr)
 			return;
+
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(other->GetOwner());
+
+		if (kirby != nullptr && kirby->GetKirbyState() == eDefaultKirbyState::Inhaled_Skill)
+			return;		
 
 		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함		
 		Inventory* inventory = SceneManager::GetInventory();
