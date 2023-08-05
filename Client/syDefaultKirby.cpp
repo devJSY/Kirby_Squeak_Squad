@@ -61,7 +61,7 @@ namespace sy
 
 		// 局聪皋捞记 积己
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"Choice", Vector2(309.f, 324.f), Vector2(22.f, 28.f), Vector2(22.f, 0.f), 0.04f, 9);
-		mAnimator->CreateAnimation(DefaultKirby_Right, L"Enter", Vector2(738.f, 7.f), Vector2(19.f, 22.f), Vector2(19.f, 0.f), 0.6f, 1);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"Enter", Vector2(738.f, 7.f), Vector2(19.f, 22.f), Vector2(19.f, 0.f), 1.f, 1);
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Idle", Vector2(8.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Idle", Vector2(972.f, 11.f), Vector2(20.f, 18.f), Vector2(20.f, 0.f), 1.f, 1);
@@ -629,6 +629,14 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
 				mState = eDefaultKirbyState::Idle;
 			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::W)
+			|| Input::GetKeyDown(eKeyCode::A)
+			|| Input::GetKeyDown(eKeyCode::D))
+		{
+			mAnimator->PlayAnimation(L"Enter", false);
+			mState = eDefaultKirbyState::Enter;
 		}
 	}
 

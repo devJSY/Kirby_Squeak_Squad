@@ -29,6 +29,7 @@ namespace sy
 		eStageState mCurStageState;
 
 		float mEnterTime;
+		class Zoom_Effect* mZoom;
     };
 }
 

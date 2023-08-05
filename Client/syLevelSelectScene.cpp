@@ -105,7 +105,7 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 		 
-		if (mEnterTime > 1.f)
+		if (mEnterTime > 1.3f)
 		{
 			// 현재 레벨상태 지정
 			switch (mCurLevelState)
@@ -144,17 +144,6 @@ namespace sy
 				{
 					mZoom = new Zoom_Effect(SceneManager::GetPlayer());
 					object::ActiveSceneAddGameObject(eLayerType::Zoom, mZoom);
-
-					// 플레이어 타입에따라 상태 설정 
-					Player* player = SceneManager::GetPlayer();
-					eAbilityType playerType = player->GetAbilityType();
-					if (playerType == eAbilityType::Normal)
-					{
-						DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
-						defaultKirby->SetKirbyState(eDefaultKirbyState::Enter);
-						defaultKirby->SetLevelEnter(true);
-						player->GetComponent<Animator>()->PlayAnimation(L"Enter", false);
-					}
 				}
 
 				// 오디오 재생

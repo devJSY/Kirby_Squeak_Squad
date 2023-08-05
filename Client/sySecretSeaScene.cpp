@@ -18,6 +18,7 @@
 #include "syTime.h"
 #include "sySound.h"
 #include "syResourceManager.h"
+#include "syZoom_Effect.h"
 
 namespace sy
 {
@@ -26,6 +27,7 @@ namespace sy
 		, ExitUI(nullptr)
 		, mCurStageState(eStageState::StageExit)
 		, mEnterTime(0.f)
+		, mZoom(nullptr)
 	{
 	}
 
@@ -76,7 +78,7 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 
-		if (mEnterTime > 1.f)
+		if (mEnterTime > 1.3f)
 		{
 			switch (mCurStageState)
 			{
@@ -99,6 +101,7 @@ namespace sy
 	void SecretSeaScene::Enter()
 	{
 		mEnterTime = 0.f;
+		mZoom = nullptr;
 
 		// 카메라 설정
 		Camera::SetTarget(nullptr);
@@ -138,6 +141,7 @@ namespace sy
 	void SecretSeaScene::Exit()
 	{
 		mEnterTime = 0.f;
+		mZoom = nullptr;
 
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
@@ -160,7 +164,11 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			SceneManager::LoadScene(L"TunnelScene");
+			if (mZoom == nullptr)
+			{
+				mZoom = new Zoom_Effect(SceneManager::GetPlayer());
+				object::ActiveSceneAddGameObject(eLayerType::Zoom, mZoom);
+			}
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
