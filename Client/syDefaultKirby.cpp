@@ -2519,8 +2519,6 @@ namespace sy
 	{
 		// 흡수한 객체의 타입으로 상태설정
 
-
-
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{

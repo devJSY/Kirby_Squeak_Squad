@@ -21,6 +21,11 @@ namespace sy
 
         bool IsExistTarget() { return mTarget != nullptr; }
         bool IsInhaled() { return mbInhale; }
+        
+    private:
+        void SetTarget();
+        void TargetUpdate();
+
 
     private:
         eDirection               mDir;
