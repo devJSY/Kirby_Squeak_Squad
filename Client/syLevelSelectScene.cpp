@@ -522,7 +522,6 @@ namespace sy
 			for (size_t i = 0; i < mDots[2].size(); i++)
 			{
 				DotUI* dot = mDots[2][i];
-				//dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
 				dot->SetActiveTrig(true);
 			}
 		}
@@ -535,7 +534,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[3].size(); i++)
 			{
 				DotUI* dot = mDots[3][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Four) || type == eLevelType::Level4)
@@ -547,7 +546,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[4].size(); i++)
 			{
 				DotUI* dot = mDots[4][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Five) || type == eLevelType::Level5)
@@ -559,7 +558,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[5].size(); i++)
 			{
 				DotUI* dot = mDots[5][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Six) || type == eLevelType::Level6)
@@ -571,7 +570,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[6].size(); i++)
 			{
 				DotUI* dot = mDots[6][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Seven) || type == eLevelType::Level7)
@@ -583,7 +582,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[7].size(); i++)
 			{
 				DotUI* dot = mDots[7][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 		else if (Input::GetKeyDown(eKeyCode::Eight) || type == eLevelType::Level8)
@@ -595,7 +594,7 @@ namespace sy
 			for (size_t i = 0; i < mDots[8].size(); i++)
 			{
 				DotUI* dot = mDots[8][i];
-				dot->GetComponent<Animator>()->PlayAnimation(L"Dot");
+				dot->SetActiveTrig(true);
 			}
 		}
 	}
@@ -630,6 +629,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 65.f));
+			dot->SetDelayTime(0.2f - (0.05f * i));
 
 			mDots[3].push_back(dot);
 		}
@@ -639,6 +639,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f, 73.f + (8.f * i)));
+			dot->SetDelayTime(0.25f + (0.05f * i));
 
 			mDots[3].push_back(dot);
 		}
@@ -648,6 +649,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(240.f - (8.f * i), 113.f));
+			dot->SetDelayTime(0.45f + (0.05f * i));
 
 			mDots[3].push_back(dot);
 		}
@@ -657,12 +659,14 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(215.f, 153.f - (8.f * i)));
+			dot->SetDelayTime(0.25f - (0.05f * i));
 
 			mDots[4].push_back(dot);
 		}
 
 		dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 		dot->GetComponent<Transform>()->SetPosition(Vector2(207.f, 153.f));
+		dot->SetDelayTime(0.3f);
 
 		mDots[4].push_back(dot);
 
@@ -672,6 +676,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(170.f - (8.f * i), 153.f));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[5].push_back(dot);
 		}
@@ -681,6 +686,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(100.f - (8.f * i), 153.f));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[6].push_back(dot);
 		}
@@ -690,6 +696,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 140.f - (8.f * i)));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[7].push_back(dot);
 		}
@@ -699,6 +706,7 @@ namespace sy
 		{
 			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
 			dot->GetComponent<Transform>()->SetPosition(Vector2(35.f, 90.f - (8.f * i)));
+			dot->SetDelayTime(0.05f * i);
 
 			mDots[8].push_back(dot);
 		}
