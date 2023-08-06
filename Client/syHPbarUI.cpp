@@ -15,8 +15,7 @@ namespace sy
 		, mRedTex(nullptr)
 		, mPinkTex(nullptr)
 		, mDecreaseHP(0.f)
-	{
-		mDecreaseHP = (float)SceneManager::GetPlayer()->GetHP();
+	{		
 	}
 
 	HPbarUI::~HPbarUI()
@@ -25,6 +24,8 @@ namespace sy
 
 	void HPbarUI::Initialize()
 	{
+		mDecreaseHP = (float)SceneManager::GetPlayer()->GetHP();
+
 		mBarTex = ResourceManager::Load<Texture>(L"HP_Bar", L"..\\Resources\\UI\\HpBar\\HP_Bar.bmp");
 		mPinkTex = ResourceManager::Load<Texture>(L"HP_Pink", L"..\\Resources\\UI\\HpBar\\HP_Pink.bmp");
 		mRedTex = ResourceManager::Load<Texture>(L"HP_Red", L"..\\Resources\\UI\\HpBar\\HP_Red.bmp");

@@ -18,10 +18,6 @@ namespace sy
 		, mLife(3)
 		, mHitEnemy(nullptr)
 	{
-		// 애니메이터 생성
-		AddComponent<Animator>();
-		AddComponent<Rigidbody>();
-		AddComponent<Collider>()->SetSize(Vector2(15.f, 15.f));		
 	}
 
 	Player::~Player()
@@ -38,6 +34,11 @@ namespace sy
 
 	void Player::Initialize()
 	{
+		// 애니메이터 생성
+		AddComponent<Animator>();
+		AddComponent<Rigidbody>();
+		AddComponent<Collider>()->SetSize(Vector2(15.f, 15.f));
+
 		mKirbyType.resize((UINT)eAbilityType::End);
 
 		mKirbyType[(UINT)eAbilityType::Normal] = new DefaultKirby(this);
@@ -103,9 +104,12 @@ namespace sy
 
 	void Player::PlayerTransform(eAbilityType type)
 	{
-		mKirbyType[(UINT)mAbilityType]->Exit();
-		mAbilityType = type;
-		mKirbyType[(UINT)mAbilityType]->Enter();
+		if (mAbilityType != type)
+		{
+			mKirbyType[(UINT)mAbilityType]->Exit();
+			mAbilityType = type;
+			mKirbyType[(UINT)mAbilityType]->Enter();
+		}
 
 		if (type == eAbilityType::Normal)
 		{
