@@ -174,7 +174,7 @@
     <ClInclude Include="syForeGround.h" />
     <ClInclude Include="syHotHead.h" />
     <ClInclude Include="syHPbarUI.h" />
-    <ClInclude Include="syIce.h" />
+    <ClInclude Include="syIce_Enemy.h" />
     <ClInclude Include="syIceIslandScene.h" />
     <ClInclude Include="syIceKirby.h" />
     <ClInclude Include="syIceKirby_Skill.h" />
@@ -264,7 +264,7 @@
     <ClCompile Include="syForeGround.cpp" />
     <ClCompile Include="syHotHead.cpp" />
     <ClCompile Include="syHPbarUI.cpp" />
-    <ClCompile Include="syIce.cpp" />
+    <ClCompile Include="syIce_Enemy.cpp" />
     <ClCompile Include="syIceIslandScene.cpp" />
     <ClCompile Include="syIceKirby.cpp" />
     <ClCompile Include="syIceKirby_Skill.cpp" />

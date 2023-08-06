@@ -76,18 +76,18 @@ namespace sy
 		std::vector<GameObject*>& rights = rightLayer.GetGameObjects();
 
 		// 해당 Layer의 모든 오브젝트들을 돌면서 충돌상태인지 체크한다 
-		for (GameObject* Left : lefts)
+		for (size_t i = 0; i < lefts.size(); i++)
 		{
-			Collider* leftCol = Left->GetComponent<Collider>();
+			Collider* leftCol = lefts[i]->GetComponent<Collider>();
 			if (leftCol == nullptr) // Collider가 존재하지않으면  continue;
 				continue;
 
-			for (GameObject* Right : rights)
+			for (size_t j = 0; j < rights.size(); j++)
 			{
-				Collider* RightCol = Right->GetComponent<Collider>();
+				Collider* RightCol = rights[j]->GetComponent<Collider>();
 				if (RightCol == nullptr) // Collider가 존재하지않으면  continue;
 					continue;
-				if (Left == Right) // 충돌한 객체가 자기자신이면 continue;
+				if (lefts[i] == rights[j]) // 충돌한 객체가 자기자신이면 continue;
 					continue;
 
 				// 각 Collider끼리 충돌상태를 확인한다.

@@ -3,17 +3,17 @@
 
 namespace sy
 {
-	enum class eIceType
+	enum class eIceEnemyType
 	{
 		Small,
 		Big
 	};
 
-	class Ice : public Enemy
+	class Ice_Enemy : public Enemy
 	{
 	public:
-		Ice(eIceType type);
-		virtual ~Ice();
+		Ice_Enemy(eIceEnemyType type);
+		virtual ~Ice_Enemy();
 
 		virtual void Initialize();
 		virtual void Update();

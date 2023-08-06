@@ -4,7 +4,7 @@
 #include "syEnemy.h"
 #include "syTime.h"
 #include "syDefaultKirby.h"
-#include "syIce.h"
+#include "syIce_Enemy.h"
 #include "syPlayer.h"
 #include "syAbilityItem.h"
 
@@ -80,7 +80,7 @@ namespace sy
 
 	void Inhale_Effect::OnCollisionEnter(Collider* other)
 	{
-		DefaultKirby* player = dynamic_cast<DefaultKirby*>(other->GetOwner());
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
 		if (player != nullptr)
 			return;
 
@@ -88,15 +88,6 @@ namespace sy
 			return;
 
 		mInhaledObject.push_back(other->GetOwner());
-	}
-
-	void Inhale_Effect::OnCollisionStay(Collider* other)
-	{
-		
-	}
-
-	void Inhale_Effect::OnCollisionExit(Collider* other)
-	{
 	}
 
 	void Inhale_Effect::SetTarget()
@@ -158,10 +149,14 @@ namespace sy
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
-			Enemy* enemy = dynamic_cast<Enemy*>(obj);
-
 			// Enemy가 아니면 적용하지않음
+			Enemy* enemy = dynamic_cast<Enemy*>(obj);
 			if (enemy == nullptr)
+				continue;
+
+			// IceEnemy는 적용하지않음
+			Ice_Enemy* IceEnemy = dynamic_cast<Ice_Enemy*>(obj);
+			if (IceEnemy != nullptr)
 				continue;
 
 			if (mTarget == nullptr)

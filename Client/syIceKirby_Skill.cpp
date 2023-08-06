@@ -6,7 +6,8 @@
 #include "syCollider.h"
 #include "syAnimator.h"
 #include "syIceKirby.h"
-
+#include "syIce_Enemy.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -86,7 +87,25 @@ namespace sy
 
 	void IceKirby_Skill::OnCollisionEnter(Collider* other)
 	{
+		// Plyaer는 무시
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		if (player != nullptr)
+			return;
 
+		// Ice_Enemy 는 무시
+		Ice_Enemy* IceEnemy = dynamic_cast<Ice_Enemy*>(other->GetOwner());
+		if (IceEnemy != nullptr)
+			return;
+
+		// Dead상태는 무시
+		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
+			return;
+
+		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
+		IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+
+		Destroy(other->GetOwner());
 	}
 
 	void IceKirby_Skill::OnCollisionStay(Collider* other)

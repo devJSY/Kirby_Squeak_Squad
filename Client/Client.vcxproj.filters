@@ -420,7 +420,7 @@
     <ClInclude Include="syBlockin.h">
       <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClInclude>
-    <ClInclude Include="syIce.h">
+    <ClInclude Include="syIce_Enemy.h">
       <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead.h">
@@ -686,7 +686,7 @@
     <ClCompile Include="syBlockin.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClCompile>
-    <ClCompile Include="syIce.cpp">
+    <ClCompile Include="syIce_Enemy.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead.cpp">
