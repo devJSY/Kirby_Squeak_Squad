@@ -795,6 +795,20 @@ namespace sy
 			}
 		}
 
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_Walk", true);
+			mState = eDefaultKirbyState::Walk;
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Walk", true);
+			mState = eDefaultKirbyState::Walk;
+		}
+
 		// Run
 		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
 		{		
