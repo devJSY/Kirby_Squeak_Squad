@@ -19,7 +19,7 @@
 #include "syDash_Effect.h"
 #include "syLevelSelectScene.h"
 #include "syBreath_Effect.h"
-
+#include "syIceKirby_Skill.h"
 
 namespace sy
 {
@@ -34,6 +34,7 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mSkill(nullptr)
 	{
 	}
 
@@ -780,7 +781,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
-
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 			// 오디오 재생		
 		}
@@ -905,6 +907,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 
 			// 오디오 재생		
@@ -1031,7 +1035,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
-
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 			// 오디오 재생		
 		}
@@ -1145,7 +1150,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
-
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 			// 오디오 재생		
 		}
@@ -1224,7 +1230,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
-
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 			// 오디오 재생		
 		}
@@ -1277,7 +1284,7 @@ namespace sy
 			mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
 		}
 
-				// Skill
+		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
@@ -1288,6 +1295,8 @@ namespace sy
 			mState = eIceKirbyState::Skill;
 
 			// 스킬 생성
+			mSkill = new IceKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 
 
 			// 오디오 재생		
@@ -1623,7 +1632,7 @@ namespace sy
 
 	void IceKirby::Skill()
 	{
-		// 키입력이없으면서 타겟이 없을경우 Idle 로 변경
+		// 키입력이없을경우 Idle 로 변경
 		if (!Input::GetKeyPressed(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
@@ -1632,6 +1641,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
 
 			mState = eIceKirbyState::Idle;
+
+			Destroy(mSkill);
 
 			// 오디오 정지			
 		}

@@ -80,16 +80,18 @@ namespace sy
 		void Skill();
 
 	private:
-		eIceKirbyState		mState;
-		class Animator*		mAnimator;
-		class Transform*	mTransform;
-		class Rigidbody*	mRigidBody;
-		eDirection			mDir;
+		eIceKirbyState			mState;
+		class Animator*			mAnimator;
+		class Transform*		mTransform;
+		class Rigidbody*		mRigidBody;
+		eDirection				mDir;
 
-		bool				mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
-		bool				mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
-		bool				mbTopStop;		// 상단에 충돌한 상태여부
-		bool				mbOnSlope;		// 경사로에 올라탄 상태여부
+		bool					mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
+		bool					mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
+		bool					mbTopStop;		// 상단에 충돌한 상태여부
+		bool					mbOnSlope;		// 경사로에 올라탄 상태여부
+
+		class IceKirby_Skill*	mSkill;
 	};
 }
 

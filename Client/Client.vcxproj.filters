@@ -292,6 +292,9 @@
     <Filter Include="Contents\GameObject\Player\Tornado">
       <UniqueIdentifier>{6d3a510c-4a27-4ebc-a567-039382353d5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\IceKirby\Skill">
+      <UniqueIdentifier>{bd8cb1ba-7a0f-4827-aa19-f5c548f60f0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -564,6 +567,9 @@
     <ClInclude Include="syTonadoKirby.h">
       <Filter>Contents\GameObject\Player\Tornado</Filter>
     </ClInclude>
+    <ClInclude Include="syIceKirby_Skill.h">
+      <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -826,6 +832,9 @@
     </ClCompile>
     <ClCompile Include="syTonadoKirby.cpp">
       <Filter>Contents\GameObject\Player\Tornado</Filter>
+    </ClCompile>
+    <ClCompile Include="syIceKirby_Skill.cpp">
+      <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

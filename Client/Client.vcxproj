@@ -177,6 +177,7 @@
     <ClInclude Include="syIce.h" />
     <ClInclude Include="syIceIslandScene.h" />
     <ClInclude Include="syIceKirby.h" />
+    <ClInclude Include="syIceKirby_Skill.h" />
     <ClInclude Include="syInhale_Effect.h" />
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syInventoryItem.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="syIce.cpp" />
     <ClCompile Include="syIceIslandScene.cpp" />
     <ClCompile Include="syIceKirby.cpp" />
+    <ClCompile Include="syIceKirby_Skill.cpp" />
     <ClCompile Include="syInhale_Effect.cpp" />
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syInventoryItem.cpp" />
