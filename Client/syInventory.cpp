@@ -192,10 +192,10 @@ namespace sy
 						// 슬롯 반지름 범위 안에 들어왔다
 						if (Length <= SlotRadius)
 						{
-							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType())
-							{
-								// 예외처리 추가
-
+							// 변신할 타입이 자기자신이 아니면서 변신가능한 상태이면 적용
+							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType()
+								&& SceneManager::GetPlayer()->GetActiveKirby()->IsTransformableCheck())
+							{				
 								mSlot[idx] = nullptr;
 								Destroy(mFocusItem);
 								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());

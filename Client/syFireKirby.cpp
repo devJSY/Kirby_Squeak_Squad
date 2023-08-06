@@ -263,9 +263,7 @@ namespace sy
 	{
 		// Dash_Skill에서 변경한 Collider Size 원상복귀
 		Collider* col = GetOwner()->GetComponent<Collider>();
-		col->SetSize(Vector2(15.f, 15.f));
-
-		mRigidBody->SetGround(false);		
+		col->SetSize(Vector2(15.f, 15.f));	
 	}
 
 	void FireKirby::OnCollisionEnter(Collider* other)
@@ -301,8 +299,8 @@ namespace sy
 
 	void FireKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		// DASH_Skill 상태에선 충돌 무시
-		if (mState == eFireKirbyState::DASH_Skill)
+		// 특정 상태에선 충돌 무시
+		if (mState == eFireKirbyState::Skill || mState == eFireKirbyState::DASH_Skill || mState == eFireKirbyState::Transformations)
 			return;
 
 		// Fire 정보를담은 AbilityStar 하나 생성해야함

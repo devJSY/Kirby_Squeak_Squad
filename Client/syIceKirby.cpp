@@ -288,6 +288,10 @@ namespace sy
 
 	void IceKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		// 특정 상태에선 충돌 무시
+		if (mState == eIceKirbyState::Skill || mState == eIceKirbyState::Transformations)
+			return;
+
 		// Ice 정보를담은 Star 하나 생성해야함
 
 		GetOwner()->Damaged(DamageAmount);
