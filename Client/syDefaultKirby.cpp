@@ -52,7 +52,7 @@ namespace sy
 		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
 		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
 
-		// 부모생성자에서 만들었던 컴포넌트 멤버변수로 저장
+		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mTransform = GetOwner()->GetComponent<Transform>();
 		

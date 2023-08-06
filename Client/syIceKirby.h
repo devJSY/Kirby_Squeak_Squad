@@ -10,15 +10,15 @@ namespace sy
 		Idle,
 		Walk,
 		Run,
-		Skill,
-		Down,
 		Jump,
 		Turn,
 		Drop,
+		Down,
 		Fly_Start,
 		Fly_End,
 		Fly_Down,
 		Fly_Up,
+		Skill,
 		End,
 	};
 
@@ -67,15 +67,15 @@ namespace sy
 		void Idle();
 		void Walk();
 		void Run();
-		void Skill();
-		void Down();
 		void Jump();
 		void Turn();
 		void Drop();
+		void Down();
 		void Fly_Start();
 		void Fly_End();
 		void Fly_Down();
 		void Fly_Up();
+		void Skill();
 
 	private:
 		eIceKirbyState		mState;
