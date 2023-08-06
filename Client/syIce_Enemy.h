@@ -9,6 +9,15 @@ namespace sy
 		Big
 	};
 
+	enum class eIceEnemyState
+	{
+		Idle,
+		Move,
+		Dead,
+		End,
+	};
+
+
 	class Ice_Enemy : public Enemy
 	{
 	public:
@@ -26,8 +35,14 @@ namespace sy
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) {};
 
 	private:
+		void Idle();
+		void Move();
+		void Dead();
+
+	private:
+		eIceEnemyState		mState;
+		class Animator*		mAnimator;
 		class Transform*	mTransform;
 		float				mDuration;
-		bool				mbMove;
 	};
 }
