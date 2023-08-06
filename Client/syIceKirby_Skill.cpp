@@ -72,7 +72,7 @@ namespace sy
 		Player* player = dynamic_cast<Player*>(GetOwner());
 		IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
 		
-		if (iceKirby == nullptr)
+		if (iceKirby == nullptr || iceKirby->GetKirbyState() != eIceKirbyState::Skill)
 		{
 			Destroy(this);
 		}

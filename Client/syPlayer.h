@@ -28,7 +28,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 
-		void PlayerTransformations(eAbilityType type);
+		void PlayerTransformations(eAbilityType type);		
 
 		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
 
@@ -50,7 +50,7 @@ namespace sy
 
 	private:
 		std::vector<Kirby*>		mKirbyType;
-		enums::eAbilityType		mAbilityType;
+		eAbilityType			mAbilityType;
 		ePlayerMode				mMode;		
 
 		bool					mbLevelEnter;	// Level Mode State 첫진입시 설정

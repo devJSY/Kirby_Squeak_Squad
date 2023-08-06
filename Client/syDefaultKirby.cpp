@@ -2016,6 +2016,10 @@ namespace sy
 			{
 				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
 			}
+			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar)
+			{
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
+			}
 		}
 
 		// Inhaled_Skill

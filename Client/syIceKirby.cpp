@@ -149,6 +149,22 @@ namespace sy
 		}
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
+			if (Input::GetKeyDown(eKeyCode::W))
+			{
+				eDefaultKirbyState state = eDefaultKirbyState::Idle;
+
+				if(mState == eIceKirbyState::Idle)
+					state = eDefaultKirbyState::Idle;
+				else if (mState == eIceKirbyState::Walk)
+					state = eDefaultKirbyState::Walk;
+				else if (mState == eIceKirbyState::Run)
+					state = eDefaultKirbyState::Run;
+				else 
+					state = eDefaultKirbyState::Drop;
+
+				//GetOwner()->ReleaseTransformations(state);
+			}
+
 			// 픽셀충돌 체크
 			CheckPixelCollision();
 

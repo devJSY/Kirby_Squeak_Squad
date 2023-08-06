@@ -41,6 +41,7 @@ namespace sy
 	{
 		Monster,
 		AbilityItem,
+		AbilityStar,
 		End,
 	};
 

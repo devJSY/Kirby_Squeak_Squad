@@ -6,6 +6,7 @@
 #include "syIceKirby.h"
 #include "syInventory.h"
 #include "sySceneManager.h"
+#include "syKirby.h"
 
 namespace sy
 {
@@ -42,18 +43,11 @@ namespace sy
 		mKirbyType.resize((UINT)eAbilityType::End);
 
 		mKirbyType[(UINT)eAbilityType::Normal] = new DefaultKirby(this);
-
 		mKirbyType[(UINT)eAbilityType::Fire] = new DefaultKirby(this);
-
-
-
 		mKirbyType[(UINT)eAbilityType::Ice] = new IceKirby(this);
-
-
-
 		mKirbyType[(UINT)eAbilityType::Cutter] = new DefaultKirby(this);
 		mKirbyType[(UINT)eAbilityType::Tornado] = new DefaultKirby(this);
-		mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
+		//mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
 	
 
 		for (UINT i = 0; i < (UINT)eAbilityType::End; i++)
@@ -132,4 +126,6 @@ namespace sy
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Tornado", false);
 		}
 	}
+
+
 }
