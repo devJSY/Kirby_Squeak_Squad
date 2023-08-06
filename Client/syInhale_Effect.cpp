@@ -47,16 +47,27 @@ namespace sy
 		SetTarget();
 
 		// 플레이어 위치따라가도록 갱신
-		DefaultKirby* player = dynamic_cast<DefaultKirby*>(GetOwner());		
-		GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());		
+		Player* player = dynamic_cast<Player*>(GetOwner());		
+
+		GetComponent<Transform>()->SetPosition(player->GetComponent<Transform>()->GetPosition());
 
 		// Target 상태 업데이트
-		TargetUpdate();		
+		TargetUpdate();				
 
-		// Inhale 이외의 상태에선 삭제
-		if (mTarget == nullptr && !(player->GetKirbyState() == eDefaultKirbyState::Inhale_1 || player->GetKirbyState() == eDefaultKirbyState::Inhale_2))
+		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+
+		// defaultKirby 가 아니면 삭제
+		if (defaultKirby == nullptr)
 		{
 			Destroy(this);
+		}
+		else
+		{
+			// Inhale 이외의 상태에선 삭제
+			if (mTarget == nullptr && !(defaultKirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || defaultKirby->GetKirbyState() == eDefaultKirbyState::Inhale_2))
+			{
+				Destroy(this);
+			}
 		}
 
 		Effects::Update();
@@ -90,7 +101,7 @@ namespace sy
 
 	void Inhale_Effect::SetTarget()
 	{
-		DefaultKirby* player = dynamic_cast<DefaultKirby*>(GetOwner());
+		Player* player = dynamic_cast<Player*>(GetOwner());
 		if (player == nullptr)
 			return;
 
@@ -184,7 +195,12 @@ namespace sy
 		if (mTarget == nullptr)
 			return;
 
-		DefaultKirby* player = dynamic_cast<DefaultKirby*>(GetOwner());
+		Player* player = dynamic_cast<Player*>(GetOwner());
+		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+
+		// defaultKirby 가 아니면 리턴
+		if (defaultKirby == nullptr)
+			return;
 
 		Transform* PlayerTransform = player->GetComponent<Transform>();
 		Transform* TargetTransform = mTarget->GetComponent<Transform>();
@@ -205,11 +221,11 @@ namespace sy
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
 			if (enemy != nullptr)
 			{
-				player->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
+				defaultKirby->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
 			}
 			else if (abilityItem != nullptr)
 			{
-				player->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
+				defaultKirby->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
 			}			
 		}
 		else

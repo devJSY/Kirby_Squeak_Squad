@@ -42,10 +42,6 @@ namespace sy
 	{
 	}
 
-	void IceKirby::Render(HDC hdc)
-	{
-	}
-
 	void IceKirby::OnCollisionEnter(Collider* other)
 	{
 	}

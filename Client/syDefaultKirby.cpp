@@ -1976,17 +1976,6 @@ namespace sy
 			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
 
-		// Inhaled_Damage
-		if (Input::GetKeyDown(eKeyCode::W))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Damage", false);
-			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Damage", false);
-
-			mState = eDefaultKirbyState::Inhaled_Damage;
-		}
-
 		// Inhaled_Down
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
@@ -2000,7 +1989,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2155,7 +2144,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2313,7 +2302,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{

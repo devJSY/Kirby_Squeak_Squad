@@ -54,7 +54,7 @@ namespace sy
 		ePlayerMode				mMode;		
 
 		bool					mbLevelEnter;	// Level Mode State 첫진입시 설정
-		int						mHP;	// HP 0 ~ 100 범위
+		int						mHP;			// HP 0 ~ 100 범위
 		int						mLife;	
 
 		Enemy*					mHitEnemy;

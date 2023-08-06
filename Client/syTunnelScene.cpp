@@ -200,11 +200,11 @@ namespace sy
 
 		// 플레이어 타입에따라 상태 설정 
 		eAbilityType playerType = player->GetAbilityType();
-		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
-
 
 		if (playerType == eAbilityType::Normal)
 		{
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+
 			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
 			{
 				if (mPrevSceneName == L"LevelSelectScene")

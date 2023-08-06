@@ -128,9 +128,9 @@ namespace sy
 		eAbilityType playerType = player->GetAbilityType();
 		if (playerType == eAbilityType::Normal)
 		{
-			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
 			defaultKirby->SetKirbyState(eDefaultKirbyState::Choice);
-			defaultKirby->SetLevelEnter(true);
+			player->SetLevelEnter(true);
 			playerAni->PlayAnimation(L"Choice", false);
 		}
 

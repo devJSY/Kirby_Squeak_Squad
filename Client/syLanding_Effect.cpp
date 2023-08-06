@@ -4,6 +4,7 @@
 #include "sySpriteRenderer.h"
 #include "syResourceManager.h"
 #include "syTime.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -15,7 +16,7 @@ namespace sy
 		Texture* Landing_Effect_tex = ResourceManager::Load<Texture>(L"Landing_Effect", L"..\\Resources\\Effect\\Landing_Effect.bmp");
 
 		mTransform = GetComponent<Transform>();
-		Vector2 vec = owner->GetComponent<Transform>()->GetPosition();
+		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
 		mTransform->SetPosition(vec);
 
 		SpriteRenderer* spriteRenderer = AddComponent<SpriteRenderer>();

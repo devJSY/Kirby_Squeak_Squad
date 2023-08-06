@@ -4,8 +4,9 @@
 #include "syAnimator.h"
 #include "syGameObject.h"
 #include "syTransform.h"
-#include "syDefaultKirby.h"
 #include "syPlayer.h"
+#include "syDefaultKirby.h"
+#include "syIceKirby.h"
 
 namespace sy
 {
@@ -43,30 +44,49 @@ namespace sy
 
 	void Dash_Effect::Update()
 	{
-		Player* Owner = dynamic_cast<Player*>(GetOwner());
-		assert(Owner);
+		Player* player = dynamic_cast<Player*>(GetOwner());
 
 		if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
 		{
 			Transform* tr = GetComponent<Transform>();
-			Vector2 vec = Owner->GetComponent<Transform>()->GetPosition();
+			Vector2 vec = player->GetComponent<Transform>()->GetPosition();
 			vec.x -= 20.f;
 			tr->SetPosition(vec);
 		}
 		else
 		{
 			Transform* tr = GetComponent<Transform>();
-			Vector2 vec = Owner->GetComponent<Transform>()->GetPosition();
+			Vector2 vec = player->GetComponent<Transform>()->GetPosition();
 			vec.x += 20.f;
 			tr->SetPosition(vec);
 		}
-		
-		// Run 상태가 아니거나 애니메이션이 끝나면 삭제
-		if (mAnimator->IsActiveAnimationComplete() 
-			|| !(Owner->GetKirbyState() == eDefaultKirbyState::Run || Owner->GetKirbyState() == eDefaultKirbyState::Inhaled_Run))
+	
+
+		if (player->GetAbilityType() == eAbilityType::Normal)
 		{
-			Destroy(this);
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+			// Run 상태가 아니거나 애니메이션이 끝나면 삭제
+			if (mAnimator->IsActiveAnimationComplete()
+				|| !(defaultKirby->GetKirbyState() == eDefaultKirbyState::Run || defaultKirby->GetKirbyState() == eDefaultKirbyState::Inhaled_Run))
+			{
+				Destroy(this);
+			}
 		}
+		else if (player->GetAbilityType() == eAbilityType::Fire)
+		{
+
+		}
+		else if (player->GetAbilityType() == eAbilityType::Ice)
+		{
+			IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
+			// Run 상태가 아니거나 애니메이션이 끝나면 삭제
+			if (mAnimator->IsActiveAnimationComplete()
+				|| !(iceKirby->GetKirbyState() == eIceKirbyState::Run))
+			{
+				Destroy(this);
+			}
+		}		
+
 
 		Effects::Update();
 	}

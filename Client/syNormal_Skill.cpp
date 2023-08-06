@@ -26,7 +26,7 @@ namespace sy
 		Texture* Normal_Skill_Destory_tex = ResourceManager::Load<Texture>(L"Normal_Skill_Destory", L"..\\Resources\\Effect\\Normal_Skill_Destory.bmp");
 
 		Transform* tr = GetComponent<Transform>();
-		Vector2 vec = owner->GetComponent<Transform>()->GetPosition();
+		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
 		tr->SetPosition(vec);
 
 		Collider* col = AddComponent<Collider>();

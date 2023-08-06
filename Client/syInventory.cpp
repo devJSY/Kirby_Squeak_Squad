@@ -12,6 +12,7 @@
 #include "syApplication.h"
 #include "syTime.h"
 #include "syMixItem.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -193,7 +194,7 @@ namespace sy
 						{
 							mSlot[idx] = nullptr;
 							Destroy(mFocusItem);
-							SceneManager::PlayerTransform(mFocusItem->GetType());
+							SceneManager::GetPlayer()->PlayerTransform(mFocusItem->GetType());
 						}
 					}
 					else

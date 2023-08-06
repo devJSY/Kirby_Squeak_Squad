@@ -205,7 +205,7 @@ namespace sy
 		eAbilityType playerType = player->GetAbilityType();
 		if (playerType == eAbilityType::Normal)
 		{
-			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player);
+			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
 			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
 			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
 		}
