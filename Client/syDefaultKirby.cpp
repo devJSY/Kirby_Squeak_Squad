@@ -174,6 +174,9 @@ namespace sy
 		{
 			switch (mState)
 			{
+			case eDefaultKirbyState::Transformations:
+				Transformations();
+				break;
 			case eDefaultKirbyState::Choice:
 				Choice();
 				break;
@@ -204,6 +207,9 @@ namespace sy
 			// 상태처리
 			switch (mState)
 			{
+			case eDefaultKirbyState::Transformations:
+				Transformations();
+				break;
 			case eDefaultKirbyState::Idle:
 				Idle();
 				break;
@@ -405,6 +411,8 @@ namespace sy
 
 	void DefaultKirby::Enter()
 	{
+		mAnimator->PlayAnimation(L"Enter", false);
+		mState = eDefaultKirbyState::Transformations;
 	}
 
 	void DefaultKirby::Exit()
@@ -757,6 +765,19 @@ namespace sy
 		Vector2 pos = mTransform->GetPosition();
 		pos.y += 120.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
+	}
+
+	void DefaultKirby::Transformations()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+
+			mState = eDefaultKirbyState::Idle;
+		}
 	}
 
 	void DefaultKirby::Idle()
@@ -1989,7 +2010,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2144,7 +2165,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2302,7 +2323,7 @@ namespace sy
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::GetPlayer()->PlayerTransform(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{

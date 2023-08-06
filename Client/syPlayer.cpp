@@ -102,7 +102,7 @@ namespace sy
 		mKirbyType[(UINT)mAbilityType]->TakeHit(DamageAmount, HitDir);
 	}
 
-	void Player::PlayerTransform(eAbilityType type)
+	void Player::PlayerTransformations(eAbilityType type)
 	{
 		if (mAbilityType != type)
 		{

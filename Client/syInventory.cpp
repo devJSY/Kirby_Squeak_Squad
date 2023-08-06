@@ -194,7 +194,7 @@ namespace sy
 						{
 							mSlot[idx] = nullptr;
 							Destroy(mFocusItem);
-							SceneManager::GetPlayer()->PlayerTransform(mFocusItem->GetType());
+							SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());
 						}
 					}
 					else

@@ -249,7 +249,7 @@ namespace sy
 		// Ice 정보를담은 Star 하나 생성해야함
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransform(eAbilityType::Normal);
+		GetOwner()->PlayerTransformations(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);

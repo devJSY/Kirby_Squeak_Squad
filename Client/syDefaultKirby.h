@@ -5,6 +5,7 @@ namespace sy
 {
 	enum class eDefaultKirbyState
 	{
+		Transformations,
 		Idle,
 		Walk,
 		Run,
@@ -97,6 +98,7 @@ namespace sy
 
 	private:
 		// Play Mode State
+		void Transformations();
 		void Idle();
 		void Walk();
 		void Run();

@@ -28,7 +28,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 
-		void PlayerTransform(eAbilityType type);
+		void PlayerTransformations(eAbilityType type);
 
 		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
 
