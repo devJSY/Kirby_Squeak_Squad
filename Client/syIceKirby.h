@@ -5,6 +5,7 @@ namespace sy
 {
 	enum class eIceKirbyState
 	{
+		Transformations,
 		Choice,
 		Enter,
 		Idle,
@@ -64,6 +65,7 @@ namespace sy
 
 	private:
 		// Play Mode State
+		void Transformations();
 		void Idle();
 		void Walk();
 		void Run();
