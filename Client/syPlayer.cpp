@@ -102,6 +102,10 @@ namespace sy
 
 	void Player::PlayerTransformations(eAbilityType type)
 	{
+		// 변신이 불가능한 상태면 return
+		if (!mKirbyType[(UINT)mAbilityType]->IsTransformableCheck())
+			return;
+
 		if (mAbilityType != type)
 		{
 			mKirbyType[(UINT)mAbilityType]->Exit();

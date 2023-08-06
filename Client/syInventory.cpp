@@ -194,6 +194,8 @@ namespace sy
 						{
 							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType())
 							{
+								// 예외처리 추가
+
 								mSlot[idx] = nullptr;
 								Destroy(mFocusItem);
 								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());

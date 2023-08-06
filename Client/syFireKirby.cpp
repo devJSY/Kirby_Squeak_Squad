@@ -20,6 +20,7 @@
 #include "syLevelSelectScene.h"
 #include "syBreath_Effect.h"
 #include "syFireKirby_Skill.h"
+#include "syCollider.h"
 
 namespace sy
 {
@@ -97,8 +98,8 @@ namespace sy
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Skill", Vector2(187.f, 1109.f), Vector2(31.f, 29.f), Vector2(31.f, 0.f), 0.05f, 4, Vector2(0.f, -7.f));
 		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Skill", Vector2(476.f, 1109.f), Vector2(31.f, 29.f), Vector2(-31.f, 0.f), 0.05f, 4, Vector2(0.f, -7.f));
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_DashSkill", Vector2(0.f, 836.f), Vector2(59.f, 38.f), Vector2(59.f, 0.f), 0.03f, 9, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_DashSkill", Vector2(635.f, 836.f), Vector2(59.f, 38.f), Vector2(-59.f, 0.f), 0.043f, 9, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_DashSkill", Vector2(0.f, 836.f), Vector2(59.f, 38.f), Vector2(59.f, 0.f), 0.03f, 9);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_DashSkill", Vector2(635.f, 836.f), Vector2(59.f, 38.f), Vector2(-59.f, 0.f), 0.043f, 9);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"FireKirby_Right_Idle", true);
@@ -260,6 +261,11 @@ namespace sy
 
 	void FireKirby::Exit()
 	{
+		// Dash_Skill에서 변경한 Collider Size 원상복귀
+		Collider* col = GetOwner()->GetComponent<Collider>();
+		col->SetSize(Vector2(15.f, 15.f));
+
+		mRigidBody->SetGround(false);		
 	}
 
 	void FireKirby::OnCollisionEnter(Collider* other)
@@ -285,9 +291,21 @@ namespace sy
 	{
 	}
 
+	bool FireKirby::IsTransformableCheck()
+	{
+		if (mState == eFireKirbyState::Skill || mState == eFireKirbyState::DASH_Skill)
+			return false;
+
+		return true;
+	}
+
 	void FireKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		// Ice 정보를담은 Star 하나 생성해야함
+		// DASH_Skill 상태에선 충돌 무시
+		if (mState == eFireKirbyState::DASH_Skill)
+			return;
+
+		// Fire 정보를담은 AbilityStar 하나 생성해야함
 
 		GetOwner()->Damaged(DamageAmount);
 		GetOwner()->PlayerTransformations(eAbilityType::Normal);
@@ -1068,6 +1086,26 @@ namespace sy
 
 			// 오디오 재생		
 		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"FireKirby_Left_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"FireKirby_Right_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
 	}
 
 	void FireKirby::Jump()
@@ -1200,6 +1238,26 @@ namespace sy
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
 		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"FireKirby_Left_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"FireKirby_Right_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
 	}
 
 	void FireKirby::Turn()
@@ -1279,6 +1337,26 @@ namespace sy
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
 		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"FireKirby_Left_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"FireKirby_Right_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
 	}
 
 	void FireKirby::Drop()
@@ -1307,6 +1385,19 @@ namespace sy
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"FireKirby_Left_Drop", true);
+		}
+
+		// 방향전환 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"FireKirby_Right_Drop", true);
+		}
+
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && mDir == eDirection::RIGHT)
 		{
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"FireKirby_Left_Drop", true);
@@ -1351,6 +1442,26 @@ namespace sy
 
 			mState = eFireKirbyState::Idle;
 			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
+		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"FireKirby_Left_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
+		}
+
+		// DASH_Skill
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::S))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"FireKirby_Right_DashSkill", true);
+			mState = eFireKirbyState::DASH_Skill;
+
+			// 오디오 재생		
 		}
 	}
 
@@ -1678,5 +1789,39 @@ namespace sy
 
 	void FireKirby::DASH_Skill()
 	{
+		mRigidBody->SetGround(true);
+		Collider* col = GetOwner()->GetComponent<Collider>();
+		col->SetSize(Vector2(59.f, 30.f));
+
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (mDir == eDirection::RIGHT)
+				pos.x += 200.f * Time::DeltaTime();
+			else
+				pos.x -= 200.f * Time::DeltaTime();			
+
+			mTransform->SetPosition(pos);
+		}
+
+		static float Duration = 0.f;
+		Duration += Time::DeltaTime();
+
+		// 지속시간이 끝나면 상태 변경
+		if (Duration > 1.5f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"FireKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"FireKirby_Left_Drop", true);
+
+			Duration = 0.f;
+			mState = eFireKirbyState::Drop;
+			mRigidBody->SetGround(false);
+			col->SetSize(Vector2(15.f, 15.f));
+		}
 	}
 }

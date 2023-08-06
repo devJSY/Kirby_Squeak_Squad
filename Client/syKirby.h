@@ -16,6 +16,7 @@ namespace sy
 		virtual void Enter() = 0;
 		virtual void Exit() = 0;
 
+		virtual bool IsTransformableCheck() = 0;
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) {};
 
 		virtual void OnCollisionEnter(class Collider* other) {};

@@ -345,6 +345,11 @@ namespace sy
 
 	}
 
+	bool DefaultKirby::IsTransformableCheck()
+	{
+		return true;
+	}
+
 	void DefaultKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 이미 데미지 상태면 처리하지않음
@@ -1431,6 +1436,18 @@ namespace sy
 			mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
 		}
 
+		// 방향전환 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
+		}
+
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && mDir == eDirection::RIGHT)
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
+		}
 
 		// Inhale_1
 		if (Input::GetKeyDown(eKeyCode::S))

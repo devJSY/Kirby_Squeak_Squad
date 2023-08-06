@@ -278,6 +278,14 @@ namespace sy
 	{
 	}
 
+	bool IceKirby::IsTransformableCheck()
+	{
+		if (mState == eIceKirbyState::Skill)
+			return false;
+
+		return true;
+	}
+
 	void IceKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// Ice 정보를담은 Star 하나 생성해야함
@@ -1300,6 +1308,19 @@ namespace sy
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+		}
+
+		// 방향전환 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+		}
+
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && mDir == eDirection::RIGHT)
 		{
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);

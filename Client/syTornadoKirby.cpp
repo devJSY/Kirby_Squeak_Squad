@@ -36,6 +36,11 @@ namespace sy
 	{
 	}
 
+	bool TornadoKirby::IsTransformableCheck()
+	{
+		return true;
+	}
+
 	void TornadoKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 	}

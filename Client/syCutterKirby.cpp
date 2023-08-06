@@ -36,6 +36,11 @@ namespace sy
 	{
 	}
 
+	bool CutterKirby::IsTransformableCheck()
+	{
+		return true;
+	}
+
 	void CutterKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 	}

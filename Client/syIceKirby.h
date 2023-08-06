@@ -39,6 +39,7 @@ namespace sy
 		virtual void Enter() override;
 		virtual void Exit() override;
 
+		virtual bool IsTransformableCheck() override;
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
 
 		virtual void OnCollisionEnter(class Collider* other) override;
