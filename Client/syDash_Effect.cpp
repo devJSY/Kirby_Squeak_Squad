@@ -85,7 +85,14 @@ namespace sy
 			{
 				Destroy(this);
 			}
-		}		
+		}	
+		else
+		{
+			if (mAnimator->IsActiveAnimationComplete())
+			{
+				Destroy(this);
+			}
+		}
 
 
 		Effects::Update();

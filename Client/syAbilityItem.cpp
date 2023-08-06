@@ -88,7 +88,7 @@ namespace sy
 		if (plyer == nullptr)
 			return;
 
-		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(other->GetOwner());
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(plyer->GetActiveKirby());
 
 		if (kirby != nullptr && kirby->GetKirbyState() == eDefaultKirbyState::Inhaled_Skill)
 			return;		

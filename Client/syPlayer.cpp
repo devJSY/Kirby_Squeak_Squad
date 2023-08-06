@@ -41,7 +41,18 @@ namespace sy
 		mKirbyType.resize((UINT)eAbilityType::End);
 
 		mKirbyType[(UINT)eAbilityType::Normal] = new DefaultKirby(this);
+
+		mKirbyType[(UINT)eAbilityType::Fire] = new DefaultKirby(this);
+
+
+
 		mKirbyType[(UINT)eAbilityType::Ice] = new IceKirby(this);
+
+
+
+		mKirbyType[(UINT)eAbilityType::Cutter] = new DefaultKirby(this);
+		mKirbyType[(UINT)eAbilityType::Tornado] = new DefaultKirby(this);
+		mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
 	
 
 		for (UINT i = 0; i < (UINT)eAbilityType::End; i++)
