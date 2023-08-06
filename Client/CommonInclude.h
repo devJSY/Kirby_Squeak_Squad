@@ -83,8 +83,8 @@ namespace sy::enums
 
 	enum class eDirection
 	{
-		RIGHT = 0,
-		LEFT = 1,
+		RIGHT,
+		LEFT,
 	};
 
 	enum class eLevelType

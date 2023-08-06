@@ -26,6 +26,8 @@ namespace sy
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) {};
 
 	private:
-
+		class Transform*	mTransform;
+		float				mDuration;
+		bool				mbMove;
 	};
 }

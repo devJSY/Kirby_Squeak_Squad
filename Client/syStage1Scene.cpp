@@ -135,51 +135,51 @@ namespace sy
 			Vector2 pos = playerTrans->GetPosition();
 			pos.x += 50.f;
 
-			//// 믹스 효과 추가하기
-			//object::Instantiate<MixItem>(eLayerType::InventoryItem);
+			// 믹스 효과 추가하기
+			object::Instantiate<MixItem>(eLayerType::InventoryItem);
 
-			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
-			item->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
-			pos.x += 50.f;
+			//AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+			//item->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+			//pos.x += 50.f;
 
-			AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
-			item2->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
-			pos.x += 50.f;
+			//AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+			//item2->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
+			//pos.x += 50.f;
 
-			AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
-			item3->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
-			pos.x += 50.f;
+			//AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+			//item3->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
+			//pos.x += 50.f;
 
-			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
-			item4->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+			//AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+			//item4->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
 
-			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			//waddleDee->GetComponent<Transform>()->SetPosition(pos);
-			//waddleDee->Initialize();
+			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee->GetComponent<Transform>()->SetPosition(pos);
+			waddleDee->Initialize();
 
-			//pos.x += 10.f;
-			//HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-			//hotHead->GetComponent<Transform>()->SetPosition(pos);
-			//hotHead->Initialize();
+			pos.x += 10.f;
+			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+			hotHead->GetComponent<Transform>()->SetPosition(pos);
+			hotHead->Initialize();
 
-			//pos.x += 10.f;
-			//Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
-			//blockin->GetComponent<Transform>()->SetPosition(pos);
-			//blockin->Initialize();
+			pos.x += 10.f;
+			Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+			blockin->GetComponent<Transform>()->SetPosition(pos);
+			blockin->Initialize();
 
-			//pos.x += 10.f;
-			//SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
-			//sirKibble->GetComponent<Transform>()->SetPosition(pos);
-			//sirKibble->Initialize();
+			pos.x += 10.f;
+			SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+			sirKibble->GetComponent<Transform>()->SetPosition(pos);
+			sirKibble->Initialize();
 
-			//pos.x += 10.f;
-			//Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
-			//crimp->GetComponent<Transform>()->SetPosition(pos);
-			//crimp->Initialize();
+			pos.x += 10.f;
+			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			crimp->GetComponent<Transform>()->SetPosition(pos);
+			crimp->Initialize();
 		}
 
 
@@ -252,6 +252,7 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::AbilityItem, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 
 		// 오디오 정지

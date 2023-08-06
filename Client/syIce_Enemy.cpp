@@ -3,13 +3,22 @@
 #include "syResourceManager.h"
 #include "syAnimator.h"
 #include "syCollider.h"
-
+#include "syTime.h"
+#include "syPlayer.h"
+#include "syEnemy.h"
+#include "syTransform.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
 	Ice_Enemy::Ice_Enemy(eIceEnemyType type)
 		: Enemy(eAbilityType::Ice)
+		, mTransform(nullptr)
+		, mDuration(0.f)
+		, mbMove(false)
 	{
+		mTransform = GetComponent<Transform>();
+
 		Texture* Monster_Ice = ResourceManager::Load<Texture>(L"Monster_Ice_Tex", L"..\\Resources\\Enemy\\Monster_Ice.bmp");
 
 		Animator* animator = GetComponent<Animator>();
@@ -40,6 +49,23 @@ namespace sy
 
 	void Ice_Enemy::Update()
 	{
+		mDuration += Time::DeltaTime();
+
+		if (mDuration > 5.f)
+		{
+			Destroy(this);
+		}
+
+		if (mbMove)
+		{
+			Vector2 pos = mTransform->GetPosition();
+			if (mTransform->GetDirection() == eDirection::RIGHT)
+				pos.x += 200.f * Time::DeltaTime();
+			else
+				pos.x -= 200.f * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+		}
+
 		Enemy::Update();
 	}
 
@@ -50,6 +76,47 @@ namespace sy
 
 	void Ice_Enemy::OnCollisionEnter(Collider* other)
 	{
+		// IceEnemy끼리의 충돌은 적용하지않음
+		Ice_Enemy* IceEnemy = dynamic_cast<Ice_Enemy*>(other->GetOwner());
+		if (IceEnemy != nullptr)
+			return;
+
+
+		// player 충돌 처리
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player != nullptr)
+		{
+			// 이미 충돌했던 상태라면 리턴
+			if (mbMove)
+				return;
+
+			Vector2 pos = mTransform->GetPosition();
+			Vector2 playerpos = player->GetComponent<Transform>()->GetPosition();
+
+			Vector2 Dir = pos - playerpos;
+			Dir.Normalize();
+			
+			if (Dir.x > 0.f)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
+
+			mbMove = true;
+		}
+
+		// Enemy 충돌 처리
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+
+		if (enemy != nullptr)
+		{
+			// 스킬 → 몬스터 방향
+			Vector2 Dir = enemy->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+			SceneManager::GetPlayer()->SetHitEnemy(enemy);
+			enemy->TakeHit(50, Dir);
+			enemy->SetHPBarUIRenderTrig(true);
+		}
 	}
 
 	void Ice_Enemy::OnCollisionStay(Collider* other)

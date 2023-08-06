@@ -156,6 +156,7 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::AbilityItem, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 
 		// 오디오 정지
