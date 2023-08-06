@@ -14,7 +14,7 @@ namespace sy
 	class Landing_Effect : public Effects
 	{
     public:
-        Landing_Effect(GameObject* owner);
+        Landing_Effect(class Player* owner);
         virtual ~Landing_Effect();
 
         virtual void Initialize();

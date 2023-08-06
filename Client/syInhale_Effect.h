@@ -8,7 +8,7 @@ namespace sy
 	class Inhale_Effect : public Effects
 	{
     public:
-        Inhale_Effect(GameObject* owner);
+        Inhale_Effect(class Player* owner);
         virtual ~Inhale_Effect();
 
         virtual void Initialize();

@@ -40,8 +40,6 @@ namespace sy
 		static Player* GetPlayer() { return mPlayer; }
 		static Inventory* GetInventory() { return mInventory; }
 
-		static void PlayerTransform(eAbilityType type);
-
 	private:
 		// 트리 자료구조
 		// Key Value 구조로 이루어져 있다

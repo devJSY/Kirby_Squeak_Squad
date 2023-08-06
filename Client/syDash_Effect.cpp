@@ -5,10 +5,11 @@
 #include "syGameObject.h"
 #include "syTransform.h"
 #include "syDefaultKirby.h"
+#include "syPlayer.h"
 
 namespace sy
 {
-	Dash_Effect::Dash_Effect(GameObject* owner)
+	Dash_Effect::Dash_Effect(Player* owner)
 		: Effects(owner)
 		, mAnimator(nullptr)
 	{
@@ -42,10 +43,10 @@ namespace sy
 
 	void Dash_Effect::Update()
 	{
-		DefaultKirby* Owner = dynamic_cast<DefaultKirby*>(GetOwner());
+		Player* Owner = dynamic_cast<Player*>(GetOwner());
 		assert(Owner);
 
-		if (Owner->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+		if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
 		{
 			Transform* tr = GetComponent<Transform>();
 			Vector2 vec = Owner->GetComponent<Transform>()->GetPosition();

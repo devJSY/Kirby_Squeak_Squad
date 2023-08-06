@@ -7,7 +7,7 @@
 
 namespace sy
 {
-	Zoom_Effect::Zoom_Effect(GameObject* owner)
+	Zoom_Effect::Zoom_Effect(Player* owner)
 		: Effects(owner)
 	{
 		Texture* tex = ResourceManager::Load<Texture>(L"Zoom", L"..\\Resources\\Effect\\Zoom.bmp");

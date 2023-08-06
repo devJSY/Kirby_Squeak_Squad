@@ -9,6 +9,7 @@ namespace sy
 		PlayMode,
 	};
 
+	class Kirby;
 	class Enemy;
 
 	class Player : public GameObject
@@ -21,11 +22,15 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(class Collider* other) {};
-		virtual void OnCollisionStay(class Collider* other) {};
-		virtual void OnCollisionExit(class Collider* other) {};
+		virtual void OnCollisionEnter(class Collider* other);
+		virtual void OnCollisionStay(class Collider* other);
+		virtual void OnCollisionExit(class Collider* other);
 
-		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) = 0;
+		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
+
+		void PlayerTransform(eAbilityType type);
+
+		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
 
 		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
 		bool GetLevelEnter() { return mbLevelEnter; }
@@ -40,11 +45,11 @@ namespace sy
 		void SetHitEnemy(class Enemy* enemy) { mHitEnemy = enemy; }
 		Enemy* GetHitEnemy() { return mHitEnemy; }
 
-	protected:
 		void Damaged(int amount) { mHP -= amount; }
 		void Recovery(int amount) { mHP += amount; }
 
 	private:
+		std::vector<Kirby*>		mKirbyType;
 		enums::eAbilityType		mAbilityType;
 		ePlayerMode				mMode;		
 

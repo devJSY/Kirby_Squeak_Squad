@@ -7,7 +7,7 @@
 
 namespace sy
 {
-	Landing_Effect::Landing_Effect(GameObject* owner)
+	Landing_Effect::Landing_Effect(Player* owner)
 		: Effects(owner)
 		, mDir()
 		, mDuration(0.f)

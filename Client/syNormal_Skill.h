@@ -6,7 +6,7 @@ namespace sy
 	class Normal_Skill : public Effects
 	{
     public:
-        Normal_Skill(GameObject* owner);
+        Normal_Skill(class Player* owner);
         virtual ~Normal_Skill();
 
         virtual void Initialize();

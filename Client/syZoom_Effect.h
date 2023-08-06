@@ -6,7 +6,7 @@ namespace sy
 	class Zoom_Effect :	public Effects
 	{
     public:
-        Zoom_Effect(GameObject* owner);
+        Zoom_Effect(class Player* owner);
         virtual ~Zoom_Effect();
 
         virtual void Initialize();

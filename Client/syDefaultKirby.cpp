@@ -22,11 +22,12 @@
 #include "syInventory.h"
 #include "syAbilityItem.h"
 #include "syLanding_Effect.h"
+#include "syPlayer.h"
 
 namespace sy
 {
-	DefaultKirby::DefaultKirby()
-		: Player(eAbilityType::Normal, ePlayerMode::LevelMode)
+	DefaultKirby::DefaultKirby(Player* owner)
+		: Kirby(owner)
 		, mState(eDefaultKirbyState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
@@ -52,10 +53,10 @@ namespace sy
 		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
 
 		// 부모생성자에서 만들었던 컴포넌트 멤버변수로 저장
-		mAnimator = GetComponent<Animator>();
-		mTransform = GetComponent<Transform>();
+		mAnimator = GetOwner()->GetComponent<Animator>();
+		mTransform = GetOwner()->GetComponent<Transform>();
 		
-		mRigidBody = GetComponent<Rigidbody>();
+		mRigidBody = GetOwner()->GetComponent<Rigidbody>();
 		mRigidBody->SetGround(true);
 
 		// 애니메이션 생성
@@ -161,9 +162,6 @@ namespace sy
 		ResourceManager::Find<Sound>(L"InhaleSkillSound")->SetVolume(80.f);
 		ResourceManager::Find<Sound>(L"LandSound")->SetVolume(10.f);
 		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
-
-
-		Player::Initialize();
 	}
 
 	void DefaultKirby::Update()
@@ -172,7 +170,7 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// PlayerMode 에 따라서 상태처리 
-		if (GetPlayerMode() == ePlayerMode::LevelMode)
+		if (GetOwner()->GetPlayerMode() == ePlayerMode::LevelMode)
 		{
 			switch (mState)
 			{
@@ -180,7 +178,7 @@ namespace sy
 				Choice();
 				break;
 			case eDefaultKirbyState::Enter:
-				Enter();
+				Level_Enter();
 				break;
 			case eDefaultKirbyState::Idle:
 				Level_Idle();
@@ -198,7 +196,7 @@ namespace sy
 				break;
 			}
 		}
-		else if (GetPlayerMode() == ePlayerMode::PlayMode)
+		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
 			// 픽셀충돌 체크
 			CheckPixelCollision();
@@ -308,14 +306,9 @@ namespace sy
 			}
 			mTransform->SetPosition(pos);
 		}		
-
-		Player::Update();
 	}
 
-	void DefaultKirby::Render(HDC hdc)
-	{
-		Player::Render(hdc);
-	}
+
 
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
@@ -331,7 +324,7 @@ namespace sy
 		// 커비 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
-		SetHitEnemy(enemy);
+		GetOwner()->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
 		enemy->SetHPBarUIRenderTrig(true);
 	}
@@ -352,7 +345,7 @@ namespace sy
 		if (mState == eDefaultKirbyState::Damage || mState == eDefaultKirbyState::Inhaled_Damage)
 			return;
 
-		Damaged(DamageAmount);
+		GetOwner()->Damaged(DamageAmount);
 
 		if (mState == eDefaultKirbyState::Inhaled
 			|| mState == eDefaultKirbyState::Inhaled_Idle
@@ -410,6 +403,14 @@ namespace sy
 		}
 	}
 
+	void DefaultKirby::Enter()
+	{
+	}
+
+	void DefaultKirby::Exit()
+	{
+	}
+
 	void DefaultKirby::CheckPixelCollision()
 	{
 		// Stage타입에따라 픽셀텍스쳐 변경하기
@@ -440,7 +441,7 @@ namespace sy
 			offset = Vector2(1603.f, 137.f);
 		}
 
-		Collider* col = GetComponent<Collider>();
+		Collider* col = GetOwner()->GetComponent<Collider>();
 		Vector2 ColPos = col->GetPosition();
 		Vector2 ColSize = col->GetSize();
 
@@ -516,7 +517,7 @@ namespace sy
 				// Blue 만 인식하도록 설정
 				if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
 				{
-					Landing_Effect* landingEffect = new Landing_Effect(this);
+					Landing_Effect* landingEffect = new Landing_Effect(GetOwner());
 					object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
 				}
 			}
@@ -608,7 +609,7 @@ namespace sy
 	void DefaultKirby::Choice()
 	{
 		// 애니메이션
-		if ((Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT)) && !GetLevelEnter())
+		if ((Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT)) && !GetOwner()->GetLevelEnter())
 		{
 			mAnimator->PlayAnimation(L"Choice", false);
 		}		
@@ -617,11 +618,11 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			// 씬에 첫진입이라면 Enter애니메이션 재생
-			if (GetLevelEnter())
+			if (GetOwner()->GetLevelEnter())
 			{
 				mAnimator->PlayAnimation(L"Enter", false);
 				mState = eDefaultKirbyState::Enter;
-				SetLevelEnter(false);
+				GetOwner()->SetLevelEnter(false);
 			}
 			else
 			{
@@ -639,7 +640,7 @@ namespace sy
 		}
 	}
 
-	void DefaultKirby::Enter()
+	void DefaultKirby::Level_Enter()
 	{
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
@@ -737,7 +738,7 @@ namespace sy
 		time += Time::DeltaTime();
 		if (time > 0.3f)
 		{
-			Dash_Effect* DashEffect = new Dash_Effect(this);
+			Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 			DashEffect->GetComponent<Animator>()->SetAffectedCamera(false);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 			time = 0.f;
@@ -817,7 +818,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Run", true);
 				mState = eDefaultKirbyState::Run;
 
-				Dash_Effect* DashEffect = new Dash_Effect(this);
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 
 				// 오디오 재생
@@ -833,7 +834,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Run", true);
 				mState = eDefaultKirbyState::Run;
 
-				Dash_Effect* DashEffect = new Dash_Effect(this);
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 
 				// 오디오 재생
@@ -878,7 +879,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 
@@ -1005,7 +1006,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 			// 오디오 재생
@@ -1132,7 +1133,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 			// 오디오 재생
@@ -1249,7 +1250,7 @@ namespace sy
 			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 			// 오디오 재생
@@ -1330,7 +1331,7 @@ namespace sy
 			TurnTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 			// 오디오 재생
@@ -1359,7 +1360,7 @@ namespace sy
 		// 애니메이션
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetOwner()->GetHP() <= 0.f)
 			{
 				// 게임오버
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));				
@@ -1420,7 +1421,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhale_1;
 
-			mInhaleEffect = new Inhale_Effect(this);
+			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
 
 			// 오디오 재생
@@ -1641,7 +1642,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Fly_End;
 
-			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 		}
 
@@ -1775,7 +1776,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
-			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
@@ -1868,7 +1869,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_FlyEnd", false);
 
 			mState = eDefaultKirbyState::Fly_End;
-			Breath_Effect* BreathEffect = new Breath_Effect(this);
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 
 			// 오디오 재생
@@ -1935,7 +1936,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Run", true);
 				mState = eDefaultKirbyState::Inhaled_Run;
 
-				Dash_Effect* DashEffect = new Dash_Effect(this);
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 
 				// 오디오 재생
@@ -1951,7 +1952,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Run", true);
 				mState = eDefaultKirbyState::Inhaled_Run;
 
-				Dash_Effect* DashEffect = new Dash_Effect(this);
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
 
 				// 오디오 재생
@@ -2019,7 +2020,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{				
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2174,7 +2175,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2332,7 +2333,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2470,7 +2471,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2555,7 +2556,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2626,7 +2627,7 @@ namespace sy
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				Normal_Skill* NormalSkill = new Normal_Skill(this);
+				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
 				// 오디오 재생
@@ -2662,7 +2663,7 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Land;
 
-			Landing_Effect* landingEffect = new Landing_Effect(this);
+			Landing_Effect* landingEffect = new Landing_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
 
 			// 오디오 재생
@@ -2689,7 +2690,7 @@ namespace sy
 		// 애니메이션
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetOwner()->GetHP() <= 0.f)
 			{
 				// 게임오버
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));

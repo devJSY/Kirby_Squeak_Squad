@@ -11,7 +11,7 @@
 
 namespace sy
 {
-	Normal_Skill::Normal_Skill(GameObject* owner)
+	Normal_Skill::Normal_Skill(Player* owner)
 		: Effects(owner)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)

@@ -6,7 +6,7 @@ namespace sy
 	class Breath_Effect : public Effects
 	{
     public:
-        Breath_Effect(GameObject* owner);
+        Breath_Effect(class Player* owner);
         virtual ~Breath_Effect();
 
         virtual void Initialize();

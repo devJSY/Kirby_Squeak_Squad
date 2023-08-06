@@ -26,7 +26,7 @@
 #include "syAbilityUI.h"
 #include "syHPbarUI.h"
 #include "syLifeUI.h"
-#include "syDefaultKirby.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -34,7 +34,7 @@ namespace sy
 	Scene* SceneManager::mActiveScene = nullptr;
 
 	// SceneManager俊辑 Player按眉 积己
-	Player* SceneManager::mPlayer = new DefaultKirby;
+	Player* SceneManager::mPlayer = new Player(eAbilityType::Normal, ePlayerMode::LevelMode);
 
 	// SceneManager俊辑 UI按眉 积己
 	Inventory* SceneManager::mInventory = new Inventory;
@@ -108,8 +108,6 @@ namespace sy
 		}
 
 		mPlayer->Initialize();
-		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(275.f, 100.f));
-
 		mInventory->Initialize();
 		mAbilityUI->Initialize();
 		mHPbarUI->Initialize();
@@ -207,35 +205,5 @@ namespace sy
 			return nullptr;
 
 		return iter->second;
-	}
-
-	void SceneManager::PlayerTransform(eAbilityType type)
-	{
-		//delete mPlayer;
-
-		if (type == eAbilityType::Normal)
-		{
-			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Non", false);
-		}
-		else if (type == eAbilityType::Fire)
-		{
-			//mPlayer = new FireKirby;
-			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Fire", false);
-		}
-		else if (type == eAbilityType::Ice)
-		{
-			//mPlayer = new ;
-			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Ice", false);
-		}
-		else if (type == eAbilityType::Cutter)
-		{
-			//mPlayer = new ;
-			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Cutter", false);
-		}
-		else if (type == eAbilityType::Tornado)
-		{
-			//mPlayer = new ;
-			mInventory->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Tornado", false);
-		}		
 	}
 }

@@ -10,7 +10,7 @@
 
 namespace sy
 {
-	Breath_Effect::Breath_Effect(GameObject* owner)
+	Breath_Effect::Breath_Effect(Player* owner)
 		: Effects(owner)
 		, mDir(eDirection::RIGHT)
 		, mColOffset(0.f)

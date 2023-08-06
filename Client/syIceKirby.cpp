@@ -8,8 +8,8 @@
 
 namespace sy
 {
-	IceKirby::IceKirby()
-		: Player(eAbilityType::Normal, ePlayerMode::LevelMode)
+	IceKirby::IceKirby(class Player* owner)
+		: Kirby(owner)
 		, mState(eIceKirbyState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
@@ -31,6 +31,14 @@ namespace sy
 	}
 
 	void IceKirby::Update()
+	{
+	}
+
+	void IceKirby::Enter()
+	{
+	}
+
+	void IceKirby::Exit()
 	{
 	}
 

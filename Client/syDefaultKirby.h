@@ -1,5 +1,5 @@
 #pragma once
-#include "syPlayer.h"
+#include "syKirby.h"
 
 namespace sy
 {
@@ -52,21 +52,24 @@ namespace sy
 	// A,D Á¡ÇÁ 
 	// S »¡¾ÆµéÀÌ±â, ¹ñ±â
 	// W º¯½Å´É·Â ¹ñ±â
-	class DefaultKirby : public Player
+	class DefaultKirby : public Kirby
 	{
 	public:
-		DefaultKirby();
+		DefaultKirby(class Player* owner);
 		virtual ~DefaultKirby();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
-		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(class Collider* other) override;
-		virtual void OnCollisionStay(class Collider* other) override;
-		virtual void OnCollisionExit(class Collider* other) override;
+		virtual void Enter() override;
+		virtual void Exit() override;
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
+
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other)	override;
+		virtual void OnCollisionExit(class Collider* other)	override;
+
 
 		void SetKirbyState(eDefaultKirbyState state) { mState = state; }
 		eDefaultKirbyState GetKirbyState() { return mState; }
@@ -86,7 +89,7 @@ namespace sy
 	private:
 		// Level Mode State
 		void Choice();
-		void Enter();
+		void Level_Enter();
 		void Level_Idle();
 		void Level_Run();
 		void Level_FlyUp();

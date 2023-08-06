@@ -6,7 +6,7 @@ namespace sy
 	class Dash_Effect :	public Effects
 	{
     public:
-        Dash_Effect(GameObject* owner);
+        Dash_Effect(class Player* owner);
         virtual ~Dash_Effect();
 
         virtual void Initialize();

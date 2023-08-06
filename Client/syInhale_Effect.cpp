@@ -10,7 +10,7 @@
 
 namespace sy
 {
-	Inhale_Effect::Inhale_Effect(GameObject* owner)
+	Inhale_Effect::Inhale_Effect(Player* owner)
 		: Effects(owner)
 		, mDir(eDirection::RIGHT)
 		, mInhaledObject()

@@ -1,5 +1,5 @@
 #pragma once
-#include "syPlayer.h"
+#include "syKirby.h"
 
 namespace sy
 {
@@ -26,21 +26,23 @@ namespace sy
 	// A,D 점프 
 	// S 스킬
 	// W 변신능력 뱉기
-	class IceKirby : public Player
+	class IceKirby : public Kirby
 	{
 	public:
-		IceKirby();
+		IceKirby(class Player* owner);
 		virtual ~IceKirby();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
-		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(class Collider* other) override;
-		virtual void OnCollisionStay(class Collider* other) override;
-		virtual void OnCollisionExit(class Collider* other) override;
+		virtual void Enter() override;
+		virtual void Exit() override;
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
+
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other)	override;
+		virtual void OnCollisionExit(class Collider* other)	override;
 
 		void SetKirbyState(eIceKirbyState state) { mState = state; }
 		eIceKirbyState GetKirbyState() { return mState; }
