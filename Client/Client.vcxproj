@@ -174,10 +174,12 @@
     <ClInclude Include="syHPbarUI.h" />
     <ClInclude Include="syIce.h" />
     <ClInclude Include="syIceIslandScene.h" />
+    <ClInclude Include="syIceKirby.h" />
     <ClInclude Include="syInhale_Effect.h" />
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syInventoryItem.h" />
     <ClInclude Include="syJamJungleScene.h" />
+    <ClInclude Include="syKirby.h" />
     <ClInclude Include="syLanding_Effect.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
@@ -258,10 +260,12 @@
     <ClCompile Include="syHPbarUI.cpp" />
     <ClCompile Include="syIce.cpp" />
     <ClCompile Include="syIceIslandScene.cpp" />
+    <ClCompile Include="syIceKirby.cpp" />
     <ClCompile Include="syInhale_Effect.cpp" />
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syInventoryItem.cpp" />
     <ClCompile Include="syJamJungleScene.cpp" />
+    <ClCompile Include="syKirby.cpp" />
     <ClCompile Include="syLanding_Effect.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />

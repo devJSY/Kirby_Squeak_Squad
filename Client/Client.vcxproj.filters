@@ -157,9 +157,6 @@
     <Filter Include="Contents\GameObject\Player">
       <UniqueIdentifier>{e181023e-aad4-4200-a419-93547baf32cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\Kirby">
-      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy">
       <UniqueIdentifier>{eb572f62-a55e-4adf-9b2b-169106e7893a}</UniqueIdentifier>
     </Filter>
@@ -277,6 +274,18 @@
     <Filter Include="Contents\GameObject\Effects\Zoom_Effect">
       <UniqueIdentifier>{a737e13b-a84b-43db-8da9-3dc6bffa2990}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\FireKirby">
+      <UniqueIdentifier>{2df014f2-4f6a-4ba7-8547-397e4cd1323e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\IceKirby">
+      <UniqueIdentifier>{f384a25c-310f-4cb2-a61b-f489789614cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\DefaultKirby">
+      <UniqueIdentifier>{3cc17043-9671-4df7-9ea5-31fdc5ea021b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\Kirby">
+      <UniqueIdentifier>{d269fbf1-9518-447c-b43c-45caa889e09e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -391,7 +400,7 @@
       <Filter>Contents\GameObject\Video</Filter>
     </ClInclude>
     <ClInclude Include="syDefaultKirby.h">
-      <Filter>Contents\GameObject\Player\Kirby</Filter>
+      <Filter>Contents\GameObject\Player\DefaultKirby</Filter>
     </ClInclude>
     <ClInclude Include="syPlayer.h">
       <Filter>Contents\GameObject\Player</Filter>
@@ -534,6 +543,12 @@
     <ClInclude Include="syZoom_Effect.h">
       <Filter>Contents\GameObject\Effects\Zoom_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="syIceKirby.h">
+      <Filter>Contents\GameObject\Player\IceKirby</Filter>
+    </ClInclude>
+    <ClInclude Include="syKirby.h">
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -639,7 +654,7 @@
       <Filter>Contents\GameObject\Video</Filter>
     </ClCompile>
     <ClCompile Include="syDefaultKirby.cpp">
-      <Filter>Contents\GameObject\Player\Kirby</Filter>
+      <Filter>Contents\GameObject\Player\DefaultKirby</Filter>
     </ClCompile>
     <ClCompile Include="syPlayer.cpp">
       <Filter>Contents\GameObject\Player</Filter>
@@ -781,6 +796,12 @@
     </ClCompile>
     <ClCompile Include="syZoom_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Zoom_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="syIceKirby.cpp">
+      <Filter>Contents\GameObject\Player\IceKirby</Filter>
+    </ClCompile>
+    <ClCompile Include="syKirby.cpp">
+      <Filter>Contents\GameObject\Player\Kirby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

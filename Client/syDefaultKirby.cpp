@@ -39,6 +39,14 @@ namespace sy
 		, mInhaleEffect(nullptr)
 		, mInhaledObjectInfo{}
 	{
+	}
+
+	DefaultKirby::~DefaultKirby()
+	{
+	}
+
+	void DefaultKirby::Initialize()
+	{			
 		// 텍스쳐 로드
 		Texture* DefaultKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
 		Texture* DefaultKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
@@ -46,7 +54,7 @@ namespace sy
 		// 부모생성자에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-
+		
 		mRigidBody = GetComponent<Rigidbody>();
 		mRigidBody->SetGround(true);
 
@@ -69,7 +77,7 @@ namespace sy
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Jump", Vector2(716.f, 9.f), Vector2(20.f, 20.f), Vector2(20.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Jump", Vector2(264.f, 9.f), Vector2(20.f, 20.f), Vector2(-20.f, 0.f), 1.f, 1);
 
-		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.05f, 6);
+		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Turn", Vector2(759.f, 9.f), Vector2(22.f, 20.f), Vector2(22.f, 0.f), 0.05f, 6); 
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_Turn", Vector2(219.f, 9.f), Vector2(22.f, 20.f), Vector2(-22.f, 0.f), 0.05f, 6);
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_Damage", Vector2(0.f, 179.f), Vector2(22.f, 22.f), Vector2(22.f, 0.f), 0.04f, 10);
@@ -83,13 +91,13 @@ namespace sy
 
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyStart", Vector2(642.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyStart", Vector2(337.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
-
+		
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyEnd", Vector2(705.f, 37.f), Vector2(21.f, 24.f), Vector2(-21.f, 0.f), 0.05f, 4);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyEnd", Vector2(274.f, 37.f), Vector2(21.f, 24.f), Vector2(21.f, 0.f), 0.05f, 4);
-
+		
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyDown", Vector2(733.f, 36.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.15f, 2);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyDown", Vector2(243.f, 36.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.15f, 2);
-
+		
 		mAnimator->CreateAnimation(DefaultKirby_Right, L"DefaultKirby_Right_FlyUp", Vector2(785.f, 36.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 0.07f, 4);
 		mAnimator->CreateAnimation(DefaultKirby_Left, L"DefaultKirby_Left_FlyUp", Vector2(189.f, 36.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 0.07f, 4);
 
@@ -146,21 +154,15 @@ namespace sy
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"StarSpitSound", L"..\\Resources\\Sound\\Effect\\StarSpit.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
-
+		
 		ResourceManager::Find<Sound>(L"BreathSound")->SetVolume(20.f);
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"InhaleSkillSound")->SetVolume(80.f);
 		ResourceManager::Find<Sound>(L"LandSound")->SetVolume(10.f);
 		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
-	}
 
-	DefaultKirby::~DefaultKirby()
-	{
-	}
 
-	void DefaultKirby::Initialize()
-	{			
 		Player::Initialize();
 	}
 
