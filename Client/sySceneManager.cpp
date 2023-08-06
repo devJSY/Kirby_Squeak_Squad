@@ -34,7 +34,7 @@ namespace sy
 	Scene* SceneManager::mActiveScene = nullptr;
 
 	// SceneManager俊辑 Player按眉 积己
-	Player* SceneManager::mPlayer = new Player(eAbilityType::Ice, ePlayerMode::LevelMode);
+	Player* SceneManager::mPlayer = new Player(eAbilityType::Normal, ePlayerMode::LevelMode);
 
 	// SceneManager俊辑 UI按眉 积己
 	Inventory* SceneManager::mInventory = new Inventory;

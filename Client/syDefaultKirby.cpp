@@ -1514,7 +1514,7 @@ namespace sy
 
 			inhaleTime = 0.f;
 
-			// 오디오 재생
+			// 오디오 정지
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
@@ -1530,7 +1530,7 @@ namespace sy
 
 			inhaleTime = 0.f;
 
-			// 오디오 재생
+			// 오디오 정지
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}
@@ -1552,7 +1552,7 @@ namespace sy
 
 			inhaleTime = 0.f;
 
-			// 오디오 재생
+			// 오디오 정지
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
@@ -1568,7 +1568,7 @@ namespace sy
 
 			inhaleTime = 0.f;
 
-			// 오디오 재생
+			// 오디오 정지
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
@@ -1584,7 +1584,7 @@ namespace sy
 
 			inhaleTime = 0.f;
 
-			// 오디오 재생
+			// 오디오 정지
 			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}

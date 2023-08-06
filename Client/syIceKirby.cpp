@@ -18,6 +18,7 @@
 #include "syTime.h"
 #include "syDash_Effect.h"
 #include "syLevelSelectScene.h"
+#include "syBreath_Effect.h"
 
 
 namespace sy
@@ -635,49 +636,979 @@ namespace sy
 
 	void IceKirby::Idle()
 	{
+		// 애니메이션 
+
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경 비탈길에서는 예외처리해줘야함
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+
+			mState = eIceKirbyState::Drop;
+		}
+
+		// Walk
+		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::RIGHT))
+		{
+			if (!mbOnRightStop)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"IceKirby_Right_Walk", true);
+				mState = eIceKirbyState::Walk;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (!mbOnLeftStop)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"IceKirby_Left_Walk", true);
+				mState = eIceKirbyState::Walk;
+			}
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Walk", true);
+			mState = eIceKirbyState::Walk;
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Walk", true);
+			mState = eIceKirbyState::Walk;
+		}
+
+		// Run
+		if (Input::IsDoubleKeyPressed(eKeyCode::RIGHT))
+		{
+			if (!mbOnRightStop)
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"IceKirby_Right_Run", true);
+				mState = eIceKirbyState::Run;
+
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+			}
+		}
+
+		if (Input::IsDoubleKeyPressed(eKeyCode::LEFT))
+		{
+			if (!mbOnLeftStop)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"IceKirby_Left_Run", true);
+				mState = eIceKirbyState::Run;
+
+				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
+				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+			}
+		}
+
+		// Jump
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Jump", false);
+
+			mState = eIceKirbyState::Jump;
+			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
+		}
+
+		// Down
+		if (Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Down", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Down", false);
+
+			mState = eIceKirbyState::Down;
+		}
+
+		// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
 	}
 
 	void IceKirby::Walk()
 	{
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+			return;
+		}
+
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		// 애니메이션
+
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+
+			mState = eIceKirbyState::Drop;
+		}
+
+		// Idle
+		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+		}
+
+		// Walk
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Walk", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Walk", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Walk", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Walk", true);
+		}
+
+		// Jump
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Jump", false);
+
+			mState = eIceKirbyState::Jump;
+			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
+		}
+
+		// Down
+		if (Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Down", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Down", false);
+
+			mState = eIceKirbyState::Down;
+		}
+
+		// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
 	}
 
 	void IceKirby::Run()
 	{
-	}
+		// Stop 상태라면 Idle 로 상태변경
+		if (mbOnLeftStop || mbOnRightStop)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
 
-	void IceKirby::Skill()
-	{
-	}
+			mState = eIceKirbyState::Idle;
 
-	void IceKirby::Down()
-	{
+			return;
+		}
+
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 120.f * Time::DeltaTime();
+				else
+					pos.x -= 120.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		// 애니메이션
+
+		// 땅에 닿은 상태가 아니면서 경사로가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround() && mbOnSlope == false)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+
+			mState = eIceKirbyState::Drop;
+		}
+
+		// Idle
+		// 좌우 어느 키입력도 없으면 Idle 상태로 변경
+		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+		}
+
+		// Run
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Run", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Run", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Run", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Run", true);
+		}
+
+		// Jump
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Jump", false);
+
+			mState = eIceKirbyState::Jump;
+			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
+		}
+
+		// Down
+		if (Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Down", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Down", false);
+
+			mState = eIceKirbyState::Down;
+		}
+
+		// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
 	}
 
 	void IceKirby::Jump()
 	{
+		// 상하 이동
+		static float KeyReleaseTime = 0.f;
+		static float KeyPressdTime = 0.f;
+
+		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			KeyPressdTime += Time::DeltaTime();
+
+			// 일정 누른 시간에만 상승
+			if (KeyPressdTime < 0.2f)
+			{
+				mRigidBody->AddForce(Vector2(0.f, -400.f));
+			}
+
+			// 키를 누른 시간이 일정시간이상 지나면 상태변경
+			if (KeyPressdTime > 0.4f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"IceKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"IceKirby_Left_Turn", false);
+
+				mState = eIceKirbyState::Turn;
+
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			}
+		}
+
+		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
+		{
+			KeyReleaseTime += Time::DeltaTime();
+
+			// 키를 뗀시간이 일정시간이상 지나면 상태변경
+			if (KeyReleaseTime > 0.125f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"IceKirby_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"IceKirby_Left_Turn", false);
+
+				mState = eIceKirbyState::Turn;
+
+				KeyPressdTime = 0.f;
+				KeyReleaseTime = 0.f;
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			}
+		}
+
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+
+		// 애니메이션
+
+		// Jump
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Jump", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Jump", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Jump", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Jump", true);
+		}
+
+		// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyStart", false);
+
+			mState = eIceKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+			KeyPressdTime = 0.f;
+			KeyReleaseTime = 0.f;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
+		}
 	}
 
 	void IceKirby::Turn()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		// 애니메이션	
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+		}
+
+		static float TurnTime = 0.f;
+		TurnTime += Time::DeltaTime();
+
+		// 애니메이션이 끝나면 상태 변경
+		if (mAnimator->IsActiveAnimationComplete() || TurnTime > 0.3f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+
+			TurnTime = 0.f;
+			mState = eIceKirbyState::Drop;
+		}
+
+		// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyStart", false);
+
+			TurnTime = 0.f;
+			mState = eIceKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
+		}
 	}
 
 	void IceKirby::Drop()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+		}
+
+				// Skill
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Skill", true);
+
+			mState = eIceKirbyState::Skill;
+
+			// 스킬 생성
+
+
+			// 오디오 재생		
+		}
+
+		// Fly Start
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyStart", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyStart", false);
+
+			mState = eIceKirbyState::Fly_Start;
+			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
+		}
+
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
+		}
+	}
+
+	void IceKirby::Down()
+	{
+		// 애니메이션
+
+		// 반대방향키가 눌렸을때 방향 전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_Down", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_Down", true);
+		}
+
+		// 키입력이없을땐 Idle 로 변경
+		if (!Input::GetKeyPressed(eKeyCode::DOWN))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+		}
 	}
 
 	void IceKirby::Fly_Start()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		// 방향전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyEnd", false);
+
+			mState = eIceKirbyState::Fly_End;
+
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
+		}
+
+		// 애니메이션이 끝나면 Fly Down 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyDown", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyDown", true);
+
+			mState = eIceKirbyState::Fly_Down;
+		}
 	}
 
 	void IceKirby::Fly_End()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+
+		// 방향 전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+		}
+
+		// 애니메이션이 끝나면 Drop 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
+
+			mState = eIceKirbyState::Drop;
+		}
 	}
 
 	void IceKirby::Fly_Down()
 	{
+		// Fly상태에선 속도제한
+		mRigidBody->SetLimitVelocity(Vector2(50.f, 50.f));
+
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		// 방향 전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_FlyDown", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_FlyDown", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_FlyDown", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_FlyDown", true);
+		}
+
+
+		// Fly Up
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D)
+			|| Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyUp", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyUp", true);
+
+			mState = eIceKirbyState::Fly_Up;
+			mRigidBody->SetVelocity(Vector2(0.f, -300.f));
+			mRigidBody->SetGround(false);
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyEnd", false);
+
+			mState = eIceKirbyState::Fly_End;
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
+
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);
+		}
 	}
 
 	void IceKirby::Fly_Up()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+
+		// 방향 전환
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_FlyUp", true);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_FlyUp", true);
+		}
+
+		// 키 동시 입력 예외처리
+		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"IceKirby_Right_FlyUp", true);
+		}
+		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"IceKirby_Left_FlyUp", true);
+		}
+
+		// 누르고있을때 상승
+		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
+		{
+			// 상단에 충돌한 상태면 속도를 0으로 설정하고 고정위치 셋팅
+			if (mbTopStop)
+			{
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				// 좌우 이동
+				Vector2 pos = mTransform->GetPosition();
+				pos.y -= 1.f;
+				mTransform->SetPosition(pos);
+			}
+			else
+			{
+				mRigidBody->SetVelocity(Vector2(0.f, -80.f));
+			}
+		}
+
+		// 키를 누르고있지 않을때 Fly Down
+		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyDown", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyDown", true);
+
+			mState = eIceKirbyState::Fly_Down;
+		}
+
+		// Fly End
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_FlyEnd", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_FlyEnd", false);
+
+			mState = eIceKirbyState::Fly_End;
+			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);
+		}
+	}
+
+	void IceKirby::Skill()
+	{
+		// 키입력이없으면서 타겟이 없을경우 Idle 로 변경
+		if (!Input::GetKeyPressed(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+
+			// 오디오 정지			
+		}
 	}
 }
