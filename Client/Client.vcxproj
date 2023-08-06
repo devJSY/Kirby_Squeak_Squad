@@ -150,10 +150,12 @@
     <ClInclude Include="syCollider.h" />
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
+    <ClInclude Include="syCutterKirby.h" />
     <ClInclude Include="syDash_Effect.h" />
     <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syCrimp_Skill.h" />
     <ClInclude Include="syEnemyHPbarUI.h" />
+    <ClInclude Include="syFireKirby.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="syStage4Scene.h" />
     <ClInclude Include="syStepUI.h" />
     <ClInclude Include="syStarUI.h" />
+    <ClInclude Include="syTonadoKirby.h" />
     <ClInclude Include="syVocalVolcanoScene.h" />
     <ClInclude Include="syWaddleDee.h" />
     <ClInclude Include="sySirKibble.h" />
@@ -237,10 +240,12 @@
     <ClCompile Include="syCollider.cpp" />
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
+    <ClCompile Include="syCutterKirby.cpp" />
     <ClCompile Include="syDash_Effect.cpp" />
     <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syCrimp_Skill.cpp" />
     <ClCompile Include="syEnemyHPbarUI.cpp" />
+    <ClCompile Include="syFireKirby.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
@@ -287,6 +292,7 @@
     <ClCompile Include="syStage4Scene.cpp" />
     <ClCompile Include="syStepUI.cpp" />
     <ClCompile Include="syStarUI.cpp" />
+    <ClCompile Include="syTonadoKirby.cpp" />
     <ClCompile Include="syVocalVolcanoScene.cpp" />
     <ClCompile Include="syWaddleDee.cpp" />
     <ClCompile Include="sySirKibble.cpp" />

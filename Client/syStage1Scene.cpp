@@ -1,5 +1,4 @@
 #include "syStage1Scene.h"
-#include "syDefaultKirby.h"
 #include "syObject.h"
 #include "syGameObject.h"
 #include "sySpriteRenderer.h"
@@ -22,6 +21,11 @@
 #include "syPortalUI.h"
 #include "syAbilityItem.h"
 #include "syMixItem.h"
+#include "syDefaultKirby.h"
+#include "syFireKirby.h"
+#include "syIceKirby.h"
+#include "syCutterKirby.h"
+#include "syTonadoKirby.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -208,6 +212,30 @@ namespace sy
 			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
 			defaultKirby->SetKirbyState(eDefaultKirbyState::Turn);
 			playerAni->PlayAnimation(L"DefaultKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Fire)
+		{
+			FireKirby* fireKirby = dynamic_cast<FireKirby*>(player->GetActiveKirby());
+			fireKirby->SetKirbyState(eFireKirbyState::Turn);
+			playerAni->PlayAnimation(L"FireKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Ice)
+		{
+			IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
+			iceKirby->SetKirbyState(eIceKirbyState::Turn);
+			playerAni->PlayAnimation(L"IceKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Cutter)
+		{
+			CutterKirby* cutterKirby = dynamic_cast<CutterKirby*>(player->GetActiveKirby());
+			cutterKirby->SetKirbyState(eCutterKirbyState::Turn);
+			playerAni->PlayAnimation(L"CutterKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Tornado)
+		{
+			TonadoKirby* tonadoKirby = dynamic_cast<TonadoKirby*>(player->GetActiveKirby());
+			tonadoKirby->SetKirbyState(eTonadoKirbyState::Turn);
+			playerAni->PlayAnimation(L"TornadoKirby_Right_Turn", false);
 		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);

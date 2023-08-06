@@ -25,12 +25,16 @@
 #include "sySceneManager.h"
 #include "syPlayer.h"
 #include "syGameObject.h"
-#include "syDefaultKirby.h"
 #include "syRigidbody.h"
 #include "syTime.h"
 #include "sySound.h"
 #include "syResourceManager.h"
 #include "syZoom_Effect.h"
+#include "syDefaultKirby.h"
+#include "syFireKirby.h"
+#include "syIceKirby.h"
+#include "syCutterKirby.h"
+#include "syTonadoKirby.h"
 
 namespace sy
 {
@@ -221,7 +225,7 @@ namespace sy
 
 		player->SetPlayerMode(ePlayerMode::LevelMode);
 		playerTrans->SetDirection(eDirection::RIGHT);		
-
+		player->SetLevelEnter(true);
 		
 		
 		// 플레이어 타입에따라 상태 설정 
@@ -229,9 +233,32 @@ namespace sy
 		if (playerType == eAbilityType::Normal)
 		{
 			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
-			defaultKirby->SetKirbyState(eDefaultKirbyState::Choice);
-			player->SetLevelEnter(true);
+			defaultKirby->SetKirbyState(eDefaultKirbyState::Choice);			
 			playerAni->PlayAnimation(L"Choice", false);
+		}
+		else if (playerType == eAbilityType::Fire)
+		{
+			FireKirby* fireKirby = dynamic_cast<FireKirby*>(player->GetActiveKirby());
+			fireKirby->SetKirbyState(eFireKirbyState::Choice);
+			playerAni->PlayAnimation(L"FireKirby_Choice", false);
+		}
+		else if (playerType == eAbilityType::Ice)
+		{
+			IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
+			iceKirby->SetKirbyState(eIceKirbyState::Choice);
+			playerAni->PlayAnimation(L"IceKirby_Choice", false);
+		}
+		else if (playerType == eAbilityType::Cutter)
+		{
+			CutterKirby* cutterKirby = dynamic_cast<CutterKirby*>(player->GetActiveKirby());
+			cutterKirby->SetKirbyState(eCutterKirbyState::Choice);
+			playerAni->PlayAnimation(L"CutterKirby_Choice", false);
+		}
+		else if (playerType == eAbilityType::Tornado)
+		{
+			TonadoKirby* tonadoKirby = dynamic_cast<TonadoKirby*>(player->GetActiveKirby());
+			tonadoKirby->SetKirbyState(eTonadoKirbyState::Choice);
+			playerAni->PlayAnimation(L"TornadoKirby_Choice", false);
 		}
 
 		// 오디오 재생

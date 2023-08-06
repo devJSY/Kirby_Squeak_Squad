@@ -2,7 +2,6 @@
 #include "syInput.h"
 #include "sySceneManager.h"
 #include "syObject.h"
-#include "syDefaultKirby.h"
 #include "syTransform.h"
 #include "syResourceManager.h"
 #include "syApplication.h"
@@ -15,6 +14,11 @@
 #include "syTime.h"
 #include "sySound.h"
 #include "syResourceManager.h"
+#include "syDefaultKirby.h"
+#include "syFireKirby.h"
+#include "syIceKirby.h"
+#include "syCutterKirby.h"
+#include "syTonadoKirby.h"
 
 namespace sy
 {
@@ -229,6 +233,126 @@ namespace sy
 					playerAni->PlayAnimation(L"DefaultKirby_Right_Run", true);
 				else
 					playerAni->PlayAnimation(L"DefaultKirby_Left_Run", true);
+			}
+		}
+		else if (playerType == eAbilityType::Fire)
+		{
+			FireKirby* fireKirby = dynamic_cast<FireKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					fireKirby->SetKirbyState(eFireKirbyState::Drop);
+					playerAni->PlayAnimation(L"FireKirby_Right_Drop", true);
+				}
+				else
+				{
+					fireKirby->SetKirbyState(eFireKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"FireKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				fireKirby->SetKirbyState(eFireKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"FireKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"FireKirby_Left_Run", true);
+			}
+		}
+		else if (playerType == eAbilityType::Ice)
+		{
+			IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					iceKirby->SetKirbyState(eIceKirbyState::Drop);
+					playerAni->PlayAnimation(L"IceKirby_Right_Drop", true);
+				}
+				else
+				{
+					iceKirby->SetKirbyState(eIceKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"IceKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				iceKirby->SetKirbyState(eIceKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"IceKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"IceKirby_Left_Run", true);
+			}
+		}
+		else if (playerType == eAbilityType::Cutter)
+		{
+			CutterKirby* cutterKirby = dynamic_cast<CutterKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					cutterKirby->SetKirbyState(eCutterKirbyState::Drop);
+					playerAni->PlayAnimation(L"CutterKirby_Right_Drop", true);
+				}
+				else
+				{
+					cutterKirby->SetKirbyState(eCutterKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"CutterKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				cutterKirby->SetKirbyState(eCutterKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"CutterKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"CutterKirby_Left_Run", true);
+			}
+		}
+		else if (playerType == eAbilityType::Tornado)
+		{
+			TonadoKirby* tonadoKirby = dynamic_cast<TonadoKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					tonadoKirby->SetKirbyState(eTonadoKirbyState::Drop);
+					playerAni->PlayAnimation(L"TornadoKirby_Right_Drop", true);
+				}
+				else
+				{
+					tonadoKirby->SetKirbyState(eTonadoKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"TornadoKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				tonadoKirby->SetKirbyState(eTonadoKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"TornadoKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"TornadoKirby_Left_Run", true);
 			}
 		}
 

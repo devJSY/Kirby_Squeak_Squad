@@ -15,6 +15,10 @@
 #include "syInput.h"
 #include "syLanding_Effect.h"
 #include "syObject.h"
+#include "syTime.h"
+#include "syDash_Effect.h"
+#include "syLevelSelectScene.h"
+
 
 namespace sy
 {
@@ -50,9 +54,9 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 애니메이션 생성
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Choice", Vector2(169.f, 355.f), Vector2(24.f, 33.f), Vector2(24.f, 0.f), 0.04f, 9);
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(23.f, 31.f), Vector2(23.f, 0.f), 0.16f, 1);
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Enter", Vector2(459.f, 466.f), Vector2(23.f, 31.f), Vector2(-23.f, 0.f), 0.16f, 1);
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Choice", Vector2(169.f, 355.f), Vector2(24.f, 33.f), Vector2(24.f, 0.f), 0.04f, 9);
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(23.f, 31.f), Vector2(23.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Enter", Vector2(459.f, 466.f), Vector2(23.f, 31.f), Vector2(-23.f, 0.f), 1.f, 1);
 
 		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Idle", Vector2(7.f, 4.f), Vector2(21.f, 25.f), Vector2(21.f, 0.f), 0.8f, 2);
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Idle", Vector2(569.f, 4.f), Vector2(21.f, 25.f), Vector2(-21.f, 0.f), 0.8f, 2);
@@ -469,7 +473,7 @@ namespace sy
 		// 애니메이션
 		if ((Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT)) && !GetOwner()->GetLevelEnter())
 		{
-			mAnimator->PlayAnimation(L"IceKirby_Right_Choice", false);
+			mAnimator->PlayAnimation(L"IceKirby_Choice", false);
 		}
 
 		// 애니메이션이 끝나면 Idle 상태로 변경
@@ -488,11 +492,7 @@ namespace sy
 			}
 			else
 			{
-				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"IceKirby_Right_Idle", false);
-				else
-					mAnimator->PlayAnimation(L"IceKirby_Left_Idle", false);
-
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
 				mState = eIceKirbyState::Idle;
 			}
 		}
@@ -512,22 +512,125 @@ namespace sy
 
 	void IceKirby::Level_Enter()
 	{
+		// 애니메이션이 끝나면 Idle 상태로 변경
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+
+			mState = eIceKirbyState::Idle;
+		}
 	}
 
 	void IceKirby::Level_Idle()
 	{
+		if (Input::GetKeyDown(eKeyCode::UP)
+			|| Input::GetKeyDown(eKeyCode::DOWN)
+			|| Input::GetKeyDown(eKeyCode::RIGHT)
+			|| Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			mAnimator->PlayAnimation(L"IceKirby_Choice", false);
+			mState = eIceKirbyState::Choice;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::W)
+			|| Input::GetKeyDown(eKeyCode::A)
+			|| Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Enter", false);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Left_Enter", false);
+
+			mState = eIceKirbyState::Enter;
+		}
 	}
 
 	void IceKirby::Level_Run()
 	{
+		// BackGround Animator Set
+		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		eLevelState CurLevelState = levelSelectScene->GetCurLevelState();
+
+		Vector2 pos = mTransform->GetPosition();
+
+		if (CurLevelState == eLevelState::Level1 || CurLevelState == eLevelState::Level5)
+		{
+			if (mDir == eDirection::RIGHT)
+				pos.x += 120.f * Time::DeltaTime();
+			else
+				pos.x -= 120.f * Time::DeltaTime();
+		}
+		else if (CurLevelState == eLevelState::Level3)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(766.f, 202.f) - Vector2(517.f, 77.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+			else
+			{
+				Vector2 vec = Vector2(517.f, 77.f) - Vector2(766.f, 202.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+		else if (CurLevelState == eLevelState::Level4 || CurLevelState == eLevelState::Level7)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(1032.f, 83.f) - Vector2(792.f, 202.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+			else
+			{
+				Vector2 vec = Vector2(792.f, 202.f) - Vector2(1032.f, 83.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+		else if (CurLevelState == eLevelState::Level8)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 vec = Vector2(766.f, 202.f) - Vector2(517.f, 77.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+			else
+			{
+				Vector2 vec = Vector2(517.f, 77.f) - Vector2(766.f, 202.f);
+				vec.Normalize();
+				pos += (vec * 120.f) * Time::DeltaTime();
+			}
+		}
+
+		mTransform->SetPosition(pos);
+
+		static float time = 0.f;
+		time += Time::DeltaTime();
+		if (time > 0.3f)
+		{
+			Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
+			DashEffect->GetComponent<Animator>()->SetAffectedCamera(false);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
+			time = 0.f;
+		}
 	}
 
 	void IceKirby::Level_FlyUp()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		pos.y -= 120.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
 	}
 
 	void IceKirby::Level_Drop()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		pos.y += 120.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
 	}
 
 	void IceKirby::Idle()
