@@ -29,20 +29,6 @@ namespace sy
 
 	void Player::Update()
 	{
-		//if (mHP > 100)
-		//	mHP = 100;
-
-		//if (mHP <= 0)
-		//{
-		//	mHP = 0;
-		//	--mLife;
-		//}
-
-		//if (mLife < 0)
-		//{
-		//	// GameOver
-		//}
-
 		GameObject::Update();
 	}
 

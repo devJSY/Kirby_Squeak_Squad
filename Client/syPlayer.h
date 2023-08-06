@@ -27,6 +27,9 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) = 0;
 
+		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
+		bool GetLevelEnter() { return mbLevelEnter; }
+
 		eAbilityType GetAbilityType() { return mAbilityType; }
 
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
@@ -45,6 +48,7 @@ namespace sy
 		enums::eAbilityType		mAbilityType;
 		ePlayerMode				mMode;		
 
+		bool					mbLevelEnter;	// Level Mode State 첫진입시 설정
 		int						mHP;	// HP 0 ~ 100 범위
 		int						mLife;	
 

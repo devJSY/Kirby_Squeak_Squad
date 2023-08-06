@@ -71,8 +71,6 @@ namespace sy
 		void SetKirbyState(eDefaultKirbyState state) { mState = state; }
 		eDefaultKirbyState GetKirbyState() { return mState; }
 
-		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
-
 		void SetOnLeftStop(bool trig) { mbOnLeftStop = trig; }
 		void SetOnRightStop(bool trig) { mbOnRightStop = trig; }
 
@@ -131,7 +129,6 @@ namespace sy
 		class Rigidbody*			mRigidBody;
 		eDirection					mDir;
 
-		bool						mbLevelEnter;	// Level Mode State 첫진입시 설정
 		bool						mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
 		bool						mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
 		bool						mbTopStop;		// 상단에 충돌한 상태여부

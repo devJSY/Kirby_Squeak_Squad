@@ -34,13 +34,13 @@ namespace sy
 	Scene* SceneManager::mActiveScene = nullptr;
 
 	// SceneManager俊辑 Player按眉 积己
-	Player* SceneManager::mPlayer = new DefaultKirby;
+	Player* SceneManager::mPlayer = nullptr;
 
 	// SceneManager俊辑 UI按眉 积己
-	Inventory* SceneManager::mInventory = new Inventory;
-	AbilityUI* SceneManager::mAbilityUI = new AbilityUI;
-	HPbarUI* SceneManager::mHPbarUI = new HPbarUI;
-	LifeUI* SceneManager::mLifeUI = new LifeUI;
+	Inventory* SceneManager::mInventory = nullptr;
+	AbilityUI* SceneManager::mAbilityUI = nullptr;
+	HPbarUI* SceneManager::mHPbarUI = nullptr;
+	LifeUI* SceneManager::mLifeUI = nullptr;
 
 	SceneManager::SceneManager()
 	{
@@ -107,8 +107,15 @@ namespace sy
 			iter.second->Initialize();
 		}
 
+		mPlayer = new DefaultKirby;
 		mPlayer->Initialize();
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(275.f, 100.f));
+
+
+		mInventory = new Inventory;
+		mAbilityUI = new AbilityUI;
+		mHPbarUI = new HPbarUI;
+		mLifeUI = new LifeUI;
 
 		mInventory->Initialize();
 		mAbilityUI->Initialize();
