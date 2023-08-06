@@ -59,8 +59,8 @@ namespace sy
 		// 애니메이션 생성
 
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Choice", Vector2(187.f, 558.f), Vector2(28.f, 48.f), Vector2(28.f, 0.f), 0.03f, 12);
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Enter", Vector2(368.f, 1153.f), Vector2(22.f, 29.f), Vector2(22.f, 0.f), 1.f, 2);
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Enter", Vector2(304.f, 1153.f), Vector2(22.f, 29.f), Vector2(-22.f, 0.f), 1.f, 2);
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Enter", Vector2(368.f, 1153.f), Vector2(22.f, 29.f), Vector2(22.f, 0.f), 0.5f, 2);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Enter", Vector2(304.f, 1153.f), Vector2(22.f, 29.f), Vector2(-22.f, 0.f), 0.5f, 2);
 
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Idle", Vector2(8.f, 4.f), Vector2(23.f, 32.f), Vector2(23.f, 0.f), 0.08f, 8, Vector2(0.f, -7.f));
 		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Idle", Vector2(663.f, 4.f), Vector2(23.f, 32.f), Vector2(-23.f, 0.f), 0.08f, 8, Vector2(0.f, -7.f));
@@ -1789,7 +1789,7 @@ namespace sy
 	{
 		mRigidBody->SetGround(true);
 		Collider* col = GetOwner()->GetComponent<Collider>();
-		col->SetSize(Vector2(59.f, 30.f));
+		col->SetSize(Vector2(59.f, 25.f));
 
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))

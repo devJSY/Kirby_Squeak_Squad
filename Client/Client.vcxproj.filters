@@ -298,6 +298,9 @@
     <Filter Include="Contents\GameObject\Player\FireKirby\Skill">
       <UniqueIdentifier>{12baa194-3af7-425f-ae25-476069a134f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\AbilityStar">
+      <UniqueIdentifier>{95c871db-e718-466e-a770-19e267ec5382}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -576,6 +579,9 @@
     <ClInclude Include="syFireKirby_Skill.h">
       <Filter>Contents\GameObject\Player\FireKirby\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="syAbilityStar.h">
+      <Filter>Contents\GameObject\AbilityStar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -844,6 +850,9 @@
     </ClCompile>
     <ClCompile Include="syFireKirby_Skill.cpp">
       <Filter>Contents\GameObject\Player\FireKirby\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="syAbilityStar.cpp">
+      <Filter>Contents\GameObject\AbilityStar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
