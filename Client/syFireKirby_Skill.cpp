@@ -102,7 +102,7 @@ namespace sy
 			return;
 
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
-		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
