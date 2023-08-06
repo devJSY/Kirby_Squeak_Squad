@@ -87,11 +87,11 @@ namespace sy
 		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyEnd", Vector2(108.f, 207.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyEnd", Vector2(465.f, 207.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
-
 		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyDown", Vector2(6.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyDown", Vector2(565.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
+
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
 
 		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Skill", Vector2(181.f, 573.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 0.1f, 2, Vector2(0.f, -5.f));
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Skill", Vector2(394.f, 573.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 0.1f, 2, Vector2(0.f, -5.f));

@@ -295,6 +295,9 @@
     <Filter Include="Contents\GameObject\Player\IceKirby\Skill">
       <UniqueIdentifier>{bd8cb1ba-7a0f-4827-aa19-f5c548f60f0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\FireKirby\Skill">
+      <UniqueIdentifier>{12baa194-3af7-425f-ae25-476069a134f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -564,11 +567,14 @@
     <ClInclude Include="syFireKirby.h">
       <Filter>Contents\GameObject\Player\FireKirby</Filter>
     </ClInclude>
-    <ClInclude Include="syTonadoKirby.h">
+    <ClInclude Include="syTornadoKirby.h">
       <Filter>Contents\GameObject\Player\Tornado</Filter>
     </ClInclude>
     <ClInclude Include="syIceKirby_Skill.h">
       <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="syFireKirby_Skill.h">
+      <Filter>Contents\GameObject\Player\FireKirby\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -830,11 +836,14 @@
     <ClCompile Include="syFireKirby.cpp">
       <Filter>Contents\GameObject\Player\FireKirby</Filter>
     </ClCompile>
-    <ClCompile Include="syTonadoKirby.cpp">
+    <ClCompile Include="syTornadoKirby.cpp">
       <Filter>Contents\GameObject\Player\Tornado</Filter>
     </ClCompile>
     <ClCompile Include="syIceKirby_Skill.cpp">
       <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="syFireKirby_Skill.cpp">
+      <Filter>Contents\GameObject\Player\FireKirby\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

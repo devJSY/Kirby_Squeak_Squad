@@ -3,7 +3,7 @@
 
 namespace sy
 {
-	enum class eTonadoKirbyState
+	enum class eTornadoKirbyState
 	{
 		Choice,
 		Enter,
@@ -25,11 +25,11 @@ namespace sy
 	// A,D 점프 
 	// S 스킬
 	// W 변신능력 뱉기
-	class TonadoKirby : public Kirby
+	class TornadoKirby : public Kirby
 	{
 	public:
-		TonadoKirby(class Player* owner);
-		virtual ~TonadoKirby();
+		TornadoKirby(class Player* owner);
+		virtual ~TornadoKirby();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -43,8 +43,8 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other)	override;
 		virtual void OnCollisionExit(class Collider* other)	override;
 
-		void SetKirbyState(eTonadoKirbyState state) { mState = state; }
-		eTonadoKirbyState GetKirbyState() { return mState; }
+		void SetKirbyState(eTornadoKirbyState state) { mState = state; }
+		eTornadoKirbyState GetKirbyState() { return mState; }
 
 		void SetOnLeftStop(bool trig) { mbOnLeftStop = trig; }
 		void SetOnRightStop(bool trig) { mbOnRightStop = trig; }
@@ -77,7 +77,7 @@ namespace sy
 		void Skill();
 
 	private:
-		eTonadoKirbyState	mState;
+		eTornadoKirbyState	mState;
 		class Animator*		mAnimator;
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidBody;

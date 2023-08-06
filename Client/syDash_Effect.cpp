@@ -6,7 +6,10 @@
 #include "syTransform.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "syFireKirby.h"
 #include "syIceKirby.h"
+#include "syCutterKirby.h"
+#include "syTornadoKirby.h"
 
 namespace sy
 {
@@ -61,11 +64,10 @@ namespace sy
 			tr->SetPosition(vec);
 		}
 	
-
+		// Run 상태가 아니거나 애니메이션이 끝나면 삭제
 		if (player->GetAbilityType() == eAbilityType::Normal)
-		{
+		{			
 			DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
-			// Run 상태가 아니거나 애니메이션이 끝나면 삭제
 			if (mAnimator->IsActiveAnimationComplete()
 				|| !(defaultKirby->GetKirbyState() == eDefaultKirbyState::Run || defaultKirby->GetKirbyState() == eDefaultKirbyState::Inhaled_Run))
 			{
@@ -74,18 +76,40 @@ namespace sy
 		}
 		else if (player->GetAbilityType() == eAbilityType::Fire)
 		{
-
+			FireKirby* fireKirby = dynamic_cast<FireKirby*>(player->GetActiveKirby());
+			if (mAnimator->IsActiveAnimationComplete()
+				|| !(fireKirby->GetKirbyState() == eFireKirbyState::Run))
+			{
+				Destroy(this);
+			}
 		}
 		else if (player->GetAbilityType() == eAbilityType::Ice)
 		{
 			IceKirby* iceKirby = dynamic_cast<IceKirby*>(player->GetActiveKirby());
-			// Run 상태가 아니거나 애니메이션이 끝나면 삭제
 			if (mAnimator->IsActiveAnimationComplete()
 				|| !(iceKirby->GetKirbyState() == eIceKirbyState::Run))
 			{
 				Destroy(this);
 			}
 		}	
+		else if (player->GetAbilityType() == eAbilityType::Cutter)
+		{
+			CutterKirby* cutterKirby = dynamic_cast<CutterKirby*>(player->GetActiveKirby());
+			if (mAnimator->IsActiveAnimationComplete()
+				|| !(cutterKirby->GetKirbyState() == eCutterKirbyState::Run))
+			{
+				Destroy(this);
+			}
+		}
+		else if (player->GetAbilityType() == eAbilityType::Ice)
+		{
+			TornadoKirby* tornadoKirby = dynamic_cast<TornadoKirby*>(player->GetActiveKirby());
+			if (mAnimator->IsActiveAnimationComplete()
+				|| !(tornadoKirby->GetKirbyState() == eTornadoKirbyState::Run))
+			{
+				Destroy(this);
+			}
+		}
 		else
 		{
 			if (mAnimator->IsActiveAnimationComplete())

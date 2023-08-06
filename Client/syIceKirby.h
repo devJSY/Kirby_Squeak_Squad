@@ -84,7 +84,7 @@ namespace sy
 		class Animator*			mAnimator;
 		class Transform*		mTransform;
 		class Rigidbody*		mRigidBody;
-		eDirection				mDir;
+		enums::eDirection		mDir;
 
 		bool					mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
 		bool					mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부

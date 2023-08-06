@@ -5,6 +5,7 @@ namespace sy
 {
 	enum class eFireKirbyState
 	{
+		Transformations,
 		Choice,
 		Enter,
 		Idle,
@@ -19,8 +20,10 @@ namespace sy
 		Fly_Down,
 		Fly_Up,
 		Skill,
+		DASH_Skill,
 		End,
 	};
+
 
 	// A,D 점프 
 	// S 스킬
@@ -63,6 +66,7 @@ namespace sy
 
 	private:
 		// Play Mode State
+		void Transformations();
 		void Idle();
 		void Walk();
 		void Run();
@@ -75,18 +79,21 @@ namespace sy
 		void Fly_Down();
 		void Fly_Up();
 		void Skill();
+		void DASH_Skill();
 
 	private:
-		eFireKirbyState		mState;
-		class Animator*		mAnimator;
-		class Transform*	mTransform;
-		class Rigidbody*	mRigidBody;
-		enums::eDirection	mDir;
+		eFireKirbyState			mState;
+		class Animator*			mAnimator;
+		class Transform*		mTransform;
+		class Rigidbody*		mRigidBody;
+		enums::eDirection		mDir;
 
-		bool				mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
-		bool				mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
-		bool				mbTopStop;		// 상단에 충돌한 상태여부
-		bool				mbOnSlope;		// 경사로에 올라탄 상태여부
+		bool					mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
+		bool					mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
+		bool					mbTopStop;		// 상단에 충돌한 상태여부
+		bool					mbOnSlope;		// 경사로에 올라탄 상태여부
+
+		class FireKirby_Skill* mSkill;
 	};
 }
 

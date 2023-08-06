@@ -25,7 +25,7 @@
 #include "syFireKirby.h"
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
-#include "syTonadoKirby.h"
+#include "syTornadoKirby.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -233,8 +233,8 @@ namespace sy
 		}
 		else if (playerType == eAbilityType::Tornado)
 		{
-			TonadoKirby* tonadoKirby = dynamic_cast<TonadoKirby*>(player->GetActiveKirby());
-			tonadoKirby->SetKirbyState(eTonadoKirbyState::Turn);
+			TornadoKirby* tornadoKirby = dynamic_cast<TornadoKirby*>(player->GetActiveKirby());
+			tornadoKirby->SetKirbyState(eTornadoKirbyState::Turn);
 			playerAni->PlayAnimation(L"TornadoKirby_Right_Turn", false);
 		}
 

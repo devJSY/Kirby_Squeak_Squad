@@ -18,7 +18,7 @@
 #include "syFireKirby.h"
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
-#include "syTonadoKirby.h"
+#include "syTornadoKirby.h"
 
 namespace sy
 {
@@ -327,18 +327,18 @@ namespace sy
 		}
 		else if (playerType == eAbilityType::Tornado)
 		{
-			TonadoKirby* tonadoKirby = dynamic_cast<TonadoKirby*>(player->GetActiveKirby());
+			TornadoKirby* tornadoKirby = dynamic_cast<TornadoKirby*>(player->GetActiveKirby());
 
 			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
 			{
 				if (mPrevSceneName == L"LevelSelectScene")
 				{
-					tonadoKirby->SetKirbyState(eTonadoKirbyState::Drop);
+					tornadoKirby->SetKirbyState(eTornadoKirbyState::Drop);
 					playerAni->PlayAnimation(L"TornadoKirby_Right_Drop", true);
 				}
 				else
 				{
-					tonadoKirby->SetKirbyState(eTonadoKirbyState::Fly_Up);
+					tornadoKirby->SetKirbyState(eTornadoKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"TornadoKirby_Right_FlyUp", true);
 				}
 			}
@@ -347,7 +347,7 @@ namespace sy
 				// 오디오 재생
 				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 
-				tonadoKirby->SetKirbyState(eTonadoKirbyState::Run);
+				tornadoKirby->SetKirbyState(eTornadoKirbyState::Run);
 
 				if (playerTrans->GetDirection() == eDirection::RIGHT)
 					playerAni->PlayAnimation(L"TornadoKirby_Right_Run", true);

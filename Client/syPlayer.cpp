@@ -2,13 +2,15 @@
 #include "syAnimator.h"
 #include "syCollider.h"
 #include "syRigidbody.h"
-#include "syDefaultKirby.h"
-#include "syIceKirby.h"
 #include "syInventory.h"
 #include "sySceneManager.h"
-#include "syKirby.h"
 #include "syTransform.h"
-
+#include "syKirby.h"
+#include "syDefaultKirby.h"
+#include "syFireKirby.h"
+#include "syIceKirby.h"
+#include "syCutterKirby.h"
+#include "syTornadoKirby.h"
 
 namespace sy
 {
@@ -45,10 +47,10 @@ namespace sy
 		mKirbyType.resize((UINT)eAbilityType::End);
 
 		mKirbyType[(UINT)eAbilityType::Normal] = new DefaultKirby(this);
-		mKirbyType[(UINT)eAbilityType::Fire] = new DefaultKirby(this);
+		mKirbyType[(UINT)eAbilityType::Fire] = new FireKirby(this);
 		mKirbyType[(UINT)eAbilityType::Ice] = new IceKirby(this);
-		mKirbyType[(UINT)eAbilityType::Cutter] = new DefaultKirby(this);
-		mKirbyType[(UINT)eAbilityType::Tornado] = new DefaultKirby(this);
+		mKirbyType[(UINT)eAbilityType::Cutter] = new CutterKirby(this);
+		mKirbyType[(UINT)eAbilityType::Tornado] = new TornadoKirby(this);
 		//mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
 	
 
