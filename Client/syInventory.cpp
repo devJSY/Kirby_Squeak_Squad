@@ -192,9 +192,12 @@ namespace sy
 						// 슬롯 반지름 범위 안에 들어왔다
 						if (Length <= SlotRadius)
 						{
-							mSlot[idx] = nullptr;
-							Destroy(mFocusItem);
-							SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());
+							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType())
+							{
+								mSlot[idx] = nullptr;
+								Destroy(mFocusItem);
+								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());
+							}
 						}
 					}
 					else

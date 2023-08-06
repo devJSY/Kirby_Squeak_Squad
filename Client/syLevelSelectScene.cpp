@@ -35,6 +35,7 @@
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTonadoKirby.h"
+#include "syMixItem.h"
 
 namespace sy
 {
@@ -155,6 +156,11 @@ namespace sy
 			}			
 		}
 
+		// 임시 믹스 효과 추가하기
+		if (Input::GetKeyDown(eKeyCode::R))
+		{			
+			object::Instantiate<MixItem>(eLayerType::InventoryItem);
+		}
 
 		// 스테이지 전부 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
