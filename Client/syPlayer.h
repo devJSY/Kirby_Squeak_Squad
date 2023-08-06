@@ -1,5 +1,6 @@
 #pragma once
 #include "syGameObject.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -29,6 +30,7 @@ namespace sy
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 
 		void PlayerTransformations(eAbilityType type);		
+		void ReleaseTransformations(eDefaultKirbyState state);
 
 		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
 

@@ -159,10 +159,15 @@ namespace sy
 					state = eDefaultKirbyState::Walk;
 				else if (mState == eIceKirbyState::Run)
 					state = eDefaultKirbyState::Run;
+				else if (mState == eIceKirbyState::Down)
+					state = eDefaultKirbyState::Down;
 				else 
 					state = eDefaultKirbyState::Drop;
 
-				//GetOwner()->ReleaseTransformations(state);
+				GetOwner()->ReleaseTransformations(state);
+
+				// 상태변경 방지 리턴
+				return;
 			}
 
 			// 픽셀충돌 체크

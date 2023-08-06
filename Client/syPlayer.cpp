@@ -7,6 +7,8 @@
 #include "syInventory.h"
 #include "sySceneManager.h"
 #include "syKirby.h"
+#include "syTransform.h"
+
 
 namespace sy
 {
@@ -127,5 +129,50 @@ namespace sy
 		}
 	}
 
+	void Player::ReleaseTransformations(eDefaultKirbyState state)
+	{
+		mAbilityType = eAbilityType::Normal;
+		Kirby* kirby = mKirbyType[(UINT)mAbilityType];
+		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(kirby);
+		defaultKirby->SetKirbyState(state);
+		GetComponent<Rigidbody>()->SetLimitVelocity(Vector2(300.f, 300.f));
+		GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, 0.f));
+		
+		if (state == eDefaultKirbyState::Idle)
+		{
+			if (GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+			else
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+		}
+		else if (state == eDefaultKirbyState::Walk)
+		{
+			if (GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Right_Walk", true);
+			else
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Walk", true);
 
+		}
+		else if (state == eDefaultKirbyState::Run)
+		{
+			if (GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Right_Run", true);
+			else
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Run", true);
+		}
+		else if (state == eDefaultKirbyState::Down)
+		{
+			if (GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Right_Down", true);
+			else
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Down", true);
+		}
+		else
+		{
+			if (GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Right_Drop");
+			else
+				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Drop");
+		}
+	}
 }
