@@ -280,12 +280,6 @@
     <Filter Include="Contents\GameObject\Player\Kirby">
       <UniqueIdentifier>{d269fbf1-9518-447c-b43c-45caa889e09e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\Cutter">
-      <UniqueIdentifier>{836a143a-d51c-4fa5-93d9-b72a7ed37048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Player\Tornado">
-      <UniqueIdentifier>{6d3a510c-4a27-4ebc-a567-039382353d5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Player\IceKirby\Skill">
       <UniqueIdentifier>{bd8cb1ba-7a0f-4827-aa19-f5c548f60f0f}</UniqueIdentifier>
     </Filter>
@@ -300,6 +294,15 @@
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
       <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\CutterKirbvy">
+      <UniqueIdentifier>{836a143a-d51c-4fa5-93d9-b72a7ed37048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\TornadoKirby">
+      <UniqueIdentifier>{6d3a510c-4a27-4ebc-a567-039382353d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\CutterKirbvy\Skill">
+      <UniqueIdentifier>{bc321b6f-30f5-4e7e-9575-39bcfaa17948}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -565,13 +568,13 @@
       <Filter>Contents\GameObject\Player\Kirby</Filter>
     </ClInclude>
     <ClInclude Include="syCutterKirby.h">
-      <Filter>Contents\GameObject\Player\Cutter</Filter>
+      <Filter>Contents\GameObject\Player\CutterKirbvy</Filter>
     </ClInclude>
     <ClInclude Include="syFireKirby.h">
       <Filter>Contents\GameObject\Player\FireKirby</Filter>
     </ClInclude>
     <ClInclude Include="syTornadoKirby.h">
-      <Filter>Contents\GameObject\Player\Tornado</Filter>
+      <Filter>Contents\GameObject\Player\TornadoKirby</Filter>
     </ClInclude>
     <ClInclude Include="syIceKirby_Skill.h">
       <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
@@ -581,6 +584,9 @@
     </ClInclude>
     <ClInclude Include="syAbilityStar.h">
       <Filter>Contents\GameObject\AbilityStar</Filter>
+    </ClInclude>
+    <ClInclude Include="syCutterKirby_Skill.h">
+      <Filter>Contents\GameObject\Player\CutterKirbvy\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -837,13 +843,13 @@
       <Filter>Contents\GameObject\Player\Kirby</Filter>
     </ClCompile>
     <ClCompile Include="syCutterKirby.cpp">
-      <Filter>Contents\GameObject\Player\Cutter</Filter>
+      <Filter>Contents\GameObject\Player\CutterKirbvy</Filter>
     </ClCompile>
     <ClCompile Include="syFireKirby.cpp">
       <Filter>Contents\GameObject\Player\FireKirby</Filter>
     </ClCompile>
     <ClCompile Include="syTornadoKirby.cpp">
-      <Filter>Contents\GameObject\Player\Tornado</Filter>
+      <Filter>Contents\GameObject\Player\TornadoKirby</Filter>
     </ClCompile>
     <ClCompile Include="syIceKirby_Skill.cpp">
       <Filter>Contents\GameObject\Player\IceKirby\Skill</Filter>
@@ -853,6 +859,9 @@
     </ClCompile>
     <ClCompile Include="syAbilityStar.cpp">
       <Filter>Contents\GameObject\AbilityStar</Filter>
+    </ClCompile>
+    <ClCompile Include="syCutterKirby_Skill.cpp">
+      <Filter>Contents\GameObject\Player\CutterKirbvy\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
