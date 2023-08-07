@@ -137,8 +137,4 @@ namespace sy
 		enemy->TakeHit(50, Dir);
 		enemy->SetHPBarUIRenderTrig(true);
 	}
-
-	void FireKirby_Skill::OnCollisionExit(Collider* other)
-	{
-	}
 }

@@ -117,7 +117,9 @@ namespace sy
 			mKirbyType[(UINT)mAbilityType]->Exit();
 			mAbilityType = type;
 			mKirbyType[(UINT)mAbilityType]->Enter();
-			ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
+
+			if (type != eAbilityType::Normal)
+				ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
 		}
 
 		if (type == eAbilityType::Normal)

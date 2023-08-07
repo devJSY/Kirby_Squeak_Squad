@@ -15,10 +15,12 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other) override;
         virtual void OnCollisionStay(class Collider* other) override;
-        virtual void OnCollisionExit(class Collider* other) override;
 
     private:
-        eDirection mDir;
+        eDirection          mDir;
+        class Transform*    mTransform;
+        class Rigidbody*    mRigidbody;
+        float               mDuration;
 
     };
 }
