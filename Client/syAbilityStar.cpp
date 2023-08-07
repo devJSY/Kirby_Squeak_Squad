@@ -173,9 +173,9 @@ namespace sy
 
 		Vector2 pos = mTransform->GetPosition();
 		if (mTransform->GetDirection() == eDirection::RIGHT)
-			pos.x += 100.f * Time::DeltaTime();
+			pos.x += 50.f * Time::DeltaTime();
 		else
-			pos.x -= 100.f * Time::DeltaTime();
+			pos.x -= 50.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 	}
 

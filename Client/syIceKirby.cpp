@@ -57,45 +57,47 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Choice", Vector2(169.f, 355.f), Vector2(24.f, 33.f), Vector2(24.f, 0.f), 0.04f, 9, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(23.f, 31.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
+		Vector2 Animationoffset = Vector2(0.f, -5.f);
+
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Choice", Vector2(169.f, 355.f), Vector2(24.f, 33.f), Vector2(24.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(23.f, 31.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Enter", Vector2(459.f, 466.f), Vector2(23.f, 31.f), Vector2(-23.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Idle", Vector2(7.f, 4.f), Vector2(21.f, 25.f), Vector2(21.f, 0.f), 0.8f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Idle", Vector2(569.f, 4.f), Vector2(21.f, 25.f), Vector2(-21.f, 0.f), 0.8f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Idle", Vector2(7.f, 4.f), Vector2(21.f, 25.f), Vector2(21.f, 0.f), 0.8f, 2, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Idle", Vector2(569.f, 4.f), Vector2(21.f, 25.f), Vector2(-21.f, 0.f), 0.8f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Walk", Vector2(7.f, 136.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 0.07f, 10, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Walk", Vector2(568.f, 136.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 0.07f, 10, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Walk", Vector2(7.f, 136.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 0.07f, 10, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Walk", Vector2(568.f, 136.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 0.07f, 10, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Run", Vector2(0.f, 174.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 0.043f, 8, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Run", Vector2(572.f, 174.f), Vector2(25.f, 26.f), Vector2(-25.f, 0.f), 0.043f, 8, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Run", Vector2(0.f, 174.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Run", Vector2(572.f, 174.f), Vector2(25.f, 26.f), Vector2(-25.f, 0.f), 0.043f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Jump", Vector2(7.f, 100.f), Vector2(21.f, 28.f), Vector2(21.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Jump", Vector2(569.f, 100.f), Vector2(21.f, 28.f), Vector2(-21.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Jump", Vector2(7.f, 100.f), Vector2(21.f, 28.f), Vector2(21.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Jump", Vector2(569.f, 100.f), Vector2(21.f, 28.f), Vector2(-21.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Turn", Vector2(32.f, 103.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.035f, 6, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Turn", Vector2(541.f, 103.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.035f, 6, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Turn", Vector2(32.f, 103.f), Vector2(24.f, 25.f), Vector2(24.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Turn", Vector2(541.f, 103.f), Vector2(24.f, 25.f), Vector2(-24.f, 0.f), 0.035f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Drop", Vector2(197.f, 102.f), Vector2(21.f, 26.f), Vector2(21.f, 0.f), 0.05f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Drop", Vector2(379.f, 102.f), Vector2(21.f, 26.f), Vector2(-21.f, 0.f), 0.05f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Drop", Vector2(197.f, 102.f), Vector2(21.f, 26.f), Vector2(21.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Drop", Vector2(379.f, 102.f), Vector2(21.f, 26.f), Vector2(-21.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Down", Vector2(7.f, 41.f), Vector2(25.f, 19.f), Vector2(25.f, 0.f), 0.8f, 2);
 		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Down", Vector2(565.f, 41.f), Vector2(25.f, 19.f), Vector2(-25.f, 0.f), 0.8f, 2);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyStart", Vector2(60.f, 207.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyStart", Vector2(513.f, 207.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyStart", Vector2(60.f, 207.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyStart", Vector2(513.f, 207.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyEnd", Vector2(108.f, 207.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyEnd", Vector2(465.f, 207.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyEnd", Vector2(108.f, 207.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyEnd", Vector2(465.f, 207.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyDown", Vector2(6.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyDown", Vector2(565.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyDown", Vector2(6.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.15f, 2, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyDown", Vector2(565.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.15f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.1f, 4, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Skill", Vector2(181.f, 573.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 0.1f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Skill", Vector2(394.f, 573.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 0.1f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(IceKirby_Right, L"IceKirby_Right_Skill", Vector2(181.f, 573.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(IceKirby_Left, L"IceKirby_Left_Skill", Vector2(394.f, 573.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 0.1f, 2, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
@@ -150,7 +152,8 @@ namespace sy
 		}
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
-			if (Input::GetKeyDown(eKeyCode::W))
+			if (Input::GetKeyDown(eKeyCode::W)
+				&& mState != eIceKirbyState::Skill)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 

@@ -57,48 +57,50 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Choice", Vector2(5.f, 95.f), Vector2(27.f, 42.f), Vector2(27.f, 0.f), 0.04f, 9, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Enter", Vector2(549.f, 316.f), Vector2(22.f, 30.f), Vector2(22.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Enter", Vector2(18.f, 316.f), Vector2(22.f, 30.f), Vector2(-22.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
+		Vector2 Animationoffset = Vector2(0.f, -5.f);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Idle", Vector2(6.f, 20.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Idle", Vector2(557.f, 20.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Choice", Vector2(5.f, 95.f), Vector2(27.f, 42.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Enter", Vector2(549.f, 316.f), Vector2(22.f, 30.f), Vector2(22.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Enter", Vector2(18.f, 316.f), Vector2(22.f, 30.f), Vector2(-22.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Idle", Vector2(6.f, 20.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Idle", Vector2(557.f, 20.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Run", Vector2(0.f, 60.f), Vector2(27.f, 27.f), Vector2(27.f, 0.f), 0.043f, 8, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Run", Vector2(562.f, 60.f), Vector2(27.f, 27.f), Vector2(-27.f, 0.f), 0.043f, 8, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Jump", Vector2(251.f, 58.f), Vector2(23.f, 28.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Jump", Vector2(315.f, 58.f), Vector2(23.f, 28.f), Vector2(-23.f, 0.f), 1.f, 1, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Run", Vector2(0.f, 60.f), Vector2(27.f, 27.f), Vector2(27.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Run", Vector2(562.f, 60.f), Vector2(27.f, 27.f), Vector2(-27.f, 0.f), 0.043f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Turn", Vector2(291.f, 57.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.035f, 6, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Turn", Vector2(273.f, 57.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.035f, 6, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Jump", Vector2(251.f, 58.f), Vector2(23.f, 28.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Jump", Vector2(315.f, 58.f), Vector2(23.f, 28.f), Vector2(-23.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Drop", Vector2(478.f, 60.f), Vector2(22.f, 26.f), Vector2(22.f, 0.f), 0.05f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Drop", Vector2(89.f, 60.f), Vector2(22.f, 26.f), Vector2(-22.f, 0.f), 0.05f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Turn", Vector2(291.f, 57.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Turn", Vector2(273.f, 57.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.035f, 6, Animationoffset);
+
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Drop", Vector2(478.f, 60.f), Vector2(22.f, 26.f), Vector2(22.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Drop", Vector2(89.f, 60.f), Vector2(22.f, 26.f), Vector2(-22.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Down", Vector2(33.f, 25.f), Vector2(25.f, 20.f), Vector2(25.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Down", Vector2(531.f, 25.f), Vector2(25.f, 20.f), Vector2(-25.f, 0.f), 1.f, 1);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Skill", Vector2(175.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 4, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Skill", Vector2(372.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 4, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Skill", Vector2(175.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 4, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Skill", Vector2(372.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Skill_End", Vector2(343.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Skill_End", Vector2(288.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_Skill_End", Vector2(343.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 2, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_Skill_End", Vector2(288.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyStart", Vector2(183.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyStart", Vector2(380.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyStart", Vector2(183.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyStart", Vector2(380.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyEnd", Vector2(131.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyEnd", Vector2(432.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyEnd", Vector2(131.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyEnd", Vector2(432.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyDown", Vector2(256.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyDown", Vector2(307.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.15f, 2, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyDown", Vector2(256.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.15f, 2, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyDown", Vector2(307.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.15f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyUp", Vector2(318.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.07f, 4, Vector2(0.f, -5.f));
-		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyUp", Vector2(245.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.07f, 4, Vector2(0.f, -5.f));
+		mAnimator->CreateAnimation(CutterKirby_Right, L"CutterKirby_Right_FlyUp", Vector2(318.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.07f, 4, Animationoffset);
+		mAnimator->CreateAnimation(CutterKirby_Left, L"CutterKirby_Left_FlyUp", Vector2(245.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.07f, 4, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"CutterKirby_Right_Idle", true);
@@ -153,7 +155,8 @@ namespace sy
 		}
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
-			if (Input::GetKeyDown(eKeyCode::W))
+			if (Input::GetKeyDown(eKeyCode::W) 
+				&& mState != eCutterKirbyState::Skill)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 

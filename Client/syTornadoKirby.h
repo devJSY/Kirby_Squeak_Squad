@@ -5,6 +5,7 @@ namespace sy
 {
 	enum class eTornadoKirbyState
 	{
+		Transformations,
 		Choice,
 		Enter,
 		Idle,
@@ -18,9 +19,12 @@ namespace sy
 		Fly_End,
 		Fly_Down,
 		Fly_Up,
+		Skill_Enter,
 		Skill,
+		Skill_Exit,
 		End,
 	};
+
 
 	// A,D 점프 
 	// S 스킬
@@ -64,6 +68,7 @@ namespace sy
 
 	private:
 		// Play Mode State
+		void Transformations();
 		void Idle();
 		void Walk();
 		void Run();
@@ -75,21 +80,22 @@ namespace sy
 		void Fly_End();
 		void Fly_Down();
 		void Fly_Up();
+		void Skill_Enter();
 		void Skill();
+		void Skill_Exit();
 
 	private:
-		eTornadoKirbyState	mState;
-		class Animator*		mAnimator;
-		class Transform*	mTransform;
-		class Rigidbody*	mRigidBody;
-		enums::eDirection	mDir;
+		eTornadoKirbyState		mState;
+		class Animator*			mAnimator;
+		class Transform*		mTransform;
+		class Rigidbody*		mRigidBody;
+		enums::eDirection		mDir;
 
-		bool				mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
-		bool				mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
-		bool				mbTopStop;		// 상단에 충돌한 상태여부
-		bool				mbOnSlope;		// 경사로에 올라탄 상태여부
+		bool					mbOnLeftStop;	// 왼쪽 벽에 충돌한 상태여부
+		bool					mbOnRightStop;	// 오른쪽 벽에 충돌한 상태여부
+		bool					mbTopStop;		// 상단에 충돌한 상태여부
+		bool					mbOnSlope;		// 경사로에 올라탄 상태여부
 	};
 }
-
 
 

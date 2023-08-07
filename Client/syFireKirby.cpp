@@ -58,46 +58,47 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
+		Vector2 Animationoffset = Vector2(0.f, -7.f);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Choice", Vector2(187.f, 558.f), Vector2(28.f, 48.f), Vector2(28.f, 0.f), 0.03f, 12, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Enter", Vector2(368.f, 1153.f), Vector2(22.f, 29.f), Vector2(22.f, 0.f), 0.5f, 2, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Enter", Vector2(304.f, 1153.f), Vector2(22.f, 29.f), Vector2(-22.f, 0.f), 0.5f, 2, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Choice", Vector2(187.f, 558.f), Vector2(28.f, 48.f), Vector2(28.f, 0.f), 0.03f, 12, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Enter", Vector2(368.f, 1153.f), Vector2(22.f, 29.f), Vector2(22.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Enter", Vector2(304.f, 1153.f), Vector2(22.f, 29.f), Vector2(-22.f, 0.f), 0.5f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Idle", Vector2(8.f, 4.f), Vector2(23.f, 32.f), Vector2(23.f, 0.f), 0.08f, 8, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Idle", Vector2(663.f, 4.f), Vector2(23.f, 32.f), Vector2(-23.f, 0.f), 0.08f, 8, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Idle", Vector2(8.f, 4.f), Vector2(23.f, 32.f), Vector2(23.f, 0.f), 0.08f, 8, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Idle", Vector2(663.f, 4.f), Vector2(23.f, 32.f), Vector2(-23.f, 0.f), 0.08f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Walk", Vector2(7.f, 292.f), Vector2(25.f, 36.f), Vector2(25.f, 0.f), 0.035f, 20, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Walk", Vector2(662.f, 292.f), Vector2(25.f, 36.f), Vector2(-25.f, 0.f), 0.035f, 20, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Walk", Vector2(7.f, 292.f), Vector2(25.f, 36.f), Vector2(25.f, 0.f), 0.035f, 20, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Walk", Vector2(662.f, 292.f), Vector2(25.f, 36.f), Vector2(-25.f, 0.f), 0.035f, 20, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Run", Vector2(0.f, 342.f), Vector2(48.f, 30.f), Vector2(48.f, 0.f), 0.043f, 8, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Run", Vector2(646.f, 342.f), Vector2(48.f, 30.f), Vector2(-48.f, 0.f), 0.043f, 8, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Run", Vector2(0.f, 342.f), Vector2(48.f, 30.f), Vector2(48.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Run", Vector2(646.f, 342.f), Vector2(48.f, 30.f), Vector2(-48.f, 0.f), 0.043f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Jump", Vector2(0.f, 251.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.2f, 2, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Jump", Vector2(670.f, 251.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.2f, 2, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Jump", Vector2(0.f, 251.f), Vector2(24.f, 27.f), Vector2(24.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Jump", Vector2(670.f, 251.f), Vector2(24.f, 27.f), Vector2(-24.f, 0.f), 0.2f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Turn", Vector2(423.f, 251.f), Vector2(31.f, 29.f), Vector2(31.f, 0.f), 0.035f, 6, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Turn", Vector2(240.f, 251.f), Vector2(31.f, 29.f), Vector2(-31.f, 0.f), 0.035f, 6, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Turn", Vector2(423.f, 251.f), Vector2(31.f, 29.f), Vector2(31.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Turn", Vector2(240.f, 251.f), Vector2(31.f, 29.f), Vector2(-31.f, 0.f), 0.035f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Drop", Vector2(239.f, 242.f), Vector2(22.f, 36.f), Vector2(22.f, 0.f), 0.05f, 2, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Drop", Vector2(433.f, 242.f), Vector2(22.f, 36.f), Vector2(-22.f, 0.f), 0.05f, 2, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Drop", Vector2(239.f, 242.f), Vector2(22.f, 36.f), Vector2(22.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Drop", Vector2(433.f, 242.f), Vector2(22.f, 36.f), Vector2(-22.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Down", Vector2(230.f, 10.f), Vector2(27.f, 26.f), Vector2(27.f, 0.f), 0.08f, 8);
 		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Down", Vector2(437.f, 10.f), Vector2(27.f, 26.f), Vector2(-27.f, 0.f), 0.08f, 8);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyStart", Vector2(62.f, 382.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.0667f, 3, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyStart", Vector2(606.f, 382.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.0667f, 3, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyStart", Vector2(62.f, 382.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyStart", Vector2(606.f, 382.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyEnd", Vector2(114.f, 382.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.0667f, 3, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyEnd", Vector2(554.f, 382.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.0667f, 3, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyEnd", Vector2(114.f, 382.f), Vector2(26.f, 31.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyEnd", Vector2(554.f, 382.f), Vector2(26.f, 31.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyDown", Vector2(7.f, 520.f), Vector2(26.f, 41.f), Vector2(26.f, 0.f), 0.05f, 6, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyDown", Vector2(661.f, 520.f), Vector2(26.f, 41.f), Vector2(-26.f, 0.f), 0.05f, 6, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyDown", Vector2(7.f, 520.f), Vector2(26.f, 41.f), Vector2(26.f, 0.f), 0.05f, 6, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyDown", Vector2(661.f, 520.f), Vector2(26.f, 41.f), Vector2(-26.f, 0.f), 0.05f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyUp", Vector2(7.f, 469.f), Vector2(26.f, 41.f), Vector2(26.f, 0.f), 0.05f, 8, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyUp", Vector2(661.f, 469.f), Vector2(26.f, 41.f), Vector2(-26.f, 0.f), 0.05f, 8, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_FlyUp", Vector2(7.f, 469.f), Vector2(26.f, 41.f), Vector2(26.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_FlyUp", Vector2(661.f, 469.f), Vector2(26.f, 41.f), Vector2(-26.f, 0.f), 0.05f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Skill", Vector2(187.f, 1109.f), Vector2(31.f, 29.f), Vector2(31.f, 0.f), 0.05f, 4, Vector2(0.f, -7.f));
-		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Skill", Vector2(476.f, 1109.f), Vector2(31.f, 29.f), Vector2(-31.f, 0.f), 0.05f, 4, Vector2(0.f, -7.f));
+		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Skill", Vector2(187.f, 1109.f), Vector2(31.f, 29.f), Vector2(31.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_Skill", Vector2(476.f, 1109.f), Vector2(31.f, 29.f), Vector2(-31.f, 0.f), 0.05f, 4, Animationoffset);
 
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_DashSkill", Vector2(0.f, 836.f), Vector2(59.f, 38.f), Vector2(59.f, 0.f), 0.03f, 9);
 		mAnimator->CreateAnimation(FireKirby_Left, L"FireKirby_Left_DashSkill", Vector2(635.f, 836.f), Vector2(59.f, 38.f), Vector2(-59.f, 0.f), 0.043f, 9);
@@ -156,7 +157,8 @@ namespace sy
 		}
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
-			if (Input::GetKeyDown(eKeyCode::W))
+			if (Input::GetKeyDown(eKeyCode::W) 
+				&& mState != eFireKirbyState::Skill && mState != eFireKirbyState::DASH_Skill)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 
