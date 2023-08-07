@@ -234,9 +234,9 @@ namespace sy
 		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
 		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
 
-
 		// ¹Ù´Ú Ã³¸®
-		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255))
+		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
+			|| LBColor == RGB(255, 0, 0) || RBColor == RGB(255, 0, 0))
 		{
 			// ÀÌµ¿
 			Vector2 pos = mTransform->GetPosition();
@@ -250,11 +250,12 @@ namespace sy
 
 		// ¹Ù´Ú ~ ¹Ù´Ú + 1ÇÈ¼¿ ¹üÀ§°¡ ¾Æ´Ò°æ¿ì Ground false Ã³¸®
 		if (!(LBColor == RGB(0, 0, 255) || LBColorOffsetY == RGB(0, 0, 255)
-			|| RBColor == RGB(0, 0, 255) || RBColorOffsetY == RGB(0, 0, 255)))
+			|| RBColor == RGB(0, 0, 255) || RBColorOffsetY == RGB(0, 0, 255)
+			|| LBColor == RGB(255, 0, 0) || LBColorOffsetY == RGB(255, 0, 0)
+			|| RBColor == RGB(255, 0, 0) || RBColorOffsetY == RGB(255, 0, 0)))
 		{
 			mRigidBody->SetGround(false);
 		}
-
 
 		// Right Stop Check
 		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(int(RB.x + 1), (int)RB.y);

@@ -550,7 +550,7 @@ namespace sy
 
 
 		// OnSlope Check 
-		// 아래로 20픽셀까지 체크
+		// 아래로 10픽셀까지 체크
 		mbOnSlope = false;
 
 		for (size_t i = 0; i < 10; i++)
