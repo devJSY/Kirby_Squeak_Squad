@@ -3,10 +3,17 @@
 
 namespace sy
 {
+    enum class eAbilityStarState
+    {
+        Move,
+        Dead,
+        End,
+    };
+
 	class AbilityStar : public GameObject
 	{
     public:
-        AbilityStar();
+        AbilityStar(math::Vector2 Dir);
         virtual ~AbilityStar();
 
         virtual void Initialize();
@@ -18,6 +25,18 @@ namespace sy
         virtual void OnCollisionExit(class Collider* other);
 
     private:
+        void CheckPixelCollision();
+
+    private:
+        void Move();
+        void Dead();
+
+    private:
+        eAbilityStarState	mState;
+        class Animator*     mAnimator;
+        class Transform*    mTransform;
+        class Collider*     mCollider;
+        float				mDuration;
 
 	};
 }

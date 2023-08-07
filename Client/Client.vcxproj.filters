@@ -172,9 +172,6 @@
     <Filter Include="Contents\GameObject\Enemy\Normal">
       <UniqueIdentifier>{169ac7fe-c859-4764-8d97-051e57d6637a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Normal\Ice">
-      <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\HotHead">
       <UniqueIdentifier>{1903906d-2b00-4a1d-9490-8851aad6ca25}</UniqueIdentifier>
     </Filter>
@@ -300,6 +297,9 @@
     </Filter>
     <Filter Include="Contents\GameObject\AbilityStar">
       <UniqueIdentifier>{95c871db-e718-466e-a770-19e267ec5382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Ice_Enemy">
+      <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -427,7 +427,7 @@
       <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClInclude>
     <ClInclude Include="syIce_Enemy.h">
-      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice_Enemy</Filter>
     </ClInclude>
     <ClInclude Include="syHotHead.h">
       <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
@@ -699,7 +699,7 @@
       <Filter>Contents\GameObject\Enemy\Normal\Blockin</Filter>
     </ClCompile>
     <ClCompile Include="syIce_Enemy.cpp">
-      <Filter>Contents\GameObject\Enemy\Normal\Ice</Filter>
+      <Filter>Contents\GameObject\Enemy\Normal\Ice_Enemy</Filter>
     </ClCompile>
     <ClCompile Include="syHotHead.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\HotHead</Filter>
