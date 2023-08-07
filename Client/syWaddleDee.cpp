@@ -63,6 +63,11 @@ namespace sy
 			CheckPixelCollision();
 		}
 
+		if (GetHP() <= 0.f)
+		{
+			mState = eWaddleDeeState::Dead;
+		}
+
 		switch (mState)
 		{
 		case eWaddleDeeState::Walk:

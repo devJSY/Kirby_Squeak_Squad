@@ -47,7 +47,10 @@ namespace sy
 
 	void Crimp::Update()
 	{
-		Enemy::Update();
+		if (GetHP() <= 0.f)
+		{
+			mState = eCrimpState::Dead;
+		}
 
 		switch (mState)
 		{
@@ -69,6 +72,8 @@ namespace sy
 		default:
 			break;
 		}
+
+		Enemy::Update();
 	}
 
 	void Crimp::Render(HDC hdc)

@@ -68,6 +68,11 @@ namespace sy
 			CheckPixelCollision();
 		}
 
+		if (GetHP() <= 0.f)
+		{
+			mState = eSirKibbleState::Dead;
+		}
+
 		switch (mState)
 		{
 		case eSirKibbleState::Idle:

@@ -68,6 +68,11 @@ namespace sy
 			CheckPixelCollision();
 		}
 
+		if (GetHP() <= 0.f)
+		{
+			mState = eHotHeadState::Dead;
+		}
+
 		switch (mState)
 		{
 		case eHotHeadState::Walk:

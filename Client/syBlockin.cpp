@@ -68,6 +68,11 @@ namespace sy
 			CheckPixelCollision();
 		}
 
+		if (GetHP() <= 0.f)
+		{
+			mState = eBlockinState::Dead;
+		}
+
 		switch (mState)
 		{
 		case eBlockinState::Idle:
