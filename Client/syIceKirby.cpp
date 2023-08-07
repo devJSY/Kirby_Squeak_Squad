@@ -20,6 +20,7 @@
 #include "syLevelSelectScene.h"
 #include "syBreath_Effect.h"
 #include "syIceKirby_Skill.h"
+#include "syAbilityStar.h"
 
 namespace sy
 {
@@ -165,6 +166,9 @@ namespace sy
 					state = eDefaultKirbyState::Drop;
 
 				GetOwner()->ReleaseTransformations(state);
+
+				AbilityStar* abilityStar = new AbilityStar(GetOwner(), Vector2(1.f, 1.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, abilityStar);
 
 				// 상태변경 방지 리턴
 				return;

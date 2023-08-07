@@ -5,17 +5,20 @@
 #include "syCollider.h"
 #include "syTime.h"
 #include "syAnimator.h"
+#include "syPlayer.h"
 
 namespace sy
 {
-	AbilityStar::AbilityStar(math::Vector2 Dir)
-		: mState(eAbilityStarState::Move)
+	AbilityStar::AbilityStar(class Player* owner, math::Vector2 Dir)
+		: mOwner(owner)
+		, mState(eAbilityStarState::Move)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
 		, mDuration(0.f)
 	{
 		mTransform = GetComponent<Transform>();
+		mTransform->SetPosition(mOwner->GetComponent<Transform>()->GetPosition());
 
 		if(Dir.x > 0.f)
 			mTransform->SetDirection(eDirection::RIGHT);
@@ -25,12 +28,11 @@ namespace sy
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(20.f, 20.f));
 
-
 		Texture* Portal_StarTex = ResourceManager::Load<Texture>(L"Portal_Star", L"..\\Resources\\UI\\Portal_Star.bmp");
 		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
 
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimation(Portal_StarTex, L"Portal_Star", Vector2::Zero, Vector2(50.f, 30.f), Vector2(50.f, 0.f), 0.07f, 12, Vector2(0.f, -20.f));
+		mAnimator->CreateAnimation(Portal_StarTex, L"Portal_Star", Vector2::Zero, Vector2(50.f, 30.f), Vector2(50.f, 0.f), 0.07f, 12);
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"AbilityStar_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 				
 		mAnimator->PlayAnimation(L"Portal_Star", true);
@@ -69,18 +71,6 @@ namespace sy
 		GameObject::Render(hdc);
 	}
 
-	void AbilityStar::OnCollisionEnter(Collider* other)
-	{
-	}
-
-	void AbilityStar::OnCollisionStay(Collider* other)
-	{
-	}
-
-	void AbilityStar::OnCollisionExit(Collider* other)
-	{
-	}
-
 	void AbilityStar::CheckPixelCollision()
 	{
 	}
@@ -95,9 +85,9 @@ namespace sy
 
 		Vector2 pos = mTransform->GetPosition();
 		if (mTransform->GetDirection() == eDirection::RIGHT)
-			pos.x += 200.f * Time::DeltaTime();
+			pos.x += 50.f * Time::DeltaTime();
 		else
-			pos.x -= 200.f * Time::DeltaTime();
+			pos.x -= 50.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 	}
 

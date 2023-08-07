@@ -13,16 +13,12 @@ namespace sy
 	class AbilityStar : public GameObject
 	{
     public:
-        AbilityStar(math::Vector2 Dir);
+        AbilityStar(class Player* owner, math::Vector2 Dir);
         virtual ~AbilityStar();
 
         virtual void Initialize();
         virtual void Update();
         virtual void Render(HDC hdc);
-
-        virtual void OnCollisionEnter(class Collider* other);
-        virtual void OnCollisionStay(class Collider* other);
-        virtual void OnCollisionExit(class Collider* other);
 
     private:
         void CheckPixelCollision();
@@ -32,6 +28,7 @@ namespace sy
         void Dead();
 
     private:
+        class Player*       mOwner;
         eAbilityStarState	mState;
         class Animator*     mAnimator;
         class Transform*    mTransform;
