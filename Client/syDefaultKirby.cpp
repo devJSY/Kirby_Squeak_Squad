@@ -553,10 +553,26 @@ namespace sy
 		// 아래로 20픽셀까지 체크
 		mbOnSlope = false;
 
-		for (size_t i = 0; i < 20; i++)
+		for (size_t i = 0; i < 10; i++)
 		{
 			COLORREF tempColor = PixelTex->GetTexturePixel((int)LB.x, int(LB.y + i));
 			
+			if (tempColor == RGB(255, 0, 0))
+			{
+				mbOnSlope = true;
+				break;
+			}
+
+			tempColor = PixelTex->GetTexturePixel((int)MB.x, int(MB.y + i));
+
+			if (tempColor == RGB(255, 0, 0))
+			{
+				mbOnSlope = true;
+				break;
+			}
+
+			tempColor = PixelTex->GetTexturePixel((int)RB.x, int(RB.y + i));
+
 			if (tempColor == RGB(255, 0, 0))
 			{
 				mbOnSlope = true;
