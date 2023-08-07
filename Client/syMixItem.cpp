@@ -7,6 +7,8 @@
 #include "sySceneManager.h"
 #include "syTime.h"
 #include "syApplication.h"
+#include "sySound.h"
+#include "sySoundManager.h"
 
 
 namespace sy
@@ -25,6 +27,9 @@ namespace sy
 		Transform* transform = GetComponent<Transform>();
 		transform->SetPosition(Vector2(128.f, 250.f));
 		transform->SetScale(Vector2(3.f, 3.f));
+
+		ResourceManager::Load<Sound>(L"CombineItem_Sound", L"..\\Resources\\Sound\\Effect\\CombineItem.wav");
+		ResourceManager::Find<Sound>(L"CombineItem_Sound")->Play(false);
 	}
 
 	MixItem::~MixItem()

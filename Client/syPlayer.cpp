@@ -11,6 +11,9 @@
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
+#include "sySound.h"
+#include "sySoundManager.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -62,6 +65,9 @@ namespace sy
 			}			
 		}
 
+
+		ResourceManager::Load<Sound>(L"Transform_Sound", L"..\\Resources\\Sound\\Effect\\Transform.wav");
+
 		GameObject::Initialize();
 	}
 
@@ -111,6 +117,7 @@ namespace sy
 			mKirbyType[(UINT)mAbilityType]->Exit();
 			mAbilityType = type;
 			mKirbyType[(UINT)mAbilityType]->Enter();
+			ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
 		}
 
 		if (type == eAbilityType::Normal)
