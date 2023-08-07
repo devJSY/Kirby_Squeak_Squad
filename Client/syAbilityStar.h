@@ -33,6 +33,7 @@ namespace sy
         class Animator*     mAnimator;
         class Transform*    mTransform;
         class Collider*     mCollider;
+        class Rigidbody*    mRigidBody;
         float				mDuration;
 
 	};

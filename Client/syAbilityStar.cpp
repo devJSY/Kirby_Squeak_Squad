@@ -6,6 +6,7 @@
 #include "syTime.h"
 #include "syAnimator.h"
 #include "syPlayer.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
@@ -15,6 +16,7 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
+		, mRigidBody(nullptr)
 		, mDuration(0.f)
 	{
 		mTransform = GetComponent<Transform>();
@@ -36,6 +38,8 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"AbilityStar_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 				
 		mAnimator->PlayAnimation(L"Portal_Star", true);
+
+		mRigidBody = AddComponent<Rigidbody>();
 	}
 
 	AbilityStar::~AbilityStar()
@@ -73,6 +77,13 @@ namespace sy
 
 	void AbilityStar::CheckPixelCollision()
 	{
+
+		// 바닥에 박을때 벨로시티 Vector2(0.f, -200.f)
+
+		// 좌우 벽박을때 방향 전환
+
+		// 상단충돌시는 y위치 고정
+
 	}
 
 	void AbilityStar::Move()
