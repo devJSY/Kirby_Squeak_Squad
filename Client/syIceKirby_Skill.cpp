@@ -46,6 +46,9 @@ namespace sy
 			animator->PlayAnimation(L"Ice_Skill_Right", true);
 		else
 			animator->PlayAnimation(L"Ice_Skill_Left", true);
+
+		ResourceManager::Load<Sound>(L"IceSkill_Sound", L"..\\Resources\\Sound\\Effect\\IceSkill.wav")->Play(true);
+		ResourceManager::Find<Sound>(L"IceSkill_Sound")->SetVolume(100.f);
 	}
 
 	IceKirby_Skill::~IceKirby_Skill()
@@ -77,6 +80,7 @@ namespace sy
 		if (iceKirby == nullptr || iceKirby->GetKirbyState() != eIceKirbyState::Skill)
 		{
 			Destroy(this);
+			ResourceManager::Find<Sound>(L"IceSkill_Sound")->Stop(true);
 		}
 
 		Effects::Update();

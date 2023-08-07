@@ -1695,7 +1695,8 @@ namespace sy
 
 			Destroy(mSkill);
 
-			// 오디오 정지			
+			// 오디오 정지		
+			ResourceManager::Find<Sound>(L"IceSkill_Sound")->Stop(true);
 		}
 	}
 }

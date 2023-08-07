@@ -79,7 +79,7 @@ namespace sy
 		if (fireKirby == nullptr || fireKirby->GetKirbyState() != eFireKirbyState::Skill)
 		{
 			Destroy(this);
-			ResourceManager::Load<Sound>(L"FireSkill_Sound", L"..\\Resources\\Sound\\Effect\\FireSkill.wav")->Stop(true);
+			ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);
 		}
 
 		Effects::Update();
