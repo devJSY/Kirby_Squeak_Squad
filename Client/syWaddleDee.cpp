@@ -63,13 +63,6 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f && mState != eWaddleDeeState::Dead)
-		{
-			mAnimator->PlayAnimation(L"WaddleDee_Death", false);
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mState = eWaddleDeeState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eWaddleDeeState::Walk:
@@ -316,6 +309,13 @@ namespace sy
 
 	void WaddleDee::Walk()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"WaddleDee_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eWaddleDeeState::Dead;
+		}
+
 		// ÁÂ¿ì ÀÌµ¿
 		Vector2 pos = mTransform->GetPosition();
 		if (mDir == eDirection::RIGHT)

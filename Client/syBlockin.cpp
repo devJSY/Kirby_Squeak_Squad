@@ -68,13 +68,6 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f && mState != eBlockinState::Dead)
-		{
-			mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mState = eBlockinState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eBlockinState::Idle:
@@ -334,6 +327,13 @@ namespace sy
 
 	void Blockin::Walk()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eBlockinState::Dead;
+		}
+
 		// ÁÂ¿ì ÀÌµ¿
 		Vector2 pos = mTransform->GetPosition();
 		if (mDir == eDirection::RIGHT)

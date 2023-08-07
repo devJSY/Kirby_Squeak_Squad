@@ -52,12 +52,6 @@ namespace sy
 			mState = eCrimpState::Dead;
 		}
 
-		if (GetHP() <= 0.f && mState != eCrimpState::Dead)
-		{
-			mAnimator->PlayAnimation(L"Crimp_Death", false);
-			mState = eCrimpState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eCrimpState::Move:
@@ -145,10 +139,21 @@ namespace sy
 
 	void Crimp::Move()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"Crimp_Death", false);
+			mState = eCrimpState::Dead;
+		}
 	}
 
 	void Crimp::Attack()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"Crimp_Death", false);
+			mState = eCrimpState::Dead;
+		}
+
 		// 특정 조건일때 스킬 생성
 		if (Input::GetKeyDown(eKeyCode::T))
 		{

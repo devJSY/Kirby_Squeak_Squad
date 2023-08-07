@@ -68,13 +68,6 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f && mState != eHotHeadState::Dead)
-		{
-			mAnimator->PlayAnimation(L"HotHead_Death", false);
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mState = eHotHeadState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eHotHeadState::Walk:
@@ -322,6 +315,13 @@ namespace sy
 
 	void HotHead::Walk()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"HotHead_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eHotHeadState::Dead;
+		}
+
 		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 		if (mDir == eDirection::RIGHT)
@@ -352,6 +352,13 @@ namespace sy
 
 	void HotHead::Attack()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"HotHead_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eHotHeadState::Dead;
+		}
+
 		// 특정 조건일때 스킬 생성
 		if (Input::GetKeyDown(eKeyCode::T))
 		{

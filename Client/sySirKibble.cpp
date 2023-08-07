@@ -68,13 +68,6 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f && mState != eSirKibbleState::Dead)
-		{
-			mAnimator->PlayAnimation(L"SirKibble_Death", false);
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mState = eSirKibbleState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eSirKibbleState::Idle:
@@ -303,10 +296,23 @@ namespace sy
 
 	void SirKibble::Idle()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"SirKibble_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eSirKibbleState::Dead;
+		}
 	}
 
 	void SirKibble::Attack()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"SirKibble_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eSirKibbleState::Dead;
+		}
+
 		//// 특정 조건일때 스킬 생성
 		//Transform* tr = GetComponent<Transform>();
 		//// 현재 HotHead 위치 기준 더해준 위치로 생성
@@ -320,6 +326,12 @@ namespace sy
 
 	void SirKibble::Jump()
 	{
+		if (GetHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"SirKibble_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mState = eSirKibbleState::Dead;
+		}
 	}
 
 	void SirKibble::Damage()
