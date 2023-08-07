@@ -8,6 +8,8 @@
 #include "syIceKirby.h"
 #include "syIce_Enemy.h"
 #include "syObject.h"
+#include "sySoundManager.h"
+#include "sySound.h"
 
 namespace sy
 {

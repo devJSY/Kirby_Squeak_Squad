@@ -8,6 +8,8 @@
 #include "syFireKirby.h"
 #include "syObject.h"
 #include "syIce_Enemy.h"
+#include "sySoundManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -43,6 +45,8 @@ namespace sy
 			animator->PlayAnimation(L"Fire_Skill_Right", true);
 		else
 			animator->PlayAnimation(L"Fire_Skill_Left", true);
+
+		ResourceManager::Load<Sound>(L"FireSkill_Sound", L"..\\Resources\\Sound\\Effect\\FireSkill.wav")->Play(true);
 	}
 
 	FireKirby_Skill::~FireKirby_Skill()
@@ -75,6 +79,7 @@ namespace sy
 		if (fireKirby == nullptr || fireKirby->GetKirbyState() != eFireKirbyState::Skill)
 		{
 			Destroy(this);
+			ResourceManager::Load<Sound>(L"FireSkill_Sound", L"..\\Resources\\Sound\\Effect\\FireSkill.wav")->Stop(true);
 		}
 
 		Effects::Update();

@@ -111,6 +111,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
+		ResourceManager::Load<Sound>(L"FireKirby_Right_DashSkill_Sound", L"..\\Resources\\Sound\\Effect\\NinjaCharge.wav");
 
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
@@ -1098,6 +1099,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 
 		// DASH_Skill
@@ -1108,6 +1110,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 	}
 
@@ -1250,6 +1253,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 
 		// DASH_Skill
@@ -1260,6 +1264,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 	}
 
@@ -1349,6 +1354,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 
 		// DASH_Skill
@@ -1359,6 +1365,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 	}
 
@@ -1455,6 +1462,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 
 		// DASH_Skill
@@ -1465,6 +1473,7 @@ namespace sy
 			mState = eFireKirbyState::DASH_Skill;
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"FireKirby_Right_DashSkill_Sound")->Play(false);
 		}
 	}
 
@@ -1787,6 +1796,7 @@ namespace sy
 			Destroy(mSkill);
 
 			// 오디오 정지			
+			ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);
 		}
 	}
 
