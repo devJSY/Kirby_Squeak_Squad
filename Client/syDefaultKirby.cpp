@@ -2041,17 +2041,14 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Down;
 
 			// 흡수한 객체의 타입으로 상태설정
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
 				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
-			}
-			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar)
-			{
-				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
 			}
 		}
 
@@ -2065,8 +2062,9 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
-			{				
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
 
@@ -2200,9 +2198,10 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Down;
 
 			// 흡수한 객체의 타입으로 상태설정
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2220,7 +2219,8 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
@@ -2244,9 +2244,6 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2358,9 +2355,10 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Down;
 
 			// 흡수한 객체의 타입으로 상태설정
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
-				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
+				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
 			}
 			else if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityItem)
 			{
@@ -2378,7 +2376,8 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
@@ -2402,9 +2401,6 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2512,11 +2508,10 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhaled_Skill", false);
 
-			KeyPressdTime = 0.f;
-			KeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
@@ -2540,9 +2535,6 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2601,7 +2593,8 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
@@ -2625,9 +2618,6 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 	}
 
@@ -2672,7 +2662,8 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
-			if (mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
+			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, NormalSkill);
@@ -2696,9 +2687,6 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"StarSpitSound")->Play(false);
 		}
 
 		if (mRigidBody->IsGround())

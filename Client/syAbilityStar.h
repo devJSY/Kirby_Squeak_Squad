@@ -22,6 +22,8 @@ namespace sy
         virtual void Update();
         virtual void Render(HDC hdc);
 
+        eAbilityType GetAbilityType() { return mType; }
+
     private:
         void CheckPixelCollision();
 

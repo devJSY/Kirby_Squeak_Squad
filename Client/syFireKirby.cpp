@@ -21,6 +21,7 @@
 #include "syBreath_Effect.h"
 #include "syFireKirby_Skill.h"
 #include "syCollider.h"
+#include "syAbilityStar.h"
 
 namespace sy
 {
@@ -171,6 +172,9 @@ namespace sy
 
 				GetOwner()->ReleaseTransformations(state);
 
+				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Fire);
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
+
 				// 상태변경 방지 리턴
 				return;
 			}
@@ -303,7 +307,8 @@ namespace sy
 		if (mState == eFireKirbyState::Skill || mState == eFireKirbyState::DASH_Skill || mState == eFireKirbyState::Transformations)
 			return;
 
-		// Fire 정보를담은 AbilityStar 하나 생성해야함
+		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Fire);
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
 		GetOwner()->PlayerTransformations(eAbilityType::Normal);

@@ -168,7 +168,7 @@ namespace sy
 				GetOwner()->ReleaseTransformations(state);
 
 				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ice);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, abilityStar);
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 				// 상태변경 방지 리턴
 				return;
@@ -296,7 +296,8 @@ namespace sy
 		if (mState == eIceKirbyState::Skill || mState == eIceKirbyState::Transformations)
 			return;
 
-		// Ice 정보를담은 Star 하나 생성해야함
+		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ice);
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
 		GetOwner()->PlayerTransformations(eAbilityType::Normal);

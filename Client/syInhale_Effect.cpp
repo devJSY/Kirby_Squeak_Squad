@@ -7,6 +7,7 @@
 #include "syIce_Enemy.h"
 #include "syPlayer.h"
 #include "syAbilityItem.h"
+#include "syAbilityStar.h"
 
 namespace sy
 {
@@ -100,7 +101,46 @@ namespace sy
 		if (mTarget != nullptr)
 			return;
 
-		// 흡수 우선순위 0번째 AbilityItem
+		// 흡수 우선순위 0번째 AbilityStar
+		for (GameObject* obj : mInhaledObject)
+		{
+			if (obj == nullptr)
+				continue;
+
+			Transform* PlayerTransform = player->GetComponent<Transform>();
+
+			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(obj);
+
+			// abilityStar이 아니면 적용하지않음
+			if (abilityStar == nullptr)
+				continue;
+
+			if (mTarget == nullptr)
+			{
+				mTarget = abilityStar;
+			}
+			else
+			{
+				Transform* TargetTransform = mTarget->GetComponent<Transform>();
+				Transform* objTransform = obj->GetComponent<Transform>();
+
+				float TargetLen = (PlayerTransform->GetPosition() - TargetTransform->GetPosition()).Length();
+				float ObjLen = (PlayerTransform->GetPosition() - objTransform->GetPosition()).Length();
+
+				// Player와의 거리가 작은 obj 를 타겟으로 설정
+				if (ObjLen < TargetLen)
+				{
+					mTarget = abilityStar;
+				}
+			}
+		}
+
+		// AbilityStar를 찾았다면 리턴
+		if (mTarget != nullptr)
+			return;
+
+
+		// 흡수 우선순위 1번째 AbilityItem
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
@@ -139,9 +179,7 @@ namespace sy
 			return;
 
 
-
-
-		// 흡수 우선순위 1번째 Enemy
+		// 흡수 우선순위 2번째 Enemy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
@@ -212,16 +250,22 @@ namespace sy
 
 			// Player에 흡수한 객체 정보 셋팅
 
-			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
-			if (enemy != nullptr)
+			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+
+			if (abilityStar != nullptr)
 			{
-				defaultKirby->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
+				defaultKirby->SetInhaledObjectInfo(abilityStar->GetAbilityType(), sy::InhaledObjectType::AbilityStar);
 			}
 			else if (abilityItem != nullptr)
 			{
 				defaultKirby->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
-			}			
+			}
+			else if (enemy != nullptr)
+			{
+				defaultKirby->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
+			}	
 		}
 		else
 		{
