@@ -52,6 +52,12 @@ namespace sy
 			mState = eCrimpState::Dead;
 		}
 
+		if (GetHP() <= 0.f && mState != eCrimpState::Dead)
+		{
+			mAnimator->PlayAnimation(L"Crimp_Death", false);
+			mState = eCrimpState::Dead;
+		}
+
 		switch (mState)
 		{
 		case eCrimpState::Move:

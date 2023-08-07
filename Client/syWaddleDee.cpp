@@ -63,8 +63,10 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f)
+		if (GetHP() <= 0.f && mState != eWaddleDeeState::Dead)
 		{
+			mAnimator->PlayAnimation(L"WaddleDee_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eWaddleDeeState::Dead;
 		}
 

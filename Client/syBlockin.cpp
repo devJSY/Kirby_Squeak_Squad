@@ -68,8 +68,10 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f)
+		if (GetHP() <= 0.f && mState != eBlockinState::Dead)
 		{
+			mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eBlockinState::Dead;
 		}
 

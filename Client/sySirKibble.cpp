@@ -68,8 +68,10 @@ namespace sy
 			CheckPixelCollision();
 		}
 
-		if (GetHP() <= 0.f)
+		if (GetHP() <= 0.f && mState != eSirKibbleState::Dead)
 		{
+			mAnimator->PlayAnimation(L"SirKibble_Death", false);
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eSirKibbleState::Dead;
 		}
 
