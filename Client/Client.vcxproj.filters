@@ -178,9 +178,6 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\HotHead\Skill">
       <UniqueIdentifier>{1534f389-2884-4a7a-a0b1-19f2b7030493}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
-      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\SirKibble">
       <UniqueIdentifier>{4ff1f8ed-7015-4504-ae0b-0719aef24984}</UniqueIdentifier>
     </Filter>
@@ -300,6 +297,9 @@
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Normal\Ice_Enemy">
       <UniqueIdentifier>{16b0d948-3e8e-421c-80fa-17926f822f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\WaddleDee">
+      <UniqueIdentifier>{0c381bfb-3834-4f64-98bb-ca769bd9def8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

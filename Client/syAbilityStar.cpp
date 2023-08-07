@@ -7,12 +7,14 @@
 #include "syAnimator.h"
 #include "syPlayer.h"
 #include "syRigidbody.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
-	AbilityStar::AbilityStar(class Player* owner, math::Vector2 Dir)
+	AbilityStar::AbilityStar(class Player* owner, eAbilityType type)
 		: mOwner(owner)
 		, mState(eAbilityStarState::Move)
+		, mType(type)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
@@ -22,10 +24,11 @@ namespace sy
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mOwner->GetComponent<Transform>()->GetPosition());
 
-		if(Dir.x > 0.f)
-			mTransform->SetDirection(eDirection::RIGHT);
-		else
+		// 플레이어와 반대방향으로 생성
+		if(mOwner->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
 			mTransform->SetDirection(eDirection::LEFT);
+		else
+			mTransform->SetDirection(eDirection::RIGHT);
 
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(20.f, 20.f));
@@ -40,6 +43,7 @@ namespace sy
 		mAnimator->PlayAnimation(L"Portal_Star", true);
 
 		mRigidBody = AddComponent<Rigidbody>();
+		mRigidBody->SetVelocity(Vector2(0.f, -200.f));
 	}
 
 	AbilityStar::~AbilityStar()
@@ -54,6 +58,9 @@ namespace sy
 	void AbilityStar::Update()
 	{
 		mDuration += Time::DeltaTime();
+
+		// 픽셀충돌 체크
+		CheckPixelCollision();
 
 		switch (mState)
 		{
@@ -77,13 +84,83 @@ namespace sy
 
 	void AbilityStar::CheckPixelCollision()
 	{
+		// Stage타입에따라 픽셀텍스쳐 변경하기
+		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
-		// 바닥에 박을때 벨로시티 Vector2(0.f, -200.f)
+		if (PixelTex == nullptr)
+			return;
 
-		// 좌우 벽박을때 방향 전환
+		// Offset 픽셀 좌상단위치 설정
+		Vector2 offset = Vector2::Zero;
 
-		// 상단충돌시는 y위치 고정
+		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
 
+		if (CurSceneName == L"Stage1Scene")
+		{
+			offset = Vector2::Zero;
+		}
+		else if (CurSceneName == L"Stage2Scene")
+		{
+			offset = Vector2(0, 347.f);
+		}
+		else if (CurSceneName == L"Stage3Scene")
+		{
+			offset = Vector2(0, 679.f);
+		}
+		else if (CurSceneName == L"Stage4Scene")
+		{
+			offset = Vector2(1603.f, 137.f);
+		}
+
+		Vector2 ColPos = mCollider->GetPosition();
+		Vector2 ColSize = mCollider->GetSize();
+
+		Vector2 Left = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y);
+		Vector2 Right = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y);
+		Vector2 Top = Vector2(ColPos.x, ColPos.y - (ColSize.y / 2.f));
+		Vector2 Bottom = Vector2(ColPos.x, ColPos.y + (ColSize.y / 2.f));
+
+		Left += offset;
+		Right += offset;
+		Top += offset;
+		Bottom += offset;
+
+		COLORREF LeftColor = PixelTex->GetTexturePixel((int)Left.x, (int)Left.y);
+		COLORREF RightColor = PixelTex->GetTexturePixel((int)Right.x, (int)Right.y);
+		COLORREF TopColor = PixelTex->GetTexturePixel((int)Top.x, (int)Top.y);
+		COLORREF BottomColor = PixelTex->GetTexturePixel((int)Bottom.x, (int)Bottom.y);
+
+		// 상단 처리		
+		if (TopColor == RGB(0, 255, 0))
+		{
+			Vector2 pos = mTransform->GetPosition();
+			pos.y += 1.f;
+			mTransform->SetPosition(pos);
+		}
+
+		// 바닥 처리 Y축 방향 변경
+		if (BottomColor == RGB(0, 0, 255) || BottomColor == RGB(255, 0, 0))
+		{
+			mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+		}
+
+		// 좌측 처리 방향 변경
+		if (LeftColor == RGB(0, 255, 0))
+		{
+			if (mTransform->GetDirection() == eDirection::RIGHT)
+				mTransform->SetDirection(eDirection::LEFT);
+			else
+				mTransform->SetDirection(eDirection::RIGHT);
+		}
+
+		// 우측 처리 방향 변경
+		if (RightColor == RGB(0, 255, 0))
+		{
+			if (mTransform->GetDirection() == eDirection::RIGHT)
+				mTransform->SetDirection(eDirection::LEFT);
+			else
+				mTransform->SetDirection(eDirection::RIGHT);
+		}
 	}
 
 	void AbilityStar::Move()
@@ -96,9 +173,9 @@ namespace sy
 
 		Vector2 pos = mTransform->GetPosition();
 		if (mTransform->GetDirection() == eDirection::RIGHT)
-			pos.x += 50.f * Time::DeltaTime();
+			pos.x += 100.f * Time::DeltaTime();
 		else
-			pos.x -= 50.f * Time::DeltaTime();
+			pos.x -= 100.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 	}
 

@@ -10,10 +10,12 @@ namespace sy
         End,
     };
 
+    using namespace enums;
+
 	class AbilityStar : public GameObject
 	{
     public:
-        AbilityStar(class Player* owner, math::Vector2 Dir);
+        AbilityStar(class Player* owner, eAbilityType type);
         virtual ~AbilityStar();
 
         virtual void Initialize();
@@ -30,6 +32,7 @@ namespace sy
     private:
         class Player*       mOwner;
         eAbilityStarState	mState;
+        eAbilityType        mType;
         class Animator*     mAnimator;
         class Transform*    mTransform;
         class Collider*     mCollider;

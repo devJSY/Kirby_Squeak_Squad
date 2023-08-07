@@ -167,7 +167,7 @@ namespace sy
 
 				GetOwner()->ReleaseTransformations(state);
 
-				AbilityStar* abilityStar = new AbilityStar(GetOwner(), Vector2(1.f, 1.f));
+				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ice);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, abilityStar);
 
 				// 상태변경 방지 리턴
