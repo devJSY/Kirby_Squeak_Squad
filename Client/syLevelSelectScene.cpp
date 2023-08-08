@@ -51,6 +51,7 @@ namespace sy
 		, mCurLevelState(eLevelState::Level1)
 		, mEnterTime(0.f)
 		, mZoom(nullptr)
+		, mbSceneChange(false)
 	{
 	}
 
@@ -111,7 +112,7 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 		 
-		if (mEnterTime > 1.3f)
+		if (mEnterTime > 1.3f && !mbSceneChange)
 		{
 			// 현재 레벨상태 지정
 			switch (mCurLevelState)
@@ -146,6 +147,8 @@ namespace sy
 
 			if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 			{
+				mbSceneChange = true;
+
 				if (mZoom == nullptr)
 				{
 					mZoom = new Zoom_Effect(SceneManager::GetPlayer());
@@ -192,6 +195,7 @@ namespace sy
 	{
 		mEnterTime = 0.f;
 		mZoom = nullptr;
+		mbSceneChange = false;
 
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
@@ -282,6 +286,7 @@ namespace sy
 	{
 		mEnterTime = 0.f;
 		mZoom = nullptr;
+		mbSceneChange = false;
 
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);

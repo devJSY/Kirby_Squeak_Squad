@@ -98,7 +98,7 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 
-		if (mEnterTime > 1.3f)
+		if (mEnterTime > 1.3f && !mbSceneChange)
 		{
 			switch (mCurStageState)
 			{
@@ -116,9 +116,13 @@ namespace sy
 			}
 		}
 
-		if (mbSceneChange && Camera::IsEmptyCamEffect())
+		if (mbSceneChange && mCurStageState == eStageState::Stage1 && Camera::IsEmptyCamEffect())
 		{
 			SceneManager::LoadScene(L"Stage1Scene");
+		}
+		else if (mbSceneChange && mCurStageState == eStageState::Boss && Camera::IsEmptyCamEffect())
+		{
+			//SceneManager::LoadScene(L"보스방");
 		}
 
 
@@ -352,6 +356,8 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
+			mbSceneChange = true;
+
 			if (mZoom == nullptr)
 			{
 				mZoom = new Zoom_Effect(SceneManager::GetPlayer());
@@ -418,6 +424,8 @@ namespace sy
 
 		//if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		//{
+		// mbSceneChange = true;
+		// 
 		//	SceneManager::LoadScene(L"보스방 진입");
 		// 
 		// 		//// 오디오 재생

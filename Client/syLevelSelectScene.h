@@ -55,5 +55,6 @@ namespace sy
 		eLevelState					mCurLevelState;
 		float						mEnterTime;
 		class Zoom_Effect*			mZoom;
+		bool						mbSceneChange;
 	};
 }
