@@ -1897,9 +1897,6 @@ namespace sy
 					mAnimator->PlayAnimation(L"NinjaKirby_Left_Fire", false);
 
 				mState = eNinjaKirbyState::Fire;			
-
-				NinjaKirby_Fire* effect = new NinjaKirby_Fire(GetOwner());
-				object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
 			}
 			else
 			{
@@ -1922,6 +1919,56 @@ namespace sy
 
 		Duration += Time::DeltaTime();
 
+
+
+		static bool bActive[4] = { true, true, true, true };
+
+		if (bActive[0])
+		{
+			NinjaKirby_Fire* effect = new NinjaKirby_Fire(GetOwner(), GetOwner()->GetComponent<Transform>()->GetPosition());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+
+			bActive[0] = false;
+		}
+
+		//else if (Duration >= 0.2f && bActive[1])
+		//{
+		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(),Vector2(pos.x + 20.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+
+		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 20.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+
+		//	bActive[1] = false;
+		//}
+		//else if (Duration >= 0.4f && bActive[2])
+		//{
+		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 40.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+
+		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 40.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+
+		//	bActive[2] = false;
+		//}
+		//else if (Duration >= 0.6f && bActive[3])
+		//{
+		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 60.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+
+		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 60.f, pos.y));
+		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+
+		//	bActive[3] = false;
+		//}
+
+
 		if (Duration > 1.f)
 		{
 			if (mAnimator->IsActiveAnimationComplete())
@@ -1935,6 +1982,7 @@ namespace sy
 			}
 
 			Duration = 0.f;
+			bActive[0] = bActive[1] = bActive[2] = bActive[3] = true;
 		}
 	}
 

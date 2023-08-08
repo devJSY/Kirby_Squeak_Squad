@@ -6,7 +6,7 @@ namespace sy
     class NinjaKirby_Fire : public Effects
     {
     public:
-        NinjaKirby_Fire(class Player* owner);
+        NinjaKirby_Fire(class Player* owner, Vector2 pos);
         virtual ~NinjaKirby_Fire();
 
         virtual void Initialize();

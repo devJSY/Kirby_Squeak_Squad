@@ -304,16 +304,16 @@
     <Filter Include="Contents\GameObject\Player\CutterKirbvy\Skill">
       <UniqueIdentifier>{bc321b6f-30f5-4e7e-9575-39bcfaa17948}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\NinhaKirkby">
+    <Filter Include="Contents\GameObject\Player\NinjaKirkby">
       <UniqueIdentifier>{a4bb6ab7-39cd-46c0-90dc-a8be1d7a2bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\NinhaKirkby\Skill_Fire">
+    <Filter Include="Contents\GameObject\Player\NinjaKirkby\Skill_Fire">
       <UniqueIdentifier>{c77dad04-b1ae-4d4a-9aca-3c33a034e9eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken">
+    <Filter Include="Contents\GameObject\Player\NinjaKirkby\Skill_Shuriken">
       <UniqueIdentifier>{1a8b8e77-575d-4eaf-acad-72af465402d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\NinhaKirkby\ChargeEffect">
+    <Filter Include="Contents\GameObject\Player\NinjaKirkby\ChargeEffect">
       <UniqueIdentifier>{d55533f3-cf48-49ac-987f-34c047e18eea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -601,16 +601,16 @@
       <Filter>Contents\GameObject\Player\CutterKirbvy\Skill</Filter>
     </ClInclude>
     <ClInclude Include="syNinjaKirby.h">
-      <Filter>Contents\GameObject\Player\NinhaKirkby</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby</Filter>
     </ClInclude>
     <ClInclude Include="syNinjaKirby_Fire.h">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Fire</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\Skill_Fire</Filter>
     </ClInclude>
     <ClInclude Include="syNinjaKirby_Shuriken.h">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\Skill_Shuriken</Filter>
     </ClInclude>
     <ClInclude Include="syNinjaKirby_ChargeEffect.h">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\ChargeEffect</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\ChargeEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -888,16 +888,16 @@
       <Filter>Contents\GameObject\Player\CutterKirbvy\Skill</Filter>
     </ClCompile>
     <ClCompile Include="syNinjaKirby.cpp">
-      <Filter>Contents\GameObject\Player\NinhaKirkby</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby</Filter>
     </ClCompile>
     <ClCompile Include="syNinjaKirby_Fire.cpp">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Fire</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\Skill_Fire</Filter>
     </ClCompile>
     <ClCompile Include="syNinjaKirby_Shuriken.cpp">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\Skill_Shuriken</Filter>
     </ClCompile>
     <ClCompile Include="syNinjaKirby_ChargeEffect.cpp">
-      <Filter>Contents\GameObject\Player\NinhaKirkby\ChargeEffect</Filter>
+      <Filter>Contents\GameObject\Player\NinjaKirkby\ChargeEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
