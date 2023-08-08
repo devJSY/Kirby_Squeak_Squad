@@ -49,8 +49,8 @@ namespace sy
 		{
 			std::srand(static_cast<unsigned int>(std::time(nullptr))); // 시간을 시드로 사용
 
-			//int randomNumber = std::rand() % (int)eAbilityType::End; // 0부터 eAbilityType까지의 랜덤 정수 생성
-			int randomNumber = std::rand() % 4; // 0부터 3까지의 랜덤 정수 생성
+			int randomNumber = std::rand() % (int)eAbilityType::Normal; // 0부터 eAbilityType까지의 랜덤 정수 생성
+			//int randomNumber = std::rand() % 5; // 0부터 4까지의 랜덤 정수 생성
 
 			SceneManager::GetInventory()->AddItem((eAbilityType)randomNumber);
 			Destroy(this);

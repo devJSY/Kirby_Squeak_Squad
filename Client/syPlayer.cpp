@@ -14,6 +14,7 @@
 #include "sySound.h"
 #include "sySoundManager.h"
 #include "syResourceManager.h"
+#include "syNinjaKirby.h"
 
 namespace sy
 {
@@ -54,6 +55,7 @@ namespace sy
 		mKirbyType[(UINT)eAbilityType::Ice] = new IceKirby(this);
 		mKirbyType[(UINT)eAbilityType::Cutter] = new CutterKirby(this);
 		mKirbyType[(UINT)eAbilityType::Tornado] = new TornadoKirby(this);
+		mKirbyType[(UINT)eAbilityType::Ninja] = new NinjaKirby(this);
 		//mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
 	
 

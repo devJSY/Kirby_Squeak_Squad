@@ -35,7 +35,7 @@ namespace sy
 		mAnimator->CreateAnimation(tex, L"Ability_UI_Ice", Vector2(80.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(tex, L"Ability_UI_Cutter", Vector2(120.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(tex, L"Ability_UI_Tornado", Vector2(160.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		//mAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
 
 		mAnimator->PlayAnimation(L"Ability_UI_Normal", false);
 		mAnimator->SetAffectedCamera(false);
@@ -63,8 +63,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"Ability_UI_Cutter", false);	
 			else if (type == eAbilityType::Tornado)
 				mAnimator->PlayAnimation(L"Ability_UI_Tornado", false);		
-			//else if (type == eAbilityType::Ninja)
-			//	mAnimator->PlayAnimation(L"Ability_UI_Ninja", false);		
+			else if (type == eAbilityType::Ninja)
+				mAnimator->PlayAnimation(L"Ability_UI_Ninja", false);		
 		}
 	}
 

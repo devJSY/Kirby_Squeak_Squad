@@ -191,6 +191,9 @@
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syMixItem.h" />
     <ClInclude Include="syNatureNotchScene.h" />
+    <ClInclude Include="syNinjaKirby.h" />
+    <ClInclude Include="syNinjaKirby_Fire.h" />
+    <ClInclude Include="syNinjaKirby_Shuriken.h" />
     <ClInclude Include="syNormal_Skill.h" />
     <ClInclude Include="syNumberUI.h" />
     <ClInclude Include="syPlacardUI.h" />
@@ -284,6 +287,9 @@
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syMixItem.cpp" />
     <ClCompile Include="syNatureNotchScene.cpp" />
+    <ClCompile Include="syNinjaKirby.cpp" />
+    <ClCompile Include="syNinjaKirby_Fire.cpp" />
+    <ClCompile Include="syNinjaKirby_Shuriken.cpp" />
     <ClCompile Include="syNormal_Skill.cpp" />
     <ClCompile Include="syNumberUI.cpp" />
     <ClCompile Include="syPlacardUI.cpp" />
