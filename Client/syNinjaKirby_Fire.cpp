@@ -6,20 +6,25 @@
 #include "syResourceManager.h"
 #include "sySound.h"
 #include "syTransform.h"
+#include "syTime.h"
 
 namespace sy
 {
 	NinjaKirby_Fire::NinjaKirby_Fire(Player* owner)
 		: Effects(owner)
+		, mCollider(nullptr)
+		, mTime(0.f)
 	{
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
 		Animator* animator = AddComponent<Animator>();
-		AddComponent<Collider>()->SetSize(Vector2(60.f, 20.f));
+		mCollider = AddComponent<Collider>();
+		mCollider->SetSize(Vector2(60.f, 20.f));
+		mCollider->SetOffset(Vector2(0.f, -15.f));
 
 		Texture* Ninja_Fire = ResourceManager::Load<Texture>(L"Ninja_Fire_Tex", L"..\\Resources\\Effect\\Ninja_Fire.bmp");
 
-		animator->CreateAnimation(Ninja_Fire, L"Ninja_Fire", Vector2(0.f, 0.f), Vector2(60.f, 100.f), Vector2(60.f, 0.f), 0.035f, 19, Vector2(0.f, -60.f));
+		animator->CreateAnimation(Ninja_Fire, L"Ninja_Fire", Vector2(0.f, 0.f), Vector2(60.f, 100.f), Vector2(60.f, 0.f), 0.035f, 19, Vector2(0.f, -35.f));
 
 		animator->PlayAnimation(L"Ninja_Fire", false);
 
@@ -37,6 +42,25 @@ namespace sy
 
 	void NinjaKirby_Fire::Update()
 	{
+		if (mTime >= 0.51f)
+		{
+			mCollider->SetSize(Vector2(0.f, 0.f));
+		}
+		else
+		{
+			mTime += (float)Time::DeltaTime();
+
+			Vector2 size = { 60.f, 20.f };
+
+			float fdata = mTime * 150.f;
+
+			size.y += fdata;
+
+			if (size.y >= 80.f)
+
+			mCollider->SetSize(size);
+		}
+
 		Effects::Update();
 	}
 

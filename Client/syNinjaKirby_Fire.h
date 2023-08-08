@@ -17,6 +17,7 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) override;
 
     private:
-
+        class Collider*     mCollider;
+        float               mTime;
     };
 }
