@@ -1930,43 +1930,42 @@ namespace sy
 
 			bActive[0] = false;
 		}
+		else if (Duration >= 0.2f && bActive[1])
+		{
+			Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		//else if (Duration >= 0.2f && bActive[1])
-		//{
-		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+			NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(),Vector2(pos.x + 20.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
 
-		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(),Vector2(pos.x + 20.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+			NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 20.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
 
-		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 20.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+			bActive[1] = false;
+		}
+		else if (Duration >= 0.4f && bActive[2])
+		{
+			Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		//	bActive[1] = false;
-		//}
-		//else if (Duration >= 0.4f && bActive[2])
-		//{
-		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+			NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 40.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
 
-		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 40.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+			NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 40.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
 
-		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 40.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+			bActive[2] = false;
+		}
+		else if (Duration >= 0.6f && bActive[3])
+		{
+			Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
-		//	bActive[2] = false;
-		//}
-		//else if (Duration >= 0.6f && bActive[3])
-		//{
-		//	Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
+			NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 60.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
 
-		//	NinjaKirby_Fire* effect1 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x + 60.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect1);
+			NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 60.f, pos.y));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
 
-		//	NinjaKirby_Fire* effect2 = new NinjaKirby_Fire(GetOwner(), Vector2(pos.x - 60.f, pos.y));
-		//	object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
-
-		//	bActive[3] = false;
-		//}
+			bActive[3] = false;
+		}
 
 
 		if (Duration > 1.f)

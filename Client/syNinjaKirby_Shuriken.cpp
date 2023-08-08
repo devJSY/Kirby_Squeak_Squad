@@ -133,6 +133,9 @@ namespace sy
 
 
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
+			return;
+
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 		mStuckOffset = Dir;
 

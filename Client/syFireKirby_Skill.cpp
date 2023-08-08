@@ -107,6 +107,9 @@ namespace sy
 			return;
 
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
+			return;
+
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);
@@ -131,6 +134,9 @@ namespace sy
 			return;
 
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
+			return;
+
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);
