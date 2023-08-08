@@ -192,6 +192,7 @@
     <ClInclude Include="syMixItem.h" />
     <ClInclude Include="syNatureNotchScene.h" />
     <ClInclude Include="syNinjaKirby.h" />
+    <ClInclude Include="syNinjaKirby_ChargeEffect.h" />
     <ClInclude Include="syNinjaKirby_Fire.h" />
     <ClInclude Include="syNinjaKirby_Shuriken.h" />
     <ClInclude Include="syNormal_Skill.h" />
@@ -288,6 +289,7 @@
     <ClCompile Include="syMixItem.cpp" />
     <ClCompile Include="syNatureNotchScene.cpp" />
     <ClCompile Include="syNinjaKirby.cpp" />
+    <ClCompile Include="syNinjaKirby_ChargeEffect.cpp" />
     <ClCompile Include="syNinjaKirby_Fire.cpp" />
     <ClCompile Include="syNinjaKirby_Shuriken.cpp" />
     <ClCompile Include="syNormal_Skill.cpp" />

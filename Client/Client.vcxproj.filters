@@ -313,6 +313,9 @@
     <Filter Include="Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken">
       <UniqueIdentifier>{1a8b8e77-575d-4eaf-acad-72af465402d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\NinhaKirkby\ChargeEffect">
+      <UniqueIdentifier>{d55533f3-cf48-49ac-987f-34c047e18eea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -606,6 +609,9 @@
     <ClInclude Include="syNinjaKirby_Shuriken.h">
       <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken</Filter>
     </ClInclude>
+    <ClInclude Include="syNinjaKirby_ChargeEffect.h">
+      <Filter>Contents\GameObject\Player\NinhaKirkby\ChargeEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -889,6 +895,9 @@
     </ClCompile>
     <ClCompile Include="syNinjaKirby_Shuriken.cpp">
       <Filter>Contents\GameObject\Player\NinhaKirkby\Skill_Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="syNinjaKirby_ChargeEffect.cpp">
+      <Filter>Contents\GameObject\Player\NinhaKirkby\ChargeEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

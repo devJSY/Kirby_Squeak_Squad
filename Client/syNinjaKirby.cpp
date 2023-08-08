@@ -23,6 +23,7 @@
 #include "syAbilityStar.h"
 #include "syNinjaKirby_Fire.h"
 #include "syNinjaKirby_Shuriken.h"
+#include "syNinjaKirby_ChargeEffect.h"
 
 namespace sy
 {
@@ -852,7 +853,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1000,7 +1001,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1149,7 +1150,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1303,7 +1304,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1404,7 +1405,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1511,7 +1512,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1852,7 +1853,7 @@ namespace sy
 		}
 
 		// Charge
-		if (mChargeTime > 1.f)
+		if (mChargeTime > 0.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
@@ -1868,13 +1869,25 @@ namespace sy
 
 	void NinjaKirby::Charge()
 	{
+		static bool	bFireTrig = false;
 		static float Duration = 0.f;
 
-		Duration += Time::DeltaTime();
+		if (!bFireTrig)
+		{
+			Duration += Time::DeltaTime();
+		}
+		
+		if (Duration > 0.5f)
+		{
+			Duration = 0.f;
+			bFireTrig = true;
+			NinjaKirby_ChargeEffect* effect = new NinjaKirby_ChargeEffect(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+		}
 
 		if (!Input::GetKeyPressed(eKeyCode::S))
 		{
-			if (Duration > 0.5f)
+			if (bFireTrig)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"NinjaKirby_Right_Fire", false);
@@ -1893,6 +1906,7 @@ namespace sy
 				mState = eNinjaKirbyState::Drop;
 			}
 
+			bFireTrig = false;
 			Duration = 0.f;
 		}	
 	}
