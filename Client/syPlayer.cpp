@@ -114,6 +114,9 @@ namespace sy
 		if (!mKirbyType[(UINT)mAbilityType]->IsTransformableCheck())
 			return;
 
+		GetComponent<Rigidbody>()->SetLimitVelocity(Vector2(300.f, 300.f));
+		GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, 0.f));
+
 		if (mAbilityType != type)
 		{
 			mKirbyType[(UINT)mAbilityType]->Exit();
