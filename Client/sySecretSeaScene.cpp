@@ -23,6 +23,7 @@
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
+#include "syNinjaKirby.h"
 
 namespace sy
 {
@@ -159,6 +160,13 @@ namespace sy
 			tornadoKirby->SetKirbyState(eTornadoKirbyState::Choice);
 			playerAni->PlayAnimation(L"TornadoKirby_Choice", false);
 		}
+		else if (playerType == eAbilityType::Ninja)
+		{
+			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
+			ninjaKirby->SetKirbyState(eNinjaKirbyState::Choice);
+			playerAni->PlayAnimation(L"NinjaKirby_Choice", false);
+		}
+
 
 		mCurStageState = eStageState::StageExit;
 

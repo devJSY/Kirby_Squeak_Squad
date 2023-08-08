@@ -19,6 +19,7 @@
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
+#include "syNinjaKirby.h"
 
 namespace sy
 {
@@ -353,6 +354,36 @@ namespace sy
 					playerAni->PlayAnimation(L"TornadoKirby_Right_Run", true);
 				else
 					playerAni->PlayAnimation(L"TornadoKirby_Left_Run", true);
+			}
+		}
+		else if (playerType == eAbilityType::Ninja)
+		{
+			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					ninjaKirby->SetKirbyState(eNinjaKirbyState::Drop);
+					playerAni->PlayAnimation(L"NinjaKirby_Right_Drop", true);
+				}
+				else
+				{
+					ninjaKirby->SetKirbyState(eNinjaKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"NinjaKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				ninjaKirby->SetKirbyState(eNinjaKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"NinjaKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"NinjaKirby_Left_Run", true);
 			}
 		}
 

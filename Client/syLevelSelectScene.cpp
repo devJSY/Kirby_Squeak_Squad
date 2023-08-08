@@ -30,12 +30,13 @@
 #include "sySound.h"
 #include "syResourceManager.h"
 #include "syZoom_Effect.h"
+#include "syMixItem.h"
 #include "syDefaultKirby.h"
 #include "syFireKirby.h"
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
-#include "syMixItem.h"
+#include "syNinjaKirby.h"
 
 namespace sy
 {
@@ -265,6 +266,12 @@ namespace sy
 			TornadoKirby* tornadoKirby = dynamic_cast<TornadoKirby*>(player->GetActiveKirby());
 			tornadoKirby->SetKirbyState(eTornadoKirbyState::Choice);
 			playerAni->PlayAnimation(L"TornadoKirby_Choice", false);
+		}
+		else if (playerType == eAbilityType::Ninja)
+		{
+			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
+			ninjaKirby->SetKirbyState(eNinjaKirbyState::Choice);
+			playerAni->PlayAnimation(L"NinjaKirby_Choice", false);
 		}
 
 		// 오디오 재생

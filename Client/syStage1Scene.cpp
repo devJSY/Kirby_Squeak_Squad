@@ -26,6 +26,7 @@
 #include "syIceKirby.h"
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
+#include "syNinjaKirby.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -236,6 +237,12 @@ namespace sy
 			TornadoKirby* tornadoKirby = dynamic_cast<TornadoKirby*>(player->GetActiveKirby());
 			tornadoKirby->SetKirbyState(eTornadoKirbyState::Turn);
 			playerAni->PlayAnimation(L"TornadoKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Ninja)
+		{
+			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
+			ninjaKirby->SetKirbyState(eNinjaKirbyState::Turn);
+			playerAni->PlayAnimation(L"NinjaKirby_Right_Turn", false);
 		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);
