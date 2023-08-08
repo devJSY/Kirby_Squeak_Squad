@@ -225,7 +225,7 @@ namespace sy
 	void Inhale_Effect::TargetUpdate()
 	{
 		// Target 의 Inhaled 상태 호출
-		if (mTarget == nullptr)
+		if (mTarget == nullptr || mTarget->GetGameObjectState() == eGameObjectState::Dead)
 			return;
 
 		Player* player = dynamic_cast<Player*>(GetOwner());

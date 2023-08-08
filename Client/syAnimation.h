@@ -37,6 +37,10 @@ namespace sy
 			, Vector2 leftTop, Vector2 size, Vector2 Interbal
 			, float duration, UINT spriteLength, Vector2 offset);
 
+		void Create_Offset(Texture* texture, const std::wstring& name
+			, Vector2 leftTop, Vector2 size, Vector2 Interbal
+			, float duration, UINT spriteLength, std::vector<Vector2> offset);
+
 		void Reset();
 
 		bool IsComplete() { return mbComplete; }

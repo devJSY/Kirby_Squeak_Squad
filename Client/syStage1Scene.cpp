@@ -63,9 +63,6 @@ namespace sy
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(1050.f, 100.f));
 
 
-
-
-
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\Stage\\World1_Backgrounds.png"); // 이미지 설정
 

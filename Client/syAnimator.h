@@ -20,6 +20,11 @@ namespace sy
 			, Vector2 leftTop, Vector2 size, Vector2 Interbal
 			, float duration = 0.1f, UINT spriteLength = 0, Vector2 offset = Vector2::Zero);
 
+		Animation* CreateAnimation_Offset(class Texture* texture
+			, const std::wstring& name
+			, Vector2 leftTop, Vector2 size, Vector2 Interbal
+			, float duration = 0.1f, UINT spriteLength = 0, std::vector<Vector2> offset = {});
+
 		void CreateAnimationFolder(const std::wstring& name
 			, const std::wstring& path
 			, float duration = 0.1f, Vector2 offset = Vector2::Zero);

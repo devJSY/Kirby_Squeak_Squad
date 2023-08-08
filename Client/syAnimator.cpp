@@ -73,6 +73,25 @@ namespace sy
 		return animation;
 	}
 
+	Animation* Animator::CreateAnimation_Offset(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, std::vector<Vector2> offset)
+	{
+		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
+		Animation* animation = nullptr;
+		animation = FindAnimation(name); // Animator 에서 같은 이름의 애니메이션이 있다면 생성하지않고 리턴
+		if (animation != nullptr)
+			return animation;
+
+		animation = new Animation();
+		animation->Create_Offset(texture, name
+			, leftTop, size, Interbal
+			, duration, spriteLength, offset);
+		animation->SetAnimator(this);
+
+		mAnimations.insert(std::make_pair(name, animation));
+
+		return animation;
+	}
+
 	void Animator::CreateAnimationFolder(
 		const std::wstring& name
 		, const std::wstring& path

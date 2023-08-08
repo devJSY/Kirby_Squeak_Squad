@@ -86,6 +86,39 @@ namespace sy
 		}
 	}
 
+	void Animation::Create_Offset(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, std::vector<Vector2> offset)
+	{
+		SetName(name);
+		bool offsetFlag = true;
+
+		if (offset.empty()) offsetFlag = false;
+
+		// 텍스쳐 설정
+		mTexture = texture;
+
+		// 텍스쳐의 각 스프라이트의 정보를 셋팅하여 Sprite형태로 vector에 저장한다.
+		for (size_t i = 0; i < spriteLength; i++)
+		{
+			Sprite sprite = {};
+
+			sprite.leftTop = leftTop + (Interbal * (float)i);
+			sprite.size = size;
+			if (offsetFlag)
+			{
+				sprite.offset.x = offset[i].x;
+				sprite.offset.y = offset[i].y;
+			}
+			else
+			{
+				sprite.offset.x = 0.f;
+				sprite.offset.y = 0.f;
+			}
+			sprite.duration = duration;
+
+			mSpriteSheet.push_back(sprite);
+		}
+	}
+
 	void Animation::Reset()
 	{
 		mTime = 0.0f;
