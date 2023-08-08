@@ -24,7 +24,7 @@ namespace sy
 
 		mAnimator = GetComponent<Animator>();
 
-		std::vector<Vector2> Animationoffset = { Vector2(-1.f, -5.f) };
+		Vector2 Animationoffset = Vector2(-1.f, -5.f);
 		mAnimator->CreateAnimation(Monster_Ice, L"BigIce", Vector2(0.f, 0.f), Vector2(29.f, 29.f), Vector2(29.f, 5.f), 1.f, 1);
 		mAnimator->CreateAnimation(Monster_Ice, L"SmallIce", Vector2(30.f, 0.f), Vector2(21.f, 29.f), Vector2(21.f, 5.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"Ice_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);

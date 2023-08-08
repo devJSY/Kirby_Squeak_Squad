@@ -54,7 +54,7 @@ namespace sy
 		, Vector2 leftTop
 		, Vector2 size, Vector2 Interbal
 		, float duration, UINT spriteLength
-		, std::vector<Vector2> offset)
+		, Vector2 offset)
 	{
 		// Animation은 ResourceManager가 관리하지않고 각 Animator 가 관리
 		Animation* animation = nullptr;
@@ -96,7 +96,7 @@ namespace sy
 		const std::wstring& name
 		, const std::wstring& path
 		, float duration
-		, std::vector<Vector2> offset)
+		, Vector2 offset)
 	{
 		UINT width = 0;
 		UINT height = 0;

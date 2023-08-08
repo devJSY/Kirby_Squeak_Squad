@@ -22,7 +22,7 @@ namespace sy
 		sr->SetTexture(Portal_Tex);
 
 		mAnimator = AddComponent<Animator>();
-		std::vector<Vector2> Animationoffset = { Vector2(0.f, -20.f) };
+		Vector2 Animationoffset = Vector2(0.f, -20.f);
 		mAnimator->CreateAnimation(Portal_StarTex, L"Portal_Star", Vector2::Zero, Vector2(50.f, 30.f), Vector2(50.f, 0.f), 0.07f, 12, Animationoffset);
 		mAnimator->PlayAnimation(L"Portal_Star", true);
 

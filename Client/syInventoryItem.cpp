@@ -35,7 +35,7 @@ namespace sy
 		mBubbleAnimator->SetAffectedCamera(false);
 		mAbilityAnimator->SetAffectedCamera(false);
 
-		std::vector<Vector2> Animationoffset = { Vector2(0.f, 3.f) };
+		Vector2 Animationoffset = Vector2(0.f, 3.f);
 
 		mBubbleAnimator->CreateAnimation(Bubble_Tex, L"BubbleAnimation", Vector2::Zero, Vector2(32.f, 34.f), Vector2(32.f, 0.f), 0.08f, 4, Animationoffset);
 		mBubbleAnimator->PlayAnimation(L"BubbleAnimation", true);

@@ -58,7 +58,7 @@ namespace sy
 		LifeCount_8->SetType(eTextureType::Bmp);
 		LifeCount_9->SetType(eTextureType::Bmp);
 
-		std::vector<Vector2> Animationoffset = { Vector2(23.f, 0.f) };
+		Vector2 Animationoffset = Vector2(23.f, 0.f);
 
 		mAnimator->CreateAnimation(LifeCount_0, L"LifeCount_0", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(LifeCount_1, L"LifeCount_1", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);

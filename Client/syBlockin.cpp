@@ -39,7 +39,7 @@ namespace sy
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
 
-		std::vector<Vector2> Animationoffset = { Vector2(0.f, -10.f) };
+		Vector2 Animationoffset = Vector2(0.f, -10.f);
 
 		mAnimator->CreateAnimation(Enemies_Right, L"BlockEnemy_Right_Idle", Vector2(1.f, 611.f), Vector2(16.f, 16.f), Vector2(16.f, 0.f), 1.f, 1);
 		

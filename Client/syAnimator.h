@@ -18,7 +18,7 @@ namespace sy
 		Animation* CreateAnimation(class Texture* texture
 			, const std::wstring& name
 			, Vector2 leftTop, Vector2 size, Vector2 Interbal
-			, float duration = 0.1f, UINT spriteLength = 0, std::vector<Vector2> offset = {});
+			, float duration = 0.1f, UINT spriteLength = 0, Vector2 offset = Vector2::Zero);
 
 		Animation* CreateAnimation_Offset(class Texture* texture
 			, const std::wstring& name
@@ -27,7 +27,7 @@ namespace sy
 
 		void CreateAnimationFolder(const std::wstring& name
 			, const std::wstring& path
-			, float duration = 0.1f, std::vector<Vector2> offset = {});
+			, float duration = 0.1f, Vector2 offset = Vector2::Zero);
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false); // 루프 기본값 false

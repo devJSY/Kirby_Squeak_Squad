@@ -15,7 +15,7 @@ namespace sy
 
 		Texture* Ninja_Charge_Effect = ResourceManager::Load<Texture>(L"Ninja_Charge_Effect_Tex", L"..\\Resources\\Effect\\Ninja_Charge_Effect.bmp");
 		Animator* animator = GetComponent<Animator>();
-		std::vector<Vector2> Animationoffset = { Vector2(0.f, -12.f) };
+		Vector2 Animationoffset = Vector2(0.f, -12.f);
 		animator->CreateAnimation(Ninja_Charge_Effect, L"Ninja_Charge_Effect", Vector2(0.f, 0.f), Vector2(52.f, 50.f), Vector2(52.f, 0.f), 0.02f, 10, Animationoffset);
 		animator->PlayAnimation(L"Ninja_Charge_Effect", true);
 	}
