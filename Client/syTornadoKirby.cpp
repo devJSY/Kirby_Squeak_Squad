@@ -316,7 +316,7 @@ namespace sy
 			|| mState == eTornadoKirbyState::Transformations)
 			return;
 
-		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Fire);
+		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Tornado);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
