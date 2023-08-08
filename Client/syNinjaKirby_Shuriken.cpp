@@ -107,6 +107,9 @@ namespace sy
 		if (player != nullptr)
 			return;
 
+		if (mStuckTarget != nullptr)
+			return;
+
 		if (mDir == eDirection::RIGHT)
 		{
 			Vector2 pos = mTransform->GetPosition();
