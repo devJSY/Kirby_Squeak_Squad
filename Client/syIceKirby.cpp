@@ -296,14 +296,14 @@ namespace sy
 	void IceKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eIceKirbyState::Skill || mState == eIceKirbyState::Transformations)
+		if (mState == eIceKirbyState::Transformations)
 			return;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ice);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransformations(eAbilityType::Normal);
+		GetOwner()->SetKirbyType(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);

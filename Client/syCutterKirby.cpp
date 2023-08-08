@@ -302,14 +302,14 @@ namespace sy
 	void CutterKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eCutterKirbyState::Skill || mState == eCutterKirbyState::Transformations)
+		if (mState == eCutterKirbyState::Transformations)
 			return;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Cutter);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransformations(eAbilityType::Normal);
+		GetOwner()->SetKirbyType(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);

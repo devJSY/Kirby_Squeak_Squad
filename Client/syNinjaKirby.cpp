@@ -314,14 +314,14 @@ namespace sy
 	void NinjaKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eNinjaKirbyState::ThrowShuriken || mState == eNinjaKirbyState::Charge || mState == eNinjaKirbyState::Fire || mState == eNinjaKirbyState::Transformations)
+		if (mState == eNinjaKirbyState::Fire || mState == eNinjaKirbyState::Transformations)
 			return;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ninja);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransformations(eAbilityType::Normal);
+		GetOwner()->SetKirbyType(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);

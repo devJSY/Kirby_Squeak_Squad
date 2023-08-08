@@ -30,6 +30,7 @@ namespace sy
 
 		float mEnterTime;
 		class Zoom_Effect* mZoom;
+		bool mbSceneChange;
     };
 }
 

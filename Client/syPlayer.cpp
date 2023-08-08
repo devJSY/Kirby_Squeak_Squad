@@ -196,4 +196,15 @@ namespace sy
 				GetComponent<Animator>()->PlayAnimation(L"DefaultKirby_Left_Drop");
 		}
 	}
+
+	void Player::SetKirbyType(eAbilityType type)
+	{
+		// 강제로 인자로들어온타입으로 변경하는 함수 주의하여 사용
+		mKirbyType[(UINT)mAbilityType]->Exit();
+		mAbilityType = type;
+		mKirbyType[(UINT)mAbilityType]->Enter();
+
+		GetComponent<Rigidbody>()->SetLimitVelocity(Vector2(300.f, 300.f));
+		GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, 0.f));
+	}
 }

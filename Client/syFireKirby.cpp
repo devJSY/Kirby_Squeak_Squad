@@ -307,14 +307,14 @@ namespace sy
 	void FireKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eFireKirbyState::Skill || mState == eFireKirbyState::DASH_Skill || mState == eFireKirbyState::Transformations)
+		if (mState == eFireKirbyState::DASH_Skill || mState == eFireKirbyState::Transformations)
 			return;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Fire);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransformations(eAbilityType::Normal);
+		GetOwner()->SetKirbyType(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);

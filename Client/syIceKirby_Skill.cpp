@@ -27,9 +27,9 @@ namespace sy
 		Vector2 vec = owner->GetComponent<Transform>()->GetPosition();
 
 		if (mDir == eDirection::RIGHT)
-			vec.x += 28.f;
+			vec.x += 30.f;
 		else
-			vec.x -= 18.f;
+			vec.x -= 30.f;
 
 		tr->SetPosition(vec);
 
@@ -65,11 +65,10 @@ namespace sy
 		// 플레이어 위치따라가도록 갱신
 		Transform* tr = GetComponent<Transform>();
 		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
-
 		if (mDir == eDirection::RIGHT)
-			vec.x += 28.f;
+			vec.x += 30.f;
 		else
-			vec.x -= 18.f;
+			vec.x -= 30.f;
 		tr->SetPosition(vec);
 
 

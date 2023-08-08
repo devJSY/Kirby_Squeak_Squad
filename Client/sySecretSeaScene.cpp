@@ -33,6 +33,7 @@ namespace sy
 		, mCurStageState(eStageState::StageExit)
 		, mEnterTime(0.f)
 		, mZoom(nullptr)
+		, mbSceneChange(false)
 	{
 	}
 
@@ -107,6 +108,7 @@ namespace sy
 	{
 		mEnterTime = 0.f;
 		mZoom = nullptr;
+		mbSceneChange = false;
 
 		// 카메라 설정
 		Camera::SetTarget(nullptr);
@@ -178,6 +180,7 @@ namespace sy
 	{
 		mEnterTime = 0.f;
 		mZoom = nullptr;
+		mbSceneChange = false;
 
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
