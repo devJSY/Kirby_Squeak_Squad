@@ -29,8 +29,11 @@ namespace sy
 
 		Animator* animator = GetComponent<Animator>();
 
-		animator->CreateAnimation(Breath_Effect_Left_tex, L"Breath_Effect_Left", Vector2(500.f, 0.f), Vector2(100.f, 25.f), Vector2(-100.f, 0.f), 0.05f, 6, Vector2(-50.f, 0.f));
-		animator->CreateAnimation(Breath_Effect_Right_tex, L"Breath_Effect_Right", Vector2(0.f, 0.f), Vector2(100.f, 25.f), Vector2(100.f, 0.f), 0.05f, 6, Vector2(50.f, 0.f));
+		std::vector<Vector2> LeftOffset = { Vector2(-50.f, 0.f) };
+		std::vector<Vector2> RightOffset = { Vector2(50.f, 0.f) };
+
+		animator->CreateAnimation(Breath_Effect_Left_tex, L"Breath_Effect_Left", Vector2(500.f, 0.f), Vector2(100.f, 25.f), Vector2(-100.f, 0.f), 0.05f, 6, LeftOffset);
+		animator->CreateAnimation(Breath_Effect_Right_tex, L"Breath_Effect_Right", Vector2(0.f, 0.f), Vector2(100.f, 25.f), Vector2(100.f, 0.f), 0.05f, 6, RightOffset);
 
 		
 		// 방향 설정

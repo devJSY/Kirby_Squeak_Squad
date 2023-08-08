@@ -58,7 +58,7 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		Vector2 Animationoffset = Vector2(0.f, -7.f);
+		std::vector<Vector2> Animationoffset = { Vector2(0.f, -7.f) };
 
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Choice", Vector2(187.f, 558.f), Vector2(28.f, 48.f), Vector2(28.f, 0.f), 0.03f, 12, Animationoffset);
 		mAnimator->CreateAnimation(FireKirby_Right, L"FireKirby_Right_Enter", Vector2(368.f, 1153.f), Vector2(22.f, 29.f), Vector2(22.f, 0.f), 0.5f, 2, Animationoffset);

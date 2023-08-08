@@ -56,7 +56,7 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		Vector2 Animationoffset = Vector2(0.f, -5.f);
+		std::vector<Vector2> Animationoffset = { Vector2(0.f, -5.f) };
 
 		mAnimator->CreateAnimation(TornadoKirby_Right, L"TornadoKirby_Choice", Vector2(223.f, 541.f), Vector2(25.f, 50.f), Vector2(25.f, 0.f), 0.03f, 12, Animationoffset);
 		mAnimator->CreateAnimation(TornadoKirby_Right, L"TornadoKirby_Right_Enter", Vector2(396.f, 1064.f), Vector2(24.f, 30.f), Vector2(24.f, 0.f), 0.5f, 2, Animationoffset);
