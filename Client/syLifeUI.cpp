@@ -58,17 +58,18 @@ namespace sy
 		LifeCount_8->SetType(eTextureType::Bmp);
 		LifeCount_9->SetType(eTextureType::Bmp);
 
+		std::vector<Vector2> Animationoffset = { Vector2(23.f, 0.f) };
 
-		mAnimator->CreateAnimation(LifeCount_0, L"LifeCount_0", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_1, L"LifeCount_1", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_2, L"LifeCount_2", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_3, L"LifeCount_3", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_4, L"LifeCount_4", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_5, L"LifeCount_5", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_6, L"LifeCount_6", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_7, L"LifeCount_7", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_8, L"LifeCount_8", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
-		mAnimator->CreateAnimation(LifeCount_9, L"LifeCount_9", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Vector2(23.f, 0.f));
+		mAnimator->CreateAnimation(LifeCount_0, L"LifeCount_0", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_1, L"LifeCount_1", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_2, L"LifeCount_2", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_3, L"LifeCount_3", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_4, L"LifeCount_4", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_5, L"LifeCount_5", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_6, L"LifeCount_6", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_7, L"LifeCount_7", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_8, L"LifeCount_8", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(LifeCount_9, L"LifeCount_9", Vector2::Zero, Vector2(23.f, 16.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
 
 		mAnimator->PlayAnimation(L"LifeCount_3", false);
 		mAnimator->SetAffectedCamera(false);

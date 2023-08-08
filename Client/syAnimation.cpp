@@ -65,9 +65,11 @@ namespace sy
 			, tr->GetRotation());
 	}
 
-	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)
+	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, std::vector<Vector2> offset)
 	{	
 		SetName(name);
+		bool offsetFlag = true;
+		if (offset.empty()) offsetFlag = false;
 
 		// 텍스쳐 설정
 		mTexture = texture;
@@ -79,7 +81,16 @@ namespace sy
 
 			sprite.leftTop = leftTop + (Interbal * (float)i);
 			sprite.size = size;
-			sprite.offset = offset;
+			if (offsetFlag)
+			{
+				sprite.offset.x = offset[i].x;
+				sprite.offset.y = offset[i].y;
+			}
+			else
+			{
+				sprite.offset.x = 0.f;
+				sprite.offset.y = 0.f;
+			}
 			sprite.duration = duration;
 
 			mSpriteSheet.push_back(sprite);

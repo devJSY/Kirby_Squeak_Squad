@@ -35,7 +35,9 @@ namespace sy
 		mBubbleAnimator->SetAffectedCamera(false);
 		mAbilityAnimator->SetAffectedCamera(false);
 
-		mBubbleAnimator->CreateAnimation(Bubble_Tex, L"BubbleAnimation", Vector2::Zero, Vector2(32.f, 34.f), Vector2(32.f, 0.f), 0.08f, 4, Vector2(0.f, 3.f));
+		std::vector<Vector2> Animationoffset = { Vector2(0.f, 3.f) };
+
+		mBubbleAnimator->CreateAnimation(Bubble_Tex, L"BubbleAnimation", Vector2::Zero, Vector2(32.f, 34.f), Vector2(32.f, 0.f), 0.08f, 4, Animationoffset);
 		mBubbleAnimator->PlayAnimation(L"BubbleAnimation", true);
 
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Fire_AbilityItem", Vector2(0.f, 43.f), Vector2(15.f, 27.f), Vector2(15.f, 0.f), 1.f, 1);

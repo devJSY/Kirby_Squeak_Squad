@@ -60,7 +60,8 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		Vector2 Animationoffset = Vector2(0.f, -5.f);
+		std::vector<Vector2> Animationoffset = { Vector2(0.f, -5.f) };
+		std::vector<Vector2> NinjaKirby_Charge_offset = { Vector2(0.f, 0.f), Vector2(0.f, 2.f), Vector2(0.f, 0.f), Vector2(0.f, 2.f) };
 
 		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Choice", Vector2(314.f, 470.f), Vector2(24.f, 48.f), Vector2(24.f, 0.f), 0.03f, 12, Animationoffset);
 		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Enter", Vector2(316.f, 211.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 1.f, 1, Animationoffset);
@@ -102,8 +103,8 @@ namespace sy
 		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_ThrowShuriken", Vector2(0.f, 322.f), Vector2(49.f, 28.f), Vector2(49.f, 0.f), 0.05f, 7, Animationoffset);
 		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_ThrowShuriken", Vector2(675.f, 322.f), Vector2(49.f, 28.f), Vector2(-49.f, 0.f), 0.05f, 7, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Charge", Vector2(324.f, 406.f), Vector2(26.f, 36.f), Vector2(26.f, 0.f), 0.05f, 4, Animationoffset);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Charge", Vector2(374.f, 406.f), Vector2(26.f, 36.f), Vector2(-26.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Charge", Vector2(324.f, 406.f), Vector2(26.f, 36.f), Vector2(26.f, 0.f), 0.05f, 4, NinjaKirby_Charge_offset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Charge", Vector2(374.f, 406.f), Vector2(26.f, 36.f), Vector2(-26.f, 0.f), 0.05f, 4, NinjaKirby_Charge_offset);
 
 		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Fire", Vector2(464.f, 408.f), Vector2(29.f, 34.f), Vector2(29.f, 0.f), 0.05f, 8, Animationoffset);
 		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Fire", Vector2(231.f, 408.f), Vector2(29.f, 34.f), Vector2(-29.f, 0.f), 0.05f, 8, Animationoffset);
