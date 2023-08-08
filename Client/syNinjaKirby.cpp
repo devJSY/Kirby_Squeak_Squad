@@ -59,53 +59,53 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 局聪皋捞记 积己
-		Vector2 Animationoffset = Vector2(0.f, -7.f);
+		Vector2 Animationoffset = Vector2(0.f, -5.f);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Choice", Vector2(314.f, 470.f), Vector2(24.f, 48.f), Vector2(24.f, 0.f), 0.03f, 12);
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Enter", Vector2(316.f, 211.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Enter", Vector2(386.f, 211.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Choice", Vector2(314.f, 470.f), Vector2(24.f, 48.f), Vector2(24.f, 0.f), 0.03f, 12, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Enter", Vector2(316.f, 211.f), Vector2(22.f, 27.f), Vector2(22.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Enter", Vector2(386.f, 211.f), Vector2(22.f, 27.f), Vector2(-22.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Idle", Vector2(8.f, 6.f), Vector2(25.f, 25.f), Vector2(25.f, 0.f), 0.13f, 4);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Idle", Vector2(691.f, 6.f), Vector2(25.f, 25.f), Vector2(-25.f, 0.f), 0.13f, 4);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Idle", Vector2(8.f, 6.f), Vector2(25.f, 25.f), Vector2(25.f, 0.f), 0.13f, 4, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Idle", Vector2(691.f, 6.f), Vector2(25.f, 25.f), Vector2(-25.f, 0.f), 0.13f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Walk", Vector2(0.f, 41.f), Vector2(33.f, 27.f), Vector2(33.f, 0.f), 0.0636f, 11);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Walk", Vector2(691.f, 41.f), Vector2(33.f, 27.f), Vector2(-33.f, 0.f), 0.0636f, 11);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Walk", Vector2(0.f, 41.f), Vector2(33.f, 27.f), Vector2(33.f, 0.f), 0.0636f, 11, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Walk", Vector2(691.f, 41.f), Vector2(33.f, 27.f), Vector2(-33.f, 0.f), 0.0636f, 11, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Run", Vector2(0.f, 74.f), Vector2(42.f, 26.f), Vector2(42.f, 0.f), 0.043f, 8);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Run", Vector2(682.f, 74.f), Vector2(42.f, 26.f), Vector2(-42.f, 0.f), 0.043f, 8);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Run", Vector2(0.f, 74.f), Vector2(42.f, 26.f), Vector2(42.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Run", Vector2(682.f, 74.f), Vector2(42.f, 26.f), Vector2(-42.f, 0.f), 0.043f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Jump", Vector2(7.f, 144.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 0.13f, 2);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Jump", Vector2(692.f, 144.f), Vector2(25.f, 26.f), Vector2(-25.f, 0.f), 0.13f, 2);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Jump", Vector2(7.f, 144.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 0.13f, 2, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Jump", Vector2(692.f, 144.f), Vector2(25.f, 26.f), Vector2(-25.f, 0.f), 0.13f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Turn", Vector2(369.f, 42.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.035f, 6);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Turn", Vector2(330.f, 42.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.035f, 6);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Turn", Vector2(369.f, 42.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Turn", Vector2(330.f, 42.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.035f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Drop", Vector2(173.f, 134.f), Vector2(27.f, 38.f), Vector2(27.f, 0.f), 0.05f, 2);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Drop", Vector2(524.f, 134.f), Vector2(27.f, 38.f), Vector2(-27.f, 0.f), 0.05f, 2);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Drop", Vector2(173.f, 134.f), Vector2(27.f, 38.f), Vector2(27.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Drop", Vector2(524.f, 134.f), Vector2(27.f, 38.f), Vector2(-27.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Down", Vector2(204.f, 12.f), Vector2(25.f, 19.f), Vector2(25.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Down", Vector2(495.f, 12.f), Vector2(25.f, 19.f), Vector2(-25.f, 0.f), 1.f, 1);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyStart", Vector2(511.f, 180.f), Vector2(32.f, 25.f), Vector2(32.f, 0.f), 0.0667f, 3);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyStart", Vector2(181.f, 180.f), Vector2(32.f, 25.f), Vector2(-32.f, 0.f), 0.0667f, 3);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyStart", Vector2(511.f, 180.f), Vector2(32.f, 25.f), Vector2(32.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyStart", Vector2(181.f, 180.f), Vector2(32.f, 25.f), Vector2(-32.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyEnd", Vector2(575.f, 180.f), Vector2(32.f, 25.f), Vector2(-32.f, 0.f), 0.0667f, 3);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyEnd", Vector2(117.f, 180.f), Vector2(32.f, 25.f), Vector2(32.f, 0.f), 0.0667f, 3);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyEnd", Vector2(575.f, 180.f), Vector2(32.f, 25.f), Vector2(-32.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyEnd", Vector2(117.f, 180.f), Vector2(32.f, 25.f), Vector2(32.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyUp", Vector2(0.f, 209.f), Vector2(29.f, 31.f), Vector2(29.f, 0.f), 0.1f, 4);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyUp", Vector2(695.f, 209.f), Vector2(29.f, 31.f), Vector2(-29.f, 0.f), 0.1f, 4);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyUp", Vector2(0.f, 209.f), Vector2(29.f, 31.f), Vector2(29.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyUp", Vector2(695.f, 209.f), Vector2(29.f, 31.f), Vector2(-29.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyDown", Vector2(634.f, 173.f), Vector2(27.f, 32.f), Vector2(27.f, 0.f), 0.15f, 2);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyDown", Vector2(63.f, 173.f), Vector2(27.f, 32.f), Vector2(-27.f, 0.f), 0.15f, 2);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_FlyDown", Vector2(634.f, 173.f), Vector2(27.f, 32.f), Vector2(27.f, 0.f), 0.15f, 2, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_FlyDown", Vector2(63.f, 173.f), Vector2(27.f, 32.f), Vector2(-27.f, 0.f), 0.15f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_ThrowShuriken", Vector2(0.f, 322.f), Vector2(49.f, 28.f), Vector2(49.f, 0.f), 0.05f, 7);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_ThrowShuriken", Vector2(675.f, 322.f), Vector2(49.f, 28.f), Vector2(-49.f, 0.f), 0.05f, 7);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_ThrowShuriken", Vector2(0.f, 322.f), Vector2(49.f, 28.f), Vector2(49.f, 0.f), 0.05f, 7, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_ThrowShuriken", Vector2(675.f, 322.f), Vector2(49.f, 28.f), Vector2(-49.f, 0.f), 0.05f, 7, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Charge", Vector2(324.f, 406.f), Vector2(26.f, 36.f), Vector2(26.f, 0.f), 0.05f, 4);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Charge", Vector2(374.f, 406.f), Vector2(26.f, 36.f), Vector2(-26.f, 0.f), 0.05f, 4);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Charge", Vector2(324.f, 406.f), Vector2(26.f, 36.f), Vector2(26.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Charge", Vector2(374.f, 406.f), Vector2(26.f, 36.f), Vector2(-26.f, 0.f), 0.05f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Fire", Vector2(464.f, 408.f), Vector2(29.f, 34.f), Vector2(29.f, 0.f), 0.05f, 8);
-		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Fire", Vector2(231.f, 408.f), Vector2(29.f, 34.f), Vector2(-29.f, 0.f), 0.05f, 8);
+		mAnimator->CreateAnimation(NinjaKirby_Right, L"NinjaKirby_Right_Fire", Vector2(464.f, 408.f), Vector2(29.f, 34.f), Vector2(29.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(NinjaKirby_Left, L"NinjaKirby_Left_Fire", Vector2(231.f, 408.f), Vector2(29.f, 34.f), Vector2(-29.f, 0.f), 0.05f, 8, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"NinjaKirby_Right_Idle", true);
@@ -1840,6 +1840,30 @@ namespace sy
 
 			mState = eNinjaKirbyState::Drop;
 		}
+
+		if (Input::GetKeyPressed(eKeyCode::S))
+		{
+			mChargeTime += Time::DeltaTime();
+		}
+
+		if (Input::GetKeyUp(eKeyCode::S))
+		{
+			mChargeTime = 0.f;
+		}
+
+		// Charge
+		if (mChargeTime > 1.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"NinjaKirby_Right_Charge", true);
+			else
+				mAnimator->PlayAnimation(L"NinjaKirby_Left_Charge", true);
+
+			mState = eNinjaKirbyState::Charge;
+
+			ResourceManager::Find<Sound>(L"NinjaChargeSound")->Play(false);
+			mChargeTime = 0.f;
+		}
 	}
 
 	void NinjaKirby::Charge()
@@ -1868,21 +1892,30 @@ namespace sy
 
 				mState = eNinjaKirbyState::Drop;
 			}
-		}
 
-		Duration = 0.f;		
+			Duration = 0.f;
+		}	
 	}
 
 	void NinjaKirby::Fire()
 	{
-		if (mAnimator->IsActiveAnimationComplete())
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"NinjaKirby_Right_Drop", true);
-			else
-				mAnimator->PlayAnimation(L"NinjaKirby_Left_Drop", true);
+		static float Duration = 0.f;
 
-			mState = eNinjaKirbyState::Drop;
+		Duration += Time::DeltaTime();
+
+		if (Duration > 1.f)
+		{
+			if (mAnimator->IsActiveAnimationComplete())
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"NinjaKirby_Right_Drop", true);
+				else
+					mAnimator->PlayAnimation(L"NinjaKirby_Left_Drop", true);
+
+				mState = eNinjaKirbyState::Drop;
+			}
+
+			Duration = 0.f;
 		}
 	}
 

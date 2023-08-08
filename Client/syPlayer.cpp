@@ -144,6 +144,10 @@ namespace sy
 		{
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Tornado", false);
 		}
+		else if (type == eAbilityType::Ninja)
+		{
+			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Ninja", false);
+		}
 	}
 
 	void Player::ReleaseTransformations(eDefaultKirbyState state)

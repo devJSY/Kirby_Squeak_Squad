@@ -77,8 +77,7 @@ namespace sy
 		{
 			Sprite sprite = {};
 
-			sprite.leftTop.x = leftTop.x + (Interbal.x * (float)i);
-			sprite.leftTop.y = leftTop.y;
+			sprite.leftTop = leftTop + (Interbal * (float)i);
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;
