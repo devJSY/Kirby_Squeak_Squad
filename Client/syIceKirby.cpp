@@ -126,7 +126,7 @@ namespace sy
 			switch (mState)
 			{
 			case eIceKirbyState::Transformations:
-				Transformations();
+				Level_Transformations();
 				break;
 			case eIceKirbyState::Choice:
 				Choice();
@@ -520,6 +520,19 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			mbOnRightStop = false;
+		}
+	}
+
+	void IceKirby::Level_Transformations()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+
+			mState = eIceKirbyState::Idle;
 		}
 	}
 

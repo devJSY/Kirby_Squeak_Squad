@@ -57,6 +57,7 @@ namespace sy
 
 	private:
 		// Level Mode State
+		void Level_Transformations();
 		void Choice();
 		void Level_Enter();
 		void Level_Idle();

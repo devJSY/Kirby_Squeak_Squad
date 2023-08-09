@@ -600,9 +600,6 @@
     <ClInclude Include="syCutterKirby_Skill.h">
       <Filter>Contents\GameObject\Player\CutterKirbvy\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="syNinjaKirby.h">
-      <Filter>Contents\GameObject\Player\NinjaKirkby</Filter>
-    </ClInclude>
     <ClInclude Include="syNinjaKirby_Fire.h">
       <Filter>Contents\GameObject\Player\NinjaKirkby\Skill_Fire</Filter>
     </ClInclude>
@@ -611,6 +608,9 @@
     </ClInclude>
     <ClInclude Include="syNinjaKirby_ChargeEffect.h">
       <Filter>Contents\GameObject\Player\NinjaKirkby\ChargeEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="syNinjaKirby.h">
+      <Filter>Contents\GameObject\Player\NinjaKirkby</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

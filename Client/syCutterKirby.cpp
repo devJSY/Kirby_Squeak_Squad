@@ -129,7 +129,7 @@ namespace sy
 			switch (mState)
 			{
 			case eCutterKirbyState::Transformations:
-				Transformations();
+				Level_Transformations();
 				break;
 			case eCutterKirbyState::Choice:
 				Choice();
@@ -526,6 +526,19 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			mbOnRightStop = false;
+		}
+	}
+
+	void CutterKirby::Level_Transformations()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"CutterKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"CutterKirby_Left_Idle", true);
+
+			mState = eCutterKirbyState::Idle;
 		}
 	}
 

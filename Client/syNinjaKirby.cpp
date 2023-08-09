@@ -138,7 +138,7 @@ namespace sy
 			switch (mState)
 			{
 			case eNinjaKirbyState::Transformations:
-				Transformations();
+				Level_Transformations();
 				break;
 			case eNinjaKirbyState::Choice:
 				Choice();
@@ -538,6 +538,19 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			mbOnRightStop = false;
+		}
+	}
+
+	void NinjaKirby::Level_Transformations()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"NinjaKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"NinjaKirby_Left_Idle", true);
+
+			mState = eNinjaKirbyState::Idle;
 		}
 	}
 

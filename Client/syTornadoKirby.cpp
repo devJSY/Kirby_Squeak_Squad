@@ -132,7 +132,7 @@ namespace sy
 			switch (mState)
 			{
 			case eTornadoKirbyState::Transformations:
-				Transformations();
+				Level_Transformations();
 				break;
 			case eTornadoKirbyState::Choice:
 				Choice();
@@ -537,6 +537,19 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			mbOnRightStop = false;
+		}
+	}
+
+	void TornadoKirby::Level_Transformations()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"TornadoKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"TornadoKirby_Left_Idle", true);
+
+			mState = eTornadoKirbyState::Idle;
 		}
 	}
 
