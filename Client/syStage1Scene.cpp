@@ -133,55 +133,55 @@ namespace sy
 			Transform* playerTrans = player->GetComponent<Transform>();
 
 			Vector2 pos = playerTrans->GetPosition();
-			pos.x += 50.f;
+			//pos.x += 50.f;
 
-			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
-			item->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
-			pos.x += 50.f;
+			//AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+			//item->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+			//pos.x += 50.f;
 
-			AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
-			item2->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
-			pos.x += 50.f;
+			//AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+			//item2->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
+			//pos.x += 50.f;
 
-			AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
-			item3->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
-			pos.x += 50.f;
+			//AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+			//item3->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
+			//pos.x += 50.f;
 
-			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
-			item4->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
-			pos.x += 50.f;
+			//AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+			//item4->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+			//pos.x += 50.f;
 
 			AbilityItem* item5 = new AbilityItem(eAbilityType::Wheel);
 			item5->GetComponent<Transform>()->SetPosition(pos);
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
 
-			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDee->GetComponent<Transform>()->SetPosition(pos);
-			waddleDee->Initialize();
+			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDee->GetComponent<Transform>()->SetPosition(pos);
+			//waddleDee->Initialize();
 
-			pos.x += 10.f;
-			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-			hotHead->GetComponent<Transform>()->SetPosition(pos);
-			hotHead->Initialize();
+			//pos.x += 10.f;
+			//HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+			//hotHead->GetComponent<Transform>()->SetPosition(pos);
+			//hotHead->Initialize();
 
-			pos.x += 10.f;
-			Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
-			blockin->GetComponent<Transform>()->SetPosition(pos);
-			blockin->Initialize();
+			//pos.x += 10.f;
+			//Blockin* blockin = object::Instantiate<Blockin>(eLayerType::Enemy);
+			//blockin->GetComponent<Transform>()->SetPosition(pos);
+			//blockin->Initialize();
 
-			pos.x += 10.f;
-			SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
-			sirKibble->GetComponent<Transform>()->SetPosition(pos);
-			sirKibble->Initialize();
+			//pos.x += 10.f;
+			//SirKibble* sirKibble = object::Instantiate<SirKibble>(eLayerType::Enemy);
+			//sirKibble->GetComponent<Transform>()->SetPosition(pos);
+			//sirKibble->Initialize();
 
-			pos.x += 10.f;
-			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
-			crimp->GetComponent<Transform>()->SetPosition(pos);
-			crimp->Initialize();
+			//pos.x += 10.f;
+			//Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			//crimp->GetComponent<Transform>()->SetPosition(pos);
+			//crimp->Initialize();
 		}
 
 

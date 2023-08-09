@@ -63,10 +63,10 @@ namespace sy
 		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Enter", Vector2(361.f, 375.f), Vector2(24.f, 32.f), Vector2(-24.f, 0.f), 1.f, 1, Animationoffset);
 
 		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Idle", Vector2(6.f, 6.f), Vector2(24.f, 24.f), Vector2(24.f, 0.f), 0.05f, 2, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Idle", Vector2(390.f, 6.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Idle", Vector2(366.f, 6.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.05f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Walk", Vector2(7.f, 302.f), Vector2(28.f, 30.f), Vector2(28.f, 0.f), 0.035f, 20, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Walk", Vector2(665.f, 302.f), Vector2(28.f, 30.f), Vector2(-28.f, 0.f), 0.035f, 20, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Walk", Vector2(4.f, 82.f), Vector2(24.f, 24.f), Vector2(24.f, 0.f), 0.035f, 10, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Walk", Vector2(367.f, 82.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.035f, 10, Animationoffset);
 
 		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Run", Vector2(0.f, 347.f), Vector2(33.f, 28.f), Vector2(33.f, 0.f), 0.043f, 8, Animationoffset);
 		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Run", Vector2(667.f, 347.f), Vector2(33.f, 28.f), Vector2(-33.f, 0.f), 0.043f, 8, Animationoffset);
