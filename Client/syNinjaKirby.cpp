@@ -708,14 +708,16 @@ namespace sy
 
 	void NinjaKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"NinjaKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"NinjaKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"NinjaKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"NinjaKirby_Left_Drop", true);
 
-			mState = eNinjaKirbyState::Idle;
+			mState = eNinjaKirbyState::Drop;
 		}
 	}
 

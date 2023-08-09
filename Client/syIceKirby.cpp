@@ -690,14 +690,16 @@ namespace sy
 
 	void IceKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"IceKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"IceKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"IceKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"IceKirby_Left_Drop", true);
 
-			mState = eIceKirbyState::Idle;
+			mState = eIceKirbyState::Drop;
 		}
 	}
 

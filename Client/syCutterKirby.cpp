@@ -696,14 +696,16 @@ namespace sy
 
 	void CutterKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"CutterKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"CutterKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"CutterKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"CutterKirby_Left_Drop", true);
 
-			mState = eCutterKirbyState::Idle;
+			mState = eCutterKirbyState::Drop;
 		}
 	}
 

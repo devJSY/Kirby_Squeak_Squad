@@ -792,14 +792,16 @@ namespace sy
 
 	void DefaultKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"DefaultKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"DefaultKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"DefaultKirby_Left_Drop", true);
 
-			mState = eDefaultKirbyState::Idle;
+			mState = eDefaultKirbyState::Drop;
 		}
 	}
 

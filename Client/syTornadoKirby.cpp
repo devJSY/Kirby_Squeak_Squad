@@ -707,14 +707,16 @@ namespace sy
 
 	void TornadoKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"TornadoKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"TornadoKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"TornadoKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"TornadoKirby_Left_Drop", true);
 
-			mState = eTornadoKirbyState::Idle;
+			mState = eTornadoKirbyState::Drop;
 		}
 	}
 

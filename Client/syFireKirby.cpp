@@ -701,14 +701,16 @@ namespace sy
 
 	void FireKirby::Transformations()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"FireKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"FireKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"FireKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"FireKirby_Left_Drop", true);
 
-			mState = eFireKirbyState::Idle;
+			mState = eFireKirbyState::Drop;
 		}
 	}
 
