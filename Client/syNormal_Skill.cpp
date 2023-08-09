@@ -104,14 +104,6 @@ namespace sy
 		mAnimator->PlayAnimation(L"Normal_Skill_Destory");
 	}
 
-	void Normal_Skill::OnCollisionStay(Collider* other)
-	{
-	}
-
-	void Normal_Skill::OnCollisionExit(Collider* other)
-	{
-	}
-
 	void Normal_Skill::CheckPixelCollision()
 	{
 		// Stage타입에따라 픽셀텍스쳐 변경하기

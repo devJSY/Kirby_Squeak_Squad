@@ -20,6 +20,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) = 0;
 		virtual void TakeInhaled(math::Vector2 InhaleDir) {};
+		virtual bool IsDamagedState() = 0;
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
 		int GetHP() { return mHP; }

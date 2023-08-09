@@ -5,8 +5,8 @@ namespace sy
 {
 	class InventoryItem : public GameObject
 	{
-
-	friend class Inventory;
+		// Inventory에서만 접근가능
+		friend class Inventory;
 
 	private:
 		InventoryItem(eAbilityType type, UINT SlotNumber);

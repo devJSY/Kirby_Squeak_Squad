@@ -184,6 +184,10 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// Stay상태에서 Damage 상태면 적용하지않음
+		if (enemy->IsDamagedState())
+			return;
+
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);

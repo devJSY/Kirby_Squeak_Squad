@@ -129,15 +129,20 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// 이동
+		Transform* transform = enemy->GetComponent<Transform>();
+		Vector2 pos = transform->GetPosition();
+		pos.y -= 150.f * Time::DeltaTime();
+		transform->SetPosition(pos);
+
+		// Stay상태에서 Damage 상태면 적용하지않음
+		if (enemy->IsDamagedState())
+			return;
+
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 	
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
 		enemy->SetHPBarUIRenderTrig(true);
-
-		Transform* transform = enemy->GetComponent<Transform>();
-		Vector2 pos = transform->GetPosition();
-		pos.y -= 150.f * Time::DeltaTime();
-		transform->SetPosition(pos);		
 	}
 }

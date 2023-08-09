@@ -28,6 +28,7 @@ namespace sy
 
         virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
         virtual void TakeInhaled(math::Vector2 InhaleDir) override;
+        virtual bool IsDamagedState() { return mState == eWaddleDeeState::Damage; }
 
     private:
         void CheckPixelCollision();

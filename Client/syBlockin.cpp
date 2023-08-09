@@ -136,11 +136,12 @@ namespace sy
 
 	void Blockin::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		// 이미 데미지 상태면 처리하지않음
+		Damaged(DamageAmount);
+
+		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
 		if (mState == eBlockinState::Damage || mState == eBlockinState::Dead)
 			return;
 
-		Damaged(DamageAmount);
 		mState = eBlockinState::Damage;
 
 		if (HitDir != Vector2::Zero)

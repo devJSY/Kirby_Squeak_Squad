@@ -33,6 +33,7 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other);
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) {};
+		virtual bool IsDamagedState() { return false; }
 
 	private:
 		void Idle();

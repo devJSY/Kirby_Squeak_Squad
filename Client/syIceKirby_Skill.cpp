@@ -106,6 +106,11 @@ namespace sy
 		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
 			return;
 
+		// Enemy 객체만 적용
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
+			return;
+
 		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
 		IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
@@ -127,6 +132,11 @@ namespace sy
 
 		// Dead상태는 무시
 		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
+			return;
+
+		// Enemy 객체만 적용
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
 			return;
 
 		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
