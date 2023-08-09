@@ -44,14 +44,9 @@ namespace sy
 
 	void WheelKirby::Initialize()
 	{
-		//// 텍스쳐 로드
-		//Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"WheelKirby_Right_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Right.bmp");
-		//Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"WheelKirby_Left_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Left.bmp");
-
 		// 텍스쳐 로드
-		Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
-		Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
-
+		Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"WheelKirby_Right_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Right.bmp");
+		Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"WheelKirby_Left_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Left.bmp");
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -61,14 +56,14 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 애니메이션 생성
-		Vector2 Animationoffset = Vector2(0.f, -0.f);
+		Vector2 Animationoffset = Vector2(0.f, 0.f);
 
 		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Choice", Vector2(223.f, 541.f), Vector2(25.f, 50.f), Vector2(25.f, 0.f), 0.03f, 12, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Enter", Vector2(396.f, 1064.f), Vector2(24.f, 30.f), Vector2(24.f, 0.f), 0.5f, 2, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Enter", Vector2(280.f, 1064.f), Vector2(24.f, 30.f), Vector2(-24.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Enter", Vector2(30.f, 375.f), Vector2(24.f, 32.f), Vector2(24.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Enter", Vector2(361.f, 375.f), Vector2(24.f, 32.f), Vector2(-24.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Idle", Vector2(8.f, 8.f), Vector2(28.f, 28.f), Vector2(28.f, 0.f), 0.05f, 4, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Idle", Vector2(664.f, 8.f), Vector2(28.f, 28.f), Vector2(-28.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Idle", Vector2(6.f, 6.f), Vector2(24.f, 24.f), Vector2(24.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Idle", Vector2(390.f, 6.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.05f, 4, Animationoffset);
 
 		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Walk", Vector2(7.f, 302.f), Vector2(28.f, 30.f), Vector2(28.f, 0.f), 0.035f, 20, Animationoffset);
 		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Walk", Vector2(665.f, 302.f), Vector2(28.f, 30.f), Vector2(-28.f, 0.f), 0.035f, 20, Animationoffset);
