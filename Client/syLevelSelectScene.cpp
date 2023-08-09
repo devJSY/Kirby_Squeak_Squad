@@ -37,6 +37,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "syInventory.h"
 
 namespace sy
 {
@@ -158,12 +159,6 @@ namespace sy
 				// 오디오 재생
 				ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
 			}			
-		}
-
-		// 임시 믹스 효과 추가하기
-		if (Input::GetKeyDown(eKeyCode::R))
-		{			
-			object::Instantiate<MixItem>(eLayerType::InventoryItem);
 		}
 
 		// 스테이지 전부 클리어 시 배경화면 변경

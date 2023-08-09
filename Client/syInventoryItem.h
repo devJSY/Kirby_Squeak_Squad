@@ -5,7 +5,10 @@ namespace sy
 {
 	class InventoryItem : public GameObject
 	{
-	public:
+
+	friend class Inventory;
+
+	private:
 		InventoryItem(eAbilityType type, UINT SlotNumber);
 		virtual ~InventoryItem();
 
@@ -31,6 +34,5 @@ namespace sy
 		Vector2				mSlotPos;
 		float				mEnterTime;
 		float				mTime;
-
 	};
 }

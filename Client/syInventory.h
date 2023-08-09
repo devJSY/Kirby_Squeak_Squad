@@ -16,6 +16,7 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 		void AddItem(eAbilityType type);
+		void AddMixItem();
 		void SetMixItem(InventoryItem* item) { mMixItem = item; }
 		bool IsFullSlot()
 		{
@@ -34,12 +35,13 @@ namespace sy
 		InventoryItem* GetFocusItem() { return mFocusItem; }
 
 	private:
-		class Animator*			mAnimator;
-		InventoryItem*			mSlot[5];
-		InventoryItem*			mFocusItem;
-		float					mFocusTime;
-		InventoryItem*			mMixItem;
-		float					mAngle;
+		class Animator*					mAnimator;
+		InventoryItem*					mSlot[5];
+		InventoryItem*					mFocusItem;
+		float							mFocusTime;
+		InventoryItem*					mMixItem;
+		float							mAngle;
+		std::vector<class MixItem*>		mMixItems;
 
 	};
 }

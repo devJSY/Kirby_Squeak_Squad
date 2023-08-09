@@ -21,6 +21,7 @@
 #include "syPortalUI.h"
 #include "syAbilityItem.h"
 #include "syMixItem.h"
+#include "syInventory.h"
 #include "syDefaultKirby.h"
 #include "syFireKirby.h"
 #include "syIceKirby.h"
@@ -132,9 +133,6 @@ namespace sy
 
 			Vector2 pos = playerTrans->GetPosition();
 			pos.x += 50.f;
-
-			// 믹스 효과 추가하기
-			object::Instantiate<MixItem>(eLayerType::InventoryItem);
 
 			//AbilityItem* item = new AbilityItem(eAbilityType::Fire);
 			//item->GetComponent<Transform>()->SetPosition(pos);

@@ -86,7 +86,6 @@ namespace sy
 
 	InventoryItem::~InventoryItem()
 	{
-
 	}
 
 	void InventoryItem::Initialize()

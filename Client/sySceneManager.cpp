@@ -142,25 +142,11 @@ namespace sy
 		mActiveScene->RemoveGameObject(eLayerType::UI, mHPbarUI);
 		mActiveScene->RemoveGameObject(eLayerType::UI, mLifeUI);
 
-		// 인벤토리 아이템 저장
-		InventoryItem* Items[5];
-		for (UINT i = 0; i < 5; i++)
-		{
-			Items[i] = mInventory->GetItem(i);
-			if (Items[i] != nullptr)
-			{
-				mActiveScene->RemoveGameObject(eLayerType::InventoryItem, Items[i]);
-			}			
-		}
-
-
 		// 파라메타로 들어온 name 의 Scene 을 찾아 ActiveScene으로 설정해준다
 		std::map<std::wstring, Scene*>::iterator iter = mScenes.find(name);
 		if (iter == mScenes.end())
 			return nullptr;
 		mActiveScene = iter->second;
-
-
 
 		// 설정한 씬을 제외한 씬에 UI 추가
 		if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
@@ -171,19 +157,6 @@ namespace sy
 			mActiveScene->AddGameObject(eLayerType::UI, mHPbarUI);
 			mActiveScene->AddGameObject(eLayerType::UI, mLifeUI);
 		}
-
-		// 설정한 씬을 제외한 씬에 InventoryItem 추가
-		if (name != L"OpeningScene" && name != L"TitleScene")
-		{
-			for (size_t i = 0; i < 5; i++)
-			{
-				if (Items[i] != nullptr)
-				{
-					mActiveScene->AddGameObject(eLayerType::InventoryItem, Items[i]);
-				}
-			}
-		}
-
 
 		// TunnelScene 진입전 이전 씬 이름 등록
 		if (name == L"TunnelScene")

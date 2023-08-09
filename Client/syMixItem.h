@@ -5,7 +5,10 @@ namespace sy
 {
 	class MixItem : public GameObject
 	{
-	public:
+	
+	friend class Inventory;
+
+	private:
 		MixItem();
 		virtual ~MixItem();
 

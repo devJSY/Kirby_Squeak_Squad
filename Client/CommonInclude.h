@@ -40,7 +40,6 @@ namespace sy::enums
 		UI,			 
 		Zoom,
 		Inventory,
-		InventoryItem,
 		End,
 	};
 

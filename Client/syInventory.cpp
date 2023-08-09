@@ -23,11 +23,36 @@ namespace sy
 		, mFocusTime(0.f)
 		, mMixItem(nullptr)
 		, mAngle(0.f)
+		, mMixItems()
 	{
+		// 슬롯 초기화
+		for (size_t i = 0; i < 5; i++)
+		{
+			mSlot[i] = nullptr;		
+		}
 	}
 
 	Inventory::~Inventory()
 	{
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mSlot[i] != nullptr)
+			{
+				delete mSlot[i];
+				mSlot[i] = nullptr;
+			}
+		}
+
+		for (size_t i = 0; i < mMixItems.size(); i++)
+		{
+			if (nullptr != mMixItems[i])
+			{
+				delete mMixItems[i];
+				mMixItems[i] = nullptr;
+			}
+		}
+
+		mMixItems.clear();
 	}
 
 	void Inventory::Initialize()
@@ -59,12 +84,20 @@ namespace sy
 
 	void Inventory::Update()
 	{
+		// 임시 믹스 효과 추가하기
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			SceneManager::GetInventory()->AddMixItem();
+		}
+
+		// Damage 애니메이션 재생 이후 재생
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			mAnimator->PlayAnimation(L"Inventory_Animation", true);
 		}
 
 
+		// 마우스클릭 상호작용
 		if (Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
 			Vector2 mousePos = Input::GetMousePos();
@@ -90,6 +123,7 @@ namespace sy
 					// 콜라이더 범위 안에 들어왔다
 					if (Length <= SlotRadius)
 					{
+						// mFocusItem 설정
 						mFocusItem = mSlot[i];
 						mFocusTime = 0.f;
 						break;
@@ -164,13 +198,11 @@ namespace sy
 			// Mix 상태
 			if (mFocusItem != nullptr && mMixItem != nullptr)
 			{
-				mSlot[mFocusItem->GetSlotNumber()] = nullptr;
-				mSlot[mMixItem->GetSlotNumber()] = nullptr;
 				Destroy(mFocusItem);
 				Destroy(mMixItem);
 
 				// 믹스 효과 추가하기
-				object::Instantiate<MixItem>(eLayerType::InventoryItem);
+				AddMixItem();
 			}
 			else
 			{
@@ -196,7 +228,6 @@ namespace sy
 							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType()
 								&& SceneManager::GetPlayer()->GetActiveKirby()->IsTransformableCheck())
 							{				
-								mSlot[idx] = nullptr;
 								Destroy(mFocusItem);
 								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());
 							}
@@ -249,11 +280,84 @@ namespace sy
 		}
 
 		GameObject::Update();
+
+		// Slot Update
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mSlot[i] != nullptr)
+			{
+				if (mSlot[i]->GetGameObjectState() == eGameObjectState::Pause)
+					continue;
+
+				mSlot[i]->Update();
+			}
+		}
+
+		// MixItems Update
+		for (size_t i = 0; i < mMixItems.size(); i++)
+		{
+			if (mMixItems[i]->GetGameObjectState() == eGameObjectState::Pause)
+				continue;
+
+			mMixItems[i]->Update();
+		}
 	}
 
 	void Inventory::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+
+		// Slot Render
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mSlot[i] != nullptr)
+			{
+				if (mSlot[i]->GetGameObjectState() == eGameObjectState::Pause)
+					continue;
+
+				mSlot[i]->Render(hdc);
+			}
+		}
+
+		// Dead상태인 Item 는 Inventory 에서 제외한다
+		for (size_t i = 0; i < 5; i++)
+		{
+			if (mSlot[i] != nullptr)
+			{
+				if (mSlot[i]->GetGameObjectState() == eGameObjectState::Dead)
+				{
+					delete mSlot[i];
+					mSlot[i] = nullptr;
+				}
+			}
+		}
+
+		// MixItems Render
+		for (size_t i = 0; i < mMixItems.size(); i++)
+		{
+			if (mMixItems[i]->GetGameObjectState() == GameObject::eGameObjectState::Pause)
+				continue;
+
+			mMixItems[i]->Render(hdc);
+		}
+
+		// Dead상태인 MixItem은 MixItems 에서 제외한다
+		for (std::vector<MixItem*>::iterator iter = mMixItems.begin()
+			; iter != mMixItems.end()
+			; )
+		{
+			if ((*iter)->GetGameObjectState() == GameObject::eGameObjectState::Dead)
+			{
+				MixItem* obj = *iter;
+				iter = mMixItems.erase(iter);
+				delete obj;
+				obj = nullptr;
+			}
+			else
+			{
+				iter++;
+			}
+		}
 	}
 
 	void Inventory::AddItem(eAbilityType type)
@@ -264,10 +368,14 @@ namespace sy
 			if (mSlot[i] == nullptr)
 			{
 				InventoryItem* item = new InventoryItem(type, (UINT)i);
-				mSlot[i] = item;
-				object::ActiveSceneAddGameObject(eLayerType::InventoryItem, item);
+				mSlot[i] = item;				
 				break;
 			}
 		}
+	}
+	
+	void Inventory::AddMixItem()
+	{
+		mMixItems.push_back(new MixItem);
 	}
 }
