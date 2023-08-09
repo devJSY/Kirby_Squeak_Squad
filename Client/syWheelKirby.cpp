@@ -44,9 +44,14 @@ namespace sy
 
 	void WheelKirby::Initialize()
 	{
+		//// 텍스쳐 로드
+		//Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"WheelKirby_Right_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Right.bmp");
+		//Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"WheelKirby_Left_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Left.bmp");
+
 		// 텍스쳐 로드
-		Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"WheelKirby_Right_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Right.bmp");
-		Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"WheelKirby_Left_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Left.bmp");
+		Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"DefaultKirby_Right_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Right.bmp");
+		Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"DefaultKirby_Left_Tex", L"..\\Resources\\Kirby\\DefaultKirby\\DefaultKirby_Left.bmp");
+
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -176,7 +181,7 @@ namespace sy
 
 				GetOwner()->ReleaseTransformations(state);
 
-				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Tornado);
+				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Wheel);
 				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 				// 상태변경 방지 리턴
@@ -225,18 +230,18 @@ namespace sy
 			case eWheelKirbyState::Fly_Up:
 				Fly_Up();
 				break;
-			case eWheelKirbyState::Skill_Enter:
-				Skill_Enter();
-				break;
 			case eWheelKirbyState::Skill:
 				Skill();
 				break;
-			case eWheelKirbyState::Skill_Exit:
-				Skill_Exit();
+			case eWheelKirbyState::Skill_Right_Turn:
+				Skill_Right_Turn();
+				break;
+			case eWheelKirbyState::Skill_Left_Turn:
+				Skill_Left_Turn();
 				break;
 			default:
 				break;
-			}
+			}			
 
 			// 이동제한
 			Vector2 pos = mTransform->GetPosition();
@@ -301,7 +306,7 @@ namespace sy
 
 	bool WheelKirby::IsTransformableCheck()
 	{
-		if (mState == eWheelKirbyState::Skill_Enter || mState == eWheelKirbyState::Skill || mState == eWheelKirbyState::Skill_Exit)
+		if (mState == eWheelKirbyState::Skill || mState == eWheelKirbyState::Skill_Right_Turn || mState == eWheelKirbyState::Skill_Left_Turn)
 			return false;
 
 		return true;
@@ -310,13 +315,13 @@ namespace sy
 	void WheelKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eWheelKirbyState::Skill_Enter
-			|| mState == eWheelKirbyState::Skill
-			|| mState == eWheelKirbyState::Skill_Exit
+		if (mState == eWheelKirbyState::Skill 
+			|| mState == eWheelKirbyState::Skill_Right_Turn
+			|| mState == eWheelKirbyState::Skill_Left_Turn
 			|| mState == eWheelKirbyState::Transformations)
 			return;
 
-		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Tornado);
+		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Wheel);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
@@ -846,15 +851,6 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
-
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 	}
 
@@ -969,15 +965,7 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
 
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 	}
 
@@ -1093,15 +1081,6 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
-
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 	}
 
@@ -1205,15 +1184,6 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
-
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 
 		// Fly Start
@@ -1282,15 +1252,7 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
 
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 
 		// Fly Start
@@ -1357,15 +1319,7 @@ namespace sy
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillEnter", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillEnter", false);
 
-			mState = eWheelKirbyState::Skill_Enter;
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
 
 		// Fly Start
@@ -1721,14 +1675,7 @@ namespace sy
 
 		if (Duration > 3.f)
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_SkillExit", false);
-			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_SkillExit", false);
-
-			mState = eWheelKirbyState::Skill_Exit;
-			Duration = 0.f;
-			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))

@@ -28,6 +28,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "syWheelKirby.h"
 
 #include "syWaddleDee.h"
 #include "syHotHead.h"
@@ -134,24 +135,29 @@ namespace sy
 			Vector2 pos = playerTrans->GetPosition();
 			pos.x += 50.f;
 
-			//AbilityItem* item = new AbilityItem(eAbilityType::Fire);
-			//item->GetComponent<Transform>()->SetPosition(pos);
-			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
-			//pos.x += 50.f;
+			AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+			item->GetComponent<Transform>()->SetPosition(pos);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+			pos.x += 50.f;
 
-			//AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
-			//item2->GetComponent<Transform>()->SetPosition(pos);
-			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
-			//pos.x += 50.f;
+			AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+			item2->GetComponent<Transform>()->SetPosition(pos);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
+			pos.x += 50.f;
 
-			//AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
-			//item3->GetComponent<Transform>()->SetPosition(pos);
-			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
-			//pos.x += 50.f;
+			AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+			item3->GetComponent<Transform>()->SetPosition(pos);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
+			pos.x += 50.f;
 
-			//AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
-			//item4->GetComponent<Transform>()->SetPosition(pos);
-			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+			AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+			item4->GetComponent<Transform>()->SetPosition(pos);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+			pos.x += 50.f;
+
+			AbilityItem* item5 = new AbilityItem(eAbilityType::Wheel);
+			item5->GetComponent<Transform>()->SetPosition(pos);
+			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
 
 			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			waddleDee->GetComponent<Transform>()->SetPosition(pos);
@@ -238,6 +244,12 @@ namespace sy
 			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
 			ninjaKirby->SetKirbyState(eNinjaKirbyState::Turn);
 			playerAni->PlayAnimation(L"NinjaKirby_Right_Turn", false);
+		}
+		else if (playerType == eAbilityType::Wheel)
+		{
+			WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+			wheelKirby->SetKirbyState(eWheelKirbyState::Turn);
+			playerAni->PlayAnimation(L"WheelKirby_Right_Turn", false);
 		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);

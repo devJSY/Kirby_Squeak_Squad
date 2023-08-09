@@ -37,6 +37,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "syWheelKirby.h"
 #include "syInventory.h"
 
 namespace sy
@@ -271,6 +272,12 @@ namespace sy
 			NinjaKirby* ninjaKirby = dynamic_cast<NinjaKirby*>(player->GetActiveKirby());
 			ninjaKirby->SetKirbyState(eNinjaKirbyState::Choice);
 			playerAni->PlayAnimation(L"NinjaKirby_Choice", false);
+		}
+		else if (playerType == eAbilityType::Wheel)
+		{
+			WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+			wheelKirby->SetKirbyState(eWheelKirbyState::Choice);
+			playerAni->PlayAnimation(L"WheelKirby_Choice", false);
 		}
 
 		// 오디오 재생

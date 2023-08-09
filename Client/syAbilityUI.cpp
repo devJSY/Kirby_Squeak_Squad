@@ -59,6 +59,8 @@ namespace sy
 		mNameBase->PlayAnimation(L"NameBase", false);
 		mNameAnimator->PlayAnimation(L"Ability_UI_Normal_Name", false);
 		mIconAnimator->SetAffectedCamera(false);
+		mNameBase->SetAffectedCamera(false);
+		mNameAnimator->SetAffectedCamera(false);
 
 		UI::Initialize();
 	}
