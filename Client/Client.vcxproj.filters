@@ -316,6 +316,9 @@
     <Filter Include="Contents\GameObject\Player\NinjaKirkby\ChargeEffect">
       <UniqueIdentifier>{d55533f3-cf48-49ac-987f-34c047e18eea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\WheelKirby">
+      <UniqueIdentifier>{2a2a00ae-207e-48c7-96b1-58322ef55e36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -612,6 +615,9 @@
     <ClInclude Include="syNinjaKirby.h">
       <Filter>Contents\GameObject\Player\NinjaKirkby</Filter>
     </ClInclude>
+    <ClInclude Include="syWheelKirby.h">
+      <Filter>Contents\GameObject\Player\WheelKirby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -898,6 +904,9 @@
     </ClCompile>
     <ClCompile Include="syNinjaKirby_ChargeEffect.cpp">
       <Filter>Contents\GameObject\Player\NinjaKirkby\ChargeEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="syWheelKirby.cpp">
+      <Filter>Contents\GameObject\Player\WheelKirby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

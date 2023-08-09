@@ -50,6 +50,7 @@ namespace sy::enums
 		Cutter,
 		Tornado,
 		Ninja,
+		Wheel,		
 		//Hammer,
 		//Metal,
 		//Sleep,
@@ -57,7 +58,6 @@ namespace sy::enums
 		//Sword,
 		//Throw,
 		//TripleStar,
-		//Wheel,		
 		Normal,
 		End,
 	};

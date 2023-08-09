@@ -28,7 +28,7 @@ namespace sy
 
 		mBubbleAnimator = AddComponent<Animator>();
 		mAbilityAnimator = AddComponent<Animator>();
-
+	
 		Vector2 Animationoffset = Vector2(0.f, 3.f);
 
 		mBubbleAnimator->CreateAnimation(Bubble_Tex, L"BubbleAnimation", Vector2::Zero, Vector2(32.f, 34.f), Vector2(32.f, 0.f), 0.08f, 4, Animationoffset);
@@ -39,6 +39,7 @@ namespace sy
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Cutter_AbilityItem", Vector2(32.f, 43.f), Vector2(15.f, 27.f), Vector2(15.f, 0.f), 1.f, 1);
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Tornado_AbilityItem", Vector2(47.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Ninja_AbilityItem", Vector2(63.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
+		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Wheel_AbilityItem", Vector2(25.f, 125.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
 
 		if (mType == eAbilityType::Fire)
 			mAbilityAnimator->PlayAnimation(L"Fire_AbilityItem");
@@ -50,7 +51,8 @@ namespace sy
 			mAbilityAnimator->PlayAnimation(L"Tornado_AbilityItem");
 		else if (mType == eAbilityType::Ninja)
 			mAbilityAnimator->PlayAnimation(L"Ninja_AbilityItem");
-
+		else if (mType == eAbilityType::Wheel)
+			mAbilityAnimator->PlayAnimation(L"Wheel_AbilityItem");
 
 		Collider* col = AddComponent<Collider>();
 		col->SetColliderType(eColliderType::Sphere);
@@ -58,7 +60,6 @@ namespace sy
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetFloat(true);
-
 	}
 
 	AbilityItem::~AbilityItem()

@@ -10,7 +10,9 @@
 namespace sy
 {
 	AbilityUI::AbilityUI()
-		:mAnimator(nullptr)
+		: mIconAnimator(nullptr)
+		, mNameAnimator(nullptr)
+		, mNameBase(nullptr)
 	{
 	}
 
@@ -23,22 +25,40 @@ namespace sy
 		// AbilityUI 기본 위치 설정 
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.x = 20.0f;
-		vec.y -= 22.f;
+		vec.y -= 27.f;
 		GetComponent<Transform>()->SetPosition(vec);
 
-		mAnimator = AddComponent<Animator>();
+		mIconAnimator = AddComponent<Animator>();
+		mNameBase = AddComponent<Animator>();
+		mNameAnimator = AddComponent<Animator>();
 
 		Texture* tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
 
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Normal", Vector2::Zero, Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Fire", Vector2(40.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Ice", Vector2(80.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Cutter", Vector2(120.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Tornado", Vector2(160.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 40.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Normal", Vector2::Zero, Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Fire", Vector2(40.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Ice", Vector2(80.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Cutter", Vector2(120.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Tornado", Vector2(160.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Wheel", Vector2(25.f, 80.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 1.f, 1, Vector2(0.f, 1.f));
 
-		mAnimator->PlayAnimation(L"Ability_UI_Normal", false);
-		mAnimator->SetAffectedCamera(false);
+		Vector2 offset = Vector2(0.f, 20.f);
+
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Normal_Name",Vector2(0.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Fire_Name", Vector2(40.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Ice_Name", Vector2(80.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Cutter_Name", Vector2(120.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Tornado_Name", Vector2(160.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Ninja_Name", Vector2(200.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Wheel_Name", Vector2(35.f, 111.f), Vector2(28.f, 13.f), Vector2(28.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->SetBmpRGB(L"Ability_UI_Wheel_Name", 0,0,0);
+
+		mNameBase->CreateAnimation(tex, L"NameBase", Vector2(241.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+
+		mIconAnimator->PlayAnimation(L"Ability_UI_Normal", false);
+		mNameBase->PlayAnimation(L"NameBase", false);
+		mNameAnimator->PlayAnimation(L"Ability_UI_Normal_Name", false);
+		mIconAnimator->SetAffectedCamera(false);
 
 		UI::Initialize();
 	}
@@ -54,17 +74,40 @@ namespace sy
 			eAbilityType type = player->GetAbilityType();
 		
 			if (type == eAbilityType::Normal)
-				mAnimator->PlayAnimation(L"Ability_UI_Normal", false);		
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Normal", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Normal_Name", false);
+			}	
 			else if (type == eAbilityType::Fire)
-				mAnimator->PlayAnimation(L"Ability_UI_Fire", false);		
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Fire", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Fire_Name", false);
+			}
 			else if (type == eAbilityType::Ice)
-				mAnimator->PlayAnimation(L"Ability_UI_Ice", false);		
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Ice", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Ice_Name", false);
+			}
 			else if (type == eAbilityType::Cutter)
-				mAnimator->PlayAnimation(L"Ability_UI_Cutter", false);	
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Cutter", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Cutter_Name", false);
+			}
 			else if (type == eAbilityType::Tornado)
-				mAnimator->PlayAnimation(L"Ability_UI_Tornado", false);		
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Tornado", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Tornado_Name", false);
+			}
 			else if (type == eAbilityType::Ninja)
-				mAnimator->PlayAnimation(L"Ability_UI_Ninja", false);		
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Ninja", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Ninja_Name", false);
+			}
+			else if (type == eAbilityType::Wheel)
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Wheel", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Wheel_Name", false);
+			}
 		}
 	}
 

@@ -45,6 +45,7 @@ namespace sy
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Cutter_AbilityItem", Vector2(32.f, 43.f), Vector2(15.f, 27.f), Vector2(15.f, 0.f), 1.f, 1);
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Tornado_AbilityItem", Vector2(47.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Ninja_AbilityItem", Vector2(63.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
+		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Wheel_AbilityItem", Vector2(25.f, 125.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
 
 		if (mType == eAbilityType::Fire)
 			mAbilityAnimator->PlayAnimation(L"Fire_AbilityItem");
@@ -56,6 +57,8 @@ namespace sy
 			mAbilityAnimator->PlayAnimation(L"Tornado_AbilityItem");
 		else if (mType == eAbilityType::Ninja)
 			mAbilityAnimator->PlayAnimation(L"Ninja_AbilityItem");
+		else if (mType == eAbilityType::Wheel)
+			mAbilityAnimator->PlayAnimation(L"Wheel_AbilityItem");
 
 
 		mCollider = AddComponent<Collider>();

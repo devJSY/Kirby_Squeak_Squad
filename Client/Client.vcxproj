@@ -238,6 +238,12 @@
     <ClInclude Include="syTunnel_BG.h" />
     <ClInclude Include="syTunnelScene.h" />
     <ClInclude Include="syCrimp.h" />
+    <ClInclude Include="syWheelKirby.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="syZoom_Effect.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="syObject.h" />
@@ -335,6 +341,12 @@
     <ClCompile Include="syTunnel_BG.cpp" />
     <ClCompile Include="syTunnelScene.cpp" />
     <ClCompile Include="syCrimp.cpp" />
+    <ClCompile Include="syWheelKirby.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="syZoom_Effect.cpp" />
   </ItemGroup>
   <ItemGroup>

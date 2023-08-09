@@ -14,6 +14,8 @@ namespace sy
 		virtual void Render(HDC hdc) override;
 
 	private:
-		class Animator* mAnimator;
+		class Animator* mIconAnimator;
+		class Animator* mNameAnimator;
+		class Animator* mNameBase;
 	};
 }

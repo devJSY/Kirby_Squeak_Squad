@@ -56,7 +56,7 @@ namespace sy
 		mKirbyType[(UINT)eAbilityType::Cutter] = new CutterKirby(this);
 		mKirbyType[(UINT)eAbilityType::Tornado] = new TornadoKirby(this);
 		mKirbyType[(UINT)eAbilityType::Ninja] = new NinjaKirby(this);
-		//mKirbyType[(UINT)eAbilityType::Ninja] = new DefaultKirby(this);
+		mKirbyType[(UINT)eAbilityType::Wheel] = new DefaultKirby(this);
 	
 
 		for (UINT i = 0; i < (UINT)eAbilityType::End; i++)
@@ -150,6 +150,11 @@ namespace sy
 		else if (type == eAbilityType::Ninja)
 		{
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Ninja", false);
+		}
+		else if (type == eAbilityType::Wheel)
+		{
+			// 리소스없어서 임시로 설정
+			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal", false);
 		}
 	}
 
