@@ -100,6 +100,7 @@ namespace sy::enums
 		, Level6
 		, Level7
 		, Level8
+		, AbilityTest
 		, Bosses
 		, None
 	};

@@ -325,6 +325,9 @@
     <Filter Include="Contents\GameObject\Player\SparkKirby\Skill">
       <UniqueIdentifier>{932cd696-0455-4f1c-858d-1a5e4f6a52d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\AbilityTestScene">
+      <UniqueIdentifier>{6628b9b1-d13f-402a-b154-7db8f671c998}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -630,6 +633,9 @@
     <ClInclude Include="sySparkKirby_Skill.h">
       <Filter>Contents\GameObject\Player\SparkKirby\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="syAbilityTestScene.h">
+      <Filter>Contents\Scene\AbilityTestScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -925,6 +931,9 @@
     </ClCompile>
     <ClCompile Include="sySparkKirby_Skill.cpp">
       <Filter>Contents\GameObject\Player\SparkKirby\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="syAbilityTestScene.cpp">
+      <Filter>Contents\Scene\AbilityTestScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

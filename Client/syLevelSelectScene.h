@@ -13,6 +13,7 @@ namespace sy
 		Level6,
 		Level7,
 		Level8,
+		AbilityTest,
 	};
 
 	class LevelSelectScene : public Scene
@@ -43,15 +44,16 @@ namespace sy
 		void Level6();
 		void Level7();
 		void Level8();
+		void AbilityTest();
 		
 	private:
 		eLevelType					mLevelType;
 		class Level_BG*				mlevelBG;		
-		bool						mbActiveUI[9];
-		class PlacardUI*			mPlacardUI[9];
-		class StarUI*				mStarUI[9];
-		class NumberUI*				mNumberUI[9];
-		std::vector<class DotUI*>	mDots[9]; 
+		bool						mbActiveUI[10];
+		class PlacardUI*			mPlacardUI[10];
+		class StarUI*				mStarUI[10];
+		class NumberUI*				mNumberUI[10];
+		std::vector<class DotUI*>	mDots[10]; 
 		eLevelState					mCurLevelState;
 		float						mEnterTime;
 		class Zoom_Effect*			mZoom;

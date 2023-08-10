@@ -78,6 +78,10 @@ namespace sy
 			{
 				SceneManager::LoadScene(L"EndingScene");
 			}
+			else if (SceneName == L"AbilityTestScene")
+			{
+				SceneManager::LoadScene(L"LevelSelectScene");
+			}
 		}
 	}
 }

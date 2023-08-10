@@ -144,6 +144,9 @@ namespace sy
 			case eLevelState::Level8:
 				Level8();
 				break;
+			case eLevelState::AbilityTest:
+				AbilityTest();
+				break;
 			default:
 				break;
 			}
@@ -152,15 +155,27 @@ namespace sy
 			{
 				mbSceneChange = true;
 
-				if (mZoom == nullptr)
+				if (mCurLevelState == eLevelState::AbilityTest)
 				{
-					mZoom = new Zoom_Effect(SceneManager::GetPlayer());
-					object::ActiveSceneAddGameObject(eLayerType::Zoom, mZoom);
+					Camera::fadeOut(1.f, RGB(255, 255, 255));
+				}
+				else
+				{
+					if (mZoom == nullptr)
+					{
+						mZoom = new Zoom_Effect(SceneManager::GetPlayer());
+						object::ActiveSceneAddGameObject(eLayerType::Zoom, mZoom);
+					}
 				}
 
 				// 오디오 재생
 				ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
 			}			
+		}
+
+		if (mbSceneChange && mCurLevelState == eLevelState::AbilityTest && Camera::IsEmptyCamEffect())
+		{
+			SceneManager::LoadScene(L"AbilityTestScene");
 		}
 
 		// 스테이지 전부 클리어 시 배경화면 변경
@@ -216,6 +231,8 @@ namespace sy
 			vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
 		else if (mCurLevelState == eLevelState::Level8)
 			vec = mPlacardUI[8]->GetComponent<Transform>()->GetPosition();
+		else if (mCurLevelState == eLevelState::AbilityTest)
+			vec = mPlacardUI[9]->GetComponent<Transform>()->GetPosition();
 
 		// Offset값 추가
 		vec.y -= 17.f;
@@ -305,7 +322,7 @@ namespace sy
 	void LevelSelectScene::CreateLevelUI()
 	{
 		// Create LevelUI don't use index zero
-		for (size_t i = 1; i <= 8; i++)
+		for (size_t i = 1; i <= 9; i++)
 		{
 			mPlacardUI[i] = object::Instantiate<PlacardUI>(eLayerType::LevelUI);
 			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::LevelUI);
@@ -344,6 +361,10 @@ namespace sy
 		mPlacardUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 45.f));
 		mStarUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 42.f));
 		mNumberUI[8]->GetComponent<Transform>()->SetPosition(Vector2(35.f, 43.f));
+
+		mPlacardUI[9]->GetComponent<Transform>()->SetPosition(Vector2(128.f, 100.f));
+		mStarUI[9]->GetComponent<Transform>()->SetPosition(Vector2(128.f, 97.f));
+		mNumberUI[9]->GetComponent<Transform>()->SetPosition(Vector2(128.f, 98.f));
 	}
 
 	void LevelSelectScene::Level1()
@@ -396,7 +417,7 @@ namespace sy
 
 	void LevelSelectScene::Level3()
 	{
-		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::UP))
+		if (Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[2] == true)
 			{
@@ -421,6 +442,20 @@ namespace sy
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
 				mCurLevelState = eLevelState::Level4;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[9] == true)
+			{
+				Vector2 vec = mPlacardUI[9]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::AbilityTest;
 			}
 		}
 	}
@@ -458,7 +493,7 @@ namespace sy
 
 	void LevelSelectScene::Level5()
 	{
-		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			if (mbActiveUI[4] == true)
 			{
@@ -483,6 +518,20 @@ namespace sy
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
 				mCurLevelState = eLevelState::Level6;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::UP))
+		{
+			if (mbActiveUI[9] == true)
+			{
+				Vector2 vec = mPlacardUI[9]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::AbilityTest;
 			}
 		}
 	}
@@ -534,7 +583,7 @@ namespace sy
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::UP))
+		if (Input::GetKeyDown(eKeyCode::UP))
 		{
 			if (mbActiveUI[8] == true)
 			{
@@ -545,6 +594,20 @@ namespace sy
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
 				mCurLevelState = eLevelState::Level8;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[9] == true)
+			{
+				Vector2 vec = mPlacardUI[9]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::AbilityTest;
 			}
 		}
 	}
@@ -562,6 +625,51 @@ namespace sy
 				Transform* playerTrans = player->GetComponent<Transform>();
 				playerTrans->SetPosition(vec);
 				mCurLevelState = eLevelState::Level7;
+			}
+		}
+	}
+
+	void LevelSelectScene::AbilityTest()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			if (mbActiveUI[7] == true)
+			{
+				Vector2 vec = mPlacardUI[7]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::Level7;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[3] == true)
+			{
+				Vector2 vec = mPlacardUI[3]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::Level3;
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::DOWN))
+		{
+			if (mbActiveUI[5] == true)
+			{
+				Vector2 vec = mPlacardUI[5]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 17.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurLevelState = eLevelState::Level5;
 			}
 		}
 	}
@@ -656,6 +764,18 @@ namespace sy
 			for (size_t i = 0; i < mDots[8].size(); i++)
 			{
 				DotUI* dot = mDots[8][i];
+				dot->SetActiveTrig(true);
+			}
+		}
+		else if (Input::GetKeyDown(eKeyCode::Nine) || type == eLevelType::AbilityTest)
+		{
+			mbActiveUI[9] = true;
+			mPlacardUI[9]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+			mNumberUI[9]->GetComponent<Animator>()->PlayAnimation(L"Number_9");
+
+			for (size_t i = 0; i < mDots[9].size(); i++)
+			{
+				DotUI* dot = mDots[9][i];
 				dot->SetActiveTrig(true);
 			}
 		}
@@ -772,5 +892,49 @@ namespace sy
 
 			mDots[8].push_back(dot);
 		}
+
+		/////////// AbilityTest ///////////
+		for (size_t i = 0; i < 9; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(51.f + (8.f * i), 103.f));
+			dot->SetDelayTime(0.05f * i);
+
+			mDots[9].push_back(dot);
+		}
+
+		for (size_t i = 0; i < 6; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(142.f + (8.f * i), 103.f));
+			dot->SetDelayTime(0.45f + (0.05f * i));
+
+			mDots[9].push_back(dot);
+		}
+
+		dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+		dot->GetComponent<Transform>()->SetPosition(Vector2(190.f, 108.f));
+		dot->SetDelayTime(0.75f);
+
+		mDots[9].push_back(dot);
+
+
+		for (size_t i = 0; i < 3; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(126.f, 110 + (i * 8.f)));
+			dot->SetDelayTime(0.45f + (0.05f * i));
+
+			mDots[9].push_back(dot);
+		}
+
+		for (size_t i = 0; i < 3; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(118.f, 126.f + (i * 8.f)));
+			dot->SetDelayTime(0.60f + (0.05f * i));
+
+			mDots[9].push_back(dot);
+		}		
 	}
 }

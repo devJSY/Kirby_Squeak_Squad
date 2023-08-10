@@ -16,6 +16,7 @@
 #include "syIceIslandScene.h"
 #include "sySecretSeaScene.h"
 #include "syGambleGalaxyScene.h"
+#include "syAbilityTestScene.h"
 #include "syInventoryItem.h"
 #include "syAnimator.h"
 
@@ -94,6 +95,7 @@ namespace sy
 		CreateScene<SecretSeaScene>(L"SecretSeaScene");
 		CreateScene<GambleGalaxyScene>(L"GambleGalaxyScene");
 		CreateScene<LevelSelectScene>(L"LevelSelectScene");
+		CreateScene<AbilityTestScene>(L"AbilityTestScene");
 		CreateScene<Stage1Scene>(L"Stage1Scene");
 		CreateScene<Stage2Scene>(L"Stage2Scene");
 		CreateScene<Stage3Scene>(L"Stage3Scene");

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="syAbilityTestScene.h" />
     <ClInclude Include="syCutterKirby_Skill.h" />
     <ClInclude Include="syAbilityItem.h" />
     <ClInclude Include="syAbilityStar.h" />
@@ -251,6 +252,7 @@
     <ClInclude Include="syObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="syAbilityTestScene.cpp" />
     <ClCompile Include="syCutterKirby_Skill.cpp" />
     <ClCompile Include="syAbilityItem.cpp" />
     <ClCompile Include="syAbilityStar.cpp" />
