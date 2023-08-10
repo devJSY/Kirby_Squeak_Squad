@@ -47,6 +47,7 @@ namespace sy
 			else
 			{
 				time = 0.f;
+				mDecreaseHP = (float)SceneManager::GetPlayer()->GetHP();
 			}
 		}
 

@@ -82,6 +82,12 @@ namespace sy
 		mKirbyType[(UINT)mAbilityType]->Update();
 
 		GameObject::Update();		
+
+		// 임시 체력 무제한처리
+		if (mHP <= 0.f)
+		{
+			mHP = 100;
+		}
 	}
 
 	void Player::Render(HDC hdc)
