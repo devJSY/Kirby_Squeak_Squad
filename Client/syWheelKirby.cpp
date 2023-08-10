@@ -58,6 +58,7 @@ namespace sy
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
 
+		// 리소스 문제로 추후에 구현
 		/*mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Choice", Vector2(223.f, 541.f), Vector2(25.f, 50.f), Vector2(25.f, 0.f), 0.03f, 12, Animationoffset);
 		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Enter", Vector2(30.f, 375.f), Vector2(24.f, 32.f), Vector2(24.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Enter", Vector2(361.f, 375.f), Vector2(24.f, 32.f), Vector2(-24.f, 0.f), 1.f, 1, Animationoffset);
