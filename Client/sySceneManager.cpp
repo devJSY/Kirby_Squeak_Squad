@@ -114,6 +114,7 @@ namespace sy
 		mLifeUI->Initialize();
 
 		LoadScene(L"Stage1Scene");
+		//LoadScene(L"OpeningScene");
 	}
 
 	void SceneManager::Update()

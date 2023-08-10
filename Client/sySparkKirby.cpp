@@ -57,46 +57,46 @@ namespace sy
 		// 局聪皋捞记 积己
 		Vector2 Animationoffset = Vector2(0.f, 10.f);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Choice", Vector2(169.f, 355.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.04f, 9, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Enter", Vector2(459.f, 466.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Choice", Vector2(2304.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Enter", Vector2(2304.f, 3840.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Enter", Vector2(2304.f, 3840.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.5f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.125f, 8, Animationoffset);
 		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.125f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Walk", Vector2(7.f, 136.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.07f, 10, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Walk", Vector2(568.f, 136.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.07f, 10, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Walk", Vector2(1792.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.025f, 20, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Walk", Vector2(1792.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.025f, 20, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Run", Vector2(0.f, 174.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.043f, 8, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Run", Vector2(572.f, 174.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Run", Vector2(1792.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Run", Vector2(1792.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 8, Animationoffset);
 
 		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Jump", Vector2(1536.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Jump", Vector2(1536.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Turn", Vector2(32.f, 103.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Turn", Vector2(541.f, 103.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Turn", Vector2(2304.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Turn", Vector2(2304.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Drop", Vector2(197.f, 102.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Drop", Vector2(379.f, 102.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Drop", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Drop", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Down", Vector2(2048.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.125f, 8, Animationoffset);
 		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Down", Vector2(2048.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.125f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyStart", Vector2(60.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyStart", Vector2(513.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyStart", Vector2(768.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyStart", Vector2(768.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyEnd", Vector2(108.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyEnd", Vector2(465.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyEnd", Vector2(1536.f, 2560.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyEnd", Vector2(1536.f, 2560.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyDown", Vector2(6.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 2, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyDown", Vector2(565.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyDown", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.04f, 10, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyDown", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.04f, 10, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyUp", Vector2(1792.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.02f, 29, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyUp", Vector2(1792.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.02f, 29, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Skill", Vector2(181.f, 573.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Skill", Vector2(394.f, 573.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
-
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Skill", Vector2(0.f, 3584.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Skill", Vector2(0.f, 3584.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 4, Animationoffset);
+		
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 

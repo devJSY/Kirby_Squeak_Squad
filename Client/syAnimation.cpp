@@ -80,8 +80,9 @@ namespace sy
 			sprite.leftTop = leftTop + (Interbal * (float)i);
 			if (sprite.leftTop.x >= texture->GetWidth())
 			{
-				sprite.leftTop.x = sprite.leftTop.x - texture->GetWidth();
-				sprite.leftTop.y = leftTop.y + size.y;
+				int row = int(sprite.leftTop.x / texture->GetWidth());
+				sprite.leftTop.x = sprite.leftTop.x - (texture->GetWidth() * row);
+				sprite.leftTop.y = leftTop.y + (size.y * row);
 			}
 			sprite.size = size;
 			sprite.offset = offset;
