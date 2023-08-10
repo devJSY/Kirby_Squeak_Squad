@@ -156,9 +156,9 @@ namespace sy
 			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
 			//pos.x += 50.f;
 
-			AbilityItem* item5 = new AbilityItem(eAbilityType::Spark);
-			item5->GetComponent<Transform>()->SetPosition(pos);
-			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
+			//AbilityItem* item5 = new AbilityItem(eAbilityType::Spark);
+			//item5->GetComponent<Transform>()->SetPosition(pos);
+			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
 
 			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			//waddleDee->GetComponent<Transform>()->SetPosition(pos);

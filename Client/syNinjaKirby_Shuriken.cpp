@@ -68,7 +68,7 @@ namespace sy
 		// 픽셀충돌 체크
 		CheckPixelCollision();
 
-		if (mStuckTarget != nullptr && mStuckTarget->GetGameObjectState() == eGameObjectState::Dead)
+		if (mState != eShurikenState::Dead && mStuckTarget != nullptr && mStuckTarget->GetGameObjectState() == eGameObjectState::Dead)
 		{
 			mAnimator->PlayAnimation(L"Destroy_Animation", false);
 			mState = eShurikenState::Dead;
