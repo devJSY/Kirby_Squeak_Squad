@@ -319,6 +319,9 @@
     <Filter Include="Contents\GameObject\Player\WheelKirby">
       <UniqueIdentifier>{2a2a00ae-207e-48c7-96b1-58322ef55e36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\SparkKirby">
+      <UniqueIdentifier>{55e7d40f-c694-4d0d-9344-6d15445a1a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -618,6 +621,9 @@
     <ClInclude Include="syWheelKirby.h">
       <Filter>Contents\GameObject\Player\WheelKirby</Filter>
     </ClInclude>
+    <ClInclude Include="sySparkKirby.h">
+      <Filter>Contents\GameObject\Player\SparkKirby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -907,6 +913,9 @@
     </ClCompile>
     <ClCompile Include="syWheelKirby.cpp">
       <Filter>Contents\GameObject\Player\WheelKirby</Filter>
+    </ClCompile>
+    <ClCompile Include="sySparkKirby.cpp">
+      <Filter>Contents\GameObject\Player\SparkKirby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

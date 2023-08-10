@@ -206,6 +206,7 @@
     <ClInclude Include="sySirKibble_Skill.h" />
     <ClInclude Include="sySound.h" />
     <ClInclude Include="sySoundManager.h" />
+    <ClInclude Include="sySparkKirby.h" />
     <ClInclude Include="syStage2Scene.h" />
     <ClInclude Include="syStage3Scene.h" />
     <ClInclude Include="syStage4Scene.h" />
@@ -309,6 +310,7 @@
     <ClCompile Include="sySirKibble_Skill.cpp" />
     <ClCompile Include="sySound.cpp" />
     <ClCompile Include="sySoundManager.cpp" />
+    <ClCompile Include="sySparkKirby.cpp" />
     <ClCompile Include="syStage2Scene.cpp" />
     <ClCompile Include="syStage3Scene.cpp" />
     <ClCompile Include="syStage4Scene.cpp" />

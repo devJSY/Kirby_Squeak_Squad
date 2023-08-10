@@ -40,6 +40,7 @@ namespace sy
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Cutter", Vector2(120.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Tornado", Vector2(160.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Spark", Vector2(120.f, 80), Vector2(27.f, 26.f), Vector2(27.f, 0.f), 1.f, 1);
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Wheel", Vector2(25.f, 80.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 1.f, 1, Vector2(0.f, 1.f));
 
 		Vector2 offset = Vector2(0.f, 20.f);
@@ -50,6 +51,7 @@ namespace sy
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Cutter_Name", Vector2(120.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Tornado_Name", Vector2(160.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Ninja_Name", Vector2(200.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Spark_Name", Vector2(144.f, 111.f), Vector2(26.f, 13.f), Vector2(26.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Wheel_Name", Vector2(35.f, 111.f), Vector2(28.f, 13.f), Vector2(28.f, 0.f), 1.f, 1, offset);
 
 		mNameBase->CreateAnimation(tex, L"NameBase", Vector2(241.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
@@ -105,11 +107,16 @@ namespace sy
 				mIconAnimator->PlayAnimation(L"Ability_UI_Ninja", false);
 				mNameAnimator->PlayAnimation(L"Ability_UI_Ninja_Name", false);
 			}
-			else if (type == eAbilityType::Wheel)
+			else if (type == eAbilityType::Spark)
 			{
-				mIconAnimator->PlayAnimation(L"Ability_UI_Wheel", false);
-				mNameAnimator->PlayAnimation(L"Ability_UI_Wheel_Name", false);
+				mIconAnimator->PlayAnimation(L"Ability_UI_Spark", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Spark_Name", false);
 			}
+			//else if (type == eAbilityType::Wheel)
+			//{
+			//	mIconAnimator->PlayAnimation(L"Ability_UI_Wheel", false);
+			//	mNameAnimator->PlayAnimation(L"Ability_UI_Wheel_Name", false);
+			//}
 		}
 	}
 

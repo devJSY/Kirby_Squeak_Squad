@@ -1,4 +1,4 @@
-#include "syWheelKirby.h"
+#include "sySparkKirby.h"
 #include "syAnimator.h"
 #include "syTransform.h"
 #include "syRigidbody.h"
@@ -19,14 +19,13 @@
 #include "syDash_Effect.h"
 #include "syLevelSelectScene.h"
 #include "syBreath_Effect.h"
-#include "syCollider.h"
 #include "syAbilityStar.h"
 
 namespace sy
 {
-	WheelKirby::WheelKirby(class Player* owner)
+	SparkKirby::SparkKirby(class Player* owner)
 		: Kirby(owner)
-		, mState(eWheelKirbyState::Idle)
+		, mState(eSparkKirbyState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
@@ -38,15 +37,15 @@ namespace sy
 	{
 	}
 
-	WheelKirby::~WheelKirby()
+	SparkKirby::~SparkKirby()
 	{
 	}
 
-	void WheelKirby::Initialize()
+	void SparkKirby::Initialize()
 	{
 		// 텍스쳐 로드
-		Texture* WheelKirby_Right = ResourceManager::Load<Texture>(L"WheelKirby_Right_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Right.bmp");
-		Texture* WheelKirby_Left = ResourceManager::Load<Texture>(L"WheelKirby_Left_Tex", L"..\\Resources\\Kirby\\WheelKirby\\WheelKirby_Left.bmp");
+		Texture* SparkKirby_Right = ResourceManager::Load<Texture>(L"SparkKirby_Right_Tex", L"..\\Resources\\Kirby\\SparkKirby\\SparkKirby_Right.bmp");
+		Texture* SparkKirby_Left = ResourceManager::Load<Texture>(L"SparkKirby_Left_Tex", L"..\\Resources\\Kirby\\SparkKirby\\SparkKirby_Left.bmp");
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -56,56 +55,50 @@ namespace sy
 		mRigidBody->SetGround(true);
 
 		// 애니메이션 생성
-		Vector2 Animationoffset = Vector2(0.f, 0.f);
+		Vector2 Animationoffset = Vector2(0.f, -5.f);
 
-		/*mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Choice", Vector2(223.f, 541.f), Vector2(25.f, 50.f), Vector2(25.f, 0.f), 0.03f, 12, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Enter", Vector2(30.f, 375.f), Vector2(24.f, 32.f), Vector2(24.f, 0.f), 1.f, 1, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Enter", Vector2(361.f, 375.f), Vector2(24.f, 32.f), Vector2(-24.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Choice", Vector2(169.f, 355.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Enter", Vector2(115.f, 466.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Enter", Vector2(459.f, 466.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Idle", Vector2(6.f, 6.f), Vector2(24.f, 24.f), Vector2(24.f, 0.f), 0.05f, 2, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Idle", Vector2(366.f, 6.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.8f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.8f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Walk", Vector2(10.f, 83.f), Vector2(23.f, 25.f), Vector2(23.f, 0.f), 0.035f, 10, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Walk", Vector2(367.f, 82.f), Vector2(23.f, 23.f), Vector2(-23.f, 0.f), 0.035f, 10, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Walk", Vector2(7.f, 136.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.07f, 10, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Walk", Vector2(568.f, 136.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.07f, 10, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Run", Vector2(0.f, 347.f), Vector2(33.f, 28.f), Vector2(33.f, 0.f), 0.043f, 8, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Run", Vector2(667.f, 347.f), Vector2(33.f, 28.f), Vector2(-33.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Run", Vector2(0.f, 174.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Run", Vector2(572.f, 174.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.043f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Jump", Vector2(0.f, 259.f), Vector2(25.f, 28.f), Vector2(25.f, 0.f), 0.2f, 2, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Jump", Vector2(675.f, 259.f), Vector2(25.f, 28.f), Vector2(-25.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Jump", Vector2(7.f, 100.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Jump", Vector2(569.f, 100.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Turn", Vector2(63.f, 257.f), Vector2(25.f, 30.f), Vector2(25.f, 0.f), 0.035f, 6, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Turn", Vector2(612.f, 257.f), Vector2(25.f, 30.f), Vector2(-25.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Turn", Vector2(32.f, 103.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Turn", Vector2(541.f, 103.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.035f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Drop", Vector2(235.f, 255.f), Vector2(28.f, 32.f), Vector2(28.f, 0.f), 0.05f, 2, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Drop", Vector2(437.f, 255.f), Vector2(28.f, 32.f), Vector2(-28.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Drop", Vector2(197.f, 102.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Drop", Vector2(379.f, 102.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Down", Vector2(250.f, 14.f), Vector2(27.f, 22.f), Vector2(27.f, 0.f), 0.15f, 4);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Down", Vector2(423.f, 14.f), Vector2(27.f, 22.f), Vector2(-27.f, 0.f), 0.15f, 4);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Down", Vector2(7.f, 41.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.8f, 2);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Down", Vector2(565.f, 41.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.8f, 2);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_FlyStart", Vector2(67.f, 382.f), Vector2(29.f, 31.f), Vector2(29.f, 0.f), 0.0667f, 3, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_FlyStart", Vector2(604.f, 382.f), Vector2(29.f, 31.f), Vector2(-29.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyStart", Vector2(60.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyStart", Vector2(513.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_FlyEnd", Vector2(125.f, 382.f), Vector2(29.f, 31.f), Vector2(-29.f, 0.f), 0.0667f, 3, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_FlyEnd", Vector2(546.f, 382.f), Vector2(29.f, 31.f), Vector2(29.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyEnd", Vector2(108.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyEnd", Vector2(465.f, 207.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_FlyUp", Vector2(0.f, 468.f), Vector2(27.f, 35.f), Vector2(27.f, 0.f), 0.05f, 8, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_FlyUp", Vector2(673.f, 468.f), Vector2(27.f, 35.f), Vector2(-27.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyDown", Vector2(6.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyDown", Vector2(565.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_FlyDown", Vector2(0.f, 509.f), Vector2(27.f, 37.f), Vector2(27.f, 0.f), 0.05f, 6, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_FlyDown", Vector2(673.f, 509.f), Vector2(27.f, 37.f), Vector2(-27.f, 0.f), 0.05f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyUp", Vector2(66.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyUp", Vector2(505.f, 280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_SkillEnter", Vector2(0.f, 1145.f), Vector2(32.f, 32.f), Vector2(32.f, 0.f), 0.03f, 12, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_SkillEnter", Vector2(668.f, 1145.f), Vector2(32.f, 32.f), Vector2(-32.f, 0.f), 0.03f, 12, Animationoffset);
-
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Right_Skill", Vector2(0.f, 1189.f), Vector2(34.f, 28.f), Vector2(34.f, 0.f), 0.04f, 8, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Left_Skill", Vector2(666.f, 1189.f), Vector2(34.f, 28.f), Vector2(-34.f, 0.f), 0.04f, 8, Animationoffset);
-
-		mAnimator->CreateAnimation(WheelKirby_Left, L"WheelKirby_Right_SkillExit", Vector2(316.f, 1145.f), Vector2(32.f, 32.f), Vector2(32.f, 0.f), 0.03f, 12, Animationoffset);
-		mAnimator->CreateAnimation(WheelKirby_Right, L"WheelKirby_Left_SkillExit", Vector2(352.f, 1145.f), Vector2(32.f, 32.f), Vector2(-32.f, 0.f), 0.03f, 12, Animationoffset);*/
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Skill", Vector2(181.f, 573.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Skill", Vector2(394.f, 573.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 2, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
-		mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+		mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"FlySound", L"..\\Resources\\Sound\\Effect\\Fly.wav");
@@ -113,7 +106,8 @@ namespace sy
 		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
-		ResourceManager::Load<Sound>(L"TornadoSkill_Sound", L"..\\Resources\\Sound\\Effect\\TornadoSkill.wav");
+		ResourceManager::Load<Sound>(L"SparkSound", L"..\\Resources\\Sound\\Effect\\Spark.wav");
+		ResourceManager::Load<Sound>(L"Spark2Sound", L"..\\Resources\\Sound\\Effect\\Spark_2.wav");
 
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
@@ -121,7 +115,7 @@ namespace sy
 		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
 	}
 
-	void WheelKirby::Update()
+	void SparkKirby::Update()
 	{
 		// 방향 설정
 		mDir = mTransform->GetDirection();
@@ -131,25 +125,25 @@ namespace sy
 		{
 			switch (mState)
 			{
-			case eWheelKirbyState::Transformations:
+			case eSparkKirbyState::Transformations:
 				Level_Transformations();
 				break;
-			case eWheelKirbyState::Choice:
+			case eSparkKirbyState::Choice:
 				Choice();
 				break;
-			case eWheelKirbyState::Enter:
+			case eSparkKirbyState::Enter:
 				Level_Enter();
 				break;
-			case eWheelKirbyState::Idle:
+			case eSparkKirbyState::Idle:
 				Level_Idle();
 				break;
-			case eWheelKirbyState::Run:
+			case eSparkKirbyState::Run:
 				Level_Run();
 				break;
-			case eWheelKirbyState::Fly_Up:
+			case eSparkKirbyState::Fly_Up:
 				Level_FlyUp();
 				break;
-			case eWheelKirbyState::Drop:
+			case eSparkKirbyState::Drop:
 				Level_Drop();
 				break;
 			default:
@@ -159,25 +153,25 @@ namespace sy
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
 			if (Input::GetKeyDown(eKeyCode::W)
-				&& mState != eWheelKirbyState::Skill)
+				&& mState != eSparkKirbyState::Skill)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 
-				if (mState == eWheelKirbyState::Idle)
+				if (mState == eSparkKirbyState::Idle)
 					state = eDefaultKirbyState::Idle;
-				else if (mState == eWheelKirbyState::Walk)
+				else if (mState == eSparkKirbyState::Walk)
 					state = eDefaultKirbyState::Walk;
-				else if (mState == eWheelKirbyState::Run)
+				else if (mState == eSparkKirbyState::Run)
 					state = eDefaultKirbyState::Run;
-				else if (mState == eWheelKirbyState::Down)
+				else if (mState == eSparkKirbyState::Down)
 					state = eDefaultKirbyState::Down;
 				else
 					state = eDefaultKirbyState::Drop;
 
 				GetOwner()->ReleaseTransformations(state);
 
-				//AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Wheel);
-				//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
+				AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Spark);
+				object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 				// 상태변경 방지 리턴
 				return;
@@ -189,54 +183,48 @@ namespace sy
 			// 상태처리
 			switch (mState)
 			{
-			case eWheelKirbyState::Transformations:
+			case eSparkKirbyState::Transformations:
 				Transformations();
 				break;
-			case eWheelKirbyState::Idle:
+			case eSparkKirbyState::Idle:
 				Idle();
 				break;
-			case eWheelKirbyState::Walk:
+			case eSparkKirbyState::Walk:
 				Walk();
 				break;
-			case eWheelKirbyState::Run:
+			case eSparkKirbyState::Run:
 				Run();
 				break;
-			case eWheelKirbyState::Jump:
+			case eSparkKirbyState::Jump:
 				Jump();
 				break;
-			case eWheelKirbyState::Turn:
+			case eSparkKirbyState::Turn:
 				Turn();
 				break;
-			case eWheelKirbyState::Drop:
+			case eSparkKirbyState::Drop:
 				Drop();
 				break;
-			case eWheelKirbyState::Down:
+			case eSparkKirbyState::Down:
 				Down();
 				break;
-			case eWheelKirbyState::Fly_Start:
+			case eSparkKirbyState::Fly_Start:
 				Fly_Start();
 				break;
-			case eWheelKirbyState::Fly_End:
+			case eSparkKirbyState::Fly_End:
 				Fly_End();
 				break;
-			case eWheelKirbyState::Fly_Down:
+			case eSparkKirbyState::Fly_Down:
 				Fly_Down();
 				break;
-			case eWheelKirbyState::Fly_Up:
+			case eSparkKirbyState::Fly_Up:
 				Fly_Up();
 				break;
-			case eWheelKirbyState::Skill:
+			case eSparkKirbyState::Skill:
 				Skill();
-				break;
-			case eWheelKirbyState::Skill_Right_Turn:
-				Skill_Right_Turn();
-				break;
-			case eWheelKirbyState::Skill_Left_Turn:
-				Skill_Left_Turn();
 				break;
 			default:
 				break;
-			}			
+			}
 
 			// 이동제한
 			Vector2 pos = mTransform->GetPosition();
@@ -260,23 +248,21 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Enter()
+	void SparkKirby::Enter()
 	{
 		if (mDir == eDirection::RIGHT)
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Enter", false);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Enter", false);
 		else
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Enter", false);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Enter", false);
 
-		mState = eWheelKirbyState::Transformations;
+		mState = eSparkKirbyState::Transformations;
 	}
 
-	void WheelKirby::Exit()
+	void SparkKirby::Exit()
 	{
-		// Skill 에서 변경한 Limit 원상복귀
-		mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 	}
 
-	void WheelKirby::OnCollisionEnter(Collider* other)
+	void SparkKirby::OnCollisionEnter(Collider* other)
 	{
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 
@@ -291,36 +277,33 @@ namespace sy
 		enemy->SetHPBarUIRenderTrig(true);
 	}
 
-	void WheelKirby::OnCollisionStay(Collider* other)
+	void SparkKirby::OnCollisionStay(Collider* other)
 	{
 	}
 
-	void WheelKirby::OnCollisionExit(Collider* other)
+	void SparkKirby::OnCollisionExit(Collider* other)
 	{
 	}
 
-	bool WheelKirby::IsTransformableCheck()
+	bool SparkKirby::IsTransformableCheck()
 	{
-		if (mState == eWheelKirbyState::Skill || mState == eWheelKirbyState::Skill_Right_Turn || mState == eWheelKirbyState::Skill_Left_Turn)
+		if (mState == eSparkKirbyState::Skill)
 			return false;
 
 		return true;
 	}
 
-	void WheelKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
+	void SparkKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eWheelKirbyState::Skill 
-			|| mState == eWheelKirbyState::Skill_Right_Turn
-			|| mState == eWheelKirbyState::Skill_Left_Turn
-			|| mState == eWheelKirbyState::Transformations)
+		if (mState == eSparkKirbyState::Transformations)
 			return;
 
-		//AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Wheel);
-		//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
+		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Spark);
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
 
 		GetOwner()->Damaged(DamageAmount);
-		GetOwner()->PlayerTransformations(eAbilityType::Normal);
+		GetOwner()->SetKirbyType(eAbilityType::Normal);
 
 		DefaultKirby* defaultKirby = dynamic_cast<DefaultKirby*>(GetOwner()->GetActiveKirby());
 		defaultKirby->SetKirbyState(eDefaultKirbyState::Damage);
@@ -346,7 +329,7 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::CheckPixelCollision()
+	void SparkKirby::CheckPixelCollision()
 	{
 		// Stage타입에따라 픽셀텍스쳐 변경하기
 		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
@@ -439,8 +422,8 @@ namespace sy
 			|| MBColor == RGB(255, 0, 0))
 		{
 			// 특정상태일때는 바닥 무시
-			if (!(mState == eWheelKirbyState::Jump
-				|| mState == eWheelKirbyState::Fly_Up))
+			if (!(mState == eSparkKirbyState::Jump
+				|| mState == eSparkKirbyState::Fly_Up))
 			{
 				// 이동
 				Vector2 pos = mTransform->GetPosition();
@@ -540,25 +523,25 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Level_Transformations()
+	void SparkKirby::Level_Transformations()
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 		}
 	}
 
-	void WheelKirby::Choice()
+	void SparkKirby::Choice()
 	{
 		// 애니메이션
 		if ((Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::RIGHT)) && !GetOwner()->GetLevelEnter())
 		{
-			mAnimator->PlayAnimation(L"WheelKirby_Choice", false);
+			mAnimator->PlayAnimation(L"SparkKirby_Choice", false);
 		}
 
 		// 애니메이션이 끝나면 Idle 상태로 변경
@@ -568,17 +551,17 @@ namespace sy
 			if (GetOwner()->GetLevelEnter())
 			{
 				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"WheelKirby_Right_Enter", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Right_Enter", false);
 				else
-					mAnimator->PlayAnimation(L"WheelKirby_Left_Enter", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Left_Enter", false);
 
-				mState = eWheelKirbyState::Enter;
+				mState = eSparkKirbyState::Enter;
 				GetOwner()->SetLevelEnter(false);
 			}
 			else
 			{
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
-				mState = eWheelKirbyState::Idle;
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
+				mState = eSparkKirbyState::Idle;
 			}
 		}
 
@@ -587,34 +570,34 @@ namespace sy
 			|| Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Enter", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Enter", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Enter", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Enter", false);
 
-			mState = eWheelKirbyState::Enter;
+			mState = eSparkKirbyState::Enter;
 		}
 	}
 
-	void WheelKirby::Level_Enter()
+	void SparkKirby::Level_Enter()
 	{
 		// 애니메이션이 끝나면 Idle 상태로 변경
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 		}
 	}
 
-	void WheelKirby::Level_Idle()
+	void SparkKirby::Level_Idle()
 	{
 		if (Input::GetKeyDown(eKeyCode::UP)
 			|| Input::GetKeyDown(eKeyCode::DOWN)
 			|| Input::GetKeyDown(eKeyCode::RIGHT)
 			|| Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			mAnimator->PlayAnimation(L"WheelKirby_Choice", false);
-			mState = eWheelKirbyState::Choice;
+			mAnimator->PlayAnimation(L"SparkKirby_Choice", false);
+			mState = eSparkKirbyState::Choice;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::W)
@@ -622,15 +605,15 @@ namespace sy
 			|| Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Enter", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Enter", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Enter", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Enter", false);
 
-			mState = eWheelKirbyState::Enter;
+			mState = eSparkKirbyState::Enter;
 		}
 	}
 
-	void WheelKirby::Level_Run()
+	void SparkKirby::Level_Run()
 	{
 		// BackGround Animator Set
 		LevelSelectScene* levelSelectScene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
@@ -704,36 +687,36 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Level_FlyUp()
+	void SparkKirby::Level_FlyUp()
 	{
 		Vector2 pos = mTransform->GetPosition();
 		pos.y -= 120.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 	}
 
-	void WheelKirby::Level_Drop()
+	void SparkKirby::Level_Drop()
 	{
 		Vector2 pos = mTransform->GetPosition();
 		pos.y += 120.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 	}
 
-	void WheelKirby::Transformations()
+	void SparkKirby::Transformations()
 	{
 		mRigidBody->SetGround(true);
 
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 	}
 
-	void WheelKirby::Idle()
+	void SparkKirby::Idle()
 	{
 		// 애니메이션 
 
@@ -741,11 +724,11 @@ namespace sy
 		if (!mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 
 		// Walk
@@ -754,8 +737,8 @@ namespace sy
 			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Walk", true);
-				mState = eWheelKirbyState::Walk;
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Walk", true);
+				mState = eSparkKirbyState::Walk;
 			}
 		}
 
@@ -764,8 +747,8 @@ namespace sy
 			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Walk", true);
-				mState = eWheelKirbyState::Walk;
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Walk", true);
+				mState = eSparkKirbyState::Walk;
 			}
 		}
 
@@ -773,14 +756,14 @@ namespace sy
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Walk", true);
-			mState = eWheelKirbyState::Walk;
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Walk", true);
+			mState = eSparkKirbyState::Walk;
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Walk", true);
-			mState = eWheelKirbyState::Walk;
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Walk", true);
+			mState = eSparkKirbyState::Walk;
 		}
 
 		// Run
@@ -789,8 +772,8 @@ namespace sy
 			if (!mbOnRightStop)
 			{
 				mTransform->SetDirection(eDirection::RIGHT);
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Run", true);
-				mState = eWheelKirbyState::Run;
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Run", true);
+				mState = eSparkKirbyState::Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
@@ -805,8 +788,8 @@ namespace sy
 			if (!mbOnLeftStop)
 			{
 				mTransform->SetDirection(eDirection::LEFT);
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Run", true);
-				mState = eWheelKirbyState::Run;
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Run", true);
+				mState = eSparkKirbyState::Run;
 
 				Dash_Effect* DashEffect = new Dash_Effect(GetOwner());
 				object::ActiveSceneAddGameObject(eLayerType::Effect, DashEffect);
@@ -820,11 +803,11 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Jump", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Jump", false);
 
-			mState = eWheelKirbyState::Jump;
+			mState = eSparkKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 
@@ -836,30 +819,39 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Down", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Down", false);
 
-			mState = eWheelKirbyState::Down;
+			mState = eSparkKirbyState::Down;
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 	}
 
-	void WheelKirby::Walk()
+	void SparkKirby::Walk()
 	{
 		// Stop 상태라면 Idle 로 상태변경
 		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 			return;
 		}
 
@@ -886,11 +878,11 @@ namespace sy
 		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 
 		// Idle
@@ -898,47 +890,47 @@ namespace sy
 		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 		}
 
 		// Walk
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Walk", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Walk", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Walk", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Walk", true);
 		}
 
 		// 키 동시 입력 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Walk", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Walk", true);
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Walk", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Walk", true);
 		}
 
 		// Jump
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Jump", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Jump", false);
 
-			mState = eWheelKirbyState::Jump;
+			mState = eSparkKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 
@@ -950,31 +942,39 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Down", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Down", false);
 
-			mState = eWheelKirbyState::Down;
+			mState = eSparkKirbyState::Down;
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
 
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 	}
 
-	void WheelKirby::Run()
+	void SparkKirby::Run()
 	{
 		// Stop 상태라면 Idle 로 상태변경
 		if (mbOnLeftStop || mbOnRightStop)
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 
 			return;
 		}
@@ -1002,11 +1002,11 @@ namespace sy
 		if (!mRigidBody->IsGround() && mbOnSlope == false)
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 
 		// Idle
@@ -1014,47 +1014,47 @@ namespace sy
 		if (!Input::GetKeyPressed(eKeyCode::RIGHT) && !Input::GetKeyPressed(eKeyCode::LEFT))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 		}
 
 		// Run
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Run", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Run", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Run", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Run", true);
 		}
 
 		// 키 동시 입력 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Run", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Run", true);
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Run", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Run", true);
 		}
 
 		// Jump
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Jump", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Jump", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Jump", false);
 
-			mState = eWheelKirbyState::Jump;
+			mState = eSparkKirbyState::Jump;
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 
@@ -1066,20 +1066,29 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Down", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Down", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Down", false);
 
-			mState = eWheelKirbyState::Down;
+			mState = eSparkKirbyState::Down;
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 	}
 
-	void WheelKirby::Jump()
+	void SparkKirby::Jump()
 	{
 		// 상하 이동
 		static float KeyReleaseTime = 0.f;
@@ -1099,11 +1108,11 @@ namespace sy
 			if (KeyPressdTime > 0.4f)
 			{
 				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"WheelKirby_Right_Turn", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Right_Turn", false);
 				else
-					mAnimator->PlayAnimation(L"WheelKirby_Left_Turn", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Left_Turn", false);
 
-				mState = eWheelKirbyState::Turn;
+				mState = eSparkKirbyState::Turn;
 
 				KeyPressdTime = 0.f;
 				KeyReleaseTime = 0.f;
@@ -1119,11 +1128,11 @@ namespace sy
 			if (KeyReleaseTime > 0.125f)
 			{
 				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"WheelKirby_Right_Turn", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Right_Turn", false);
 				else
-					mAnimator->PlayAnimation(L"WheelKirby_Left_Turn", false);
+					mAnimator->PlayAnimation(L"SparkKirby_Left_Turn", false);
 
-				mState = eWheelKirbyState::Turn;
+				mState = eSparkKirbyState::Turn;
 
 				KeyPressdTime = 0.f;
 				KeyReleaseTime = 0.f;
@@ -1155,41 +1164,50 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Jump", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Jump", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Jump", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Jump", true);
 		}
 
 		// 키 동시 입력 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Jump", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Jump", true);
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Jump", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Jump", true);
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 
 		// Fly Start
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyStart", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyStart", false);
 
-			mState = eWheelKirbyState::Fly_Start;
+			mState = eSparkKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 			KeyPressdTime = 0.f;
 			KeyReleaseTime = 0.f;
@@ -1199,7 +1217,7 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Turn()
+	void SparkKirby::Turn()
 	{
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
@@ -1236,30 +1254,38 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete() || TurnTime > 0.3f)
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
 			TurnTime = 0.f;
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
 
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 
 		// Fly Start
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyStart", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyStart", false);
 
 			TurnTime = 0.f;
-			mState = eWheelKirbyState::Fly_Start;
+			mState = eSparkKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 
 			// 오디오 재생
@@ -1267,7 +1293,7 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Drop()
+	void SparkKirby::Drop()
 	{
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
@@ -1289,59 +1315,67 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 		}
 
 		// 방향전환 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && mDir == eDirection::LEFT)
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 		}
 
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && mDir == eDirection::RIGHT)
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 		}
 
 		// Skill
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
 
+			mState = eSparkKirbyState::Skill;
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
 		}
 
 		// Fly Start
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyStart", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyStart", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyStart", false);
 
-			mState = eWheelKirbyState::Fly_Start;
+			mState = eSparkKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
 		}
 
 		if (mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
 		}
 	}
 
-	void WheelKirby::Down()
+	void SparkKirby::Down()
 	{
 		// 애니메이션
 
@@ -1349,28 +1383,28 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_Down", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_Down", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_Down", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_Down", true);
 		}
 
 		// 키입력이없을땐 Idle 로 변경
 		if (!Input::GetKeyPressed(eKeyCode::DOWN))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Idle", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
-			mState = eWheelKirbyState::Idle;
+			mState = eSparkKirbyState::Idle;
 		}
 	}
 
-	void WheelKirby::Fly_Start()
+	void SparkKirby::Fly_Start()
 	{
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
@@ -1404,11 +1438,11 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyEnd", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyEnd", false);
 
-			mState = eWheelKirbyState::Fly_End;
+			mState = eSparkKirbyState::Fly_End;
 
 			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
@@ -1418,15 +1452,15 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyDown", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyDown", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyDown", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyDown", true);
 
-			mState = eWheelKirbyState::Fly_Down;
+			mState = eSparkKirbyState::Fly_Down;
 		}
 	}
 
-	void WheelKirby::Fly_End()
+	void SparkKirby::Fly_End()
 	{
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
@@ -1461,15 +1495,15 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_Drop", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Drop", true);
 
-			mState = eWheelKirbyState::Drop;
+			mState = eSparkKirbyState::Drop;
 		}
 	}
 
-	void WheelKirby::Fly_Down()
+	void SparkKirby::Fly_Down()
 	{
 		// Fly상태에선 속도제한
 		mRigidBody->SetLimitVelocity(Vector2(50.f, 50.f));
@@ -1495,25 +1529,25 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_FlyDown", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_FlyDown", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_FlyDown", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_FlyDown", true);
 		}
 
 		// 키 동시 입력 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_FlyDown", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_FlyDown", true);
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_FlyDown", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_FlyDown", true);
 		}
 
 
@@ -1522,11 +1556,11 @@ namespace sy
 			|| Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyUp", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyUp", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyUp", true);
 
-			mState = eWheelKirbyState::Fly_Up;
+			mState = eSparkKirbyState::Fly_Up;
 			mRigidBody->SetVelocity(Vector2(0.f, -300.f));
 			mRigidBody->SetGround(false);
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
@@ -1539,11 +1573,11 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyEnd", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyEnd", false);
 
-			mState = eWheelKirbyState::Fly_End;
+			mState = eSparkKirbyState::Fly_End;
 			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 
@@ -1554,7 +1588,7 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Fly_Up()
+	void SparkKirby::Fly_Up()
 	{
 		// Stop 상태가 아닌경우에만 이동
 		if (!(mbOnLeftStop || mbOnRightStop))
@@ -1578,25 +1612,25 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_FlyUp", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_FlyUp", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_FlyUp", true);
 		}
 
 		// 키 동시 입력 예외처리
 		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
-			mAnimator->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Right_FlyUp", true);
 		}
 		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mTransform->SetDirection(eDirection::LEFT);
-			mAnimator->PlayAnimation(L"WheelKirby_Left_FlyUp", true);
+			mAnimator->PlayAnimation(L"SparkKirby_Left_FlyUp", true);
 		}
 
 		// 누르고있을때 상승
@@ -1621,22 +1655,22 @@ namespace sy
 		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyDown", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyDown", true);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyDown", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyDown", true);
 
-			mState = eWheelKirbyState::Fly_Down;
+			mState = eSparkKirbyState::Fly_Down;
 		}
 
 		// Fly End
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"WheelKirby_Right_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_FlyEnd", false);
 			else
-				mAnimator->PlayAnimation(L"WheelKirby_Left_FlyEnd", false);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_FlyEnd", false);
 
-			mState = eWheelKirbyState::Fly_End;
+			mState = eSparkKirbyState::Fly_End;
 			Breath_Effect* BreathEffect = new Breath_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, BreathEffect);
 
@@ -1645,60 +1679,20 @@ namespace sy
 		}
 	}
 
-	void WheelKirby::Skill()
+	void SparkKirby::Skill()
 	{
-		// 좌우 이동
-		Vector2 pos = mTransform->GetPosition();
-
-		if (mDir == eDirection::RIGHT)
-			pos.x += 150.f * Time::DeltaTime();
-		else
-			pos.x -= 150.f * Time::DeltaTime();
-
-		mTransform->SetPosition(pos);
-
-		mRigidBody->SetLimitVelocity(Vector2(50.f, 50.f));
-
-		if (Input::GetKeyDown(eKeyCode::S) || Input::GetKeyPressed(eKeyCode::S))
+		// 키입력이없을경우 Idle 로 변경
+		if (!Input::GetKeyPressed(eKeyCode::S))
 		{
-			mRigidBody->SetVelocity(Vector2(0.f, -50.f));
-			mRigidBody->SetGround(false);
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
+
+			mState = eSparkKirbyState::Idle;
+
+			// 오디오 정지		
+			ResourceManager::Find<Sound>(L"SparkSound")->Stop(true);		
 		}
-
-		static float Duration = 0.f;
-		Duration += Time::DeltaTime();
-
-		if (Duration > 3.f)
-		{
-;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
-		{
-			mTransform->SetDirection(eDirection::RIGHT);
-		}
-
-		if (Input::GetKeyDown(eKeyCode::LEFT))
-		{
-			mTransform->SetDirection(eDirection::LEFT);
-		}
-
-		// 키 동시 입력 예외처리
-		if (Input::GetKeyPressed(eKeyCode::RIGHT) && Input::GetKeyUp(eKeyCode::LEFT))
-		{
-			mTransform->SetDirection(eDirection::RIGHT);
-		}
-		if (Input::GetKeyPressed(eKeyCode::LEFT) && Input::GetKeyUp(eKeyCode::RIGHT))
-		{
-			mTransform->SetDirection(eDirection::LEFT);
-		}
-	}
-
-	void WheelKirby::Skill_Right_Turn()
-	{
-	}
-
-	void WheelKirby::Skill_Left_Turn()
-	{
 	}
 }

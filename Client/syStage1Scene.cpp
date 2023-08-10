@@ -28,6 +28,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "sySparkKirby.h"
 #include "syWheelKirby.h"
 
 #include "syWaddleDee.h"
@@ -155,7 +156,7 @@ namespace sy
 			//object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
 			//pos.x += 50.f;
 
-			AbilityItem* item5 = new AbilityItem(eAbilityType::Wheel);
+			AbilityItem* item5 = new AbilityItem(eAbilityType::Spark);
 			item5->GetComponent<Transform>()->SetPosition(pos);
 			object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
 
@@ -245,12 +246,18 @@ namespace sy
 			ninjaKirby->SetKirbyState(eNinjaKirbyState::Turn);
 			playerAni->PlayAnimation(L"NinjaKirby_Right_Turn", false);
 		}
-		else if (playerType == eAbilityType::Wheel)
+		else if (playerType == eAbilityType::Spark)
 		{
-			WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
-			wheelKirby->SetKirbyState(eWheelKirbyState::Turn);
-			playerAni->PlayAnimation(L"WheelKirby_Right_Turn", false);
+			SparkKirby* sparkKirby = dynamic_cast<SparkKirby*>(player->GetActiveKirby());
+			sparkKirby->SetKirbyState(eSparkKirbyState::Turn);
+			playerAni->PlayAnimation(L"SparkKirby_Right_Turn", false);
 		}
+		//else if (playerType == eAbilityType::Wheel)
+		//{
+		//	WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+		//	wheelKirby->SetKirbyState(eWheelKirbyState::Turn);
+		//	playerAni->PlayAnimation(L"WheelKirby_Right_Turn", false);
+		//}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);
 

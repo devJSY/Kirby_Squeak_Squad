@@ -28,6 +28,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "sySparkKirby.h"
 #include "syWheelKirby.h"
 
 namespace sy
@@ -174,12 +175,18 @@ namespace sy
 			ninjaKirby->SetKirbyState(eNinjaKirbyState::Choice);
 			playerAni->PlayAnimation(L"NinjaKirby_Choice", false);
 		}
-		else if (playerType == eAbilityType::Wheel)
+		else if (playerType == eAbilityType::Spark)
 		{
-			WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
-			wheelKirby->SetKirbyState(eWheelKirbyState::Choice);
-			playerAni->PlayAnimation(L"WheelKirby_Choice", false);
+			SparkKirby* sparkKirby = dynamic_cast<SparkKirby*>(player->GetActiveKirby());
+			sparkKirby->SetKirbyState(eSparkKirbyState::Choice);
+			playerAni->PlayAnimation(L"SparkKirby_Choice", false);
 		}
+		//else if (playerType == eAbilityType::Wheel)
+		//{
+		//	WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+		//	wheelKirby->SetKirbyState(eWheelKirbyState::Choice);
+		//	playerAni->PlayAnimation(L"WheelKirby_Choice", false);
+		//}
 
 		mCurStageState = eStageState::StageExit;
 

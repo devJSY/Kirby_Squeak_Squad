@@ -20,6 +20,7 @@
 #include "syCutterKirby.h"
 #include "syTornadoKirby.h"
 #include "syNinjaKirby.h"
+#include "sySparkKirby.h"
 #include "syWheelKirby.h"
 
 namespace sy
@@ -387,21 +388,21 @@ namespace sy
 					playerAni->PlayAnimation(L"NinjaKirby_Left_Run", true);
 			}
 		}
-		else if (playerType == eAbilityType::Wheel)
+		else if (playerType == eAbilityType::Spark)
 		{
-			WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+			SparkKirby* sparkKirby = dynamic_cast<SparkKirby*>(player->GetActiveKirby());
 
 			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
 			{
 				if (mPrevSceneName == L"LevelSelectScene")
 				{
-					wheelKirby->SetKirbyState(eWheelKirbyState::Drop);
-					playerAni->PlayAnimation(L"WheelKirby_Right_Drop", true);
+					sparkKirby->SetKirbyState(eSparkKirbyState::Drop);
+					playerAni->PlayAnimation(L"SparkKirby_Right_Drop", true);
 				}
 				else
 				{
-					wheelKirby->SetKirbyState(eWheelKirbyState::Fly_Up);
-					playerAni->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
+					sparkKirby->SetKirbyState(eSparkKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"SparkKirby_Right_FlyUp", true);
 				}
 			}
 			else
@@ -409,14 +410,44 @@ namespace sy
 				// 오디오 재생
 				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
 
-				wheelKirby->SetKirbyState(eWheelKirbyState::Run);
+				sparkKirby->SetKirbyState(eSparkKirbyState::Run);
 
 				if (playerTrans->GetDirection() == eDirection::RIGHT)
-					playerAni->PlayAnimation(L"WheelKirby_Right_Run", true);
+					playerAni->PlayAnimation(L"SparkKirby_Right_Run", true);
 				else
-					playerAni->PlayAnimation(L"WheelKirby_Left_Run", true);
+					playerAni->PlayAnimation(L"SparkKirby_Left_Run", true);
 			}
-		}
+			}
+		//else if (playerType == eAbilityType::Wheel)
+		//{
+		//	WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
+
+		//	if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+		//	{
+		//		if (mPrevSceneName == L"LevelSelectScene")
+		//		{
+		//			wheelKirby->SetKirbyState(eWheelKirbyState::Drop);
+		//			playerAni->PlayAnimation(L"WheelKirby_Right_Drop", true);
+		//		}
+		//		else
+		//		{
+		//			wheelKirby->SetKirbyState(eWheelKirbyState::Fly_Up);
+		//			playerAni->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
+		//		}
+		//	}
+		//	else
+		//	{
+		//		// 오디오 재생
+		//		ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+		//		wheelKirby->SetKirbyState(eWheelKirbyState::Run);
+
+		//		if (playerTrans->GetDirection() == eDirection::RIGHT)
+		//			playerAni->PlayAnimation(L"WheelKirby_Right_Run", true);
+		//		else
+		//			playerAni->PlayAnimation(L"WheelKirby_Left_Run", true);
+		//	}
+		//}
 
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);

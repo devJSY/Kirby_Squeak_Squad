@@ -113,8 +113,7 @@ namespace sy
 		mHPbarUI->Initialize();
 		mLifeUI->Initialize();
 
-		//LoadScene(L"OpeningScene");
-		LoadScene(L"Stage1Scene");
+		LoadScene(L"OpeningScene");
 	}
 
 	void SceneManager::Update()

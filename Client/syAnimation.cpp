@@ -78,6 +78,11 @@ namespace sy
 			Sprite sprite = {};
 
 			sprite.leftTop = leftTop + (Interbal * (float)i);
+			if (sprite.leftTop.x >= texture->GetWidth())
+			{
+				sprite.leftTop.x = sprite.leftTop.x - texture->GetWidth();
+				sprite.leftTop.y = leftTop.y + size.y;
+			}
 			sprite.size = size;
 			sprite.offset = offset;
 			sprite.duration = duration;

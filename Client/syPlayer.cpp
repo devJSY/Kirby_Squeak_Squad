@@ -15,6 +15,7 @@
 #include "sySoundManager.h"
 #include "syResourceManager.h"
 #include "syNinjaKirby.h"
+#include "sySparkKirby.h"
 #include "syWheelKirby.h"
 
 namespace sy
@@ -57,7 +58,8 @@ namespace sy
 		mKirbyType[(UINT)eAbilityType::Cutter] = new CutterKirby(this);
 		mKirbyType[(UINT)eAbilityType::Tornado] = new TornadoKirby(this);
 		mKirbyType[(UINT)eAbilityType::Ninja] = new NinjaKirby(this);
-		mKirbyType[(UINT)eAbilityType::Wheel] = new WheelKirby(this);
+		mKirbyType[(UINT)eAbilityType::Spark] = new SparkKirby(this);
+		//mKirbyType[(UINT)eAbilityType::Wheel] = new WheelKirby(this);
 	
 
 		for (UINT i = 0; i < (UINT)eAbilityType::End; i++)
@@ -152,11 +154,16 @@ namespace sy
 		{
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Ninja", false);
 		}
-		else if (type == eAbilityType::Wheel)
+		else if (type == eAbilityType::Spark)
 		{
 			// 리소스없어서 임시로 설정
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal", false);
 		}
+		//else if (type == eAbilityType::Wheel)
+		//{
+		//	// 리소스없어서 임시로 설정
+		//	SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal", false);
+		//}
 	}
 
 	void Player::ReleaseTransformations(eDefaultKirbyState state)
