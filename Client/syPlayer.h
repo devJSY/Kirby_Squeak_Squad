@@ -44,6 +44,7 @@ namespace sy
 		ePlayerMode GetPlayerMode() { return mMode; }		
 
 		int GetHP() { return mHP; }
+		int GetLife() { return mLife; }
 
 		void SetHitEnemy(class Enemy* enemy) { mHitEnemy = enemy; }
 		Enemy* GetHitEnemy() { return mHitEnemy; }

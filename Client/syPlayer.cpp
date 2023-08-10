@@ -26,7 +26,7 @@ namespace sy
 		, mMode(ePlayerMode::LevelMode)
 		, mbLevelEnter(false)
 		, mHP(100)
-		, mLife(3)
+		, mLife(9)
 		, mHitEnemy(nullptr)
 	{
 	}
@@ -87,6 +87,11 @@ namespace sy
 		if (mHP <= 0.f)
 		{
 			mHP = 100;
+
+			if (mLife > 0)
+			{
+				mLife -= 1;
+			}		
 		}
 	}
 

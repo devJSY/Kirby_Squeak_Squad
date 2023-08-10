@@ -6,6 +6,8 @@
 #include "sySpriteRenderer.h"
 #include "syTransform.h"
 #include "syApplication.h"
+#include "syPlayer.h"
+#include "sySceneManager.h"
 
 namespace sy
 {
@@ -45,7 +47,6 @@ namespace sy
 		Texture* LifeCount_8 = ResourceManager::Load<Texture>(L"LifeCount_8_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_8.bmp");
 		Texture* LifeCount_9 = ResourceManager::Load<Texture>(L"LifeCount_9_Tex", L"..\\Resources\\UI\\LifeCount\\LifeCount_9.bmp");
 
-
 		// AlphaBmp 안그려짐 Bmp로 강제 타입변환		
 		LifeCount_0->SetType(eTextureType::Bmp);
 		LifeCount_1->SetType(eTextureType::Bmp);
@@ -80,6 +81,29 @@ namespace sy
 
 	void LifeUI::Update()
 	{
+		int life = SceneManager::GetPlayer()->GetLife();
+
+		if (life == 0)
+			mAnimator->PlayAnimation(L"LifeCount_0", false);
+		else if (life == 1)
+			mAnimator->PlayAnimation(L"LifeCount_1", false);
+		else if (life == 2)
+			mAnimator->PlayAnimation(L"LifeCount_2", false);
+		else if (life == 3)
+			mAnimator->PlayAnimation(L"LifeCount_3", false);
+		else if (life == 4)
+			mAnimator->PlayAnimation(L"LifeCount_4", false);
+		else if (life == 5)
+			mAnimator->PlayAnimation(L"LifeCount_5", false);
+		else if (life == 6)
+			mAnimator->PlayAnimation(L"LifeCount_6", false);
+		else if (life == 7)
+			mAnimator->PlayAnimation(L"LifeCount_7", false);
+		else if (life == 8)
+			mAnimator->PlayAnimation(L"LifeCount_8", false);
+		else if (life == 9)
+			mAnimator->PlayAnimation(L"LifeCount_9", false);
+
 		UI::Update();
 	}
 
