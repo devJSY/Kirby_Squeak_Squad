@@ -240,7 +240,5 @@ namespace sy
 
 	void AbilityTestScene::Exit()
 	{
-		//Camera::Pause(1.f, RGB(255, 255, 255));
-		//Camera::fadeIn(1.f, RGB(255, 255, 255));
 	}
 }

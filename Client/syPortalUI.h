@@ -17,5 +17,6 @@ namespace sy
 
 	private:
 		class Animator* mAnimator;
+		bool			mbSceneChange;
 	};
 }
