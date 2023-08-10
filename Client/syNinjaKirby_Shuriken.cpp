@@ -50,6 +50,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"NinjaKirby_ShurikenSound", L"..\\Resources\\Sound\\Effect\\NinjaStar.wav")->Play(false);
 
 		mCollider = AddComponent<Collider>();
+		mCollider->SetPosition(mTransform->GetPosition());
 		mCollider->SetSize(Vector2(23.f, 16.f));
 	}
 
@@ -207,7 +208,7 @@ namespace sy
 				mDuration = 0.f;
 			}
 
-			if (LBColor == RGB(0, 255, 0) || LTColor == RGB(0, 255, 0))
+			if (LTColor == RGB(0, 255, 0) || LBColor == RGB(0, 255, 0))
 			{
 				Vector2 pos = mTransform->GetPosition();
 				pos.x -= 5.f;
@@ -218,7 +219,6 @@ namespace sy
 				mDuration = 0.f;
 			}
 		}
-
 	}
 
 	void NinjaKirby_Shuriken::Move()

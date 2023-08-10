@@ -47,11 +47,6 @@ namespace sy
 
 	void Crimp::Update()
 	{
-		if (GetHP() <= 0.f)
-		{
-			mState = eCrimpState::Dead;
-		}
-
 		switch (mState)
 		{
 		case eCrimpState::Move:

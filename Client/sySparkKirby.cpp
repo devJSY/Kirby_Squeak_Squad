@@ -20,6 +20,7 @@
 #include "syLevelSelectScene.h"
 #include "syBreath_Effect.h"
 #include "syAbilityStar.h"
+#include "sySparkKirby_Skill.h"
 
 namespace sy
 {
@@ -34,6 +35,7 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mSkill(nullptr)
 	{
 	}
 
@@ -94,8 +96,8 @@ namespace sy
 		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_FlyUp", Vector2(1792.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.02f, 29, Animationoffset);
 		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_FlyUp", Vector2(1792.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.02f, 29, Animationoffset);
 
-		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Skill", Vector2(0.f, 3584.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 4, Animationoffset);
-		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Skill", Vector2(0.f, 3584.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Right, L"SparkKirby_Right_Skill", Vector2(1792.f, 3328.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SparkKirby_Left, L"SparkKirby_Left_Skill", Vector2(1792.f, 3328.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.03f, 3, Animationoffset);
 		
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SparkKirby_Right_Idle", true);
@@ -106,8 +108,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
-		ResourceManager::Load<Sound>(L"SparkSound", L"..\\Resources\\Sound\\Effect\\Spark.wav");
-		ResourceManager::Load<Sound>(L"Spark2Sound", L"..\\Resources\\Sound\\Effect\\Spark_2.wav");
+
 
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
@@ -296,7 +297,7 @@ namespace sy
 	void SparkKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eSparkKirbyState::Transformations)
+		if (mState == eSparkKirbyState::Transformations || mState == eSparkKirbyState::Skill)
 			return;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Spark);
@@ -830,14 +831,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 	}
 
@@ -953,14 +955,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 	}
 
@@ -1077,14 +1080,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 	}
 
@@ -1189,14 +1193,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 
 		// Fly Start
@@ -1266,14 +1271,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 
 		// Fly Start
@@ -1341,14 +1347,15 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Right_Skill", false);
 			else
-				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", true);
+				mAnimator->PlayAnimation(L"SparkKirby_Left_Skill", false);
 
 			mState = eSparkKirbyState::Skill;
 
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SparkSound")->Play(true);
+			// 스킬 생성
+			mSkill = new SparkKirby_Skill(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, mSkill);
 		}
 
 		// Fly Start
@@ -1690,6 +1697,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"SparkKirby_Left_Idle", true);
 
 			mState = eSparkKirbyState::Idle;
+
+			Destroy(mSkill);
 
 			// 오디오 정지		
 			ResourceManager::Find<Sound>(L"SparkSound")->Stop(true);		
