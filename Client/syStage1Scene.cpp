@@ -133,7 +133,7 @@ namespace sy
 			Transform* playerTrans = player->GetComponent<Transform>();
 
 			Vector2 pos = playerTrans->GetPosition();
-			//pos.x += 50.f;
+			pos.x += 50.f;
 
 			//AbilityItem* item = new AbilityItem(eAbilityType::Fire);
 			//item->GetComponent<Transform>()->SetPosition(pos);

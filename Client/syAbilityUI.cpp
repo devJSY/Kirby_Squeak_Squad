@@ -51,13 +51,13 @@ namespace sy
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Tornado_Name", Vector2(160.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Ninja_Name", Vector2(200.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Wheel_Name", Vector2(35.f, 111.f), Vector2(28.f, 13.f), Vector2(28.f, 0.f), 1.f, 1, offset);
-		mNameAnimator->SetBmpRGB(L"Ability_UI_Wheel_Name", 0,0,0);
 
 		mNameBase->CreateAnimation(tex, L"NameBase", Vector2(241.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 
 		mIconAnimator->PlayAnimation(L"Ability_UI_Normal", false);
 		mNameBase->PlayAnimation(L"NameBase", false);
 		mNameAnimator->PlayAnimation(L"Ability_UI_Normal_Name", false);
+
 		mIconAnimator->SetAffectedCamera(false);
 		mNameBase->SetAffectedCamera(false);
 		mNameAnimator->SetAffectedCamera(false);
