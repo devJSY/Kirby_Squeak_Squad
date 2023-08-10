@@ -182,8 +182,15 @@ namespace sy
 
 	void SirKibble::CheckPixelCollision()
 	{
+		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
+
+		Texture* PixelTex = nullptr;
+
 		// Stage타입에따라 픽셀텍스쳐 변경하기
-		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
+		if (CurSceneName == L"AbilityTestScene")
+			PixelTex = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
+		else
+			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
 		if (PixelTex == nullptr)
 			return;
@@ -191,9 +198,8 @@ namespace sy
 		// Offset 픽셀 좌상단위치 설정
 		Vector2 offset = Vector2::Zero;
 
-		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
-
-		if (CurSceneName == L"Stage1Scene")
+		if (CurSceneName == L"AbilityTestScene"
+			|| CurSceneName == L"Stage1Scene")
 		{
 			offset = Vector2::Zero;
 		}
