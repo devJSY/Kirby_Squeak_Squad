@@ -23,10 +23,12 @@
 #include "sySpriteRenderer.h"
 #include "syForeGround.h"
 #include "syInput.h"
+#include "syWaddleDee.h"
 
 namespace sy
 {
 	AbilityTestScene::AbilityTestScene()
+		: mPixelBG(nullptr)
 	{
 	}
 
@@ -36,6 +38,32 @@ namespace sy
 
 	void AbilityTestScene::Initialize()
 	{
+		// AbilityItem 생성
+		AbilityItem* item = new AbilityItem(eAbilityType::Fire);
+		item->GetComponent<Transform>()->SetPosition(Vector2(30.f, 40.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item);
+
+		AbilityItem* item2 = new AbilityItem(eAbilityType::Ice);
+		item2->GetComponent<Transform>()->SetPosition(Vector2(80.f, 30.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item2);
+
+		AbilityItem* item3 = new AbilityItem(eAbilityType::Cutter);
+		item3->GetComponent<Transform>()->SetPosition(Vector2(170.f, 30.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item3);
+
+		AbilityItem* item4 = new AbilityItem(eAbilityType::Tornado);
+		item4->GetComponent<Transform>()->SetPosition(Vector2(230.f, 40.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item4);
+
+		AbilityItem* item5 = new AbilityItem(eAbilityType::Ninja);
+		item5->GetComponent<Transform>()->SetPosition(Vector2(30.f, 100.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item5);
+
+		AbilityItem* item6 = new AbilityItem(eAbilityType::Spark);
+		item6->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item6);
+		
+
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World3_Backgrounds", L"..\\Resources\\Map\\Stage\\World3_Backgrounds.png"); // 이미지 설정
 
@@ -49,7 +77,7 @@ namespace sy
 		BgRenderer->SetTexture(tex);
 
 		// 스테이지 설정
-		tex = ResourceManager::Load<Texture>(L"Stage1", L"..\\Resources\\Map\\Foreground\\Stage2.bmp"); // 이미지 설정
+		tex = ResourceManager::Load<Texture>(L"Stage2", L"..\\Resources\\Map\\Foreground\\Stage2.bmp"); // 이미지 설정
 		ForeGround* Fg = object::Instantiate<ForeGround>(eLayerType::ForeGround);
 		Vector2 FgPos = Vector2(136.f, 104.f);
 		Fg->GetComponent<Transform>()->SetPosition(FgPos); // 중점 설정
@@ -62,7 +90,7 @@ namespace sy
 		FgRenderer->SetBmpRGB(0, 18, 127);
 
 		// 픽셀 이미지 로드
-		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Stage1_Pixel"
+		Texture* Pixeltex = ResourceManager::Load<Texture>(L"AbilityTest_Pixel"
 			, L"..\\Resources\\Map\\Foreground\\AbilityTest.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
@@ -81,10 +109,6 @@ namespace sy
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
-
-		// Sound Load
-		ResourceManager::Load<Sound>(L"Stage1BGMSound", L"..\\Resources\\Sound\\Theme\\Stage1BGM.wav");
-
 	}
 
 	void AbilityTestScene::Update()
@@ -97,6 +121,26 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(false);
 			else
 				PixelBgRenderer->SetRenderTrig(true);
+		}
+
+		// Enemy Spawn
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee->GetComponent<Transform>()->SetPosition(Vector2(80.f, 50.f));
+			waddleDee->Initialize();
+
+			WaddleDee* waddleDe2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDe2->GetComponent<Transform>()->SetPosition(Vector2(170.f, 50.f));
+			waddleDe2->Initialize();
+
+			WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(40.f, 100.f));
+			waddleDee3->Initialize();
+
+			WaddleDee* waddleDee4 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
+			waddleDee4->Initialize();
 		}
 
 		Scene::Update();
@@ -112,12 +156,11 @@ namespace sy
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
 		Transform* playerTrans = player->GetComponent<Transform>();
-		playerTrans->SetPosition(Vector2(30.f, 100.f));
+		playerTrans->SetPosition(Vector2(128.f, 100.f));
 		Animator* playerAni = player->GetComponent<Animator>();
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
-		//playerCol->SetSize(Vector2(50.f, 50.f));
 		player->SetPlayerMode(ePlayerMode::PlayMode);
 		playerTrans->SetDirection(eDirection::RIGHT);
 
@@ -197,7 +240,7 @@ namespace sy
 
 	void AbilityTestScene::Exit()
 	{
-		Camera::Pause(1.f, RGB(255, 255, 255));
-		Camera::fadeIn(1.f, RGB(255, 255, 255));
+		//Camera::Pause(1.f, RGB(255, 255, 255));
+		//Camera::fadeIn(1.f, RGB(255, 255, 255));
 	}
 }

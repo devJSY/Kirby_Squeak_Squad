@@ -111,6 +111,10 @@ namespace sy
 		if (mStuckTarget != nullptr)
 			return;
 
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy == nullptr)
+			return;
+
 		if (mDir == eDirection::RIGHT)
 		{
 			Vector2 pos = mTransform->GetPosition();
@@ -132,10 +136,6 @@ namespace sy
 			mDuration = 0.f;
 		}
 
-
-		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
-		if (enemy == nullptr)
-			return;
 
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 		mStuckOffset = Dir;

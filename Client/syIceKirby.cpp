@@ -331,17 +331,21 @@ namespace sy
 
 	void IceKirby::CheckPixelCollision()
 	{
-		// Stage타입에따라 픽셀텍스쳐 변경하기
-		Texture* PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
-		Texture* AbilityTest_Pixel = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
+		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
 
-		if (PixelTex == nullptr && AbilityTest_Pixel == nullptr)
+		Texture* PixelTex = nullptr;
+
+		// Stage타입에따라 픽셀텍스쳐 변경하기
+		if (CurSceneName == L"AbilityTestScene")
+			PixelTex = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
+		else
+			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
+
+		if (PixelTex == nullptr)
 			return;
 
 		// Offset 픽셀 좌상단위치 설정
 		Vector2 offset = Vector2::Zero;
-
-		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
 
 		if (CurSceneName == L"AbilityTestScene"
 			|| CurSceneName == L"Stage1Scene")
