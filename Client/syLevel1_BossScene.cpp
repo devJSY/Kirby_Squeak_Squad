@@ -32,6 +32,8 @@
 #include "syPrismPlainsScene.h"
 #include "syKingDedede.h"
 
+#include "syWaddleDee.h"
+
 namespace sy
 {
 	Level1_BossScene::Level1_BossScene()
@@ -50,6 +52,9 @@ namespace sy
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, kingDedede);
 		kingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 100.f));
 
+		// 적 생성
+		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(110.f, 100.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"King_Dedede_Stage", L"..\\Resources\\Map\\Stage\\King_Dedede_Stage.png"); // 이미지 설정
@@ -84,8 +89,6 @@ namespace sy
 
 	void Level1_BossScene::Update()
 	{
-		Scene::Update();
-
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
 			SceneManager::LoadScene(L"PrismPlainsScene");
@@ -108,6 +111,8 @@ namespace sy
 		//	portalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
 		//	portalUI->Initialize();
 		//}
+
+		Scene::Update();
 	}
 
 	void Level1_BossScene::Render(HDC hdc)

@@ -16,7 +16,7 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
-		, mDir(eDirection::RIGHT)
+		, mDir(eDirection::LEFT)
 	{
 	}
 
@@ -29,22 +29,77 @@ namespace sy
 		// 텍스쳐 로드
 		Texture* KingDedede_Right = ResourceManager::Load<Texture>(L"KingDedede_Right_Tex", L"..\\Resources\\Enemy\\Boss\\KingDedede\\KingDedede_Right.bmp");
 		Texture* KingDedede_Left = ResourceManager::Load<Texture>(L"KingDedede_Left_Tex", L"..\\Resources\\Enemy\\Boss\\KingDedede\\KingDedede_Left.bmp");
+		KingDedede_Right->SetType(eTextureType::Bmp);
+		KingDedede_Left->SetType(eTextureType::Bmp);
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
-		mRigidBody->SetGround(true);
-		GetComponent<Collider>()->SetSize(Vector2(60.f, 60.f));
+		Collider* col = GetComponent<Collider>();
+		col->SetSize(Vector2(50.f, 50.f));
 
 		// 애니메이션 생성
-		Vector2 Animationoffset = Vector2(0.f, 0.f);
+		Vector2 Animationoffset = Vector2(0.f, 30.f);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 4, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.05f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
+		
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 4, Animationoffset);
 
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_JumpReady", Vector2(768.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_JumpReady", Vector2(768.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
 
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Jump", Vector2(1024.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Jump", Vector2(1024.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Drop", Vector2(0.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Drop", Vector2(0.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_AttackReady", Vector2(256.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_AttackReady", Vector2(256.f, 512.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_AttackRun", Vector2(0.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_AttackRun", Vector2(0.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 6, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 6, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_FlyReady", Vector2(0.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_FlyReady", Vector2(0.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_FlyUp", Vector2(512.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_FlyUp", Vector2(512.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Fly", Vector2(768.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Fly", Vector2(768.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_FlyDrop", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_FlyDrop", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonReady", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonReady", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonJump", Vector2(1024.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonJump", Vector2(1024.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonDrop", Vector2(0.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonDrop", Vector2(0.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 8, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 8, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_DeathJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_DeathJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Death", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Death", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+		
 		mAnimator->SetAffectedCamera(true);
-		mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+		mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"BossAttack", L"..\\Resources\\Sound\\Effect\\Boss\\BossAttack.wav");
@@ -65,8 +120,7 @@ namespace sy
 		mDir = mTransform->GetDirection();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
-		
+		CheckPixelCollision();		
 
 		switch (mState)
 		{
