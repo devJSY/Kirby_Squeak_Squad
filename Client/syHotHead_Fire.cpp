@@ -85,12 +85,4 @@ namespace sy
 
 		player->TakeHit(10, Dir);
 	}
-
-	void HotHead_Fire::OnCollisionStay(Collider* other)
-	{
-	}
-
-	void HotHead_Fire::OnCollisionExit(Collider* other)
-	{
-	}
 }

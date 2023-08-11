@@ -24,7 +24,10 @@
 #include "syForeGround.h"
 #include "syInput.h"
 #include "syWaddleDee.h"
+
+
 #include "syHotHead.h"
+#include "syCrimp.h"
 
 namespace sy
 {
@@ -146,6 +149,11 @@ namespace sy
 			HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 			hotHead->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
 			hotHead->Initialize();
+
+
+			Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
+			crimp->GetComponent<Transform>()->SetPosition(Vector2(80.f, 50.f));
+			crimp->Initialize();
 		}
 
 		Scene::Update();

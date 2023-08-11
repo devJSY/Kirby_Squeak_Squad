@@ -9,6 +9,7 @@
 #include "syPlayer.h"
 #include "syCollider.h"
 #include "syDefaultKirby.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -17,6 +18,7 @@ namespace sy
 		, mState(eCrimpState::Move)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
+		, mAttackDelay(0.f)
 	{
 	}
 
@@ -36,7 +38,7 @@ namespace sy
 
 		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Move", Vector2(0.f, 2916.f), Vector2(25.f, 24.f), Vector2(25.f, 0.f), 0.15f, 6);
 		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Damage", Vector2(36.f, 3021.f), Vector2(20.f, 32.f), Vector2(20.f, 0.f), 1.f, 1);
-		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Attack", Vector2(0.f, 2941.f), Vector2(30.f, 26.f), Vector2(30.f, 0.f), 0.2f, 3);
+		mAnimator->CreateAnimation(Enemies_Right, L"Crimp_Right_Attack", Vector2(0.f, 2941.f), Vector2(30.f, 26.f), Vector2(30.f, 0.f), 0.1f, 3);
 
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"Crimp_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
@@ -140,26 +142,42 @@ namespace sy
 			mAnimator->PlayAnimation(L"Crimp_Death", false);
 			mState = eCrimpState::Dead;
 		}
+
+		mAttackDelay += Time::DeltaTime();
+
+		// 특정 조건일때 스킬 생성
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+
+		if (Len < 50.f && mAttackDelay > 1.f)
+		{
+			CrimpSkill* Skill = new CrimpSkill(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Skill);
+			mAnimator->PlayAnimation(L"Crimp_Right_Attack", false);
+			mState = eCrimpState::Attack;
+			mAttackDelay = 0.f;
+		}
 	}
 
 	void Crimp::Attack()
 	{
+		static float time = 0.f;
+
+		time += Time::DeltaTime();
+
 		if (GetHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"Crimp_Death", false);
 			mState = eCrimpState::Dead;
+			time = 0.f;
 		}
 
-		// 특정 조건일때 스킬 생성
-		if (Input::GetKeyDown(eKeyCode::T))
+		if (mAnimator->IsActiveAnimationComplete() && time > 2.f)
 		{
-			Transform* tr = GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos += Vector2(10.f, 0.f);
-
-			CrimpSkill* Skill = new CrimpSkill(this);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Skill);
-			Skill->GetComponent<Transform>()->SetPosition(pos);
+			mAnimator->PlayAnimation(L"Crimp_Right_Move", true);
+			mState = eCrimpState::Move;
+			time = 0.f;
 		}
 	}
 

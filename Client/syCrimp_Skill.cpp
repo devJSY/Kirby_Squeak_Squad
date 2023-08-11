@@ -3,12 +3,25 @@
 #include "syResourceManager.h"
 #include "syAnimator.h"
 #include "syCollider.h"
+#include "syTime.h"
+#include "syPlayer.h"
+#include "syTransform.h"
+#include "syRigidbody.h"
 
 namespace sy
 {
 	CrimpSkill::CrimpSkill(GameObject* owner)
 		: Effects(owner)
+		, mTransform(nullptr)
+		, mDuration(0.f)
 	{
+		mTransform = GetComponent<Transform>();
+		mTransform->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+
+		Rigidbody* rigidbody = AddComponent<Rigidbody>();
+		rigidbody->SetGround(false);
+		rigidbody->SetVelocity(Vector2(200.f, 0.f));
+
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(10.f, 10.f));
 
@@ -31,6 +44,13 @@ namespace sy
 
 	void CrimpSkill::Update()
 	{
+		mDuration += Time::DeltaTime();
+
+		if (mDuration > 3.f)
+		{
+			Destroy(this);
+		}
+
 		Effects::Update();
 	}
 
@@ -40,11 +60,14 @@ namespace sy
 	}
 	void CrimpSkill::OnCollisionEnter(Collider* other)
 	{
-	}
-	void CrimpSkill::OnCollisionStay(Collider* other)
-	{
-	}
-	void CrimpSkill::OnCollisionExit(Collider* other)
-	{
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// 스킬 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 }

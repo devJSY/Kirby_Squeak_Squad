@@ -43,6 +43,7 @@ namespace sy
         class Animator*     mAnimator;
         class Transform*    mTransform;
 
+        float               mAttackDelay;
     };
 }
 

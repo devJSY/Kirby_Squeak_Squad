@@ -354,11 +354,11 @@ namespace sy
 
 	void DefaultKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		// 이미 데미지 상태면 처리하지않음
+		GetOwner()->Damaged(DamageAmount);
+
+		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
 		if (mState == eDefaultKirbyState::Damage || mState == eDefaultKirbyState::Inhaled_Damage)
 			return;
-
-		GetOwner()->Damaged(DamageAmount);
 
 		if (mState == eDefaultKirbyState::Inhaled
 			|| mState == eDefaultKirbyState::Inhaled_Idle
