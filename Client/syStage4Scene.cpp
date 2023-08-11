@@ -50,7 +50,6 @@ namespace sy
 		SirKibble* sirKibble2 = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirKibble2->GetComponent<Transform>()->SetPosition(Vector2(42.f, 169.f));
 
-
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
 

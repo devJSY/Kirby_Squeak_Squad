@@ -16,7 +16,8 @@ namespace sy
 		virtual void Enter();
 		virtual void Exit();
 
-		void SetActiveUI();
+		void SetActiveUI(eStageState type);
+		void SetClearActiveUI(eStageState type);
 
 	private:
 		void CreateDot();

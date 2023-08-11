@@ -101,9 +101,7 @@ namespace sy
 		Scene::Initialize();
 
 		// 기본 Level1 UI 활성화
-		mbActiveUI[1] = true;
-		mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-		mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
+		SetActiveUI(eLevelType::Level1);
 
 		mlevelBG->SetLevelType(eLevelType::LevelSelect);
 	}
@@ -195,7 +193,24 @@ namespace sy
 		}
 
 		// 임시로 키입력으로 UI 활성화
-		SetActiveUI(eLevelType::None);
+		if (Input::GetKeyDown(eKeyCode::One))
+			SetActiveUI(eLevelType::Level1);
+		else if (Input::GetKeyDown(eKeyCode::Two))
+			SetActiveUI(eLevelType::Level2);
+		else if (Input::GetKeyDown(eKeyCode::Three))
+			SetActiveUI(eLevelType::Level3);
+		else if (Input::GetKeyDown(eKeyCode::Four))
+			SetActiveUI(eLevelType::Level4);
+		else if (Input::GetKeyDown(eKeyCode::Five))
+			SetActiveUI(eLevelType::Level5);
+		else if (Input::GetKeyDown(eKeyCode::Six))
+			SetActiveUI(eLevelType::Level6);
+		else if (Input::GetKeyDown(eKeyCode::Seven))
+			SetActiveUI(eLevelType::Level7);
+		else if (Input::GetKeyDown(eKeyCode::Eight))
+			SetActiveUI(eLevelType::Level8);
+		else if (Input::GetKeyDown(eKeyCode::Nine))
+			SetActiveUI(eLevelType::AbilityTest);
 	}
 
 	void LevelSelectScene::Render(HDC hdc)
@@ -677,13 +692,13 @@ namespace sy
 	void LevelSelectScene::SetActiveUI(eLevelType type)
 	{
 		// type 에 따라 UI 활성화
-		if (Input::GetKeyDown(eKeyCode::One) || type == eLevelType::Level1)
+		if (type == eLevelType::Level1)
 		{
 			mbActiveUI[1] = true;
 			mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
 			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
 		}
-		else if (Input::GetKeyDown(eKeyCode::Two) || type == eLevelType::Level2)
+		else if (type == eLevelType::Level2)
 		{
 			mbActiveUI[2] = true;
 			mPlacardUI[2]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -695,7 +710,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Three) || type == eLevelType::Level3)
+		else if (type == eLevelType::Level3)
 		{
 			mbActiveUI[3] = true;
 			mPlacardUI[3]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -707,7 +722,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Four) || type == eLevelType::Level4)
+		else if (type == eLevelType::Level4)
 		{
 			mbActiveUI[4] = true;
 			mPlacardUI[4]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -719,7 +734,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Five) || type == eLevelType::Level5)
+		else if (type == eLevelType::Level5)
 		{
 			mbActiveUI[5] = true;
 			mPlacardUI[5]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -731,7 +746,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Six) || type == eLevelType::Level6)
+		else if (type == eLevelType::Level6)
 		{
 			mbActiveUI[6] = true;
 			mPlacardUI[6]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -743,7 +758,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Seven) || type == eLevelType::Level7)
+		else if (type == eLevelType::Level7)
 		{
 			mbActiveUI[7] = true;
 			mPlacardUI[7]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -755,7 +770,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Eight) || type == eLevelType::Level8)
+		else if (type == eLevelType::Level8)
 		{
 			mbActiveUI[8] = true;
 			mPlacardUI[8]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
@@ -767,7 +782,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Nine) || type == eLevelType::AbilityTest)
+		else if (type == eLevelType::AbilityTest)
 		{
 			mbActiveUI[9] = true;
 			mPlacardUI[9]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");

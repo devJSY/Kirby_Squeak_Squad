@@ -226,18 +226,6 @@
     <Filter Include="Contents\GameObject\BackGround\Tunnel_BG">
       <UniqueIdentifier>{c670cd71-43ce-4486-99cd-2d4548907e73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\StageScene\Stage1">
-      <UniqueIdentifier>{b740f755-ca6d-4ce6-a450-ecdaa0540f53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\StageScene\Stage2">
-      <UniqueIdentifier>{d898b881-a3a0-45f7-8ec6-3c33fad9af93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\StageScene\Stage3">
-      <UniqueIdentifier>{15caa6dc-74f6-4014-96a2-41bc72c771bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\StageScene\Stage4">
-      <UniqueIdentifier>{85e6171e-1709-4021-8716-4f8305000bde}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Effects\Breath_Effect">
       <UniqueIdentifier>{a1c44ee5-dd8d-4795-aba8-06444b5d24d1}</UniqueIdentifier>
     </Filter>
@@ -327,6 +315,24 @@
     </Filter>
     <Filter Include="Contents\Scene\AbilityTestScene">
       <UniqueIdentifier>{6628b9b1-d13f-402a-b154-7db8f671c998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1">
+      <UniqueIdentifier>{c098b97b-4168-4fe3-952e-313598540640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1\Stage1">
+      <UniqueIdentifier>{b740f755-ca6d-4ce6-a450-ecdaa0540f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1\Stage2">
+      <UniqueIdentifier>{d898b881-a3a0-45f7-8ec6-3c33fad9af93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1\Stage3">
+      <UniqueIdentifier>{15caa6dc-74f6-4014-96a2-41bc72c771bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1\Stage4">
+      <UniqueIdentifier>{85e6171e-1709-4021-8716-4f8305000bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level1\Boss">
+      <UniqueIdentifier>{e904e40d-81de-4394-8875-a8ba8626f7b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -544,16 +550,16 @@
       <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="syStage1Scene.h">
-      <Filter>Contents\Scene\StageScene\Stage1</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage1</Filter>
     </ClInclude>
     <ClInclude Include="syStage2Scene.h">
-      <Filter>Contents\Scene\StageScene\Stage2</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage2</Filter>
     </ClInclude>
     <ClInclude Include="syStage3Scene.h">
-      <Filter>Contents\Scene\StageScene\Stage3</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage3</Filter>
     </ClInclude>
     <ClInclude Include="syStage4Scene.h">
-      <Filter>Contents\Scene\StageScene\Stage4</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage4</Filter>
     </ClInclude>
     <ClInclude Include="syBreath_Effect.h">
       <Filter>Contents\GameObject\Effects\Breath_Effect</Filter>
@@ -843,16 +849,16 @@
       <Filter>Engine\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="syStage1Scene.cpp">
-      <Filter>Contents\Scene\StageScene\Stage1</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage1</Filter>
     </ClCompile>
     <ClCompile Include="syStage2Scene.cpp">
-      <Filter>Contents\Scene\StageScene\Stage2</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage2</Filter>
     </ClCompile>
     <ClCompile Include="syStage3Scene.cpp">
-      <Filter>Contents\Scene\StageScene\Stage3</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage3</Filter>
     </ClCompile>
     <ClCompile Include="syStage4Scene.cpp">
-      <Filter>Contents\Scene\StageScene\Stage4</Filter>
+      <Filter>Contents\Scene\StageScene\Level1\Stage4</Filter>
     </ClCompile>
     <ClCompile Include="syBreath_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Breath_Effect</Filter>

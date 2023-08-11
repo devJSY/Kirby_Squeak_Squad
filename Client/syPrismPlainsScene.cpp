@@ -133,23 +133,15 @@ namespace sy
 		{
 			mLevelType = eLevelType::Level1_Clear;
 			mlevelBG->SetLevelType(mLevelType);
-
-			// 현재 스테이지 클리어 처리
-			if (mCurStageState == eStageState::Stage1)
-			{
-				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClearFlash", true);
-				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
-			}
-			else if (mCurStageState == eStageState::Boss)
-			{
-				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClearFlash", true);
-				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
-				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"Number_Dedede");
-			}
+			SetClearActiveUI(eStageState::Stage1);
+			SetClearActiveUI(eStageState::Boss);
 		}
 
 		// 임시로 숫자 키패드로 Stage 활성화
-		SetActiveUI();
+		if (Input::GetKeyDown(eKeyCode::One))
+			SetActiveUI(eStageState::Stage1);
+		else if (Input::GetKeyDown(eKeyCode::Two))
+			SetActiveUI(eStageState::Boss);		
 
 		Scene::Update();
 	}
@@ -240,6 +232,8 @@ namespace sy
 
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
+
+		SetActiveUI(eStageState::Stage1);
 	}
 
 	void PrismPlainsScene::Exit()
@@ -253,10 +247,10 @@ namespace sy
 		CollisionManager::Clear();
 	}
 
-	void PrismPlainsScene::SetActiveUI()
+	void PrismPlainsScene::SetActiveUI(eStageState type)
 	{
 		// type 에 따라 UI 활성화
-		if (Input::GetKeyDown(eKeyCode::One))
+		if (type == eStageState::Stage1)
 		{
 			mbActiveUI[0] = true;
 			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageFlash", true);
@@ -269,7 +263,7 @@ namespace sy
 				dot->SetActiveTrig(true);
 			}
 		}
-		else if (Input::GetKeyDown(eKeyCode::Two))
+		else if (type == eStageState::Boss)
 		{
 			mbActiveUI[1] = true;
 			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageFlash", true);
@@ -280,6 +274,28 @@ namespace sy
 			{
 				DotUI* dot = mDots[1][i];
 				dot->SetActiveTrig(true);
+			}
+		}
+	}
+
+	void PrismPlainsScene::SetClearActiveUI(eStageState type)
+	{
+		// 현재 스테이지 클리어 처리
+		if (type == eStageState::Stage1)
+		{
+			if (mbActiveUI[0])
+			{
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageClearFlash", true);
+				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+			}
+		}
+		else if (type == eStageState::Boss)
+		{
+			if (mbActiveUI[1])
+			{
+				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageClearFlash", true);
+				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"Number_Dedede");
 			}
 		}
 	}
