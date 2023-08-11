@@ -192,6 +192,8 @@ namespace sy
 		// Stage타입에따라 픽셀텍스쳐 변경하기
 		if (CurSceneName == L"AbilityTestScene")
 			PixelTex = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
+		else if (CurSceneName == L"Level1_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"King_Dedede_Stage_Pixel");
 		else
 			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
@@ -202,6 +204,7 @@ namespace sy
 		Vector2 offset = Vector2::Zero;
 
 		if (CurSceneName == L"AbilityTestScene"
+			|| CurSceneName == L"King_Dedede_Stage_Pixel"
 			|| CurSceneName == L"Level1_Stage1Scene")
 		{
 			offset = Vector2::Zero;
