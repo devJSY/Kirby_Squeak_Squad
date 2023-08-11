@@ -20,6 +20,7 @@
 #include "sySound.h"
 #include "syResourceManager.h"
 #include "syPortalUI.h"
+#include "syPrismPlainsScene.h"
 
 #include "sySirKibble.h"
 
@@ -111,7 +112,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			SceneManager::LoadScene(L"EndingScene");
+			SceneManager::LoadScene(L"PrismPlainsScene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -164,5 +165,10 @@ namespace sy
 
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
+
+		// 보스 스테이지 활성화
+		PrismPlainsScene* scene = dynamic_cast<PrismPlainsScene*>(SceneManager::GetScene(L"PrismPlainsScene"));
+		scene->SetClearActiveUI(eStageState::Stage1);
+		scene->SetActiveUI(eStageState::Boss);
 	}
 }

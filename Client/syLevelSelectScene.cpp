@@ -176,20 +176,16 @@ namespace sy
 			SceneManager::LoadScene(L"AbilityTestScene");
 		}
 
-		// 스테이지 전부 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			mLevelType = eLevelType::AllClear_LevelSelect;
-			mlevelBG->SetLevelType(mLevelType);
-
-			// 활성화 되어있는 UI의 Star만 Play
-			for (size_t i = 1; i <= 8; i++)
-			{
-				if (mbActiveUI[i])
-				{
-					mStarUI[i]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
-				}
-			}
+			SetClearActiveUI(eLevelState::Level1);
+			SetClearActiveUI(eLevelState::Level2);
+			SetClearActiveUI(eLevelState::Level3);
+			SetClearActiveUI(eLevelState::Level4);
+			SetClearActiveUI(eLevelState::Level5);
+			SetClearActiveUI(eLevelState::Level6);
+			SetClearActiveUI(eLevelState::Level7);
+			SetClearActiveUI(eLevelState::Level8);
 		}
 
 		// 임시로 키입력으로 UI 활성화
@@ -694,106 +690,188 @@ namespace sy
 		// type 에 따라 UI 활성화
 		if (type == eLevelType::Level1)
 		{
-			mbActiveUI[1] = true;
-			mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
+			if (!mbActiveUI[1])
+			{
+				mbActiveUI[1] = true;
+				mPlacardUI[1]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"One");
+			}
 		}
 		else if (type == eLevelType::Level2)
 		{
-			mbActiveUI[2] = true;
-			mPlacardUI[2]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[2]->GetComponent<Animator>()->PlayAnimation(L"Two");
-
-			for (size_t i = 0; i < mDots[2].size(); i++)
+			if (!mbActiveUI[2])
 			{
-				DotUI* dot = mDots[2][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[2] = true;
+				mPlacardUI[2]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[2]->GetComponent<Animator>()->PlayAnimation(L"Two");
+
+				for (size_t i = 0; i < mDots[2].size(); i++)
+				{
+					DotUI* dot = mDots[2][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level3)
 		{
-			mbActiveUI[3] = true;
-			mPlacardUI[3]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[3]->GetComponent<Animator>()->PlayAnimation(L"Three");
-
-			for (size_t i = 0; i < mDots[3].size(); i++)
+			if (!mbActiveUI[3])
 			{
-				DotUI* dot = mDots[3][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[3] = true;
+				mPlacardUI[3]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[3]->GetComponent<Animator>()->PlayAnimation(L"Three");
+
+				for (size_t i = 0; i < mDots[3].size(); i++)
+				{
+					DotUI* dot = mDots[3][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level4)
 		{
-			mbActiveUI[4] = true;
-			mPlacardUI[4]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[4]->GetComponent<Animator>()->PlayAnimation(L"Four");
-
-			for (size_t i = 0; i < mDots[4].size(); i++)
+			if (!mbActiveUI[4])
 			{
-				DotUI* dot = mDots[4][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[4] = true;
+				mPlacardUI[4]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[4]->GetComponent<Animator>()->PlayAnimation(L"Four");
+
+				for (size_t i = 0; i < mDots[4].size(); i++)
+				{
+					DotUI* dot = mDots[4][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level5)
 		{
-			mbActiveUI[5] = true;
-			mPlacardUI[5]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[5]->GetComponent<Animator>()->PlayAnimation(L"Five");
-
-			for (size_t i = 0; i < mDots[5].size(); i++)
+			if (!mbActiveUI[5])
 			{
-				DotUI* dot = mDots[5][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[5] = true;
+				mPlacardUI[5]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[5]->GetComponent<Animator>()->PlayAnimation(L"Five");
+
+				for (size_t i = 0; i < mDots[5].size(); i++)
+				{
+					DotUI* dot = mDots[5][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level6)
 		{
-			mbActiveUI[6] = true;
-			mPlacardUI[6]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[6]->GetComponent<Animator>()->PlayAnimation(L"Six");
-
-			for (size_t i = 0; i < mDots[6].size(); i++)
+			if (!mbActiveUI[6])
 			{
-				DotUI* dot = mDots[6][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[6] = true;
+				mPlacardUI[6]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[6]->GetComponent<Animator>()->PlayAnimation(L"Six");
+
+				for (size_t i = 0; i < mDots[6].size(); i++)
+				{
+					DotUI* dot = mDots[6][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level7)
 		{
-			mbActiveUI[7] = true;
-			mPlacardUI[7]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[7]->GetComponent<Animator>()->PlayAnimation(L"Seven");
-
-			for (size_t i = 0; i < mDots[7].size(); i++)
+			if (!mbActiveUI[7])
 			{
-				DotUI* dot = mDots[7][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[7] = true;
+				mPlacardUI[7]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[7]->GetComponent<Animator>()->PlayAnimation(L"Seven");
+
+				for (size_t i = 0; i < mDots[7].size(); i++)
+				{
+					DotUI* dot = mDots[7][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::Level8)
 		{
-			mbActiveUI[8] = true;
-			mPlacardUI[8]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[8]->GetComponent<Animator>()->PlayAnimation(L"Eight");
-
-			for (size_t i = 0; i < mDots[8].size(); i++)
+			if (!mbActiveUI[8])
 			{
-				DotUI* dot = mDots[8][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[8] = true;
+				mPlacardUI[8]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[8]->GetComponent<Animator>()->PlayAnimation(L"Eight");
+
+				for (size_t i = 0; i < mDots[8].size(); i++)
+				{
+					DotUI* dot = mDots[8][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eLevelType::AbilityTest)
 		{
-			mbActiveUI[9] = true;
-			mPlacardUI[9]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
-			mNumberUI[9]->GetComponent<Animator>()->PlayAnimation(L"Number_9");
-
-			for (size_t i = 0; i < mDots[9].size(); i++)
+			if (!mbActiveUI[9])
 			{
-				DotUI* dot = mDots[9][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[9] = true;
+				mPlacardUI[9]->GetComponent<Animator>()->PlayAnimation(L"PlacardUI");
+				mNumberUI[9]->GetComponent<Animator>()->PlayAnimation(L"Number_9");
+
+				for (size_t i = 0; i < mDots[9].size(); i++)
+				{
+					DotUI* dot = mDots[9][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
+	}
+
+	void LevelSelectScene::SetClearActiveUI(eLevelState type)
+	{
+		if (type == eLevelState::Level1)
+		{
+			if (mbActiveUI[1])
+				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level2)
+		{
+			if (mbActiveUI[2])
+				mStarUI[2]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level3)
+		{
+			if (mbActiveUI[3])
+				mStarUI[3]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level4)
+		{
+			if (mbActiveUI[4])
+				mStarUI[4]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level5)
+		{
+			if (mbActiveUI[5])
+				mStarUI[5]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level6)
+		{
+			if (mbActiveUI[6])
+				mStarUI[6]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level7)
+		{
+			if (mbActiveUI[7])
+				mStarUI[7]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+		else if (type == eLevelState::Level8)
+		{
+			if (mbActiveUI[8])
+				mStarUI[8]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+		}
+
+
+		// 스테이지 전부 클리어 시 배경화면 변경
+		for (size_t i = 1; i <= 8; i++)
+		{
+			if (mbActiveUI[i] == false)
+				return;
+		}
+
+		mLevelType = eLevelType::AllClear_LevelSelect;
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void LevelSelectScene::CreateDot()

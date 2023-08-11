@@ -30,6 +30,7 @@ namespace sy
 		virtual void Exit() override;
 
 		void SetActiveUI(eLevelType type);
+		void SetClearActiveUI(eLevelState type);
 		eLevelState GetCurLevelState() { return mCurLevelState; }
 
 	private:

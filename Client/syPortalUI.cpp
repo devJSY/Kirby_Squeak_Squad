@@ -64,7 +64,7 @@ namespace sy
 			}
 			else if (SceneName == L"Stage4Scene")
 			{
-				SceneManager::LoadScene(L"EndingScene");
+				SceneManager::LoadScene(L"PrismPlainsScene");
 			}
 			else if (SceneName == L"AbilityTestScene")
 			{

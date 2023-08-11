@@ -160,7 +160,16 @@ namespace sy
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
-		Vector2 vec = Vector2(35.f, 70.f);
+		Vector2 vec = Vector2::Zero;
+
+		if (mCurStageState == eStageState::StageExit)
+			vec = ExitUI->GetComponent<Transform>()->GetPosition();
+		else if (mCurStageState == eStageState::Stage1)
+			vec = mStepUI[0]->GetComponent<Transform>()->GetPosition();
+		else if (mCurStageState == eStageState::Boss)
+			vec = mStepUI[1]->GetComponent<Transform>()->GetPosition();
+
+		vec.y -= 10.f;
 
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
@@ -228,8 +237,6 @@ namespace sy
 		//	playerAni->PlayAnimation(L"WheelKirby_Choice", false);
 		//}
 
-		mCurStageState = eStageState::StageExit;
-
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
 
@@ -252,28 +259,34 @@ namespace sy
 		// type 에 따라 UI 활성화
 		if (type == eStageState::Stage1)
 		{
-			mbActiveUI[0] = true;
-			mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageFlash", true);
-			mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
-			mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
-
-			for (size_t i = 0; i < mDots[0].size(); i++)
+			if (!mbActiveUI[0])
 			{
-				DotUI* dot = mDots[0][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[0] = true;
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"NormalStageFlash", true);
+				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+				mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"One");
+
+				for (size_t i = 0; i < mDots[0].size(); i++)
+				{
+					DotUI* dot = mDots[0][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 		else if (type == eStageState::Boss)
 		{
-			mbActiveUI[1] = true;
-			mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageFlash", true);
-			mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
-			mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
-
-			for (size_t i = 0; i < mDots[1].size(); i++)
+			if (!mbActiveUI[1])
 			{
-				DotUI* dot = mDots[1][i];
-				dot->SetActiveTrig(true);
+				mbActiveUI[1] = true;
+				mStepUI[1]->GetComponent<Animator>()->PlayAnimation(L"BossStageFlash", true);
+				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
+
+				for (size_t i = 0; i < mDots[1].size(); i++)
+				{
+					DotUI* dot = mDots[1][i];
+					dot->SetActiveTrig(true);
+				}
 			}
 		}
 	}
