@@ -23,6 +23,7 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mDirDuration(0.f)
 		, mDir(eDirection::RIGHT)
+		, mAttackDelay(0.f)
 	{
 	}
 
@@ -341,6 +342,7 @@ namespace sy
 		mTransform->SetPosition(pos);
 
 		mDirDuration += Time::DeltaTime();
+		mAttackDelay += Time::DeltaTime();
 
 		// 일정시간 이후 방향 변경
 		if (mDirDuration > 3.f)
@@ -358,28 +360,67 @@ namespace sy
 
 			mDirDuration = 0.f;
 		}
+
+
+
+		// 특정 조건일때 스킬 생성
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+				
+		if (Len < 50.f && mAttackDelay > 1.f)
+		{
+			if (PlayerPos.x > mTransform->GetPosition().x)
+				mDir = eDirection::RIGHT;
+			else 
+				mDir = eDirection::LEFT;
+
+			mTransform->SetDirection(mDir);
+
+			HotHead_Fire* Fire = new HotHead_Fire(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Fire);
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"HotHead_Right_Attack", false);
+			else
+				mAnimator->PlayAnimation(L"HotHead_Left_Attack", false);
+
+			mState = eHotHeadState::Attack;
+			mDirDuration = 0.f;
+			mAttackDelay = 0.f;
+		}
 	}
 
 	void HotHead::Attack()
 	{
+		static float time = 0.f;
+
+		time += Time::DeltaTime();
+
 		if (GetHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"HotHead_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eHotHeadState::Dead;
+
+			time = 0.f;
 		}
 
-		// 특정 조건일때 스킬 생성
-		if (Input::GetKeyDown(eKeyCode::T))
+		if (mAnimator->IsActiveAnimationComplete() && time > 2.f)
 		{
-			Transform* tr = GetComponent<Transform>();
-			// 현재 HotHead 위치 기준 더해준 위치로 생성
-			Vector2 pos = tr->GetPosition();
-			pos += Vector2(10.f, 0.f);
+			if (mDir == eDirection::RIGHT)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"HotHead_Left_Walk", true);
+			}
+			else
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"HotHead_Right_Walk", true);
+			}
 
-			HotHead_Fire* Fire = new HotHead_Fire(this);
-			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Fire);
-			Fire->GetComponent<Transform>()->SetPosition(pos);
+			mState = eHotHeadState::Walk;
+			time = 0.f;
 		}
 	}
 

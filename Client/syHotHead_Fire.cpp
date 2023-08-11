@@ -3,14 +3,31 @@
 #include "syResourceManager.h"
 #include "syAnimator.h"
 #include "syCollider.h"
+#include "syTime.h"
+#include "syTransform.h"
+#include "syPlayer.h"
+#include "syHotHead.h"
 
 namespace sy
 {
 	HotHead_Fire::HotHead_Fire(GameObject* owner)
 		: Effects(owner)
+		, mTransform(nullptr)
+		, mDir()
 	{
+		mTransform = GetComponent<Transform>();
+		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
+		mTransform->SetDirection(mDir);
+
+		Vector2 vec = owner->GetComponent<Transform>()->GetPosition();
+		if (mDir == eDirection::RIGHT)
+			vec.x += 20.f;
+		else
+			vec.x -= 20.f;
+		mTransform->SetPosition(vec);
+
 		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(10.f, 10.f));
+		col->SetSize(Vector2(20.f, 20.f));
 
 		Texture* Enemies_Right = ResourceManager::Load<Texture>(L"Enemies_Right_Tex", L"..\\Resources\\Enemy\\Enemies_Right.bmp");
 		Texture* Enemies_Left = ResourceManager::Load<Texture>(L"Enemies_Left_Tex", L"..\\Resources\\Enemy\\Enemies_Left.bmp");
@@ -34,6 +51,20 @@ namespace sy
 
 	void HotHead_Fire::Update()
 	{
+		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
+		if (mDir == eDirection::RIGHT)
+			vec.x += 20.f;
+		else
+			vec.x -= 20.f;
+		mTransform->SetPosition(vec);
+
+		HotHead* hothead = dynamic_cast<HotHead*>(GetOwner());
+		if (hothead == nullptr || hothead->GetHotHeadState() != eHotHeadState::Attack)
+		{
+			Destroy(this);
+		}
+
+
 		Effects::Update();
 	}
 
@@ -41,12 +72,24 @@ namespace sy
 	{
 		Effects::Render(hdc);
 	}
+
 	void HotHead_Fire::OnCollisionEnter(Collider* other)
 	{
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// 스킬 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
+
 	void HotHead_Fire::OnCollisionStay(Collider* other)
 	{
 	}
+
 	void HotHead_Fire::OnCollisionExit(Collider* other)
 	{
 	}

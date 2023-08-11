@@ -18,8 +18,9 @@ namespace sy
         virtual void OnCollisionExit(class Collider* other);
 
     private:
-        
-	};
+        class Transform*    mTransform;
+        eDirection          mDir;
+    };
 
 }
 

@@ -32,6 +32,8 @@ namespace sy
         virtual void TakeInhaled(math::Vector2 InhaleDir) override;
         virtual bool IsDamagedState() { return mState == eHotHeadState::Damage; }
 
+        eHotHeadState GetHotHeadState() { return mState; }
+
     private:
         void CheckPixelCollision();
 
@@ -50,6 +52,7 @@ namespace sy
         eDirection			mDir;
 
         float               mDirDuration;
+        float               mAttackDelay;
     };
 }
 
