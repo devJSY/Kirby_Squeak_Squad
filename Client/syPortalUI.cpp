@@ -50,19 +50,19 @@ namespace sy
 			Scene* activeScene = SceneManager::GetActiveScene();
 			std::wstring SceneName = activeScene->GetName();
 
-			if (SceneName == L"Stage1Scene")
+			if (SceneName == L"Level1_Stage1Scene")
 			{
-				SceneManager::LoadScene(L"Stage2Scene");
+				SceneManager::LoadScene(L"Level1_Stage2Scene");
 			}
-			else if (SceneName == L"Stage2Scene")
+			else if (SceneName == L"Level1_Stage2Scene")
 			{
-				SceneManager::LoadScene(L"Stage3Scene");
+				SceneManager::LoadScene(L"Level1_Stage3Scene");
 			}
-			else if (SceneName == L"Stage3Scene")
+			else if (SceneName == L"Level1_Stage3Scene")
 			{
-				SceneManager::LoadScene(L"Stage4Scene");
+				SceneManager::LoadScene(L"Level1_Stage4Scene");
 			}
-			else if (SceneName == L"Stage4Scene")
+			else if (SceneName == L"Level1_Stage4Scene" || SceneName == L"Level1_BossScene")
 			{
 				SceneManager::LoadScene(L"PrismPlainsScene");
 			}

@@ -8,6 +8,7 @@
 #include "syPlayer.h"
 #include "syAbilityItem.h"
 #include "syAbilityStar.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -195,6 +196,11 @@ namespace sy
 			// IceEnemy는 적용하지않음
 			Ice_Enemy* IceEnemy = dynamic_cast<Ice_Enemy*>(obj);
 			if (IceEnemy != nullptr)
+				continue;
+
+			// KingDedede는 적용하지않음
+			KingDedede* kingDedede = dynamic_cast<KingDedede*>(obj);
+			if (kingDedede != nullptr)
 				continue;
 
 			if (mTarget == nullptr)

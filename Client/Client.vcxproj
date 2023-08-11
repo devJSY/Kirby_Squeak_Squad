@@ -186,8 +186,10 @@
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syInventoryItem.h" />
     <ClInclude Include="syJamJungleScene.h" />
+    <ClInclude Include="syKingDedede.h" />
     <ClInclude Include="syKirby.h" />
     <ClInclude Include="syLanding_Effect.h" />
+    <ClInclude Include="syLevel1_BossScene.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syMixItem.h" />
@@ -209,9 +211,9 @@
     <ClInclude Include="sySoundManager.h" />
     <ClInclude Include="sySparkKirby.h" />
     <ClInclude Include="sySparkKirby_Skill.h" />
-    <ClInclude Include="syStage2Scene.h" />
-    <ClInclude Include="syStage3Scene.h" />
-    <ClInclude Include="syStage4Scene.h" />
+    <ClInclude Include="syLevel1_Stage2Scene.h" />
+    <ClInclude Include="syLevel1_Stage3Scene.h" />
+    <ClInclude Include="syLevel1_Stage4Scene.h" />
     <ClInclude Include="syStepUI.h" />
     <ClInclude Include="syStarUI.h" />
     <ClInclude Include="syTornadoKirby.h" />
@@ -232,7 +234,7 @@
     <ClInclude Include="syMath.h" />
     <ClInclude Include="sySceneManager.h" />
     <ClInclude Include="sySpriteRenderer.h" />
-    <ClInclude Include="syStage1Scene.h" />
+    <ClInclude Include="syLevel1_Stage1Scene.h" />
     <ClInclude Include="syTime.h" />
     <ClInclude Include="syTitleScene.h" />
     <ClInclude Include="syTransform.h" />
@@ -292,8 +294,10 @@
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syInventoryItem.cpp" />
     <ClCompile Include="syJamJungleScene.cpp" />
+    <ClCompile Include="syKingDedede.cpp" />
     <ClCompile Include="syKirby.cpp" />
     <ClCompile Include="syLanding_Effect.cpp" />
+    <ClCompile Include="syLevel1_BossScene.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syMixItem.cpp" />
@@ -315,9 +319,9 @@
     <ClCompile Include="sySoundManager.cpp" />
     <ClCompile Include="sySparkKirby.cpp" />
     <ClCompile Include="sySparkKirby_Skill.cpp" />
-    <ClCompile Include="syStage2Scene.cpp" />
-    <ClCompile Include="syStage3Scene.cpp" />
-    <ClCompile Include="syStage4Scene.cpp" />
+    <ClCompile Include="syLevel1_Stage2Scene.cpp" />
+    <ClCompile Include="syLevel1_Stage3Scene.cpp" />
+    <ClCompile Include="syLevel1_Stage4Scene.cpp" />
     <ClCompile Include="syStepUI.cpp" />
     <ClCompile Include="syStarUI.cpp" />
     <ClCompile Include="syTornadoKirby.cpp" />
@@ -338,7 +342,7 @@
     <ClCompile Include="syLayer.cpp" />
     <ClCompile Include="sySceneManager.cpp" />
     <ClCompile Include="sySpriteRenderer.cpp" />
-    <ClCompile Include="syStage1Scene.cpp" />
+    <ClCompile Include="syLevel1_Stage1Scene.cpp" />
     <ClCompile Include="syTime.cpp" />
     <ClCompile Include="syTitleScene.cpp" />
     <ClCompile Include="syTransform.cpp" />

@@ -120,19 +120,17 @@ namespace sy
 
 		if (mbSceneChange && mCurStageState == eStageState::Stage1 && Camera::IsEmptyCamEffect())
 		{
-			SceneManager::LoadScene(L"Stage1Scene");
+			SceneManager::LoadScene(L"Level1_Stage1Scene");
 		}
 		else if (mbSceneChange && mCurStageState == eStageState::Boss && Camera::IsEmptyCamEffect())
 		{
-			//SceneManager::LoadScene(L"보스방");
+			SceneManager::LoadScene(L"Level1_BossScene");
 		}
 
 
 		// 스테이지 클리어 시 배경화면 변경
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			mLevelType = eLevelType::Level1_Clear;
-			mlevelBG->SetLevelType(mLevelType);
 			SetClearActiveUI(eStageState::Stage1);
 			SetClearActiveUI(eStageState::Boss);
 		}
@@ -169,6 +167,7 @@ namespace sy
 		else if (mCurStageState == eStageState::Boss)
 			vec = mStepUI[1]->GetComponent<Transform>()->GetPosition();
 
+		// Offset값 추가
 		vec.y -= 10.f;
 
 		// 플레이어 설정
@@ -311,6 +310,16 @@ namespace sy
 				mNumberUI[1]->GetComponent<Animator>()->PlayAnimation(L"Number_Dedede");
 			}
 		}
+
+		// 스테이지 전부 클리어 시 배경화면 변경
+		for (size_t i = 0; i < 2; i++)
+		{
+			if (mbActiveUI[i] == false)
+				return;
+		}
+
+		mLevelType = eLevelType::Level1_Clear;
+		mlevelBG->SetLevelType(mLevelType);
 	}
 
 	void PrismPlainsScene::CreateDot()
@@ -465,14 +474,14 @@ namespace sy
 			}
 		}
 
-		//if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
-		//{
-		// mbSceneChange = true;
-		// 
-		//	SceneManager::LoadScene(L"보스방 진입");
-		// 
-		// 		//// 오디오 재생
-				//ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
-		//}
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		{
+			// 카메라 효과 등록
+			Camera::fadeOut(1.f, RGB(255, 255, 255));
+			mbSceneChange = true;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
+		}
 	}
 }

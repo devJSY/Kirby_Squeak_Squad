@@ -124,7 +124,7 @@ namespace sy
 		}
 
 		// Enemy Spawn
-		if (Input::GetKeyDown(eKeyCode::R))
+		if (Input::GetKeyDown(eKeyCode::M))
 		{
 			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 			waddleDee->GetComponent<Transform>()->SetPosition(Vector2(80.f, 50.f));

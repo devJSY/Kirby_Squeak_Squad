@@ -1,12 +1,14 @@
+
 #include "sySceneManager.h"
 #include "syTitleScene.h"
 #include "syLevelSelectScene.h"
 #include "syEndingScene.h"
 #include "syOpeningScene.h"
-#include "syStage1Scene.h"
-#include "syStage2Scene.h"
-#include "syStage3Scene.h"
-#include "syStage4Scene.h"
+#include "syLevel1_Stage1Scene.h"
+#include "syLevel1_Stage2Scene.h"
+#include "syLevel1_Stage3Scene.h"
+#include "syLevel1_Stage4Scene.h"
+#include "syLevel1_BossScene.h"
 #include "syTunnelScene.h"
 #include "syPrismPlainsScene.h"
 #include "syNatureNotchScene.h"
@@ -96,10 +98,11 @@ namespace sy
 		CreateScene<GambleGalaxyScene>(L"GambleGalaxyScene");
 		CreateScene<LevelSelectScene>(L"LevelSelectScene");
 		CreateScene<AbilityTestScene>(L"AbilityTestScene");
-		CreateScene<Stage1Scene>(L"Stage1Scene");
-		CreateScene<Stage2Scene>(L"Stage2Scene");
-		CreateScene<Stage3Scene>(L"Stage3Scene");
-		CreateScene<Stage4Scene>(L"Stage4Scene");
+		CreateScene<Level1_Stage1Scene>(L"Level1_Stage1Scene");
+		CreateScene<Level1_Stage2Scene>(L"Level1_Stage2Scene");
+		CreateScene<Level1_Stage3Scene>(L"Level1_Stage3Scene");
+		CreateScene<Level1_Stage4Scene>(L"Level1_Stage4Scene");
+		CreateScene<Level1_BossScene>(L"Level1_BossScene");
 		CreateScene<TunnelScene>(L"TunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");
 

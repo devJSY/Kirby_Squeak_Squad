@@ -117,19 +117,19 @@ namespace sy
 
 		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
 
-		if (CurSceneName == L"Stage1Scene")
+		if (CurSceneName == L"Level1_Stage1Scene")
 		{
 			offset = Vector2::Zero;
 		}
-		else if (CurSceneName == L"Stage2Scene")
+		else if (CurSceneName == L"Level1_Stage2Scene")
 		{
 			offset = Vector2(0, 347.f);
 		}
-		else if (CurSceneName == L"Stage3Scene")
+		else if (CurSceneName == L"Level1_Stage3Scene")
 		{
 			offset = Vector2(0, 679.f);
 		}
-		else if (CurSceneName == L"Stage4Scene")
+		else if (CurSceneName == L"Level1_Stage4Scene")
 		{
 			offset = Vector2(1603.f, 137.f);
 		}
