@@ -30,6 +30,7 @@
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
 #include "syPrismPlainsScene.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -45,6 +46,9 @@ namespace sy
 	void Level1_BossScene::Initialize()
 	{
 		// 보스 생성
+		KingDedede* kingDedede = new KingDedede(eAbilityType::Normal);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, kingDedede);
+		kingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 100.f));
 
 
 		// 백그라운드 설정
