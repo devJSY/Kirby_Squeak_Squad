@@ -10,6 +10,9 @@
 #include "syTime.h"
 #include "syPlayer.h"
 
+
+#include "syInput.h"
+
 namespace sy
 {
 	KingDedede::KingDedede(eAbilityType type)
@@ -50,8 +53,8 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
 		
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 4, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
 
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_JumpReady", Vector2(768.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_JumpReady", Vector2(768.f, 256.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
@@ -83,8 +86,8 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_FlyDrop", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_FlyDrop", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonReady", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonReady", Vector2(0.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonReady", Vector2(256.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonReady", Vector2(256.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 3, Animationoffset);
 
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonJump", Vector2(1024.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonJump", Vector2(1024.f, 1536.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
@@ -127,6 +130,17 @@ namespace sy
 
 		// 픽셀충돌 체크
 		CheckPixelCollision();		
+
+		// 테스트용 상태변경
+		if (Input::GetKeyDown(eKeyCode::M))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+		}
 
 		switch (mState)
 		{
@@ -341,10 +355,20 @@ namespace sy
 
 	void KingDedede::Idle()
 	{
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Drop", true);
+
+			mState = eKingDededeState::Drop;
+		}
+
+		// 플레이어 방향을 바라보도록 설정
 		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
-
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
-
 		if (Dir.x > 0.f)
 		{
 			mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
@@ -358,14 +382,102 @@ namespace sy
 			mDir = eDirection::LEFT;
 		}
 
+		// 상태처리
+		if (fabs(Dir.x) > 50.f)
+		{
+			int randomNumber = std::rand() % 3;
+			if (randomNumber == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_Walk", true);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_Walk", true);
+
+				mState = eKingDededeState::Walk;
+			}
+			else if (randomNumber == 1)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
+
+				mState = eKingDededeState::JumpReady;
+			}
+			else if (randomNumber == 2)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
+
+				mState = eKingDededeState::FlyReady;
+			}
+		}
+		else
+		{
+			int randomNumber = std::rand() % 100;
+			if (randomNumber % 2 == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_AttackReady", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_AttackReady", false);
+
+				mState = eKingDededeState::AttackReady;
+			}
+			else 
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
+
+				mState = eKingDededeState::MonsterSummonReady;
+			}
+		}
 	}
 
 	void KingDedede::Walk()
 	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (mDir == eDirection::RIGHT)
+			pos.x += 20.f * Time::DeltaTime();
+		else
+			pos.x -= 20.f * Time::DeltaTime();
+
+		mTransform->SetPosition(pos);
+
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+		// 상태처리
+		if (fabs(Dir.x) < 50.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+		}
 	}
 
 	void KingDedede::JumpReady()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Jump", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Jump", true);
+
+			mState = eKingDededeState::Jump;
+		}
 	}
 
 	void KingDedede::Jump()
@@ -374,10 +486,28 @@ namespace sy
 
 	void KingDedede::Drop()
 	{
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+		}
 	}
 
 	void KingDedede::AttackReady()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_AttackRun", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_AttackRun", true);
+
+			mState = eKingDededeState::AttackRun;
+		}
 	}
 
 	void KingDedede::AttackRun()
@@ -390,6 +520,15 @@ namespace sy
 
 	void KingDedede::FlyReady()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyUp", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyUp", true);
+
+			mState = eKingDededeState::FlyUp;
+		}
 	}
 
 	void KingDedede::FlyUp()
@@ -406,6 +545,15 @@ namespace sy
 
 	void KingDedede::MonsterSummonReady()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonJump", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonJump", true);
+
+			mState = eKingDededeState::MonsterSummonJump;
+		}
 	}
 
 	void KingDedede::MonsterSummonJump()
@@ -429,6 +577,8 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete() && StateChangeDelay > 1.f)
 		{
 			StateChangeDelay = 0.f;
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 
 			if (GetCurHP() <= 0.f)
 			{
