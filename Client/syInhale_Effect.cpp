@@ -188,9 +188,10 @@ namespace sy
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
-			// Star_Effect 가 아니면 적용하지않음
+			// Star_Effect 가 아니면 적용하지않음, Dead 상태는 적용하지않음
 			Star_Effect* star = dynamic_cast<Star_Effect*>(obj);
-			if (star == nullptr)
+			if (star == nullptr
+				|| star->GetStarState() == eStarState::Dead)
 				continue;
 
 			if (mTarget == nullptr)
@@ -225,9 +226,11 @@ namespace sy
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
-			// Enemy가 아니면 적용하지않음
+			// Enemy가 아니면 적용하지않음, Dead 상태는 적용하지않음
 			Enemy* enemy = dynamic_cast<Enemy*>(obj);
-			if (enemy == nullptr)
+			if (enemy == nullptr
+				|| enemy->GetGameObjectState() == eGameObjectState::Dead
+				|| enemy->GetCurHP() <= 0.f)
 				continue;
 
 			// IceEnemy는 적용하지않음

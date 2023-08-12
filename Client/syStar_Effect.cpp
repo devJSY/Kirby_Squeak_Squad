@@ -12,6 +12,7 @@ namespace sy
 {
 	Star_Effect::Star_Effect(GameObject* owner, Vector2 pos)
 		: Effects(owner)
+		, mState(eStarState::Active)
 		, mAnimator(nullptr)
 		, mDuration(0.f)
 	{
@@ -44,17 +45,16 @@ namespace sy
 
 	void Star_Effect::Update()
 	{
-		mDuration += Time::DeltaTime();
-
-		if (mDuration > 3.f)
+		switch (mState)
 		{
-			mAnimator->PlayAnimation(L"Star_Effect_Dead", false);
-			mDuration = 0.f;
-		}
-
-		if (mAnimator->IsActiveAnimationComplete())
-		{
-			Destroy(this);
+		case eStarState::Active:
+			Active();
+			break;
+		case eStarState::Dead:
+			Dead();
+			break;
+		default:
+			break;
 		}
 
 		Effects::Update();
@@ -84,5 +84,25 @@ namespace sy
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
 		player->TakeHit(10, Dir);
+	}
+
+	void Star_Effect::Active()
+	{
+		mDuration += Time::DeltaTime();
+
+		if (mDuration > 3.f)
+		{
+			mAnimator->PlayAnimation(L"Star_Effect_Dead", false);
+			mDuration = 0.f;
+			mState = eStarState::Dead;
+		}
+	}
+
+	void Star_Effect::Dead()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
+		}
 	}
 }

@@ -3,6 +3,12 @@
 
 namespace sy
 {
+    enum class eStarState
+    {
+        Active,
+        Dead,
+    };
+
     using namespace math;
 
 	class Star_Effect :	public Effects
@@ -17,9 +23,15 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other);
 
+        eStarState GetStarState() { return mState; }
+
     private:
+        void Active();
+        void Dead();
+
+    private:
+        eStarState      mState;
         class Animator* mAnimator;
         float           mDuration;
-
 	};
 }

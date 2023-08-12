@@ -1,6 +1,7 @@
 #include "syCollisionManager.h"
 #include "syScene.h"
 #include "sySceneManager.h"
+#include "syGameObject.h"
 
 namespace sy
 {
@@ -79,13 +80,15 @@ namespace sy
 		for (size_t i = 0; i < lefts.size(); i++)
 		{
 			Collider* leftCol = lefts[i]->GetComponent<Collider>();
-			if (leftCol == nullptr) // Collider가 존재하지않으면  continue;
+			// Collider가 존재하지않으거나 Dead상태면  continue;
+			if (leftCol == nullptr || lefts[i]->GetGameObjectState() == GameObject::eGameObjectState::Dead) 
 				continue;
 
 			for (size_t j = 0; j < rights.size(); j++)
 			{
 				Collider* RightCol = rights[j]->GetComponent<Collider>();
-				if (RightCol == nullptr) // Collider가 존재하지않으면  continue;
+				// Collider가 존재하지않으거나 Dead상태면  continue;
+				if (RightCol == nullptr || rights[j]->GetGameObjectState() == GameObject::eGameObjectState::Dead)
 					continue;
 				if (lefts[i] == rights[j]) // 충돌한 객체가 자기자신이면 continue;
 					continue;
