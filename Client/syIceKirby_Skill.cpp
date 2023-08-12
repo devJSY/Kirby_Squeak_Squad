@@ -10,6 +10,7 @@
 #include "syObject.h"
 #include "sySoundManager.h"
 #include "sySound.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -111,6 +112,17 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// KingDedede는 데미지 적용
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
+		if (kingDedede != nullptr)
+		{
+			Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+			SceneManager::GetPlayer()->SetHitEnemy(enemy);
+			enemy->TakeHit(50, Dir);
+			enemy->SetHPBarUIRenderTrig(true);
+			return;
+		}			
+
 		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
 		IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
@@ -138,6 +150,21 @@ namespace sy
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 		if (enemy == nullptr)
 			return;
+
+		// Stay상태에서 Damage 상태면 적용하지않음
+		if (enemy->IsDamagedState())
+			return;
+
+		// KingDedede는 데미지 적용
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
+		if (kingDedede != nullptr)
+		{
+			Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+			SceneManager::GetPlayer()->SetHitEnemy(enemy);
+			enemy->TakeHit(50, Dir);
+			enemy->SetHPBarUIRenderTrig(true);
+			return;
+		}
 
 		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);

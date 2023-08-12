@@ -122,11 +122,6 @@ namespace sy
 		if (IceEnemy != nullptr)
 			return;
 
-		// KingDedede는 적용하지않음
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
-		if (kingDedede != nullptr)
-			return;
-
 		// Dead상태는 무시
 		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
 			return;
@@ -134,12 +129,6 @@ namespace sy
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 		if (enemy == nullptr)
 			return;
-
-		// 이동
-		Transform* transform = enemy->GetComponent<Transform>();
-		Vector2 pos = transform->GetPosition();
-		pos.y -= 150.f * Time::DeltaTime();
-		transform->SetPosition(pos);
 
 		// Stay상태에서 Damage 상태면 적용하지않음
 		if (enemy->IsDamagedState())
@@ -150,5 +139,17 @@ namespace sy
 		SceneManager::GetPlayer()->SetHitEnemy(enemy);
 		enemy->TakeHit(50, Dir);
 		enemy->SetHPBarUIRenderTrig(true);
+
+		// KingDedede는 이동 적용하지않음
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
+		if (kingDedede != nullptr)
+			return;
+
+		// 이동
+		Transform* transform = enemy->GetComponent<Transform>();
+		Vector2 pos = transform->GetPosition();
+		pos.y -= 150.f * Time::DeltaTime();
+		transform->SetPosition(pos);
+
 	}
 }
