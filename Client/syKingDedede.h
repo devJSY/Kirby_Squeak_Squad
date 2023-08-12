@@ -43,6 +43,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 		virtual bool IsDamagedState() { return mState == eKingDededeState::Damage; }
+		virtual bool IsDeadState() { return mState == eKingDededeState::Dead; }
 
 	private:
 		void CheckPixelCollision();

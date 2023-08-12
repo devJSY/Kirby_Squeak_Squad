@@ -34,6 +34,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) {};
 		virtual bool IsDamagedState() { return false; }
+		virtual bool IsDeadState() { return false; }
 
 	private:
 		void Idle();

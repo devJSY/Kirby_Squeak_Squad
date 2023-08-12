@@ -90,6 +90,11 @@ namespace sy
 		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
 			return;
 
+		// 흡수한 오브젝트가 Enemy인경우 Dead상태인지 체크
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		if (enemy != nullptr && enemy->IsDeadState())
+			return;
+
 		mInhaledObject.push_back(other->GetOwner());
 	}
 
