@@ -90,8 +90,19 @@ namespace sy
 		if (other->GetOwner()->GetGameObjectState() == eGameObjectState::Dead)
 			return;
 
-		// 흡수한 오브젝트가 Enemy인경우 Dead상태인지 체크
+		AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(other->GetOwner());
+		AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(other->GetOwner());
+		Star_Effect* star = dynamic_cast<Star_Effect*>(other->GetOwner());
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+
+		// 특정 오브젝트만 흡수 인식
+		if (abilityStar == nullptr
+			&& abilityItem == nullptr
+			&& star == nullptr
+			&& enemy == nullptr)
+			return;
+
+		// 흡수한 오브젝트가 Enemy인경우 Dead상태인지 체크
 		if (enemy != nullptr && enemy->IsDeadState())
 			return;
 
