@@ -176,11 +176,10 @@ namespace sy
 		}
 		else if (leftType == eColliderType::Sphere && rightType == eColliderType::Box)
 		{
-			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인 
-			float Left = rightPos.x - (rightSize.x / 2.f) - leftRadius;
-			float Right = rightPos.x + (rightSize.x / 2.f) + leftRadius;
-			float top = rightPos.y + (rightSize.x / 2.f) + leftRadius;
-			float bottom = rightPos.y - (rightSize.x / 2.f) - leftRadius;
+			float Left = rightPos.x - (rightSize.x / 2.f);
+			float Right = rightPos.x + (rightSize.x / 2.f);
+			float top = rightPos.y + (rightSize.x / 2.f);
+			float bottom = rightPos.y - (rightSize.x / 2.f);
 
 			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
 			// 사각형의 좌상단 포인트가 원안에 있는지 파악
@@ -195,6 +194,12 @@ namespace sy
 			// 사각형의 우하단 포인트가 원안에 있는지 파악
 			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, bottom)) return true;
 
+
+			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인 
+			Left -= leftRadius;
+			Right += leftRadius;
+			top += leftRadius;
+			bottom -= leftRadius;
 
 			if (Left < leftPos.x
 				&& leftPos.x < Right
@@ -206,24 +211,29 @@ namespace sy
 		}
 		else if (leftType == eColliderType::Box && rightType == eColliderType::Sphere)
 		{
-			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인
-			float Left = leftPos.x - (leftSize.x / 2.f) - rightRadius;
-			float Right = leftPos.x + (leftSize.x / 2.f) + rightRadius;
-			float top = leftPos.y + (leftSize.x / 2.f) + rightRadius;
-			float bottom = leftPos.y - (leftSize.x / 2.f) - rightRadius;
+			float Left = leftPos.x - (leftSize.x / 2.f);
+			float Right = leftPos.x + (leftSize.x / 2.f);
+			float top = leftPos.y + (leftSize.x / 2.f);
+			float bottom = leftPos.y - (leftSize.x / 2.f);
 
 			// 예외상황 사각형 꼭지점이 원안에 들어오면 충돌
 			// 사각형의 좌상단 포인트가 원안에 있는지 파악
-			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, top)) return true;
+			if (IsPointInCircle(rightPos.x, rightPos.y, leftRadius, Left, top)) return true;
 
 			// 사각형의 좌하단 포인트가 원안에 있는지 파악
-			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Left, bottom)) return true;
+			if (IsPointInCircle(rightPos.x, rightPos.y, leftRadius, Left, bottom)) return true;
 
 			// 사각형의 우상단 포인트가 원안에 있는지 파악
-			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, top)) return true;
+			if (IsPointInCircle(rightPos.x, rightPos.y, leftRadius, Right, top)) return true;
 
 			// 사각형의 우하단 포인트가 원안에 있는지 파악
-			if (IsPointInCircle(leftPos.x, leftPos.y, leftRadius, Right, bottom)) return true;
+			if (IsPointInCircle(rightPos.x, rightPos.y, leftRadius, Right, bottom)) return true;
+
+			// 원의 Radius 만큼 사각형을 확장한뒤 원의 중점이 사각형 안에 들어있는지 확인
+			Left -= rightRadius;
+			Right += rightRadius;
+			top += rightRadius;
+			bottom -= rightRadius;
 
 			if (Left < rightPos.x
 				&& rightPos.x < Right

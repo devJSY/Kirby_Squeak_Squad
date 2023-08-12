@@ -12,10 +12,13 @@ namespace sy
 	Star_Effect::Star_Effect(GameObject* owner, Vector2 pos)
 		: Effects(owner)
 		, mAnimator(nullptr)
+		, mDuration(0.f)
 	{
 		GetComponent<Transform>()->SetPosition(pos);
 
-		AddComponent<Collider>()->SetSize(Vector2(20.f, 20.f));
+		Collider* col = AddComponent<Collider>();
+		col->SetColliderType(eColliderType::Sphere);
+		col->SetRadius(15.f);
 
 		// 텍스쳐 로드
 		Texture* Star_Effect_Tex = ResourceManager::Load<Texture>(L"Star_Effect_Tex", L"..\\Resources\\Effect\\Star_Effect.bmp");
@@ -40,13 +43,12 @@ namespace sy
 
 	void Star_Effect::Update()
 	{
-		static float time = 0.f;
-		time += Time::DeltaTime();
+		mDuration += Time::DeltaTime();
 
-		if (time > 3.f)
+		if (mDuration > 3.f)
 		{
 			mAnimator->PlayAnimation(L"Star_Effect_Dead", false);
-			time = 0.f;
+			mDuration = 0.f;
 		}
 
 		if (mAnimator->IsActiveAnimationComplete())

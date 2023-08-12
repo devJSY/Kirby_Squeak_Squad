@@ -19,6 +19,7 @@ namespace sy
 
     private:
         class Animator* mAnimator;
+        float           mDuration;
 
 	};
 }
