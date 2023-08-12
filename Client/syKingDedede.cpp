@@ -9,7 +9,8 @@
 #include "sySceneManager.h"
 #include "syTime.h"
 #include "syPlayer.h"
-
+#include "syStar_Effect.h"
+#include "syObject.h"
 
 #include "syInput.h"
 
@@ -141,6 +142,18 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
+
+			Vector2 pos = mTransform->GetPosition();
+			pos.x -= 50.f;
+			pos.y += 20.f;
+			Star_Effect* effect = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+
+			pos = mTransform->GetPosition();
+			pos.x += 50.f;
+			pos.y += 20.f;
+			Star_Effect* effect2 = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
 		}
 
 		switch (mState)
