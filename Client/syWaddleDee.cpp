@@ -319,7 +319,7 @@ namespace sy
 
 	void WaddleDee::Walk()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"WaddleDee_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
@@ -358,7 +358,7 @@ namespace sy
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetCurHP() <= 0.f)
 			{
 				mAnimator->PlayAnimation(L"WaddleDee_Death", false);
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));

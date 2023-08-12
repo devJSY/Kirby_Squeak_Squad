@@ -43,14 +43,16 @@ namespace sy
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
 		ePlayerMode GetPlayerMode() { return mMode; }		
 
-		int GetHP() { return mHP; }
+		int GetMaxHP() { return mMaxHp; }
+		int GetCurHP() { return mCurHp; }
+		void SetHP(int hp) { mMaxHp = mCurHp = hp; }
 		int GetLife() { return mLife; }
 
 		void SetHitEnemy(class Enemy* enemy) { mHitEnemy = enemy; }
 		Enemy* GetHitEnemy() { return mHitEnemy; }
 
-		void Damaged(int amount) { mHP -= amount; }
-		void Recovery(int amount) { mHP += amount; }
+		void Damaged(int amount) { mCurHp -= amount; }
+		void Recovery(int amount) { mCurHp += amount; }
 
 	private:
 		std::vector<Kirby*>		mKirbyType;
@@ -58,7 +60,8 @@ namespace sy
 		ePlayerMode				mMode;		
 
 		bool					mbLevelEnter;	// Level Mode State 첫진입시 설정
-		int						mHP;			// HP 0 ~ 100 범위
+		int						mMaxHp;
+		int						mCurHp;			
 		int						mLife;	
 
 		Enemy*					mHitEnemy;

@@ -22,8 +22,8 @@ namespace sy
 		MonsterSummonDrop,
 		MonsterSummon,
 		Damage,
-		DeathJump,
-		Death,
+		DeadJump,
+		Dead,
 		End,
 	};
 
@@ -65,8 +65,8 @@ namespace sy
 		void MonsterSummonDrop();
 		void MonsterSummon();
 		void Damage();
-		void DeathJump();
-		void Death();
+		void DeadJump();
+		void Dead();
 
 	private:
 		eKingDededeState	    mState;

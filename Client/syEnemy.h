@@ -23,18 +23,21 @@ namespace sy
 		virtual bool IsDamagedState() = 0;
 
 		eAbilityType GetAbilityType() { return mAbilityType; }
-		int GetHP() { return mHP; }
+		int GetMaxHP() { return mMaxHp; }
+		int GetCurHP() { return mCurHp; }
+		void SetHP(int hp) { mMaxHp = mCurHp = hp; }
 		
 		EnemyHPbarUI* GetEnemyHPbarUI() { return mHPbarUI; }
 		void SetHPBarUIRenderTrig(bool trig){ mHPbarUI->SetRenderTrig(trig); }
 
 	protected:
-		void Damaged(int amount) { mHP -= amount; }
-		void Recovery(int amount) { mHP += amount; }
+		void Damaged(int amount) { mCurHp -= amount; }
+		void Recovery(int amount) { mCurHp += amount; }
 
 	private:
 		enums::eAbilityType		mAbilityType;
-		int						mHP;					// HP 0 ~ 100 ¹üÀ§
+		int						mMaxHp;					
+		int						mCurHp;					
 		EnemyHPbarUI*			mHPbarUI;
 	};
 }

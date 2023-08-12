@@ -11,6 +11,7 @@
 #include "syIce_Enemy.h"
 #include "sySceneManager.h"
 #include "syRigidbody.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -119,6 +120,11 @@ namespace sy
 		// Ice_Enemy 는 무시
 		Ice_Enemy* IceEnemy = dynamic_cast<Ice_Enemy*>(other->GetOwner());
 		if (IceEnemy != nullptr)
+			return;
+
+		// KingDedede는 적용하지않음
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
+		if (kingDedede != nullptr)
 			return;
 
 		// Dead상태는 무시

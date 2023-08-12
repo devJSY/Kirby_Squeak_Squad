@@ -25,7 +25,8 @@ namespace sy
 		, mAbilityType(type)
 		, mMode(ePlayerMode::LevelMode)
 		, mbLevelEnter(false)
-		, mHP(100)
+		, mMaxHp(100)
+		, mCurHp(mMaxHp)
 		, mLife(9)
 		, mHitEnemy(nullptr)
 	{
@@ -84,9 +85,9 @@ namespace sy
 		GameObject::Update();		
 
 		// 임시 체력 무제한처리
-		if (mHP <= 0.f)
+		if (mCurHp <= 0.f)
 		{
-			mHP = 100;
+			mCurHp = 100;
 
 			if (mLife > 0)
 			{

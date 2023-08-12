@@ -137,7 +137,7 @@ namespace sy
 
 	void Crimp::Move()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"Crimp_Death", false);
 			mState = eCrimpState::Dead;
@@ -166,7 +166,7 @@ namespace sy
 
 		time += Time::DeltaTime();
 
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"Crimp_Death", false);
 			mState = eCrimpState::Dead;
@@ -185,7 +185,7 @@ namespace sy
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetCurHP() <= 0.f)
 			{
 				mAnimator->PlayAnimation(L"Crimp_Death", false);
 				mState = eCrimpState::Dead;

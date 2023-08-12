@@ -7,6 +7,8 @@
 #include "syRigidbody.h"
 #include "sySound.h"
 #include "sySceneManager.h"
+#include "syTime.h"
+#include "syPlayer.h"
 
 namespace sy
 {
@@ -26,6 +28,9 @@ namespace sy
 
 	void KingDedede::Initialize()
 	{
+		// 체력 설정
+		SetHP(500);
+
 		// 텍스쳐 로드
 		Texture* KingDedede_Right = ResourceManager::Load<Texture>(L"KingDedede_Right_Tex", L"..\\Resources\\Enemy\\Boss\\KingDedede\\KingDedede_Right.bmp");
 		Texture* KingDedede_Left = ResourceManager::Load<Texture>(L"KingDedede_Left_Tex", L"..\\Resources\\Enemy\\Boss\\KingDedede\\KingDedede_Left.bmp");
@@ -36,7 +41,8 @@ namespace sy
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
 		Collider* col = GetComponent<Collider>();
-		col->SetSize(Vector2(50.f, 50.f));
+		col->SetSize(Vector2(35.f, 40.f));
+		col->SetOffset(Vector2(0.f, 5.f));
 
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 30.f);
@@ -92,11 +98,11 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_DeathJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_DeathJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_DeadJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_DeadJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Death", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Death", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Dead", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Dead", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
@@ -175,11 +181,11 @@ namespace sy
 		case eKingDededeState::Damage:
 			Damage();
 			break;
-		case eKingDededeState::DeathJump:
-			DeathJump();
+		case eKingDededeState::DeadJump:
+			DeadJump();
 			break;
-		case eKingDededeState::Death:
-			Death();
+		case eKingDededeState::Dead:
+			Dead();
 			break;
 		default:
 			break;
@@ -195,6 +201,24 @@ namespace sy
 
 	void KingDedede::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		Damaged(DamageAmount);
+
+		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
+		if (mState == eKingDededeState::Damage || mState == eKingDededeState::Dead)
+			return;
+
+		mState = eKingDededeState::Damage;
+
+		if (HitDir.x < 0.f)
+		{
+			mAnimator->PlayAnimation(L"KingDedede_Right_Damage", false);
+			mTransform->SetDirection(eDirection::RIGHT);
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"KingDedede_Left_Damage", false);
+			mTransform->SetDirection(eDirection::LEFT);
+		}
 	}
 
 	void KingDedede::CheckPixelCollision()
@@ -317,6 +341,23 @@ namespace sy
 
 	void KingDedede::Idle()
 	{
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+		if (Dir.x > 0.f)
+		{
+			mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			mTransform->SetDirection(eDirection::RIGHT);
+			mDir = eDirection::RIGHT;
+		}
+		else
+		{
+			mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+			mTransform->SetDirection(eDirection::LEFT);
+			mDir = eDirection::LEFT;
+		}
+
 	}
 
 	void KingDedede::Walk()
@@ -381,13 +422,40 @@ namespace sy
 
 	void KingDedede::Damage()
 	{
+		static float StateChangeDelay = 0.f;
+
+		StateChangeDelay += Time::DeltaTime();
+
+		if (mAnimator->IsActiveAnimationComplete() && StateChangeDelay > 1.f)
+		{
+			StateChangeDelay = 0.f;
+
+			if (GetCurHP() <= 0.f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_Dead", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_Dead", false);
+
+				mState = eKingDededeState::Dead;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+				mState = eKingDededeState::Idle;
+			}
+		}
 	}
 
-	void KingDedede::DeathJump()
+	void KingDedede::DeadJump()
 	{
 	}
 
-	void KingDedede::Death()
+	void KingDedede::Dead()
 	{
 	}
 }

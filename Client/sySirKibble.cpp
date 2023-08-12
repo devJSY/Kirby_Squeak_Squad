@@ -306,7 +306,7 @@ namespace sy
 
 	void SirKibble::Idle()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"SirKibble_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
@@ -316,7 +316,7 @@ namespace sy
 
 	void SirKibble::Attack()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"SirKibble_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
@@ -336,7 +336,7 @@ namespace sy
 
 	void SirKibble::Jump()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"SirKibble_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
@@ -348,7 +348,7 @@ namespace sy
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetCurHP() <= 0.f)
 			{
 				mAnimator->PlayAnimation(L"SirKibble_Death", false);
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));

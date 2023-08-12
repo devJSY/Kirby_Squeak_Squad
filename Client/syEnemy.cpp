@@ -9,7 +9,8 @@ namespace sy
 {
 	Enemy::Enemy(eAbilityType type)
 		: mAbilityType(type)
-		, mHP(100)
+		, mMaxHp(100)
+		, mCurHp(mMaxHp)
 		, mHPbarUI(nullptr)
 	{
 		AddComponent<Animator>();

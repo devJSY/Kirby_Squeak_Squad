@@ -18,7 +18,7 @@ namespace sy
 		mBarTex = ResourceManager::Load<Texture>(L"Monster_HP", L"..\\Resources\\UI\\MonsterLifeBar\\Monster_HP.bmp");
 		mHPTex = ResourceManager::Load<Texture>(L"Monster_cHP", L"..\\Resources\\UI\\MonsterLifeBar\\Monster_cHP.bmp");	
 
-		mRenderHP = (float)mOwner->GetHP();
+		mRenderHP = (float)mOwner->GetMaxHP();
 	}
 
 	EnemyHPbarUI::~EnemyHPbarUI()
@@ -48,8 +48,10 @@ namespace sy
 			UIActivetime = 0.f;
 		}
 
-		if ((int)mRenderHP >= mOwner->GetHP())
-			mRenderHP -= (float)Time::DeltaTime() * 100.f;	
+		if ((int)mRenderHP >= mOwner->GetCurHP())
+			mRenderHP -= (float)Time::DeltaTime() * 100.f;
+		else
+			mRenderHP = (float)mOwner->GetCurHP();
 
 
 		UI::Update();
@@ -66,8 +68,8 @@ namespace sy
 				TransparentBlt(hdc, 180, 180, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
 					, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
 
-				TransparentBlt(hdc, 186, 181, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), mHPTex->GetHdc()
-					, 0, 0, (int)(mHPTex->GetWidth() * (mRenderHP / 100.f)), mHPTex->GetHeight(), RGB(255, 0, 255));
+				TransparentBlt(hdc, 186, 181, (int)(mHPTex->GetWidth() * (mRenderHP / mOwner->GetMaxHP())), mHPTex->GetHeight(), mHPTex->GetHdc()
+					, 0, 0, (int)(mHPTex->GetWidth() * (mRenderHP / mOwner->GetMaxHP())), mHPTex->GetHeight(), RGB(255, 0, 255));
 			}
 		}		
 

@@ -339,7 +339,7 @@ namespace sy
 
 	void Blockin::Walk()
 	{
-		if (GetHP() <= 0.f)
+		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
@@ -378,7 +378,7 @@ namespace sy
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetHP() <= 0.f)
+			if (GetCurHP() <= 0.f)
 			{
 				mAnimator->PlayAnimation(L"BlockEnemy_Death", false);
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));

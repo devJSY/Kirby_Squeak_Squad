@@ -1428,7 +1428,7 @@ namespace sy
 		// 애니메이션
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetOwner()->GetHP() <= 0.f)
+			if (GetOwner()->GetCurHP() <= 0.f)
 			{
 				// 게임오버
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));				
@@ -2751,7 +2751,7 @@ namespace sy
 		// 애니메이션
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (GetOwner()->GetHP() <= 0.f)
+			if (GetOwner()->GetCurHP() <= 0.f)
 			{
 				// 게임오버
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
