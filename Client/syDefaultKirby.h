@@ -39,9 +39,11 @@ namespace sy
 
 	enum class InhaledObjectType
 	{
-		Monster,
-		AbilityItem,
+		// 흡수 우선순위 순
 		AbilityStar,
+		AbilityItem,
+		Star_Effect,
+		Monster,
 		End,
 	};
 

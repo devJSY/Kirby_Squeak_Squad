@@ -8,6 +8,7 @@
 #include "syPlayer.h"
 #include "syAbilityItem.h"
 #include "syAbilityStar.h"
+#include "syStar_Effect.h"
 #include "syKingDedede.h"
 
 namespace sy
@@ -179,8 +180,44 @@ namespace sy
 		if (mTarget != nullptr)
 			return;
 
+		// 흡수 우선순위 2번째 Star_Effect
+		for (GameObject* obj : mInhaledObject)
+		{
+			if (obj == nullptr)
+				continue;
 
-		// 흡수 우선순위 2번째 Enemy
+			Transform* PlayerTransform = player->GetComponent<Transform>();
+
+			// Star_Effect 가 아니면 적용하지않음
+			Star_Effect* star = dynamic_cast<Star_Effect*>(obj);
+			if (star == nullptr)
+				continue;
+
+			if (mTarget == nullptr)
+			{
+				mTarget = star;
+			}
+			else
+			{
+				Transform* TargetTransform = mTarget->GetComponent<Transform>();
+				Transform* objTransform = obj->GetComponent<Transform>();
+
+				float TargetLen = (PlayerTransform->GetPosition() - TargetTransform->GetPosition()).Length();
+				float ObjLen = (PlayerTransform->GetPosition() - objTransform->GetPosition()).Length();
+
+				// Player와의 거리가 작은 obj 를 타겟으로 설정
+				if (ObjLen < TargetLen)
+				{
+					mTarget = star;
+				}
+			}
+		}
+
+		// Star_Effect를 찾았다면 리턴
+		if (mTarget != nullptr)
+			return;
+
+		// 흡수 우선순위 3번째 Enemy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
@@ -258,6 +295,7 @@ namespace sy
 
 			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
+			Star_Effect* star = dynamic_cast<Star_Effect*>(mTarget);
 			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
 
 			if (abilityStar != nullptr)
@@ -267,6 +305,10 @@ namespace sy
 			else if (abilityItem != nullptr)
 			{
 				defaultKirby->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
+			}
+			else if (star != nullptr)
+			{
+				defaultKirby->SetInhaledObjectInfo(eAbilityType::Normal, sy::InhaledObjectType::Star_Effect);
 			}
 			else if (enemy != nullptr)
 			{

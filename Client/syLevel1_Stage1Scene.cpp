@@ -280,6 +280,7 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Effect, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Enemy, eLayerType::Enemy, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Effect, true);
 
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);

@@ -2068,6 +2068,7 @@ namespace sy
 
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);				
@@ -2089,6 +2090,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
@@ -2225,6 +2227,7 @@ namespace sy
 
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
@@ -2246,6 +2249,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
@@ -2382,6 +2386,7 @@ namespace sy
 
 			// 흡수한 객체의 타입으로 상태설정
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				SceneManager::GetPlayer()->PlayerTransformations(mInhaledObjectInfo.AbilityType);
@@ -2403,6 +2408,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
@@ -2537,6 +2543,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
@@ -2620,6 +2627,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());
@@ -2689,6 +2697,7 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled_Skill;
 
 			if (mInhaledObjectInfo.ObjType == InhaledObjectType::AbilityStar
+				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Star_Effect
 				|| mInhaledObjectInfo.ObjType == InhaledObjectType::Monster)
 			{
 				Normal_Skill* NormalSkill = new Normal_Skill(GetOwner());

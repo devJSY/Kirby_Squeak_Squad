@@ -6,6 +6,7 @@
 #include "syTime.h"
 #include "syPlayer.h"
 #include "syCollider.h"
+#include "syDefaultKirby.h"
 
 namespace sy
 {
@@ -70,6 +71,14 @@ namespace sy
 
 		if (player == nullptr)
 			return;
+
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
 
 		// 스킬 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
