@@ -355,6 +355,12 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\KingDedede">
       <UniqueIdentifier>{955ae2d2-5faf-4838-942d-803bcf1b0b48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\Enemy_Effect">
+      <UniqueIdentifier>{3a6248fe-f825-4c99-91bd-a9fd62636c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\TornadoKirby\Effect">
+      <UniqueIdentifier>{ef359405-f5c1-42ec-9bb1-6771dccfa9c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -669,6 +675,9 @@
     <ClInclude Include="syKingDedede.h">
       <Filter>Contents\GameObject\Enemy\Boss\KingDedede</Filter>
     </ClInclude>
+    <ClInclude Include="syTornado_Effect.h">
+      <Filter>Contents\GameObject\Player\TornadoKirby\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -973,6 +982,9 @@
     </ClCompile>
     <ClCompile Include="syKingDedede.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\KingDedede</Filter>
+    </ClCompile>
+    <ClCompile Include="syTornado_Effect.cpp">
+      <Filter>Contents\GameObject\Player\TornadoKirby\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

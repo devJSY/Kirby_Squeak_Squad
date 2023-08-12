@@ -21,6 +21,7 @@
 #include "syBreath_Effect.h"
 #include "syCollider.h"
 #include "syAbilityStar.h"
+#include "syTornado_Effect.h"
 
 namespace sy
 {
@@ -1751,6 +1752,9 @@ namespace sy
 			mState = eTornadoKirbyState::Skill_Exit;
 			Duration = 0.f;
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
+
+			Tornado_Effect* Effect = new Tornado_Effect(GetOwner());
+			object::ActiveSceneAddGameObject(eLayerType::Effect, Effect);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))

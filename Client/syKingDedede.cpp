@@ -141,14 +141,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
-
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
-
-			mState = eKingDededeState::JumpReady;
 		}
 
 		switch (mState)
