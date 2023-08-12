@@ -22,6 +22,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
 		, mDir(eDirection::LEFT)
+		, mStateChangeDelay(0.f)
 	{
 	}
 
@@ -140,6 +141,14 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
+
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
+
+			mState = eKingDededeState::JumpReady;
 		}
 
 		switch (mState)
@@ -221,6 +230,7 @@ namespace sy
 		if (mState == eKingDededeState::Damage || mState == eKingDededeState::Dead)
 			return;
 
+		mStateChangeDelay = 0.f;
 		mState = eKingDededeState::Damage;
 
 		if (HitDir.x < 0.f)
@@ -383,9 +393,13 @@ namespace sy
 		}
 
 		// 상태처리
-		if (fabs(Dir.x) > 50.f)
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 2.f)
 		{
-			int randomNumber = std::rand() % 3;
+			mStateChangeDelay = 0.f;
+
+			int randomNumber = std::rand() % 5;
 			if (randomNumber == 0)
 			{
 				if (mDir == eDirection::RIGHT)
@@ -407,26 +421,22 @@ namespace sy
 			else if (randomNumber == 2)
 			{
 				if (mDir == eDirection::RIGHT)
-					mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
-				else
-					mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
-
-				mState = eKingDededeState::FlyReady;
-			}
-		}
-		else
-		{
-			int randomNumber = std::rand() % 100;
-			if (randomNumber % 2 == 0)
-			{
-				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"KingDedede_Right_AttackReady", false);
 				else
 					mAnimator->PlayAnimation(L"KingDedede_Left_AttackReady", false);
 
 				mState = eKingDededeState::AttackReady;
 			}
-			else 
+			else if (randomNumber == 3)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
+
+				mState = eKingDededeState::FlyReady;
+			}
+			else if (randomNumber == 4)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
@@ -472,16 +482,42 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Jump", true);
+				mAnimator->PlayAnimation(L"KingDedede_Right_Jump", false);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Jump", true);
+				mAnimator->PlayAnimation(L"KingDedede_Left_Jump", false);
 
 			mState = eKingDededeState::Jump;
+			mRigidBody->SetGround(false);
+
+			// 플레이어 방향을 바라보도록 설정
+			Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+			Vector2 Dir = PlayerPos - mTransform->GetPosition();
+				
+			Vector2 vel = Vector2(0.f, -200.f);
+
+			// 제자리 점프, 이동점프 랜덤구현
+			int randomNumber = std::rand() % 100;
+			if(randomNumber % 2 == 0)
+				vel.x += Dir.x / 3.f;	// 거리비례 x축 거리 조절
+
+			mRigidBody->SetVelocity(vel);
+			mStateChangeDelay = 0.f;
 		}
 	}
 
 	void KingDedede::Jump()
 	{
+		Vector2 vel = mRigidBody->GetVelocity();
+
+		if (mAnimator->IsActiveAnimationComplete() && vel.y >= 0.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Drop", true);
+
+			mState = eKingDededeState::Drop;
+		}
 	}
 
 	void KingDedede::Drop()
@@ -494,6 +530,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
+			mRigidBody->SetVelocity(Vector2::Zero);
 		}
 	}
 
@@ -512,10 +549,43 @@ namespace sy
 
 	void KingDedede::AttackRun()
 	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+
+		if (mDir == eDirection::RIGHT)
+			pos.x += 50.f * Time::DeltaTime();
+		else
+			pos.x -= 50.f * Time::DeltaTime();
+
+		mTransform->SetPosition(pos);
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+		// 상태처리
+		if (fabs(Dir.x) < 50.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Attack", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Attack", false);
+
+			mState = eKingDededeState::Attack;
+		}
 	}
 
 	void KingDedede::Attack()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+		}
 	}
 
 	void KingDedede::FlyReady()
@@ -570,13 +640,11 @@ namespace sy
 
 	void KingDedede::Damage()
 	{
-		static float StateChangeDelay = 0.f;
+		mStateChangeDelay += Time::DeltaTime();
 
-		StateChangeDelay += Time::DeltaTime();
-
-		if (mAnimator->IsActiveAnimationComplete() && StateChangeDelay > 1.f)
+		if (mAnimator->IsActiveAnimationComplete() && mStateChangeDelay > 1.f)
 		{
-			StateChangeDelay = 0.f;
+			mStateChangeDelay = 0.f;
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 
