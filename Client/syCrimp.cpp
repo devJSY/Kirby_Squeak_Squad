@@ -80,7 +80,9 @@ namespace sy
 
 	void Crimp::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eCrimpState::Dead || mState == eCrimpState::Inhaled)
+		if (mState == eCrimpState::Dead 
+			|| mState == eCrimpState::Inhaled 
+			|| GetCurHP() <= 0.f)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());

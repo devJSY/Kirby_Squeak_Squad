@@ -20,6 +20,7 @@ namespace sy
 		, mCollider(nullptr)
 		, mRigidBody(nullptr)
 		, mDuration(0.f)
+		, mInhaled(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mOwner->GetComponent<Transform>()->GetPosition());
@@ -60,7 +61,8 @@ namespace sy
 		mDuration += Time::DeltaTime();
 
 		// 픽셀충돌 체크
-		CheckPixelCollision();
+		if(!mInhaled)
+			CheckPixelCollision();
 
 		switch (mState)
 		{

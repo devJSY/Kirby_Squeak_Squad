@@ -78,7 +78,8 @@ namespace sy
 
 	void AbilityItem::Update()
 	{
-		CheckPixelCollision();
+		if(!mInhaled)
+			CheckPixelCollision();
 
 		GameObject::Update();
 	}

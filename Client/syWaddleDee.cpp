@@ -91,7 +91,9 @@ namespace sy
 
 	void WaddleDee::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eWaddleDeeState::Dead || mState == eWaddleDeeState::Inhaled)
+		if (mState == eWaddleDeeState::Dead 
+			|| mState == eWaddleDeeState::Inhaled
+			|| GetCurHP() <= 0.f)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());

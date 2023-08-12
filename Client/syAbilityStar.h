@@ -23,6 +23,7 @@ namespace sy
         virtual void Render(HDC hdc);
 
         eAbilityType GetAbilityType() { return mType; }
+        void TakeInhaled() { mInhaled = true; }
 
     private:
         void CheckPixelCollision();
@@ -40,6 +41,7 @@ namespace sy
         class Collider*     mCollider;
         class Rigidbody*    mRigidBody;
         float				mDuration;
+        bool				mInhaled;
 
 	};
 }

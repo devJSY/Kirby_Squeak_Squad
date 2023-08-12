@@ -18,7 +18,7 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		eAbilityType GetAbilityType() { return mType; }
-		virtual void TakeInhaled() { mInhaled = true; }
+		void TakeInhaled() { mInhaled = true; }
 
 	private:
 		void CheckPixelCollision();

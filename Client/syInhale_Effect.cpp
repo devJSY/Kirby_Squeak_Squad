@@ -336,22 +336,26 @@ namespace sy
 		}
 		else
 		{
-			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
+			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
+			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
 
-			// Enemy 인지 Block 인지 체크
-			if (enemy != nullptr)
+			// Inhaled 상태 설정
+			if (abilityStar != nullptr)
 			{
-				// Enemy 라면 Inhaled 상태 설정
-				enemy->TakeInhaled(vecDir);
+				abilityStar->TakeInhaled();
 			}
 			else if (abilityItem != nullptr)
 			{
 				abilityItem->TakeInhaled();
 			}
+			else if (enemy != nullptr)
+			{
+				enemy->TakeInhaled(vecDir);
+			}
 
 			vecDir.Normalize();
-			vecDir *= 300.f * Time::DeltaTime();
+			vecDir *= 350.f * Time::DeltaTime();
 			vecDir += TargetTransform->GetPosition();
 			TargetTransform->SetPosition(vecDir);
 		}		

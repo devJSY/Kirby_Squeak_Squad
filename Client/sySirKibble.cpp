@@ -102,7 +102,9 @@ namespace sy
 
 	void SirKibble::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eSirKibbleState::Dead || mState == eSirKibbleState::Inhaled)
+		if (mState == eSirKibbleState::Dead 
+			|| mState == eSirKibbleState::Inhaled
+			|| GetCurHP() <= 0.f)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
@@ -116,8 +118,6 @@ namespace sy
 			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
 				return;
 		}
-
-
 
 		// 몬스터 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
