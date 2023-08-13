@@ -142,13 +142,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
-
-			mState = eKingDededeState::JumpReady;
 		}
 
 		switch (mState)
@@ -246,8 +239,6 @@ namespace sy
 		if (mState == eKingDededeState::Damage || mState == eKingDededeState::Dead)
 			return;
 
-		mCollider->SetSize(Vector2(35.f, 40.f));
-		mCollider->SetOffset(Vector2(0.f, 5.f));
 		mStateChangeDelay = 0.f;
 		mState = eKingDededeState::Damage;
 
@@ -361,6 +352,19 @@ namespace sy
 			Vector2 pos = mTransform->GetPosition();
 			pos.x -= 3.f;
 			mTransform->SetPosition(pos);
+
+			if (mDir == eDirection::RIGHT)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+			}
+			else
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			}
+			mState = eKingDededeState::Idle;
+			mStateChangeDelay = 0.f;
 		}
 
 		// Left Stop Check
@@ -378,6 +382,19 @@ namespace sy
 			Vector2 pos = mTransform->GetPosition();
 			pos.x += 3.f;
 			mTransform->SetPosition(pos);
+
+			if (mDir == eDirection::RIGHT)
+			{
+				mTransform->SetDirection(eDirection::LEFT);
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+			}
+			else
+			{
+				mTransform->SetDirection(eDirection::RIGHT);
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			}
+			mState = eKingDededeState::Idle;
+			mStateChangeDelay = 0.f;
 		}
 	}
 
@@ -609,8 +626,6 @@ namespace sy
 
 	void KingDedede::AttackRun()
 	{
-		mStateChangeDelay += Time::DeltaTime();
-
 		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 
@@ -621,12 +636,11 @@ namespace sy
 
 		mTransform->SetPosition(pos);
 
-		// 플레이어 방향을 바라보도록 설정
 		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
 
 		// 상태처리
-		if (fabs(Dir.x) < 50.f || mStateChangeDelay > 2.f)
+		if (fabs(Dir.x) < 50.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"KingDedede_Right_Attack", false);
