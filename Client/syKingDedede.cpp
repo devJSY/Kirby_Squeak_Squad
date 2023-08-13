@@ -766,11 +766,10 @@ namespace sy
 			pos.x -= 30.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 
+		// Fly 일정시간 마다 상하 방향 변경
 		static float FlyTime = 0.f;	
-
 		if(mFlyDir == eFlyDiration::Up)
 			FlyTime += Time::DeltaTime();
-
 		if (FlyTime > 1.f)
 		{
 			FlyTime = 0.f;
@@ -783,6 +782,7 @@ namespace sy
 		else
 			pos.y += 30.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
+
 
 		// 플레이어 방향을 바라보도록 설정
 		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
@@ -798,6 +798,8 @@ namespace sy
 			mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
 		}
 
+
+		// Fly 종료
 		mStateChangeDelay += Time::DeltaTime();
 
 		if (mStateChangeDelay > 5.f)

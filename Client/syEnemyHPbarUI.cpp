@@ -14,6 +14,7 @@ namespace sy
 		, mHPTex(nullptr)
 		, mRenderHP(0.f)
 		, mbRenderTrig(false)
+		, mUIActivetime(0.f)
 	{
 		mBarTex = ResourceManager::Load<Texture>(L"Monster_HP", L"..\\Resources\\UI\\MonsterLifeBar\\Monster_HP.bmp");
 		mHPTex = ResourceManager::Load<Texture>(L"Monster_cHP", L"..\\Resources\\UI\\MonsterLifeBar\\Monster_cHP.bmp");	
@@ -32,20 +33,17 @@ namespace sy
 
 	void EnemyHPbarUI::Update()
 	{
-		// 일정시간 동안만 렌더링
-		static float UIActivetime = 0.f;
-
 		if (mbRenderTrig)
 		{
-			UIActivetime += Time::DeltaTime();
-			if (UIActivetime > 3.f)
+			mUIActivetime += Time::DeltaTime();
+			if (mUIActivetime > 3.f)
 			{
 				mbRenderTrig = false;				
 			}
 		}
 		else
 		{
-			UIActivetime = 0.f;
+			mUIActivetime = 0.f;
 		}
 
 		if ((int)mRenderHP >= mOwner->GetCurHP())

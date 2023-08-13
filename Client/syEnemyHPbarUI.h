@@ -14,7 +14,11 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void SetRenderTrig(bool trig) { mbRenderTrig = trig; }
+		void SetRenderTrig(bool trig) 
+		{ 
+			mbRenderTrig = trig; 
+			mUIActivetime = 0.f;
+		}
 
 	private:
 		Enemy*		mOwner;
@@ -23,6 +27,7 @@ namespace sy
 
 		float		mRenderHP;
 		bool		mbRenderTrig;
+		float		mUIActivetime;
 	};
 
 }
