@@ -11,8 +11,8 @@
 #include "syPlayer.h"
 #include "syStar_Effect.h"
 #include "syObject.h"
-
 #include "syInput.h"
+#include "syWaddleDee.h"
 
 namespace sy
 {
@@ -22,6 +22,7 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
+		, mCollider(nullptr)
 		, mDir(eDirection::LEFT)
 		, mFlyDir(eFlyDiration::Down)
 		, mStateChangeDelay(0.f)
@@ -98,8 +99,8 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummonDrop", Vector2(0.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummonDrop", Vector2(0.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 8, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 8, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 8, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_MonsterSummon", Vector2(256.f, 1792.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 8, Animationoffset);
 
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
@@ -143,13 +144,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
-
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
-
-			mState = eKingDededeState::FlyReady;
 		}
 
 		switch (mState)
@@ -501,7 +495,7 @@ namespace sy
 		// 상태처리
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 2.f)
+		if (mStateChangeDelay > 1.f)
 		{
 			mStateChangeDelay = 0.f;
 
@@ -840,12 +834,17 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonJump", false);
 
 			mState = eKingDededeState::MonsterSummonJump;
+			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+			mStateChangeDelay = 0.f;
 		}
 	}
 
 	void KingDedede::MonsterSummonJump()
 	{
-		if (mAnimator->IsActiveAnimationComplete())
+		Vector2 vel = mRigidBody->GetVelocity();
+
+		if (mAnimator->IsActiveAnimationComplete() && vel.y >= 0.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonDrop", false);
@@ -874,11 +873,32 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
+			{
 				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				AddStarEffect(eDirection::RIGHT);
 
-			mState = eKingDededeState::Idle;
+				Vector2 pos = mTransform->GetPosition();
+				pos.x += 50.f;
+				pos.y += 10.f;
+				WaddleDee* waddleDee = new WaddleDee();
+				waddleDee->Initialize();
+				waddleDee->GetComponent<Transform>()->SetPosition(pos);
+				object::ActiveSceneAddGameObject(eLayerType::Enemy, waddleDee);
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				mState = eKingDededeState::Idle;
+				AddStarEffect(eDirection::LEFT);
+
+				Vector2 pos = mTransform->GetPosition();
+				pos.x -= 50.f;
+				pos.y += 10.f;
+				WaddleDee* waddleDee = new WaddleDee();
+				waddleDee->Initialize();
+				waddleDee->GetComponent<Transform>()->SetPosition(pos);
+				object::ActiveSceneAddGameObject(eLayerType::Enemy, waddleDee);
+			}			
 		}
 	}
 
