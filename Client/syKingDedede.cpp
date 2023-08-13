@@ -45,9 +45,9 @@ namespace sy
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mRigidBody = AddComponent<Rigidbody>();
-		Collider* col = GetComponent<Collider>();
-		col->SetSize(Vector2(35.f, 40.f));
-		col->SetOffset(Vector2(0.f, 5.f));
+		mCollider = GetComponent<Collider>();
+		mCollider->SetSize(Vector2(35.f, 40.f));
+		mCollider->SetOffset(Vector2(0.f, 5.f));
 
 		// 局聪皋捞记 积己
 		Vector2 Animationoffset = Vector2(0.f, 30.f);
@@ -73,8 +73,8 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_AttackRun", Vector2(0.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_AttackRun", Vector2(0.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 6, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 6, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 6, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Attack", Vector2(1024.f, 768.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.15f, 6, Animationoffset);
 
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_FlyReady", Vector2(0.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_FlyReady", Vector2(0.f, 1280.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.3f, 2, Animationoffset);
@@ -144,11 +144,11 @@ namespace sy
 			mState = eKingDededeState::Idle;
 
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
+				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
+				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
 
-			mState = eKingDededeState::MonsterSummonReady;
+			mState = eKingDededeState::JumpReady;
 		}
 
 		switch (mState)
@@ -246,6 +246,8 @@ namespace sy
 		if (mState == eKingDededeState::Damage || mState == eKingDededeState::Dead)
 			return;
 
+		mCollider->SetSize(Vector2(35.f, 40.f));
+		mCollider->SetOffset(Vector2(0.f, 5.f));
 		mStateChangeDelay = 0.f;
 		mState = eKingDededeState::Damage;
 
@@ -376,6 +378,26 @@ namespace sy
 			Vector2 pos = mTransform->GetPosition();
 			pos.x += 3.f;
 			mTransform->SetPosition(pos);
+		}
+	}
+
+	void KingDedede::AddStarEffect(eDirection dir)
+	{
+		Vector2 pos = mTransform->GetPosition();
+
+		if (dir == eDirection::RIGHT)
+		{
+			pos.x += 50.f;
+			pos.y += 10.f;
+			Star_Effect* effect = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+		}
+		else
+		{		
+			pos.x -= 50.f;
+			pos.y += 10.f;
+			Star_Effect* effect = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
 		}
 	}
 
@@ -548,17 +570,8 @@ namespace sy
 			mState = eKingDededeState::Idle;
 			mRigidBody->SetVelocity(Vector2::Zero);
 
-			Vector2 pos = mTransform->GetPosition();
-			pos.x -= 50.f;
-			pos.y += 10.f;
-			Star_Effect* effect = new Star_Effect(this, pos);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
-
-			pos = mTransform->GetPosition();
-			pos.x += 50.f;
-			pos.y += 10.f;
-			Star_Effect* effect2 = new Star_Effect(this, pos);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+			AddStarEffect(eDirection::RIGHT);
+			AddStarEffect(eDirection::LEFT);
 		}
 	}
 
@@ -630,9 +643,15 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
+			{
 				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				AddStarEffect(eDirection::RIGHT);
+			}
 			else
+			{
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				AddStarEffect(eDirection::LEFT);
+			}			
 
 			mState = eKingDededeState::Idle;
 		}

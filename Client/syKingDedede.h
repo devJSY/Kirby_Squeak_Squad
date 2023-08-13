@@ -47,6 +47,7 @@ namespace sy
 
 	private:
 		void CheckPixelCollision();
+		void AddStarEffect(eDirection dir);
 
 	private:
 		void Idle();
@@ -74,6 +75,7 @@ namespace sy
 		class Animator*			mAnimator;
 		class Transform*		mTransform;
 		class Rigidbody*		mRigidBody;
+		class Collider*			mCollider;
 		eDirection				mDir;
 
 		float					mStateChangeDelay;

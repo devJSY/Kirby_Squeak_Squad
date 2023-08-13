@@ -49,7 +49,7 @@ namespace sy
 		// 보스 생성
 		KingDedede* kingDedede = new KingDedede(eAbilityType::Normal);
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, kingDedede);
-		kingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 100.f));
+		kingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 150.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"King_Dedede_Stage", L"..\\Resources\\Map\\Stage\\King_Dedede_Stage.png"); // 이미지 설정
