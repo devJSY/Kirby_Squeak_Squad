@@ -25,6 +25,7 @@
 #include "syNinjaKirby_Shuriken.h"
 #include "syNinjaKirby_ChargeEffect.h"
 #include "syNinjaKirby_Fire.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -39,6 +40,8 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mKeyReleaseTime(0.f)
+		, mKeyPressdTime(0.f)
 		, mChargeTime(0.f)
 	{
 	}
@@ -287,6 +290,11 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// KingDedede 는 플레이어 충돌 무시
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(enemy);
+		if (kingDedede != nullptr)
+			return;
+
 		// 커비 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
@@ -316,6 +324,9 @@ namespace sy
 		// 특정 상태에선 충돌 무시
 		if (mState == eNinjaKirbyState::Fire || mState == eNinjaKirbyState::Transformations)
 			return;
+
+		mKeyPressdTime = 0.f;
+		mKeyReleaseTime = 0.f;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Ninja);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
@@ -1193,21 +1204,18 @@ namespace sy
 	void NinjaKirby::Jump()
 	{
 		// 상하 이동
-		static float KeyReleaseTime = 0.f;
-		static float KeyPressdTime = 0.f;
-
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyPressdTime += Time::DeltaTime();
+			mKeyPressdTime += Time::DeltaTime();
 
 			// 일정 누른 시간에만 상승
-			if (KeyPressdTime < 0.2f)
+			if (mKeyPressdTime < 0.2f)
 			{
 				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
-			if (KeyPressdTime > 0.4f)
+			if (mKeyPressdTime > 0.4f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"NinjaKirby_Right_Turn", false);
@@ -1216,18 +1224,18 @@ namespace sy
 
 				mState = eNinjaKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
 		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyReleaseTime += Time::DeltaTime();
+			mKeyReleaseTime += Time::DeltaTime();
 
 			// 키를 뗀시간이 일정시간이상 지나면 상태변경
-			if (KeyReleaseTime > 0.125f)
+			if (mKeyReleaseTime > 0.125f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"NinjaKirby_Right_Turn", false);
@@ -1236,8 +1244,8 @@ namespace sy
 
 				mState = eNinjaKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
@@ -1297,8 +1305,8 @@ namespace sy
 
 			mState = eNinjaKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
-			KeyPressdTime = 0.f;
-			KeyReleaseTime = 0.f;
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
@@ -1313,6 +1321,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"NinjaKirby_Left_ThrowShuriken", false);
 
 			mState = eNinjaKirbyState::ThrowShuriken;
+
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
 
 			// 스킬 생성
 			NinjaKirby_Shuriken* shuriken = new NinjaKirby_Shuriken(GetOwner());
@@ -1338,6 +1349,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"NinjaKirby_Left_Charge", true);
 
 			mState = eNinjaKirbyState::Charge;
+
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
 
 			ResourceManager::Find<Sound>(L"NinjaChargeSound")->Play(false);
 			mChargeTime = 0.f;

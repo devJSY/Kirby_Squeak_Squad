@@ -78,6 +78,10 @@ namespace sy
 
 	void AbilityItem::Update()
 	{
+		// Inhaled 상태에선 중력적용 X
+		if (mInhaled)
+			mRigidbody->SetGround(true);
+
 		if(!mInhaled)
 			CheckPixelCollision();
 

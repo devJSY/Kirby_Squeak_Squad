@@ -58,6 +58,10 @@ namespace sy
 
 	void AbilityStar::Update()
 	{
+		// Inhaled 상태에선 중력적용 X
+		if (mInhaled)
+			mRigidBody->SetGround(true);
+
 		mDuration += Time::DeltaTime();
 
 		// 픽셀충돌 체크

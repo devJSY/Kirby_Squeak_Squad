@@ -387,6 +387,8 @@ namespace sy
 
 	void WaddleDee::Inhaled()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)

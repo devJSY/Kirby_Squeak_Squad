@@ -143,17 +143,12 @@ namespace sy
 
 			mState = eKingDededeState::Idle;
 
-			Vector2 pos = mTransform->GetPosition();
-			pos.x -= 50.f;
-			pos.y += 10.f;
-			Star_Effect* effect = new Star_Effect(this, pos);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
 
-			pos = mTransform->GetPosition();
-			pos.x += 50.f;
-			pos.y += 10.f;
-			Star_Effect* effect2 = new Star_Effect(this, pos);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
+			mState = eKingDededeState::MonsterSummonReady;
 		}
 
 		switch (mState)
@@ -225,6 +220,22 @@ namespace sy
 	void KingDedede::Render(HDC hdc)
 	{
 		Enemy::Render(hdc);
+	}
+
+	void KingDedede::OnCollisionEnter(Collider* other)
+	{
+		if (mState == eKingDededeState::Dead
+			|| GetCurHP() <= 0.f)
+			return;
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		if (player == nullptr)
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void KingDedede::TakeHit(int DamageAmount, math::Vector2 HitDir)
@@ -536,6 +547,18 @@ namespace sy
 
 			mState = eKingDededeState::Idle;
 			mRigidBody->SetVelocity(Vector2::Zero);
+
+			Vector2 pos = mTransform->GetPosition();
+			pos.x -= 50.f;
+			pos.y += 10.f;
+			Star_Effect* effect = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+
+			pos = mTransform->GetPosition();
+			pos.x += 50.f;
+			pos.y += 10.f;
+			Star_Effect* effect2 = new Star_Effect(this, pos);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect2);
 		}
 	}
 
@@ -543,17 +566,38 @@ namespace sy
 	{
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_AttackRun", true);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_AttackRun", true);
+			mStateChangeDelay = 0.f;
 
-			mState = eKingDededeState::AttackRun;
+			// 플레이어 방향을 바라보도록 설정
+			Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+			Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+			// 상태처리
+			if (fabs(Dir.x) < 50.f)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_Attack", false);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_Attack", false);
+
+				mState = eKingDededeState::Attack;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"KingDedede_Right_AttackRun", true);
+				else
+					mAnimator->PlayAnimation(L"KingDedede_Left_AttackRun", true);
+
+				mState = eKingDededeState::AttackRun;
+			}
 		}
 	}
 
 	void KingDedede::AttackRun()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
 		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 
@@ -569,7 +613,7 @@ namespace sy
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
 
 		// 상태처리
-		if (fabs(Dir.x) < 50.f)
+		if (fabs(Dir.x) < 50.f || mStateChangeDelay > 2.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"KingDedede_Right_Attack", false);
@@ -577,6 +621,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Attack", false);
 
 			mState = eKingDededeState::Attack;
+			mStateChangeDelay = 0.f;
 		}
 	}
 
@@ -623,9 +668,9 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonJump", true);
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonJump", false);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonJump", true);
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonJump", false);
 
 			mState = eKingDededeState::MonsterSummonJump;
 		}
@@ -633,14 +678,41 @@ namespace sy
 
 	void KingDedede::MonsterSummonJump()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonDrop", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonDrop", false);
+
+			mState = eKingDededeState::MonsterSummonDrop;
+		}
 	}
 
 	void KingDedede::MonsterSummonDrop()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummon", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummon", false);
+
+			mState = eKingDededeState::MonsterSummon;
+		}
 	}
 
 	void KingDedede::MonsterSummon()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+		}
 	}
 
 	void KingDedede::Damage()

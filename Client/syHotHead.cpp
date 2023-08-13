@@ -459,6 +459,8 @@ namespace sy
 
 	void HotHead::Inhaled()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)

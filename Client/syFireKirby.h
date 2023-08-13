@@ -95,6 +95,9 @@ namespace sy
 		bool					mbTopStop;		// 상단에 충돌한 상태여부
 		bool					mbOnSlope;		// 경사로에 올라탄 상태여부
 
+		float					mKeyReleaseTime;
+		float					mKeyPressdTime;
+
 		class FireKirby_Skill*  mSkill;
 	};
 }

@@ -355,7 +355,7 @@ namespace sy
 			}
 
 			vecDir.Normalize();
-			vecDir *= 350.f * Time::DeltaTime();
+			vecDir *= 300.f * Time::DeltaTime();
 			vecDir += TargetTransform->GetPosition();
 			TargetTransform->SetPosition(vecDir);
 		}		

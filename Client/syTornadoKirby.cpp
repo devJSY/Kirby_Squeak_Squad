@@ -22,6 +22,7 @@
 #include "syCollider.h"
 #include "syAbilityStar.h"
 #include "syTornado_Effect.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -36,6 +37,8 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mKeyReleaseTime(0.f)
+		, mKeyPressdTime(0.f)
 	{
 	}
 
@@ -284,6 +287,11 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
+		// KingDedede 는 플레이어 충돌 무시
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(enemy);
+		if (mState != eTornadoKirbyState::Skill && kingDedede != nullptr)
+			return;
+
 		// 커비 → 몬스터 방향
 		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
 
@@ -316,6 +324,9 @@ namespace sy
 			|| mState == eTornadoKirbyState::Skill_Exit
 			|| mState == eTornadoKirbyState::Transformations)
 			return;
+
+		mKeyPressdTime = 0.f;
+		mKeyReleaseTime = 0.f;
 
 		AbilityStar* abilityStar = new AbilityStar(GetOwner(), eAbilityType::Tornado);
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, abilityStar);
@@ -1118,21 +1129,18 @@ namespace sy
 	void TornadoKirby::Jump()
 	{
 		// 상하 이동
-		static float KeyReleaseTime = 0.f;
-		static float KeyPressdTime = 0.f;
-
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyPressdTime += Time::DeltaTime();
+			mKeyPressdTime += Time::DeltaTime();
 
 			// 일정 누른 시간에만 상승
-			if (KeyPressdTime < 0.2f)
+			if (mKeyPressdTime < 0.2f)
 			{
 				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
-			if (KeyPressdTime > 0.4f)
+			if (mKeyPressdTime > 0.4f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"TornadoKirby_Right_Turn", false);
@@ -1141,18 +1149,18 @@ namespace sy
 
 				mState = eTornadoKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
 		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyReleaseTime += Time::DeltaTime();
+			mKeyReleaseTime += Time::DeltaTime();
 
 			// 키를 뗀시간이 일정시간이상 지나면 상태변경
-			if (KeyReleaseTime > 0.125f)
+			if (mKeyReleaseTime > 0.125f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"TornadoKirby_Right_Turn", false);
@@ -1161,8 +1169,8 @@ namespace sy
 
 				mState = eTornadoKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
@@ -1222,6 +1230,9 @@ namespace sy
 
 			mState = eTornadoKirbyState::Skill_Enter;
 
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
+
 			// 오디오 재생		
 			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(true);
 		}
@@ -1236,8 +1247,8 @@ namespace sy
 
 			mState = eTornadoKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
-			KeyPressdTime = 0.f;
-			KeyReleaseTime = 0.f;
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"FlySound")->Play(false);

@@ -377,6 +377,8 @@ namespace sy
 
 	void SirKibble::Inhaled()
 	{
+		mRigidBody->SetGround(true);
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)

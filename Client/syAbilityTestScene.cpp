@@ -246,12 +246,14 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 
 		// 오디오 정지
-		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
+		ResourceManager::Find<Sound>(L"WorldSelectSound")->Stop(true);
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Play(true);
 	}
 
 	void AbilityTestScene::Exit()
 	{
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
 	}
 }

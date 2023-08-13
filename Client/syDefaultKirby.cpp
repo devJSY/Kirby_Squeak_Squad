@@ -23,6 +23,7 @@
 #include "syAbilityItem.h"
 #include "syLanding_Effect.h"
 #include "syPlayer.h"
+#include "syKingDedede.h"
 
 namespace sy
 {
@@ -37,6 +38,8 @@ namespace sy
 		, mbOnRightStop(false)
 		, mbTopStop(false)
 		, mbOnSlope(false)
+		, mKeyReleaseTime(0.f)
+		, mKeyPressdTime(0.f)
 		, mInhaleEffect(nullptr)
 		, mInhaledObjectInfo{}
 	{
@@ -321,12 +324,12 @@ namespace sy
 	void DefaultKirby::OnCollisionEnter(Collider* other)
 	{
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
-
 		if (enemy == nullptr)
 			return;
 
-		// 흡수 상태에선 몬스터 충돌 무시
-		if (mState == eDefaultKirbyState::Inhale_1 || mState == eDefaultKirbyState::Inhale_2)
+		// KingDedede 는 플레이어 충돌 무시
+		KingDedede* kingDedede = dynamic_cast<KingDedede*>(enemy);
+		if (kingDedede != nullptr)
 			return;
 
 		// 커비 → 몬스터 방향
@@ -359,6 +362,9 @@ namespace sy
 		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
 		if (mState == eDefaultKirbyState::Damage || mState == eDefaultKirbyState::Inhaled_Damage)
 			return;
+
+		mKeyReleaseTime = 0.f;
+		mKeyPressdTime = 0.f;
 
 		if (mState == eDefaultKirbyState::Inhaled
 			|| mState == eDefaultKirbyState::Inhaled_Idle
@@ -1212,21 +1218,18 @@ namespace sy
 	void DefaultKirby::Jump()
 	{
 		// 상하 이동
-		static float KeyReleaseTime = 0.f;
-		static float KeyPressdTime = 0.f;
-
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyPressdTime += Time::DeltaTime();
+			mKeyReleaseTime += Time::DeltaTime();
 
 			// 일정 누른 시간에만 상승
-			if (KeyPressdTime < 0.2f)
+			if (mKeyReleaseTime < 0.2f)
 			{
 				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
-			if (KeyPressdTime > 0.4f)
+			if (mKeyReleaseTime > 0.4f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
@@ -1235,18 +1238,18 @@ namespace sy
 
 				mState = eDefaultKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyReleaseTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
 		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyReleaseTime += Time::DeltaTime();
+			mKeyReleaseTime += Time::DeltaTime();
 
 			// 키를 뗀시간이 일정시간이상 지나면 상태변경
-			if (KeyReleaseTime > 0.125f)
+			if (mKeyReleaseTime > 0.125f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"DefaultKirby_Right_Turn", false);
@@ -1255,8 +1258,8 @@ namespace sy
 
 				mState = eDefaultKirbyState::Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyReleaseTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
@@ -1314,8 +1317,8 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"DefaultKirby_Left_Inhale_1", true);
 
-			KeyPressdTime = 0.f;
-			KeyReleaseTime = 0.f;
+			mKeyReleaseTime = 0.f;
+			mKeyReleaseTime = 0.f;
 			mState = eDefaultKirbyState::Inhale_1;
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
@@ -1335,8 +1338,8 @@ namespace sy
 
 			mState = eDefaultKirbyState::Fly_Start;
 			mRigidBody->SetVelocity(Vector2(0.f, -150.f));
-			KeyPressdTime = 0.f;
-			KeyReleaseTime = 0.f;
+			mKeyReleaseTime = 0.f;
+			mKeyReleaseTime = 0.f;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"FlySound")->Play(false);
@@ -2439,21 +2442,18 @@ namespace sy
 	void DefaultKirby::Inhaled_Jump()
 	{
 		// 상하 이동
-		static float KeyReleaseTime = 0.f;
-		static float KeyPressdTime = 0.f;
-
 		if (Input::GetKeyPressed(eKeyCode::A) || Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyPressdTime += Time::DeltaTime();
+			mKeyPressdTime += Time::DeltaTime();
 
 			// 일정 누른 시간에만 상승
-			if (KeyPressdTime < 0.2f)
+			if (mKeyPressdTime < 0.2f)
 			{
 				mRigidBody->AddForce(Vector2(0.f, -400.f));
 			}
 
 			// 키를 누른 시간이 일정시간이상 지나면 상태변경
-			if (KeyPressdTime > 0.4f)
+			if (mKeyPressdTime > 0.4f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Turn", false);
@@ -2462,18 +2462,18 @@ namespace sy
 
 				mState = eDefaultKirbyState::Inhaled_Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
 
 		if (!Input::GetKeyPressed(eKeyCode::A) && !Input::GetKeyPressed(eKeyCode::D))
 		{
-			KeyReleaseTime += Time::DeltaTime();
+			mKeyReleaseTime += Time::DeltaTime();
 
 			// 키를 뗀시간이 일정시간이상 지나면 상태변경
-			if (KeyReleaseTime > 0.125f)
+			if (mKeyReleaseTime > 0.125f)
 			{
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"DefaultKirby_Right_Inhaled_Turn", false);
@@ -2482,8 +2482,8 @@ namespace sy
 
 				mState = eDefaultKirbyState::Inhaled_Turn;
 
-				KeyPressdTime = 0.f;
-				KeyReleaseTime = 0.f;
+				mKeyPressdTime = 0.f;
+				mKeyReleaseTime = 0.f;
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			}
 		}
