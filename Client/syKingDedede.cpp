@@ -23,6 +23,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
 		, mDir(eDirection::LEFT)
+		, mFlyDir(eFlyDiration::Down)
 		, mStateChangeDelay(0.f)
 	{
 	}
@@ -142,6 +143,13 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
+
+			mState = eKingDededeState::FlyReady;
 		}
 
 		switch (mState)
@@ -241,6 +249,7 @@ namespace sy
 
 		mStateChangeDelay = 0.f;
 		mState = eKingDededeState::Damage;
+		mRigidBody->SetFloat(false);
 
 		if (HitDir.x < 0.f)
 		{
@@ -317,11 +326,18 @@ namespace sy
 		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
 			|| LBColor == RGB(255, 0, 0) || RBColor == RGB(255, 0, 0))
 		{
-			// 이동
-			Vector2 pos = mTransform->GetPosition();
-			pos.y -= 1.f;
-			mTransform->SetPosition(pos);
-			mRigidBody->SetGround(true);
+			if (mState == eKingDededeState::Fly)
+			{
+				mFlyDir = eFlyDiration::Up;
+			}
+			else
+			{
+				// 이동
+				Vector2 pos = mTransform->GetPosition();
+				pos.y -= 1.f;
+				mTransform->SetPosition(pos);
+				mRigidBody->SetGround(true);
+			}
 		}
 
 		COLORREF LBColorOffsetY = PixelTex->GetTexturePixel((int)LB.x, int(LB.y + 1));
@@ -333,9 +349,10 @@ namespace sy
 			|| LBColor == RGB(255, 0, 0) || LBColorOffsetY == RGB(255, 0, 0)
 			|| RBColor == RGB(255, 0, 0) || RBColorOffsetY == RGB(255, 0, 0)))
 		{
-			mRigidBody->SetGround(false);
+			// 특정상태에선 바닥무시
+			if(mState != eKingDededeState::Fly)
+				mRigidBody->SetGround(false);
 		}
-
 
 		// Right Stop Check
 		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(int(RB.x + 1), (int)RB.y);
@@ -353,18 +370,35 @@ namespace sy
 			pos.x -= 3.f;
 			mTransform->SetPosition(pos);
 
-			if (mDir == eDirection::RIGHT)
+			// 방향전환
+			if (mState == eKingDededeState::Fly)
 			{
-				mTransform->SetDirection(eDirection::LEFT);
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				if (mDir == eDirection::RIGHT)
+				{
+					mTransform->SetDirection(eDirection::LEFT);
+					mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
+				}
+				else
+				{
+					mTransform->SetDirection(eDirection::RIGHT);
+					mAnimator->PlayAnimation(L"KingDedede_Right_Fly", true);
+				}
 			}
 			else
 			{
-				mTransform->SetDirection(eDirection::RIGHT);
-				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
-			}
-			mState = eKingDededeState::Idle;
-			mStateChangeDelay = 0.f;
+				if (mDir == eDirection::RIGHT)
+				{
+					mTransform->SetDirection(eDirection::LEFT);
+					mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				}
+				else
+				{
+					mTransform->SetDirection(eDirection::RIGHT);
+					mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				}
+				mState = eKingDededeState::Idle;
+				mStateChangeDelay = 0.f;
+			}			
 		}
 
 		// Left Stop Check
@@ -383,18 +417,35 @@ namespace sy
 			pos.x += 3.f;
 			mTransform->SetPosition(pos);
 
-			if (mDir == eDirection::RIGHT)
+			// 방향전환
+			if (mState == eKingDededeState::Fly)
 			{
-				mTransform->SetDirection(eDirection::LEFT);
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				if (mDir == eDirection::RIGHT)
+				{
+					mTransform->SetDirection(eDirection::LEFT);
+					mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
+				}
+				else
+				{
+					mTransform->SetDirection(eDirection::RIGHT);
+					mAnimator->PlayAnimation(L"KingDedede_Right_Fly", true);
+				}
 			}
 			else
 			{
-				mTransform->SetDirection(eDirection::RIGHT);
-				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				if (mDir == eDirection::RIGHT)
+				{
+					mTransform->SetDirection(eDirection::LEFT);
+					mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				}
+				else
+				{
+					mTransform->SetDirection(eDirection::RIGHT);
+					mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				}
+				mState = eKingDededeState::Idle;
+				mStateChangeDelay = 0.f;
 			}
-			mState = eKingDededeState::Idle;
-			mStateChangeDelay = 0.f;
 		}
 	}
 
@@ -424,11 +475,11 @@ namespace sy
 		if (!mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Drop", true);
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyDrop", true);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Drop", true);
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyDrop", true);
 
-			mState = eKingDededeState::Drop;
+			mState = eKingDededeState::FlyDrop;
 		}
 
 		// 플레이어 방향을 바라보도록 설정
@@ -544,7 +595,6 @@ namespace sy
 			mState = eKingDededeState::Jump;
 			mRigidBody->SetGround(false);
 
-			// 플레이어 방향을 바라보도록 설정
 			Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 			Vector2 Dir = PlayerPos - mTransform->GetPosition();
 				
@@ -676,24 +726,106 @@ namespace sy
 		if (mAnimator->IsActiveAnimationComplete())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_FlyUp", true);
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyUp", false);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_FlyUp", true);
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyUp", false);
 
 			mState = eKingDededeState::FlyUp;
+
+			mRigidBody->SetGround(false);
+			mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+			mStateChangeDelay = 0.f;
 		}
 	}
 
 	void KingDedede::FlyUp()
 	{
+		Vector2 vel = mRigidBody->GetVelocity();
+
+		if (mAnimator->IsActiveAnimationComplete() && vel.y >= 0.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Fly", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
+
+			mRigidBody->SetFloat(true);
+			mState = eKingDededeState::Fly;
+			mFlyDir = eFlyDiration::Down;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void KingDedede::Fly()
 	{
+		// 좌우 이동
+		Vector2 pos = mTransform->GetPosition();
+		if (mDir == eDirection::RIGHT)
+			pos.x += 30.f * Time::DeltaTime();
+		else
+			pos.x -= 30.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
+
+		static float FlyTime = 0.f;	
+
+		if(mFlyDir == eFlyDiration::Up)
+			FlyTime += Time::DeltaTime();
+
+		if (FlyTime > 1.f)
+		{
+			FlyTime = 0.f;
+			mFlyDir = eFlyDiration::Down;
+		}
+
+		// 상하 이동
+		if (mFlyDir == eFlyDiration::Up)
+			pos.y -= 30.f * Time::DeltaTime();
+		else
+			pos.y += 30.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+		if (Dir.x > 0.f)
+		{
+			mTransform->SetDirection(eDirection::RIGHT);
+			mAnimator->PlayAnimation(L"KingDedede_Right_Fly", true);
+		}
+		else
+		{
+			mTransform->SetDirection(eDirection::LEFT);
+			mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
+		}
+
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 5.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyDrop", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyDrop", false);
+
+			mRigidBody->SetFloat(false);
+			mState = eKingDededeState::FlyDrop;
+			mStateChangeDelay = 0.f;
+			FlyTime = 0.f;
+		}
 	}
 
 	void KingDedede::FlyDrop()
 	{
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eKingDededeState::Idle;
+			mRigidBody->SetVelocity(Vector2::Zero);
+		}
 	}
 
 	void KingDedede::MonsterSummonReady()
@@ -756,7 +888,6 @@ namespace sy
 		{
 			mStateChangeDelay = 0.f;
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mRigidBody->SetLimitVelocity(Vector2(300.f, 300.f));
 
 			if (GetCurHP() <= 0.f)
 			{

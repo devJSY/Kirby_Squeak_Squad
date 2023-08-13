@@ -27,6 +27,12 @@ namespace sy
 		End,
 	};
 
+	enum class eFlyDiration
+	{
+		Up,
+		Down,
+	};
+
 	class KingDedede : public Enemy
 	{
 	public:
@@ -77,6 +83,7 @@ namespace sy
 		class Rigidbody*		mRigidBody;
 		class Collider*			mCollider;
 		eDirection				mDir;
+		eFlyDiration			mFlyDir;
 
 		float					mStateChangeDelay;
 	};
