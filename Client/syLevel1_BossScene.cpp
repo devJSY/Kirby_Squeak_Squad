@@ -37,6 +37,8 @@ namespace sy
 {
 	Level1_BossScene::Level1_BossScene()
 		: mPixelBG(nullptr)
+		, mKingDedede(nullptr)
+		, mPortalUI(nullptr)
 	{
 	}
 
@@ -47,9 +49,9 @@ namespace sy
 	void Level1_BossScene::Initialize()
 	{
 		// 보스 생성
-		KingDedede* kingDedede = new KingDedede(eAbilityType::Normal);
-		object::ActiveSceneAddGameObject(eLayerType::Enemy, kingDedede);
-		kingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 150.f));
+		mKingDedede = new KingDedede(eAbilityType::Normal);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, mKingDedede);
+		mKingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 150.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"King_Dedede_Stage", L"..\\Resources\\Map\\Stage\\King_Dedede_Stage.png"); // 이미지 설정
@@ -99,13 +101,16 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		//if (보스잡은경우)
-		//{
-		//	// Portal
-		//	PortalUI* portalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-		//	portalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
-		//	portalUI->Initialize();
-		//}
+		if (mKingDedede->GetKingDededeState() == eKingDededeState::Dead)
+		{
+			// Portal
+			if (mPortalUI == nullptr)
+			{
+				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
+				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
+				mPortalUI->Initialize();
+			}
+		}
 
 		Scene::Update();
 	}

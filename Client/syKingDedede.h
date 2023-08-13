@@ -51,6 +51,8 @@ namespace sy
 		virtual bool IsDamagedState() { return mState == eKingDededeState::Damage; }
 		virtual bool IsDeadState() { return mState == eKingDededeState::Dead; }
 
+		eKingDededeState GetKingDededeState() { return mState; }
+
 	private:
 		void CheckPixelCollision();
 		void AddStarEffect(eDirection dir);
