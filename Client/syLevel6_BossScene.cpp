@@ -30,12 +30,13 @@
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
 #include "syIceIslandScene.h"
-
+#include "syDaroach.h"
 
 namespace sy
 {
 	Level6_BossScene::Level6_BossScene()
 		: mPixelBG(nullptr)
+		, mDaroach(nullptr)
 		, mPortalUI(nullptr)
 	{
 	}
@@ -47,7 +48,9 @@ namespace sy
 	void Level6_BossScene::Initialize()
 	{
 		// 보스 생성
-
+		mDaroach = new Daroach(eAbilityType::Normal);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, mDaroach);
+		mDaroach->GetComponent<Transform>()->SetPosition(Vector2(192.f, 50.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"Daroach_Stage", L"..\\Resources\\Map\\Foreground\\Daroach.bmp"); // 이미지 설정

@@ -18,7 +18,8 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
-		class BackGround* mPixelBG;
-		class PortalUI* mPortalUI;
+		class BackGround*	mPixelBG;
+		class Daroach*		mDaroach;
+		class PortalUI*		mPortalUI;
 	};
 }

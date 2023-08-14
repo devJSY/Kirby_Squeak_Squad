@@ -14,7 +14,6 @@ namespace sy
 		, mState(eDaroachState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
-		, mRigidBody(nullptr)
 		, mCollider(nullptr)
 		, mDir(eDirection::LEFT)
 		, mStateChangeDelay(0.f)
@@ -31,18 +30,17 @@ namespace sy
 		SetHP(500);
 
 		// 텍스쳐 로드
-		Texture* Daroach_Right_Tex = ResourceManager::Load<Texture>(L"KingDedede_Right_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Right.bmp");
-		Texture* Daroach_Left_Tex = ResourceManager::Load<Texture>(L"KingDedede_Left_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Left.bmp");
+		Texture* Daroach_Right_Tex = ResourceManager::Load<Texture>(L"Daroach_Right_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Right.bmp");
+		Texture* Daroach_Left_Tex = ResourceManager::Load<Texture>(L"Daroach_Left_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Left.bmp");
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-		mRigidBody = AddComponent<Rigidbody>();
 		mCollider = GetComponent<Collider>();
 		mCollider->SetSize(Vector2(40.f, 40.f));
 		//mCollider->SetOffset(Vector2(0.f, 0.f));
 
 
-			// 애니메이션 생성
+		// 애니메이션 생성
 		std::vector<Vector2> Daroach_StarAttack_offset = { Vector2(0.f,5.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,21.f), Vector2(0.f,26.f), Vector2(0.f, 26.f) };
 
 		mAnimator->CreateAnimation(Daroach_Right_Tex, L"Daroach_Right_Idle", Vector2(8.f, 15.f), Vector2(55.f, 56.f), Vector2(55.f, 0.f), 0.15f, 4);
