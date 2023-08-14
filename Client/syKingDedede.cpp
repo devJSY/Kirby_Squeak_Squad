@@ -115,14 +115,12 @@ namespace sy
 		mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 		// Sound Load
-		ResourceManager::Load<Sound>(L"BossAttack", L"..\\Resources\\Sound\\Effect\\Boss\\BossAttack.wav");
-		ResourceManager::Load<Sound>(L"BossDeath", L"..\\Resources\\Sound\\Effect\\Boss\\BossDeath.wav");
-		ResourceManager::Load<Sound>(L"BossDrop", L"..\\Resources\\Sound\\Effect\\Boss\\BossDrop.wav");
-		ResourceManager::Load<Sound>(L"BossRun", L"..\\Resources\\Sound\\Effect\\Boss\\BossRun.wav");
-		ResourceManager::Load<Sound>(L"BossShout", L"..\\Resources\\Sound\\Effect\\Boss\\BossShout.wav");
-		ResourceManager::Load<Sound>(L"BossWalk", L"..\\Resources\\Sound\\Effect\\Boss\\BossWalk.wav");
-
-		//ResourceManager::Find<Sound>(L"BossAttack")->SetVolume(100.f);
+		ResourceManager::Load<Sound>(L"BossAttack", L"..\\Resources\\Sound\\Effect\\Dedede\\BossAttack.wav");
+		ResourceManager::Load<Sound>(L"BossDeath", L"..\\Resources\\Sound\\Effect\\Dedede\\BossDeath.wav");
+		ResourceManager::Load<Sound>(L"BossDrop", L"..\\Resources\\Sound\\Effect\\Dedede\\BossDrop.wav");
+		ResourceManager::Load<Sound>(L"BossRun", L"..\\Resources\\Sound\\Effect\\Dedede\\BossRun.wav");
+		ResourceManager::Load<Sound>(L"BossShout", L"..\\Resources\\Sound\\Effect\\Dedede\\BossShout.wav");
+		ResourceManager::Load<Sound>(L"BossWalk", L"..\\Resources\\Sound\\Effect\\Dedede\\BossWalk.wav");
 
 		Enemy::Initialize();
 	}
@@ -268,6 +266,8 @@ namespace sy
 			PixelTex = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
 		else if (CurSceneName == L"Level1_BossScene")
 			PixelTex = ResourceManager::Find<Texture>(L"King_Dedede_Stage_Pixel");
+		else if (CurSceneName == L"Level6_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"Daroach_Pixel");
 		else
 			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
@@ -279,6 +279,7 @@ namespace sy
 
 		if (CurSceneName == L"AbilityTestScene"
 			|| CurSceneName == L"King_Dedede_Stage_Pixel"
+			|| CurSceneName == L"Daroach_Pixel"
 			|| CurSceneName == L"Level1_Stage1Scene")
 		{
 			offset = Vector2::Zero;

@@ -364,6 +364,24 @@
     <Filter Include="Contents\Scene\StageScene\Level6\Boss">
       <UniqueIdentifier>{96c9ded9-8318-476e-bcc3-bf60b8ee3034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach">
+      <UniqueIdentifier>{9747f0f8-6231-44f4-90f4-6d919dad15e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach\Daroach_Boom">
+      <UniqueIdentifier>{443dc858-9f39-4910-8e18-89475003af36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach\Daroach_TimeBoom">
+      <UniqueIdentifier>{0dddc2d0-a4cf-4d36-86c0-64e11265df5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach\Daroach_Star">
+      <UniqueIdentifier>{fbe23aa3-374d-451c-9628-30114e181b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach\Daroach_Energe">
+      <UniqueIdentifier>{8b6df1f6-6e79-4537-bbad-d0e93a51dd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\Daroach\Daroach_Charge_Energe">
+      <UniqueIdentifier>{60acc2f5-171c-4b5d-ae79-9baaafd3966c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -687,6 +705,9 @@
     <ClInclude Include="syLevel6_BossScene.h">
       <Filter>Contents\Scene\StageScene\Level6\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="syDaroach.h">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1000,6 +1021,9 @@
     </ClCompile>
     <ClCompile Include="syLevel6_BossScene.cpp">
       <Filter>Contents\Scene\StageScene\Level6\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="syDaroach.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

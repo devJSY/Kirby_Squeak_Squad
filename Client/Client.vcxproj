@@ -154,6 +154,7 @@
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
     <ClInclude Include="syCutterKirby.h" />
+    <ClInclude Include="syDaroach.h" />
     <ClInclude Include="syDash_Effect.h" />
     <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syCrimp_Skill.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
     <ClCompile Include="syCutterKirby.cpp" />
+    <ClCompile Include="syDaroach.cpp" />
     <ClCompile Include="syDash_Effect.cpp" />
     <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syCrimp_Skill.cpp" />

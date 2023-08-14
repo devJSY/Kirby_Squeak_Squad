@@ -60,7 +60,7 @@ namespace sy
 		BgRenderer->SetTexture(tex);
 
 		// 픽셀 이미지 로드
-		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Daroach_Stage_Pixel"
+		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Daroach_Pixel"
 			, L"..\\Resources\\Map\\Foreground\\Daroach_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
@@ -130,7 +130,6 @@ namespace sy
 		playerAni->SetAffectedCamera(true);
 		Collider* playerCol = player->GetComponent<Collider>();
 		playerCol->SetAffectedCamera(true);
-		//playerCol->SetSize(Vector2(50.f, 50.f));
 		player->SetPlayerMode(ePlayerMode::PlayMode);
 		playerTrans->SetDirection(eDirection::RIGHT);
 
