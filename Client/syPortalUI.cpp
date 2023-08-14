@@ -70,6 +70,10 @@ namespace sy
 			{
 				SceneManager::LoadScene(L"LevelSelectScene");
 			}
+			else if (SceneName == L"Level6_BossScene")
+			{
+				SceneManager::LoadScene(L"IceIslandScene");
+			}
 
 			mbSceneChange = false;
 			Camera::fadeIn(0.5f, RGB(255, 255, 255));

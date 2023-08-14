@@ -111,7 +111,7 @@ namespace sy
 				Stage1();
 				break;
 			case eStageState::Boss:
-				StageBoss();
+				Boss();
 				break;
 			default:
 				break;
@@ -425,7 +425,8 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			Vector2 vec = Vector2(35.f, 70.f);
+			Vector2 vec = ExitUI->GetComponent<Transform>()->GetPosition();
+			vec.y -= 10.f;
 
 			Player* player = SceneManager::GetPlayer();
 			Transform* playerTrans = player->GetComponent<Transform>();
@@ -458,7 +459,7 @@ namespace sy
 		}
 	}
 
-	void PrismPlainsScene::StageBoss()
+	void PrismPlainsScene::Boss()
 	{
 		if (Input::GetKeyDown(eKeyCode::LEFT) || Input::GetKeyDown(eKeyCode::DOWN))
 		{

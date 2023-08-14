@@ -53,20 +53,20 @@ namespace sy
 		mAnimator->SetBmpRGB(L"Eight", 0,128,0);
 		mAnimator->SetBmpRGB(L"Ex", 0,128,0);
 		mAnimator->SetBmpRGB(L"QuestionMark", 0,128,0);
+		mAnimator->SetBmpRGB(L"D", 0,128,0);
 
 		mAnimator->SetBmpRGB(L"Number_Dedede", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_MsMorey", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_Kracko", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_4", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_5", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_6", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_7", 0,128,0);
-		mAnimator->SetBmpRGB(L"Number_8", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_MrsMoley", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_MechaKracko", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_Yadgaine", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_Bohboh", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_Daroach", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_MetaKnight", 0,128,0);
+		mAnimator->SetBmpRGB(L"Number_DarkNebula", 0,128,0);
 		mAnimator->SetBmpRGB(L"Number_9", 0,128,0);
 
 
 		mAnimator->SetAffectedCamera(false);
-		//mAnimator->PlayAnimation(L"One");		
 
 		UI::Initialize();
 	}

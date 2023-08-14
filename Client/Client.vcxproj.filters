@@ -361,6 +361,9 @@
     <Filter Include="Contents\GameObject\Effects\Star_Effect">
       <UniqueIdentifier>{3a6248fe-f825-4c99-91bd-a9fd62636c37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level6\Boss">
+      <UniqueIdentifier>{96c9ded9-8318-476e-bcc3-bf60b8ee3034}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -681,6 +684,9 @@
     <ClInclude Include="syStar_Effect.h">
       <Filter>Contents\GameObject\Effects\Star_Effect</Filter>
     </ClInclude>
+    <ClInclude Include="syLevel6_BossScene.h">
+      <Filter>Contents\Scene\StageScene\Level6\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -991,6 +997,9 @@
     </ClCompile>
     <ClCompile Include="syStar_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Star_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="syLevel6_BossScene.cpp">
+      <Filter>Contents\Scene\StageScene\Level6\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -25,23 +25,23 @@ namespace sy
 
 		void StageExit();
 		void Stage1();
-		void StageBoss();
+		void Boss();
 
 	private:
-		eLevelType mLevelType;
-		class Level_BG* mlevelBG;
+		eLevelType					mLevelType;
+		class Level_BG*				mlevelBG;
 
-		bool mbActiveUI[7];					
-		class UI* ExitUI;
-		class StepUI* mStepUI[7];
-		class StarUI* mStarUI[7];
-		class NumberUI* mNumberUI[7];
+		bool						 mbActiveUI[7];					
+		class UI*					 ExitUI;
+		class StepUI*				 mStepUI[7];
+		class StarUI*				 mStarUI[7];
+		class NumberUI*				 mNumberUI[7];
 
-		std::vector<class DotUI*> mDots[7];
-		eStageState mCurStageState;
+		std::vector<class DotUI*>	 mDots[7];
+		eStageState					 mCurStageState;
 
-		float mEnterTime;
-		class Zoom_Effect* mZoom;
-		bool mbSceneChange;
+		float						 mEnterTime;
+		class Zoom_Effect*			 mZoom;
+		bool						 mbSceneChange;
 	};
 }

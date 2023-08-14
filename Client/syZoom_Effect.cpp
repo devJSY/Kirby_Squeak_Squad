@@ -4,6 +4,7 @@
 #include "syTransform.h"
 #include "syAnimator.h"
 #include "sySceneManager.h"
+#include "syPlayer.h"
 
 namespace sy
 {

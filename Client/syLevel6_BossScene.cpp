@@ -1,4 +1,4 @@
-#include "syLevel1_BossScene.h"
+#include "syLevel6_BossScene.h"
 #include "syObject.h"
 #include "syGameObject.h"
 #include "sySpriteRenderer.h"
@@ -29,44 +29,39 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
-#include "syPrismPlainsScene.h"
-#include "syKingDedede.h"
+#include "syIceIslandScene.h"
 
 
 namespace sy
 {
-	Level1_BossScene::Level1_BossScene()
+	Level6_BossScene::Level6_BossScene()
 		: mPixelBG(nullptr)
-		, mKingDedede(nullptr)
 		, mPortalUI(nullptr)
 	{
 	}
 
-	Level1_BossScene::~Level1_BossScene()
+	Level6_BossScene::~Level6_BossScene()
 	{
 	}
 
-	void Level1_BossScene::Initialize()
+	void Level6_BossScene::Initialize()
 	{
 		// 보스 생성
-		mKingDedede = new KingDedede(eAbilityType::Normal);
-		object::ActiveSceneAddGameObject(eLayerType::Enemy, mKingDedede);
-		mKingDedede->GetComponent<Transform>()->SetPosition(Vector2(210.f, 150.f));
+
 
 		// 백그라운드 설정
-		Texture* tex = ResourceManager::Load<Texture>(L"King_Dedede_Stage", L"..\\Resources\\Map\\Stage\\King_Dedede_Stage.png"); // 이미지 설정
+		Texture* tex = ResourceManager::Load<Texture>(L"Daroach_Stage", L"..\\Resources\\Map\\Foreground\\Daroach.bmp"); // 이미지 설정
 
 		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
 		Bg->GetComponent<Transform>()->SetPosition(Vector2(128.f, 96.f));
-		Animator* animator = Bg->AddComponent<Animator>();
-		animator->SetAffectedCamera(true);
-		animator->CreateAnimation(tex, L"King_Dedede_Stage", Vector2(8.f, 108.f), Vector2(256.f, 192.f), Vector2(261.f, 0.f), 0.05f, 4);
-		animator->SetBmpRGB(L"King_Dedede_Stage", 0, 0, 100);
-		animator->PlayAnimation(L"King_Dedede_Stage", true);
+
+		SpriteRenderer* BgRenderer = Bg->AddComponent<SpriteRenderer>();
+		BgRenderer->SetAffectedCamera(true);
+		BgRenderer->SetTexture(tex);
 
 		// 픽셀 이미지 로드
-		Texture* Pixeltex = ResourceManager::Load<Texture>(L"King_Dedede_Stage_Pixel"
-			, L"..\\Resources\\Map\\Foreground\\King_Dedede_Stage_Pixel.bmp");
+		Texture* Pixeltex = ResourceManager::Load<Texture>(L"Daroach_Stage_Pixel"
+			, L"..\\Resources\\Map\\Foreground\\Daroach_Pixel.bmp");
 
 		mPixelBG = object::Instantiate<BackGround>(eLayerType::Pixel);
 		mPixelBG->GetComponent<Transform>()->SetPosition(Vector2(128.f, 96.f)); // 중점 설정
@@ -77,18 +72,18 @@ namespace sy
 		PixelBgRenderer->SetRenderTrig(false);
 
 		// Sound Load
-		ResourceManager::Load<Sound>(L"BossSound", L"..\\Resources\\Sound\\Theme\\Boss.wav");
+		ResourceManager::Load<Sound>(L"Level6BossSound", L"..\\Resources\\Sound\\Theme\\Level6Boss.wav");
 		ResourceManager::Load<Sound>(L"BossClearSound", L"..\\Resources\\Sound\\Theme\\BossClear.wav");
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
 	}
 
-	void Level1_BossScene::Update()
+	void Level6_BossScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			SceneManager::LoadScene(L"PrismPlainsScene");
+			SceneManager::LoadScene(L"IceIslandScene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -101,31 +96,31 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		if (mKingDedede->GetKingDededeState() == eKingDededeState::Dead)
-		{
-			// Portal
-			if (mPortalUI == nullptr)
-			{
-				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
-				mPortalUI->Initialize();
+		//if (mKingDedede->GetKingDededeState() == eKingDededeState::Dead)
+		//{
+		//	// Portal
+		//	if (mPortalUI == nullptr)
+		//	{
+		//		mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
+		//		mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
+		//		mPortalUI->Initialize();
 
-				// 오디오 재생
-				ResourceManager::Find<Sound>(L"BossSound")->Stop(true);
-				// 오디오 재생
-				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
-			}
-		}
+		//		// 오디오 재생
+		//		ResourceManager::Find<Sound>(L"Level6BossSound")->Stop(true);
+		//		// 오디오 재생
+		//		ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
+		//	}
+		//}
 
 		Scene::Update();
 	}
 
-	void Level1_BossScene::Render(HDC hdc)
+	void Level6_BossScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
 	}
 
-	void Level1_BossScene::Enter()
+	void Level6_BossScene::Enter()
 	{
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
@@ -211,16 +206,16 @@ namespace sy
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
 		// 오디오 재생
-		ResourceManager::Find<Sound>(L"BossSound")->Play(true);
+		ResourceManager::Find<Sound>(L"Level6BossSound")->Play(true);
 	}
 
-	void Level1_BossScene::Exit()
+	void Level6_BossScene::Exit()
 	{
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
 
-		PrismPlainsScene* scene = dynamic_cast<PrismPlainsScene*>(SceneManager::GetScene(L"PrismPlainsScene"));
+		IceIslandScene* scene = dynamic_cast<IceIslandScene*>(SceneManager::GetScene(L"IceIslandScene"));
 		scene->SetClearActiveUI(eStageState::Boss);	 // 보스 스테이지 클리어 처리
 	}
 }
