@@ -10,6 +10,8 @@
 #include "sySceneManager.h"
 #include "syPlayer.h"
 #include "syInput.h"
+#include "syDaroach_Charge_Energe.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -110,7 +112,6 @@ namespace sy
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Daroach_Teleport", L"..\\Resources\\Sound\\Effect\\Daroach\\Teleport.wav");
 
-
 		Enemy::Initialize();
 	}
 
@@ -166,6 +167,8 @@ namespace sy
 
 			mState = eDaroachState::Teleport;
 			mStateChangeDelay = 0.f;
+
+			ResourceManager::Find<Sound>(L"Daroach_Teleport")->Play(false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Four))
@@ -381,6 +384,8 @@ namespace sy
 					mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
 
 				mState = eDaroachState::Teleport;
+
+				ResourceManager::Find<Sound>(L"Daroach_Teleport")->Play(false);
 			}
 			else if (randomNumber == 3)
 			{
@@ -428,6 +433,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_WandCharge", true);
 
 			mState = eDaroachState::WandCharge;
+
+			Daroach_Charge_Energe* energe = new Daroach_Charge_Energe(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, energe);
 		}
 	}
 
@@ -528,7 +536,6 @@ namespace sy
 
 			mState = eDaroachState::TeleportEnd;
 
-
 			int randomPos = std::rand() % 6;
 			mTransform->SetPosition(FixedPos[randomPos]);
 		}
@@ -570,6 +577,8 @@ namespace sy
 					mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
 
 				mState = eDaroachState::Teleport;
+
+				ResourceManager::Find<Sound>(L"Daroach_Teleport")->Play(false);
 			}
 			else
 			{
