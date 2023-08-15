@@ -22,7 +22,6 @@ namespace sy
 		MonsterSummonDrop,
 		MonsterSummon,
 		Damage,
-		DeadJump,
 		Dead,
 		End,
 	};
@@ -75,7 +74,6 @@ namespace sy
 		void MonsterSummonDrop();
 		void MonsterSummon();
 		void Damage();
-		void DeadJump();
 		void Dead();
 
 	private:

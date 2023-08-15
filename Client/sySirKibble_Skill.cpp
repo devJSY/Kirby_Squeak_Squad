@@ -3,10 +3,11 @@
 #include "syResourceManager.h"
 #include "syAnimator.h"
 #include "syCollider.h"
+#include "sySirKibble.h"
 
 namespace sy
 {
-	SirKibble_Skill::SirKibble_Skill(GameObject* owner)
+	SirKibble_Skill::SirKibble_Skill(SirKibble* owner)
 		: Effects(owner)
 	{
 		Collider* col = AddComponent<Collider>();

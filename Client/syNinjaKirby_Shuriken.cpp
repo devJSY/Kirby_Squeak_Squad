@@ -257,6 +257,7 @@ namespace sy
 		if (mStuckTarget != nullptr)
 		{
 			Vector2 pos = mStuckTarget->GetComponent<Transform>()->GetPosition();
+
 			pos -= mStuckOffset;
 			mTransform->SetPosition(pos);
 		}

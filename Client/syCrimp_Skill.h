@@ -5,8 +5,11 @@ namespace sy
 {
     class CrimpSkill : public Effects
     {
-    public:
-        CrimpSkill(GameObject* owner);
+        // Crimp 에서만 생성가능
+        friend class Crimp;
+
+    private:
+        CrimpSkill(Crimp* owner);
         virtual ~CrimpSkill();
 
         virtual void Initialize();

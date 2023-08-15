@@ -3,14 +3,16 @@
 
 namespace sy
 {
-	class SirKibble_Skill : public Effects
+    class Daroach;
+
+	class Daroach_Charge_Energe : public Effects
 	{
-        // SirKibble 에서만 생성가능
-        friend class SirKibble;
+        // Daroach 에서만 생성가능
+        friend class Daroach;
 
     private:
-        SirKibble_Skill(SirKibble* owner);
-        virtual ~SirKibble_Skill();
+        Daroach_Charge_Energe(Daroach* owner);
+        virtual ~Daroach_Charge_Energe();
 
         virtual void Initialize();
         virtual void Update();
@@ -19,9 +21,6 @@ namespace sy
         virtual void OnCollisionEnter(class Collider* other);
         virtual void OnCollisionStay(class Collider* other);
         virtual void OnCollisionExit(class Collider* other);
-    
-    private:
 	};
 }
-
 

@@ -5,8 +5,11 @@ namespace sy
 {
 	class HotHead_Fire : public Effects
 	{
-    public:
-        HotHead_Fire(GameObject* owner);
+        // HotHead 에서만 생성가능
+        friend class HotHead;
+
+    private:
+        HotHead_Fire(HotHead* owner);
         virtual ~HotHead_Fire();
 
         virtual void Initialize();

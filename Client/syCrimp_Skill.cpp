@@ -7,10 +7,11 @@
 #include "syPlayer.h"
 #include "syTransform.h"
 #include "syRigidbody.h"
+#include "syCrimp.h"
 
 namespace sy
 {
-	CrimpSkill::CrimpSkill(GameObject* owner)
+	CrimpSkill::CrimpSkill(Crimp* owner)
 		: Effects(owner)
 		, mTransform(nullptr)
 		, mDuration(0.f)

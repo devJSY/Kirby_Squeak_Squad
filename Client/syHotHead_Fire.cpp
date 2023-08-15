@@ -10,7 +10,7 @@
 
 namespace sy
 {
-	HotHead_Fire::HotHead_Fire(GameObject* owner)
+	HotHead_Fire::HotHead_Fire(HotHead* owner)
 		: Effects(owner)
 		, mTransform(nullptr)
 		, mDir()

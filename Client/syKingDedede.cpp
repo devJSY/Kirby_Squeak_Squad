@@ -105,9 +105,6 @@ namespace sy
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Damage", Vector2(768.f, 2048.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_DeadJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_DeadJump", Vector2(0.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 1, Animationoffset);
-
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Dead", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Dead", Vector2(256.f, 2304.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 2, Animationoffset);
 		
@@ -121,7 +118,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"BossRun", L"..\\Resources\\Sound\\Effect\\Dedede\\BossRun.wav");
 		ResourceManager::Load<Sound>(L"BossShout", L"..\\Resources\\Sound\\Effect\\Dedede\\BossShout.wav");
 		ResourceManager::Load<Sound>(L"BossWalk", L"..\\Resources\\Sound\\Effect\\Dedede\\BossWalk.wav");
-
+		
 		Enemy::Initialize();
 	}
 
@@ -186,9 +183,6 @@ namespace sy
 		case eKingDededeState::Damage:
 			Damage();
 			break;
-		case eKingDededeState::DeadJump:
-			DeadJump();
-			break;
 		case eKingDededeState::Dead:
 			Dead();
 			break;
@@ -231,6 +225,11 @@ namespace sy
 		mStateChangeDelay = 0.f;
 		mState = eKingDededeState::Damage;
 		mRigidBody->SetFloat(false);
+
+		// 사운드 정지
+		ResourceManager::Find<Sound>(L"BossWalk")->Stop(true);
+		ResourceManager::Find<Sound>(L"BossRun")->Stop(true);
+		ResourceManager::Find<Sound>(L"BossDrop")->Stop(true);
 
 		if (HitDir.x < 0.f)
 		{
@@ -504,6 +503,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_Walk", true);
 
 				mState = eKingDededeState::Walk;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossWalk")->Play(true);
 			}
 			else if (randomNumber == 1)
 			{
@@ -513,6 +515,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
 
 				mState = eKingDededeState::JumpReady;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			}
 			else if (randomNumber == 2)
 			{
@@ -522,6 +527,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_AttackReady", false);
 
 				mState = eKingDededeState::AttackReady;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			}
 			else if (randomNumber == 3)
 			{
@@ -531,6 +539,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
 
 				mState = eKingDededeState::FlyReady;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			}
 			else if (randomNumber == 4)
 			{
@@ -540,6 +551,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
 
 				mState = eKingDededeState::MonsterSummonReady;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			}
 		}
 	}
@@ -570,6 +584,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
 
 			mState = eKingDededeState::Idle;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossWalk")->Stop(true);
 		}
 	}
 
@@ -629,6 +646,9 @@ namespace sy
 
 			AddStarEffect(eDirection::RIGHT);
 			AddStarEffect(eDirection::LEFT);
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossDrop")->Play(false);
 		}
 	}
 
@@ -651,6 +671,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_Attack", false);
 
 				mState = eKingDededeState::Attack;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossAttack")->Play(false);
 			}
 			else
 			{
@@ -660,6 +683,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_AttackRun", true);
 
 				mState = eKingDededeState::AttackRun;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossRun")->Play(true);
 			}
 		}
 	}
@@ -689,6 +715,12 @@ namespace sy
 
 			mState = eKingDededeState::Attack;
 			mStateChangeDelay = 0.f;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossAttack")->Play(false);
+
+			// 사운드 정지
+			ResourceManager::Find<Sound>(L"BossRun")->Stop(true);
 		}
 	}
 
@@ -817,6 +849,9 @@ namespace sy
 
 			mState = eKingDededeState::Idle;
 			mRigidBody->SetVelocity(Vector2::Zero);
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossDrop")->Play(false);
 		}
 	}
 
@@ -861,6 +896,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummon", false);
 
 			mState = eKingDededeState::MonsterSummon;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossAttack")->Play(false);
 		}
 	}
 
@@ -871,6 +909,7 @@ namespace sy
 			if (mDir == eDirection::RIGHT)
 			{
 				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				mState = eKingDededeState::Idle;
 				AddStarEffect(eDirection::RIGHT);
 
 				Vector2 pos = mTransform->GetPosition();
@@ -915,6 +954,9 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_Dead", false);
 
 				mState = eKingDededeState::Dead;
+
+				// 사운드 재생
+				ResourceManager::Find<Sound>(L"BossDeath")->Play(false);
 			}
 			else
 			{
@@ -926,10 +968,6 @@ namespace sy
 				mState = eKingDededeState::Idle;
 			}
 		}
-	}
-
-	void KingDedede::DeadJump()
-	{
 	}
 
 	void KingDedede::Dead()
