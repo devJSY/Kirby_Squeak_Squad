@@ -120,6 +120,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_BombAttackReady", false);
 
 			mState = eDaroachState::BombAttackReady;
+			mStateChangeDelay = 0.f;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Two))
@@ -130,6 +131,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_WandUp", false);
 
 			mState = eDaroachState::WandUp;
+			mStateChangeDelay = 0.f;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Three))
@@ -140,6 +142,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
 
 			mState = eDaroachState::Teleport;
+			mStateChangeDelay = 0.f;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Four))
@@ -150,6 +153,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_StarAttack", false);
 
 			mState = eDaroachState::StarAttack;
+			mStateChangeDelay = 0.f;
 		}
 
 		switch (mState)
@@ -317,9 +321,20 @@ namespace sy
 
 	void Daroach::WandCharge()
 	{
-		// 플레이어 방향을 바라보도록 설정
+		// 플레이어 y축 따라 가도록 설정
 		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+		Dir.Normalize();
+		Dir.y *= 50.f * Time::DeltaTime();
+		Vector2 pos = mTransform->GetPosition();
+		pos.y += Dir.y;
+		mTransform->SetPosition(pos);
+
+
+		// 플레이어 방향을 바라보도록 설정
+		PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Dir = PlayerPos - mTransform->GetPosition();
 		if (Dir.x > 0.f)
 		{
 			if (mDir == eDirection::LEFT)
@@ -356,16 +371,6 @@ namespace sy
 
 	void Daroach::WandAttack()
 	{
-		// 플레이어 y축 따라가야함
-
-
-
-
-
-
-
-
-
 		mStateChangeDelay += Time::DeltaTime();
 
 		if (mStateChangeDelay > 3.f)
@@ -419,16 +424,54 @@ namespace sy
 
 	void Daroach::TeleportEnd()
 	{
+		static int TeleportCount = 0;
+
 		if (mAnimator->IsActiveAnimationComplete())
 		{
-			mStateChangeDelay = 0.f;
+			if (TeleportCount < 2)
+			{
+				// 플레이어 방향을 바라보도록 설정
+				Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+				Vector2 Dir = PlayerPos - mTransform->GetPosition();
+				if (Dir.x > 0.f)
+				{
+					if (mDir == eDirection::LEFT)
+					{
+						mTransform->SetDirection(eDirection::RIGHT);
+						mDir = eDirection::RIGHT;
+					}
+				}
+				else
+				{
+					if (mDir == eDirection::RIGHT)
+					{
+						mTransform->SetDirection(eDirection::LEFT);
+						mDir = eDirection::LEFT;
+					}
+				}
 
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"Daroach_Right_Idle", true);
+				TeleportCount++;
+
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"Daroach_Right_Teleport", false);
+				else
+					mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
+
+				mState = eDaroachState::Teleport;
+			}
 			else
-				mAnimator->PlayAnimation(L"Daroach_Left_Idle", true);
+			{
+				TeleportCount = 0;
 
-			mState = eDaroachState::Idle;
+				mStateChangeDelay = 0.f;
+
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"Daroach_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"Daroach_Left_Idle", true);
+
+				mState = eDaroachState::Idle;
+			}
 		}
 	}
 
