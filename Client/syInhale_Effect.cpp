@@ -105,9 +105,15 @@ namespace sy
 			&& enemy == nullptr)
 			return;
 
-		// 흡수한 오브젝트가 Enemy인경우 Dead상태인지 체크
-		if (enemy != nullptr && enemy->IsDeadState())
-			return;
+		// 흡수한 오브젝트가 Enemy인경우
+		if (enemy != nullptr)
+		{
+			if (enemy->IsDeadState() || enemy->GetCurHP() <= 0.f)
+			{
+				return;
+			}
+		}
+			
 
 		mInhaledObject.push_back(other->GetOwner());
 	}

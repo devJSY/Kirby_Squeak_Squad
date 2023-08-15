@@ -6,6 +6,7 @@
 #include "syTransform.h"
 #include "syPlayer.h"
 #include "syCollider.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -35,15 +36,19 @@ namespace sy
 
 		animator->CreateAnimation(Daroach_Left_Energe_Tex, L"Daroach_Left_Energe", Vector2::Zero, Vector2(250.f, 16.f), Vector2(250.f, 0.f), 0.05f, 4);
 		animator->CreateAnimation(Daroach_Right_Energe_Tex, L"Daroach_Right_Energe", Vector2::Zero, Vector2(250.f, 16.f), Vector2(250.f, 0.f), 0.05f, 4);
-		
+
 		if (mDir == eDirection::RIGHT)
 			animator->PlayAnimation(L"Daroach_Right_Energe", true);
 		else
-			animator->PlayAnimation(L"Daroach_Left_Energe", true);		
+			animator->PlayAnimation(L"Daroach_Left_Energe", true);
+	
+		// Sound Load
+		ResourceManager::Load<Sound>(L"Daroach_IceSkill", L"..\\Resources\\Sound\\Effect\\Daroach\\IceSkill.wav")->Play(true);	
 	}
 
 	Daroach_Energe::~Daroach_Energe()
 	{
+		ResourceManager::Find<Sound>(L"Daroach_IceSkill")->Stop(true);
 	}
 
 	void Daroach_Energe::Initialize()
