@@ -36,7 +36,10 @@ namespace sy
 
 	Inhale_Effect::~Inhale_Effect()
 	{
-
+		if (mTarget != nullptr)
+		{
+			Destroy(mTarget);
+		}
 	}
 
 	void Inhale_Effect::Initialize()

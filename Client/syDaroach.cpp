@@ -12,6 +12,7 @@
 #include "syInput.h"
 #include "syDaroach_Charge_Energe.h"
 #include "syObject.h"
+#include "syDaroach_Energe.h"
 
 namespace sy
 {
@@ -486,6 +487,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_WandAttack", true);
 
 			mState = eDaroachState::WandAttack;
+
+			Daroach_Energe* energe = new Daroach_Energe(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, energe);
 		}
 	}
 

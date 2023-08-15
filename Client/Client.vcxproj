@@ -157,6 +157,7 @@
     <ClInclude Include="syCutterKirby.h" />
     <ClInclude Include="syDaroach.h" />
     <ClInclude Include="syDaroach_Charge_Energe.h" />
+    <ClInclude Include="syDaroach_Energe.h" />
     <ClInclude Include="syDash_Effect.h" />
     <ClInclude Include="syDotUI.h" />
     <ClInclude Include="syCrimp_Skill.h" />
@@ -272,6 +273,7 @@
     <ClCompile Include="syCutterKirby.cpp" />
     <ClCompile Include="syDaroach.cpp" />
     <ClCompile Include="syDaroach_Charge_Energe.cpp" />
+    <ClCompile Include="syDaroach_Energe.cpp" />
     <ClCompile Include="syDash_Effect.cpp" />
     <ClCompile Include="syDotUI.cpp" />
     <ClCompile Include="syCrimp_Skill.cpp" />
