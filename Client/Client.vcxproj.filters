@@ -708,6 +708,9 @@
     <ClInclude Include="syDaroach.h">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach</Filter>
     </ClInclude>
+    <ClInclude Include="syBossEnemy.h">
+      <Filter>Contents\GameObject\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1024,6 +1027,9 @@
     </ClCompile>
     <ClCompile Include="syDaroach.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach</Filter>
+    </ClCompile>
+    <ClCompile Include="syBossEnemy.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

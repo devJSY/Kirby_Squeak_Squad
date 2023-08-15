@@ -23,7 +23,7 @@
 #include "syAbilityItem.h"
 #include "syLanding_Effect.h"
 #include "syPlayer.h"
-#include "syKingDedede.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -327,9 +327,9 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
-		// KingDedede 는 플레이어 충돌 무시
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(enemy);
-		if (kingDedede != nullptr)
+		// BossEnemy는 플레이어 충돌 무시
+		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
+		if (bossEnemy != nullptr)
 			return;
 
 		// 커비 → 몬스터 방향

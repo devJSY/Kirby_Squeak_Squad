@@ -22,7 +22,7 @@
 #include "syCollider.h"
 #include "syAbilityStar.h"
 #include "syTornado_Effect.h"
-#include "syKingDedede.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -287,9 +287,9 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
-		// KingDedede 는 플레이어 충돌 무시
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(enemy);
-		if (mState != eTornadoKirbyState::Skill && kingDedede != nullptr)
+		// BossEnemy는 플레이어 충돌 무시
+		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
+		if (bossEnemy != nullptr)
 			return;
 
 		// 커비 → 몬스터 방향

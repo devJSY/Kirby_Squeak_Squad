@@ -1,5 +1,5 @@
 #pragma once
-#include "syEnemy.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -33,7 +33,7 @@ namespace sy
 		Down,
 	};
 
-	class KingDedede : public Enemy
+	class KingDedede : public BossEnemy
 	{
 	public:
 		KingDedede(eAbilityType type);

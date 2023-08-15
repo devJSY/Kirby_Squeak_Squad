@@ -14,14 +14,16 @@
 namespace sy
 {
 	Daroach::Daroach(eAbilityType type)
-		: Enemy(type)
+		: BossEnemy(type)
 		, mState(eDaroachState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
+		, mRigidBody(nullptr)
 		, mCollider(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mStateChangeDelay(0.f)
 		, FixedPos{}
+		, mbDamaged(false)
 	{
 		FixedPos[0].x = 40.f;
 		FixedPos[0].y = 40.f;
@@ -57,9 +59,12 @@ namespace sy
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
+		mRigidBody = AddComponent<Rigidbody>();
 		mCollider = GetComponent<Collider>();
 		mCollider->SetSize(Vector2(40.f, 40.f));
 		//mCollider->SetOffset(Vector2(0.f, 0.f));
+
+		mRigidBody->SetGround(true);
 
 		mTransform->SetPosition(FixedPos[1]);
 
@@ -93,8 +98,8 @@ namespace sy
 		mAnimator->CreateAnimation_Offset(Daroach_Right_Tex, L"Daroach_Right_StarAttack", Vector2(1.f, 381.f), Vector2(100.f, 89.f), Vector2(100.f, 0.f), 0.1f, 8, Daroach_StarAttack_offset);
 		mAnimator->CreateAnimation_Offset(Daroach_Left_Tex, L"Daroach_Left_StarAttack", Vector2(719.f, 381.f), Vector2(100.f, 89.f), Vector2(-100.f, 0.f), 0.1f, 8, Daroach_StarAttack_offset);
 
-		mAnimator->CreateAnimation(Daroach_Right_Tex, L"Daroach_Right_Death", Vector2(170.f, 152.f), Vector2(71.f, 56.f), Vector2(71.f, 0.f), 2.5f, 1);
-		mAnimator->CreateAnimation(Daroach_Left_Tex, L"Daroach_Left_Death", Vector2(579.f, 152.f), Vector2(71.f, 56.f), Vector2(-71.f, 0.f), 2.5f, 1);
+		mAnimator->CreateAnimation(Daroach_Right_Tex, L"Daroach_Right_Dead", Vector2(170.f, 152.f), Vector2(71.f, 56.f), Vector2(71.f, 0.f), 2.5f, 1);
+		mAnimator->CreateAnimation(Daroach_Left_Tex, L"Daroach_Left_Dead", Vector2(579.f, 152.f), Vector2(71.f, 56.f), Vector2(-71.f, 0.f), 2.5f, 1);
 
 		mAnimator->CreateAnimation(Daroach_Right_Tex, L"Daroach_Right_End", Vector2(252.f, 159.f), Vector2(61.f, 44.f), Vector2(61.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(Daroach_Left_Tex, L"Daroach_Left_End", Vector2(507.f, 159.f), Vector2(61.f, 44.f), Vector2(-61.f, 0.f), 1.f, 1);
@@ -111,6 +116,24 @@ namespace sy
 
 	void Daroach::Update()
 	{
+		// 데미지 딜레이 설정
+		static float DamageDelayTime = 0.f;
+		if(mbDamaged)
+			DamageDelayTime += Time::DeltaTime();
+
+		if (DamageDelayTime > 1.f)
+		{
+			mbDamaged = false;
+			DamageDelayTime = 0.f;
+		}
+
+
+		// 방향 설정
+		mDir = mTransform->GetDirection();
+
+		// 픽셀충돌 체크
+		CheckPixelCollision();
+
 		// 테스트용 상태변경
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
@@ -185,9 +208,6 @@ namespace sy
 		case eDaroachState::StarAttack:
 			StarAttack();
 			break;
-		case eDaroachState::Damage:
-			Damage();
-			break;
 		case eDaroachState::Dead:
 			Dead();
 			break;
@@ -209,6 +229,88 @@ namespace sy
 
 	void Daroach::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		Damaged(DamageAmount);
+
+		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
+		if (mbDamaged || mState == eDaroachState::Dead)
+			return;
+
+		mStateChangeDelay = 0.f;
+		mbDamaged = true;
+	}
+
+	void Daroach::CheckPixelCollision()
+	{
+		std::wstring CurSceneName = SceneManager::GetActiveScene()->GetName();
+
+		Texture* PixelTex = nullptr;
+
+		// Stage타입에따라 픽셀텍스쳐 변경하기
+		if (CurSceneName == L"AbilityTestScene")
+			PixelTex = ResourceManager::Find<Texture>(L"AbilityTest_Pixel");
+		else if (CurSceneName == L"Level1_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"King_Dedede_Stage_Pixel");
+		else if (CurSceneName == L"Level6_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"Daroach_Pixel");
+		else
+			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
+
+		if (PixelTex == nullptr)
+			return;
+
+		// Offset 픽셀 좌상단위치 설정
+		Vector2 offset = Vector2::Zero;
+
+		if (CurSceneName == L"AbilityTestScene"
+			|| CurSceneName == L"King_Dedede_Stage_Pixel"
+			|| CurSceneName == L"Daroach_Pixel"
+			|| CurSceneName == L"Level1_Stage1Scene")
+		{
+			offset = Vector2::Zero;
+		}
+		else if (CurSceneName == L"Level1_Stage2Scene")
+		{
+			offset = Vector2(0, 347.f);
+		}
+		else if (CurSceneName == L"Level1_Stage3Scene")
+		{
+			offset = Vector2(0, 679.f);
+		}
+		else if (CurSceneName == L"Level1_Stage4Scene")
+		{
+			offset = Vector2(1603.f, 137.f);
+		}
+
+		Collider* col = GetComponent<Collider>();
+		Vector2 ColPos = col->GetPosition();
+		Vector2 ColSize = col->GetSize();
+
+		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
+		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+
+		LT += offset;
+		RT += offset;
+		LB += offset;
+		RB += offset;
+
+		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
+		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);
+		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
+		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
+
+
+		// 바닥 처리
+		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
+			|| LBColor == RGB(255, 0, 0) || RBColor == RGB(255, 0, 0))
+		{
+			// 이동
+			Vector2 pos = mTransform->GetPosition();
+			pos.y -= 1.f;
+			mTransform->SetPosition(pos);
+			mRigidBody->SetGround(true);			
+		}
 	}
 
 	void Daroach::Idle()
@@ -490,11 +592,8 @@ namespace sy
 		}
 	}
 
-	void Daroach::Damage()
-	{
-	}
-
 	void Daroach::Dead()
 	{
+		
 	}
 }

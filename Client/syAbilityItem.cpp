@@ -125,7 +125,7 @@ namespace sy
 		Inventory* inventory = SceneManager::GetInventory();
 		if (inventory->IsFullSlot())
 		{
-			// 스킬 → 몬스터 방향
+			// 스킬 → 몬스터 방향S
 			Vector2 Dir = GetComponent<Transform>()->GetPosition() - other->GetOwner()->GetComponent<Transform>()->GetPosition();
 			Dir.Normalize();
 			Dir *= 30.f;

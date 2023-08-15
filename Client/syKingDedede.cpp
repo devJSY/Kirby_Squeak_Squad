@@ -17,7 +17,7 @@
 namespace sy
 {
 	KingDedede::KingDedede(eAbilityType type)
-		: Enemy(type)
+		: BossEnemy(type)
 		, mState(eKingDededeState::Idle)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)

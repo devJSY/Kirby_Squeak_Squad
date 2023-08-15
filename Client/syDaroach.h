@@ -1,5 +1,5 @@
 #pragma once
-#include "syEnemy.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -14,12 +14,11 @@ namespace sy
 		Teleport,
 		TeleportEnd,
 		StarAttack,
-		Damage,
 		Dead,
 		End,
 	};
 
-	class Daroach : public Enemy
+	class Daroach : public BossEnemy
 	{
 	public:
 		Daroach(eAbilityType type);
@@ -34,13 +33,13 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
-		virtual bool IsDamagedState() { return mState == eDaroachState::Damage; }
+		virtual bool IsDamagedState() { return mbDamaged; }
 		virtual bool IsDeadState() { return mState == eDaroachState::Dead; }
 
 		eDaroachState GetDaroachState() { return mState; }
 
 	private:
-
+		void CheckPixelCollision();
 
 	private:
 		void Idle();
@@ -52,17 +51,18 @@ namespace sy
 		void Teleport();
 		void TeleportEnd();
 		void StarAttack();
-		void Damage();
 		void Dead();
 
 	private:
 		eDaroachState			 mState;
 		class Animator*			 mAnimator;
 		class Transform*		 mTransform;
+		class Rigidbody*		 mRigidBody;
 		class Collider*			 mCollider;
 		eDirection				 mDir;
 
 		float					 mStateChangeDelay;
 		Vector2					 FixedPos[6];
+		bool					 mbDamaged; // 연속 피격 방지
 	};
 }

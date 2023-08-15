@@ -11,7 +11,7 @@
 #include "syIce_Enemy.h"
 #include "sySceneManager.h"
 #include "syRigidbody.h"
-#include "syKingDedede.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -140,9 +140,9 @@ namespace sy
 			enemy->SetHPBarUIRenderTrig(true);
 		}
 
-		// KingDedede는 이동 적용하지않음
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
-		if (kingDedede != nullptr)
+		// BossEnemy는 이동 적용하지않음
+		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
+		if (bossEnemy != nullptr)
 			return;
 
 		// 이동
