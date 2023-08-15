@@ -178,14 +178,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::T))
 		{
-			SetClearActiveUI(eLevelState::Level1);
-			SetClearActiveUI(eLevelState::Level2);
-			SetClearActiveUI(eLevelState::Level3);
-			SetClearActiveUI(eLevelState::Level4);
-			SetClearActiveUI(eLevelState::Level5);
-			SetClearActiveUI(eLevelState::Level6);
-			SetClearActiveUI(eLevelState::Level7);
-			SetClearActiveUI(eLevelState::Level8);
+			SetClearActiveUI(mCurLevelState);
 		}
 
 		// 임시로 키입력으로 UI 활성화

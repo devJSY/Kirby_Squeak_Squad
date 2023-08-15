@@ -159,6 +159,7 @@
     <ClInclude Include="syDaroach_Bomb.h" />
     <ClInclude Include="syDaroach_Charge_Energe.h" />
     <ClInclude Include="syDaroach_Energe.h" />
+    <ClInclude Include="syDaroach_Star.h" />
     <ClInclude Include="syDaroach_TimeBomb.h" />
     <ClInclude Include="syDash_Effect.h" />
     <ClInclude Include="syDotUI.h" />
@@ -277,6 +278,7 @@
     <ClCompile Include="syDaroach_Bomb.cpp" />
     <ClCompile Include="syDaroach_Charge_Energe.cpp" />
     <ClCompile Include="syDaroach_Energe.cpp" />
+    <ClCompile Include="syDaroach_Star.cpp" />
     <ClCompile Include="syDaroach_TimeBomb.cpp" />
     <ClCompile Include="syDash_Effect.cpp" />
     <ClCompile Include="syDotUI.cpp" />

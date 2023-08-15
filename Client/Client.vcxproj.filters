@@ -723,6 +723,9 @@
     <ClInclude Include="syDaroach_TimeBomb.h">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_TimeBoom</Filter>
     </ClInclude>
+    <ClInclude Include="syDaroach_Star.h">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Star</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1054,6 +1057,9 @@
     </ClCompile>
     <ClCompile Include="syDaroach_TimeBomb.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_TimeBoom</Filter>
+    </ClCompile>
+    <ClCompile Include="syDaroach_Star.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Star</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

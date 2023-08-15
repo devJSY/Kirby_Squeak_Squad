@@ -251,7 +251,6 @@ namespace sy
 			mState = eDaroachState::Dead;
 		}
 
-		mStateChangeDelay = 0.f;
 		mbDamaged = true;
 	}
 
@@ -356,7 +355,7 @@ namespace sy
 		// 惑怕贸府
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 1.f)
+		if (mStateChangeDelay > 0.1f)
 		{
 			mStateChangeDelay = 0.f;
 
@@ -413,23 +412,18 @@ namespace sy
 
 			mState = eDaroachState::BombAttack;
 
-
-			Daroach_TimeBomb* bomb = new Daroach_TimeBomb(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
-
-
-			//// Bomb 罚待 积己
-			//int randomNumber = std::rand() % 100;
-			//if (randomNumber % 2 == 0)
-			//{
-			//	Daroach_Bomb* bomb = new Daroach_Bomb(this);
-			//	object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
-			//}
-			//else
-			//{
-			//	Daroach_TimeBomb* bomb = new Daroach_TimeBomb(this);
-			//	object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
-			//}
+			// Bomb 罚待 积己
+			int randomNumber = std::rand() % 100;
+			if (randomNumber % 2 == 0)
+			{
+				Daroach_Bomb* bomb = new Daroach_Bomb(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
+			}
+			else
+			{
+				Daroach_TimeBomb* bomb = new Daroach_TimeBomb(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
+			}
 		}
 	}
 

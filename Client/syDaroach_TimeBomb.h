@@ -39,11 +39,11 @@ namespace sy
 
     private:
         eDaroachTimeBombState   mState;
-        class Transform*    mTransform;
-        class Animator*     mAnimator;
-        class Collider*     mCollider;
-        class Rigidbody*    mRigidBody;
-        float               mDuration;
+        class Transform*        mTransform;
+        class Animator*         mAnimator;
+        class Collider*         mCollider;
+        class Rigidbody*        mRigidBody;
+        float                   mDuration;
     };
 }
 
