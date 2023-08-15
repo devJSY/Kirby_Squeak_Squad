@@ -43,14 +43,17 @@ namespace sy
 		mCollider->SetRadius(15.f);
 
 		Dir.Normalize();
-		Dir *= 100.f;
+		Dir *= 200.f;
 		mRigidBody->SetVelocity(Dir);
 		mRigidBody->SetFriction(0.f);
 		mRigidBody->SetFloat(true);
 
 		// 局聪皋捞记 积己
 		Texture* Daroach_Star_Tex = ResourceManager::Load<Texture>(L"Daroach_Star_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Star.bmp");
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+		
 		mAnimator->CreateAnimation(Daroach_Star_Tex, L"Daroach_Star", Vector2::Zero, Vector2(50.f, 50.f), Vector2(50.f, 0.f), 0.05f, 8);
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"Daroach_Star_Death", Vector2(0.f, 0.f), Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 		mAnimator->PlayAnimation(L"Daroach_Star", true);
 	}
 
@@ -71,8 +74,15 @@ namespace sy
 
 		if (mDuration > 5.f)
 		{
+			mAnimator->PlayAnimation(L"Daroach_Star_Death", false);
+			mDuration = 0.f;
+		}
+
+		if (mAnimator->IsActiveAnimationComplete())
+		{
 			Destroy(this);
 		}
+
 
 		Effects::Update();
 	}

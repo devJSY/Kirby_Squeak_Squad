@@ -179,15 +179,15 @@ namespace sy
 		{
 			if (mDir == eDirection::RIGHT)
 			{
-				Vector2 dir = Vector2(2.f, -1.f);
+				Vector2 dir = Vector2(5.f, 1.f);
 				Daroach_Star* star = new Daroach_Star(this, dir);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
 
-				Vector2 dir2 = Vector2(2.f, -2.f);
+				Vector2 dir2 = Vector2(2.f, 2.f);
 				Daroach_Star* star2 = new Daroach_Star(this, dir2);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
 
-				Vector2 dir3 = Vector2(1.f, -2.f);
+				Vector2 dir3 = Vector2(1.f, 5.f);
 				Daroach_Star* star3 = new Daroach_Star(this, dir3);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
 
@@ -195,15 +195,15 @@ namespace sy
 			}
 			else
 			{
-				Vector2 dir = Vector2(-2.f, -1.f);
+				Vector2 dir = Vector2(-5.f, 1.f);
 				Daroach_Star* star = new Daroach_Star(this, dir);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
 
-				Vector2 dir2 = Vector2(-2.f, -2.f);
+				Vector2 dir2 = Vector2(-2.f, 2.f);
 				Daroach_Star* star2 = new Daroach_Star(this, dir2);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
 
-				Vector2 dir3 = Vector2(-1.f, -2.f);
+				Vector2 dir3 = Vector2(-1.f, 5.f);
 				Daroach_Star* star3 = new Daroach_Star(this, dir3);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
 
@@ -422,15 +422,15 @@ namespace sy
 			{
 				if (mDir == eDirection::RIGHT)
 				{
-					Vector2 dir = Vector2(2.f, -1.f);
+					Vector2 dir = Vector2(5.f, 1.f);
 					Daroach_Star* star = new Daroach_Star(this, dir);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star);
 
-					Vector2 dir2 = Vector2(2.f, -2.f);
+					Vector2 dir2 = Vector2(2.f, 2.f);
 					Daroach_Star* star2 = new Daroach_Star(this, dir2);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
 
-					Vector2 dir3 = Vector2(1.f, -2.f);
+					Vector2 dir3 = Vector2(1.f, 5.f);
 					Daroach_Star* star3 = new Daroach_Star(this, dir3);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
 
@@ -438,15 +438,15 @@ namespace sy
 				}					
 				else
 				{
-					Vector2 dir = Vector2(-2.f, -1.f);
+					Vector2 dir = Vector2(-5.f, 1.f);
 					Daroach_Star* star = new Daroach_Star(this, dir);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star);
 
-					Vector2 dir2 = Vector2(-2.f, -2.f);
+					Vector2 dir2 = Vector2(-2.f, 2.f);
 					Daroach_Star* star2 = new Daroach_Star(this, dir2);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
 
-					Vector2 dir3 = Vector2(-1.f, -2.f);
+					Vector2 dir3 = Vector2(-1.f, 5.f);
 					Daroach_Star* star3 = new Daroach_Star(this, dir3);
 					object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
 
