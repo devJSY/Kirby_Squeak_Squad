@@ -13,6 +13,7 @@
 #include "syDaroach_Charge_Energe.h"
 #include "syObject.h"
 #include "syDaroach_Energe.h"
+#include "syDaroach_Bomb.h"
 
 namespace sy
 {
@@ -410,6 +411,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"Daroach_Left_BombAttack", false);
 
 			mState = eDaroachState::BombAttack;
+
+			Daroach_Bomb* bomb = new Daroach_Bomb(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
 
 			// Bomb ·£´ý »ý¼º
 			int randomNumber = std::rand() % 100;

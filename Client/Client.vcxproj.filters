@@ -717,6 +717,9 @@
     <ClInclude Include="syDaroach_Energe.h">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Energe</Filter>
     </ClInclude>
+    <ClInclude Include="syDaroach_Bomb.h">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Boom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1042,6 +1045,9 @@
     </ClCompile>
     <ClCompile Include="syDaroach_Energe.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Energe</Filter>
+    </ClCompile>
+    <ClCompile Include="syDaroach_Bomb.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\Daroach\Daroach_Boom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
