@@ -825,41 +825,57 @@ namespace sy
 		{
 			if (mbActiveUI[1])
 				mStarUI[1]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level2);
 		}
 		else if (type == eLevelState::Level2)
 		{
 			if (mbActiveUI[2])
 				mStarUI[2]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level3);
 		}
 		else if (type == eLevelState::Level3)
 		{
 			if (mbActiveUI[3])
 				mStarUI[3]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level4);
 		}
 		else if (type == eLevelState::Level4)
 		{
 			if (mbActiveUI[4])
 				mStarUI[4]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level5);
 		}
 		else if (type == eLevelState::Level5)
 		{
 			if (mbActiveUI[5])
 				mStarUI[5]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level6);
 		}
 		else if (type == eLevelState::Level6)
 		{
 			if (mbActiveUI[6])
 				mStarUI[6]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level7);
 		}
 		else if (type == eLevelState::Level7)
 		{
 			if (mbActiveUI[7])
 				mStarUI[7]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::Level8);
 		}
 		else if (type == eLevelState::Level8)
 		{
 			if (mbActiveUI[8])
 				mStarUI[8]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+
+			SetActiveUI(eLevelType::AbilityTest);
 		}
 
 

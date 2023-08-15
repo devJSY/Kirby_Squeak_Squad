@@ -110,7 +110,7 @@ namespace sy
 				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
 				mPortalUI->Initialize();
 
-				// 오디오 재생
+				// 오디오 정지
 				ResourceManager::Find<Sound>(L"BossSound")->Stop(true);
 				// 오디오 재생
 				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
@@ -219,6 +219,9 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"BossSound")->Stop(true);
 
 		PrismPlainsScene* scene = dynamic_cast<PrismPlainsScene*>(SceneManager::GetScene(L"PrismPlainsScene"));
 		scene->SetClearActiveUI(eStageState::Boss);	 // 보스 스테이지 클리어 처리

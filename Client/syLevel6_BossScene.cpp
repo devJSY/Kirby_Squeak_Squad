@@ -104,7 +104,7 @@ namespace sy
 			if (mPortalUI == nullptr)
 			{
 				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
+				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 150.f));
 				mPortalUI->Initialize();
 
 				// 오디오 재생
@@ -215,6 +215,9 @@ namespace sy
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
+
+		// 오디오 정지
+		ResourceManager::Find<Sound>(L"Level6BossSound")->Stop(true);
 
 		IceIslandScene* scene = dynamic_cast<IceIslandScene*>(SceneManager::GetScene(L"IceIslandScene"));
 		scene->SetClearActiveUI(eStageState::Boss);	 // 보스 스테이지 클리어 처리
