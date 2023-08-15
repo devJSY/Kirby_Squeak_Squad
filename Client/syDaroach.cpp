@@ -14,6 +14,7 @@
 #include "syObject.h"
 #include "syDaroach_Energe.h"
 #include "syDaroach_Bomb.h"
+#include "syDaroach_TimeBomb.h"
 
 namespace sy
 {
@@ -412,19 +413,23 @@ namespace sy
 
 			mState = eDaroachState::BombAttack;
 
-			Daroach_Bomb* bomb = new Daroach_Bomb(this);
+
+			Daroach_TimeBomb* bomb = new Daroach_TimeBomb(this);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
 
-			// Bomb 罚待 积己
-			int randomNumber = std::rand() % 100;
-			if (randomNumber % 2 == 0)
-			{
 
-			}
-			else
-			{
-
-			}
+			//// Bomb 罚待 积己
+			//int randomNumber = std::rand() % 100;
+			//if (randomNumber % 2 == 0)
+			//{
+			//	Daroach_Bomb* bomb = new Daroach_Bomb(this);
+			//	object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
+			//}
+			//else
+			//{
+			//	Daroach_TimeBomb* bomb = new Daroach_TimeBomb(this);
+			//	object::ActiveSceneAddGameObject(eLayerType::Effect, bomb);
+			//}
 		}
 	}
 
