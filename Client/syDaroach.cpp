@@ -235,6 +235,16 @@ namespace sy
 		if (mbDamaged || mState == eDaroachState::Dead)
 			return;
 
+		if (GetCurHP() <= 0.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Daroach_Right_Dead", false);
+			else
+				mAnimator->PlayAnimation(L"Daroach_Left_Dead", false);
+
+			mState = eDaroachState::Dead;
+		}
+
 		mStateChangeDelay = 0.f;
 		mbDamaged = true;
 	}
@@ -594,6 +604,14 @@ namespace sy
 
 	void Daroach::Dead()
 	{
-		
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Daroach_Right_End", true);
+			else
+				mAnimator->PlayAnimation(L"Daroach_Left_End", true);
+
+			mRigidBody->SetGround(false);
+		}		
 	}
 }

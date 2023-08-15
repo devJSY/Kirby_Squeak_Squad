@@ -289,7 +289,7 @@ namespace sy
 
 		// BossEnemy는 플레이어 충돌 무시
 		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
-		if (bossEnemy != nullptr)
+		if (mState != eTornadoKirbyState::Skill && bossEnemy != nullptr)
 			return;
 
 		// 커비 → 몬스터 방향
