@@ -15,6 +15,7 @@
 #include "syDaroach_Energe.h"
 #include "syDaroach_Bomb.h"
 #include "syDaroach_TimeBomb.h"
+#include "syDaroach_Star.h"
 
 namespace sy
 {
@@ -177,9 +178,37 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::Four))
 		{
 			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 dir = Vector2(2.f, -1.f);
+				Daroach_Star* star = new Daroach_Star(this, dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+				Vector2 dir2 = Vector2(2.f, -2.f);
+				Daroach_Star* star2 = new Daroach_Star(this, dir2);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+				Vector2 dir3 = Vector2(1.f, -2.f);
+				Daroach_Star* star3 = new Daroach_Star(this, dir3);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
 				mAnimator->PlayAnimation(L"Daroach_Right_StarAttack", false);
+			}
 			else
+			{
+				Vector2 dir = Vector2(-2.f, -1.f);
+				Daroach_Star* star = new Daroach_Star(this, dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+				Vector2 dir2 = Vector2(-2.f, -2.f);
+				Daroach_Star* star2 = new Daroach_Star(this, dir2);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+				Vector2 dir3 = Vector2(-1.f, -2.f);
+				Daroach_Star* star3 = new Daroach_Star(this, dir3);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
 				mAnimator->PlayAnimation(L"Daroach_Left_StarAttack", false);
+			}
 
 			mState = eDaroachState::StarAttack;
 			mStateChangeDelay = 0.f;
@@ -392,9 +421,37 @@ namespace sy
 			else if (randomNumber == 3)
 			{
 				if (mDir == eDirection::RIGHT)
+				{
+					Vector2 dir = Vector2(2.f, -1.f);
+					Daroach_Star* star = new Daroach_Star(this, dir);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+					Vector2 dir2 = Vector2(2.f, -2.f);
+					Daroach_Star* star2 = new Daroach_Star(this, dir2);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+					Vector2 dir3 = Vector2(1.f, -2.f);
+					Daroach_Star* star3 = new Daroach_Star(this, dir3);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
 					mAnimator->PlayAnimation(L"Daroach_Right_StarAttack", false);
+				}					
 				else
+				{
+					Vector2 dir = Vector2(-2.f, -1.f);
+					Daroach_Star* star = new Daroach_Star(this, dir);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+					Vector2 dir2 = Vector2(-2.f, -2.f);
+					Daroach_Star* star2 = new Daroach_Star(this, dir2);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+					Vector2 dir3 = Vector2(-1.f, -2.f);
+					Daroach_Star* star3 = new Daroach_Star(this, dir3);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
 					mAnimator->PlayAnimation(L"Daroach_Left_StarAttack", false);
+				}
 
 				mState = eDaroachState::StarAttack;
 			}

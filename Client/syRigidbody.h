@@ -25,6 +25,8 @@ namespace sy
 		void SetFloat(bool _float) { mbfloat = _float; }
 		bool Float() { return mbfloat; }
 
+		void SetFriction(float friction) { mFriction = friction; }
+
 	private:
 		float mMass;				// Áú·®
 

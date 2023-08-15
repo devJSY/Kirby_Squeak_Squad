@@ -12,7 +12,7 @@
 
 namespace sy
 {
-	Daroach_Star::Daroach_Star(Daroach* owner)
+	Daroach_Star::Daroach_Star(Daroach* owner, Vector2 Dir)
 		: Effects(owner)
 		, mTransform(nullptr)
 		, mAnimator(nullptr)
@@ -22,22 +22,35 @@ namespace sy
 	{
 		mTransform = GetComponent<Transform>();
 		mAnimator = GetComponent<Animator>();
-		mCollider = GetComponent<Collider>();
-		mRigidBody = GetComponent<Rigidbody>();
+		mCollider = AddComponent<Collider>();
+		mRigidBody = AddComponent<Rigidbody>();
 
-		mTransform->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-		mCollider->SetSize(Vector2(50.f, 50.f));
+		Vector2 pos = GetOwner()->GetComponent<Transform>()->GetPosition();
 
 		if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
-			mRigidBody->SetVelocity(Vector2(100.f, 0.f));
+		{
+			pos.x += 31.f;
+			pos.y -= 12.f;
+		}
 		else
-			mRigidBody->SetVelocity(Vector2(-100.f, 0.f));
+		{
+			pos.x -= 31.f;
+			pos.y -= 12.f;
+		}
 
+		mTransform->SetPosition(pos);
+		mCollider->SetColliderType(eColliderType::Sphere);
+		mCollider->SetRadius(15.f);
+
+		Dir.Normalize();
+		Dir *= 100.f;
+		mRigidBody->SetVelocity(Dir);
+		mRigidBody->SetFriction(0.f);
 		mRigidBody->SetFloat(true);
 
 		// 애니메이션 생성
 		Texture* Daroach_Star_Tex = ResourceManager::Load<Texture>(L"Daroach_Star_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Star.bmp");
-		mAnimator->CreateAnimation(Daroach_Star_Tex, L"Daroach_Star", Vector2::Zero, Vector2(50.f, 50.f), Vector2(50.f, 0.f), 0.1f, 8);
+		mAnimator->CreateAnimation(Daroach_Star_Tex, L"Daroach_Star", Vector2::Zero, Vector2(50.f, 50.f), Vector2(50.f, 0.f), 0.05f, 8);
 		mAnimator->PlayAnimation(L"Daroach_Star", true);
 	}
 
@@ -52,6 +65,8 @@ namespace sy
 
 	void Daroach_Star::Update()
 	{
+		CheckPixelCollision();
+
 		mDuration += Time::DeltaTime();
 
 		if (mDuration > 5.f)
@@ -122,77 +137,57 @@ namespace sy
 			offset = Vector2(1603.f, 137.f);
 		}
 
-		Collider* col = GetComponent<Collider>();
-		Vector2 ColPos = col->GetPosition();
-		Vector2 ColSize = col->GetSize();
+		Vector2 ColPos = mCollider->GetPosition();
+		float ColRadius = mCollider->GetRadius();
 
-		Vector2 LT = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
-		Vector2 RT = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y - (ColSize.y / 2.f));
-		Vector2 LB = Vector2(ColPos.x - (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
-		Vector2 RB = Vector2(ColPos.x + (ColSize.x / 2.f), ColPos.y + (ColSize.y / 2.f));
+		Vector2 LEFT = Vector2(ColPos.x - ColRadius, ColPos.y);
+		Vector2 RIGHT = Vector2(ColPos.x + ColRadius, ColPos.y);
+		Vector2 TOP = Vector2(ColPos.x, ColPos.y - ColRadius);
+		Vector2 BOTTOM = Vector2(ColPos.x, ColPos.y + ColRadius);
 
-		LT += offset;
-		RT += offset;
-		LB += offset;
-		RB += offset;
+		LEFT += offset;
+		RIGHT += offset;
+		TOP += offset;
+		BOTTOM += offset;
 
-		COLORREF LTColor = PixelTex->GetTexturePixel((int)LT.x, (int)LT.y);
-		COLORREF RTColor = PixelTex->GetTexturePixel((int)RT.x, (int)RT.y);
-		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
-		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
+		COLORREF LEFTColor = PixelTex->GetTexturePixel((int)LEFT.x, (int)LEFT.y);
+		COLORREF RIGHTColor = PixelTex->GetTexturePixel((int)RIGHT.x, (int)RIGHT.y);
+		COLORREF TOPColor = PixelTex->GetTexturePixel((int)TOP.x, (int)TOP.y);
+		COLORREF BOTTOMColor = PixelTex->GetTexturePixel((int)BOTTOM.x, (int)BOTTOM.y);
+
+		// 상단 처리
+		if (TOPColor == RGB(0, 255, 0))
+		{
+			Vector2 vel = mRigidBody->GetVelocity();
+			if (vel.y < 0.f)
+				vel.y *= -1.f;
+			mRigidBody->SetVelocity(vel);
+		}
 
 		// 바닥 처리
-		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
-			|| LBColor == RGB(255, 0, 0) || RBColor == RGB(255, 0, 0))
+		if (BOTTOMColor == RGB(0, 0, 255))
 		{
-			// 이동
-			Vector2 pos = mTransform->GetPosition();
-			pos.y -= 1.f;
-			mTransform->SetPosition(pos);
-			mRigidBody->SetGround(true);
+			Vector2 vel = mRigidBody->GetVelocity();
+			if (vel.y > 0.f)
+				vel.y *= -1.f;
+			mRigidBody->SetVelocity(vel);
 		}
 
 		// Right Stop Check
-		COLORREF RBColorOffsetX = PixelTex->GetTexturePixel(int(RB.x + 1), (int)RB.y);
-
-		if (RBColor == RGB(0, 255, 0))
+		if (RIGHTColor == RGB(0, 255, 0))
 		{
-			// 이동
-			Vector2 pos = mTransform->GetPosition();
-			pos.x -= 1.f;
-			mTransform->SetPosition(pos);
-		}
-		else if (RBColorOffsetX == RGB(0, 255, 0))
-		{
-			Vector2 pos = mTransform->GetPosition();
-			pos.x -= 3.f;
-			mTransform->SetPosition(pos);
-
 			Vector2 vel = mRigidBody->GetVelocity();
 			if (vel.x > 0.f)
-				vel.x *= -1;
+				vel.x *= -1.f;
 			mRigidBody->SetVelocity(vel);
 		}
 
 		// Left Stop Check
-		COLORREF LBColorOffsetX = PixelTex->GetTexturePixel(int(LB.x - 1), (int)LB.y);
-
-		if (LBColor == RGB(0, 255, 0))
+		if (LEFTColor == RGB(0, 255, 0))
 		{
-			// 이동
-			Vector2 pos = mTransform->GetPosition();
-			pos.x += 1.f;
-			mTransform->SetPosition(pos);
-		}
-		else if (LBColorOffsetX == RGB(0, 255, 0))
-		{
-			Vector2 pos = mTransform->GetPosition();
-			pos.x += 3.f;
-			mTransform->SetPosition(pos);
-
 			Vector2 vel = mRigidBody->GetVelocity();
 			if (vel.x < 0.f)
-				vel.x *= -1;
+				vel.x *= -1.f;
 			mRigidBody->SetVelocity(vel);
 		}
 	}

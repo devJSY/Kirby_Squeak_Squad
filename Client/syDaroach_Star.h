@@ -10,7 +10,7 @@ namespace sy
         friend class Daroach;
 
     private:
-        Daroach_Star(Daroach* owner);
+        Daroach_Star(Daroach* owner, Vector2 Dir);
         virtual ~Daroach_Star();
 
         virtual void Initialize();
