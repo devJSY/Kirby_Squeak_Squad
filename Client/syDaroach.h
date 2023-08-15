@@ -6,11 +6,11 @@ namespace sy
 	enum class eDaroachState
 	{
 		Idle,
-		Prepare,
+		BombAttackReady,
+		BombAttack,
 		WandUp,
 		WandCharge,
 		WandAttack,
-		BoomAttack,
 		Teleport,
 		TeleportEnd,
 		StarAttack,
@@ -37,19 +37,18 @@ namespace sy
 		virtual bool IsDamagedState() { return mState == eDaroachState::Damage; }
 		virtual bool IsDeadState() { return mState == eDaroachState::Dead; }
 
-		eDaroachState GetKingDededeState() { return mState; }
+		eDaroachState GetDaroachState() { return mState; }
 
 	private:
-		void CheckPixelCollision();
-		void AddStarEffect(eDirection dir);
+
 
 	private:
 		void Idle();
-		void Prepare();
+		void BombAttackReady();
+		void BombAttack();
 		void WandUp();
 		void WandCharge();
 		void WandAttack();
-		void BoomAttack();
 		void Teleport();
 		void TeleportEnd();
 		void StarAttack();
@@ -64,5 +63,6 @@ namespace sy
 		eDirection				 mDir;
 
 		float					 mStateChangeDelay;
+		Vector2					 FixedPos[6];
 	};
 }

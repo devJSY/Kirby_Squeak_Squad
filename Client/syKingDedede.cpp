@@ -54,8 +54,8 @@ namespace sy
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 30.f);
 
-		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
-		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.4f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
+		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
 		
 		mAnimator->CreateAnimation(KingDedede_Right, L"KingDedede_Right_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
 		mAnimator->CreateAnimation(KingDedede_Left, L"KingDedede_Left_Walk", Vector2(768.f, 0.f), Vector2(256.f, 256.f), Vector2(256.f, 0.f), 0.2f, 4, Animationoffset);
@@ -132,17 +132,6 @@ namespace sy
 
 		// 픽셀충돌 체크
 		CheckPixelCollision();		
-
-		// 테스트용 상태변경
-		if (Input::GetKeyDown(eKeyCode::M))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
-
-			mState = eKingDededeState::Idle;
-		}
 
 		switch (mState)
 		{
@@ -482,15 +471,21 @@ namespace sy
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
 		if (Dir.x > 0.f)
 		{
-			mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
-			mTransform->SetDirection(eDirection::RIGHT);
-			mDir = eDirection::RIGHT;
+			if (mDir == eDirection::LEFT)
+			{
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				mTransform->SetDirection(eDirection::RIGHT);
+				mDir = eDirection::RIGHT;
+			}
 		}
 		else
 		{
-			mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
-			mTransform->SetDirection(eDirection::LEFT);
-			mDir = eDirection::LEFT;
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				mTransform->SetDirection(eDirection::LEFT);
+				mDir = eDirection::LEFT;
+			}
 		}
 
 		// 상태처리
