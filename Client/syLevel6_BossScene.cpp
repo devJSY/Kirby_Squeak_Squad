@@ -98,21 +98,21 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		//if (mKingDedede->GetKingDededeState() == eKingDededeState::Dead)
-		//{
-		//	// Portal
-		//	if (mPortalUI == nullptr)
-		//	{
-		//		mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-		//		mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
-		//		mPortalUI->Initialize();
+		if (mDaroach->GetDaroachState() == eDaroachState::Dead)
+		{
+			// Portal
+			if (mPortalUI == nullptr)
+			{
+				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
+				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 135.f));
+				mPortalUI->Initialize();
 
-		//		// 오디오 재생
-		//		ResourceManager::Find<Sound>(L"Level6BossSound")->Stop(true);
-		//		// 오디오 재생
-		//		ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
-		//	}
-		//}
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"Level6BossSound")->Stop(true);
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
+			}
+		}
 
 		Scene::Update();
 	}

@@ -31,6 +31,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "syLevelSelectScene.h"
 
 namespace sy
 {
@@ -320,6 +321,9 @@ namespace sy
 
 		mLevelType = eLevelType::Level1_Clear;
 		mlevelBG->SetLevelType(mLevelType);
+
+		LevelSelectScene* scene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		scene->SetClearActiveUI(eLevelState::Level1);
 	}
 
 	void PrismPlainsScene::CreateDot()

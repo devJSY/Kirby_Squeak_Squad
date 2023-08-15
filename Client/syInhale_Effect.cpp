@@ -9,7 +9,7 @@
 #include "syAbilityItem.h"
 #include "syAbilityStar.h"
 #include "syStar_Effect.h"
-#include "syKingDedede.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -254,9 +254,9 @@ namespace sy
 			if (IceEnemy != nullptr)
 				continue;
 
-			// KingDedede는 적용하지않음
-			KingDedede* kingDedede = dynamic_cast<KingDedede*>(obj);
-			if (kingDedede != nullptr)
+			// BossEnemy는 적용하지않음
+			BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(obj);
+			if (bossEnemy != nullptr)
 				continue;
 
 			if (mTarget == nullptr)

@@ -30,6 +30,7 @@
 #include "syStarUI.h"
 #include "syNumberUI.h"
 #include "syDotUI.h"
+#include "syLevelSelectScene.h"
 
 namespace sy
 {
@@ -281,6 +282,9 @@ namespace sy
 
 		mLevelType = eLevelType::Level6_Clear;
 		mlevelBG->SetLevelType(mLevelType);
+
+		LevelSelectScene* scene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		scene->SetClearActiveUI(eLevelState::Level6);
 	}
 
 	void IceIslandScene::CreateDot()

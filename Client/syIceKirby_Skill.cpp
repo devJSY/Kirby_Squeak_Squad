@@ -10,7 +10,7 @@
 #include "syObject.h"
 #include "sySoundManager.h"
 #include "sySound.h"
-#include "syKingDedede.h"
+#include "syBossEnemy.h"
 
 namespace sy
 {
@@ -112,9 +112,9 @@ namespace sy
 		if (enemy == nullptr)
 			return;
 
-		// KingDedede는 데미지 적용
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
-		if (kingDedede != nullptr)
+		// BossEnemy는 데미지 적용
+		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
+		if (bossEnemy != nullptr)
 		{
 			Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 			SceneManager::GetPlayer()->SetHitEnemy(enemy);
@@ -155,9 +155,9 @@ namespace sy
 		if (enemy->IsDamagedState())
 			return;
 
-		// KingDedede는 데미지 적용
-		KingDedede* kingDedede = dynamic_cast<KingDedede*>(other->GetOwner());
-		if (kingDedede != nullptr)
+		// BossEnemy는 데미지 적용
+		BossEnemy* bossEnemy = dynamic_cast<BossEnemy*>(other->GetOwner());
+		if (bossEnemy != nullptr)
 		{
 			Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 			SceneManager::GetPlayer()->SetHitEnemy(enemy);
