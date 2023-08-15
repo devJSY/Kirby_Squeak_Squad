@@ -41,6 +41,7 @@ namespace sy
 		mTransform->SetPosition(pos);
 		mCollider->SetColliderType(eColliderType::Sphere);
 		mCollider->SetRadius(15.f);
+		mCollider->SetPosition(pos);
 
 		Dir.Normalize();
 		Dir *= 200.f;
