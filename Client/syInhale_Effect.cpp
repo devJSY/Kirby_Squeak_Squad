@@ -10,6 +10,9 @@
 #include "syAbilityStar.h"
 #include "syStar_Effect.h"
 #include "syBossEnemy.h"
+#include "syDaroach_Bomb.h"
+#include "syDaroach_TimeBomb.h"
+#include "syDaroach_Star.h"
 
 namespace sy
 {
@@ -95,14 +98,20 @@ namespace sy
 
 		AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(other->GetOwner());
 		AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(other->GetOwner());
-		Star_Effect* star = dynamic_cast<Star_Effect*>(other->GetOwner());
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+		Star_Effect* star = dynamic_cast<Star_Effect*>(other->GetOwner());
+		Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(other->GetOwner());
+		Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(other->GetOwner());
+		Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(other->GetOwner());
 
 		// 특정 오브젝트만 흡수 인식
 		if (abilityStar == nullptr
 			&& abilityItem == nullptr
+			&& enemy == nullptr
 			&& star == nullptr
-			&& enemy == nullptr)
+			&& daroachbomb == nullptr
+			&& daroachTimebomb == nullptr
+			&& daroachStar == nullptr)
 			return;
 
 		// 흡수한 오브젝트가 Enemy인경우
@@ -205,7 +214,7 @@ namespace sy
 		if (mTarget != nullptr)
 			return;
 
-		// 흡수 우선순위 2번째 Star_Effect
+		// 흡수 우선순위 2번째 Effects
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
@@ -213,15 +222,29 @@ namespace sy
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
-			// Star_Effect 가 아니면 적용하지않음, Dead 상태는 적용하지않음
+			// 특정오브젝트만 인식, Dead 상태는 적용하지않음
 			Star_Effect* star = dynamic_cast<Star_Effect*>(obj);
-			if (star == nullptr
-				|| star->GetStarState() == eStarState::Dead)
+			Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(obj);
+			Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(obj);
+			Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(obj);
+
+			// owner 설정
+			Effects* owner = nullptr;
+			if (star != nullptr)
+				owner = star;
+			else if (daroachbomb != nullptr)
+				owner = daroachbomb;
+			else if (daroachTimebomb != nullptr)
+				owner = daroachTimebomb;
+			else if (daroachStar != nullptr)
+				owner = daroachStar;
+
+			if (owner == nullptr || owner->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			if (mTarget == nullptr)
 			{
-				mTarget = star;
+				mTarget = owner;
 			}
 			else
 			{
@@ -336,7 +359,7 @@ namespace sy
 			}
 			else if (star != nullptr)
 			{
-				defaultKirby->SetInhaledObjectInfo(eAbilityType::Normal, sy::InhaledObjectType::Star_Effect);
+				defaultKirby->SetInhaledObjectInfo(eAbilityType::Normal, sy::InhaledObjectType::Effects);
 			}
 			else if (enemy != nullptr)
 			{

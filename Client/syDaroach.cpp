@@ -384,7 +384,7 @@ namespace sy
 		// 상태처리
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 0.5f)
+		if (mStateChangeDelay >= 0.f)
 		{
 			mStateChangeDelay = 0.f;
 

@@ -92,11 +92,17 @@ namespace sy
 		if (player == nullptr)
 			return;
 
+		// Inhale 상태에선 무시
 		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
 
-		// DefaultKirby가 Damage 상태면 적용하지않음
-		if (kirby != nullptr && kirby->IsDamagedState())
-			return;
+			// DefaultKirby가 Damage 상태면 적용하지않음
+			if (kirby->IsDamagedState())
+				return;
+		}
 
 		// 스킬 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
