@@ -117,6 +117,10 @@ namespace sy
 		{
 			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
 				return;
+
+			// DefaultKirby가 Damage 상태면 적용하지않음
+			if (kirby->IsDamagedState())
+				return;
 		}
 
 		// 몬스터 → 커비 방향
