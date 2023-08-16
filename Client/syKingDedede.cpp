@@ -119,7 +119,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"BossShout", L"..\\Resources\\Sound\\Effect\\Dedede\\BossShout.wav");
 		ResourceManager::Load<Sound>(L"BossWalk", L"..\\Resources\\Sound\\Effect\\Dedede\\BossWalk.wav");
 		
-		Enemy::Initialize();
+		BossEnemy::Initialize();
 	}
 
 	void KingDedede::Update()
@@ -261,12 +261,12 @@ namespace sy
 			break;
 		}
 
-		Enemy::Update();
+		BossEnemy::Update();
 	}
 
 	void KingDedede::Render(HDC hdc)
 	{
-		Enemy::Render(hdc);
+		BossEnemy::Render(hdc);
 	}
 
 	void KingDedede::OnCollisionEnter(Collider* other)
@@ -333,6 +333,8 @@ namespace sy
 			PixelTex = ResourceManager::Find<Texture>(L"King_Dedede_Stage_Pixel");
 		else if (CurSceneName == L"Level6_BossScene")
 			PixelTex = ResourceManager::Find<Texture>(L"Daroach_Pixel");
+		else if (CurSceneName == L"Level8_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"DarkNebula_Pixel");
 		else
 			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
@@ -345,6 +347,7 @@ namespace sy
 		if (CurSceneName == L"AbilityTestScene"
 			|| CurSceneName == L"King_Dedede_Stage_Pixel"
 			|| CurSceneName == L"Daroach_Pixel"
+			|| CurSceneName == L"DarkNebula_Pixel"
 			|| CurSceneName == L"Level1_Stage1Scene")
 		{
 			offset = Vector2::Zero;

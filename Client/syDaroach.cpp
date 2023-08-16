@@ -116,7 +116,7 @@ namespace sy
 		// Sound Load
 		ResourceManager::Load<Sound>(L"Daroach_Teleport", L"..\\Resources\\Sound\\Effect\\Daroach\\Teleport.wav");
 
-		Enemy::Initialize();
+		BossEnemy::Initialize();
 	}
 
 	void Daroach::Update()
@@ -250,12 +250,12 @@ namespace sy
 			break;
 		}
 
-		Enemy::Update();
+		BossEnemy::Update();
 	}
 
 	void Daroach::Render(HDC hdc)
 	{
-		Enemy::Render(hdc);
+		BossEnemy::Render(hdc);
 	}
 
 	void Daroach::OnCollisionEnter(Collider* other)
@@ -296,6 +296,8 @@ namespace sy
 			PixelTex = ResourceManager::Find<Texture>(L"King_Dedede_Stage_Pixel");
 		else if (CurSceneName == L"Level6_BossScene")
 			PixelTex = ResourceManager::Find<Texture>(L"Daroach_Pixel");
+		else if (CurSceneName == L"Level8_BossScene")
+			PixelTex = ResourceManager::Find<Texture>(L"DarkNebula_Pixel");
 		else
 			PixelTex = ResourceManager::Find<Texture>(L"Stage1_Pixel");
 
@@ -308,6 +310,7 @@ namespace sy
 		if (CurSceneName == L"AbilityTestScene"
 			|| CurSceneName == L"King_Dedede_Stage_Pixel"
 			|| CurSceneName == L"Daroach_Pixel"
+			|| CurSceneName == L"DarkNebula_Pixel"
 			|| CurSceneName == L"Level1_Stage1Scene")
 		{
 			offset = Vector2::Zero;

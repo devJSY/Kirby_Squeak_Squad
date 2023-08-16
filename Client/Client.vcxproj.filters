@@ -735,6 +735,9 @@
     <ClInclude Include="syLevel8_BossScene.h">
       <Filter>Contents\Scene\StageScene\Level8\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1072,6 +1075,9 @@
     </ClCompile>
     <ClCompile Include="syLevel8_BossScene.cpp">
       <Filter>Contents\Scene\StageScene\Level8\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
