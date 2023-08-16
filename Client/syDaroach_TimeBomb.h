@@ -32,6 +32,9 @@ namespace sy
     private:
         void CheckPixelCollision();
 
+    public:
+        eDaroachTimeBombState GetDaroachTimeBombState() { return mState; }
+
     private:
         void Idle();
         void Fire();

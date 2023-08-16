@@ -114,6 +114,7 @@ namespace sy
 			&& daroachStar == nullptr)
 			return;
 
+		// 예외처리 
 		// 흡수한 오브젝트가 Enemy인경우
 		if (enemy != nullptr)
 		{
@@ -122,7 +123,18 @@ namespace sy
 				return;
 			}
 		}
-			
+		
+		if (daroachbomb != nullptr)
+		{
+			if (daroachbomb->GetDaroachBombState() != eDaroachBombState::Idle)
+				return;
+		}
+
+		if (daroachTimebomb != nullptr)
+		{
+			if (daroachTimebomb->GetDaroachTimeBombState() != eDaroachTimeBombState::Idle)
+				return;
+		}			
 
 		mInhaledObject.push_back(other->GetOwner());
 	}
