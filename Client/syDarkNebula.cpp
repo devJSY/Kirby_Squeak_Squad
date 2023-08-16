@@ -131,6 +131,13 @@ namespace sy
 			mStateChangeDelay = 0.f;
 			int idx = std::rand() % 6;
 			mTargetPos = mFixedPos[idx];
+
+			// 방향 랜덤 설정
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Three))
@@ -139,6 +146,13 @@ namespace sy
 			mStateChangeDelay = 0.f;
 			int idx = std::rand() % 6;
 			mTargetPos = mFixedPos[idx];
+
+			// 방향 랜덤 설정
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Four))
@@ -254,6 +268,13 @@ namespace sy
 		{
 			mStateChangeDelay = 0.f;
 
+			// 방향 랜덤 설정
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
+
 			int randomNumber = std::rand() % 6;
 			if (randomNumber == 0)
 			{
@@ -264,6 +285,7 @@ namespace sy
 			else if (randomNumber == 1)
 			{
 				mState = eDarkNebulaState::RotationalMove;
+
 				int idx = std::rand() % 6;
 				mTargetPos = mFixedPos[idx];
 			}
@@ -301,7 +323,7 @@ namespace sy
 		else
 		{
 			Diff.Normalize();
-			Diff *= 100.f * Time::DeltaTime();
+			Diff *= 200.f * Time::DeltaTime();
 			pos += Diff;
 			mTransform->SetPosition(pos);
 		}
@@ -309,8 +331,32 @@ namespace sy
 
 	void DarkNebula::RotationalMove()
 	{
+		static float t = 0.f;	// 0 ~ 1값 곡선상에서 비율
+		t += 0.3f * Time::DeltaTime(); 
 
+		Vector2 pos = mTransform->GetPosition();
+		Vector2 Diff = mTargetPos - pos;
+
+		if (Diff.Length() <= 1.f)
+		{
+			t = 0.f;
+
+			mState = eDarkNebulaState::Idle;
+		}
+		else
+		{
+			// 곡선을 따라 이동할 거리 양수면 오른쪽커브, 음수면 왼쪽커브
+			float radius = 5.f;
+
+			if(mTransform->GetDirection() == eDirection::RIGHT)
+				radius = 5.f;
+			else
+				radius = -5.f;
+
+			mTransform->SetPosition(moveAlongCurve(pos, mTargetPos, radius, t));
+		}
 	}
+
 
 	void DarkNebula::ZigzagMove()
 	{

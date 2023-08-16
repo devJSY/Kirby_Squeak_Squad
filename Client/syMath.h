@@ -184,4 +184,31 @@ namespace sy::math
 	{
 		return v1.x * v2.y - v1.y * v2.x;
 	}
+
+	// 2차 베지어 곡선 계산 함수
+	Vector2 calculateBezierPoint(float t, const Vector2& p0, const Vector2& p1, const Vector2& p2) {
+		float u = 1.f - t;
+		float tt = t * t;
+		float uu = u * u;
+
+		Vector2 p;
+		p.x = uu * p0.x + 2.f * u * t * p1.x + tt * p2.x;
+		p.y = uu * p0.y + 2.f * u * t * p1.y + tt * p2.y;
+
+		return p;
+	}
+
+	Vector2 moveAlongCurve(const Vector2& start, const Vector2& end, float radius, float t) {
+		Vector2 p0 = start;
+		Vector2 p1 = { start.x + radius, start.y };
+		Vector2 p2 = { end.x - radius, end.y };
+		Vector2 p3 = end;
+
+		if (t > 1.f) {
+			t = 1.f;
+		}
+
+		Vector2 newPosition = calculateBezierPoint(t, p0, p1, p2);
+		return newPosition;
+	}
 }
