@@ -75,14 +75,6 @@ namespace sy
 		ResourceManager::Load<Sound>(L"Level8BossSound", L"..\\Resources\\Sound\\Theme\\Level8Boss.wav");
 		ResourceManager::Load<Sound>(L"BossClearSound", L"..\\Resources\\Sound\\Theme\\BossClear.wav");
 
-
-
-
-		//ResourceManager::Load<Sound>(L"BlinkSound", L"..\\Resources\\Sound\\Effect\\Blink.wav");
-		//ResourceManager::Load<Sound>(L"DN_ChangeSound", L"..\\Resources\\Sound\\Effect\\DN_Change.wav");
-		//ResourceManager::Load<Sound>(L"DN_DeathSound", L"..\\Resources\\Sound\\Effect\\DN_Death.wav");
-		//ResourceManager::Load<Sound>(L"DN_MoveSound", L"..\\Resources\\Sound\\Effect\\DN_Move.wav");
-
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
 	}

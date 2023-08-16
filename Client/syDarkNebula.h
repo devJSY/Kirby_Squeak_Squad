@@ -9,6 +9,7 @@ namespace sy
 		Move,
 		RotationalMove,
 		ZigzagMove,
+		StarAttack,
 		SkillReady,
 		FireSkill,
 		IceSkill,
@@ -49,6 +50,7 @@ namespace sy
 		void Move();
 		void RotationalMove();
 		void ZigzagMove();
+		void StarAttack();
 		void SkillReady();
 		void FireSkill();
 		void IceSkill();

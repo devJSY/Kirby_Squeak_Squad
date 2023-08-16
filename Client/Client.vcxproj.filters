@@ -388,6 +388,27 @@
     <Filter Include="Contents\Scene\StageScene\Level8\Boss">
       <UniqueIdentifier>{05818816-8918-4df1-b101-e17520a1ee9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Eye">
+      <UniqueIdentifier>{01cca710-13e6-4eb1-84cd-852b39bf98dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Border">
+      <UniqueIdentifier>{9deb8084-4033-4727-8714-32be75944b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_IceSkill">
+      <UniqueIdentifier>{e6e906cc-f463-4825-b6e1-62778d58ad44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_SparkSkill">
+      <UniqueIdentifier>{eed6da57-d509-4958-a5ab-9b29ffa093dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_FireBallSkill">
+      <UniqueIdentifier>{4dedd70b-3e07-46b0-8b61-de1ece2b7aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_FireSkill">
+      <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar">
+      <UniqueIdentifier>{bebaac0d-3d0c-464a-be7c-6b028488aa40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

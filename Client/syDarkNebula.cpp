@@ -1,4 +1,12 @@
 #include "syDarkNebula.h"
+#include "syTexture.h"
+#include "syResourceManager.h"
+#include "sySceneManager.h"
+#include "syPlayer.h"
+#include "syAnimator.h"
+#include "syTransform.h"
+#include "syCollider.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -37,6 +45,35 @@ namespace sy
 
 	void DarkNebula::Initialize()
 	{
+		// 체력 설정
+		SetHP(500);
+
+		// 텍스쳐 로드
+		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
+		Texture* DarkNebula_Dead_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Dead_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Dead.bmp");
+
+		mAnimator = GetComponent<Animator>();
+		mTransform = GetComponent<Transform>();
+		Collider* col = GetComponent<Collider>();
+		col->SetSize(Vector2(40.f, 40.f));
+
+		mTransform->SetPosition(FixedPos[1]);
+
+		// 애니메이션 생성
+		std::vector<Vector2> Daroach_StarAttack_offset = { Vector2(0.f,5.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,21.f), Vector2(0.f,26.f), Vector2(0.f, 26.f) };
+
+		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Ice", Vector2::Zero, Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
+		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Fire", Vector2(224.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
+		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Spark", Vector2(448.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
+		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2(757.f, 15.f), Vector2(55.f, 56.f), Vector2(-55.f, 0.f), 0.15f, 4);
+
+		mAnimator->PlayAnimation(L"DarkNebula_Body_Ice", true);
+
+		ResourceManager::Load<Sound>(L"BlinkSound", L"..\\Resources\\Sound\\Effect\\Blink.wav");
+		ResourceManager::Load<Sound>(L"DN_ChangeSound", L"..\\Resources\\Sound\\Effect\\DN_Change.wav");
+		ResourceManager::Load<Sound>(L"DN_DeathSound", L"..\\Resources\\Sound\\Effect\\DN_Death.wav");
+		ResourceManager::Load<Sound>(L"DN_MoveSound", L"..\\Resources\\Sound\\Effect\\DN_Move.wav");
+
 		BossEnemy::Initialize();
 	}
 
@@ -55,6 +92,9 @@ namespace sy
 			break;
 		case eDarkNebulaState::ZigzagMove:
 			ZigzagMove();
+			break;
+		case eDarkNebulaState::StarAttack:
+			StarAttack();
 			break;
 		case eDarkNebulaState::SkillReady:
 			SkillReady();
@@ -107,6 +147,10 @@ namespace sy
 	}
 
 	void DarkNebula::ZigzagMove()
+	{
+	}
+
+	void DarkNebula::StarAttack()
 	{
 	}
 
