@@ -156,6 +156,8 @@
     <ClInclude Include="syCushyCloudScene.h" />
     <ClInclude Include="syCutterKirby.h" />
     <ClInclude Include="syDarkNebula.h" />
+    <ClInclude Include="syDarkNebula_Border.h" />
+    <ClInclude Include="syDarkNebula_Eye.h" />
     <ClInclude Include="syDaroach.h" />
     <ClInclude Include="syDaroach_Bomb.h" />
     <ClInclude Include="syDaroach_Charge_Energe.h" />
@@ -277,6 +279,8 @@
     <ClCompile Include="syCushyCloudScene.cpp" />
     <ClCompile Include="syCutterKirby.cpp" />
     <ClCompile Include="syDarkNebula.cpp" />
+    <ClCompile Include="syDarkNebula_Border.cpp" />
+    <ClCompile Include="syDarkNebula_Eye.cpp" />
     <ClCompile Include="syDaroach.cpp" />
     <ClCompile Include="syDaroach_Bomb.cpp" />
     <ClCompile Include="syDaroach_Charge_Energe.cpp" />

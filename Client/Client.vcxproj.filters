@@ -759,6 +759,12 @@
     <ClInclude Include="syDarkNebula.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_Border.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Border</Filter>
+    </ClInclude>
+    <ClInclude Include="syDarkNebula_Eye.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Eye</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1099,6 +1105,12 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_Border.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Border</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_Eye.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Eye</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

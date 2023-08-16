@@ -62,7 +62,7 @@ namespace sy
 		eDirection				 mDir;
 
 		float					 mStateChangeDelay;
-		Vector2					 FixedPos[6];
+		Vector2					 mFixedPos[6];
 		bool					 mbDamaged; // 연속 피격 방지
 	};
 }

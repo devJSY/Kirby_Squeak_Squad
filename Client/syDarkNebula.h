@@ -59,14 +59,18 @@ namespace sy
 		void Dead();
 
 	private:
-		eDarkNebulaState		mState;
-		eDarkNebulaMode			mMode;
-		class Animator*			mAnimator;
-		class Transform*		mTransform;
+		eDarkNebulaState			mState;
+		eDarkNebulaMode				mMode;
+		class Animator*				mAnimator;
+		class Transform*			mTransform;
 
-		float					mStateChangeDelay;
-		math::Vector2			FixedPos[6];
-		bool					mbDamaged; // 연속 피격 방지
+		float						mStateChangeDelay;
+		math::Vector2				mFixedPos[6];
+		math::Vector2				mTargetPos;
+		bool						mbDamaged; // 연속 피격 방지
+
+		class DarkNebula_Border*	mBorder;
+		class DarkNebula_Eye*		mEye;
 
     };
 }

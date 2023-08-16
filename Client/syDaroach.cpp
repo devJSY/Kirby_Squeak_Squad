@@ -28,26 +28,26 @@ namespace sy
 		, mCollider(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mStateChangeDelay(0.f)
-		, FixedPos{}
+		, mFixedPos{}
 		, mbDamaged(false)
 	{
-		FixedPos[0].x = 40.f;
-		FixedPos[0].y = 40.f;
+		mFixedPos[0].x = 40.f;
+		mFixedPos[0].y = 40.f;
 
-		FixedPos[1].x = 128.f;
-		FixedPos[1].y = 40.f;
+		mFixedPos[1].x = 128.f;
+		mFixedPos[1].y = 40.f;
 
-		FixedPos[2].x = 200.f;
-		FixedPos[2].y = 40.f;
+		mFixedPos[2].x = 200.f;
+		mFixedPos[2].y = 40.f;
 
-		FixedPos[3].x = 40.f;
-		FixedPos[3].y = 110.f;
+		mFixedPos[3].x = 40.f;
+		mFixedPos[3].y = 110.f;
 
-		FixedPos[4].x = 128.f;
-		FixedPos[4].y = 96.f;
+		mFixedPos[4].x = 128.f;
+		mFixedPos[4].y = 96.f;
 
-		FixedPos[5].x = 200.f;
-		FixedPos[5].y = 110.f;
+		mFixedPos[5].x = 200.f;
+		mFixedPos[5].y = 110.f;
 	}
 
 	Daroach::~Daroach()
@@ -72,7 +72,7 @@ namespace sy
 
 		mRigidBody->SetGround(true);
 
-		mTransform->SetPosition(FixedPos[1]);
+		mTransform->SetPosition(mFixedPos[1]);
 
 		// 局聪皋捞记 积己
 		std::vector<Vector2> Daroach_StarAttack_offset = { Vector2(0.f,5.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,21.f), Vector2(0.f,26.f), Vector2(0.f, 26.f) };
@@ -604,7 +604,7 @@ namespace sy
 			mState = eDaroachState::TeleportEnd;
 
 			int randomPos = std::rand() % 6;
-			mTransform->SetPosition(FixedPos[randomPos]);
+			mTransform->SetPosition(mFixedPos[randomPos]);
 		}
 	}
 

@@ -7,6 +7,10 @@
 #include "syTransform.h"
 #include "syCollider.h"
 #include "sySound.h"
+#include "syDarkNebula_Border.h"
+#include "syDarkNebula_Eye.h"
+#include "syTime.h"
+#include "syInput.h"
 
 namespace sy
 {
@@ -17,30 +21,47 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mStateChangeDelay(0.f)
-		, FixedPos{}
+		, mFixedPos{}
+		, mTargetPos(Vector2::Zero)
 		, mbDamaged(false)
+		, mBorder(nullptr)
+		, mEye(nullptr)
 	{
-		FixedPos[0].x = 40.f;
-		FixedPos[0].y = 40.f;
+		mFixedPos[0].x = 40.f;
+		mFixedPos[0].y = 40.f;
 
-		FixedPos[1].x = 128.f;
-		FixedPos[1].y = 40.f;
+		mFixedPos[1].x = 128.f;
+		mFixedPos[1].y = 40.f;
 
-		FixedPos[2].x = 200.f;
-		FixedPos[2].y = 40.f;
+		mFixedPos[2].x = 200.f;
+		mFixedPos[2].y = 40.f;
 
-		FixedPos[3].x = 40.f;
-		FixedPos[3].y = 110.f;
+		mFixedPos[3].x = 40.f;
+		mFixedPos[3].y = 110.f;
 
-		FixedPos[4].x = 128.f;
-		FixedPos[4].y = 96.f;
+		mFixedPos[4].x = 128.f;
+		mFixedPos[4].y = 96.f;
 
-		FixedPos[5].x = 200.f;
-		FixedPos[5].y = 110.f;
+		mFixedPos[5].x = 200.f;
+		mFixedPos[5].y = 110.f;
+
+		mBorder = new DarkNebula_Border(this);
+		mEye = new DarkNebula_Eye(this);
 	}
 
 	DarkNebula::~DarkNebula()
 	{
+		if (mBorder != nullptr)
+		{
+			delete mBorder;
+			mBorder = nullptr;
+		}
+
+		if (mEye != nullptr)
+		{
+			delete mEye;
+			mEye = nullptr;
+		}		
 	}
 
 	void DarkNebula::Initialize()
@@ -57,7 +78,7 @@ namespace sy
 		Collider* col = GetComponent<Collider>();
 		col->SetSize(Vector2(40.f, 40.f));
 
-		mTransform->SetPosition(FixedPos[1]);
+		mTransform->SetPosition(mFixedPos[1]);
 
 		// 애니메이션 생성
 		std::vector<Vector2> Daroach_StarAttack_offset = { Vector2(0.f,5.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,0.f), Vector2(0.f,21.f), Vector2(0.f,26.f), Vector2(0.f, 26.f) };
@@ -65,20 +86,79 @@ namespace sy
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Ice", Vector2::Zero, Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Fire", Vector2(224.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Spark", Vector2(448.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
-		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2(757.f, 15.f), Vector2(55.f, 56.f), Vector2(-55.f, 0.f), 0.15f, 4);
+		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2::Zero, Vector2(60.f, 65.f), Vector2(60.f, 0.f), 0.1f, 9);
 
-		mAnimator->PlayAnimation(L"DarkNebula_Body_Ice", true);
+		mAnimator->PlayAnimation(L"DarkNebula_Body_Fire", true);
 
-		ResourceManager::Load<Sound>(L"BlinkSound", L"..\\Resources\\Sound\\Effect\\Blink.wav");
-		ResourceManager::Load<Sound>(L"DN_ChangeSound", L"..\\Resources\\Sound\\Effect\\DN_Change.wav");
-		ResourceManager::Load<Sound>(L"DN_DeathSound", L"..\\Resources\\Sound\\Effect\\DN_Death.wav");
-		ResourceManager::Load<Sound>(L"DN_MoveSound", L"..\\Resources\\Sound\\Effect\\DN_Move.wav");
-
+		ResourceManager::Load<Sound>(L"BlinkSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\Blink.wav");
+		ResourceManager::Load<Sound>(L"DarkNebula_MoveSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\DarkNebula_Move.wav");
+		ResourceManager::Load<Sound>(L"DarkNebula_DeadSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\DarkNebula_Dead.wav");
+		ResourceManager::Load<Sound>(L"DarkNebula_ChangeSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\DarkNebula_Change.wav");
+	
 		BossEnemy::Initialize();
+
+		if (mBorder != nullptr)
+			mBorder->Initialize();
+		if (mEye != nullptr)
+			mEye->Initialize();
 	}
 
 	void DarkNebula::Update()
 	{
+		// 데미지 딜레이 설정
+		static float DamageDelayTime = 0.f;
+		if (mbDamaged)
+			DamageDelayTime += Time::DeltaTime();
+
+		if (DamageDelayTime > 1.f)
+		{
+			mbDamaged = false;
+			DamageDelayTime = 0.f;
+		}
+
+		// 테스트용 상태변경
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			mState = eDarkNebulaState::Move;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			mState = eDarkNebulaState::RotationalMove;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			mState = eDarkNebulaState::ZigzagMove;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			mState = eDarkNebulaState::StarAttack;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Five))
+		{
+			mState = eDarkNebulaState::SkillReady;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Six))
+		{
+			mState = eDarkNebulaState::ModeChange;
+			mStateChangeDelay = 0.f;
+		}
+		
 		switch (mState)
 		{
 		case eDarkNebulaState::Idle:
@@ -119,11 +199,21 @@ namespace sy
 		}
 
 		BossEnemy::Update();
+
+		if (mBorder != nullptr)
+			mBorder->Update();
+		if (mEye != nullptr)
+			mEye->Update();	
 	}
 
 	void DarkNebula::Render(HDC hdc)
 	{
 		BossEnemy::Render(hdc);
+
+		if (mBorder != nullptr)
+			mBorder->Render(hdc);
+		if (mEye != nullptr)
+			mEye->Render(hdc);
 	}
 
 	void DarkNebula::OnCollisionEnter(Collider* other)
@@ -132,30 +222,109 @@ namespace sy
 
 	void DarkNebula::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		Damaged(DamageAmount);
+
+		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
+		if (mbDamaged || mState == eDarkNebulaState::Dead)
+			return;
+
+		if (GetCurHP() <= 0.f)
+		{
+			mAnimator->PlayAnimation(L"DarkNebula_Dead", false);
+			ResourceManager::Find<Sound>(L"DarkNebula_DeadSound")->Play(false);	
+
+			if (mBorder != nullptr)
+			{
+				delete mBorder;
+				mBorder = nullptr;
+			}
+
+			mState = eDarkNebulaState::Dead;
+		}
+
+		mbDamaged = true;
 	}
 
 	void DarkNebula::Idle()
 	{
+		// 상태처리
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay >= 3.f)
+		{
+			mStateChangeDelay = 0.f;
+
+			int randomNumber = std::rand() % 6;
+			if (randomNumber == 0)
+			{
+				mState = eDarkNebulaState::Move;
+				int idx = std::rand() % 6;
+				mTargetPos = mFixedPos[idx];
+			}
+			else if (randomNumber == 1)
+			{
+				mState = eDarkNebulaState::RotationalMove;
+				int idx = std::rand() % 6;
+				mTargetPos = mFixedPos[idx];
+			}
+			else if (randomNumber == 2)
+			{
+				mState = eDarkNebulaState::ZigzagMove;
+				int idx = std::rand() % 6;
+				mTargetPos = mFixedPos[idx];
+			}
+			else if (randomNumber == 3)
+			{
+				mState = eDarkNebulaState::StarAttack;
+			}
+			else if (randomNumber == 4)
+			{
+				mState = eDarkNebulaState::SkillReady;
+			}
+			else if (randomNumber == 5)
+			{
+				mState = eDarkNebulaState::ModeChange;
+			}
+		}
 	}
 
 	void DarkNebula::Move()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		
+		Vector2 Diff = mTargetPos - pos;
+
+		if(Diff.Length() <= 1.f)
+		{
+			mState = eDarkNebulaState::Idle;
+		}
+		else
+		{
+			Diff.Normalize();
+			Diff *= 100.f * Time::DeltaTime();
+			pos += Diff;
+			mTransform->SetPosition(pos);
+		}
 	}
 
 	void DarkNebula::RotationalMove()
 	{
+
 	}
 
 	void DarkNebula::ZigzagMove()
 	{
+
 	}
 
 	void DarkNebula::StarAttack()
 	{
+
 	}
 
 	void DarkNebula::SkillReady()
 	{
+
 	}
 
 	void DarkNebula::FireSkill()

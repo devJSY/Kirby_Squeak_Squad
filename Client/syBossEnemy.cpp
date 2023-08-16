@@ -14,13 +14,16 @@ namespace sy
 
 	void BossEnemy::Initialize()
 	{
+		Enemy::Initialize();
 	}
 
 	void BossEnemy::Update()
 	{
+		Enemy::Update();
 	}
 
 	void BossEnemy::Render(HDC hdc)
 	{
+		Enemy::Render(hdc);
 	}
 }

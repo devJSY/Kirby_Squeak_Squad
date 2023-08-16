@@ -30,13 +30,14 @@
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
 #include "syGambleGalaxyScene.h"
-#include "syDaroach.h"
+#include "syDarkNebula.h"
 
 namespace sy
 {
 	Level8_BossScene::Level8_BossScene()
 		: mPixelBG(nullptr)
 		, mPortalUI(nullptr)
+		, mDarkNebula(nullptr)
 	{
 	}
 
@@ -47,7 +48,8 @@ namespace sy
 	void Level8_BossScene::Initialize()
 	{
 		// 보스 생성
-
+		mDarkNebula = new DarkNebula(eAbilityType::Normal);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, mDarkNebula);
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"DarkNebula1_Stage", L"..\\Resources\\Map\\Foreground\\DarkNebula1.bmp"); // 이미지 설정
