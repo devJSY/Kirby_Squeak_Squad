@@ -23,6 +23,7 @@ namespace sy
 		void CreateDot();
 		void CreateStageUI();
 
+	private:
 		void StageExit();
 		void Boss();
 

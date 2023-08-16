@@ -198,6 +198,7 @@
     <ClInclude Include="syLanding_Effect.h" />
     <ClInclude Include="syLevel1_BossScene.h" />
     <ClInclude Include="syLevel6_BossScene.h" />
+    <ClInclude Include="syLevel8_BossScene.h" />
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syMixItem.h" />
@@ -316,6 +317,7 @@
     <ClCompile Include="syLanding_Effect.cpp" />
     <ClCompile Include="syLevel1_BossScene.cpp" />
     <ClCompile Include="syLevel6_BossScene.cpp" />
+    <ClCompile Include="syLevel8_BossScene.cpp" />
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syMixItem.cpp" />
