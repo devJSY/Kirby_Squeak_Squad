@@ -11,6 +11,7 @@
 #include "syDarkNebula_Eye.h"
 #include "syTime.h"
 #include "syInput.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -181,8 +182,9 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::Six))
 		{
-			mState = eDarkNebulaState::ModeChange;
+			mState = eDarkNebulaState::ModeChangeReady;
 			mStateChangeDelay = 0.f;
+			mTargetPos = mFixedPos[4];
 		}
 		
 		switch (mState)
@@ -216,6 +218,9 @@ namespace sy
 			break;
 		case eDarkNebulaState::SparkSkill:
 			SparkSkill();
+			break;
+		case eDarkNebulaState::ModeChangeReady:
+			ModeChangeReady();
 			break;
 		case eDarkNebulaState::ModeChange:
 			ModeChange();
@@ -254,6 +259,7 @@ namespace sy
 		// 특정 조건 에서만 충돌처리
 		if (mState != eDarkNebulaState::Move 
 			&& mState != eDarkNebulaState::RotationalMove
+			&& mState != eDarkNebulaState::ZigzagMoveReady
 			&& mState != eDarkNebulaState::ZigzagMove)
 			return;
 
@@ -341,18 +347,19 @@ namespace sy
 				else
 					mTargetPos = mFixedPos[5];
 			}
-			//else if (randomNumber == 3)
-			//{
-			//	mState = eDarkNebulaState::StarAttack;
-			//}
-			//else if (randomNumber == 4)
-			//{
-			//	mState = eDarkNebulaState::SkillReady;
-			//}
-			//else if (randomNumber == 5)
-			//{
-			//	mState = eDarkNebulaState::ModeChange;
-			//}
+			else if (randomNumber == 3)
+			{
+				mState = eDarkNebulaState::StarAttack;
+			}
+			else if (randomNumber == 4)
+			{
+				mState = eDarkNebulaState::SkillReady;
+			}
+			else if (randomNumber == 5)
+			{
+				mState = eDarkNebulaState::ModeChangeReady;
+				mTargetPos = mFixedPos[4];
+			}
 		}
 	}
 
@@ -455,7 +462,7 @@ namespace sy
 			angle -= 2.0f * 3.1415f;
 		}
 
-		pos.y += std::cos(angle) * 200.f * Time::DeltaTime();
+		pos.y += std::cos(angle) * 300.f * Time::DeltaTime();
 
 		mTransform->SetPosition(pos);
 	}
@@ -467,7 +474,21 @@ namespace sy
 
 	void DarkNebula::SkillReady()
 	{
+		if (mMode == eDarkNebulaMode::Fire)
+		{
 
+			mState = eDarkNebulaState::FireSkill;
+		}
+		else if (mMode == eDarkNebulaMode::Ice)
+		{
+
+			mState = eDarkNebulaState::IceSkill;
+		}
+		else if (mMode == eDarkNebulaMode::Spark)
+		{
+
+			mState = eDarkNebulaState::SparkSkill;
+		}
 	}
 
 	void DarkNebula::FireSkill()
@@ -482,8 +503,71 @@ namespace sy
 	{
 	}
 
+	void DarkNebula::ModeChangeReady()
+	{
+		Vector2 pos = mTransform->GetPosition();
+
+		Vector2 Diff = mTargetPos - pos;
+
+		if (Diff.Length() <= 1.f)
+		{
+			Camera::fadeOut(1.f, RGB(255, 255, 255));
+			Camera::fadeIn(1.f, RGB(255, 255, 255));
+
+			int randomMode = std::rand() % 100;
+
+			if (mMode == eDarkNebulaMode::Fire)
+			{
+				if (randomMode % 2 == 0)
+					mMode = eDarkNebulaMode::Ice;
+				else
+					mMode = eDarkNebulaMode::Spark;
+			}
+			else if (mMode == eDarkNebulaMode::Ice)
+			{
+				if (randomMode % 2 == 0)
+					mMode = eDarkNebulaMode::Fire;
+				else
+					mMode = eDarkNebulaMode::Spark;
+			}
+			else if (mMode == eDarkNebulaMode::Spark)
+			{
+				if (randomMode % 2 == 0)
+					mMode = eDarkNebulaMode::Fire;
+				else
+					mMode = eDarkNebulaMode::Ice;
+			}
+
+			mState = eDarkNebulaState::ModeChange;
+			mStateChangeDelay = 0.f;
+		}
+		else
+		{
+			Diff.Normalize();
+			Diff *= 200.f * Time::DeltaTime();
+			pos += Diff;
+			mTransform->SetPosition(pos);
+		}
+	}
+
 	void DarkNebula::ModeChange()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 2.f)
+		{
+			mState = eDarkNebulaState::Idle;
+			mStateChangeDelay = 0.f;
+		}
+		else if (mStateChangeDelay > 1.f)
+		{
+			if (mMode == eDarkNebulaMode::Fire)
+				mAnimator->PlayAnimation(L"DarkNebula_Body_Fire", true);
+			else if (mMode == eDarkNebulaMode::Ice)
+				mAnimator->PlayAnimation(L"DarkNebula_Body_Ice", true);
+			else if (mMode == eDarkNebulaMode::Spark)
+				mAnimator->PlayAnimation(L"DarkNebula_Body_Spark", true);
+		}
 	}
 
 	void DarkNebula::Dead()

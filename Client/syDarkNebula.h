@@ -15,6 +15,7 @@ namespace sy
 		FireSkill,
 		IceSkill,
 		SparkSkill,
+		ModeChangeReady,
 		ModeChange,
 		Dead,
 	};
@@ -57,6 +58,7 @@ namespace sy
 		void FireSkill();
 		void IceSkill();
 		void SparkSkill();
+		void ModeChangeReady();
 		void ModeChange();
 		void Dead();
 
