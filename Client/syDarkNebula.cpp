@@ -326,7 +326,7 @@ namespace sy
 			}
 
 			mState = eDarkNebulaState::Dead;
-			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", true);
+			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_Flash", true);
 		}
 
 		mbDamaged = true;
@@ -715,17 +715,26 @@ namespace sy
 		static float eyeDeadTime = 0.f;
 		eyeDeadTime += Time::DeltaTime();
 
-		if (eyeDeadTime > 3.f)
+		if (eyeDeadTime > 19.f)
 		{
 			if (mEye != nullptr)
 			{
-				delete mEye;
-				mEye = nullptr;
+				mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", false);
+				eyeDeadTime = 0.f;
 			}
 		}
 		else
 		{
 			// 데스스타 생성
+		}
+
+		if (mEye != nullptr)
+		{
+			if (mEye->GetComponent<Animator>()->IsActiveAnimationComplete())
+			{
+				delete mEye;
+				mEye = nullptr;
+			}
 		}
 	}
 }
