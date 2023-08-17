@@ -27,7 +27,7 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mCollider(nullptr)
 		, mDir(eDirection::RIGHT)
-		, mStateChangeDelay(0.f)
+		, mStateChangeDelay(-3.f)
 		, mFixedPos{}
 		, mbDamaged(false)
 	{
@@ -57,7 +57,7 @@ namespace sy
 	void Daroach::Initialize()
 	{
 		// 체력 설정
-		SetHP(500);
+		SetHP(750);
 
 		// 텍스쳐 로드
 		Texture* Daroach_Right_Tex = ResourceManager::Load<Texture>(L"Daroach_Right_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_Right.bmp");
@@ -540,7 +540,7 @@ namespace sy
 
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 3.f)
+		if (mStateChangeDelay > 2.f)
 		{
 			mStateChangeDelay = 0.f;
 
@@ -560,7 +560,7 @@ namespace sy
 	{
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 3.f)
+		if (mStateChangeDelay > 2.f)
 		{
 			mStateChangeDelay = 0.f;
 

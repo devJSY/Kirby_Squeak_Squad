@@ -73,7 +73,7 @@ namespace sy
 
 		mDuration += Time::DeltaTime();
 
-		if (mDuration > 5.f)
+		if (mDuration > 3.f)
 		{
 			mAnimator->PlayAnimation(L"Daroach_Star_Death", false);
 			mDuration = 0.f;

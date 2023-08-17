@@ -25,7 +25,7 @@ namespace sy
 		, mCollider(nullptr)
 		, mDir(eDirection::LEFT)
 		, mFlyDir(eFlyDiration::Down)
-		, mStateChangeDelay(0.f)
+		, mStateChangeDelay(-3.f)
 	{
 	}
 

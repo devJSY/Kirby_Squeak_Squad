@@ -28,7 +28,7 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mDir(eDirection::RIGHT)
-		, mStateChangeDelay(0.f)
+		, mStateChangeDelay(-3.f)
 		, mModeChangeDelay(0.f)
 		, mFixedPos{}
 		, mTargetPos(Vector2::Zero)
@@ -76,7 +76,7 @@ namespace sy
 	void DarkNebula::Initialize()
 	{
 		// 체력 설정
-		SetHP(500);
+		SetHP(1000);
 
 		// 텍스쳐 로드
 		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
@@ -86,6 +86,7 @@ namespace sy
 		mTransform = GetComponent<Transform>();
 		Collider* col = GetComponent<Collider>();
 		col->SetSize(Vector2(40.f, 40.f));
+		col->SetOffset(Vector2(0.f, 3.f));
 
 		mTransform->SetPosition(mFixedPos[1]);
 
