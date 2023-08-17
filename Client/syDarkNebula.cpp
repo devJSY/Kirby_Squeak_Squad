@@ -20,6 +20,7 @@ namespace sy
 		, mMode(eDarkNebulaMode::Fire)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
+		, mDir(eDirection::RIGHT)
 		, mStateChangeDelay(0.f)
 		, mFixedPos{}
 		, mTargetPos(Vector2::Zero)
@@ -105,6 +106,8 @@ namespace sy
 
 	void DarkNebula::Update()
 	{
+		mDir = mTransform->GetDirection();
+
 		// 데미지 딜레이 설정
 		static float DamageDelayTime = 0.f;
 		if (mbDamaged)
@@ -138,11 +141,13 @@ namespace sy
 				mTransform->SetDirection(eDirection::RIGHT);
 			else
 				mTransform->SetDirection(eDirection::LEFT);
+
+			mDir = mTransform->GetDirection();
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Three))
 		{
-			mState = eDarkNebulaState::ZigzagMove;
+			mState = eDarkNebulaState::ZigzagMoveReady;
 			mStateChangeDelay = 0.f;
 			int idx = std::rand() % 6;
 			mTargetPos = mFixedPos[idx];
@@ -153,6 +158,13 @@ namespace sy
 				mTransform->SetDirection(eDirection::RIGHT);
 			else
 				mTransform->SetDirection(eDirection::LEFT);
+
+			mDir = mTransform->GetDirection();
+
+			if (mDir == eDirection::RIGHT)
+				mTargetPos = mFixedPos[3];
+			else
+				mTargetPos = mFixedPos[5];
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Four))
@@ -183,6 +195,9 @@ namespace sy
 			break;
 		case eDarkNebulaState::RotationalMove:
 			RotationalMove();
+			break;
+		case eDarkNebulaState::ZigzagMoveReady:
+			ZigzagMoveReady();
 			break;
 		case eDarkNebulaState::ZigzagMove:
 			ZigzagMove();
@@ -232,6 +247,30 @@ namespace sy
 
 	void DarkNebula::OnCollisionEnter(Collider* other)
 	{
+		if (mState == eDarkNebulaState::Dead
+			|| GetCurHP() <= 0.f)
+			return;
+
+		// 특정 조건 에서만 충돌처리
+		if (mState != eDarkNebulaState::Move 
+			&& mState != eDarkNebulaState::RotationalMove
+			&& mState != eDarkNebulaState::ZigzagMove)
+			return;
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		if (player == nullptr)
+			return;
+
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+
+		// DefaultKirby가 Damage 상태면 적용하지않음
+		if (kirby != nullptr && kirby->IsDamagedState())
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void DarkNebula::TakeHit(int DamageAmount, math::Vector2 HitDir)
@@ -264,7 +303,7 @@ namespace sy
 		// 상태처리
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay >= 3.f)
+		if (mStateChangeDelay >= 0.5f)
 		{
 			mStateChangeDelay = 0.f;
 
@@ -274,6 +313,8 @@ namespace sy
 				mTransform->SetDirection(eDirection::RIGHT);
 			else
 				mTransform->SetDirection(eDirection::LEFT);
+
+			mDir = mTransform->GetDirection();
 
 			int randomNumber = std::rand() % 6;
 			if (randomNumber == 0)
@@ -291,22 +332,27 @@ namespace sy
 			}
 			else if (randomNumber == 2)
 			{
-				mState = eDarkNebulaState::ZigzagMove;
+				mState = eDarkNebulaState::ZigzagMoveReady;
 				int idx = std::rand() % 6;
 				mTargetPos = mFixedPos[idx];
+
+				if (mDir == eDirection::RIGHT)
+					mTargetPos = mFixedPos[3];
+				else
+					mTargetPos = mFixedPos[5];
 			}
-			else if (randomNumber == 3)
-			{
-				mState = eDarkNebulaState::StarAttack;
-			}
-			else if (randomNumber == 4)
-			{
-				mState = eDarkNebulaState::SkillReady;
-			}
-			else if (randomNumber == 5)
-			{
-				mState = eDarkNebulaState::ModeChange;
-			}
+			//else if (randomNumber == 3)
+			//{
+			//	mState = eDarkNebulaState::StarAttack;
+			//}
+			//else if (randomNumber == 4)
+			//{
+			//	mState = eDarkNebulaState::SkillReady;
+			//}
+			//else if (randomNumber == 5)
+			//{
+			//	mState = eDarkNebulaState::ModeChange;
+			//}
 		}
 	}
 
@@ -357,10 +403,61 @@ namespace sy
 		}
 	}
 
+	void DarkNebula::ZigzagMoveReady()
+	{
+		Vector2 pos = mTransform->GetPosition();
+
+		Vector2 Diff = mTargetPos - pos;
+
+		if (Diff.Length() <= 1.f)
+		{
+			mState = eDarkNebulaState::ZigzagMove;
+		}
+		else
+		{
+			Diff.Normalize();
+			Diff *= 200.f * Time::DeltaTime();
+			pos += Diff;
+			mTransform->SetPosition(pos);
+		}
+	}
+
 
 	void DarkNebula::ZigzagMove()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+		static float angle = 0.f;
 
+		if (mStateChangeDelay > 3.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mTargetPos = mFixedPos[5];
+			else
+				mTargetPos = mFixedPos[3];
+
+			mState = eDarkNebulaState::Move;
+			mStateChangeDelay = 0.f;
+			angle = 0.f;
+		}
+
+		Vector2 pos = mTransform->GetPosition();
+
+		if (mDir == eDirection::RIGHT)
+			pos.x += 50.f * Time::DeltaTime();
+		else
+			pos.x -= 50.f * Time::DeltaTime();
+		
+		// 초당 5도
+		angle += 5.f * (float)Time::DeltaTime();
+		// 2π (2.0f * 3.1415f)는 한 바퀴(360도)에 해당하는 각도
+		if (angle > 2.0f * 3.1415f)
+		{
+			angle -= 2.0f * 3.1415f;
+		}
+
+		pos.y += std::cos(angle) * 200.f * Time::DeltaTime();
+
+		mTransform->SetPosition(pos);
 	}
 
 	void DarkNebula::StarAttack()

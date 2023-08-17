@@ -202,7 +202,6 @@ namespace sy::math
 		Vector2 p0 = start;
 		Vector2 p1 = { start.x + radius, start.y };
 		Vector2 p2 = { end.x - radius, end.y };
-		Vector2 p3 = end;
 
 		if (t > 1.f) {
 			t = 1.f;

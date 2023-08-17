@@ -8,6 +8,7 @@ namespace sy
 		Idle,
 		Move,
 		RotationalMove,
+		ZigzagMoveReady,
 		ZigzagMove,
 		StarAttack,
 		SkillReady,
@@ -49,6 +50,7 @@ namespace sy
 		void Idle();
 		void Move();
 		void RotationalMove();
+		void ZigzagMoveReady();
 		void ZigzagMove();
 		void StarAttack();
 		void SkillReady();
@@ -63,6 +65,7 @@ namespace sy
 		eDarkNebulaMode				mMode;
 		class Animator*				mAnimator;
 		class Transform*			mTransform;
+		eDirection					mDir;
 
 		float						mStateChangeDelay;
 		math::Vector2				mFixedPos[6];
