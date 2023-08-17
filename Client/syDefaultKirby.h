@@ -75,7 +75,7 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other)	override;
 		virtual void OnCollisionExit(class Collider* other)	override;
 
-		bool IsDamagedState() { return mState == eDefaultKirbyState::Damage; }
+		bool IsDamagedState() { return mState == eDefaultKirbyState::Damage || mState == eDefaultKirbyState::Inhaled_Damage; }
 
 		void SetKirbyState(eDefaultKirbyState state) { mState = state; }
 		eDefaultKirbyState GetKirbyState() { return mState; }
