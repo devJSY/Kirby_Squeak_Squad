@@ -61,7 +61,7 @@ namespace sy
 
 	void DarkNebula_IceSkill::OnCollisionEnter(Collider* other)
 	{
-		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		Player* player = dynamic_cast<Player*>(other->GetOwner()); 
 
 		if (player == nullptr)
 			return;

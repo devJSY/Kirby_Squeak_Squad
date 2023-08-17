@@ -2028,5 +2028,4 @@ namespace sy
 			bActive[0] = bActive[1] = bActive[2] = bActive[3] = true;
 		}
 	}
-
 }

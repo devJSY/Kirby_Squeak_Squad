@@ -15,6 +15,7 @@
 #include "syDarkNebula_Star.h"
 #include "syObject.h"
 #include "syDarkNebula_IceSkill.h"
+#include "syDarkNebula_FireBall.h"
 
 namespace sy
 {
@@ -185,7 +186,7 @@ namespace sy
 		{
 			mState = eDarkNebulaState::SkillReady;
 			mStateChangeDelay = 0.f;
-
+			
 			if (mMode == eDarkNebulaMode::Fire)
 			{
 				mTargetPos = mFixedPos[1];
@@ -386,7 +387,8 @@ namespace sy
 				else if (randomNumber == 4)
 				{
 					mState = eDarkNebulaState::SkillReady;
-
+					mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_Flash", true);
+					
 					if (mMode == eDarkNebulaMode::Fire)
 					{
 						mTargetPos = mFixedPos[1];
@@ -543,10 +545,16 @@ namespace sy
 		Vector2 Diff = mTargetPos - pos;
 
 		if (Diff.Length() <= 1.f)
-		{
+		{		
+			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye", true);
+
 			if (mMode == eDarkNebulaMode::Fire)
 			{
 				mState = eDarkNebulaState::FireSkill;
+
+				DarkNebula_FireBall* skill = new DarkNebula_FireBall(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+				mStateChangeDelay = 0.f;
 			}
 			else if (mMode == eDarkNebulaMode::Ice)
 			{
@@ -575,6 +583,13 @@ namespace sy
 
 	void DarkNebula::FireSkill()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 5.f)
+		{
+			mState = eDarkNebulaState::Idle;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void DarkNebula::IceSkill()

@@ -406,14 +406,14 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireBallSkill">
       <UniqueIdentifier>{4dedd70b-3e07-46b0-8b61-de1ece2b7aa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill">
-      <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill">
       <UniqueIdentifier>{e6e906cc-f463-4825-b6e1-62778d58ad44}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill">
       <UniqueIdentifier>{eed6da57-d509-4958-a5ab-9b29ffa093dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill">
+      <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -777,6 +777,12 @@
     <ClInclude Include="syDarkNebula_IceSkill.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_FireBall.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireBallSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="syDarkNebula_Fire.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1129,6 +1135,12 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_IceSkill.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_FireBall.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireBallSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_Fire.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
