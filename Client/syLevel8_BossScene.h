@@ -20,6 +20,6 @@ namespace sy
 	private:
 		class BackGround*	mPixelBG;
 		class DarkNebula*	mDarkNebula;
-		class PortalUI*		mPortalUI;
+		float				mDuration;
 	};
 }

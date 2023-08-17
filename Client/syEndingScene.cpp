@@ -63,6 +63,8 @@ namespace sy
 	{
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);
+		Camera::Pause(1.f, RGB(255, 255, 255));
+		Camera::fadeIn(1.f, RGB(255, 255, 255));
 
 		Animator* videoAnimator = mVideo->GetComponent<Animator>();
 		videoAnimator->PlayAnimation(L"EndingVideo", false);

@@ -31,13 +31,14 @@
 #include "syWheelKirby.h"
 #include "syGambleGalaxyScene.h"
 #include "syDarkNebula.h"
+#include "syTime.h"
 
 namespace sy
 {
 	Level8_BossScene::Level8_BossScene()
 		: mPixelBG(nullptr)
-		, mPortalUI(nullptr)
 		, mDarkNebula(nullptr)
+		, mDuration(0.f)
 	{
 	}
 
@@ -98,21 +99,22 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		//if (mDaroach->GetDaroachState() == eDaroachState::Dead)
-		//{
-		//	// Portal
-		//	if (mPortalUI == nullptr)
-		//	{
-		//		mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-		//		mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 150.f));
-		//		mPortalUI->Initialize();
+		if (mDarkNebula->GetDarkNebulaState() == eDarkNebulaState::Dead)
+		{
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"Level8BossSound")->Stop(true);
+			mDuration += Time::DeltaTime();
 
-		//		// 오디오 재생
-		//		ResourceManager::Find<Sound>(L"Level8BossSound")->Stop(true);
-		//		// 오디오 재생
-		//		ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
-		//	}
-		//}
+
+			if (mDuration > 11.f)
+			{
+				SceneManager::LoadScene(L"EndingScene");
+			}
+			else if (mDuration > 10.f && Camera::IsEmptyCamEffect())
+			{
+				Camera::fadeOut(1.f, RGB(255, 255, 255));			
+			}
+		}
 
 		Scene::Update();
 	}
