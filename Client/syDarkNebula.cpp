@@ -549,6 +549,11 @@ namespace sy
 			}
 			else if (mMode == eDarkNebulaMode::Ice)
 			{
+				if (mDir == eDirection::RIGHT)
+					mTargetPos = mFixedPos[2];
+				else
+					mTargetPos = mFixedPos[1];
+
 				mState = eDarkNebulaState::IceSkill;
 			}
 			else if (mMode == eDarkNebulaMode::Spark)
@@ -571,6 +576,21 @@ namespace sy
 
 	void DarkNebula::IceSkill()
 	{
+		Vector2 pos = mTransform->GetPosition();
+
+		Vector2 Diff = mTargetPos - pos;
+
+		if (Diff.Length() <= 1.f)
+		{
+			mState = eDarkNebulaState::Idle;
+		}
+		else
+		{
+			Diff.Normalize();
+			Diff *= 200.f * Time::DeltaTime();
+			pos += Diff;
+			mTransform->SetPosition(pos);
+		}
 	}
 
 	void DarkNebula::SparkSkill()
