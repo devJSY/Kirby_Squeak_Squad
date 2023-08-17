@@ -394,20 +394,26 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Border">
       <UniqueIdentifier>{9deb8084-4033-4727-8714-32be75944b71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_IceSkill">
-      <UniqueIdentifier>{e6e906cc-f463-4825-b6e1-62778d58ad44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_SparkSkill">
-      <UniqueIdentifier>{eed6da57-d509-4958-a5ab-9b29ffa093dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_FireBallSkill">
-      <UniqueIdentifier>{4dedd70b-3e07-46b0-8b61-de1ece2b7aa1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_FireSkill">
-      <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar">
       <UniqueIdentifier>{bebaac0d-3d0c-464a-be7c-6b028488aa40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill">
+      <UniqueIdentifier>{6f5aa8a5-909a-4f28-bf34-c2e1681c8f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_Star">
+      <UniqueIdentifier>{fb49b92c-0e96-43f0-9b8a-186257197f25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireBallSkill">
+      <UniqueIdentifier>{4dedd70b-3e07-46b0-8b61-de1ece2b7aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill">
+      <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill">
+      <UniqueIdentifier>{e6e906cc-f463-4825-b6e1-62778d58ad44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill">
+      <UniqueIdentifier>{eed6da57-d509-4958-a5ab-9b29ffa093dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -765,6 +771,9 @@
     <ClInclude Include="syDarkNebula_Eye.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Eye</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_Star.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_Star</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1111,6 +1120,9 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_Eye.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_Eye</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_Star.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_Star</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

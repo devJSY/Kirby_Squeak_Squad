@@ -12,6 +12,8 @@
 #include "syTime.h"
 #include "syInput.h"
 #include "syCamera.h"
+#include "syDarkNebula_Star.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -23,6 +25,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mStateChangeDelay(0.f)
+		, mModeChangeDelay(0.f)
 		, mFixedPos{}
 		, mTargetPos(Vector2::Zero)
 		, mbDamaged(false)
@@ -88,7 +91,7 @@ namespace sy
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Ice", Vector2::Zero, Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Fire", Vector2(224.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Spark", Vector2(448.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
-		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2::Zero, Vector2(60.f, 65.f), Vector2(60.f, 0.f), 0.1f, 9);
+		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2::Zero, Vector2(60.f, 65.f), Vector2(60.f, 0.f), 0.1f, 10);
 
 		mAnimator->PlayAnimation(L"DarkNebula_Body_Fire", true);
 
@@ -302,6 +305,7 @@ namespace sy
 			}
 
 			mState = eDarkNebulaState::Dead;
+			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", true);
 		}
 
 		mbDamaged = true;
@@ -358,14 +362,14 @@ namespace sy
 					else
 						mTargetPos = mFixedPos[5];
 				}
-				//else if (randomNumber == 3)
-				//{
-				//	mState = eDarkNebulaState::StarAttack;
-				//}
-				//else if (randomNumber == 4)
-				//{
-				//	mState = eDarkNebulaState::SkillReady;
-				//}
+				else if (randomNumber == 3)
+				{
+					mState = eDarkNebulaState::StarAttack;
+				}
+				else if (randomNumber == 4)
+				{
+					mState = eDarkNebulaState::SkillReady;
+				}
 			}
 		}
 	}
@@ -476,7 +480,27 @@ namespace sy
 
 	void DarkNebula::StarAttack()
 	{
+		static int cnt = 5;
+		mStateChangeDelay += Time::DeltaTime();
 
+		if (cnt <= 0.f)
+		{
+			mState = eDarkNebulaState::Idle;
+			cnt = 5;
+			mStateChangeDelay = 0.f;
+		}
+		else
+		{
+			if (mStateChangeDelay > 0.2f)
+			{
+				Vector2 Dir = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+				DarkNebula_Star* star = new DarkNebula_Star(this, Dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+				mStateChangeDelay = 0.f;
+				--cnt;
+			}
+		}
 	}
 
 	void DarkNebula::SkillReady()
@@ -546,6 +570,7 @@ namespace sy
 			}
 
 			mState = eDarkNebulaState::ModeChange;
+			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", false);
 		}
 		else
 		{
@@ -569,10 +594,26 @@ namespace sy
 			Camera::fadeIn(1.f, RGB(255, 255, 255));
 			mState = eDarkNebulaState::Idle;
 			mModeChangeDelay = 0.f;
+			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye", true);
 		}
 	}
 
 	void DarkNebula::Dead()
 	{
+		static float eyeDeadTime = 0.f;
+		eyeDeadTime += Time::DeltaTime();
+
+		if (eyeDeadTime > 3.f)
+		{
+			if (mEye != nullptr)
+			{
+				delete mEye;
+				mEye = nullptr;
+			}
+		}
+		else
+		{
+			// 데스스타 생성
+		}
 	}
 }

@@ -13,6 +13,7 @@
 #include "syDaroach_Bomb.h"
 #include "syDaroach_TimeBomb.h"
 #include "syDaroach_Star.h"
+#include "syDarkNebula_Star.h"
 
 namespace sy
 {
@@ -103,6 +104,7 @@ namespace sy
 		Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(other->GetOwner());
 		Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(other->GetOwner());
 		Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(other->GetOwner());
+		DarkNebula_Star* darkNebulaStar = dynamic_cast<DarkNebula_Star*>(other->GetOwner());
 
 		// 특정 오브젝트만 흡수 인식
 		if (abilityStar == nullptr
@@ -111,7 +113,8 @@ namespace sy
 			&& star == nullptr
 			&& daroachbomb == nullptr
 			&& daroachTimebomb == nullptr
-			&& daroachStar == nullptr)
+			&& daroachStar == nullptr
+			&& darkNebulaStar == nullptr)
 			return;
 
 		// 예외처리 
@@ -239,6 +242,7 @@ namespace sy
 			Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(obj);
 			Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(obj);
 			Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(obj);
+			DarkNebula_Star* darkNebulaStar = dynamic_cast<DarkNebula_Star*>(obj);
 
 			// owner 설정
 			Effects* owner = nullptr;
@@ -250,6 +254,8 @@ namespace sy
 				owner = daroachTimebomb;
 			else if (daroachStar != nullptr)
 				owner = daroachStar;
+			else if (darkNebulaStar != nullptr)
+				owner = darkNebulaStar;
 
 			if (owner == nullptr || owner->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
@@ -358,7 +364,13 @@ namespace sy
 
 			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
+
 			Star_Effect* star = dynamic_cast<Star_Effect*>(mTarget);
+			Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(mTarget);
+			Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(mTarget);
+			Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(mTarget);
+			DarkNebula_Star* darkNebulaStar = dynamic_cast<DarkNebula_Star*>(mTarget);
+
 			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
 
 			if (abilityStar != nullptr)
@@ -369,7 +381,11 @@ namespace sy
 			{
 				defaultKirby->SetInhaledObjectInfo(abilityItem->GetAbilityType(), sy::InhaledObjectType::AbilityItem);
 			}
-			else if (star != nullptr)
+			else if (star != nullptr 
+				|| daroachbomb != nullptr
+				|| daroachTimebomb != nullptr
+				|| daroachStar != nullptr
+				|| darkNebulaStar != nullptr)
 			{
 				defaultKirby->SetInhaledObjectInfo(eAbilityType::Normal, sy::InhaledObjectType::Effects);
 			}
