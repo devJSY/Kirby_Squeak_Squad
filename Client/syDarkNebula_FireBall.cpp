@@ -201,10 +201,10 @@ namespace sy
 			DarkNebula* owner = dynamic_cast<DarkNebula*>(GetOwner());
 			if (owner != nullptr)
 			{
-				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 61.5, mGroundPos.y));
+				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 61.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire1);
 
-				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 61.5, mGroundPos.y));
+				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 61.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire2);
 			}
 
@@ -215,10 +215,10 @@ namespace sy
 			DarkNebula* owner = dynamic_cast<DarkNebula*>(GetOwner());
 			if (owner != nullptr)
 			{
-				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 79.5, mGroundPos.y));
+				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 79.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire1);
 
-				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 79.5, mGroundPos.y));
+				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 79.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire2);
 			}
 
@@ -229,10 +229,10 @@ namespace sy
 			DarkNebula* owner = dynamic_cast<DarkNebula*>(GetOwner());
 			if (owner != nullptr)
 			{
-				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 97.5, mGroundPos.y));
+				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 97.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire1);
 
-				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 97.5, mGroundPos.y));
+				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 97.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire2);
 			}
 
@@ -243,10 +243,10 @@ namespace sy
 			DarkNebula* owner = dynamic_cast<DarkNebula*>(GetOwner());
 			if (owner != nullptr)
 			{
-				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 115.5, mGroundPos.y));
+				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 115.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire1);
 
-				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 115.5, mGroundPos.y));
+				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 115.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire2);
 			}
 
@@ -257,10 +257,10 @@ namespace sy
 			DarkNebula* owner = dynamic_cast<DarkNebula*>(GetOwner());
 			if (owner != nullptr)
 			{
-				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 133.5, mGroundPos.y));
+				DarkNebula_Fire* fire1 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x + 133.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire1);
 
-				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 133.5, mGroundPos.y));
+				DarkNebula_Fire* fire2 = new DarkNebula_Fire(owner, Vector2(mGroundPos.x - 133.5f, mGroundPos.y));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, fire2);
 			}
 

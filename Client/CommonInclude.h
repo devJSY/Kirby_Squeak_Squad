@@ -86,6 +86,14 @@ namespace sy::enums
 		LEFT,
 	};
 
+	enum class eCornerDirection
+	{
+		RightTop,
+		LeftTop,
+		RightBottom,
+		LeftBottom,
+	};
+
 	enum class eLevelType
 	{
 		AllClear_LevelSelect

@@ -16,6 +16,8 @@
 #include "syObject.h"
 #include "syDarkNebula_IceSkill.h"
 #include "syDarkNebula_FireBall.h"
+#include "syDarkNebula_SparkBolt.h"
+#include "syDarkNebula_SparkSkill.h"
 
 namespace sy
 {
@@ -47,7 +49,7 @@ namespace sy
 		mFixedPos[3].y = 110.f;
 
 		mFixedPos[4].x = 128.f;
-		mFixedPos[4].y = 96.f;
+		mFixedPos[4].y = 71.f;
 
 		mFixedPos[5].x = 200.f;
 		mFixedPos[5].y = 110.f;
@@ -546,6 +548,7 @@ namespace sy
 
 		if (Diff.Length() <= 1.f)
 		{		
+			mStateChangeDelay = 0.f;
 			mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye", true);
 
 			if (mMode == eDarkNebulaMode::Fire)
@@ -554,7 +557,6 @@ namespace sy
 
 				DarkNebula_FireBall* skill = new DarkNebula_FireBall(this);
 				object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
-				mStateChangeDelay = 0.f;
 			}
 			else if (mMode == eDarkNebulaMode::Ice)
 			{
@@ -570,6 +572,18 @@ namespace sy
 			else if (mMode == eDarkNebulaMode::Spark)
 			{
 				mState = eDarkNebulaState::SparkSkill;
+
+				DarkNebula_SparkBolt* RT = new DarkNebula_SparkBolt(this, eCornerDirection::RightTop);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, RT);
+
+				DarkNebula_SparkBolt* LT = new DarkNebula_SparkBolt(this, eCornerDirection::LeftTop);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, LT);
+
+				DarkNebula_SparkBolt* RB = new DarkNebula_SparkBolt(this, eCornerDirection::RightBottom);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, RB);
+
+				DarkNebula_SparkBolt* LB = new DarkNebula_SparkBolt(this, eCornerDirection::LeftBottom);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, LB);
 			}
 		}
 		else
@@ -613,6 +627,22 @@ namespace sy
 
 	void DarkNebula::SparkSkill()
 	{
+		static bool bActive = true;
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (bActive && mStateChangeDelay > 2.f)
+		{
+			DarkNebula_SparkSkill* skill = new DarkNebula_SparkSkill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);			
+			bActive = false;
+		}
+
+		if (mStateChangeDelay > 5.f)
+		{
+			mState = eDarkNebulaState::Idle;
+			mStateChangeDelay = 0.f;
+			bActive = true;
+		}
 	}
 
 	void DarkNebula::ModeChangeReady()

@@ -415,6 +415,12 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill">
       <UniqueIdentifier>{39bead8e-fa24-414a-b1ea-9df9d1dbee41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkBolt">
+      <UniqueIdentifier>{1438884f-3f6a-49f9-acb7-199585d3f375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider">
+      <UniqueIdentifier>{ee4140ed-840b-4d03-b805-2f2cd41f98ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -783,6 +789,15 @@
     <ClInclude Include="syDarkNebula_Fire.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_SparkBolt.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkBolt</Filter>
+    </ClInclude>
+    <ClInclude Include="syDarkNebula_SparkSkill.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="syDarkNebula_SparkSkill_Collider.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1141,6 +1156,15 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_Fire.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_FireSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_SparkBolt.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkBolt</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_SparkSkill.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_SparkSkill_Collider.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

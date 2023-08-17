@@ -161,6 +161,9 @@
     <ClInclude Include="syDarkNebula_Fire.h" />
     <ClInclude Include="syDarkNebula_FireBall.h" />
     <ClInclude Include="syDarkNebula_IceSkill.h" />
+    <ClInclude Include="syDarkNebula_SparkBolt.h" />
+    <ClInclude Include="syDarkNebula_SparkSkill.h" />
+    <ClInclude Include="syDarkNebula_SparkSkill_Collider.h" />
     <ClInclude Include="syDarkNebula_Star.h" />
     <ClInclude Include="syDaroach.h" />
     <ClInclude Include="syDaroach_Bomb.h" />
@@ -288,6 +291,9 @@
     <ClCompile Include="syDarkNebula_Fire.cpp" />
     <ClCompile Include="syDarkNebula_FireBall.cpp" />
     <ClCompile Include="syDarkNebula_IceSkill.cpp" />
+    <ClCompile Include="syDarkNebula_SparkBolt.cpp" />
+    <ClCompile Include="syDarkNebula_SparkSkill.cpp" />
+    <ClCompile Include="syDarkNebula_SparkSkill_Collider.cpp" />
     <ClCompile Include="syDarkNebula_Star.cpp" />
     <ClCompile Include="syDaroach.cpp" />
     <ClCompile Include="syDaroach_Bomb.cpp" />
