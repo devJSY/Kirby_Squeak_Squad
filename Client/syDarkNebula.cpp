@@ -120,6 +120,9 @@ namespace sy
 			DamageDelayTime = 0.f;
 		}
 
+		// 모드 변환 Idle에서 적용
+		mModeChangeDelay += Time::DeltaTime();
+
 		// 테스트용 상태변경
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
@@ -183,10 +186,10 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::Six))
 		{
 			mState = eDarkNebulaState::ModeChangeReady;
-			mStateChangeDelay = 0.f;
-			mTargetPos = mFixedPos[4];
+			mModeChangeDelay = 0.f;
+			mTargetPos = mFixedPos[1];
 		}
-		
+
 		switch (mState)
 		{
 		case eDarkNebulaState::Idle:
@@ -309,56 +312,60 @@ namespace sy
 		// 상태처리
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay >= 0.5f)
+		if (mModeChangeDelay > 20.f)
 		{
-			mStateChangeDelay = 0.f;
-
-			// 방향 랜덤 설정
-			int randomDir = std::rand() % 100;
-			if (randomDir % 2 == 0)
-				mTransform->SetDirection(eDirection::RIGHT);
-			else
-				mTransform->SetDirection(eDirection::LEFT);
-
-			mDir = mTransform->GetDirection();
-
-			int randomNumber = std::rand() % 6;
-			if (randomNumber == 0)
+			mState = eDarkNebulaState::ModeChangeReady;
+			mTargetPos = mFixedPos[1];
+			mModeChangeDelay = 0.f;
+		}
+		else
+		{
+			if (mStateChangeDelay >= 0.5f)
 			{
-				mState = eDarkNebulaState::Move;
-				int idx = std::rand() % 6;
-				mTargetPos = mFixedPos[idx];
-			}
-			else if (randomNumber == 1)
-			{
-				mState = eDarkNebulaState::RotationalMove;
+				mStateChangeDelay = 0.f;
 
-				int idx = std::rand() % 6;
-				mTargetPos = mFixedPos[idx];
-			}
-			else if (randomNumber == 2)
-			{
-				mState = eDarkNebulaState::ZigzagMoveReady;
-				int idx = std::rand() % 6;
-				mTargetPos = mFixedPos[idx];
-
-				if (mDir == eDirection::RIGHT)
-					mTargetPos = mFixedPos[3];
+				// 방향 랜덤 설정
+				int randomDir = std::rand() % 100;
+				if (randomDir % 2 == 0)
+					mTransform->SetDirection(eDirection::RIGHT);
 				else
-					mTargetPos = mFixedPos[5];
-			}
-			else if (randomNumber == 3)
-			{
-				mState = eDarkNebulaState::StarAttack;
-			}
-			else if (randomNumber == 4)
-			{
-				mState = eDarkNebulaState::SkillReady;
-			}
-			else if (randomNumber == 5)
-			{
-				mState = eDarkNebulaState::ModeChangeReady;
-				mTargetPos = mFixedPos[4];
+					mTransform->SetDirection(eDirection::LEFT);
+
+				mDir = mTransform->GetDirection();
+
+				int randomNumber = std::rand() % 5;
+				if (randomNumber == 0)
+				{
+					mState = eDarkNebulaState::Move;
+					int idx = std::rand() % 6;
+					mTargetPos = mFixedPos[idx];
+				}
+				else if (randomNumber == 1)
+				{
+					mState = eDarkNebulaState::RotationalMove;
+
+					int idx = std::rand() % 6;
+					mTargetPos = mFixedPos[idx];
+				}
+				else if (randomNumber == 2)
+				{
+					mState = eDarkNebulaState::ZigzagMoveReady;
+					int idx = std::rand() % 6;
+					mTargetPos = mFixedPos[idx];
+
+					if (mDir == eDirection::RIGHT)
+						mTargetPos = mFixedPos[3];
+					else
+						mTargetPos = mFixedPos[5];
+				}
+				//else if (randomNumber == 3)
+				//{
+				//	mState = eDarkNebulaState::StarAttack;
+				//}
+				//else if (randomNumber == 4)
+				//{
+				//	mState = eDarkNebulaState::SkillReady;
+				//}
 			}
 		}
 	}
@@ -512,7 +519,7 @@ namespace sy
 		if (Diff.Length() <= 1.f)
 		{
 			Camera::fadeOut(1.f, RGB(255, 255, 255));
-			Camera::fadeIn(1.f, RGB(255, 255, 255));
+			
 
 			int randomMode = std::rand() % 100;
 
@@ -539,7 +546,6 @@ namespace sy
 			}
 
 			mState = eDarkNebulaState::ModeChange;
-			mStateChangeDelay = 0.f;
 		}
 		else
 		{
@@ -552,14 +558,7 @@ namespace sy
 
 	void DarkNebula::ModeChange()
 	{
-		mStateChangeDelay += Time::DeltaTime();
-
-		if (mStateChangeDelay > 2.f)
-		{
-			mState = eDarkNebulaState::Idle;
-			mStateChangeDelay = 0.f;
-		}
-		else if (mStateChangeDelay > 1.f)
+		if (Camera::IsEmptyCamEffect())
 		{
 			if (mMode == eDarkNebulaMode::Fire)
 				mAnimator->PlayAnimation(L"DarkNebula_Body_Fire", true);
@@ -567,6 +566,9 @@ namespace sy
 				mAnimator->PlayAnimation(L"DarkNebula_Body_Ice", true);
 			else if (mMode == eDarkNebulaMode::Spark)
 				mAnimator->PlayAnimation(L"DarkNebula_Body_Spark", true);
+			Camera::fadeIn(1.f, RGB(255, 255, 255));
+			mState = eDarkNebulaState::Idle;
+			mModeChangeDelay = 0.f;
 		}
 	}
 

@@ -70,6 +70,7 @@ namespace sy
 		eDirection					mDir;
 
 		float						mStateChangeDelay;
+		float						mModeChangeDelay;
 		math::Vector2				mFixedPos[6];
 		math::Vector2				mTargetPos;
 		bool						mbDamaged; // 연속 피격 방지
