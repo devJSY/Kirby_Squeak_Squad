@@ -774,6 +774,9 @@
     <ClInclude Include="syDarkNebula_Star.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_Star</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_IceSkill.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1123,6 +1126,9 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_Star.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_Star</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_IceSkill.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_IceSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

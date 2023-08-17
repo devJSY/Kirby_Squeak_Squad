@@ -14,6 +14,7 @@
 #include "syCamera.h"
 #include "syDarkNebula_Star.h"
 #include "syObject.h"
+#include "syDarkNebula_IceSkill.h"
 
 namespace sy
 {
@@ -552,9 +553,11 @@ namespace sy
 				if (mDir == eDirection::RIGHT)
 					mTargetPos = mFixedPos[2];
 				else
-					mTargetPos = mFixedPos[1];
+					mTargetPos = mFixedPos[0];
 
 				mState = eDarkNebulaState::IceSkill;
+				DarkNebula_IceSkill* skill = new DarkNebula_IceSkill(this);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
 			}
 			else if (mMode == eDarkNebulaMode::Spark)
 			{
@@ -587,7 +590,7 @@ namespace sy
 		else
 		{
 			Diff.Normalize();
-			Diff *= 200.f * Time::DeltaTime();
+			Diff *= 30.f * Time::DeltaTime();
 			pos += Diff;
 			mTransform->SetPosition(pos);
 		}

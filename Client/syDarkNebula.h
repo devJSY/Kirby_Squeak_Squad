@@ -47,6 +47,8 @@ namespace sy
 		virtual bool IsDamagedState() { return mbDamaged; }
 		virtual bool IsDeadState() { return mState == eDarkNebulaState::Dead; }
 
+		eDarkNebulaState GetDarkNebulaState() { return mState; }
+
 	private:
 		void Idle();
 		void Move();
