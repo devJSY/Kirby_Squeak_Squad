@@ -184,6 +184,22 @@ namespace sy
 		{
 			mState = eDarkNebulaState::SkillReady;
 			mStateChangeDelay = 0.f;
+
+			if (mMode == eDarkNebulaMode::Fire)
+			{
+				mTargetPos = mFixedPos[1];
+			}
+			else if (mMode == eDarkNebulaMode::Ice)
+			{
+				if (mDir == eDirection::RIGHT)
+					mTargetPos = mFixedPos[0];
+				else
+					mTargetPos = mFixedPos[2];
+			}
+			else if (mMode == eDarkNebulaMode::Spark)
+			{
+				mTargetPos = mFixedPos[4];
+			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::Six))
@@ -369,6 +385,22 @@ namespace sy
 				else if (randomNumber == 4)
 				{
 					mState = eDarkNebulaState::SkillReady;
+
+					if (mMode == eDarkNebulaMode::Fire)
+					{
+						mTargetPos = mFixedPos[1];
+					}
+					else if (mMode == eDarkNebulaMode::Ice)
+					{
+						if(mDir == eDirection::RIGHT)
+							mTargetPos = mFixedPos[0];
+						else
+							mTargetPos = mFixedPos[2];
+					}
+					else if (mMode == eDarkNebulaMode::Spark)
+					{
+						mTargetPos = mFixedPos[4];
+					}
 				}
 			}
 		}
@@ -505,20 +537,31 @@ namespace sy
 
 	void DarkNebula::SkillReady()
 	{
-		if (mMode == eDarkNebulaMode::Fire)
-		{
+		Vector2 pos = mTransform->GetPosition();
 
-			mState = eDarkNebulaState::FireSkill;
+		Vector2 Diff = mTargetPos - pos;
+
+		if (Diff.Length() <= 1.f)
+		{
+			if (mMode == eDarkNebulaMode::Fire)
+			{
+				mState = eDarkNebulaState::FireSkill;
+			}
+			else if (mMode == eDarkNebulaMode::Ice)
+			{
+				mState = eDarkNebulaState::IceSkill;
+			}
+			else if (mMode == eDarkNebulaMode::Spark)
+			{
+				mState = eDarkNebulaState::SparkSkill;
+			}
 		}
-		else if (mMode == eDarkNebulaMode::Ice)
+		else
 		{
-
-			mState = eDarkNebulaState::IceSkill;
-		}
-		else if (mMode == eDarkNebulaMode::Spark)
-		{
-
-			mState = eDarkNebulaState::SparkSkill;
+			Diff.Normalize();
+			Diff *= 200.f * Time::DeltaTime();
+			pos += Diff;
+			mTransform->SetPosition(pos);
 		}
 	}
 
