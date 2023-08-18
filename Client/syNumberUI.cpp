@@ -39,9 +39,8 @@ namespace sy
 		mAnimator->CreateAnimation(Tex, L"Number_Bohboh", Vector2(721.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 		mAnimator->CreateAnimation(Tex, L"Number_Daroach", Vector2(739.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 		mAnimator->CreateAnimation(Tex, L"Number_MetaKnight", Vector2(758.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-		mAnimator->CreateAnimation(Tex, L"Number_DarkNebula", Vector2(777.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
+		mAnimator->CreateAnimation(Tex, L"Number_DarkNebula", Vector2(775.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
 		mAnimator->CreateAnimation(Tex, L"Number_9", Vector2(795.f, 1025.f), Vector2(15.f, 15.f), Vector2(15.f, 0), 1.f, 1);
-
 	
 		mAnimator->SetBmpRGB(L"One", 0,128,0);
 		mAnimator->SetBmpRGB(L"Two", 0,128,0);
