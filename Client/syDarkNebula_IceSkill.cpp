@@ -8,6 +8,7 @@
 #include "syAnimator.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -28,10 +29,14 @@ namespace sy
 		animator->CreateAnimation(DarkNebula_IceSkill_Tex, L"DarkNebula_IceSkill", Vector2::Zero, Vector2(60.f, 130.f), Vector2(60.f, 0.f), 0.05f, 4);
 
 		animator->PlayAnimation(L"DarkNebula_IceSkill", true);
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"DarkNebula_IceSkill", L"..\\Resources\\Sound\\Effect\\DarkNebula\\IceSkill.wav")->Play(false);
 	}
 
 	DarkNebula_IceSkill::~DarkNebula_IceSkill()
 	{
+		ResourceManager::Find<Sound>(L"DarkNebula_IceSkill")->Stop(true);
 	}
 
 	void DarkNebula_IceSkill::Initialize()

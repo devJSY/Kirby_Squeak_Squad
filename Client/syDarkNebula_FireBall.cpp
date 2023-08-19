@@ -11,7 +11,7 @@
 #include "sySceneManager.h"
 #include "syDarkNebula_Fire.h"
 #include "syObject.h"
-
+#include "sySound.h"
 
 namespace sy
 {
@@ -43,10 +43,14 @@ namespace sy
 		mAnimator->PlayAnimation(L"DarkNebula_FireBall", true);
 
 		mbActive[0] = mbActive[1] = mbActive[2] = mbActive[3] = mbActive[4] = true;
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"DarkNebula_FireSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\DarkNebula_Fire.wav");
 	}
 
 	DarkNebula_FireBall::~DarkNebula_FireBall()
 	{
+		ResourceManager::Find<Sound>(L"DarkNebula_FireSound")->Stop(true);
 	}
 
 	void DarkNebula_FireBall::Initialize()
@@ -172,6 +176,7 @@ namespace sy
 			mCollider->SetColliderType(eColliderType::Box);
 			mCollider->SetSize(Vector2(105.f, 160.f));
 			mAnimator->PlayAnimation(L"DarkNebula_FireBall_Exploded", true);
+			ResourceManager::Find<Sound>(L"DarkNebula_FireSound")->Play(false);
 			
 			Vector2 pos = mTransform->GetPosition();
 			mGroundPos = pos;

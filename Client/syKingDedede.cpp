@@ -154,8 +154,6 @@ namespace sy
 
 			mState = eKingDededeState::JumpReady;
 
-			// 사운드 재생
-			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			mStateChangeDelay = 0.f;
 		}
 
@@ -595,9 +593,6 @@ namespace sy
 					mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
 
 				mState = eKingDededeState::JumpReady;
-
-				// 사운드 재생
-				ResourceManager::Find<Sound>(L"BossShout")->Play(false);
 			}
 			else if (randomNumber == 2)
 			{

@@ -10,6 +10,7 @@
 #include "syDefaultKirby.h"
 #include "syDarkNebula_SparkSkill_Collider.h"
 #include "syObject.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -42,10 +43,14 @@ namespace sy
 		animator->CreateAnimation(DarkNebula_SparkSkill_Tex, L"DarkNebula_SparkSkill", Vector2::Zero, Vector2(256.f, 192.f), Vector2(256.f, 0.f), 0.05f, 3);
 
 		animator->PlayAnimation(L"DarkNebula_SparkSkill", true);
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"DarkNebula_SparkSound", L"..\\Resources\\Sound\\Effect\\DarkNebula\\DarkNebula_Spark.wav")->Play(false);
 	}
 
 	DarkNebula_SparkSkill::~DarkNebula_SparkSkill()
 	{
+		ResourceManager::Find<Sound>(L"DarkNebula_SparkSound")->Stop(true);
 	}
 
 	void DarkNebula_SparkSkill::Initialize()

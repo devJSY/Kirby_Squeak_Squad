@@ -9,6 +9,7 @@
 #include "syPlayer.h"
 #include "syTime.h"
 #include "syDefaultKirby.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -44,6 +45,9 @@ namespace sy
 		mAnimator->CreateAnimation(Daroach_Bomb_Fire_Tex, L"Daroach_Bomb_Fire", Vector2::Zero, Vector2(50.f, 50.f), Vector2(50.f, 0.f), 0.1f, 8);
 
 		mAnimator->PlayAnimation(L"Daroach_Bomb", true);
+
+		// Sound Load
+		ResourceManager::Load<Sound>(L"DaroachBombSound", L"..\\Resources\\Sound\\Effect\\Daroach\\DaroachBomb.wav");	
 	}
 
 	Daroach_Bomb::~Daroach_Bomb()
@@ -276,6 +280,7 @@ namespace sy
 			mCollider->SetSize(Vector2(50.f, 50.f));
 			mState = eDaroachBombState::Fire;
 			mDuration = 0.f;
+			ResourceManager::Find<Sound>(L"DaroachBombSound")->Play(false);
 		}
 	}
 
