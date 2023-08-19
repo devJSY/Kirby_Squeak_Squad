@@ -1,6 +1,7 @@
 #include "syAnimator.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -10,6 +11,7 @@ namespace sy
 		, mbLoop(false)			
 		, mbAffectedCamera(true)
 		, mAlpha(1.0f)
+		, mbBlink(false)
 	{
 	}
 

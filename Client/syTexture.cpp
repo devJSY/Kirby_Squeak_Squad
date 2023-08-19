@@ -2,6 +2,8 @@
 #include "syApplication.h"
 #include "syResourceManager.h"
 #include "syCamera.h"
+#include "syTime.h"
+
 namespace sy
 {
 	Texture::Texture()
@@ -120,7 +122,8 @@ namespace sy
 		, Vector2 scale
 		, float Alpha
 		, COLORREF rgb
-		, float rotate)
+		, float rotate
+		, bool blink)
 	{
 		// Animation or SpriteRenderer ø°º≠ »£√‚µ 
 		if (mBitmap == nullptr && mImage == nullptr)
@@ -150,6 +153,23 @@ namespace sy
 
 			if (alpha <= 0)
 				alpha = 0;
+
+			static float blinkTime = 0.f;
+			static float blinkalpha = 0.f;
+
+			if (blink)
+			{
+				blinkTime += Time::DeltaTime();
+				if (blinkTime > 0.1)
+				{
+					if (blinkalpha == 100) blinkalpha = 255;
+					else blinkalpha = 100;
+					blinkTime = 0;
+				}
+
+				alpha = (int)blinkalpha;
+			}
+
 			func.SourceConstantAlpha = alpha; // 0 ~ 255
 
 			AlphaBlend(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))

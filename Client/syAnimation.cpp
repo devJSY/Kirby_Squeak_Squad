@@ -62,7 +62,8 @@ namespace sy
 			, tr->GetScale()			
 			, mAnimator->GetAlpha()
 			, mBMPRGB
-			, tr->GetRotation());
+			, tr->GetRotation()
+			, mAnimator->GetBlink());
 	}
 
 	void Animation::Create(Texture* texture, const std::wstring& name, Vector2 leftTop, Vector2 size, Vector2 Interbal, float duration, UINT spriteLength, Vector2 offset)

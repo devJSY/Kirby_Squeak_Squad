@@ -29,7 +29,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 
-		void PlayerTransformations(eAbilityType type);		
+		void PlayerTransformations(eAbilityType type);
 		void ReleaseTransformations(eDefaultKirbyState state);
 		void SetKirbyType(eAbilityType type);
 
@@ -41,7 +41,7 @@ namespace sy
 		eAbilityType GetAbilityType() { return mAbilityType; }
 
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
-		ePlayerMode GetPlayerMode() { return mMode; }		
+		ePlayerMode GetPlayerMode() { return mMode; }
 
 		int GetMaxHP() { return mMaxHp; }
 		int GetCurHP() { return mCurHp; }
@@ -53,6 +53,8 @@ namespace sy
 
 		void Damaged(int amount) { mCurHp -= amount; }
 		void Recovery(int amount) { mCurHp += amount; }
+
+		bool IsDamaged() { return mbDamaged; }
 
 	private:
 		std::vector<Kirby*>		mKirbyType;
@@ -66,5 +68,7 @@ namespace sy
 
 		Enemy*					mHitEnemy;
 
+		bool					mbDamaged;
+		float					mDamageDelay;
 	};
 }

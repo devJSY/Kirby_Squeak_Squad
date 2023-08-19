@@ -17,6 +17,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -29,6 +30,8 @@ namespace sy
 		, mCurHp(mMaxHp)
 		, mLife(9)
 		, mHitEnemy(nullptr)
+		, mbDamaged(false)
+		, mDamageDelay(0.f)
 	{
 	}
 
@@ -94,6 +97,23 @@ namespace sy
 				mLife -= 1;
 			}		
 		}
+
+		if (mbDamaged)
+		{
+			mDamageDelay += Time::DeltaTime();
+
+			if (mDamageDelay > 2.f)
+			{
+				mbDamaged = false;
+				GetComponent<Animator>()->SetBlink(false);
+				mDamageDelay = 0.f;
+			}
+		}
+
+		if (mMode == ePlayerMode::LevelMode)
+		{
+			GetComponent<Animator>()->SetBlink(false);
+		}
 	}
 
 	void Player::Render(HDC hdc)
@@ -104,23 +124,37 @@ namespace sy
 
 	void Player::OnCollisionEnter(Collider* other)
 	{
-		mKirbyType[(UINT)mAbilityType]->OnCollisionEnter(other);
+		if (!mbDamaged)
+		{
+			mKirbyType[(UINT)mAbilityType]->OnCollisionEnter(other);
+		}
 	}
 
 	void Player::OnCollisionStay(Collider* other)
 	{
-		mKirbyType[(UINT)mAbilityType]->OnCollisionStay(other);
+		if (!mbDamaged)
+		{
+			mKirbyType[(UINT)mAbilityType]->OnCollisionStay(other);
+		}
 	}
 
 	void Player::OnCollisionExit(Collider* other)
 	{
-		mKirbyType[(UINT)mAbilityType]->OnCollisionExit(other);
+		if (!mbDamaged)
+		{
+			mKirbyType[(UINT)mAbilityType]->OnCollisionExit(other);
+		}
 	}
 
 	void Player::TakeHit(int DamageAmount, math::Vector2 HitDir)
-	{
+	{		
 		// 현재 커비의 TakeHit 호출
-		mKirbyType[(UINT)mAbilityType]->TakeHit(DamageAmount, HitDir);
+		if (!mbDamaged)
+		{
+			mbDamaged = true;
+			GetComponent<Animator>()->SetBlink(true);
+			mKirbyType[(UINT)mAbilityType]->TakeHit(DamageAmount, HitDir);
+		}
 	}
 
 	void Player::PlayerTransformations(eAbilityType type)

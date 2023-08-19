@@ -71,11 +71,6 @@ namespace sy
 		if (player == nullptr)
 			return;
 
-		// Damage 상태에선 무시
-		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
-		if (kirby != nullptr && kirby->IsDamagedState())
-			return;		
-
 		// 스킬 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
@@ -87,11 +82,6 @@ namespace sy
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 
 		if (player == nullptr)
-			return;
-
-		// Damage 상태에선 무시
-		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
-		if (kirby != nullptr && kirby->IsDamagedState())
 			return;
 
 		// 스킬 → 커비 방향
