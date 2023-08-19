@@ -17,10 +17,13 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other);
-        virtual void OnCollisionStay(class Collider* other);
-        virtual void OnCollisionExit(class Collider* other);
     
     private:
+        eDirection          mDir;
+        class Transform*    mTransform;
+        class Rigidbody*    mRigidbody;
+        float               mDuration;
+    
 	};
 }
 

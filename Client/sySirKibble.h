@@ -50,6 +50,7 @@ namespace sy
         class Transform*    mTransform;
         class Rigidbody*    mRigidBody;
         eDirection			mDir;
+        float               mAttackDelay;
 	};
 }
 

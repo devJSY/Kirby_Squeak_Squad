@@ -10,6 +10,7 @@
 #include "syRigidbody.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "syTime.h"
 
 namespace sy
 {
@@ -20,6 +21,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
 		, mDir(eDirection::RIGHT)
+		, mAttackDelay(0.f)
 	{
 	}
 
@@ -323,26 +325,64 @@ namespace sy
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eSirKibbleState::Dead;
 		}
+
+		mAttackDelay += Time::DeltaTime();
+
+		// 특정 조건일때 스킬 생성
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+
+		if (Len < 100.f && mAttackDelay > 1.f)
+		{
+			if (PlayerPos.x > mTransform->GetPosition().x)
+				mDir = eDirection::RIGHT;
+			else
+				mDir = eDirection::LEFT;
+
+			mTransform->SetDirection(mDir);
+
+			SirKibble_Skill* skill = new SirKibble_Skill(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, skill);
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SirKibble_Right_Attack", false);
+			else
+				mAnimator->PlayAnimation(L"SirKibble_Left_Attack", false);
+
+			mState = eSirKibbleState::Attack;
+			mAttackDelay = 0.f;
+		}
 	}
 
 	void SirKibble::Attack()
 	{
+		static float time = 0.f;
+
+		time += Time::DeltaTime();
+
 		if (GetCurHP() <= 0.f)
 		{
 			mAnimator->PlayAnimation(L"SirKibble_Death", false);
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 			mState = eSirKibbleState::Dead;
+			time = 0.f;
+		}	
+
+		if (mAnimator->IsActiveAnimationComplete() && time > 2.f)
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"SirKibble_Right_Idle", true);
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"SirKibble_Left_Idle", true);
+			}
+
+			mState = eSirKibbleState::Idle;
+			time = 0.f;
 		}
-
-		//// 특정 조건일때 스킬 생성
-		//Transform* tr = GetComponent<Transform>();
-		//// 현재 HotHead 위치 기준 더해준 위치로 생성
-		//Vector2 pos = tr->GetPosition();
-		//pos += Vector2(10.f, 0.f);
-
-		//SirKibble_Skill* Skill = new SirKibble_Skill(this);
-		//SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, Skill);
-		//Skill->GetComponent<Transform>()->SetPosition(pos);		
 	}
 
 	void SirKibble::Jump()
