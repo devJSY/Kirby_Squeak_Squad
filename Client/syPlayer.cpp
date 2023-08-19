@@ -18,6 +18,8 @@
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
 #include "syTime.h"
+#include "syTransformEffect.h"
+#include "syObject.h"
 
 namespace sy
 {
@@ -174,6 +176,9 @@ namespace sy
 
 			if (type != eAbilityType::Normal)
 				ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
+
+			TransformEffect* effect = new TransformEffect(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
 		}
 
 		if (type == eAbilityType::Normal)

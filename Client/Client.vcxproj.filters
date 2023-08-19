@@ -421,6 +421,9 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider">
       <UniqueIdentifier>{ee4140ed-840b-4d03-b805-2f2cd41f98ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Effects\TransformEffect">
+      <UniqueIdentifier>{8a02dcc6-41eb-43bb-9780-f27eb817e041}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -801,6 +804,9 @@
     <ClInclude Include="syDarkNebula_DeadStar.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar</Filter>
     </ClInclude>
+    <ClInclude Include="syTransformEffect.h">
+      <Filter>Contents\GameObject\Effects\TransformEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1171,6 +1177,9 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_DeadStar.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar</Filter>
+    </ClCompile>
+    <ClCompile Include="syTransformEffect.cpp">
+      <Filter>Contents\GameObject\Effects\TransformEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
