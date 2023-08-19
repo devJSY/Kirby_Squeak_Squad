@@ -18,6 +18,7 @@
 #include "syDarkNebula_FireBall.h"
 #include "syDarkNebula_SparkBolt.h"
 #include "syDarkNebula_SparkSkill.h"
+#include "syDarkNebula_DeadStar.h"
 
 namespace sy
 {
@@ -76,7 +77,7 @@ namespace sy
 	void DarkNebula::Initialize()
 	{
 		// 체력 설정
-		SetHP(1000);
+		SetHP(100);
 
 		// 텍스쳐 로드
 		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
@@ -715,17 +716,33 @@ namespace sy
 		static float eyeDeadTime = 0.f;
 		eyeDeadTime += Time::DeltaTime();
 
-		if (eyeDeadTime > 19.f)
+		static bool trig = true;
+
+		if (trig)
 		{
-			if (mEye != nullptr)
+			if (eyeDeadTime > 19.f)
 			{
-				mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", false);
-				eyeDeadTime = 0.f;
+				if (mEye != nullptr)
+				{
+					mEye->GetComponent<Animator>()->PlayAnimation(L"DarkNebula_Eye_ModeChange", false);
+					trig = false;
+				}
 			}
-		}
-		else
-		{
-			// 데스스타 생성
+			else
+			{
+				static float DeadStarTime = 0.f;
+				DeadStarTime += Time::DeltaTime();
+
+				if (DeadStarTime > 0.1f)
+				{
+					// 데스스타 생성
+					DarkNebula_DeadStar* deadStar = new DarkNebula_DeadStar(this, eDirection::RIGHT);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, deadStar);
+					DarkNebula_DeadStar* deadStar2 = new DarkNebula_DeadStar(this, eDirection::LEFT);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, deadStar2);
+					DeadStarTime = 0.f;
+				}
+			}
 		}
 
 		if (mEye != nullptr)

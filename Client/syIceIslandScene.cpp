@@ -99,7 +99,7 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 
-		if (mEnterTime > 1.3f)
+		if (mEnterTime > 1.3f && !mbSceneChange)
 		{
 			switch (mCurStageState)
 			{

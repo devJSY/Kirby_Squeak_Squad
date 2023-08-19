@@ -798,6 +798,9 @@
     <ClInclude Include="syDarkNebula_SparkSkill_Collider.h">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider</Filter>
     </ClInclude>
+    <ClInclude Include="syDarkNebula_DeadStar.h">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1165,6 +1168,9 @@
     </ClCompile>
     <ClCompile Include="syDarkNebula_SparkSkill_Collider.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\Skill\DarkNebula_SparkSkill\DarkNebula_SparkSkill_Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="syDarkNebula_DeadStar.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\DarkNebula\DarkNebula_DeadStar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

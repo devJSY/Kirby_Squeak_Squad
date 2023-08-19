@@ -157,6 +157,7 @@
     <ClInclude Include="syCutterKirby.h" />
     <ClInclude Include="syDarkNebula.h" />
     <ClInclude Include="syDarkNebula_Border.h" />
+    <ClInclude Include="syDarkNebula_DeadStar.h" />
     <ClInclude Include="syDarkNebula_Eye.h" />
     <ClInclude Include="syDarkNebula_Fire.h" />
     <ClInclude Include="syDarkNebula_FireBall.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="syCutterKirby.cpp" />
     <ClCompile Include="syDarkNebula.cpp" />
     <ClCompile Include="syDarkNebula_Border.cpp" />
+    <ClCompile Include="syDarkNebula_DeadStar.cpp" />
     <ClCompile Include="syDarkNebula_Eye.cpp" />
     <ClCompile Include="syDarkNebula_Fire.cpp" />
     <ClCompile Include="syDarkNebula_FireBall.cpp" />
