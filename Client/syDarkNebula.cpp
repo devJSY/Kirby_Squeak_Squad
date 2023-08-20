@@ -77,7 +77,7 @@ namespace sy
 	void DarkNebula::Initialize()
 	{
 		// 체력 설정
-		SetHP(100);
+		SetHP(1000);
 
 		// 텍스쳐 로드
 		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
