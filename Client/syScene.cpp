@@ -2,6 +2,7 @@
 #include "syObject.h"
 #include "syDefaultKirby.h"
 #include "sySceneManager.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -25,9 +26,22 @@ namespace sy
 
 	void Scene::Update()
 	{
-		for (Layer& layer : mLayers)
+		for (size_t i = 0; i < mLayers.size(); i++)
 		{
-			layer.Update();
+			if (Camera::GetCurCamEffect() == CAM_EFFECT::Transformations)
+			{
+				if (i == (size_t)eLayerType::Player 
+					|| i == (size_t)eLayerType::TransformEffect
+					|| i == (size_t)eLayerType::UI
+					|| i == (size_t)eLayerType::Inventory)
+				{
+					mLayers[i].Update();
+				}
+			}
+			else
+			{
+				mLayers[i].Update();
+			}
 		}
 	}
 

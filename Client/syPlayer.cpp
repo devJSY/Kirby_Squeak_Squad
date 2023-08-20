@@ -20,6 +20,7 @@
 #include "syTime.h"
 #include "syTransformEffect.h"
 #include "syObject.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -175,10 +176,18 @@ namespace sy
 			mKirbyType[(UINT)mAbilityType]->Enter();
 
 			if (type != eAbilityType::Normal)
+			{
 				ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
 
-			TransformEffect* effect = new TransformEffect(this);
-			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+				TransformEffect* effect = new TransformEffect(this);
+				object::ActiveSceneAddGameObject(eLayerType::TransformEffect, effect);
+
+				// 카메라효과
+				if (mMode == ePlayerMode::PlayMode)
+				{
+					Camera::Transformations(1.f, RGB(0, 0, 0));
+				}
+			}
 		}
 
 		if (type == eAbilityType::Normal)

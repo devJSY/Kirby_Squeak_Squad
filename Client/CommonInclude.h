@@ -37,6 +37,7 @@ namespace sy::enums
 		Enemy,
 		Player,
 		Effect,
+		TransformEffect,
 		UI,			 
 		Zoom,
 		Inventory,

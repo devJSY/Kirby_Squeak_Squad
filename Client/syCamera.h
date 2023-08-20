@@ -8,6 +8,7 @@ namespace sy
 		FADE_IN,
 		FADE_OUT,
 		Pause,
+		Transformations,
 		NONE,
 	};
 
@@ -72,9 +73,21 @@ namespace sy
 			m_listCamEffect.push_back(ef);
 		}
 
+		static void Transformations(float _fDuration, COLORREF color)
+		{
+			tCamEffect ef = {};
+			ef.eEffect = CAM_EFFECT::Transformations;
+			ef.fDuration = _fDuration;
+			ef.fCurTime = 0.f;
+			ef.TexColor = color;
+
+			m_listCamEffect.push_back(ef);
+		}
+
 	public:
 		static bool GetColliderRenderTrig() { return mbColliderRenderTrig; }
 		static bool IsEmptyCamEffect() { return m_listCamEffect.empty(); }
+		static CAM_EFFECT GetCurCamEffect() { return mCurCamEffect; }
 
 	private:
 		static Vector2 mResolution;			// 화면 해상도
@@ -87,6 +100,8 @@ namespace sy
 		static std::list<tCamEffect>  m_listCamEffect;	// 카메라 효과 이벤트 리스트
 		static class Texture* mWhiteTex;				// 카메라 효과용 텍스쳐
 		static class Texture* mBlackTex;				// 카메라 효과용 텍스쳐
+
+		static CAM_EFFECT mCurCamEffect;
 
 	public:
 		static bool mbColliderRenderTrig;

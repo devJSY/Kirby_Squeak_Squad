@@ -15,6 +15,7 @@ namespace sy
 	std::list<tCamEffect>	Camera::m_listCamEffect = {};
 	Texture*				Camera::mWhiteTex = nullptr;				
 	Texture*				Camera::mBlackTex = nullptr;
+	CAM_EFFECT				Camera::mCurCamEffect = CAM_EFFECT::NONE;
 
 	bool					Camera::mbColliderRenderTrig = false;
 
@@ -42,29 +43,10 @@ namespace sy
 			mbColliderRenderTrig = !mbColliderRenderTrig;
 		}
 
-
-		// 카메라 이동
-		//if (Input::GetKeyPressed(eKeyCode::UP))
-		//{
-		//	mLookPosition.y -= 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::LEFT))
-		//{
-		//	mLookPosition.x -= 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::DOWN))
-		//{
-		//	mLookPosition.y += 300.0f * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyPressed(eKeyCode::RIGHT))
-		//{
-		//	mLookPosition.x += 300.0f * Time::DeltaTime();
-		//}
-
 		if (mTarget)
 		{
 			Transform* tr = mTarget->GetComponent<Transform>();
-			mLookPosition = tr->GetPosition();			
+			mLookPosition = tr->GetPosition();
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);
@@ -99,6 +81,7 @@ namespace sy
 			return;
 
 		tCamEffect& effect = m_listCamEffect.front();
+		mCurCamEffect = effect.eEffect;
 
 		effect.fCurTime += Time::DeltaTime();
 	
@@ -122,7 +105,11 @@ namespace sy
 		}
 		else if (effect.eEffect == CAM_EFFECT::Pause)
 		{
-			iAlpha = (int)255.f;
+			iAlpha = 255;
+		}
+		else if (effect.eEffect == CAM_EFFECT::Transformations)
+		{
+			iAlpha = 30;
 		}
 
 		// AlphaBlend 셋팅값 설정
@@ -160,7 +147,7 @@ namespace sy
 
 		if (effect.fCurTime > effect.fDuration)
 		{
-			effect.eEffect = CAM_EFFECT::NONE;
+			mCurCamEffect = CAM_EFFECT::NONE;
 			m_listCamEffect.pop_front();
 		}
 	}

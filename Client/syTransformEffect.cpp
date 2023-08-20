@@ -17,7 +17,7 @@ namespace sy
 
 		mAnimator = GetComponent<Animator>();
 
-		mAnimator->CreateAnimation(TransformEffect_Tex, L"TransformEffect", Vector2(0.f, 0.f), Vector2(100.f, 100.f), Vector2(100.f, 0.f), 0.06f, 11);
+		mAnimator->CreateAnimation(TransformEffect_Tex, L"TransformEffect", Vector2(0.f, 0.f), Vector2(100.f, 100.f), Vector2(100.f, 0.f), 0.05f, 11);
 		mAnimator->PlayAnimation(L"TransformEffect", false);
 	}
 

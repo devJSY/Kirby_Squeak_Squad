@@ -38,7 +38,7 @@ namespace sy
 			if (mGameObjects[i]->GetGameObjectState() == GameObject::eGameObjectState::Pause)
 					continue;
 
-			mGameObjects[i]->Update();
+			mGameObjects[i]->Update();				
 		}
 	}
 
