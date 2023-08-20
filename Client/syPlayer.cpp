@@ -126,27 +126,18 @@ namespace sy
 	}
 
 	void Player::OnCollisionEnter(Collider* other)
-	{
-		if (!mbDamaged)
-		{
-			mKirbyType[(UINT)mAbilityType]->OnCollisionEnter(other);
-		}
+	{		
+		mKirbyType[(UINT)mAbilityType]->OnCollisionEnter(other);		
 	}
 
 	void Player::OnCollisionStay(Collider* other)
-	{
-		if (!mbDamaged)
-		{
-			mKirbyType[(UINT)mAbilityType]->OnCollisionStay(other);
-		}
+	{	
+		mKirbyType[(UINT)mAbilityType]->OnCollisionStay(other);		
 	}
 
 	void Player::OnCollisionExit(Collider* other)
 	{
-		if (!mbDamaged)
-		{
-			mKirbyType[(UINT)mAbilityType]->OnCollisionExit(other);
-		}
+		mKirbyType[(UINT)mAbilityType]->OnCollisionExit(other);		
 	}
 
 	void Player::TakeHit(int DamageAmount, math::Vector2 HitDir)

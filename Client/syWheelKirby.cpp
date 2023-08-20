@@ -282,6 +282,10 @@ namespace sy
 
 	void WheelKirby::OnCollisionEnter(Collider* other)
 	{
+		// 플레이어 데미지 상태면 충돌처리 X
+		if (GetOwner()->IsDamaged())
+			return;
+
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 
 		if (enemy == nullptr)
