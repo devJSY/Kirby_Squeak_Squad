@@ -73,6 +73,7 @@ namespace sy
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Cutter", L"..\\Resources\\Video\\Cutter", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Tornado", L"..\\Resources\\Video\\Tornado", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Ninja", L"..\\Resources\\Video\\Ninja", 0.03f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Spark", L"..\\Resources\\Video\\Spark", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal", L"..\\Resources\\Video\\Heal", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Non", L"..\\Resources\\Video\\Non", 0.03f);
 		mAnimator->SetAffectedCamera(false);

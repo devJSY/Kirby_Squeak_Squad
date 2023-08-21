@@ -207,14 +207,8 @@ namespace sy
 		}
 		else if (type == eAbilityType::Spark)
 		{
-			// 리소스없어서 임시로 설정
-			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal", false);
+			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Spark", false);
 		}
-		//else if (type == eAbilityType::Wheel)
-		//{
-		//	// 리소스없어서 임시로 설정
-		//	SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal", false);
-		//}
 	}
 
 	void Player::ReleaseTransformations(eDefaultKirbyState state)

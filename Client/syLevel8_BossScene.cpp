@@ -85,7 +85,7 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
 		{
-			SceneManager::LoadScene(L"GambleGalaxyScene");
+			SceneManager::LoadScene(L"EndingScene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))

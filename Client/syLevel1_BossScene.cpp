@@ -78,7 +78,6 @@ namespace sy
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"BossSound", L"..\\Resources\\Sound\\Theme\\Boss.wav");
-		ResourceManager::Load<Sound>(L"BossClearSound", L"..\\Resources\\Sound\\Theme\\BossClear.wav");
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
@@ -112,8 +111,6 @@ namespace sy
 
 				// 오디오 정지
 				ResourceManager::Find<Sound>(L"BossSound")->Stop(true);
-				// 오디오 재생
-				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
 			}
 		}
 
