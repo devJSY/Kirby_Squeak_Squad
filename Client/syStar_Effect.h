@@ -24,6 +24,7 @@ namespace sy
         virtual void OnCollisionEnter(class Collider* other);
 
         eStarState GetStarState() { return mState; }
+        void TakeInhaled() { mInhaled = true; }
 
     private:
         void Active();
@@ -33,5 +34,6 @@ namespace sy
         eStarState      mState;
         class Animator* mAnimator;
         float           mDuration;
+        bool			mInhaled;
 	};
 }

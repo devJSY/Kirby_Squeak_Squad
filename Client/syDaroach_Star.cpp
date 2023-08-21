@@ -19,6 +19,7 @@ namespace sy
 		, mCollider(nullptr)
 		, mRigidBody(nullptr)
 		, mDuration(0.f)
+		, mInhaled(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mAnimator = GetComponent<Animator>();
@@ -69,21 +70,23 @@ namespace sy
 
 	void Daroach_Star::Update()
 	{
-		CheckPixelCollision();
-
-		mDuration += Time::DeltaTime();
-
-		if (mDuration > 3.f)
+		if (!mInhaled)
 		{
-			mAnimator->PlayAnimation(L"Daroach_Star_Death", false);
-			mDuration = 0.f;
-		}
+			CheckPixelCollision();
 
-		if (mAnimator->IsActiveAnimationComplete())
-		{
-			Destroy(this);
-		}
+			mDuration += Time::DeltaTime();
 
+			if (mDuration > 3.f)
+			{
+				mAnimator->PlayAnimation(L"Daroach_Star_Death", false);
+				mDuration = 0.f;
+			}
+
+			if (mAnimator->IsActiveAnimationComplete())
+			{
+				Destroy(this);
+			}
+		}
 
 		Effects::Update();
 	}

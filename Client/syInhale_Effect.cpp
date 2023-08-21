@@ -158,6 +158,9 @@ namespace sy
 			if (obj == nullptr)
 				continue;
 
+			if (obj->GetGameObjectState() == eGameObjectState::Dead)
+				continue;
+
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
 			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(obj);
@@ -197,6 +200,9 @@ namespace sy
 			if (obj == nullptr)
 				continue;
 
+			if (obj->GetGameObjectState() == eGameObjectState::Dead)
+				continue;
+
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(obj);
@@ -233,6 +239,9 @@ namespace sy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
+				continue;
+
+			if (obj->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
@@ -288,6 +297,9 @@ namespace sy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
+				continue;
+
+			if (obj->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
@@ -358,6 +370,7 @@ namespace sy
 		{
 			mbInhale = true;
 			Destroy(mTarget);
+			mTarget = nullptr;
 			Destroy(this);
 
 			// Player에 흡수한 객체 정보 셋팅
@@ -398,6 +411,11 @@ namespace sy
 		{
 			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(mTarget);
+			Star_Effect* star = dynamic_cast<Star_Effect*>(mTarget);
+			Daroach_Bomb* daroachbomb = dynamic_cast<Daroach_Bomb*>(mTarget);
+			Daroach_TimeBomb* daroachTimebomb = dynamic_cast<Daroach_TimeBomb*>(mTarget);
+			Daroach_Star* daroachStar = dynamic_cast<Daroach_Star*>(mTarget);
+			DarkNebula_Star* darkNebulaStar = dynamic_cast<DarkNebula_Star*>(mTarget);
 			Enemy* enemy = dynamic_cast<Enemy*>(mTarget);
 
 			// Inhaled 상태 설정
@@ -408,6 +426,26 @@ namespace sy
 			else if (abilityItem != nullptr)
 			{
 				abilityItem->TakeInhaled();
+			}
+			else if (star != nullptr)
+			{
+				star->TakeInhaled();
+			}
+			else if (daroachbomb != nullptr)
+			{
+				daroachbomb->TakeInhaled();
+			}
+			else if (daroachTimebomb != nullptr)
+			{
+				daroachTimebomb->TakeInhaled();
+			}
+			else if (daroachStar != nullptr)
+			{
+				daroachStar->TakeInhaled();
+			}
+			else if (darkNebulaStar != nullptr)
+			{
+				darkNebulaStar->TakeInhaled();
 			}
 			else if (enemy != nullptr)
 			{

@@ -22,12 +22,16 @@ namespace sy
     private:
         void CheckPixelCollision();
 
+    public:
+        void TakeInhaled() { mInhaled = true; }
+
     private:
         class Transform*    mTransform;
         class Animator*     mAnimator;
         class Collider*     mCollider;
         class Rigidbody*    mRigidBody;
         float               mDuration;
+        bool		    	mInhaled;
     };
 }
 

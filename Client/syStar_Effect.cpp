@@ -15,6 +15,7 @@ namespace sy
 		, mState(eStarState::Active)
 		, mAnimator(nullptr)
 		, mDuration(0.f)
+		, mInhaled(false)
 	{
 		GetComponent<Transform>()->SetPosition(pos);
 

@@ -20,9 +20,13 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other);
 
+    public:
+        void TakeInhaled() { mInhaled = true; }
+
     private:
         class Transform*    mTransform;
         Vector2             mDir;
         float               mDuration;
+        bool		    	mInhaled;
     };
 }

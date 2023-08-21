@@ -16,6 +16,7 @@ namespace sy
 		, mTransform(nullptr)
 		, mDir(Dir)
 		, mDuration(0.f)
+		, mInhaled(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
@@ -41,16 +42,19 @@ namespace sy
 
 	void DarkNebula_Star::Update()
 	{
-		Vector2 pos = mTransform->GetPosition();
-		mDir.Normalize();
-		pos += mDir * 200.f * Time::DeltaTime();
-		mTransform->SetPosition(pos);
-
-		mDuration += Time::DeltaTime();
-
-		if (mDuration > 5.f)
+		if (!mInhaled)
 		{
-			Destroy(this);
+			Vector2 pos = mTransform->GetPosition();
+			mDir.Normalize();
+			pos += mDir * 200.f * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+
+			mDuration += Time::DeltaTime();
+
+			if (mDuration > 5.f)
+			{
+				Destroy(this);
+			}
 		}
 
 		Effects::Update();

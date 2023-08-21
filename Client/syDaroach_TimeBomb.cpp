@@ -21,6 +21,7 @@ namespace sy
 		, mCollider(nullptr)
 		, mRigidBody(nullptr)
 		, mDuration(0.f)
+		, mInhaled(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mAnimator = GetComponent<Animator>();
@@ -63,23 +64,26 @@ namespace sy
 
 	void Daroach_TimeBomb::Update()
 	{
-		// Idle 상태에서만 픽셀충돌 적용
-		if (mState == eDaroachTimeBombState::Idle)
-			CheckPixelCollision();
-
-		switch (mState)
+		if (!mInhaled)
 		{
-		case eDaroachTimeBombState::Idle:
-			Idle();
-			break;
-		case eDaroachTimeBombState::Fire:
-			Fire();
-			break;
-		case eDaroachTimeBombState::FireEnd:
-			FireEnd();
-			break;
-		default:
-			break;
+			// Idle 상태에서만 픽셀충돌 적용
+			if (mState == eDaroachTimeBombState::Idle)
+				CheckPixelCollision();
+
+			switch (mState)
+			{
+			case eDaroachTimeBombState::Idle:
+				Idle();
+				break;
+			case eDaroachTimeBombState::Fire:
+				Fire();
+				break;
+			case eDaroachTimeBombState::FireEnd:
+				FireEnd();
+				break;
+			default:
+				break;
+			}
 		}
 
 		Effects::Update();

@@ -26,13 +26,14 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other);
-        virtual void OnCollisionStay(class Collider* other);
+        virtual void OnCollisionStay(class Collider* other);      
 
     private:
         void CheckPixelCollision();
 
     public:
         eDaroachBombState GetDaroachBombState() { return mState; }
+        void TakeInhaled() { mInhaled = true; }
  
     private:
         void Idle();
@@ -45,6 +46,7 @@ namespace sy
         class Collider*     mCollider;
         class Rigidbody*    mRigidBody;
         float               mDuration;
+        bool		    	mInhaled;
     };
 }
 
