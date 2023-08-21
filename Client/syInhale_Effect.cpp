@@ -373,11 +373,6 @@ namespace sy
 		// 특정 거리 이내에 근접하면 삭제
 		if (Len < 10.f)
 		{
-			mbInhale = true;
-			Destroy(mTarget);
-			mTarget = nullptr;
-			Destroy(this);
-
 			// Player에 흡수한 객체 정보 셋팅
 
 			AbilityStar* abilityStar = dynamic_cast<AbilityStar*>(mTarget);
@@ -411,6 +406,11 @@ namespace sy
 			{
 				defaultKirby->SetInhaledObjectInfo(enemy->GetAbilityType(), sy::InhaledObjectType::Monster);
 			}	
+
+			mbInhale = true;
+			Destroy(mTarget);
+			mTarget = nullptr;
+			Destroy(this);		
 		}
 		else
 		{
