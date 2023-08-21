@@ -85,6 +85,11 @@ namespace sy
 				break;
 			}
 		}
+		else
+		{
+			// Èí¼ö»óÅÂ
+			mRigidBody->SetVelocity(Vector2::Zero);
+		}
 
 		Effects::Update();
 	}

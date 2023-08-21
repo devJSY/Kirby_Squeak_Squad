@@ -87,6 +87,12 @@ namespace sy
 				Destroy(this);
 			}
 		}
+		else
+		{
+			// Èí¼ö»óÅÂ
+			mRigidBody->SetVelocity(Vector2::Zero);
+		}
+
 
 		Effects::Update();
 	}

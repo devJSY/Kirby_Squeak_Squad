@@ -144,6 +144,23 @@ namespace sy
 
 	void Inhale_Effect::SetTarget()
 	{
+		// Dead상태인 오브젝트는 mInhaledObject에서 제외한다
+		for (std::vector<GameObject*>::iterator iter = mInhaledObject.begin()
+			; iter != mInhaledObject.end()
+			; )
+		{
+			if ((*iter)->GetGameObjectState() == GameObject::eGameObjectState::Dead)
+			{
+				GameObject* obj = *iter;
+				iter = mInhaledObject.erase(iter);
+			}
+			else
+			{
+				iter++;
+			}
+		}
+
+
 		Player* player = dynamic_cast<Player*>(GetOwner());
 		if (player == nullptr)
 			return;
@@ -156,9 +173,6 @@ namespace sy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
-				continue;
-
-			if (obj->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
@@ -200,9 +214,6 @@ namespace sy
 			if (obj == nullptr)
 				continue;
 
-			if (obj->GetGameObjectState() == eGameObjectState::Dead)
-				continue;
-
 			Transform* PlayerTransform = player->GetComponent<Transform>();
 
 			AbilityItem* abilityItem = dynamic_cast<AbilityItem*>(obj);
@@ -239,9 +250,6 @@ namespace sy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
-				continue;
-
-			if (obj->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
@@ -297,9 +305,6 @@ namespace sy
 		for (GameObject* obj : mInhaledObject)
 		{
 			if (obj == nullptr)
-				continue;
-
-			if (obj->GetGameObjectState() == eGameObjectState::Dead)
 				continue;
 
 			Transform* PlayerTransform = player->GetComponent<Transform>();
