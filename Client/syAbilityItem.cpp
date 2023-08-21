@@ -78,10 +78,6 @@ namespace sy
 
 	void AbilityItem::Update()
 	{
-		// Inhaled 상태에선 중력적용 X
-		if (mInhaled)
-			mRigidbody->SetGround(true);
-
 		if(!mInhaled)
 			CheckPixelCollision();
 
@@ -121,6 +117,12 @@ namespace sy
 
 	void AbilityItem::OnCollisionStay(Collider* other)
 	{
+		Player* plyer = dynamic_cast<Player*>(other->GetOwner());
+
+		// 플레이어가 아니면 리턴
+		if (plyer == nullptr)
+			return;
+
 		// 인벤토리에 타입전달 // 꽉찬상태라면 삭제X 밀어내야함		
 		Inventory* inventory = SceneManager::GetInventory();
 		if (inventory->IsFullSlot())
