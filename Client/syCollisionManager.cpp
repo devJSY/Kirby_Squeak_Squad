@@ -84,7 +84,11 @@ namespace sy
 			if (leftCol == nullptr || lefts[i]->GetGameObjectState() == GameObject::eGameObjectState::Dead) 
 				continue;
 
-			for (size_t j = 0; j < rights.size(); j++)
+			// 같은 레이어끼리의 충돌시 한번씩만 호출되도록 설정
+			size_t j = 0;
+			if (left == rigth){	j = i;}			
+
+			for (; j < rights.size(); j++)
 			{
 				Collider* RightCol = rights[j]->GetComponent<Collider>();
 				// Collider가 존재하지않으거나 Dead상태면  continue;

@@ -280,8 +280,7 @@ namespace sy
 
 	void DarkNebula::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eDarkNebulaState::Dead
-			|| GetCurHP() <= 0.f)
+		if (mState == eDarkNebulaState::Dead)
 			return;
 
 		// 특정 조건 에서만 충돌처리

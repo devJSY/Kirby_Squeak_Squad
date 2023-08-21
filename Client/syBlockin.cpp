@@ -105,8 +105,7 @@ namespace sy
 	void Blockin::OnCollisionEnter(Collider* other)
 	{
 		if (mState == eBlockinState::Dead 
-			|| mState == eBlockinState::Inhaled 
-			|| GetCurHP() <= 0.f)
+			|| mState == eBlockinState::Inhaled)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());

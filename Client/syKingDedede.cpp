@@ -269,8 +269,7 @@ namespace sy
 
 	void KingDedede::OnCollisionEnter(Collider* other)
 	{
-		if (mState == eKingDededeState::Dead
-			|| GetCurHP() <= 0.f)
+		if (mState == eKingDededeState::Dead)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());

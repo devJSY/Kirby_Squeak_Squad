@@ -101,8 +101,7 @@ namespace sy
 	void HotHead::OnCollisionEnter(Collider* other)
 	{
 		if (mState == eHotHeadState::Dead 
-			|| mState == eHotHeadState::Inhaled 
-			|| GetCurHP() <= 0.f)
+			|| mState == eHotHeadState::Inhaled)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());

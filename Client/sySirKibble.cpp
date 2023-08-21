@@ -105,8 +105,7 @@ namespace sy
 	void SirKibble::OnCollisionEnter(Collider* other)
 	{
 		if (mState == eSirKibbleState::Dead 
-			|| mState == eSirKibbleState::Inhaled
-			|| GetCurHP() <= 0.f)
+			|| mState == eSirKibbleState::Inhaled)
 			return;
 
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
