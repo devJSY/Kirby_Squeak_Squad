@@ -31,11 +31,11 @@ namespace sy
 		
 		// 위치 설정
 		mVideo->GetComponent<Transform>()->SetPosition(Vector2(Application::GetResolution()) / 2.f); 
-		mVideo->SetSpeed(1.f); // 재생속도 설정
+		//mVideo->SetSpeed(1.f); // 재생속도 설정
+		mVideo->SetSpeed(2.f); // 재생속도 설정
 
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
-		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0444931f / mVideo->GetSpeed()); 
-		videoAnimator->PlayAnimation(L"EndingVideo", true);
+		videoAnimator->CreateAnimationFolder(L"EndingVideo", L"..\\Resources\\Video\\Ending", 0.0486358244365362f / mVideo->GetSpeed());
 		videoAnimator->SetAffectedCamera(false);
 
 		// Sound Load

@@ -427,6 +427,9 @@
     <Filter Include="Contents\Scene\DanceScene">
       <UniqueIdentifier>{e6ef7d1f-1984-4872-8a75-b66b0195f92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\IntroScene">
+      <UniqueIdentifier>{f50679c6-fadd-4f5e-a08c-8ddf3f2e34bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
