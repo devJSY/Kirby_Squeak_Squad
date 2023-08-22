@@ -21,16 +21,8 @@
 #include "syResourceManager.h"
 #include "syPortalUI.h"
 #include "syPrismPlainsScene.h"
-
+#include "syDanceScene.h"
 #include "sySirKibble.h"
-
-
-#include "syWaddleDee.h"
-#include "syHotHead.h"
-#include "syHotHead_Fire.h"
-
-#include "syBlockin.h"
-#include "syCrimp.h"
 
 namespace sy
 {
@@ -112,7 +104,7 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
-			SceneManager::LoadScene(L"PrismPlainsScene");
+			SceneManager::LoadScene(L"DanceScene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -170,5 +162,9 @@ namespace sy
 		PrismPlainsScene* scene = dynamic_cast<PrismPlainsScene*>(SceneManager::GetScene(L"PrismPlainsScene"));
 		scene->SetClearActiveUI(eStageState::Stage1);	// Stage1 클리어 처리
 		scene->SetActiveUI(eStageState::Boss);			// 보스 스테이지 활성화
+
+		DanceScene* danceScene = dynamic_cast<DanceScene*>(SceneManager::GetScene(L"DanceScene"));
+		danceScene->SetNextSceneName(L"PrismPlainsScene");
+		danceScene->SetType(eDanceSceneType::NormalClear);
 	}
 }

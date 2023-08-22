@@ -5,8 +5,8 @@ namespace sy
 {
     enum class eDanceSceneType
     {
-        NormalClear,
         BossClear,
+        NormalClear,
         End,
     };
 
@@ -23,9 +23,15 @@ namespace sy
 		virtual void Enter();
 		virtual void Exit();
 
-    private:
-        eDanceSceneType mType;
+        void SetType(eDanceSceneType type) { mType = type; }
+        void SetNextSceneName(const std::wstring& name) { mNextSceneName = name; }
 
+    private:
+        eDanceSceneType     mType;
+        std::wstring        mNextSceneName;
+        class Video*        mVideo;
+        float		        mPassedTime;
+        bool		        mbSoundPlay;
     };
 }
 

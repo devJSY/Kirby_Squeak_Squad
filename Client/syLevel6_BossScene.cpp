@@ -31,6 +31,7 @@
 #include "syWheelKirby.h"
 #include "syIceIslandScene.h"
 #include "syDaroach.h"
+#include "syDanceScene.h"
 
 namespace sy
 {
@@ -84,7 +85,7 @@ namespace sy
 	{
 		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
-			SceneManager::LoadScene(L"IceIslandScene");
+			SceneManager::LoadScene(L"DanceScene");
 		}
 
 		if (Input::GetKeyDown(eKeyCode::T))
@@ -218,5 +219,9 @@ namespace sy
 
 		IceIslandScene* scene = dynamic_cast<IceIslandScene*>(SceneManager::GetScene(L"IceIslandScene"));
 		scene->SetClearActiveUI(eStageState::Boss);	 // 보스 스테이지 클리어 처리
+
+		DanceScene* danceScene = dynamic_cast<DanceScene*>(SceneManager::GetScene(L"DanceScene"));
+		danceScene->SetNextSceneName(L"IceIslandScene");
+		danceScene->SetType(eDanceSceneType::BossClear);
 	}
 }

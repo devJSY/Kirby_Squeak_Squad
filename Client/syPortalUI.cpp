@@ -62,17 +62,15 @@ namespace sy
 			{
 				SceneManager::LoadScene(L"Level1_Stage4Scene");
 			}
-			else if (SceneName == L"Level1_Stage4Scene" || SceneName == L"Level1_BossScene")
+			else if (SceneName == L"Level1_Stage4Scene" 
+				|| SceneName == L"Level1_BossScene"
+				|| SceneName == L"Level6_BossScene")
 			{
-				SceneManager::LoadScene(L"PrismPlainsScene");
+				SceneManager::LoadScene(L"DanceScene");
 			}
 			else if (SceneName == L"AbilityTestScene")
 			{
 				SceneManager::LoadScene(L"LevelSelectScene");
-			}
-			else if (SceneName == L"Level6_BossScene")
-			{
-				SceneManager::LoadScene(L"IceIslandScene");
 			}
 
 			mbSceneChange = false;

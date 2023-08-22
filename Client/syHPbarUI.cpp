@@ -61,13 +61,13 @@ namespace sy
 		int hp = player->GetCurHP();
 		float fhp = (float)hp / player->GetMaxHP();
 		
-		TransparentBlt(hdc, 44, 178, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
+		TransparentBlt(hdc, 44, 176, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
 			, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 50, 180, (int)(mRedTex->GetWidth() * (mDecreaseHP / player->GetMaxHP())), mRedTex->GetHeight(), mRedTex->GetHdc()
+		TransparentBlt(hdc, 50, 178, (int)(mRedTex->GetWidth() * (mDecreaseHP / player->GetMaxHP())), mRedTex->GetHeight(), mRedTex->GetHdc()
 			, 0, 0, (int)(mRedTex->GetWidth() * (mDecreaseHP / player->GetMaxHP())), mRedTex->GetHeight(), RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 50, 180, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), mPinkTex->GetHdc()
+		TransparentBlt(hdc, 50, 178, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), mPinkTex->GetHdc()
 			, 0, 0, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), RGB(255, 0, 255));
 
 		UI::Render(hdc);

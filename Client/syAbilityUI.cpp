@@ -25,7 +25,7 @@ namespace sy
 		// AbilityUI 기본 위치 설정 
 		Vector2 vec = Vector2(Application::GetResolution()) / 2.f;
 		vec.x = 20.0f;
-		vec.y -= 27.f;
+		vec.y -= 30.f;
 		GetComponent<Transform>()->SetPosition(vec);
 
 		mIconAnimator = AddComponent<Animator>();

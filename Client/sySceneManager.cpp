@@ -1,4 +1,3 @@
-
 #include "sySceneManager.h"
 #include "syTitleScene.h"
 #include "syLevelSelectScene.h"
@@ -71,6 +70,14 @@ namespace sy
 
 			delete mLifeUI;
 			mLifeUI = nullptr;
+		}
+		else if (SceneName == L"DanceScene")
+		{
+			delete mPlayer;
+			mPlayer = nullptr;
+
+			delete mInventory;
+			mInventory = nullptr;
 		}
 		else if (SceneName == L"OpeningScene" || SceneName == L"TitleScene" || SceneName == L"EndingScene")
 		{
@@ -174,11 +181,16 @@ namespace sy
 		if (iter == mScenes.end())
 			return nullptr;
 		mActiveScene = iter->second;
-
 		
 		if (name == L"IntroScene")
 		{
 			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);
+		}
+		else if (name == L"DanceScene")
+		{
+			mActiveScene->AddGameObject(eLayerType::UI, mAbilityUI);
+			mActiveScene->AddGameObject(eLayerType::UI, mHPbarUI);
+			mActiveScene->AddGameObject(eLayerType::UI, mLifeUI);
 		}
 		else if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
 		{
