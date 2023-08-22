@@ -77,7 +77,7 @@ namespace sy
 	void DarkNebula::Initialize()
 	{
 		// 체력 설정
-		SetHP(1000);
+		SetHP(100);
 
 		// 텍스쳐 로드
 		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
@@ -713,7 +713,7 @@ namespace sy
 
 		if (trig)
 		{
-			if (eyeDeadTime > 19.f)
+			if (eyeDeadTime > 9.f)
 			{
 				if (mEye != nullptr)
 				{

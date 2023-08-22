@@ -85,7 +85,7 @@ namespace sy
 
 	void Level1_BossScene::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
 			SceneManager::LoadScene(L"PrismPlainsScene");
 		}

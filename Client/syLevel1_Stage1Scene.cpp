@@ -112,7 +112,7 @@ namespace sy
 	{
 		Scene::Update();
 
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
 			SceneManager::LoadScene(L"Level1_Stage2Scene");
 		}

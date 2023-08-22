@@ -175,13 +175,14 @@ namespace sy
 			return nullptr;
 		mActiveScene = iter->second;
 
-		// 설정한 씬을 제외한 씬에 UI 추가
+		
 		if (name == L"IntroScene")
 		{
 			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);
 		}
 		else if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
 		{
+			// 설정한 씬을 제외한 씬에 UI 추가
 			mActiveScene->AddGameObject(eLayerType::Player, mPlayer);
 			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);
 			mActiveScene->AddGameObject(eLayerType::UI, mAbilityUI);

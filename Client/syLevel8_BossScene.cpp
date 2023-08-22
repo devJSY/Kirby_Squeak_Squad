@@ -83,8 +83,9 @@ namespace sy
 
 	void Level8_BossScene::Update()
 	{
-		if (Input::GetKeyDown(eKeyCode::MOUSE_RBTN))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
+			Camera::fadeOut(1.f, RGB(255, 255, 255));
 			SceneManager::LoadScene(L"EndingScene");
 		}
 
@@ -105,11 +106,11 @@ namespace sy
 			mDuration += Time::DeltaTime();
 
 
-			if (mDuration > 21.f)
+			if (mDuration > 11.f)
 			{
 				SceneManager::LoadScene(L"EndingScene");
 			}
-			else if (mDuration > 20.f && Camera::IsEmptyCamEffect())
+			else if (mDuration > 10.f && Camera::IsEmptyCamEffect())
 			{
 				Camera::fadeOut(1.f, RGB(255, 255, 255));			
 			}
