@@ -69,7 +69,6 @@ namespace sy
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}
-
 	}
 
 	void OpeningScene::Render(HDC hdc)

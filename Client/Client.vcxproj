@@ -155,6 +155,7 @@
     <ClInclude Include="syCollisionManager.h" />
     <ClInclude Include="syCushyCloudScene.h" />
     <ClInclude Include="syCutterKirby.h" />
+    <ClInclude Include="syDanceScene.h" />
     <ClInclude Include="syDarkNebula.h" />
     <ClInclude Include="syDarkNebula_Border.h" />
     <ClInclude Include="syDarkNebula_DeadStar.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="syIceKirby.h" />
     <ClInclude Include="syIceKirby_Skill.h" />
     <ClInclude Include="syInhale_Effect.h" />
+    <ClInclude Include="syIntroScene.h" />
     <ClInclude Include="syInventory.h" />
     <ClInclude Include="syInventoryItem.h" />
     <ClInclude Include="syJamJungleScene.h" />
@@ -287,6 +289,7 @@
     <ClCompile Include="syCollisionManager.cpp" />
     <ClCompile Include="syCushyCloudScene.cpp" />
     <ClCompile Include="syCutterKirby.cpp" />
+    <ClCompile Include="syDanceScene.cpp" />
     <ClCompile Include="syDarkNebula.cpp" />
     <ClCompile Include="syDarkNebula_Border.cpp" />
     <ClCompile Include="syDarkNebula_DeadStar.cpp" />
@@ -332,6 +335,7 @@
     <ClCompile Include="syIceKirby.cpp" />
     <ClCompile Include="syIceKirby_Skill.cpp" />
     <ClCompile Include="syInhale_Effect.cpp" />
+    <ClCompile Include="syIntroScene.cpp" />
     <ClCompile Include="syInventory.cpp" />
     <ClCompile Include="syInventoryItem.cpp" />
     <ClCompile Include="syJamJungleScene.cpp" />

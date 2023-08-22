@@ -813,6 +813,12 @@
     <ClInclude Include="syTransformEffect.h">
       <Filter>Contents\GameObject\Effects\TransformEffect</Filter>
     </ClInclude>
+    <ClInclude Include="syIntroScene.h">
+      <Filter>Contents\Scene\IntroScene</Filter>
+    </ClInclude>
+    <ClInclude Include="syDanceScene.h">
+      <Filter>Contents\Scene\DanceScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1186,6 +1192,12 @@
     </ClCompile>
     <ClCompile Include="syTransformEffect.cpp">
       <Filter>Contents\GameObject\Effects\TransformEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="syIntroScene.cpp">
+      <Filter>Contents\Scene\IntroScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syDanceScene.cpp">
+      <Filter>Contents\Scene\DanceScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

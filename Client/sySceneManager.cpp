@@ -23,7 +23,8 @@
 #include "syAnimator.h"
 #include "syLevel6_BossScene.h"
 #include "syLevel8_BossScene.h"
-
+#include "syIntroScene.h"
+#include "syDanceScene.h"
 
 #include "syObject.h"
 #include "syApplication.h"
@@ -57,7 +58,21 @@ namespace sy
 		std::wstring SceneName = mActiveScene->GetName();
 
 		// 삭제당시 씬이 UI를 추가하지 않은 씬이라면 직접 UI 메모리 해제 해줘야함
-		if (SceneName == L"OpeningScene" || SceneName == L"TitleScene" || SceneName == L"EndingScene")
+		if (SceneName == L"IntroScene")
+		{
+			delete mPlayer;
+			mPlayer = nullptr;
+
+			delete mAbilityUI;
+			mAbilityUI = nullptr;
+
+			delete mHPbarUI;
+			mHPbarUI = nullptr;
+
+			delete mLifeUI;
+			mLifeUI = nullptr;
+		}
+		else if (SceneName == L"OpeningScene" || SceneName == L"TitleScene" || SceneName == L"EndingScene")
 		{
 			delete mPlayer;
 			mPlayer = nullptr;
@@ -110,6 +125,8 @@ namespace sy
 		CreateScene<Level8_BossScene>(L"Level8_BossScene");
 		CreateScene<TunnelScene>(L"TunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");
+		CreateScene<IntroScene>(L"IntroScene");
+		CreateScene<DanceScene>(L"DanceScene");
 
 		for (auto iter : mScenes)
 		{
@@ -159,7 +176,11 @@ namespace sy
 		mActiveScene = iter->second;
 
 		// 설정한 씬을 제외한 씬에 UI 추가
-		if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
+		if (name == L"IntroScene")
+		{
+			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);
+		}
+		else if (name != L"OpeningScene" && name != L"TitleScene" && name != L"EndingScene")
 		{
 			mActiveScene->AddGameObject(eLayerType::Player, mPlayer);
 			mActiveScene->AddGameObject(eLayerType::Inventory, mInventory);

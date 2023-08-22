@@ -65,7 +65,7 @@ namespace sy
 			&& fabs(center.y - mousepos.y) < (mRadius * Application::GetScreenMinRatio())
 			&& Input::GetKeyDown(eKeyCode::MOUSE_LBTN))
 		{
-			SceneManager::LoadScene(L"LevelSelectScene");
+			SceneManager::LoadScene(L"IntroScene");
 		}
 	}
 
