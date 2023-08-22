@@ -77,7 +77,7 @@ namespace sy
 	void DarkNebula::Initialize()
 	{
 		// 체력 설정
-		SetHP(1000);
+		SetHP(100);
 
 		// 텍스쳐 로드
 		Texture* DarkNebula_Body_Tex = ResourceManager::Load<Texture>(L"DarkNebula_Body_Tex", L"..\\Resources\\Enemy\\Boss\\DarkNebula\\DarkNebula_Body.bmp");
@@ -97,7 +97,7 @@ namespace sy
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Ice", Vector2::Zero, Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Fire", Vector2(224.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
 		mAnimator->CreateAnimation(DarkNebula_Body_Tex, L"DarkNebula_Body_Spark", Vector2(448.f, 0.f), Vector2(56.f, 60.f), Vector2(56.f, 0.f), 0.1f, 4);
-		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2::Zero, Vector2(60.f, 65.f), Vector2(60.f, 0.f), 0.1f, 10);
+		mAnimator->CreateAnimation(DarkNebula_Dead_Tex, L"DarkNebula_Dead", Vector2::Zero, Vector2(60.f, 65.f), Vector2(60.f, 0.f), 0.5f, 10);
 
 		mAnimator->PlayAnimation(L"DarkNebula_Body_Fire", true);
 
