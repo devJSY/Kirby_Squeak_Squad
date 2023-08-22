@@ -32,6 +32,7 @@ namespace sy
         class Video*        mVideo;
         float		        mPassedTime;
         bool		        mbSoundPlay;
+        bool			    mbSceneChange;
     };
 }
 

@@ -19,6 +19,7 @@ namespace sy
 		, mVideo(nullptr)
 		, mPassedTime(0.f)
 		, mbSoundPlay(false)
+		, mbSceneChange(false)
 	{
 	}
 
@@ -69,19 +70,37 @@ namespace sy
 		}		
 
 		// 비디오 재생이 끝나면 다음 씬으로 이동
-		if (mVideo != nullptr && mVideo->GetComponent<Animator>()->IsActiveAnimationComplete())
+		if (mVideo != nullptr 
+			&& mVideo->GetComponent<Animator>()->IsActiveAnimationComplete())
 		{
-			if (!mNextSceneName.empty())
+			if (mbSceneChange == false)
 			{
-				SceneManager::LoadScene(mNextSceneName);
-			}			
+				Camera::fadeOut(1.f, RGB(255, 255, 255));
+				mbSceneChange = true;
+			}
+			else
+			{
+				if (!mNextSceneName.empty() && Camera::IsEmptyCamEffect())
+				{					
+					SceneManager::LoadScene(mNextSceneName);
+				}
+			}		
 		}
 
+		// 키입력으로 씬전환
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
-			if (!mNextSceneName.empty())
+			if (mbSceneChange == false)
 			{
-				SceneManager::LoadScene(mNextSceneName);
+				Camera::fadeOut(1.f, RGB(255, 255, 255));				
+				mbSceneChange = true;
+			}
+			else
+			{
+				if (!mNextSceneName.empty() && Camera::IsEmptyCamEffect())
+				{
+					SceneManager::LoadScene(mNextSceneName);
+				}
 			}
 		}
 
@@ -106,14 +125,18 @@ namespace sy
 
 		mPassedTime = 0.f;
 		mbSoundPlay = false;
+		mbSceneChange = false;
 	}
 
 	void DanceScene::Exit()
 	{
 		ResourceManager::Find<Sound>(L"BossClearSound")->Stop(true);
 		ResourceManager::Find<Sound>(L"NormalClearSound")->Stop(true);
+		Camera::Pause(1.f, RGB(255, 255, 255));
+		Camera::fadeIn(1.f, RGB(255, 255, 255));
 
 		mPassedTime = 0.f;
 		mbSoundPlay = false;
+		mbSceneChange = false;
 	}
 }
