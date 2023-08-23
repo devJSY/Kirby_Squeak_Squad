@@ -33,6 +33,8 @@
 #include "syDaroach.h"
 #include "syDanceScene.h"
 #include "syForeGround.h"
+#include "syTime.h"
+
 
 namespace sy
 {
@@ -40,6 +42,9 @@ namespace sy
 		: mBackGround(nullptr)
 		, mPixelBG(nullptr)
 		, mPortalUI(nullptr)
+		, mBgSpeed(300.f)
+		, mDuration(0.f)
+		, mbBGChange(false)
 	{
 	}
 
@@ -55,9 +60,9 @@ namespace sy
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"Meta_Knight_Stage", L"..\\Resources\\Map\\Stage\\Meta_Knight_Stage.bmp"); // 이미지 설정
 
-		BackGround* Bg = object::Instantiate<BackGround>(eLayerType::BackGround);
-		Bg->GetComponent<Transform>()->SetPosition(Vector2(128.f, 96.f));
-		Animator* animator = Bg->AddComponent<Animator>();
+		mBackGround = object::Instantiate<BackGround>(eLayerType::BackGround);
+		mBackGround->GetComponent<Transform>()->SetPosition(Vector2(128.f, -28.f));
+		Animator* animator = mBackGround->AddComponent<Animator>();
 		animator->SetAffectedCamera(true);
 		animator->CreateAnimation(tex, L"Meta_Knight_Stage_Normal", Vector2(284.f, 105.f), Vector2(256.f, 384.f), Vector2(256.f, 0.f), 1.f, 1);
 		animator->CreateAnimation(tex, L"Meta_Knight_Stage_Final", Vector2(280.f, 519.f), Vector2(256.f, 218.f), Vector2(280.f, 0.f), 1.f, 1);
@@ -95,6 +100,53 @@ namespace sy
 
 	void Level7_BossScene::Update()
 	{
+		mDuration += Time::DeltaTime();
+
+		if (mDuration > 10.f && mbBGChange == false)
+		{
+			mbBGChange = true;
+			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Meta_Knight_Stage_Final");
+			mBgSpeed = 50.f;
+			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
+			pos.y = 0.f;			
+			mBackGround->GetComponent<Transform>()->SetPosition(pos);
+		}
+
+		if (mbBGChange)
+		{
+			mBgSpeed -= Time::DeltaTime() * 10.f;
+			if (mBgSpeed < 0.f)
+			{
+				mBgSpeed = 0.f;
+			}
+			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
+			pos.y += Time::DeltaTime() * mBgSpeed;
+			if (pos.y > 96.f)
+			{
+				pos.y = 96.f;
+			}
+			mBackGround->GetComponent<Transform>()->SetPosition(pos);
+		}
+		else
+		{
+			mBgSpeed += Time::DeltaTime() * 10.f;
+
+			if (mBgSpeed > 900.f)
+			{
+				mBgSpeed = 900.f;
+			}
+
+
+			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
+			pos.y += Time::DeltaTime() * mBgSpeed;
+			if (pos.y > 192.f)
+			{
+				pos.y = -28.f;
+			}
+			mBackGround->GetComponent<Transform>()->SetPosition(pos);
+		}
+
+
 		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
 			SceneManager::LoadScene(L"DanceScene");

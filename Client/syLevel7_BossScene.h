@@ -23,5 +23,8 @@ namespace sy
 		BackGround*			mBackGround;
 		BackGround*			mPixelBG;
 		class PortalUI*		mPortalUI;
+		float				mBgSpeed;
+		float				mDuration;
+		bool				mbBGChange;
 	};
 }

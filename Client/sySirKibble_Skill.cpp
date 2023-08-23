@@ -50,7 +50,7 @@ namespace sy
 		animator->PlayAnimation(L"SirKibble_Skill", true);
 
 		ResourceManager::Load<Sound>(L"CutterKirby_Skill_HitSound", L"..\\Resources\\Sound\\Effect\\CutterSkill.wav");
-		ResourceManager::Load<Sound>(L"CutterKirby_Skill_Sound", L"..\\Resources\\Sound\\Effect\\CutterSkill2.wav")->Play(true);
+		ResourceManager::Load<Sound>(L"CutterKirby_Skill_Sound", L"..\\Resources\\Sound\\Effect\\CutterSkill2.wav")->Play(false);
 	}
 
 	SirKibble_Skill::~SirKibble_Skill()
