@@ -126,7 +126,6 @@ namespace sy
 			SetClearActiveUI(eStageState::Boss);
 		}
 
-
 		// 임시로 숫자 키패드로 Stage 활성화
 		if (Input::GetKeyDown(eKeyCode::One))
 			SetActiveUI(eStageState::Boss);

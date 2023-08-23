@@ -64,7 +64,8 @@ namespace sy
 			}
 			else if (SceneName == L"Level1_Stage4Scene" 
 				|| SceneName == L"Level1_BossScene"
-				|| SceneName == L"Level6_BossScene")
+				|| SceneName == L"Level6_BossScene"
+				|| SceneName == L"Level7_BossScene")
 			{
 				SceneManager::LoadScene(L"DanceScene");
 			}

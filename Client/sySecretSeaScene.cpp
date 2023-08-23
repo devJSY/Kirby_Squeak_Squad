@@ -26,12 +26,23 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "syStepUI.h"
+#include "syStarUI.h"
+#include "syNumberUI.h"
+#include "syDotUI.h"
+#include "syLevelSelectScene.h"
 
 namespace sy
 {
 	SecretSeaScene::SecretSeaScene()
 		: mLevelType(eLevelType::Level7)
+		, mlevelBG(nullptr)
+		, mbActiveUI{}
 		, ExitUI(nullptr)
+		, mStepUI{}
+		, mStarUI{}
+		, mNumberUI{}
+		, mDots{}
 		, mCurStageState(eStageState::StageExit)
 		, mEnterTime(0.f)
 		, mZoom(nullptr)
@@ -68,7 +79,10 @@ namespace sy
 		LevelNameUIAni->PlayAnimation(L"LevelNameUI");
 		LevelNameUIAni->SetAffectedCamera(false);
 
-		// Stage UI 생성
+		// Dot 생성
+		CreateDot();
+
+		// StageUI생성
 		CreateStageUI();
 
 		Scene::Initialize();
@@ -86,17 +100,35 @@ namespace sy
 		// Enter 애니메이션 재생용
 		mEnterTime += Time::DeltaTime();
 
-		if (mEnterTime > 1.3f)
+		if (mEnterTime > 1.3f && !mbSceneChange)
 		{
 			switch (mCurStageState)
 			{
 			case eStageState::StageExit:
 				StageExit();
 				break;
+			case eStageState::Boss:
+				Boss();
+				break;
 			default:
 				break;
 			}
 		}
+
+		if (mbSceneChange && mCurStageState == eStageState::Boss && Camera::IsEmptyCamEffect())
+		{
+			SceneManager::LoadScene(L"Level7_BossScene");
+		}
+
+		// 스테이지 클리어 시 배경화면 변경
+		if (Input::GetKeyDown(eKeyCode::T))
+		{
+			SetClearActiveUI(eStageState::Boss);
+		}
+
+		// 임시로 숫자 키패드로 Stage 활성화
+		if (Input::GetKeyDown(eKeyCode::One))
+			SetActiveUI(eStageState::Boss);
 
 		Scene::Update();
 	}
@@ -112,10 +144,18 @@ namespace sy
 		mZoom = nullptr;
 		mbSceneChange = false;
 
-		// 카메라 설정
+		// 카메라 설정 
 		Camera::SetTarget(nullptr);
 
-		Vector2 vec = Vector2(35.f, 70.f);
+		Vector2 vec = Vector2::Zero;
+
+		if (mCurStageState == eStageState::StageExit)
+			vec = ExitUI->GetComponent<Transform>()->GetPosition();
+		else if (mCurStageState == eStageState::Boss)
+			vec = mStepUI[0]->GetComponent<Transform>()->GetPosition();
+
+		// Offset값 추가
+		vec.y -= 10.f;
 
 		// 플레이어 설정
 		Player* player = SceneManager::GetPlayer();
@@ -183,11 +223,10 @@ namespace sy
 		//	playerAni->PlayAnimation(L"WheelKirby_Choice", false);
 		//}
 
-
-		mCurStageState = eStageState::StageExit;
-
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);
+
+		SetActiveUI(eStageState::Boss);
 	}
 
 	void SecretSeaScene::Exit()
@@ -201,6 +240,66 @@ namespace sy
 		CollisionManager::Clear();
 	}
 
+	void SecretSeaScene::SetActiveUI(eStageState type)
+	{
+		if (type == eStageState::Boss)
+		{
+			if (!mbActiveUI[0])
+			{
+				mbActiveUI[0] = true;
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"BossStageFlash", true);
+				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"StageStar");
+				mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"QuestionMark");
+
+				for (size_t i = 0; i < mDots[0].size(); i++)
+				{
+					DotUI* dot = mDots[0][i];
+					dot->SetActiveTrig(true);
+				}
+			}
+		}
+	}
+
+	void SecretSeaScene::SetClearActiveUI(eStageState type)
+	{
+		// 현재 스테이지 클리어 처리
+		if (type == eStageState::Boss)
+		{
+			if (mbActiveUI[0])
+			{
+				mStepUI[0]->GetComponent<Animator>()->PlayAnimation(L"BossStageClearFlash", true);
+				mStarUI[0]->GetComponent<Animator>()->PlayAnimation(L"Portal_Star", true);
+				mNumberUI[0]->GetComponent<Animator>()->PlayAnimation(L"Number_MetaKnight");
+			}
+		}
+
+		// 스테이지 전부 클리어
+		for (size_t i = 0; i < 1; i++)
+		{
+			if (mbActiveUI[i] == false)
+				return;
+		}
+
+		LevelSelectScene* scene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
+		scene->SetClearActiveUI(eLevelState::Level7);
+	}
+
+	void SecretSeaScene::CreateDot()
+	{
+		/////////// BossStage ///////////
+		DotUI* dot;
+
+		// StageExit 에서 BossStage으로 가는 Dot 8의 간격으로 생성
+		for (size_t i = 0; i < 20; i++)
+		{
+			dot = object::Instantiate<DotUI>(eLayerType::LevelUI);
+			dot->GetComponent<Transform>()->SetPosition(Vector2(38.f + (8 * i), 96.f));
+			dot->SetDelayTime(0.05f * i);
+
+			mDots[0].push_back(dot);
+		}
+	}
+
 	void SecretSeaScene::CreateStageUI()
 	{
 		// StageExit UI 생성 
@@ -210,11 +309,38 @@ namespace sy
 		ExitUIRenderer->SetTexture(Exit_StageScene_Tex);
 		ExitUIRenderer->SetAffectedCamera(false);
 		ExitUIRenderer->SetRenderTrig(true);
-		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(35.f, 80.f));
+		ExitUI->GetComponent<Transform>()->SetPosition(Vector2(30.f, 96.f));
+
+		// Create StageUI
+		for (size_t i = 0; i < 1; i++)
+		{
+			mStepUI[i] = object::Instantiate<StepUI>(eLayerType::LevelUI);
+			mStarUI[i] = object::Instantiate<StarUI>(eLayerType::LevelUI);
+			mNumberUI[i] = object::Instantiate<NumberUI>(eLayerType::LevelUI);
+		}
+
+		// Boss
+		mStepUI[0]->GetComponent<Transform>()->SetPosition(Vector2(192.f, 96.f));
+		mStarUI[0]->GetComponent<Transform>()->SetPosition(Vector2(192.f, 111.f));
+		mNumberUI[0]->GetComponent<Transform>()->SetPosition(Vector2(192.f, 111.f));
 	}
 
 	void SecretSeaScene::StageExit()
 	{
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		{
+			if (mbActiveUI[0] == true)
+			{
+				Vector2 vec = mStepUI[0]->GetComponent<Transform>()->GetPosition();
+				vec.y -= 10.f;
+
+				Player* player = SceneManager::GetPlayer();
+				Transform* playerTrans = player->GetComponent<Transform>();
+				playerTrans->SetPosition(vec);
+				mCurStageState = eStageState::Boss;
+			}
+		}
+
 		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
 		{
 			if (mZoom == nullptr)
@@ -222,6 +348,30 @@ namespace sy
 				mZoom = new Zoom_Effect(SceneManager::GetPlayer());
 				object::ActiveSceneAddGameObject(eLayerType::Zoom, mZoom);
 			}
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);
+		}
+	}
+
+	void SecretSeaScene::Boss()
+	{
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			Vector2 vec = ExitUI->GetComponent<Transform>()->GetPosition();
+			vec.y -= 10.f;
+
+			Player* player = SceneManager::GetPlayer();
+			Transform* playerTrans = player->GetComponent<Transform>();
+			playerTrans->SetPosition(vec);
+			mCurStageState = eStageState::StageExit;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		{
+			// 카메라 효과 등록
+			Camera::fadeOut(1.f, RGB(255, 255, 255));
+			mbSceneChange = true;
 
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"Click2Sound")->Play(false);

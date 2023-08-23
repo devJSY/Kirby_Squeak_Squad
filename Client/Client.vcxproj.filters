@@ -430,6 +430,9 @@
     <Filter Include="Contents\Scene\IntroScene">
       <UniqueIdentifier>{f50679c6-fadd-4f5e-a08c-8ddf3f2e34bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\StageScene\Level7\Boss">
+      <UniqueIdentifier>{acf44b5e-182f-4ffa-8abb-7b8623e93f8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -819,6 +822,9 @@
     <ClInclude Include="syDanceScene.h">
       <Filter>Contents\Scene\DanceScene</Filter>
     </ClInclude>
+    <ClInclude Include="syLevel7_BossScene.h">
+      <Filter>Contents\Scene\StageScene\Level7\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1198,6 +1204,9 @@
     </ClCompile>
     <ClCompile Include="syDanceScene.cpp">
       <Filter>Contents\Scene\DanceScene</Filter>
+    </ClCompile>
+    <ClCompile Include="syLevel7_BossScene.cpp">
+      <Filter>Contents\Scene\StageScene\Level7\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

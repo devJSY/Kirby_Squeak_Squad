@@ -24,6 +24,7 @@
 #include "syLevel8_BossScene.h"
 #include "syIntroScene.h"
 #include "syDanceScene.h"
+#include "syLevel7_BossScene.h"
 
 #include "syObject.h"
 #include "syApplication.h"
@@ -129,6 +130,7 @@ namespace sy
 		CreateScene<Level1_Stage4Scene>(L"Level1_Stage4Scene");
 		CreateScene<Level1_BossScene>(L"Level1_BossScene");
 		CreateScene<Level6_BossScene>(L"Level6_BossScene");
+		CreateScene<Level7_BossScene>(L"Level7_BossScene");
 		CreateScene<Level8_BossScene>(L"Level8_BossScene");
 		CreateScene<TunnelScene>(L"TunnelScene");
 		CreateScene<EndingScene>(L"EndingScene");

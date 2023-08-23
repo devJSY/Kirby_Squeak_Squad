@@ -16,15 +16,28 @@ namespace sy
 		virtual void Enter();
 		virtual void Exit();
 
+		void SetActiveUI(eStageState type);
+		void SetClearActiveUI(eStageState type);
+
 	private:
+		void CreateDot();
 		void CreateStageUI();
 
+	private:
 		void StageExit();
+		void Boss();
 
 	private:
 		eLevelType mLevelType;
+		class Level_BG* mlevelBG;
 
+		bool mbActiveUI[1];
 		class UI* ExitUI;
+		class StepUI* mStepUI[1];
+		class StarUI* mStarUI[1];
+		class NumberUI* mNumberUI[1];
+
+		std::vector<class DotUI*> mDots[1];
 		eStageState mCurStageState;
 
 		float mEnterTime;
