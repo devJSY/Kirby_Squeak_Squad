@@ -108,7 +108,7 @@ namespace sy
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Meta_Knight_Stage_Final");
 			mBgSpeed = 50.f;
 			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
-			pos.y = 0.f;			
+			pos.y = 30.f;			
 			mBackGround->GetComponent<Transform>()->SetPosition(pos);
 		}
 
@@ -121,9 +121,9 @@ namespace sy
 			}
 			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
 			pos.y += Time::DeltaTime() * mBgSpeed;
-			if (pos.y > 96.f)
+			if (pos.y > 117.f)
 			{
-				pos.y = 96.f;
+				pos.y = 117.f;
 			}
 			mBackGround->GetComponent<Transform>()->SetPosition(pos);
 		}
@@ -131,11 +131,10 @@ namespace sy
 		{
 			mBgSpeed += Time::DeltaTime() * 10.f;
 
-			if (mBgSpeed > 900.f)
+			if (mBgSpeed > 600.f)
 			{
-				mBgSpeed = 900.f;
+				mBgSpeed = 600.f;
 			}
-
 
 			Vector2 pos = mBackGround->GetComponent<Transform>()->GetPosition();
 			pos.y += Time::DeltaTime() * mBgSpeed;
