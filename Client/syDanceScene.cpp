@@ -10,6 +10,7 @@
 #include "sySound.h"
 #include "syInput.h"
 #include "syTime.h"
+#include "syInventory.h"
 
 namespace sy
 {
@@ -138,5 +139,10 @@ namespace sy
 		mPassedTime = 0.f;
 		mbSoundPlay = false;
 		mbSceneChange = false;
+
+		if (mType == eDanceSceneType::BossClear)
+		{
+			SceneManager::GetInventory()->AddItem(eAbilityType::Tornado);
+		}
 	}
 }

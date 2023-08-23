@@ -99,11 +99,28 @@ namespace sy
 		{
 			mType = eTextureType::Png;
 
-			// GDIplus 로 Gdiplus::Image 객체를 생성
-			mImage = Gdiplus::Image::FromFile(path.c_str());			
-			
-			if (mImage == nullptr || mImage->GetLastStatus() != Gdiplus::Status::Ok)
-				return E_FAIL;
+			ULONG_PTR ptrGdi;                        //Gdi+사용을 위한 포인터객체
+			Gdiplus::GdiplusStartupInput inputGdi;         //gdi+입력값객체
+			Gdiplus::GdiplusStartup(&ptrGdi, &inputGdi, 0);   //시작
+
+
+			// image.png 파일을 이용하여 Texture 객체를 생성합니다.
+			mImage = Gdiplus::Image::FromFile(path.c_str());
+
+			//파일로부터 비트맵받기
+			m_pBitGdi = Gdiplus::Bitmap::FromFile(path.c_str());
+
+			//비트맵정보를 HBITMAP m_hBit에 복사
+			m_pBitGdi->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &mBitmap);
+
+			HDC mainDC = Application::GetHdc();
+			mHdc = ::CreateCompatibleDC(mainDC);
+
+			// 비트맵과 DC 연결
+			HBITMAP hPrevBit = (HBITMAP)SelectObject(mHdc, mBitmap);
+			DeleteObject(hPrevBit);
+
+			assert(mImage);
 
 			mWidth = mImage->GetWidth();
 			mHeight = mImage->GetHeight();
@@ -183,31 +200,46 @@ namespace sy
 		}
 		else if (mType == eTextureType::Png)
 		{
-			//// 내가 원하는 픽셀을 투명화 시킬떄
-			Gdiplus::ImageAttributes imageAtt = {};
-			//// 투명화 시킬 픽셀 색 범위
-			imageAtt.SetColorKey(Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb))
-				, Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb)));
+			BLENDFUNCTION func = {};
+			func.BlendOp = AC_SRC_OVER;
+			func.BlendFlags = 0;
+			func.AlphaFormat = AC_SRC_ALPHA;
+			func.SourceConstantAlpha = 255;
 
-			Gdiplus::Graphics graphics(hdc);
+			GdiAlphaBlend(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
+				, (int)(pos.y - (size.y * scale.y / 2.0f))
+				, int(size.x * scale.x)
+				, int(size.y * scale.y)
+				, mHdc
+				, int(TexLeftTop.x), int(TexLeftTop.y)
+				, int(TexSize.x), int(TexSize.y)
+				, func);
 
-			// 회전적용 
-			graphics.TranslateTransform((float)pos.x, (float)pos.y);	// 회전시킬 기준위치 지정
-			graphics.RotateTransform(rotate);
-			graphics.TranslateTransform(-(float)pos.x, -(float)pos.y);	// 회전시킬 기준위치 복구
+			////// 내가 원하는 픽셀을 투명화 시킬떄
+			//Gdiplus::ImageAttributes imageAtt = {};
+			////// 투명화 시킬 픽셀 색 범위
+			//imageAtt.SetColorKey(Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb))
+			//	, Gdiplus::Color(GetRValue(rgb), GetGValue(rgb), GetBValue(rgb)));
 
-			graphics.DrawImage(mImage
-				, Gdiplus::Rect
-				(
-					(int)(pos.x - (size.x * scale.x / 2.0f))
-					, (int)(pos.y - (size.y * scale.y / 2.0f))
-					, (int)(size.x * scale.x)
-					, (int)(size.y * scale.y)
-				)
-				, INT(TexLeftTop.x), INT(TexLeftTop.y)
-				, INT(TexSize.x), INT(TexSize.y)
-				, Gdiplus::UnitPixel
-				, &imageAtt);
+			//Gdiplus::Graphics graphics(hdc);
+
+			//// 회전적용 
+			//graphics.TranslateTransform((float)pos.x, (float)pos.y);	// 회전시킬 기준위치 지정
+			//graphics.RotateTransform(rotate);
+			//graphics.TranslateTransform(-(float)pos.x, -(float)pos.y);	// 회전시킬 기준위치 복구
+
+			//graphics.DrawImage(mImage
+			//	, Gdiplus::Rect
+			//	(
+			//		(int)(pos.x - (size.x * scale.x / 2.0f))
+			//		, (int)(pos.y - (size.y * scale.y / 2.0f))
+			//		, (int)(size.x * scale.x)
+			//		, (int)(size.y * scale.y)
+			//	)
+			//	, INT(TexLeftTop.x), INT(TexLeftTop.y)
+			//	, INT(TexSize.x), INT(TexSize.y)
+			//	, Gdiplus::UnitPixel
+			//	, &imageAtt);
 		}
 	}
 }

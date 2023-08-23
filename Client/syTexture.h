@@ -44,8 +44,9 @@ namespace sy
 		COLORREF GetTexturePixel(int x, int y) { return GetPixel(mHdc, x, y); }
 
 	private:
-		eTextureType mType;		// 확장자 타입
-		Gdiplus::Image* mImage;	// png 객체
+		eTextureType mType;				// 확장자 타입
+		Gdiplus::Image* mImage;			// png 객체
+		Gdiplus::Bitmap* m_pBitGdi;		// GDI 용 비트맵
 
 		HBITMAP mBitmap;	 // 리소스 비트맵
 		HDC mHdc;			 // 리소스 비트맵의 dc
