@@ -75,7 +75,7 @@ namespace sy
 		SpriteRenderer* FgRenderer = Fg->AddComponent<SpriteRenderer>();
 		FgRenderer->SetAffectedCamera(true);
 		FgRenderer->SetTexture(tex);
-		FgRenderer->SetRenderSize(Vector2(256.f, 191.f));
+		FgRenderer->SetRenderSize(Vector2(256.f, 192.f));
 		FgRenderer->SetRednerLeftTop(Vector2(15.f, 109.f));
 		FgRenderer->SetBmpRGB(0, 0, 100);
 
@@ -102,7 +102,7 @@ namespace sy
 	{
 		mDuration += Time::DeltaTime();
 
-		if (mDuration > 10.f && mbBGChange == false)
+		if (mDuration > 20.f && mbBGChange == false)
 		{
 			mbBGChange = true;
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Meta_Knight_Stage_Final");
