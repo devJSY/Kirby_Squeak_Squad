@@ -80,13 +80,13 @@ namespace sy
 	}
 
 	void Application::Update()
-	{
+	{	
 		Time::Update();
 		Input::Update();		
 		Camera::Update();
 
 		CollisionManager::Update();
-		SceneManager::Update();
+		SceneManager::Update(); 	
 	}
 
 	void Application::Render()

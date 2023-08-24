@@ -30,7 +30,8 @@ namespace sy
 		Vector2 pos = Vector2(Application::GetResolution()) / 2.f;
 		pos.y /= 2.f;
 		mVideo->GetComponent<Transform>()->SetPosition(pos);
-		mVideo->SetSpeed(1.f); // 재생속도 설정
+		//mVideo->SetSpeed(1.f); // 재생속도 설정
+		mVideo->SetSpeed(2.f); // 재생속도 설정
 
 		Animator* videoAnimator = mVideo->AddComponent<Animator>();
 		videoAnimator->CreateAnimationFolder(L"IntroVideo", L"..\\Resources\\Video\\Intro", 0.0507757404795487f / mVideo->GetSpeed());
