@@ -81,6 +81,6 @@ namespace sy
 		CollisionManager::Clear();
 
 		// 오디오 정지
-		ResourceManager::Find<Sound>(L"EndingSound")->Stop(true);
+		ResourceManager::AllSoundStop();
 	}
 }

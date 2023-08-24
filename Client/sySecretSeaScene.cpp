@@ -117,6 +117,8 @@ namespace sy
 
 		if (mbSceneChange && mCurStageState == eStageState::Boss && Camera::IsEmptyCamEffect())
 		{
+			// 오디오 정지
+			ResourceManager::AllSoundStop();
 			SceneManager::LoadScene(L"Level7_BossScene");
 		}
 

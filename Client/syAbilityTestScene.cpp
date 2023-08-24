@@ -234,7 +234,7 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 
 		// 오디오 정지
-		ResourceManager::Find<Sound>(L"WorldSelectSound")->Stop(true);
+		ResourceManager::AllSoundStop();
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Play(true);
 	}
@@ -242,7 +242,6 @@ namespace sy
 	void AbilityTestScene::Exit()
 	{
 		// 오디오 정지
-		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
 		ResourceManager::AllSoundStop();
 	}
 }

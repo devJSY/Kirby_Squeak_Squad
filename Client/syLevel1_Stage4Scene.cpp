@@ -144,21 +144,19 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Effect, true);
 
-		// 오디오 정지
-		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Play(true);
 	}
 
 	void Level1_Stage4Scene::Exit()
 	{
+		// 오디오 정지
+		ResourceManager::AllSoundStop();
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
 
-		// 오디오 재생
-		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
-		
 		PrismPlainsScene* scene = dynamic_cast<PrismPlainsScene*>(SceneManager::GetScene(L"PrismPlainsScene"));
 		scene->SetClearActiveUI(eStageState::Stage1);	// Stage1 클리어 처리
 		scene->SetActiveUI(eStageState::Boss);			// 보스 스테이지 활성화

@@ -265,20 +265,18 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Effect, true);
 
-		// 오디오 정지
-		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
 		//// 오디오 재생
 		//ResourceManager::Find<Sound>(L"Level7BossSound")->Play(true);
 	}
 
 	void Level7_BossScene::Exit()
 	{
+		// 오디오 정지
+		ResourceManager::AllSoundStop();
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
-
-		//// 오디오 정지
-		//ResourceManager::Find<Sound>(L"Level7BossSound")->Stop(true);
 
 		SecretSeaScene* scene = dynamic_cast<SecretSeaScene*>(SceneManager::GetScene(L"SecretSeaScene"));
 		scene->SetClearActiveUI(eStageState::Boss);	 // 보스 스테이지 클리어 처리

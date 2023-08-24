@@ -118,11 +118,11 @@ namespace sy
 
 	void TitleScene::Exit()
 	{
+		// 오디오 정지
+		ResourceManager::AllSoundStop();
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
-
-		// 오디오 정지
-		ResourceManager::Find<Sound>(L"TitleSound")->Stop(true);
 	}
 }

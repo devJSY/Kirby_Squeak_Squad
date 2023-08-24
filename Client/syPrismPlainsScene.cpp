@@ -121,10 +121,14 @@ namespace sy
 
 		if (mbSceneChange && mCurStageState == eStageState::Stage1 && Camera::IsEmptyCamEffect())
 		{
+			// 오디오 정지
+			ResourceManager::AllSoundStop();
 			SceneManager::LoadScene(L"Level1_Stage1Scene");
 		}
 		else if (mbSceneChange && mCurStageState == eStageState::Boss && Camera::IsEmptyCamEffect())
 		{
+			// 오디오 정지
+			ResourceManager::AllSoundStop();
 			SceneManager::LoadScene(L"Level1_BossScene");
 		}
 

@@ -221,6 +221,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					defaultKirby->SetKirbyState(eDefaultKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"DefaultKirby_Right_FlyUp", true);
 				}
@@ -251,6 +254,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					fireKirby->SetKirbyState(eFireKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"FireKirby_Right_FlyUp", true);
 				}
@@ -281,6 +287,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					iceKirby->SetKirbyState(eIceKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"IceKirby_Right_FlyUp", true);
 				}
@@ -311,6 +320,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					cutterKirby->SetKirbyState(eCutterKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"CutterKirby_Right_FlyUp", true);
 				}
@@ -341,6 +353,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					tornadoKirby->SetKirbyState(eTornadoKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"TornadoKirby_Right_FlyUp", true);
 				}
@@ -371,6 +386,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					ninjaKirby->SetKirbyState(eNinjaKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"NinjaKirby_Right_FlyUp", true);
 				}
@@ -401,6 +419,9 @@ namespace sy
 				}
 				else
 				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 					sparkKirby->SetKirbyState(eSparkKirbyState::Fly_Up);
 					playerAni->PlayAnimation(L"SparkKirby_Right_FlyUp", true);
 				}
@@ -431,6 +452,9 @@ namespace sy
 		//		}
 		//		else
 		//		{
+		// 			// 오디오 재생
+					//ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
 		//			wheelKirby->SetKirbyState(eWheelKirbyState::Fly_Up);
 		//			playerAni->PlayAnimation(L"WheelKirby_Right_FlyUp", true);
 		//		}
@@ -457,14 +481,13 @@ namespace sy
 
 	void TunnelScene::Exit()
 	{
+		// 오디오 정지
+		ResourceManager::AllSoundStop();
+
 		// 카메라 설정 해제
 		Camera::SetTarget(nullptr);
 		CollisionManager::Clear();
 
 		mPassedTime = 0.f;
-
-		// 오디오 정지
-		ResourceManager::Find<Sound>(L"WorldSelectSound")->Stop(true);
-		ResourceManager::Find<Sound>(L"StageSelectSound")->Stop(true);
 	}
 }

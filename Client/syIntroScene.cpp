@@ -82,7 +82,7 @@ namespace sy
 		Camera::SetTarget(nullptr);
 
 		// 오디오 정지
-		ResourceManager::Find<Sound>(L"WorldSelectSound")->Stop(true);
+		ResourceManager::AllSoundStop();
 
 	}
 }

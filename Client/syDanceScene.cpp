@@ -131,8 +131,9 @@ namespace sy
 
 	void DanceScene::Exit()
 	{
-		ResourceManager::Find<Sound>(L"BossClearSound")->Stop(true);
-		ResourceManager::Find<Sound>(L"NormalClearSound")->Stop(true);
+		// 오디오 정지
+		ResourceManager::AllSoundStop();
+
 		Camera::Pause(1.f, RGB(255, 255, 255));
 		Camera::fadeIn(1.f, RGB(255, 255, 255));
 
