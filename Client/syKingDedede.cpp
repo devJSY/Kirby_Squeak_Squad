@@ -877,12 +877,12 @@ namespace sy
 		// 플레이어 방향을 바라보도록 설정
 		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
 		Vector2 Dir = PlayerPos - mTransform->GetPosition();
-		if (Dir.x > 0.f)
+		if (Dir.x > 10.f)
 		{
 			mTransform->SetDirection(eDirection::RIGHT);
 			mAnimator->PlayAnimation(L"KingDedede_Right_Fly", true);
 		}
-		else
+		else if (Dir.x < -10.f)
 		{
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"KingDedede_Left_Fly", true);
