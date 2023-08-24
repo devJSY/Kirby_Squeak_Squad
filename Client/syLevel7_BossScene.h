@@ -20,6 +20,7 @@ namespace sy
 		virtual void Exit() override;
 
 	private:
+		class MetaKnight*	mMetaKnight;
 		BackGround*			mBackGround;
 		BackGround*			mPixelBG;
 		class PortalUI*		mPortalUI;

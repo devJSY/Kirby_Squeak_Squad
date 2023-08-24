@@ -433,6 +433,12 @@
     <Filter Include="Contents\Scene\StageScene\Level7\Boss">
       <UniqueIdentifier>{acf44b5e-182f-4ffa-8abb-7b8623e93f8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight\SlashSkill">
+      <UniqueIdentifier>{68fe5772-bdd0-4527-8e86-5e464b9d1832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill">
+      <UniqueIdentifier>{945eeb9c-418b-4969-a3f5-da308d2bde57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

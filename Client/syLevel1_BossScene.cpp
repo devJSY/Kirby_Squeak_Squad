@@ -36,8 +36,8 @@
 namespace sy
 {
 	Level1_BossScene::Level1_BossScene()
-		: mPixelBG(nullptr)
-		, mKingDedede(nullptr)
+		: mKingDedede(nullptr)
+		, mPixelBG(nullptr)
 		, mPortalUI(nullptr)
 	{
 	}

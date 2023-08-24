@@ -36,8 +36,8 @@
 namespace sy
 {
 	Level8_BossScene::Level8_BossScene()
-		: mPixelBG(nullptr)
-		, mDarkNebula(nullptr)
+		: mDarkNebula(nullptr)
+		, mPixelBG(nullptr)
 		, mDuration(0.f)
 	{
 	}

@@ -34,12 +34,13 @@
 #include "syDanceScene.h"
 #include "syForeGround.h"
 #include "syTime.h"
-
+#include "syMetaKnight.h"
 
 namespace sy
 {
 	Level7_BossScene::Level7_BossScene()
-		: mBackGround(nullptr)
+		: mMetaKnight(nullptr)
+		, mBackGround(nullptr)
 		, mPixelBG(nullptr)
 		, mPortalUI(nullptr)
 		, mBgSpeed(300.f)
@@ -55,7 +56,8 @@ namespace sy
 	void Level7_BossScene::Initialize()
 	{
 		// 보스 생성
-
+		mMetaKnight = new MetaKnight(eAbilityType::Normal);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, mMetaKnight);
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"Meta_Knight_Stage", L"..\\Resources\\Map\\Stage\\Meta_Knight_Stage.bmp"); // 이미지 설정

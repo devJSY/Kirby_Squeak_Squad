@@ -5,12 +5,13 @@ namespace sy
 {
 	enum class eMetaKnightState
 	{
+		Appear,
 		Idle,
 		Walk,
 		Dash,
 		DashAttack,
-		Attack1,
-		Attack2,
+		Slash1,
+		Slash2,
 		Jump,
 		Turn,
 		Drop,
@@ -46,12 +47,13 @@ namespace sy
 		void AddStarEffect(eDirection dir);
 
 	private:
+		void Appear();
 		void Idle();
 		void Walk();
 		void Dash();
 		void DashAttack();
-		void Attack1();
-		void Attack2();
+		void Slash1();
+		void Slash2();
 		void Jump();
 		void Turn();
 		void Drop();
@@ -62,10 +64,10 @@ namespace sy
 
 	private:
 		eMetaKnightState	    mState;
-		class Animator* mAnimator;
-		class Transform* mTransform;
-		class Rigidbody* mRigidBody;
-		class Collider* mCollider;
+		class Animator*			mAnimator;
+		class Transform*		mTransform;
+		class Rigidbody*		mRigidBody;
+		class Collider*			mCollider;
 		eDirection				mDir;
 
 		float					mStateChangeDelay;
