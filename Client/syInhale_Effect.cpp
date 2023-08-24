@@ -14,6 +14,9 @@
 #include "syDaroach_TimeBomb.h"
 #include "syDaroach_Star.h"
 #include "syDarkNebula_Star.h"
+#include "syAnimator.h"
+#include "syTexture.h"
+#include "syResourceManager.h"
 
 namespace sy
 {
@@ -27,7 +30,8 @@ namespace sy
 		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
 		GetComponent<Transform>()->SetDirection(mDir);
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-			
+		GetComponent<Transform>()->SetScale(Vector2(0.3f, 0.3f));
+
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(63.f, 30.f));
 
@@ -36,6 +40,18 @@ namespace sy
 		else
 			col->SetOffset(Vector2(-31.5f, 0.f));
 
+		Texture* Inhale_Effect_Left_Tex = ResourceManager::Load<Texture>(L"Inhale_Effect_Left_Tex", L"..\\Resources\\Effect\\Inhale_Effect_Left.bmp");
+		Texture* Inhale_Effect_Right_Tex = ResourceManager::Load<Texture>(L"Inhale_Effect_Right_Tex", L"..\\Resources\\Effect\\Inhale_Effect_Right.bmp");
+
+		Animator* animator = GetComponent<Animator>();
+		animator->CreateAnimation(Inhale_Effect_Left_Tex, L"Inhale_Effect_Left", Vector2(2940.f, 0.f), Vector2(210.f, 210.f), Vector2(-210.f, 0.f), 0.1f, 14, Vector2(-31.5f, 0.f));
+		animator->CreateAnimation(Inhale_Effect_Right_Tex, L"Inhale_Effect_Right", Vector2(0.f, 0.f), Vector2(210.f, 210.f), Vector2(210.f, 0.f), 0.1f, 14, Vector2(31.5f, 0.f));
+		
+
+		if (mDir == eDirection::RIGHT)
+			animator->PlayAnimation(L"Inhale_Effect_Right", true);
+		else
+			animator->PlayAnimation(L"Inhale_Effect_Left", true);
 	}
 
 	Inhale_Effect::~Inhale_Effect()
