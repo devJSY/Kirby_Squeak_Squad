@@ -825,6 +825,9 @@
     <ClInclude Include="syLevel7_BossScene.h">
       <Filter>Contents\Scene\StageScene\Level7\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="syMetaKnight.h">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1207,6 +1210,9 @@
     </ClCompile>
     <ClCompile Include="syLevel7_BossScene.cpp">
       <Filter>Contents\Scene\StageScene\Level7\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="syMetaKnight.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
