@@ -3,6 +3,7 @@
 
 namespace sy
 {
+	class Sound;
 	class ResourceManager
 	{
 	private:
@@ -45,6 +46,13 @@ namespace sy
 			resource->SetPath(path);
 			mResources.insert(make_pair(name, resource));
 
+			// Sound 객체 따로 저장
+			Sound* sound = dynamic_cast<Sound*>(resource);
+			if (sound != nullptr)
+			{
+				mSounds.insert(make_pair(name, sound));
+			}
+
 			return resource;
 		}
 
@@ -53,9 +61,19 @@ namespace sy
 		{
 			resource->SetName(name);
 			mResources.insert(std::make_pair(name, resource));
+
+			// Sound 객체 따로 저장
+			Sound* sound = dynamic_cast<Sound*>(resource);
+			if (sound != nullptr)
+			{
+				mSounds.insert(make_pair(name, sound));
+			}
 		}
 
+		static void AllSoundStop();
+
 	private:
-		static std::map<std::wstring, Resource*> mResources;
+		static std::map<std::wstring, Resource*>	mResources;
+		static std::map<std::wstring, Sound*>		mSounds;
 	};
 }

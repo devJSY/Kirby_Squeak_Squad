@@ -243,5 +243,6 @@ namespace sy
 	{
 		// 오디오 정지
 		ResourceManager::Find<Sound>(L"Stage1BGMSound")->Stop(true);
+		ResourceManager::AllSoundStop();
 	}
 }
