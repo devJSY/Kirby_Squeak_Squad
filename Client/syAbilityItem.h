@@ -17,7 +17,7 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) {};
 
-		eAbilityType GetAbilityType() { return mType; }
+		eAbilityType GetAbilityType() const { return mType; }
 		void TakeInhaled() { mInhaled = true; }
 
 	private:
