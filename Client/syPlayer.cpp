@@ -17,6 +17,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "sySwordKirby.h"
 #include "syTime.h"
 #include "syTransformEffect.h"
 #include "syObject.h"
@@ -67,7 +68,7 @@ namespace sy
 		mKirbyType[(UINT)eAbilityType::Ninja] = new NinjaKirby(this);
 		mKirbyType[(UINT)eAbilityType::Spark] = new SparkKirby(this);
 		//mKirbyType[(UINT)eAbilityType::Wheel] = new WheelKirby(this);
-	
+		mKirbyType[(UINT)eAbilityType::Sword] = new SwordKirby(this);
 
 		for (UINT i = 0; i < (UINT)eAbilityType::End; i++)
 		{
@@ -76,7 +77,6 @@ namespace sy
 				mKirbyType[i]->Initialize();
 			}			
 		}
-
 
 		ResourceManager::Load<Sound>(L"Transform_Sound", L"..\\Resources\\Sound\\Effect\\Transform.wav");
 
@@ -209,6 +209,10 @@ namespace sy
 		{
 			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Spark", false);
 		}
+		else if (type == eAbilityType::Sword)
+		{
+			SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Sword", false);
+		}
 	}
 
 	void Player::ReleaseTransformations(eDefaultKirbyState state)
@@ -260,7 +264,8 @@ namespace sy
 
 	void Player::SetKirbyType(eAbilityType type)
 	{
-		// 강제로 인자로들어온타입으로 변경하는 함수 주의하여 사용
+		// 강제로 인자로 들어온타입으로 변경하는 함수 
+		// 주의하여 사용
 		mKirbyType[(UINT)mAbilityType]->Exit();
 		mAbilityType = type;
 		mKirbyType[(UINT)mAbilityType]->Enter();

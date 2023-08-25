@@ -47,6 +47,7 @@ namespace sy
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Ninja_AbilityItem", Vector2(63.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 1.f, 1);
 		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Spark_AbilityItem", Vector2(105.f, 43.f), Vector2(18.f, 27.f), Vector2(18.f, 0.f), 1.f, 1);
 		//mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Wheel_AbilityItem", Vector2(25.f, 125.f), Vector2(18.f, 27.f), Vector2(18.f, 0.f), 1.f, 1, Vector2(0.f, 2.f));
+		mAbilityAnimator->CreateAnimation(Ability_UI_Tex, L"Sword_AbilityItem", Vector2(207.f, 43.f), Vector2(17.f, 27.f), Vector2(17.f, 0.f), 1.f, 1);
 
 		if (mType == eAbilityType::Fire)
 			mAbilityAnimator->PlayAnimation(L"Fire_AbilityItem");
@@ -62,6 +63,8 @@ namespace sy
 			mAbilityAnimator->PlayAnimation(L"Spark_AbilityItem");
 		//else if (mType == eAbilityType::Wheel)
 		//	mAbilityAnimator->PlayAnimation(L"Wheel_AbilityItem");
+		else if (mType == eAbilityType::Sword)
+			mAbilityAnimator->PlayAnimation(L"Sword_AbilityItem");
 
 
 		mCollider = AddComponent<Collider>();

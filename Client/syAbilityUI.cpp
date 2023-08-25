@@ -42,6 +42,7 @@ namespace sy
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Ninja", Vector2(200.f, 0), Vector2(40.f, 26.f), Vector2(40.f, 0.f), 1.f, 1);
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Spark", Vector2(120.f, 80), Vector2(27.f, 26.f), Vector2(27.f, 0.f), 1.f, 1);
 		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Wheel", Vector2(25.f, 80.f), Vector2(25.f, 26.f), Vector2(25.f, 0.f), 1.f, 1, Vector2(0.f, 1.f));
+		mIconAnimator->CreateAnimation(tex, L"Ability_UI_Sword", Vector2(280.f, 80.f), Vector2(23.f, 26.f), Vector2(23.f, 0.f), 1.f, 1);
 
 		Vector2 offset = Vector2(0.f, 20.f);
 
@@ -53,6 +54,7 @@ namespace sy
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Ninja_Name", Vector2(200.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Spark_Name", Vector2(144.f, 111.f), Vector2(26.f, 13.f), Vector2(26.f, 0.f), 1.f, 1, offset);
 		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Wheel_Name", Vector2(35.f, 111.f), Vector2(28.f, 13.f), Vector2(28.f, 0.f), 1.f, 1, offset);
+		mNameAnimator->CreateAnimation(tex, L"Ability_UI_Sword_Name", Vector2(352.f, 111.f), Vector2(28.f, 13.f), Vector2(28.f, 0.f), 1.f, 1, offset);
 
 		mNameBase->CreateAnimation(tex, L"NameBase", Vector2(241.f, 27.f), Vector2(40.f, 13.f), Vector2(40.f, 0.f), 1.f, 1, offset);
 
@@ -117,6 +119,11 @@ namespace sy
 			//	mIconAnimator->PlayAnimation(L"Ability_UI_Wheel", false);
 			//	mNameAnimator->PlayAnimation(L"Ability_UI_Wheel_Name", false);
 			//}
+			else if (type == eAbilityType::Sword)
+			{
+				mIconAnimator->PlayAnimation(L"Ability_UI_Sword", false);
+				mNameAnimator->PlayAnimation(L"Ability_UI_Sword_Name", false);
+			}
 		}
 	}
 
