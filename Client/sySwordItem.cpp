@@ -52,6 +52,7 @@ namespace sy
 			return;
 
 		player->SetKirbyType(eAbilityType::Sword);
+		player->AddTransformEffect();
 		mOwner->SetAppear();
 		Destroy(this);
 	}

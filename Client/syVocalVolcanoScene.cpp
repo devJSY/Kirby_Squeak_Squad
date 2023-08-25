@@ -26,6 +26,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "sySwordKirby.h"
 
 namespace sy
 {
@@ -184,6 +185,12 @@ namespace sy
 		//	wheelKirby->SetKirbyState(eWheelKirbyState::Choice);
 		//	playerAni->PlayAnimation(L"WheelKirby_Choice", false);
 		//}
+		else if (playerType == eAbilityType::Sword)
+		{
+			SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+			swordKirby->SetKirbyState(eSwordKirbyState::Choice);
+			playerAni->PlayAnimation(L"SwordKirby_Choice", false);
+		}
 
 		mCurStageState = eStageState::StageExit;
 

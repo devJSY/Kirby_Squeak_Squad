@@ -26,6 +26,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "sySwordKirby.h"
 #include "syStepUI.h"
 #include "syStarUI.h"
 #include "syNumberUI.h"
@@ -224,6 +225,12 @@ namespace sy
 		//	wheelKirby->SetKirbyState(eWheelKirbyState::Choice);
 		//	playerAni->PlayAnimation(L"WheelKirby_Choice", false);
 		//}
+		else if (playerType == eAbilityType::Sword)
+		{
+			SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+			swordKirby->SetKirbyState(eSwordKirbyState::Choice);
+			playerAni->PlayAnimation(L"SwordKirby_Choice", false);
+		}
 
 		// 오디오 재생
 		ResourceManager::Find<Sound>(L"StageSelectSound")->Play(true);

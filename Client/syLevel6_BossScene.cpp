@@ -32,6 +32,7 @@
 #include "syIceIslandScene.h"
 #include "syDaroach.h"
 #include "syDanceScene.h"
+#include "sySwordKirby.h"
 
 namespace sy
 {
@@ -183,6 +184,12 @@ namespace sy
 		//	wheelKirby->SetKirbyState(eWheelKirbyState::Turn);
 		//	playerAni->PlayAnimation(L"WheelKirby_Right_Turn", false);
 		//}
+		else if (playerType == eAbilityType::Sword)
+		{
+			SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+			swordKirby->SetKirbyState(eSwordKirbyState::Turn);
+			playerAni->PlayAnimation(L"SwordKirby_Right_Turn", false);
+		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);
 

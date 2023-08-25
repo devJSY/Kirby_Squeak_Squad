@@ -32,6 +32,7 @@ namespace sy
 		void PlayerTransformations(eAbilityType type);
 		void ReleaseTransformations(eDefaultKirbyState state);
 		void SetKirbyType(eAbilityType type);
+		void AddTransformEffect();
 
 		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
 

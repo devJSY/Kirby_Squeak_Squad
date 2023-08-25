@@ -168,16 +168,7 @@ namespace sy
 
 			if (type != eAbilityType::Normal)
 			{
-				ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
-
-				TransformEffect* effect = new TransformEffect(this);
-				object::ActiveSceneAddGameObject(eLayerType::TransformEffect, effect);
-
-				// 카메라효과
-				if (mMode == ePlayerMode::PlayMode)
-				{
-					Camera::Transformations(1.f, RGB(0, 0, 0));
-				}
+				AddTransformEffect();
 			}
 		}
 
@@ -272,5 +263,19 @@ namespace sy
 
 		GetComponent<Rigidbody>()->SetLimitVelocity(Vector2(300.f, 300.f));
 		GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, 0.f));
+	}
+
+	void Player::AddTransformEffect()
+	{
+		ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
+
+		TransformEffect* effect = new TransformEffect(this);
+		object::ActiveSceneAddGameObject(eLayerType::TransformEffect, effect);
+
+		// 카메라효과
+		if (mMode == ePlayerMode::PlayMode)
+		{
+			Camera::Transformations(1.f, RGB(0, 0, 0));
+		}
 	}
 }

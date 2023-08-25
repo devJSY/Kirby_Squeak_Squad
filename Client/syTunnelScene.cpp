@@ -22,6 +22,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "sySwordKirby.h"
 
 namespace sy
 {
@@ -438,7 +439,7 @@ namespace sy
 				else
 					playerAni->PlayAnimation(L"SparkKirby_Left_Run", true);
 			}
-			}
+		}
 		//else if (playerType == eAbilityType::Wheel)
 		//{
 		//	WheelKirby* wheelKirby = dynamic_cast<WheelKirby*>(player->GetActiveKirby());
@@ -472,6 +473,39 @@ namespace sy
 		//			playerAni->PlayAnimation(L"WheelKirby_Left_Run", true);
 		//	}
 		//}
+		else if (playerType == eAbilityType::Sword)
+		{
+			SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+
+			if (mCurLevelState == eLevelState::Level2 || mCurLevelState == eLevelState::Level6)
+			{
+				if (mPrevSceneName == L"LevelSelectScene")
+				{
+					swordKirby->SetKirbyState(eSwordKirbyState::Drop);
+					playerAni->PlayAnimation(L"SwordKirby_Right_Drop", true);
+				}
+				else
+				{
+					// 오디오 재생
+					ResourceManager::Find<Sound>(L"FlySound")->Play(true);
+
+					swordKirby->SetKirbyState(eSwordKirbyState::Fly_Up);
+					playerAni->PlayAnimation(L"SwordKirby_Right_FlyUp", true);
+				}
+			}
+			else
+			{
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"RunSound")->Play(false);
+
+				swordKirby->SetKirbyState(eSwordKirbyState::Run);
+
+				if (playerTrans->GetDirection() == eDirection::RIGHT)
+					playerAni->PlayAnimation(L"SwordKirby_Right_Run", true);
+				else
+					playerAni->PlayAnimation(L"SwordKirby_Left_Run", true);
+			}
+		}
 
 		// 카메라 설정 
 		Camera::SetTarget(nullptr);

@@ -16,6 +16,7 @@
 #include "syNinjaKirby.h"
 #include "sySparkKirby.h"
 #include "syWheelKirby.h"
+#include "sySwordKirby.h"
 #include "sySound.h"
 #include "syPortalUI.h"
 #include "syBackGround.h"
@@ -215,6 +216,12 @@ namespace sy
 		//	wheelKirby->SetKirbyState(eWheelKirbyState::Turn);
 		//	playerAni->PlayAnimation(L"WheelKirby_Right_Turn", false);
 		//}
+		else if (playerType == eAbilityType::Sword)
+		{
+			SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+			swordKirby->SetKirbyState(eSwordKirbyState::Turn);
+			playerAni->PlayAnimation(L"SwordKirby_Right_Turn", false);
+		}
 
 		player->GetComponent<Rigidbody>()->SetGround(false);
 
