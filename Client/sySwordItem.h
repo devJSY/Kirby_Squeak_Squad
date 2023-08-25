@@ -3,10 +3,11 @@
 
 namespace sy
 {
+	class MetaKnight;
 	class SwordItem : public GameObject
 	{
 	public:
-		SwordItem();
+		SwordItem(MetaKnight* owner);
 		virtual ~SwordItem();
 
 		virtual void Initialize();
@@ -14,6 +15,9 @@ namespace sy
 		virtual void Render(HDC hdc);
 
 		virtual void OnCollisionEnter(class Collider* other);
+
+	private:
+		MetaKnight* mOwner;
 	};
 }
 

@@ -1,9 +1,10 @@
 #include "sySwordItem.h"
-
+#include "syMetaKnight.h"
 
 namespace sy
 {
-	SwordItem::SwordItem()
+	SwordItem::SwordItem(MetaKnight* owner)
+		: mOwner(owner)
 	{
 	}
 
