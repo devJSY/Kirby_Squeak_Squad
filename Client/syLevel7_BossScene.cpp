@@ -35,6 +35,7 @@
 #include "syForeGround.h"
 #include "syTime.h"
 #include "syMetaKnight.h"
+#include "sySwordItem.h"
 
 namespace sy
 {
@@ -58,6 +59,11 @@ namespace sy
 		// 보스 생성
 		mMetaKnight = new MetaKnight(eAbilityType::Normal);
 		object::ActiveSceneAddGameObject(eLayerType::Enemy, mMetaKnight);
+		mMetaKnight->GetComponent<Transform>()->SetPosition(Vector2(222.f, 55.f));
+
+		SwordItem* swordItem = new SwordItem(mMetaKnight);
+		object::ActiveSceneAddGameObject(eLayerType::Enemy, swordItem);
+		swordItem->GetComponent<Transform>()->SetPosition(Vector2(128.f, 97.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"Meta_Knight_Stage", L"..\\Resources\\Map\\Stage\\Meta_Knight_Stage.bmp"); // 이미지 설정
@@ -93,8 +99,8 @@ namespace sy
 		PixelBgRenderer->SetTexture(Pixeltex);
 		PixelBgRenderer->SetRenderTrig(false);
 
-		//// Sound Load
-		//ResourceManager::Load<Sound>(L"Level7BossSound", L"..\\Resources\\Sound\\Theme\\Level7Boss.wav");
+		// Sound Load
+		ResourceManager::Load<Sound>(L"Level7BossSound", L"..\\Resources\\Sound\\Theme\\Level7Boss.wav");
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
@@ -163,19 +169,19 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		//if (mDaroach->GetDaroachState() == eDaroachState::Dead)
-		//{
-		//	// Portal
-		//	if (mPortalUI == nullptr)
-		//	{
-		//		mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-		//		mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 150.f));
-		//		mPortalUI->Initialize();
+		if (mMetaKnight->GeteMetaKnightState() == eMetaKnightState::Dead)
+		{
+			// Portal
+			if (mPortalUI == nullptr)
+			{
+				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
+				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 150.f));
+				mPortalUI->Initialize();
 
-		//		// 오디오 재생
-		//		ResourceManager::Find<Sound>(L"Level7BossSound")->Stop(true);
-		//	}
-		//}
+				// 오디오 재생
+				ResourceManager::Find<Sound>(L"Level7BossSound")->Stop(true);
+			}
+		}
 
 		Scene::Update();
 	}
@@ -267,8 +273,8 @@ namespace sy
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::AbilityItem, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Effect, eLayerType::Effect, true);
 
-		//// 오디오 재생
-		//ResourceManager::Find<Sound>(L"Level7BossSound")->Play(true);
+		// 오디오 재생
+		ResourceManager::Find<Sound>(L"Level7BossSound")->Play(true);
 	}
 
 	void Level7_BossScene::Exit()
