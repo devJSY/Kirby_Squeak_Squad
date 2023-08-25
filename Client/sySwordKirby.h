@@ -19,6 +19,7 @@ namespace sy
 		Fly_End,
 		Fly_Down,
 		Fly_Up,
+		DownAttack,
 		JumpAttack,
 		Slash,
 		Slashing,
@@ -69,8 +70,6 @@ namespace sy
 	private:
 		// Play Mode State
 		void Transformations();
-		void Choice();
-		void Enter();
 		void Idle();
 		void Walk();
 		void Run();
@@ -82,6 +81,7 @@ namespace sy
 		void Fly_End();
 		void Fly_Down();
 		void Fly_Up();
+		void DownAttack();
 		void JumpAttack();
 		void Slash();
 		void Slashing();
@@ -100,8 +100,6 @@ namespace sy
 
 		float							mKeyReleaseTime;
 		float							mKeyPressdTime;
-
-		class SwordKirby_AttackArea*	mAttackArea;
 	};
 }
 

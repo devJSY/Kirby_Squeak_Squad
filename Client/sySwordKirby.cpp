@@ -22,6 +22,7 @@
 #include "syCollider.h"
 #include "syAbilityStar.h"
 #include "syBossEnemy.h"
+#include "sySwordKirby_AttackArea.h"
 
 namespace sy
 {
@@ -38,7 +39,6 @@ namespace sy
 		, mbOnSlope(false)
 		, mKeyReleaseTime(0.f)
 		, mKeyPressdTime(0.f)
-		, mAttackArea(nullptr)
 	{
 	}
 
@@ -114,6 +114,7 @@ namespace sy
 		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
+		ResourceManager::Load<Sound>(L"SwordKirbyAttackSound", L"..\\Resources\\Sound\\Effect\\SwordKirbyAttack.wav");
 
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
@@ -226,6 +227,9 @@ namespace sy
 				break;
 			case eSwordKirbyState::Fly_Up:
 				Fly_Up();
+				break;
+			case eSwordKirbyState::DownAttack:
+				DownAttack();
 				break;
 			case eSwordKirbyState::JumpAttack:
 				JumpAttack();
@@ -875,21 +879,22 @@ namespace sy
 			mState = eSwordKirbyState::Down;
 		}
 
-		// Skill
+		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
 			mState = eSwordKirbyState::Slash;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1001,22 +1006,22 @@ namespace sy
 			mState = eSwordKirbyState::Down;
 		}
 
-		// Skill
+		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
-			mState = eSwordKirbyState::Skill;
+			mState = eSwordKirbyState::Slash;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
-
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1129,21 +1134,22 @@ namespace sy
 			mState = eSwordKirbyState::Down;
 		}
 
-		// Skill
+		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
-			mState = eSwordKirbyState::Skill;
+			mState = eSwordKirbyState::Slash;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1241,21 +1247,22 @@ namespace sy
 			mAnimator->PlayAnimation(L"SwordKirby_Left_Jump", true);
 		}
 
-		// Skill
+		// JumpAttack
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_JumpAttack", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_JumpAttack", false);
 
-			mState = eSwordKirbyState::Skill;
+			mState = eSwordKirbyState::JumpAttack;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 
 		// Fly Start
@@ -1321,21 +1328,22 @@ namespace sy
 			mState = eSwordKirbyState::Drop;
 		}
 
-		// Skill
+		// JumpAttack
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_JumpAttack", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_JumpAttack", false);
 
-			mState = eSwordKirbyState::Skill;
+			mState = eSwordKirbyState::JumpAttack;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 
 		// Fly Start
@@ -1399,21 +1407,22 @@ namespace sy
 			mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
 		}
 
-		// Skill
+		// JumpAttack
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Right_JumpAttack", false);
 			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill", false);
+				mAnimator->PlayAnimation(L"SwordKirby_Left_JumpAttack", false);
 
-			mState = eSwordKirbyState::Skill;
+			mState = eSwordKirbyState::JumpAttack;
 
 			// 스킬 생성
-			SwordKirby_Skill* skill = new SwordKirby_Skill(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, skill);
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 
 		// Fly Start
@@ -1455,6 +1464,24 @@ namespace sy
 		{
 			mTransform->SetDirection(eDirection::LEFT);
 			mAnimator->PlayAnimation(L"SwordKirby_Left_Down", true);
+		}
+
+		// DownAttack
+		if (Input::GetKeyPressed(eKeyCode::DOWN) && Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_DownAttack", false);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_DownAttack", false);
+
+			mState = eSwordKirbyState::DownAttack;
+
+			// 스킬 생성
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 
 		// 키입력이없을땐 Idle 로 변경
@@ -1744,6 +1771,10 @@ namespace sy
 		}
 	}
 
+	void SwordKirby::DownAttack()
+	{
+	}
+
 	void SwordKirby::JumpAttack()
 	{
 	}
@@ -1754,33 +1785,5 @@ namespace sy
 
 	void SwordKirby::Slashing()
 	{
-	}
-
-	void SwordKirby::Skill()
-	{
-		// 애니메이션이 끝나면 Idle 상태로 변경
-		if (mAnimator->IsActiveAnimationComplete() && !Input::GetKeyPressed(eKeyCode::S))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Skill_End", false);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Skill_End", false);
-
-			mState = eSwordKirbyState::Skill_End;
-
-			// 오디오 정지			
-		}
-	}
-	void SwordKirby::Skill_End()
-	{
-		if (mAnimator->IsActiveAnimationComplete())
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Idle", true);
-
-			mState = eSwordKirbyState::Idle;
-		}
 	}
 }

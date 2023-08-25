@@ -3,6 +3,8 @@
 
 namespace sy
 {
+    using namespace math;
+
     class SwordKirby_AttackArea : public Effects
     {
     public:

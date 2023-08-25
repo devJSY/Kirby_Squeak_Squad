@@ -11,7 +11,37 @@ namespace sy
 		: Effects(owner)
 	{
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-		AddComponent<Collider>()->SetSize(ColliderSize);
+		Collider* col = AddComponent<Collider>();
+		col->SetSize(ColliderSize);
+
+		Player* player = dynamic_cast<Player*>(GetOwner());
+		SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
+
+		if (swordKirby != nullptr)
+		{
+			if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
+			{
+				if (swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack)
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack)
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)				
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)				
+					col->SetOffset(Vector2::Zero);
+			}
+			else
+			{
+				if (swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack)
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack)
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)
+					col->SetOffset(Vector2::Zero);
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)
+					col->SetOffset(Vector2::Zero);
+			}
+		}
 	}
 
 	SwordKirby_AttackArea::~SwordKirby_AttackArea()
@@ -30,14 +60,14 @@ namespace sy
 		Player* player = dynamic_cast<Player*>(GetOwner());
 		SwordKirby* swordKirby = dynamic_cast<SwordKirby*>(player->GetActiveKirby());
 
-		if (swordKirby != nullptr)  
-		{
-			if (swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack
+		// swordKirby 가 아니거나 특정상태가 아니면 삭제
+		if (swordKirby == nullptr 
+			|| 	!(swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack
+				|| swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack
 				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slash
-				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slashing)
-			{
-				Destroy(this);
-			}
+				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slashing))
+		{
+			Destroy(this);
 		}
 
 		Effects::Update();
