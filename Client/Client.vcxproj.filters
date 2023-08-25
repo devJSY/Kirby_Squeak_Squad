@@ -439,6 +439,15 @@
     <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill">
       <UniqueIdentifier>{945eeb9c-418b-4969-a3f5-da308d2bde57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\SwordKirby">
+      <UniqueIdentifier>{f3fa7a7d-a8fc-4658-beda-10b83bc45c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\SwordKirby\SwordKirby_AttackArea">
+      <UniqueIdentifier>{29a495d5-ca3b-4c53-ac57-8ebb0a16f088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight\SwordItem">
+      <UniqueIdentifier>{f35397a9-d159-4bf1-a2c0-8d1e572d2c6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -834,6 +843,15 @@
     <ClInclude Include="syMetaKnight.h">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight</Filter>
     </ClInclude>
+    <ClInclude Include="sySwordKirby.h">
+      <Filter>Contents\GameObject\Player\SwordKirby</Filter>
+    </ClInclude>
+    <ClInclude Include="sySwordItem.h">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\SwordItem</Filter>
+    </ClInclude>
+    <ClInclude Include="sySwordKirby_AttackArea.h">
+      <Filter>Contents\GameObject\Player\SwordKirby\SwordKirby_AttackArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1219,6 +1237,15 @@
     </ClCompile>
     <ClCompile Include="syMetaKnight.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight</Filter>
+    </ClCompile>
+    <ClCompile Include="sySwordKirby.cpp">
+      <Filter>Contents\GameObject\Player\SwordKirby</Filter>
+    </ClCompile>
+    <ClCompile Include="sySwordItem.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\SwordItem</Filter>
+    </ClCompile>
+    <ClCompile Include="sySwordKirby_AttackArea.cpp">
+      <Filter>Contents\GameObject\Player\SwordKirby\SwordKirby_AttackArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

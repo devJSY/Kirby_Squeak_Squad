@@ -5,6 +5,7 @@ namespace sy
 {
 	enum class eMetaKnightState
 	{
+		AppearReady,
 		Appear,
 		Idle,
 		Walk,
@@ -43,10 +44,23 @@ namespace sy
 		eMetaKnightState GeteMetaKnightState() { return mState; }
 
 	private:
+		friend class SwordItem;
+
+		void SetAppear() 
+		{ 
+			if (mState == eMetaKnightState::AppearReady)
+			{
+				mState = eMetaKnightState::Appear; 
+				mAnimator->PlayAnimation(L"MetaKnight_Appear", false);
+			}
+		}
+
+	private:
 		void CheckPixelCollision();
 		void AddStarEffect(eDirection dir);
 
 	private:
+		void AppearReady();
 		void Appear();
 		void Idle();
 		void Walk();

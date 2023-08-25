@@ -15,7 +15,7 @@ namespace sy
 {
 	MetaKnight::MetaKnight(eAbilityType type)
 		: BossEnemy(type)
-		, mState(eMetaKnightState::Appear)
+		, mState(eMetaKnightState::AppearReady)
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
@@ -53,13 +53,14 @@ namespace sy
 
 		// 局聪皋捞记 积己
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
+		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_AppearReady", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_Appear", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 22, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 11, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 6, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_3", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 15, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
-		mAnimator->PlayAnimation(L"MetaKnight_Appear", false);
+		mAnimator->PlayAnimation(L"MetaKnight_AppearReady", true);
 
 		// Sound Load
 		BossEnemy::Initialize();
@@ -69,6 +70,9 @@ namespace sy
 	{
 		switch (mState)
 		{
+		case eMetaKnightState::AppearReady:
+			AppearReady();
+			break;
 		case eMetaKnightState::Appear:
 			Appear();
 			break;
@@ -136,6 +140,10 @@ namespace sy
 	}
 
 	void MetaKnight::AddStarEffect(eDirection dir)
+	{
+	}
+
+	void MetaKnight::AppearReady()
 	{
 	}
 

@@ -241,6 +241,9 @@
     <ClInclude Include="syStar_Effect.h" />
     <ClInclude Include="syStepUI.h" />
     <ClInclude Include="syStarUI.h" />
+    <ClInclude Include="sySwordItem.h" />
+    <ClInclude Include="sySwordKirby.h" />
+    <ClInclude Include="sySwordKirby_AttackArea.h" />
     <ClInclude Include="syTornadoKirby.h" />
     <ClInclude Include="syTornado_Effect.h" />
     <ClInclude Include="syTransformEffect.h" />
@@ -376,6 +379,9 @@
     <ClCompile Include="syStar_Effect.cpp" />
     <ClCompile Include="syStepUI.cpp" />
     <ClCompile Include="syStarUI.cpp" />
+    <ClCompile Include="sySwordItem.cpp" />
+    <ClCompile Include="sySwordKirby.cpp" />
+    <ClCompile Include="sySwordKirby_AttackArea.cpp" />
     <ClCompile Include="syTornadoKirby.cpp" />
     <ClCompile Include="syTornado_Effect.cpp" />
     <ClCompile Include="syTransformEffect.cpp" />
