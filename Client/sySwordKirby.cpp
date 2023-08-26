@@ -58,11 +58,20 @@ namespace sy
 		Texture* SwordKirby_Right_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Right_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right_Slashing.png");
 		Texture* SwordKirby_Left_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Left_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left_Slashing.png");
 
+		Texture* SwordKirby_Right_UpperSlash_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Right_UpperSlash_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right_UpperSlash.png");
+		Texture* SwordKirby_Left_UpperSlash_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Left_UpperSlash_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left_UpperSlash.png");
+
 		SwordKirby_Right->SetScale(Vector2(0.35f, 0.35f));
 		SwordKirby_Left->SetScale(Vector2(0.35f, 0.35f));
 
 		SwordKirby_Right_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
 		SwordKirby_Left_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
+
+		SwordKirby_Right_Slashing_Tex->SetScale(Vector2(0.6f, 0.6f));
+		SwordKirby_Left_Slashing_Tex->SetScale(Vector2(0.6f, 0.6f));
+
+		SwordKirby_Right_UpperSlash_Tex->SetScale(Vector2(0.6f, 0.6f));
+		SwordKirby_Left_UpperSlash_Tex->SetScale(Vector2(0.6f, 0.6f));
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -74,7 +83,7 @@ namespace sy
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
 
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(212.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.045f, 7, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
 
@@ -123,9 +132,11 @@ namespace sy
 		mAnimator->CreateAnimation(SwordKirby_Right_Slash_Tex, L"SwordKirby_Right_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left_Slash_Tex, L"SwordKirby_Left_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
 
-		mAnimator->CreateAnimation(SwordKirby_Right_Slashing_Tex, L"SwordKirby_Right_Slashing", Vector2(300.f, 0.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.03f, 9, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left_Slashing_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.03f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right_Slashing_Tex, L"SwordKirby_Right_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left_Slashing_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
 
+		mAnimator->CreateAnimation(SwordKirby_Right_UpperSlash_Tex, L"SwordKirby_Right_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left_UpperSlash_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
@@ -265,6 +276,9 @@ namespace sy
 				break;
 			case eSwordKirbyState::Slashing:
 				Slashing();
+				break;
+			case eSwordKirbyState::UpperSlash:
+				UpperSlash();
 				break;
 			default:
 				break;
@@ -1886,8 +1900,8 @@ namespace sy
 
 			mState = eSwordKirbyState::Slashing;
 
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1902,5 +1916,9 @@ namespace sy
 
 			mState = eSwordKirbyState::Drop;
 		}
+	}
+
+	void SwordKirby::UpperSlash()
+	{
 	}
 }

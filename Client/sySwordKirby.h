@@ -24,6 +24,7 @@ namespace sy
 		JumpAttack,
 		Slash,
 		Slashing,
+		UpperSlash,
 		End,
 	};
 
@@ -87,6 +88,7 @@ namespace sy
 		void JumpAttack();
 		void Slash();
 		void Slashing();
+		void UpperSlash();
 
 	private:
 		eSwordKirbyState				mState;
