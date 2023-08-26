@@ -58,6 +58,9 @@ namespace sy
 		Texture* SwordKirby_Right_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Right_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right_Slashing.png");
 		Texture* SwordKirby_Left_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Left_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left_Slashing.png");
 
+		SwordKirby_Right->SetScale(Vector2(0.35f, 0.35f));
+		SwordKirby_Left->SetScale(Vector2(0.35f, 0.35f));
+
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mTransform = GetOwner()->GetComponent<Transform>();
@@ -68,12 +71,12 @@ namespace sy
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
 
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.5f, 2, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
 
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Animationoffset);
