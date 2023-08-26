@@ -22,7 +22,7 @@ namespace sy
 			if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)
 			{
 				if (swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack)
-					col->SetOffset(Vector2::Zero);
+					col->SetOffset(Vector2(10.f, 0.f));
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack)
 					col->SetOffset(Vector2::Zero);
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)				
@@ -33,7 +33,7 @@ namespace sy
 			else
 			{
 				if (swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack)
-					col->SetOffset(Vector2::Zero);
+					col->SetOffset(Vector2(-10.f, 0.f));
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack)
 					col->SetOffset(Vector2::Zero);
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)
@@ -79,26 +79,6 @@ namespace sy
 	}
 
 	void SwordKirby_AttackArea::OnCollisionEnter(Collider* other)
-	{
-		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
-
-		if (enemy == nullptr)
-			return;
-
-		Player* player = dynamic_cast<Player*>(GetOwner());
-
-		if (player == nullptr)
-			return;
-
-		// 스킬 → 몬스터 방향
-		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
-
-		player->SetHitEnemy(enemy);
-		enemy->TakeHit(50, Dir);
-		enemy->SetHPBarUIRenderTrig(true);
-	}
-
-	void SwordKirby_AttackArea::OnCollisionStay(Collider* other)
 	{
 		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
 

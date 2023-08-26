@@ -75,8 +75,8 @@ namespace sy
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(0.f, 1980.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1, Animationoffset);
 
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2::Zero, Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2::Zero, Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
 
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Animationoffset);
@@ -93,8 +93,8 @@ namespace sy
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Drop", Vector2(478.f, 60.f), Vector2(22.f, 26.f), Vector2(22.f, 0.f), 0.05f, 2, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Drop", Vector2(89.f, 60.f), Vector2(22.f, 26.f), Vector2(-22.f, 0.f), 0.05f, 2, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Down", Vector2(33.f, 25.f), Vector2(25.f, 20.f), Vector2(25.f, 0.f), 1.f, 1);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Down", Vector2(531.f, 25.f), Vector2(25.f, 20.f), Vector2(-25.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Down", Vector2(0.f, 180.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Down", Vector2(0.f, 180.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1);
 
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Skill", Vector2(175.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 4, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Skill", Vector2(372.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 4, Animationoffset);
@@ -113,6 +113,10 @@ namespace sy
 
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyUp", Vector2(318.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.07f, 4, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyUp", Vector2(245.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.07f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f),0.25f, 2);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.25f, 2);
+
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
@@ -169,6 +173,7 @@ namespace sy
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
 			if (Input::GetKeyDown(eKeyCode::W)
+				&& mState != eSwordKirbyState::DownAttack
 				&& mState != eSwordKirbyState::JumpAttack
 				&& mState != eSwordKirbyState::Slash
 				&& mState != eSwordKirbyState::Slashing)
@@ -291,6 +296,13 @@ namespace sy
 
 	void SwordKirby::OnCollisionEnter(Collider* other)
 	{
+		// 특정상태에선 AttackArea가 충돌 관리
+		if (mState == eSwordKirbyState::DownAttack
+			|| mState == eSwordKirbyState::JumpAttack
+			|| mState == eSwordKirbyState::Slash
+			|| mState == eSwordKirbyState::Slashing)
+			return;
+
 		// 플레이어 데미지 상태면 충돌처리 X
 		if (GetOwner()->IsDamaged())
 			return;
@@ -323,7 +335,8 @@ namespace sy
 
 	bool SwordKirby::IsTransformableCheck()
 	{
-		if (mState == eSwordKirbyState::JumpAttack
+		if (mState == eSwordKirbyState::DownAttack
+			|| mState == eSwordKirbyState::JumpAttack
 			|| mState == eSwordKirbyState::Slash
 			|| mState == eSwordKirbyState::Slashing)
 			return false;
@@ -335,6 +348,7 @@ namespace sy
 	{
 		// 특정 상태에선 충돌 무시
 		if (mState == eSwordKirbyState::Transformations
+			|| mState == eSwordKirbyState::DownAttack
 			|| mState == eSwordKirbyState::JumpAttack
 			|| mState == eSwordKirbyState::Slash
 			|| mState == eSwordKirbyState::Slashing)
@@ -1187,7 +1201,7 @@ namespace sy
 
 				mKeyPressdTime = 0.f;
 				mKeyReleaseTime = 0.f;
-				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mRigidBody->SetVelocity(Vector2::Zero);
 			}
 		}
 
@@ -1207,7 +1221,7 @@ namespace sy
 
 				mKeyPressdTime = 0.f;
 				mKeyReleaseTime = 0.f;
-				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mRigidBody->SetVelocity(Vector2::Zero);
 			}
 		}
 
@@ -1478,15 +1492,24 @@ namespace sy
 		// DownAttack
 		if (Input::GetKeyPressed(eKeyCode::DOWN) && Input::GetKeyDown(eKeyCode::S))
 		{
+			Vector2 vel = mRigidBody->GetVelocity();
+
 			if (mDir == eDirection::RIGHT)
+			{
 				mAnimator->PlayAnimation(L"SwordKirby_Right_DownAttack", false);
+				vel.x += 100.f;
+			}
 			else
+			{
 				mAnimator->PlayAnimation(L"SwordKirby_Left_DownAttack", false);
+				vel.x -= 100.f;
+			}
 
 			mState = eSwordKirbyState::DownAttack;
+			mRigidBody->SetVelocity(vel);
 
 			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 15.f));
 			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
@@ -1740,7 +1763,7 @@ namespace sy
 			// 상단에 충돌한 상태면 속도를 0으로 설정하고 고정위치 셋팅
 			if (mbTopStop)
 			{
-				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mRigidBody->SetVelocity(Vector2::Zero);
 				// 좌우 이동
 				Vector2 pos = mTransform->GetPosition();
 				pos.y -= 1.f;
@@ -1782,6 +1805,17 @@ namespace sy
 
 	void SwordKirby::DownAttack()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
+
+			mState = eSwordKirbyState::Drop;
+
+			mRigidBody->SetVelocity(Vector2(0.f, mRigidBody->GetVelocity().y));
+		}
 	}
 
 	void SwordKirby::JumpAttack()

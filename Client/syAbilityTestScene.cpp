@@ -64,7 +64,10 @@ namespace sy
 		AbilityItem* item6 = new AbilityItem(eAbilityType::Spark);
 		item6->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
 		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item6);
-		
+
+		AbilityItem* item7 = new AbilityItem(eAbilityType::Sword);
+		item7->GetComponent<Transform>()->SetPosition(Vector2(125.f, 20.f));
+		object::ActiveSceneAddGameObject(eLayerType::AbilityItem, item7);
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World3_Backgrounds", L"..\\Resources\\Map\\Stage\\World3_Backgrounds.png"); // 이미지 설정
