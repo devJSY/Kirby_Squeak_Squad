@@ -1937,14 +1937,39 @@ namespace sy
 
 	void SwordKirby::Slash()
 	{
-		if (mAnimator->GetActiveAnimationIndex() == 9)
+		static bool bSlashAttackAreaCheck = true;
+
+		if (mAnimator->GetActiveAnimationIndex() >= 9 && bSlashAttackAreaCheck)
 		{
+			// 이때 여러개 생성됨
 			// 스킬 생성
 			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
 			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+			bSlashAttackAreaCheck = false;
 
 			// 오디오 재생		
 			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+		}
+		else
+		{
+			// Slashing
+			if (Input::GetKeyDown(eKeyCode::S))
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_Slashing", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_Slashing", false);
+
+				mState = eSwordKirbyState::Slashing;
+
+				// 스킬 생성
+				SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+				bSlashAttackAreaCheck = true;
+
+				// 오디오 재생		
+				ResourceManager::Find<Sound>(L"SwordKirbySlashingSound")->Play(false);
+			}
 		}
 
 		if (mAnimator->IsActiveAnimationComplete())
@@ -1955,24 +1980,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
 
 			mState = eSwordKirbyState::Drop;
-		}
-
-		// Slashing
-		if (Input::GetKeyDown(eKeyCode::S))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Slashing", false);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Slashing", false);
-
-			mState = eSwordKirbyState::Slashing;
-
-			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
-			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SwordKirbySlashingSound")->Play(false);
+			bSlashAttackAreaCheck = true;
 		}
 	}
 

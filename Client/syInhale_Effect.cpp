@@ -139,9 +139,19 @@ namespace sy
 		if (enemy != nullptr)
 		{
 			if (enemy->IsDeadState() || enemy->GetCurHP() <= 0.f)
-			{
+				return;	
+		}
+
+		if (abilityStar != nullptr)
+		{
+			if (abilityStar->GetAbilityStarState() == eAbilityStarState::Dead)
 				return;
-			}
+		}
+
+		if (star != nullptr)
+		{
+			if (star->GetStarState() == eStarState::Dead)
+				return;
 		}
 		
 		if (daroachbomb != nullptr)

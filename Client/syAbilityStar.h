@@ -25,6 +25,8 @@ namespace sy
         eAbilityType GetAbilityType() { return mType; }
         void TakeInhaled() { mInhaled = true; }
 
+        eAbilityStarState GetAbilityStarState() const { return mState; }
+
     private:
         void CheckPixelCollision();
 

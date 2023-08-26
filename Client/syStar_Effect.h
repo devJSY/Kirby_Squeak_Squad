@@ -25,6 +25,8 @@ namespace sy
 
         eStarState GetStarState() { return mState; }
         void TakeInhaled() { mInhaled = true; }
+        eStarState GetStarState() const { return mState; }
+
 
     private:
         void Active();
