@@ -40,7 +40,8 @@ namespace sy
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
 		bool GetAffectedCamera() { return mbAffectedCamera; }
 
-		bool IsActiveAnimationComplete() { return mActiveAnimation->IsComplete(); }
+		bool IsActiveAnimationComplete() const { return mActiveAnimation->IsComplete(); }
+		int GetActiveAnimationIndex() const { return mActiveAnimation->GetIndex(); }
 
 		void ActiveAnimationReset() { mActiveAnimation->Reset(); }		
 

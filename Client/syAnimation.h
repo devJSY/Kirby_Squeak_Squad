@@ -43,8 +43,9 @@ namespace sy
 
 		void Reset();
 
-		bool IsComplete() { return mbComplete; }
+		bool IsComplete() const { return mbComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
+		int GetIndex() const { return mIndex; }
 
 		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
 

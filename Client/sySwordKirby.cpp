@@ -61,6 +61,9 @@ namespace sy
 		SwordKirby_Right->SetScale(Vector2(0.35f, 0.35f));
 		SwordKirby_Left->SetScale(Vector2(0.35f, 0.35f));
 
+		SwordKirby_Right_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
+		SwordKirby_Left_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
+
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mTransform = GetOwner()->GetComponent<Transform>();
@@ -116,6 +119,12 @@ namespace sy
 
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_JumpAttack", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.025f, 9, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_JumpAttack", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.025f, 9, Animationoffset);
+
+		mAnimator->CreateAnimation(SwordKirby_Right_Slash_Tex, L"SwordKirby_Right_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left_Slash_Tex, L"SwordKirby_Left_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
+
+		mAnimator->CreateAnimation(SwordKirby_Right_Slashing_Tex, L"SwordKirby_Right_Slashing", Vector2(300.f, 0.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.03f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left_Slashing_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.03f, 9, Animationoffset);
 
 
 		mAnimator->SetAffectedCamera(true);
@@ -914,13 +923,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
 			mState = eSwordKirbyState::Slash;
-
-			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
-			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1041,13 +1043,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
 			mState = eSwordKirbyState::Slash;
-
-			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
-			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1169,13 +1164,6 @@ namespace sy
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
 
 			mState = eSwordKirbyState::Slash;
-
-			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
-			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
-
-			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 		}
 	}
 
@@ -1869,9 +1857,50 @@ namespace sy
 
 	void SwordKirby::Slash()
 	{
+		if (mAnimator->GetActiveAnimationIndex() == 9)
+		{
+			// 스킬 생성
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+			// 오디오 재생		
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+		}
+
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
+
+			mState = eSwordKirbyState::Drop;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Slashing", false);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Slashing", false);
+
+			mState = eSwordKirbyState::Slashing;
+
+			// 오디오 재생
+			ResourceManager::Find<Sound>(L"BreathSound")->Play(false);
+		}
 	}
 
 	void SwordKirby::Slashing()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
+
+			mState = eSwordKirbyState::Drop;
+		}
 	}
 }
