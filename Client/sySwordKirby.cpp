@@ -114,6 +114,9 @@ namespace sy
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f),0.25f, 2, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.25f, 2, Animationoffset);
 
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_JumpAttack", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.025f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_JumpAttack", Vector2(0.f, 1440.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.025f, 9, Animationoffset);
+
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
@@ -1280,8 +1283,11 @@ namespace sy
 
 			mState = eSwordKirbyState::JumpAttack;
 
+			mKeyPressdTime = 0.f;
+			mKeyReleaseTime = 0.f;
+
 			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
 			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
@@ -1362,7 +1368,7 @@ namespace sy
 			mState = eSwordKirbyState::JumpAttack;
 
 			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
 			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
@@ -1441,7 +1447,7 @@ namespace sy
 			mState = eSwordKirbyState::JumpAttack;
 
 			// 스킬 생성
-			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(100.f, 100.f));
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
 			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
 			// 오디오 재생		
@@ -1833,6 +1839,32 @@ namespace sy
 
 	void SwordKirby::JumpAttack()
 	{
+		// Stop 상태가 아닌경우에만 이동
+		if (!(mbOnLeftStop || mbOnRightStop))
+		{
+			// 좌우 이동
+			Vector2 pos = mTransform->GetPosition();
+
+			if (Input::GetKeyPressed(eKeyCode::RIGHT) || Input::GetKeyPressed(eKeyCode::LEFT))
+			{
+				if (mDir == eDirection::RIGHT)
+					pos.x += 80.f * Time::DeltaTime();
+				else
+					pos.x -= 80.f * Time::DeltaTime();
+			}
+
+			mTransform->SetPosition(pos);
+		}
+
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
+
+			mState = eSwordKirbyState::Drop;
+		}
 	}
 
 	void SwordKirby::Slash()
