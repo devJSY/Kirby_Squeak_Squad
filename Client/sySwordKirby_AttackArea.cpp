@@ -102,4 +102,28 @@ namespace sy
 		enemy->TakeHit(50, Dir);
 		enemy->SetHPBarUIRenderTrig(true);
 	}
+
+	void SwordKirby_AttackArea::OnCollisionStay(Collider* other)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*>(other->GetOwner());
+
+		if (enemy == nullptr)
+			return;
+
+		Player* player = dynamic_cast<Player*>(GetOwner());
+
+		if (player == nullptr)
+			return;
+
+		// Stay상태에서 Damage 상태면 적용하지않음
+		if (enemy->IsDamagedState())
+			return;
+
+		// 스킬 → 몬스터 방향
+		Vector2 Dir = other->GetOwner()->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
+
+		player->SetHitEnemy(enemy);
+		enemy->TakeHit(50, Dir);
+		enemy->SetHPBarUIRenderTrig(true);
+	}
 }

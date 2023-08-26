@@ -16,5 +16,6 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other);
+        virtual void OnCollisionStay(class Collider* other);
     };
 }

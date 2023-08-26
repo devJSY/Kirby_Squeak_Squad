@@ -284,6 +284,15 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syStarUI.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySwordItem.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySwordKirby.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySwordKirby_AttackArea.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syTornadoKirby.cpp"
 
 
