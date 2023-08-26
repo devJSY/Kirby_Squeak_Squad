@@ -67,11 +67,11 @@ namespace sy
 		SwordKirby_Right_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
 		SwordKirby_Left_Slash_Tex->SetScale(Vector2(0.35f, 0.35f));
 
-		SwordKirby_Right_Slashing_Tex->SetScale(Vector2(0.6f, 0.6f));
-		SwordKirby_Left_Slashing_Tex->SetScale(Vector2(0.6f, 0.6f));
+		SwordKirby_Right_Slashing_Tex->SetScale(Vector2(0.5f, 0.5f));
+		SwordKirby_Left_Slashing_Tex->SetScale(Vector2(0.5f, 0.5f));
 
-		SwordKirby_Right_UpperSlash_Tex->SetScale(Vector2(0.6f, 0.6f));
-		SwordKirby_Left_UpperSlash_Tex->SetScale(Vector2(0.6f, 0.6f));
+		SwordKirby_Right_UpperSlash_Tex->SetScale(Vector2(0.5f, 0.5f));
+		SwordKirby_Left_UpperSlash_Tex->SetScale(Vector2(0.5f, 0.5f));
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -132,11 +132,11 @@ namespace sy
 		mAnimator->CreateAnimation(SwordKirby_Right_Slash_Tex, L"SwordKirby_Right_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left_Slash_Tex, L"SwordKirby_Left_Slash", Vector2(0.f, 0.f), Vector2(300.f, 180.f), Vector2(300.f, 0.f), 0.025f, 16, Animationoffset);
 
-		mAnimator->CreateAnimation(SwordKirby_Right_Slashing_Tex, L"SwordKirby_Right_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left_Slashing_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right_Slashing_Tex, L"SwordKirby_Right_Slashing", Vector2(60.f, 0.f), Vector2(125.f, 95.f), Vector2(140.f, 0.f), 0.03f, 26, Vector2(10.f, -8.f));
+		mAnimator->CreateAnimation(SwordKirby_Left_Slashing_Tex, L"SwordKirby_Left_Slashing", Vector2(3533.f, 0.f), Vector2(125.f, 95.f), Vector2(-140.f, 0.f), 0.03f, 26, Vector2(-10.f, -8.f));
 
-		mAnimator->CreateAnimation(SwordKirby_Right_UpperSlash_Tex, L"SwordKirby_Right_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
-		mAnimator->CreateAnimation(SwordKirby_Left_UpperSlash_Tex, L"SwordKirby_Left_Slashing", Vector2(0.f, 0.f), Vector2(148.52f, 124.f), Vector2(148.52f, 0.f), 0.025f, 26, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right_UpperSlash_Tex, L"SwordKirby_Right_UpperSlash", Vector2(0.f, 0.f), Vector2(200.f, 126.f), Vector2(210.f, 0.f), 0.03f, 18, Vector2(0.f, 0.f));
+		mAnimator->CreateAnimation(SwordKirby_Left_UpperSlash_Tex, L"SwordKirby_Left_UpperSlash", Vector2(3640.f, 0.f), Vector2(200.f, 126.f), Vector2(-210.f, 0.f), 0.03f, 18, Vector2(0.f, 0.f));
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
@@ -148,11 +148,13 @@ namespace sy
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
 		ResourceManager::Load<Sound>(L"ClickSound", L"..\\Resources\\Sound\\Effect\\Click.wav");
 		ResourceManager::Load<Sound>(L"SwordKirbyAttackSound", L"..\\Resources\\Sound\\Effect\\SwordKirbyAttack.wav");
+		ResourceManager::Load<Sound>(L"SwordKirbySlashingSound", L"..\\Resources\\Sound\\Effect\\SwordKirbySlashing.wav");
 
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"LandSound")->SetVolume(10.f);
 		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
+		ResourceManager::Find<Sound>(L"SwordKirbySlashingSound")->SetVolume(100.f);
 	}
 
 	void SwordKirby::Update()
@@ -196,7 +198,8 @@ namespace sy
 				&& mState != eSwordKirbyState::DownAttack
 				&& mState != eSwordKirbyState::JumpAttack
 				&& mState != eSwordKirbyState::Slash
-				&& mState != eSwordKirbyState::Slashing)
+				&& mState != eSwordKirbyState::Slashing
+				&& mState != eSwordKirbyState::UpperSlash)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 
@@ -326,7 +329,8 @@ namespace sy
 		if (mState == eSwordKirbyState::DownAttack
 			|| mState == eSwordKirbyState::JumpAttack
 			|| mState == eSwordKirbyState::Slash
-			|| mState == eSwordKirbyState::Slashing)
+			|| mState == eSwordKirbyState::Slashing
+			|| mState == eSwordKirbyState::UpperSlash)
 			return;
 
 		// 플레이어 데미지 상태면 충돌처리 X
@@ -364,7 +368,8 @@ namespace sy
 		if (mState == eSwordKirbyState::DownAttack
 			|| mState == eSwordKirbyState::JumpAttack
 			|| mState == eSwordKirbyState::Slash
-			|| mState == eSwordKirbyState::Slashing)
+			|| mState == eSwordKirbyState::Slashing
+			|| mState == eSwordKirbyState::UpperSlash)
 			return false;
 
 		return true;
@@ -377,7 +382,8 @@ namespace sy
 			|| mState == eSwordKirbyState::DownAttack
 			|| mState == eSwordKirbyState::JumpAttack
 			|| mState == eSwordKirbyState::Slash
-			|| mState == eSwordKirbyState::Slashing)
+			|| mState == eSwordKirbyState::Slashing
+			|| mState == eSwordKirbyState::UpperSlash)
 			return;
 
 		mKeyReleaseTime = 0.f;
@@ -931,12 +937,32 @@ namespace sy
 		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+			if (Input::GetKeyDown(eKeyCode::UP) || Input::GetKeyPressed(eKeyCode::UP))
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_UpperSlash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_UpperSlash", false);
 
-			mState = eSwordKirbyState::Slash;
+				mState = eSwordKirbyState::UpperSlash;
+				mRigidBody->SetGround(false);
+				mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+
+				SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(40.f, 30.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+				// 오디오 재생		
+				ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+
+				mState = eSwordKirbyState::Slash;
+			}
 		}
 	}
 
@@ -1033,6 +1059,9 @@ namespace sy
 			mRigidBody->SetGround(false);
 			mRigidBody->SetVelocity(Vector2(0.f, -160.f));
 
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(40.f, 30.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"JumpSound")->Play(false);
 		}
@@ -1051,12 +1080,32 @@ namespace sy
 		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+			if (Input::GetKeyDown(eKeyCode::UP) || Input::GetKeyPressed(eKeyCode::UP))
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_UpperSlash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_UpperSlash", false);
 
-			mState = eSwordKirbyState::Slash;
+				mState = eSwordKirbyState::UpperSlash;
+				mRigidBody->SetGround(false);
+				mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+
+				SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(40.f, 30.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+				// 오디오 재생		
+				ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+
+				mState = eSwordKirbyState::Slash;
+			}
 		}
 	}
 
@@ -1172,12 +1221,29 @@ namespace sy
 		// Slash
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
-			else
-				mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+			if (Input::GetKeyDown(eKeyCode::UP) || Input::GetKeyPressed(eKeyCode::UP))
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_UpperSlash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_UpperSlash", false);
 
-			mState = eSwordKirbyState::Slash;
+				mState = eSwordKirbyState::UpperSlash;
+				mRigidBody->SetGround(false);
+				mRigidBody->SetVelocity(Vector2(0.f, -200.f));
+
+				// 오디오 재생		
+				ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"SwordKirby_Right_Slash", false);
+				else
+					mAnimator->PlayAnimation(L"SwordKirby_Left_Slash", false);
+
+				mState = eSwordKirbyState::Slash;
+			}
 		}
 	}
 
@@ -1891,6 +1957,7 @@ namespace sy
 			mState = eSwordKirbyState::Drop;
 		}
 
+		// Slashing
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			if (mDir == eDirection::RIGHT)
@@ -1900,14 +1967,21 @@ namespace sy
 
 			mState = eSwordKirbyState::Slashing;
 
+			// 스킬 생성
+			SwordKirby_AttackArea* AttackArea = new SwordKirby_AttackArea(GetOwner(), Vector2(50.f, 50.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
 			// 오디오 재생		
-			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+			ResourceManager::Find<Sound>(L"SwordKirbySlashingSound")->Play(false);
 		}
 	}
 
 	void SwordKirby::Slashing()
 	{
-		if (mAnimator->IsActiveAnimationComplete())
+		static float time = 0.f;
+		time += Time::DeltaTime();
+
+		if (mAnimator->IsActiveAnimationComplete() && time > 1.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"SwordKirby_Right_Drop", true);
@@ -1915,10 +1989,20 @@ namespace sy
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Drop", true);
 
 			mState = eSwordKirbyState::Drop;
+			time = 0.f;
 		}
 	}
 
 	void SwordKirby::UpperSlash()
 	{
+		if (mAnimator->IsActiveAnimationComplete() && mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Idle", true);
+
+			mState = eSwordKirbyState::Idle;
+		}
 	}
 }

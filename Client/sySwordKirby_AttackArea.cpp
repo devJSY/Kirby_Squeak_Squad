@@ -28,7 +28,9 @@ namespace sy
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)				
 					col->SetOffset(Vector2(25.f, 0.f));
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slashing)				
-					col->SetOffset(Vector2::Zero);
+					col->SetOffset(Vector2(25.f, 0.f));
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::UpperSlash)
+					col->SetOffset(Vector2(15.f, 0.f));
 			}
 			else
 			{
@@ -39,7 +41,9 @@ namespace sy
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slash)
 					col->SetOffset(Vector2(-25.f, 0.f));
 				else if (swordKirby->GetKirbyState() == eSwordKirbyState::Slashing)
-					col->SetOffset(Vector2::Zero);
+					col->SetOffset(Vector2(-25.f, 0.f));
+				else if (swordKirby->GetKirbyState() == eSwordKirbyState::UpperSlash)
+					col->SetOffset(Vector2(-15.f, 0.f));
 			}
 		}
 	}
@@ -65,7 +69,8 @@ namespace sy
 			|| 	!(swordKirby->GetKirbyState() == eSwordKirbyState::DownAttack
 				|| swordKirby->GetKirbyState() == eSwordKirbyState::JumpAttack
 				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slash
-				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slashing))
+				|| swordKirby->GetKirbyState() == eSwordKirbyState::Slashing
+				|| swordKirby->GetKirbyState() == eSwordKirbyState::UpperSlash))
 		{
 			Destroy(this);
 		}
