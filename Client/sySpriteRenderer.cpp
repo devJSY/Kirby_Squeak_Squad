@@ -53,7 +53,6 @@ namespace sy
 				, mSize
 				, mbAffectedCamera
 				, mCameraSpeedRatio
-				, tr->GetScale()
 				, mAlpha
 				, mBMPRGB
 				, tr->GetRotation());

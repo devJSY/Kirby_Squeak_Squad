@@ -13,6 +13,7 @@ namespace sy
 		, mHdc(NULL)
 		, mWidth(0)
 		, mHeight(0)
+		, mScale(Vector2::One)
 	{
 	}
 
@@ -136,7 +137,6 @@ namespace sy
 		, Vector2 TexSize
 		, bool AffectedCamera
 		, Vector2 CameraSpeedRatio
-		, Vector2 scale
 		, float Alpha
 		, COLORREF rgb
 		, float rotate
@@ -151,10 +151,10 @@ namespace sy
 
 		if (mType == eTextureType::Bmp)
 		{
-			TransparentBlt(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
-				, (int)(pos.y - (size.y * scale.y / 2.0f))
-				, int(size.x * scale.x)
-				, int(size.y * scale.y)
+			TransparentBlt(hdc, (int)(pos.x - (size.x * mScale.x / 2.0f))
+				, (int)(pos.y - (size.y * mScale.y / 2.0f))
+				, int(size.x * mScale.x)
+				, int(size.y * mScale.y)
 				, mHdc
 				, int(TexLeftTop.x), int(TexLeftTop.y), int(TexSize.x), int(TexSize.y)
 				, rgb);
@@ -189,10 +189,10 @@ namespace sy
 
 			func.SourceConstantAlpha = alpha; // 0 ~ 255
 
-			AlphaBlend(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
-				, (int)(pos.y - (size.y * scale.y / 2.0f))
-				, int(size.x * scale.x)
-				, int(size.y * scale.y)
+			AlphaBlend(hdc, (int)(pos.x - (size.x * mScale.x / 2.0f))
+				, (int)(pos.y - (size.y * mScale.y / 2.0f))
+				, int(size.x * mScale.x)
+				, int(size.y * mScale.y)
 				, mHdc
 				, int(TexLeftTop.x), int(TexLeftTop.y)
 				, int(TexSize.x), int(TexSize.y)
@@ -206,10 +206,10 @@ namespace sy
 			func.AlphaFormat = AC_SRC_ALPHA;
 			func.SourceConstantAlpha = 255;
 
-			GdiAlphaBlend(hdc, (int)(pos.x - (size.x * scale.x / 2.0f))
-				, (int)(pos.y - (size.y * scale.y / 2.0f))
-				, int(size.x * scale.x)
-				, int(size.y * scale.y)
+			GdiAlphaBlend(hdc, (int)(pos.x - (size.x * mScale.x / 2.0f))
+				, (int)(pos.y - (size.y * mScale.y / 2.0f))
+				, int(size.x * mScale.x)
+				, int(size.y * mScale.y)
 				, mHdc
 				, int(TexLeftTop.x), int(TexLeftTop.y)
 				, int(TexSize.x), int(TexSize.y)
@@ -231,10 +231,10 @@ namespace sy
 			//graphics.DrawImage(mImage
 			//	, Gdiplus::Rect
 			//	(
-			//		(int)(pos.x - (size.x * scale.x / 2.0f))
-			//		, (int)(pos.y - (size.y * scale.y / 2.0f))
-			//		, (int)(size.x * scale.x)
-			//		, (int)(size.y * scale.y)
+			//		(int)(pos.x - (size.x * mScale.x / 2.0f))
+			//		, (int)(pos.y - (size.y * mScale.y / 2.0f))
+			//		, (int)(size.x * mScale.x)
+			//		, (int)(size.y * mScale.y)
 			//	)
 			//	, INT(TexLeftTop.x), INT(TexLeftTop.y)
 			//	, INT(TexSize.x), INT(TexSize.y)

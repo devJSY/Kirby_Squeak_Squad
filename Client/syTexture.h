@@ -22,7 +22,6 @@ namespace sy
 			, Vector2 TexSize
 			, bool AffectedCamera
 			, Vector2 CameraSpeedRatio
-			, Vector2 scale = Vector2::One
 			, float Alpha = 1.0f
 			, COLORREF rgb = RGB(255,0,255)
 			, float rotate = 0.0f
@@ -43,6 +42,8 @@ namespace sy
 
 		COLORREF GetTexturePixel(int x, int y) { return GetPixel(mHdc, x, y); }
 
+		void SetScale(Vector2 scale) { mScale = scale; }
+
 	private:
 		eTextureType mType;				// 확장자 타입
 		Gdiplus::Image* mImage;			// png 객체
@@ -52,5 +53,7 @@ namespace sy
 		HDC mHdc;			 // 리소스 비트맵의 dc
 		UINT mWidth;		 // 리소스 가로
 		UINT mHeight;		 // 리소스 세로
+
+		Vector2 mScale;
 	};
 }

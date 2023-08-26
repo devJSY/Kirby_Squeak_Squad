@@ -20,13 +20,12 @@ namespace sy
 	}
 	void SwordItem::Initialize()
 	{
-		GetComponent<Transform>()->SetScale(Vector2(0.35f, 0.35f));
-
 		Collider* col = AddComponent<Collider>();
 		col->SetSize(Vector2(15.f, 25.f));
 		col->SetOffset(Vector2(0.f, 35.f));
 
 		Texture* MetaKnight_SwordItem_Tex = ResourceManager::Load<Texture>(L"MetaKnight_SwordItem_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\SwordItem.bmp");
+		MetaKnight_SwordItem_Tex->SetScale(Vector2(0.35f, 0.35f));
 
 		Animator* animator = AddComponent<Animator>();
 		animator->CreateAnimation(MetaKnight_SwordItem_Tex, L"MetaKnight_SwordItem", Vector2::Zero, Vector2(165.f, 282.f), Vector2(165.f, 0.f), 0.1f, 2);

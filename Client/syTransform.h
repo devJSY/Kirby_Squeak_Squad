@@ -23,13 +23,9 @@ namespace sy
 		eDirection GetDirection() { return mDir; }
 		void SetDirection(eDirection dir) { mDir = dir; }
 
-		void SetScale(Vector2 scale) { mScale = scale; }
-		Vector2 GetScale() { return mScale; }
-
 	private:
 		Vector2 mPosition;
 		float	mRotation;
-		Vector2 mScale;
 		eDirection mDir;
 	};
 }

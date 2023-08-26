@@ -14,7 +14,6 @@ namespace sy
 		, mIndex(-1)
 		, mTime(0.0f)
 		, mbComplete(false)
-		, mScale(Vector2::One)
 		, mBMPRGB(RGB(255, 0, 255)) // 기본값 마젠타
 	{
 	}
@@ -58,8 +57,7 @@ namespace sy
 			, sprite.leftTop
 			, sprite.size
 			, mAnimator->GetAffectedCamera()
-			, Vector2::One				// 애니메이션은 카메라속도 비율 1
-			, tr->GetScale()			
+			, Vector2::One				// 애니메이션은 카메라속도 비율 1		
 			, mAnimator->GetAlpha()
 			, mBMPRGB
 			, tr->GetRotation()

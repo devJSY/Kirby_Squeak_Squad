@@ -45,7 +45,6 @@ namespace sy
 
 		bool IsComplete() { return mbComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
-		void SetScale(Vector2 scale) { mScale = scale; }
 
 		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
 
@@ -58,7 +57,6 @@ namespace sy
 		float mTime;
 
 		bool mbComplete;
-		Vector2 mScale;
 
 		COLORREF	mBMPRGB;
 	};

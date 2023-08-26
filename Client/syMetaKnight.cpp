@@ -41,10 +41,14 @@ namespace sy
 
 		Texture* MetaKnight_Appear_Tex = ResourceManager::Load<Texture>(L"MetaKnight_Appear_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\MetaKnight_Appear.bmp");
 		Texture* MetaKnight_Dead_Tex = ResourceManager::Load<Texture>(L"MetaKnight_Dead_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\MetaKnight_Dead.bmp");
+		
+		MetaKnight_Right_Tex->SetScale(Vector2(0.35f, 0.35f));
+		MetaKnight_Left_Tex->SetScale(Vector2(0.35f, 0.35f));
+		MetaKnight_Appear_Tex->SetScale(Vector2(0.35f, 0.35f));
+		MetaKnight_Dead_Tex->SetScale(Vector2(0.35f, 0.35f));
 
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(Vector2(0.35f, 0.35f));
 		//mRigidBody = AddComponent<Rigidbody>();
 		mCollider = GetComponent<Collider>();
 		mCollider->SetSize(Vector2(15.f, 15.f));

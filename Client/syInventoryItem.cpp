@@ -26,8 +26,10 @@ namespace sy
 		, mEnterTime(0.f)
 		, mTime(0.f)
 	{
-		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
-		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
+		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_InventoryItem_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
+		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_InventoryItem_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
+		Bubble_Tex->SetScale(Vector2(1.3f, 1.3f));
+		Ability_UI_Tex->SetScale(Vector2(1.3f, 1.3f));
 
 		mBubbleAnimator = AddComponent<Animator>();
 		mAbilityAnimator = AddComponent<Animator>();
@@ -85,8 +87,6 @@ namespace sy
 			mSlotPos = Vector2(190.f, 330.f);
 		else if (mSlotNumber == 4)
 			mSlotPos = Vector2(225.f, 270.f);
-
-		mTransform->SetScale(Vector2(1.3f, 1.3f));
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetFloat(true);

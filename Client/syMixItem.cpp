@@ -17,7 +17,8 @@ namespace sy
 		: mAnimator(nullptr)
 		, mDuration(0.f)
 	{
-		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
+		Texture* Ability_UI_Tex = ResourceManager::Load<Texture>(L"Ability_UI_MixItem_Tex", L"..\\Resources\\UI\\Ability_UI.bmp");
+		Ability_UI_Tex->SetScale(Vector2(3.f, 3.f));
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(Ability_UI_Tex, L"MixItemAnimation", Vector2(0.f, 43.f), Vector2(16.f, 27.f), Vector2(16.f, 0.f), 0.05f, 5);
 
@@ -26,7 +27,6 @@ namespace sy
 
 		Transform* transform = GetComponent<Transform>();
 		transform->SetPosition(Vector2(128.f, 250.f));
-		transform->SetScale(Vector2(3.f, 3.f));
 
 		ResourceManager::Load<Sound>(L"CombineItem_Sound", L"..\\Resources\\Sound\\Effect\\CombineItem.wav");
 		ResourceManager::Find<Sound>(L"CombineItem_Sound")->Play(false);
