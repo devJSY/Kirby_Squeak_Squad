@@ -14,6 +14,7 @@ namespace sy
 		Jump,
 		Turn,
 		Drop,
+		Land,
 		Down,
 		Fly_Start,
 		Fly_End,
@@ -76,6 +77,7 @@ namespace sy
 		void Jump();
 		void Turn();
 		void Drop();
+		void Land();
 		void Down();
 		void Fly_Start();
 		void Fly_End();

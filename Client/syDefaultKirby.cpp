@@ -2747,9 +2747,6 @@ namespace sy
 
 			mState = eDefaultKirbyState::Inhaled_Land;
 
-			Landing_Effect* landingEffect = new Landing_Effect(GetOwner());
-			object::ActiveSceneAddGameObject(eLayerType::Effect, landingEffect);
-
 			// 오디오 재생
 			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
 		}

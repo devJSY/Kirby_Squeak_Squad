@@ -78,44 +78,41 @@ namespace sy
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2::Zero, Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2::Zero, Vector2(213.f, 180.f), Vector2(213.f, 0.f), 0.5f, 2, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Walk", Vector2(0.f, 540.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.07f, 12, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Walk", Vector2(0.f, 540.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.07f, 12, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Run", Vector2(0.f, 60.f), Vector2(27.f, 27.f), Vector2(27.f, 0.f), 0.043f, 8, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Run", Vector2(562.f, 60.f), Vector2(27.f, 27.f), Vector2(-27.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Run", Vector2(0.f, 720.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.043f, 8, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Run", Vector2(0.f, 720.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.043f, 8, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Jump", Vector2(251.f, 58.f), Vector2(23.f, 28.f), Vector2(23.f, 0.f), 1.f, 1, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Jump", Vector2(315.f, 58.f), Vector2(23.f, 28.f), Vector2(-23.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Jump", Vector2(0.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Jump", Vector2(0.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 1.f, 1, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Turn", Vector2(291.f, 57.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.035f, 6, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Turn", Vector2(273.f, 57.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.035f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Turn", Vector2(212.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.035f, 7, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Turn", Vector2(212.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.035f, 7, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Drop", Vector2(478.f, 60.f), Vector2(22.f, 26.f), Vector2(22.f, 0.f), 0.05f, 2, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Drop", Vector2(89.f, 60.f), Vector2(22.f, 26.f), Vector2(-22.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Drop", Vector2(1696.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Drop", Vector2(1696.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.05f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Land", Vector2(2120.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Land", Vector2(2120.f, 900.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.05f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Down", Vector2(0.f, 180.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1);
 		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Down", Vector2(0.f, 180.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 1.f, 1);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Skill", Vector2(175.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 4, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Skill", Vector2(372.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 4, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyStart", Vector2(0.f, 1080.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyStart", Vector2(0.f, 1080.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.0667f, 3, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Skill_End", Vector2(343.f, 367.f), Vector2(42.f, 29.f), Vector2(42.f, 0.f), 0.08f, 2, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Skill_End", Vector2(288.f, 367.f), Vector2(42.f, 29.f), Vector2(-42.f, 0.f), 0.08f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyEnd", Vector2(636.f, 1260.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.0667f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyEnd", Vector2(636, 1260.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.0667f, 2, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyStart", Vector2(183.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyStart", Vector2(380.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyDown", Vector2(0.f, 1260.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.15f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyDown", Vector2(0.f, 1260.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.15f, 3, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyEnd", Vector2(131.f, 143.f), Vector2(26.f, 30.f), Vector2(26.f, 0.f), 0.0667f, 3, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyEnd", Vector2(432.f, 143.f), Vector2(26.f, 30.f), Vector2(-26.f, 0.f), 0.0667f, 3, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyUp", Vector2(636.f, 1080.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.07f, 6, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyUp", Vector2(636.f, 1080.f), Vector2(210.f, 180.f), Vector2(210.f, 0.f), 0.07f, 6, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyDown", Vector2(256.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.15f, 2, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyDown", Vector2(307.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.15f, 2, Animationoffset);
-
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyUp", Vector2(318.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.07f, 4, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyUp", Vector2(245.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.07f, 4, Animationoffset);
-
-		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f),0.25f, 2);
-		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.25f, 2);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f),0.25f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_DownAttack", Vector2(0.f, 360.f), Vector2(212.f, 180.f), Vector2(212.f, 0.f), 0.25f, 2, Animationoffset);
 
 
 		mAnimator->SetAffectedCamera(true);
@@ -226,6 +223,9 @@ namespace sy
 				break;
 			case eSwordKirbyState::Drop:
 				Drop();
+				break;
+			case eSwordKirbyState::Land:
+				Land();
 				break;
 			case eSwordKirbyState::Down:
 				Down();
@@ -1463,12 +1463,25 @@ namespace sy
 		if (mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"SwordKirby_Right_Land", false);
+			else
+				mAnimator->PlayAnimation(L"SwordKirby_Left_Land", false);
+
+			mState = eSwordKirbyState::Land;
+			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
+		}
+	}
+
+	void SwordKirby::Land()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
 			else
 				mAnimator->PlayAnimation(L"SwordKirby_Left_Idle", true);
 
 			mState = eSwordKirbyState::Idle;
-			ResourceManager::Find<Sound>(L"LandSound")->Play(false);
 		}
 	}
 
