@@ -48,9 +48,15 @@ namespace sy
 
 	void SwordKirby::Initialize()
 	{
-		//// 텍스쳐 로드
-		//Texture* SwordKirby_Right = ResourceManager::Load<Texture>(L"SwordKirby_Right_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right.bmp");
-		//Texture* SwordKirby_Left = ResourceManager::Load<Texture>(L"SwordKirby_Left_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left.bmp");
+		// 텍스쳐 로드
+		Texture* SwordKirby_Right = ResourceManager::Load<Texture>(L"SwordKirby_Right_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right.bmp");
+		Texture* SwordKirby_Left = ResourceManager::Load<Texture>(L"SwordKirby_Left_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left.bmp");
+
+		Texture* SwordKirby_Right_Slash_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Right_Slash_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right_Slash.bmp");
+		Texture* SwordKirby_Left_Slash_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Left_Slash_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left_Slash.bmp");
+
+		Texture* SwordKirby_Right_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Right_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Right_Slashing.png");
+		Texture* SwordKirby_Left_Slashing_Tex = ResourceManager::Load<Texture>(L"SwordKirby_Left_Slashing_Tex", L"..\\Resources\\Kirby\\SwordKirby\\SwordKirby_Left_Slashing.png");
 
 		// Player 에서 만들었던 컴포넌트 멤버변수로 저장
 		mAnimator = GetOwner()->GetComponent<Animator>();
@@ -62,12 +68,12 @@ namespace sy
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(5.f, 95.f), Vector2(27.f, 42.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(549.f, 316.f), Vector2(22.f, 30.f), Vector2(22.f, 0.f), 1.f, 1, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(18.f, 316.f), Vector2(22.f, 30.f), Vector2(-22.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Choice", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(27.f, 0.f), 0.04f, 9, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Enter", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Enter", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
 
-		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2(6.f, 20.f), Vector2(26.f, 25.f), Vector2(26.f, 0.f), 1.f, 1, Animationoffset);
-		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2(557.f, 20.f), Vector2(26.f, 25.f), Vector2(-26.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Idle", Vector2(0.f, 0.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.5f, 2, Animationoffset);
+		mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Idle", Vector2(0.f, 0.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.5f, 2, Animationoffset);
 
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_Walk", Vector2(319.f, 21.f), Vector2(25.f, 27.f), Vector2(25.f, 0.f), 0.07f, 10, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_Walk", Vector2(245.f, 21.f), Vector2(25.f, 27.f), Vector2(-25.f, 0.f), 0.07f, 10, Animationoffset);
@@ -105,8 +111,8 @@ namespace sy
 		//mAnimator->CreateAnimation(SwordKirby_Right, L"SwordKirby_Right_FlyUp", Vector2(318.f, 313.f), Vector2(26.f, 32.f), Vector2(26.f, 0.f), 0.07f, 4, Animationoffset);
 		//mAnimator->CreateAnimation(SwordKirby_Left, L"SwordKirby_Left_FlyUp", Vector2(245.f, 313.f), Vector2(26.f, 32.f), Vector2(-26.f, 0.f), 0.07f, 4, Animationoffset);
 
-		//mAnimator->SetAffectedCamera(true);
-		//mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
+		mAnimator->SetAffectedCamera(true);
+		mAnimator->PlayAnimation(L"SwordKirby_Right_Idle", true);
 
 		// Sound Load
 		ResourceManager::Load<Sound>(L"FlySound", L"..\\Resources\\Sound\\Effect\\Fly.wav");
