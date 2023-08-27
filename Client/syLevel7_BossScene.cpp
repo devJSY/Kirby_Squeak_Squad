@@ -170,13 +170,13 @@ namespace sy
 				PixelBgRenderer->SetRenderTrig(true);
 		}
 
-		if (mMetaKnight->GeteMetaKnightState() == eMetaKnightState::Dead)
+		if (mMetaKnight->GeteMetaKnightState() == eMetaKnightState::Dead3)
 		{
 			// Portal
 			if (mPortalUI == nullptr)
 			{
 				mPortalUI = object::Instantiate<PortalUI>(eLayerType::Portal);
-				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 150.f));
+				mPortalUI->GetComponent<Transform>()->SetPosition(Vector2(128.f, 133.f));
 				mPortalUI->Initialize();
 
 				// 오디오 재생

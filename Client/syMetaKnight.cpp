@@ -57,11 +57,54 @@ namespace sy
 
 		// 애니메이션 생성
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
-		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_AppearReady", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_Appear", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 22, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 11, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 6, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_3", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 15, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_AppearReady", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Appear_Tex, L"MetaKnight_Appear", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 22, Animationoffset);
+		
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Idle", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Idle", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Walk", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 7, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Walk", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 7, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Dash", Vector2(0.f, 960.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 5, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Dash", Vector2(0.f, 960.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 5, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_DashAttack", Vector2(0.f, 1440.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 6, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_DashAttack", Vector2(0.f, 1440.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 6, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.07f, 7, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.07f, 7, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Drop", Vector2(4320.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Drop", Vector2(4320.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_SpinAttack", Vector2(0.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 5, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_SpinAttack", Vector2(0.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 5, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoAttackCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoAttackCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoAttack", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoAttack", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+					
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 11, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 6, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_3", Vector2(0.f, 960.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 15, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"MetaKnight_AppearReady", true);
@@ -81,7 +124,8 @@ namespace sy
 		// 테스트용 상태변경
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
-
+			mState = eMetaKnightState::Dead1;
+			mAnimator->PlayAnimation(L"MetaKnight_Dead_1", false);
 			mStateChangeDelay = 0.f;
 		}
 
@@ -148,14 +192,26 @@ namespace sy
 		case eMetaKnightState::SpinAttack:
 			SpinAttack();
 			break;
-		case eMetaKnightState::SparkAttack:
-			SparkAttack();
+		case eMetaKnightState::SpinAttackEnd:
+			SpinAttackEnd();
+			break;
+		case eMetaKnightState::JumpDownAttack:
+			JumpDownAttack();
+			break;
+		case eMetaKnightState::TornadoAttackCharge:
+			TornadoAttackCharge();
 			break;
 		case eMetaKnightState::TornadoAttack:
 			TornadoAttack();
 			break;
-		case eMetaKnightState::Dead:
-			Dead();
+		case eMetaKnightState::Dead1:
+			Dead1();
+			break;
+		case eMetaKnightState::Dead2:
+			Dead2();
+			break;
+		case eMetaKnightState::Dead3:
+			Dead3();
 			break;
 		default:
 			break;
@@ -357,7 +413,15 @@ namespace sy
 	{
 	}
 
-	void MetaKnight::SparkAttack()
+	void MetaKnight::SpinAttackEnd()
+	{
+	}
+
+	void MetaKnight::JumpDownAttack()
+	{
+	}
+
+	void MetaKnight::TornadoAttackCharge()
 	{
 	}
 
@@ -365,7 +429,29 @@ namespace sy
 	{
 	}
 
-	void MetaKnight::Dead()
+	void MetaKnight::Dead1()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			mAnimator->PlayAnimation(L"MetaKnight_Dead_2", false);
+			mState = eMetaKnightState::Dead2;
+		}
+	}
+
+	void MetaKnight::Dead2()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			mAnimator->PlayAnimation(L"MetaKnight_Dead_3", false);
+			mState = eMetaKnightState::Dead3;
+		}
+	}
+
+	void MetaKnight::Dead3()
+	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
+		}
 	}
 }

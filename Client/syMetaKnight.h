@@ -17,9 +17,13 @@ namespace sy
 		Turn,
 		Drop,
 		SpinAttack,
-		SparkAttack,
+		SpinAttackEnd,
+		JumpDownAttack,
+		TornadoAttackCharge,
 		TornadoAttack,
-		Dead,
+		Dead1,
+		Dead2,
+		Dead3,
 		End,
 	};
 
@@ -39,7 +43,7 @@ namespace sy
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
 		virtual bool IsDamagedState() { return mbDamaged; }
-		virtual bool IsDeadState() { return mState == eMetaKnightState::Dead; }
+		virtual bool IsDeadState() { return mState == eMetaKnightState::Dead3; }
 
 		eMetaKnightState GeteMetaKnightState() { return mState; }
 
@@ -72,9 +76,13 @@ namespace sy
 		void Turn();
 		void Drop();
 		void SpinAttack();
-		void SparkAttack();
+		void SpinAttackEnd();
+		void JumpDownAttack();
+		void TornadoAttackCharge();
 		void TornadoAttack();
-		void Dead();
+		void Dead1();
+		void Dead2();
+		void Dead3();
 
 	private:
 		eMetaKnightState	    mState;
