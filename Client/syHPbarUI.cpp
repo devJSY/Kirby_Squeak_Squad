@@ -42,7 +42,7 @@ namespace sy
 		// 1초후에 감소
 		if (time > 1.f)
 		{
-			if ((int)mDecreaseHP >= SceneManager::GetPlayer()->GetCurHP())
+			if ((int)mDecreaseHP > SceneManager::GetPlayer()->GetCurHP())
 				mDecreaseHP -= (float)Time::DeltaTime() * 15.f;
 			else
 			{

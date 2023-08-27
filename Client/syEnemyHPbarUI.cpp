@@ -46,7 +46,7 @@ namespace sy
 			mUIActivetime = 0.f;
 		}
 
-		if ((int)mRenderHP >= mOwner->GetCurHP())
+		if ((int)mRenderHP > mOwner->GetCurHP())
 			mRenderHP -= (float)Time::DeltaTime() * 100.f;
 		else
 			mRenderHP = (float)mOwner->GetCurHP();

@@ -115,6 +115,17 @@ namespace sy
 
 	void MetaKnight::Update()
 	{
+		// 데미지 딜레이 설정
+		static float DamageDelayTime = 0.f;
+		if (mbDamaged)
+			DamageDelayTime += Time::DeltaTime();
+
+		if (DamageDelayTime > 1.f)
+		{
+			mbDamaged = false;
+			DamageDelayTime = 0.f;
+		}
+
 		// 방향 설정
 		mDir = mTransform->GetDirection();
 
@@ -124,8 +135,7 @@ namespace sy
 		// 테스트용 상태변경
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
-			mState = eMetaKnightState::Dead1;
-			mAnimator->PlayAnimation(L"MetaKnight_Dead_1", false);
+
 			mStateChangeDelay = 0.f;
 		}
 
@@ -227,10 +237,44 @@ namespace sy
 
 	void MetaKnight::OnCollisionEnter(Collider* other)
 	{
+		if (mState == eMetaKnightState::AppearReady
+			|| mState == eMetaKnightState::Appear
+			|| mState == eMetaKnightState::Dead1
+			|| mState == eMetaKnightState::Dead2
+			|| mState == eMetaKnightState::Dead3)
+			return;
+
+		Player* player = dynamic_cast<Player*>(other->GetOwner());
+		if (player == nullptr)
+			return;
+
+		// 몬스터 → 커비 방향
+		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - mTransform->GetPosition();
+
+		player->TakeHit(10, Dir);
 	}
 
 	void MetaKnight::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
+		if (mbDamaged 
+			|| mState == eMetaKnightState::AppearReady
+			|| mState == eMetaKnightState::Appear
+			|| mState == eMetaKnightState::Dead1
+			|| mState == eMetaKnightState::Dead2
+			|| mState == eMetaKnightState::Dead3)
+			return;
+
+		Damaged(DamageAmount);
+
+		if (GetCurHP() <= 0.f)
+		{
+			mState = eMetaKnightState::Dead1;
+			mAnimator->PlayAnimation(L"MetaKnight_Dead_1", false);
+
+			mState = eMetaKnightState::Dead1;
+		}
+
+		mbDamaged = true;
 	}
 
 	void MetaKnight::CheckPixelCollision()
@@ -371,6 +415,15 @@ namespace sy
 
 	void MetaKnight::Appear()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if(mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+		}
 	}
 
 	void MetaKnight::Idle()
