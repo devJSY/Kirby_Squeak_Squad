@@ -12,6 +12,7 @@
 #include "syStar_Effect.h"
 #include "syObject.h"
 #include "syInput.h"
+#include "syCamera.h"
 
 namespace sy
 {
@@ -81,8 +82,8 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.07f, 7, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.07f, 7, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 7, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Turn", Vector2(960.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 7, Animationoffset);
 
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Drop", Vector2(4320.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Drop", Vector2(4320.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 1.f, 1, Animationoffset);
@@ -90,11 +91,11 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_SpinAttack", Vector2(0.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 5, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_SpinAttack", Vector2(0.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 5, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 2, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_SpinAttackEnd", Vector2(2400.f, 3360.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 3, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.03f, 3, Animationoffset);
 
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
@@ -154,6 +155,31 @@ namespace sy
 
 		if (Input::GetKeyDown(eKeyCode::Three))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
+
+			mState = eMetaKnightState::Jump;
+			mRigidBody->SetGround(false);
+
+			// 제자리점프, 이동점프 범위
+			int randomX = (std::rand() % 100) + 100;
+			int randomY = (std::rand() % 100) + 100;
+
+			Vector2 vel = Vector2(0.f, (float)-randomY);
+
+			// X축 랜덤 방향
+			int randomSign = std::rand() % 100;
+			if (randomSign % 2 == 0)
+				randomX *= -1;
+
+			// 제자리점프, 이동점프 랜덤 구현
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				vel.x = (float)randomX;
+
+			mRigidBody->SetVelocity(vel);
 
 			mStateChangeDelay = 0.f;
 		}
@@ -232,6 +258,26 @@ namespace sy
 		default:
 			break;
 		}
+
+		// 이동제한
+		Vector2 pos = mTransform->GetPosition();
+		if (pos.x < 0)
+		{
+			pos.x = 0;
+		}
+		if (pos.y < 0)
+		{
+			pos.y = 0;
+		}
+		if (pos.x > Camera::GetCameraLimit().x)
+		{
+			pos.x = Camera::GetCameraLimit().x;
+		}
+		if (pos.y > Camera::GetCameraLimit().y)
+		{
+			pos.y = Camera::GetCameraLimit().y;
+		}
+		mTransform->SetPosition(pos);
 
 		BossEnemy::Update();
 	}
@@ -540,6 +586,25 @@ namespace sy
 					mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
 
 				mState = eMetaKnightState::Jump;
+				mRigidBody->SetGround(false);
+
+				// 제자리점프, 이동점프 범위
+				int randomX = (std::rand() % 100) + 100;
+				int randomY = (std::rand() % 100) + 100;
+
+				Vector2 vel = Vector2(0.f, (float)-randomY);
+
+				// X축 랜덤 방향
+				int randomSign = std::rand() % 100;
+				if (randomSign % 2 == 0)
+					randomX *= -1;
+
+				// 제자리점프, 이동점프 랜덤 구현
+				int randomDir = std::rand() % 100;
+				if (randomDir % 2 == 0)
+					vel.x = (float)randomX;
+
+				mRigidBody->SetVelocity(vel);
 			}
 		}
 	}
@@ -566,26 +631,134 @@ namespace sy
 
 	void MetaKnight::Jump()
 	{
+		Vector2 vel = mRigidBody->GetVelocity();
+
+		if (vel.y >= 0.f)
+		{
+			int randomNumber = std::rand() % 100;
+			if (randomNumber % 2 == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Turn", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Turn", false);
+
+				mState = eMetaKnightState::Turn;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_SpinAttack", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_SpinAttack", true);
+
+				mState = eMetaKnightState::SpinAttack;
+				mRigidBody->SetFloat(true);
+			}
+
+			vel.x = 0.f;
+			mRigidBody->SetVelocity(vel);
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void MetaKnight::Turn()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			int randomNumber = std::rand() % 100;
+			if (randomNumber % 2 == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Drop", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
+
+				mState = eMetaKnightState::Drop;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_JumpDownAttack", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_JumpDownAttack", false);
+
+				mState = eMetaKnightState::JumpDownAttack;
+			}
+
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void MetaKnight::Drop()
 	{
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+		}
 	}
 
 	void MetaKnight::SpinAttack()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 1.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_SpinAttackEnd", false);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_SpinAttackEnd", false);
+
+			mState = eMetaKnightState::SpinAttackEnd;
+			mRigidBody->SetFloat(false);
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void MetaKnight::SpinAttackEnd()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			int randomNumber = std::rand() % 100;
+			if (randomNumber % 2 == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Drop", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
+
+				mState = eMetaKnightState::Drop;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_JumpDownAttack", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_JumpDownAttack", false);
+
+				mState = eMetaKnightState::JumpDownAttack;
+			}
+
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void MetaKnight::JumpDownAttack()
 	{
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+		}
 	}
 
 	void MetaKnight::TornadoSkillCharge()
