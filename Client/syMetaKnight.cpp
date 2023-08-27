@@ -698,10 +698,43 @@ namespace sy
 
 	void MetaKnight::Dash()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		if (mDir == eDirection::RIGHT)		
+			pos.x += 150.f * Time::DeltaTime();		
+		else		
+			pos.x += -150.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);
+
+		mStateChangeDelay += Time::DeltaTime();
+		if (mStateChangeDelay > 0.5f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_DashAttack", false);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_DashAttack", false);
+
+			mState = eMetaKnightState::DashAttack;
+			mStateChangeDelay = 0.f;
+
+			// 스킬 생성
+			MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
+			object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+			ResourceManager::Find<Sound>(L"MetaKnight_DashSlashSound")->Play(false);
+		}
 	}
 
 	void MetaKnight::DashAttack()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+		}
 	}
 
 	void MetaKnight::Slash()
