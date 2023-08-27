@@ -11,16 +11,16 @@ namespace sy
 		Walk,
 		Dash,
 		DashAttack,
-		Slash1,
-		Slash2,
+		Slash,
+		SlashSkill,
 		Jump,
 		Turn,
 		Drop,
 		SpinAttack,
 		SpinAttackEnd,
 		JumpDownAttack,
-		TornadoAttackCharge,
-		TornadoAttack,
+		TornadoSkillCharge,
+		TornadoSkill,
 		Dead1,
 		Dead2,
 		Dead3,
@@ -70,16 +70,16 @@ namespace sy
 		void Walk();
 		void Dash();
 		void DashAttack();
-		void Slash1();
-		void Slash2();
+		void Slash();
+		void SlashSkill();
 		void Jump();
 		void Turn();
 		void Drop();
 		void SpinAttack();
 		void SpinAttackEnd();
 		void JumpDownAttack();
-		void TornadoAttackCharge();
-		void TornadoAttack();
+		void TornadoSkillCharge();
+		void TornadoSkill();
 		void Dead1();
 		void Dead2();
 		void Dead3();

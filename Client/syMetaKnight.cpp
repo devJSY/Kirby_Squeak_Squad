@@ -23,7 +23,7 @@ namespace sy
 		, mRigidBody(nullptr)
 		, mCollider(nullptr)
 		, mDir(eDirection::LEFT)
-		, mStateChangeDelay(-3.f)
+		, mStateChangeDelay(0.f)
 		, mbDamaged(false)
 	{
 	}
@@ -96,11 +96,11 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_JumpDownAttack", Vector2(0.f, 3840.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 3, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoAttackCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoAttackCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoAttack", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoAttack", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkill", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkill", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
 					
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 11, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 6, Animationoffset);
@@ -135,6 +135,12 @@ namespace sy
 		// 테스트용 상태변경
 		if (Input::GetKeyDown(eKeyCode::One))
 		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
 
 			mStateChangeDelay = 0.f;
 		}
@@ -184,11 +190,11 @@ namespace sy
 		case eMetaKnightState::DashAttack:
 			DashAttack();
 			break;
-		case eMetaKnightState::Slash1:
-			Slash1();
+		case eMetaKnightState::Slash:
+			Slash();
 			break;
-		case eMetaKnightState::Slash2:
-			Slash2();
+		case eMetaKnightState::SlashSkill:
+			SlashSkill();
 			break;
 		case eMetaKnightState::Jump:
 			Jump();
@@ -208,11 +214,11 @@ namespace sy
 		case eMetaKnightState::JumpDownAttack:
 			JumpDownAttack();
 			break;
-		case eMetaKnightState::TornadoAttackCharge:
-			TornadoAttackCharge();
+		case eMetaKnightState::TornadoSkillCharge:
+			TornadoSkillCharge();
 			break;
-		case eMetaKnightState::TornadoAttack:
-			TornadoAttack();
+		case eMetaKnightState::TornadoSkill:
+			TornadoSkill();
 			break;
 		case eMetaKnightState::Dead1:
 			Dead1();
@@ -428,6 +434,114 @@ namespace sy
 
 	void MetaKnight::Idle()
 	{
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Drop", true);
+
+			mState = eMetaKnightState::Drop;
+		}
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+		if (Dir.x > 0.f)
+		{
+			if (mDir == eDirection::LEFT)
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+				mTransform->SetDirection(eDirection::RIGHT);
+				mDir = eDirection::RIGHT;
+			}
+		}
+		else
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+				mTransform->SetDirection(eDirection::LEFT);
+				mDir = eDirection::LEFT;
+			}
+		}
+
+		// 상태처리
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 0.1f)
+		{
+			mStateChangeDelay = 0.f;
+
+			int randomNumber = std::rand() % 5;
+			if (randomNumber == 0)
+			{
+				if (mDir == eDirection::RIGHT)				
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Walk", true);				
+				else				
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Walk", true);				
+
+				mState = eMetaKnightState::Walk;
+			}
+			else if (randomNumber == 1)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Dash", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Dash", true);
+
+				mState = eMetaKnightState::Dash;
+			}
+			else if (randomNumber == 2)
+			{
+				Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+				Vector2 Diff = PlayerPos - mTransform->GetPosition();
+
+				// 플레이어와의 거리에 따라서 분기
+				if (fabs(Diff.x) < 50)
+				{
+					if (mDir == eDirection::RIGHT)
+						mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+					else
+						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+					mState = eMetaKnightState::Slash;
+				}
+				else
+				{
+					// 스킬 랜덤 분기
+					int randomSkill = std::rand() % 100;
+					if (randomSkill % 2 == 0)
+					{
+						if (mDir == eDirection::RIGHT)
+							mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+						else
+							mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+						mState = eMetaKnightState::SlashSkill;
+					}
+					else
+					{
+						if (mDir == eDirection::RIGHT)
+							mAnimator->PlayAnimation(L"MetaKnight_Right_TornadoSkillCharge", true);
+						else
+							mAnimator->PlayAnimation(L"MetaKnight_Left_TornadoSkillCharge", true);
+
+						mState = eMetaKnightState::TornadoSkillCharge;
+					}
+				}				
+			}
+			else if (randomNumber == 3)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Jump", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
+
+				mState = eMetaKnightState::Jump;
+			}
+		}
 	}
 
 	void MetaKnight::Walk()
@@ -442,11 +556,11 @@ namespace sy
 	{
 	}
 
-	void MetaKnight::Slash1()
+	void MetaKnight::Slash()
 	{
 	}
 
-	void MetaKnight::Slash2()
+	void MetaKnight::SlashSkill()
 	{
 	}
 
@@ -474,11 +588,11 @@ namespace sy
 	{
 	}
 
-	void MetaKnight::TornadoAttackCharge()
+	void MetaKnight::TornadoSkillCharge()
 	{
 	}
 
-	void MetaKnight::TornadoAttack()
+	void MetaKnight::TornadoSkill()
 	{
 	}
 
