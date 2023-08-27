@@ -41,6 +41,8 @@ namespace sy
 	private:
 		void CheckPixelCollision();
 
+		void SetBossState();
+
 	private:
 		void Idle();
 		void BombAttackReady();

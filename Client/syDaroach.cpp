@@ -140,80 +140,8 @@ namespace sy
 		CheckPixelCollision();
 
 		// 테스트용 상태변경
-		if (Input::GetKeyDown(eKeyCode::One))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"Daroach_Right_BombAttackReady", false);
-			else
-				mAnimator->PlayAnimation(L"Daroach_Left_BombAttackReady", false);
-
-			mState = eDaroachState::BombAttackReady;
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Two))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"Daroach_Right_WandUp", false);
-			else
-				mAnimator->PlayAnimation(L"Daroach_Left_WandUp", false);
-
-			mState = eDaroachState::WandUp;
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Three))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"Daroach_Right_Teleport", false);
-			else
-				mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
-
-			mState = eDaroachState::Teleport;
-			mStateChangeDelay = 0.f;
-
-			ResourceManager::Find<Sound>(L"Daroach_Teleport")->Play(false);
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Four))
-		{
-			if (mDir == eDirection::RIGHT)
-			{
-				Vector2 dir = Vector2(5.f, 1.f);
-				Daroach_Star* star = new Daroach_Star(this, dir);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
-
-				Vector2 dir2 = Vector2(2.f, 2.f);
-				Daroach_Star* star2 = new Daroach_Star(this, dir2);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
-
-				Vector2 dir3 = Vector2(1.f, 5.f);
-				Daroach_Star* star3 = new Daroach_Star(this, dir3);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
-
-				mAnimator->PlayAnimation(L"Daroach_Right_StarAttack", false);
-			}
-			else
-			{
-				Vector2 dir = Vector2(-5.f, 1.f);
-				Daroach_Star* star = new Daroach_Star(this, dir);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
-
-				Vector2 dir2 = Vector2(-2.f, 2.f);
-				Daroach_Star* star2 = new Daroach_Star(this, dir2);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
-
-				Vector2 dir3 = Vector2(-1.f, 5.f);
-				Daroach_Star* star3 = new Daroach_Star(this, dir3);
-				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
-
-				mAnimator->PlayAnimation(L"Daroach_Left_StarAttack", false);
-			}
-
-			mState = eDaroachState::StarAttack;
-			mStateChangeDelay = 0.f;
-		}
-
+		SetBossState();
+				
 		switch (mState)
 		{
 		case eDaroachState::Idle:
@@ -360,6 +288,83 @@ namespace sy
 			pos.y -= 1.f;
 			mTransform->SetPosition(pos);
 			mRigidBody->SetGround(true);			
+		}
+	}
+
+	void Daroach::SetBossState()
+	{
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Daroach_Right_BombAttackReady", false);
+			else
+				mAnimator->PlayAnimation(L"Daroach_Left_BombAttackReady", false);
+
+			mState = eDaroachState::BombAttackReady;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Daroach_Right_WandUp", false);
+			else
+				mAnimator->PlayAnimation(L"Daroach_Left_WandUp", false);
+
+			mState = eDaroachState::WandUp;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Daroach_Right_Teleport", false);
+			else
+				mAnimator->PlayAnimation(L"Daroach_Left_Teleport", false);
+
+			mState = eDaroachState::Teleport;
+			mStateChangeDelay = 0.f;
+
+			ResourceManager::Find<Sound>(L"Daroach_Teleport")->Play(false);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				Vector2 dir = Vector2(5.f, 1.f);
+				Daroach_Star* star = new Daroach_Star(this, dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+				Vector2 dir2 = Vector2(2.f, 2.f);
+				Daroach_Star* star2 = new Daroach_Star(this, dir2);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+				Vector2 dir3 = Vector2(1.f, 5.f);
+				Daroach_Star* star3 = new Daroach_Star(this, dir3);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
+				mAnimator->PlayAnimation(L"Daroach_Right_StarAttack", false);
+			}
+			else
+			{
+				Vector2 dir = Vector2(-5.f, 1.f);
+				Daroach_Star* star = new Daroach_Star(this, dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star);
+
+				Vector2 dir2 = Vector2(-2.f, 2.f);
+				Daroach_Star* star2 = new Daroach_Star(this, dir2);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star2);
+
+				Vector2 dir3 = Vector2(-1.f, 5.f);
+				Daroach_Star* star3 = new Daroach_Star(this, dir3);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, star3);
+
+				mAnimator->PlayAnimation(L"Daroach_Left_StarAttack", false);
+			}
+
+			mState = eDaroachState::StarAttack;
+			mStateChangeDelay = 0.f;
 		}
 	}
 

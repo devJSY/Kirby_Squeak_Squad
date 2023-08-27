@@ -133,88 +133,8 @@ namespace sy
 		mModeChangeDelay += Time::DeltaTime();
 
 		// 테스트용 상태변경
-		if (Input::GetKeyDown(eKeyCode::One))
-		{
-			mState = eDarkNebulaState::Move;
-			mStateChangeDelay = 0.f;
-			int idx = std::rand() % 6;
-			mTargetPos = mFixedPos[idx];
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Two))
-		{
-			mState = eDarkNebulaState::RotationalMove;
-			mStateChangeDelay = 0.f;
-			int idx = std::rand() % 6;
-			mTargetPos = mFixedPos[idx];
-
-			// 방향 랜덤 설정
-			int randomDir = std::rand() % 100;
-			if (randomDir % 2 == 0)
-				mTransform->SetDirection(eDirection::RIGHT);
-			else
-				mTransform->SetDirection(eDirection::LEFT);
-
-			mDir = mTransform->GetDirection();
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Three))
-		{
-			mState = eDarkNebulaState::ZigzagMoveReady;
-			mStateChangeDelay = 0.f;
-			int idx = std::rand() % 6;
-			mTargetPos = mFixedPos[idx];
-
-			// 방향 랜덤 설정
-			int randomDir = std::rand() % 100;
-			if (randomDir % 2 == 0)
-				mTransform->SetDirection(eDirection::RIGHT);
-			else
-				mTransform->SetDirection(eDirection::LEFT);
-
-			mDir = mTransform->GetDirection();
-
-			if (mDir == eDirection::RIGHT)
-				mTargetPos = mFixedPos[3];
-			else
-				mTargetPos = mFixedPos[5];
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Four))
-		{
-			mState = eDarkNebulaState::StarAttack;
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Five))
-		{
-			mState = eDarkNebulaState::SkillReady;
-			mStateChangeDelay = 0.f;
-			
-			if (mMode == eDarkNebulaMode::Fire)
-			{
-				mTargetPos = mFixedPos[1];
-			}
-			else if (mMode == eDarkNebulaMode::Ice)
-			{
-				if (mDir == eDirection::RIGHT)
-					mTargetPos = mFixedPos[0];
-				else
-					mTargetPos = mFixedPos[2];
-			}
-			else if (mMode == eDarkNebulaMode::Spark)
-			{
-				mTargetPos = mFixedPos[4];
-			}
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Six))
-		{
-			mState = eDarkNebulaState::ModeChangeReady;
-			mModeChangeDelay = 0.f;
-			mTargetPos = mFixedPos[1];
-		}
-
+		SetBossState();
+		
 		switch (mState)
 		{
 		case eDarkNebulaState::Idle:
@@ -324,6 +244,91 @@ namespace sy
 		}
 
 		mbDamaged = true;
+	}
+
+	void DarkNebula::SetBossState()
+	{
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			mState = eDarkNebulaState::Move;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			mState = eDarkNebulaState::RotationalMove;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+
+			// 방향 랜덤 설정
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
+
+			mDir = mTransform->GetDirection();
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			mState = eDarkNebulaState::ZigzagMoveReady;
+			mStateChangeDelay = 0.f;
+			int idx = std::rand() % 6;
+			mTargetPos = mFixedPos[idx];
+
+			// 방향 랜덤 설정
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				mTransform->SetDirection(eDirection::RIGHT);
+			else
+				mTransform->SetDirection(eDirection::LEFT);
+
+			mDir = mTransform->GetDirection();
+
+			if (mDir == eDirection::RIGHT)
+				mTargetPos = mFixedPos[3];
+			else
+				mTargetPos = mFixedPos[5];
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			mState = eDarkNebulaState::StarAttack;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Five))
+		{
+			mState = eDarkNebulaState::SkillReady;
+			mStateChangeDelay = 0.f;
+
+			if (mMode == eDarkNebulaMode::Fire)
+			{
+				mTargetPos = mFixedPos[1];
+			}
+			else if (mMode == eDarkNebulaMode::Ice)
+			{
+				if (mDir == eDirection::RIGHT)
+					mTargetPos = mFixedPos[0];
+				else
+					mTargetPos = mFixedPos[2];
+			}
+			else if (mMode == eDarkNebulaMode::Spark)
+			{
+				mTargetPos = mFixedPos[4];
+			}
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Six))
+		{
+			mState = eDarkNebulaState::ModeChangeReady;
+			mModeChangeDelay = 0.f;
+			mTargetPos = mFixedPos[1];
+		}
 	}
 
 	void DarkNebula::Idle()

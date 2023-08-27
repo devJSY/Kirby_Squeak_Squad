@@ -28,6 +28,7 @@ namespace sy
 		, mStateChangeDelay(0.f)
 		, mbDamaged(false)
 		, mWalkDir(mDir)
+		, mSlashCount(3)
 	{
 	}
 
@@ -38,7 +39,7 @@ namespace sy
 	void MetaKnight::Initialize()
 	{
 		// 체력 설정
-		SetHP(1000);
+		SetHP(900);
 
 		// 텍스쳐 로드
 		Texture* MetaKnight_Right_Tex = ResourceManager::Load<Texture>(L"MetaKnight_Right_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\MetaKnight_Right.bmp");
@@ -75,11 +76,11 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_DashAttack", Vector2(0.f, 1440.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 6, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_DashAttack", Vector2(0.f, 1440.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 6, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash1", Vector2(0.f, 1920.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 8, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.05f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 8, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Slash2", Vector2(0.f, 2400.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.035f, 8, Animationoffset);
 
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_Jump", Vector2(0.f, 2880.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 2, Animationoffset);
@@ -142,72 +143,11 @@ namespace sy
 		CheckPixelCollision();
 
 		// 테스트용 상태변경
-		if (Input::GetKeyDown(eKeyCode::One))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
-			else
-				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
-
-			mState = eMetaKnightState::Idle;
-
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Two))
-		{
-
-
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Three))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"MetaKnight_Right_Jump", false);
-			else
-				mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
-
-			mState = eMetaKnightState::Jump;
-			mRigidBody->SetGround(false);
-
-			// 제자리점프, 이동점프 범위
-			int randomX = (std::rand() % 100) + 100;
-			int randomY = (std::rand() % 100) + 100;
-
-			Vector2 vel = Vector2(0.f, (float)-randomY);
-
-			// X축 랜덤 방향
-			int randomSign = std::rand() % 100;
-			if (randomSign % 2 == 0)
-				randomX *= -1;
-
-			// 제자리점프, 이동점프 랜덤 구현
-			int randomDir = std::rand() % 100;
-			if (randomDir % 2 == 0)
-				vel.x = (float)randomX;
-
-			mRigidBody->SetVelocity(vel);
-
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Four))
-		{
-
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Five))
-		{
-
-			mStateChangeDelay = 0.f;
-		}
-
+		SetBossState();
+		
 		switch (mState)
 		{
 		case eMetaKnightState::AppearReady:
-			AppearReady();
 			break;
 		case eMetaKnightState::Appear:
 			Appear();
@@ -455,21 +395,174 @@ namespace sy
 		if (dir == eDirection::RIGHT)
 		{
 			pos.x += 50.f;
-			pos.y += 10.f;
+			pos.y -= 10.f;
 			Star_Effect* effect = new Star_Effect(this, pos);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
 		}
 		else
 		{
 			pos.x -= 50.f;
-			pos.y += 10.f;
+			pos.y -= 10.f;
 			Star_Effect* effect = new Star_Effect(this, pos);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
 		}
 	}
 
-	void MetaKnight::AppearReady()
+	void MetaKnight::SetBossState()
 	{
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Walk", true);
+				mWalkDir = eDirection::LEFT;
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Walk", true);
+				mWalkDir = eDirection::RIGHT;
+			}
+
+			mState = eMetaKnightState::Walk;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Dash", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Dash", true);
+
+			mState = eMetaKnightState::Dash;
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
+
+			mState = eMetaKnightState::Jump;
+			mRigidBody->SetGround(false);
+
+			// 제자리점프, 이동점프 범위
+			int randomX = (std::rand() % 100) + 100;
+			int randomY = (std::rand() % 100) + 100;
+
+			Vector2 vel = Vector2(0.f, (float)-randomY);
+
+			// X축 랜덤 방향
+			int randomSign = std::rand() % 100;
+			if (randomSign % 2 == 0)
+				randomX *= -1;
+
+			// 제자리점프, 이동점프 랜덤 구현
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				vel.x = (float)randomX;
+
+			mRigidBody->SetVelocity(vel);
+
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Five))
+		{
+			Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+			Vector2 Diff = PlayerPos - mTransform->GetPosition();
+
+			// 플레이어와의 거리에 따라서 분기
+			if (fabs(Diff.x) < 50)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+				mState = eMetaKnightState::Slash;
+				--mSlashCount;
+
+				// 스킬 생성
+				MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+				ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+				mState = eMetaKnightState::SlashSkill;
+				--mSlashCount;
+
+				// 스킬 생성
+				MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+				ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+			}
+
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Six))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_TornadoSkillCharge", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_TornadoSkillCharge", true);
+
+			mState = eMetaKnightState::TornadoSkillCharge;
+
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Seven))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Jump", false);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Jump", false);
+
+			mState = eMetaKnightState::Jump;
+			mRigidBody->SetGround(false);
+
+			// 제자리점프, 이동점프 범위
+			int randomX = (std::rand() % 100) + 100;
+			int randomY = (std::rand() % 100) + 100;
+
+			Vector2 vel = Vector2(0.f, (float)-randomY);
+
+			// X축 랜덤 방향
+			int randomSign = std::rand() % 100;
+			if (randomSign % 2 == 0)
+				randomX *= -1;
+
+			// 제자리점프, 이동점프 랜덤 구현
+			int randomDir = std::rand() % 100;
+			if (randomDir % 2 == 0)
+				vel.x = (float)randomX;
+
+			mRigidBody->SetVelocity(vel);
+
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void MetaKnight::Appear()
@@ -566,6 +659,7 @@ namespace sy
 						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
 
 					mState = eMetaKnightState::Slash;
+					--mSlashCount;
 
 					// 스킬 생성
 					MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
@@ -585,6 +679,7 @@ namespace sy
 							mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
 
 						mState = eMetaKnightState::SlashSkill;
+						--mSlashCount;
 
 						// 스킬 생성
 						MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
@@ -739,10 +834,82 @@ namespace sy
 
 	void MetaKnight::Slash()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mSlashCount == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+				mSlashCount = 3;
+				mState = eMetaKnightState::Idle;
+			}
+			else
+			{
+				if (mSlashCount == 2)
+				{
+					if (mDir == eDirection::RIGHT)
+						mAnimator->PlayAnimation(L"MetaKnight_Right_Slash2", false);
+					else
+						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash2", false);
+
+					--mSlashCount;
+					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+				}
+				else if(mSlashCount == 1)
+				{
+					if (mDir == eDirection::RIGHT)
+						mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+					else
+						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+					--mSlashCount;
+					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+				}
+			}
+		}
 	}
 
 	void MetaKnight::SlashSkill()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mSlashCount == 0)
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+				else
+					mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+				mSlashCount = 3;
+				mState = eMetaKnightState::Idle;
+			}
+			else
+			{
+				if (mSlashCount == 2)
+				{
+					if (mDir == eDirection::RIGHT)
+						mAnimator->PlayAnimation(L"MetaKnight_Right_Slash2", false);
+					else
+						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash2", false);
+
+					--mSlashCount;
+					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+				}
+				else if (mSlashCount == 1)
+				{
+					if (mDir == eDirection::RIGHT)
+						mAnimator->PlayAnimation(L"MetaKnight_Right_Slash1", false);
+					else
+						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
+
+					--mSlashCount;
+					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
+				}
+			}
+		}
 	}
 
 	void MetaKnight::Jump()
@@ -878,6 +1045,8 @@ namespace sy
 				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
 
 			mState = eMetaKnightState::Idle;
+			AddStarEffect(eDirection::RIGHT);
+			AddStarEffect(eDirection::LEFT);
 		}
 	}
 

@@ -378,12 +378,7 @@ namespace sy
 	void SwordKirby::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
 		// 특정 상태에선 충돌 무시
-		if (mState == eSwordKirbyState::Transformations
-			|| mState == eSwordKirbyState::DownAttack
-			|| mState == eSwordKirbyState::JumpAttack
-			|| mState == eSwordKirbyState::Slash
-			|| mState == eSwordKirbyState::Slashing
-			|| mState == eSwordKirbyState::UpperSlash)
+		if (mState == eSwordKirbyState::Transformations)
 			return;
 
 		mKeyReleaseTime = 0.f;

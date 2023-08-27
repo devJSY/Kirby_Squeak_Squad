@@ -131,74 +131,8 @@ namespace sy
 		CheckPixelCollision();		
 
 		// 테스트용 상태변경
-		if (Input::GetKeyDown(eKeyCode::One))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Walk", true);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Walk", true);
-
-			mState = eKingDededeState::Walk;
-
-			// 사운드 재생
-			ResourceManager::Find<Sound>(L"BossWalk")->Play(true);
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Two))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
-
-			mState = eKingDededeState::JumpReady;
-
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Three))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_AttackReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_AttackReady", false);
-
-			mState = eKingDededeState::AttackReady;
-
-			// 사운드 재생
-			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Four))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
-
-			mState = eKingDededeState::FlyReady;
-
-			// 사운드 재생
-			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
-			mStateChangeDelay = 0.f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::Five))
-		{
-			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
-			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
-
-			mState = eKingDededeState::MonsterSummonReady;
-
-			// 사운드 재생
-			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
-			mStateChangeDelay = 0.f;
-		}
-			
+		SetBossState();
+					
 		switch (mState)
 		{
 		case eKingDededeState::Idle:
@@ -523,6 +457,77 @@ namespace sy
 			pos.y += 10.f;
 			Star_Effect* effect = new Star_Effect(this, pos);
 			object::ActiveSceneAddGameObject(eLayerType::Effect, effect);
+		}
+	}
+
+	void KingDedede::SetBossState()
+	{
+		if (Input::GetKeyDown(eKeyCode::One))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_Walk", true);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_Walk", true);
+
+			mState = eKingDededeState::Walk;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossWalk")->Play(true);
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Two))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_JumpReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_JumpReady", false);
+
+			mState = eKingDededeState::JumpReady;
+
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Three))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_AttackReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_AttackReady", false);
+
+			mState = eKingDededeState::AttackReady;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Four))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_FlyReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_FlyReady", false);
+
+			mState = eKingDededeState::FlyReady;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
+			mStateChangeDelay = 0.f;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Five))
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"KingDedede_Right_MonsterSummonReady", false);
+			else
+				mAnimator->PlayAnimation(L"KingDedede_Left_MonsterSummonReady", false);
+
+			mState = eKingDededeState::MonsterSummonReady;
+
+			// 사운드 재생
+			ResourceManager::Find<Sound>(L"BossShout")->Play(false);
+			mStateChangeDelay = 0.f;
 		}
 	}
 

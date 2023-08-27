@@ -50,6 +50,9 @@ namespace sy
 		eDarkNebulaState GetDarkNebulaState() { return mState; }
 
 	private:
+		void SetBossState();
+
+	private:
 		void Idle();
 		void Move();
 		void RotationalMove();

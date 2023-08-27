@@ -56,6 +56,8 @@ namespace sy
 		void CheckPixelCollision();
 		void AddStarEffect(eDirection dir);
 
+		void SetBossState();
+
 	private:
 		void Idle();
 		void Walk();

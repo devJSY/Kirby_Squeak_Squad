@@ -63,8 +63,9 @@ namespace sy
 		void CheckPixelCollision();
 		void AddStarEffect(eDirection dir);
 
+		void SetBossState();
+
 	private:
-		void AppearReady();
 		void Appear();
 		void Idle();
 		void Walk();
@@ -92,9 +93,11 @@ namespace sy
 		class Collider*			mCollider;
 		eDirection				mDir;
 
+
 		float					mStateChangeDelay;
 		bool					mbDamaged; // 연속 피격 방지
 		eDirection				mWalkDir;
+		UINT					mSlashCount;
 	};
 }
 
