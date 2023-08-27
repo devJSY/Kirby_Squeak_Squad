@@ -27,6 +27,7 @@ namespace sy
 		, mDir(eDirection::LEFT)
 		, mStateChangeDelay(0.f)
 		, mbDamaged(false)
+		, mWalkDir(mDir)
 	{
 	}
 
@@ -146,7 +147,7 @@ namespace sy
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
 
 			mState = eMetaKnightState::Idle;
 
@@ -403,7 +404,6 @@ namespace sy
 		COLORREF LBColor = PixelTex->GetTexturePixel((int)LB.x, (int)LB.y);
 		COLORREF RBColor = PixelTex->GetTexturePixel((int)RB.x, (int)RB.y);
 
-
 		// 바닥 처리
 		if (LBColor == RGB(0, 0, 255) || RBColor == RGB(0, 0, 255)
 			|| LBColor == RGB(255, 0, 0) || RBColor == RGB(255, 0, 0))
@@ -493,7 +493,7 @@ namespace sy
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"MetaKnight_Right_Drop", true);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Drop", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
 
 			mState = eMetaKnightState::Drop;
 		}
@@ -530,10 +530,16 @@ namespace sy
 			int randomNumber = std::rand() % 5;
 			if (randomNumber == 0)
 			{
-				if (mDir == eDirection::RIGHT)				
+				if (mDir == eDirection::RIGHT)
+				{
 					mAnimator->PlayAnimation(L"MetaKnight_Right_Walk", true);				
-				else				
+					mWalkDir = eDirection::LEFT;
+				}
+				else
+				{
 					mAnimator->PlayAnimation(L"MetaKnight_Left_Walk", true);				
+					mWalkDir = eDirection::RIGHT;
+				}
 
 				mState = eMetaKnightState::Walk;
 			}
@@ -630,6 +636,64 @@ namespace sy
 
 	void MetaKnight::Walk()
 	{
+		Vector2 pos = mTransform->GetPosition();
+		float Accel = 0.f;
+
+		if (mWalkDir == eDirection::RIGHT)
+			Accel = 100.f;
+		else
+			Accel = -100.f;
+
+		mStateChangeDelay += Time::DeltaTime();
+		if (mStateChangeDelay > 2.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+			mStateChangeDelay = 0.f;
+		}
+		else if (mStateChangeDelay > 1.f)
+			Accel *= -1.f;
+
+		pos.x += Accel * Time::DeltaTime();
+		mTransform->SetPosition(pos);
+
+		// 땅에 닿은 상태가 아니라면 Drop으로 변경
+		if (!mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
+
+			mState = eMetaKnightState::Drop;
+			mStateChangeDelay = 0.f;
+		}
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+		if (Dir.x > 0.f)
+		{
+			if (mDir == eDirection::LEFT)
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Walk", true);
+				mTransform->SetDirection(eDirection::RIGHT);
+				mDir = eDirection::RIGHT;
+			}
+		}
+		else
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Walk", true);
+				mTransform->SetDirection(eDirection::LEFT);
+				mDir = eDirection::LEFT;
+			}
+		}
 	}
 
 	void MetaKnight::Dash()
@@ -718,9 +782,9 @@ namespace sy
 		if (mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
 
 			mState = eMetaKnightState::Idle;
 		}
@@ -776,9 +840,9 @@ namespace sy
 		if (mRigidBody->IsGround())
 		{
 			if (mDir == eDirection::RIGHT)
-				mAnimator->PlayAnimation(L"KingDedede_Right_Idle", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
 			else
-				mAnimator->PlayAnimation(L"KingDedede_Left_Idle", true);
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
 
 			mState = eMetaKnightState::Idle;
 		}

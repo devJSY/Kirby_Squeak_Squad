@@ -94,6 +94,7 @@ namespace sy
 
 		float					mStateChangeDelay;
 		bool					mbDamaged; // 연속 피격 방지
+		eDirection				mWalkDir;
 	};
 }
 

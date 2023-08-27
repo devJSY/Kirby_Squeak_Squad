@@ -149,6 +149,7 @@ namespace sy
 		mHPbarUI->Initialize();
 		mLifeUI->Initialize();
 
+
 		LoadScene(L"OpeningScene");
 	}
 
