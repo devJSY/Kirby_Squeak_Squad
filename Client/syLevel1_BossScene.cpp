@@ -230,6 +230,6 @@ namespace sy
 
 		DanceScene* danceScene = dynamic_cast<DanceScene*>(SceneManager::GetScene(L"DanceScene"));
 		danceScene->SetNextSceneName(L"PrismPlainsScene");
-		danceScene->SetType(eDanceSceneType::BossClear);
+		danceScene->SetType(eDanceSceneType::Level1_BossClear);
 	}
 }

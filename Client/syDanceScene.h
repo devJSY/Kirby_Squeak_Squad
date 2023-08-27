@@ -5,7 +5,9 @@ namespace sy
 {
     enum class eDanceSceneType
     {
-        BossClear,
+        Level1_BossClear,
+        Level6_BossClear,
+        Level7_BossClear,
         NormalClear,
         End,
     };

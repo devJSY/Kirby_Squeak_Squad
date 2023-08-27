@@ -227,6 +227,6 @@ namespace sy
 
 		DanceScene* danceScene = dynamic_cast<DanceScene*>(SceneManager::GetScene(L"DanceScene"));
 		danceScene->SetNextSceneName(L"IceIslandScene");
-		danceScene->SetType(eDanceSceneType::BossClear);
+		danceScene->SetType(eDanceSceneType::Level6_BossClear);
 	}
 }

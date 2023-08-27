@@ -38,7 +38,9 @@ namespace sy
 		mVideo->SetSpeed(1.f); // 재생속도 설정
 
 		Animator* VideoAnimator = mVideo->AddComponent<Animator>();
-		VideoAnimator->CreateAnimationFolder(L"BossClearVideo", L"..\\Resources\\Video\\Dance\\BossClear", 0.05f / mVideo->GetSpeed());
+		VideoAnimator->CreateAnimationFolder(L"Level1_BossClearVideo", L"..\\Resources\\Video\\Dance\\Level1_BossClear", 0.05f / mVideo->GetSpeed());
+		VideoAnimator->CreateAnimationFolder(L"Level6_BossClearVideo", L"..\\Resources\\Video\\Dance\\Level6_BossClear", 0.05f / mVideo->GetSpeed());
+		VideoAnimator->CreateAnimationFolder(L"Level7_BossClearVideo", L"..\\Resources\\Video\\Dance\\Level7_BossClear", 0.05f / mVideo->GetSpeed());
 		VideoAnimator->CreateAnimationFolder(L"NormalClearVideo", L"..\\Resources\\Video\\Dance\\NormalClear", 0.0467836257309942f / mVideo->GetSpeed());
 		VideoAnimator->SetAffectedCamera(false);
 
@@ -53,13 +55,29 @@ namespace sy
 	{
 		mPassedTime += Time::DeltaTime();
 	
-		if (mType == eDanceSceneType::BossClear)
+		if (mType == eDanceSceneType::Level1_BossClear)
 		{
 			if (mPassedTime >= 2.4f && mbSoundPlay == false)
 			{
 				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
 				mbSoundPlay = true;
 			}			
+		}
+		else if (mType == eDanceSceneType::Level6_BossClear)
+		{
+			if (mPassedTime >= 2.0f && mbSoundPlay == false)
+			{
+				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
+				mbSoundPlay = true;
+			}
+		}
+		else if (mType == eDanceSceneType::Level7_BossClear)
+		{
+			if (mPassedTime >= 2.0f && mbSoundPlay == false)
+			{
+				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
+				mbSoundPlay = true;
+			}
 		}
 		else if (mType == eDanceSceneType::NormalClear)
 		{
@@ -89,20 +107,9 @@ namespace sy
 		}
 
 		// 키입력으로 씬전환
-		if (Input::GetKeyDown(eKeyCode::A) || Input::GetKeyDown(eKeyCode::D) || Input::GetKeyDown(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::MOUSE_MBTN))
 		{
-			if (mbSceneChange == false)
-			{
-				Camera::fadeOut(1.f, RGB(255, 255, 255));				
-				mbSceneChange = true;
-			}
-			else
-			{
-				if (!mNextSceneName.empty() && Camera::IsEmptyCamEffect())
-				{
-					SceneManager::LoadScene(mNextSceneName);
-				}
-			}
+			SceneManager::LoadScene(mNextSceneName);	
 		}
 
 		Scene::Update();
@@ -115,9 +122,17 @@ namespace sy
 
 	void DanceScene::Enter()
 	{
-		if (mType == eDanceSceneType::BossClear)
+		if (mType == eDanceSceneType::Level1_BossClear)
 		{
-			mVideo->GetComponent<Animator>()->PlayAnimation(L"BossClearVideo", false);
+			mVideo->GetComponent<Animator>()->PlayAnimation(L"Level1_BossClearVideo", false);
+		}
+		else if (mType == eDanceSceneType::Level6_BossClear)
+		{
+			mVideo->GetComponent<Animator>()->PlayAnimation(L"Level6_BossClearVideo", false);
+		}
+		else if (mType == eDanceSceneType::Level7_BossClear)
+		{
+			mVideo->GetComponent<Animator>()->PlayAnimation(L"Level7_BossClearVideo", false);
 		}
 		else if (mType == eDanceSceneType::NormalClear)
 		{
@@ -141,7 +156,7 @@ namespace sy
 		mbSoundPlay = false;
 		mbSceneChange = false;
 
-		if (mType == eDanceSceneType::BossClear)
+		if (mType == eDanceSceneType::Level1_BossClear)
 		{
 			SceneManager::GetInventory()->AddItem(eAbilityType::Tornado);
 		}
