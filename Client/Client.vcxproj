@@ -216,6 +216,7 @@
     <ClInclude Include="syLevel_BG.h" />
     <ClInclude Include="syLifeUI.h" />
     <ClInclude Include="syMetaKnight.h" />
+    <ClInclude Include="syMetaKnight_AttackArea.h" />
     <ClInclude Include="syMixItem.h" />
     <ClInclude Include="syNatureNotchScene.h" />
     <ClInclude Include="syNinjaKirby.h" />
@@ -354,6 +355,7 @@
     <ClCompile Include="syLevel_BG.cpp" />
     <ClCompile Include="syLifeUI.cpp" />
     <ClCompile Include="syMetaKnight.cpp" />
+    <ClCompile Include="syMetaKnight_AttackArea.cpp" />
     <ClCompile Include="syMixItem.cpp" />
     <ClCompile Include="syNatureNotchScene.cpp" />
     <ClCompile Include="syNinjaKirby.cpp" />

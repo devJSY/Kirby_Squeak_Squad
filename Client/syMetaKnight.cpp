@@ -13,6 +13,7 @@
 #include "syObject.h"
 #include "syInput.h"
 #include "syCamera.h"
+#include "syMetaKnight_AttackArea.h"
 
 namespace sy
 {
@@ -111,6 +112,12 @@ namespace sy
 		mAnimator->PlayAnimation(L"MetaKnight_AppearReady", true);
 
 		// Sound Load
+		ResourceManager::Load<Sound>(L"MetaKnight_DashSlashSound", L"..\\Resources\\Sound\\Effect\\MetaKnight\\MetaKnight_DashSlash.wav");
+		ResourceManager::Load<Sound>(L"MetaKnight_SlashSound", L"..\\Resources\\Sound\\Effect\\MetaKnight\\MetaKnight_Slash.wav");
+
+		ResourceManager::Find<Sound>(L"MetaKnight_DashSlashSound")->SetVolume(100.f);
+		ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->SetVolume(100.f);
+
 		BossEnemy::Initialize();
 	}
 
@@ -553,6 +560,12 @@ namespace sy
 						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
 
 					mState = eMetaKnightState::Slash;
+
+					// 胶懦 积己
+					MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
+					object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 				}
 				else
 				{
@@ -566,6 +579,12 @@ namespace sy
 							mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
 
 						mState = eMetaKnightState::SlashSkill;
+
+						// 胶懦 积己
+						MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
+						object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+						ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 					}
 					else
 					{
@@ -654,6 +673,10 @@ namespace sy
 
 				mState = eMetaKnightState::SpinAttack;
 				mRigidBody->SetFloat(true);
+
+				// 胶懦 积己
+				MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(50.f, 50.f));
+				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 			}
 
 			vel.x = 0.f;
