@@ -22,7 +22,7 @@ namespace sy
 		, mbActive(true)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetPosition(Vector2(GetOwner()->GetComponent<Transform>()->GetPosition().x, 96.f));
+		mTransform->SetPosition(Vector2(GetOwner()->GetComponent<Transform>()->GetPosition().x, 75.f));
 
 		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
 		mTransform->SetDirection(mDir);
@@ -58,7 +58,7 @@ namespace sy
 	{
 		mDuration += Time::DeltaTime();
 
-		if (mDuration > 5.f && mbActive)
+		if (mDuration > 3.f && mbActive)
 		{
 			mAnimator->PlayAnimation(L"MetaKnight_Tornado_Dead", false);
 			mbActive = false;

@@ -14,6 +14,8 @@ namespace sy
 		, mWidth(0)
 		, mHeight(0)
 		, mScale(Vector2::One)
+		, mblinkTime(0.f)
+		, mblinkAlpha(0.f)
 	{
 	}
 
@@ -171,20 +173,17 @@ namespace sy
 			if (alpha <= 0)
 				alpha = 0;
 
-			static float blinkTime = 0.f;
-			static float blinkalpha = 0.f;
-
 			if (blink)
 			{
-				blinkTime += Time::DeltaTime();
-				if (blinkTime > 0.1)
+				mblinkTime += Time::DeltaTime();
+				if (mblinkTime > 0.1)
 				{
-					if (blinkalpha == 100) blinkalpha = 255;
-					else blinkalpha = 100;
-					blinkTime = 0;
+					if (mblinkAlpha == 100) mblinkAlpha = 255;
+					else mblinkAlpha = 100;
+					mblinkTime = 0;
 				}
 
-				alpha = (int)blinkalpha;
+				alpha = (int)mblinkAlpha;
 			}
 
 			func.SourceConstantAlpha = alpha; // 0 ~ 255

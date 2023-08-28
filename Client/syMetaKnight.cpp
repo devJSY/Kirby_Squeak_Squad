@@ -135,6 +135,7 @@ namespace sy
 		if (DamageDelayTime > 1.f)
 		{
 			mbDamaged = false;
+			mAnimator->SetBlink(false);
 			DamageDelayTime = 0.f;
 		}
 
@@ -277,6 +278,7 @@ namespace sy
 		}
 
 		mbDamaged = true;
+		mAnimator->SetBlink(true);
 	}
 
 	void MetaKnight::CheckPixelCollision()
@@ -460,22 +462,9 @@ namespace sy
 			mState = eMetaKnightState::Jump;
 			mRigidBody->SetGround(false);
 
-			// 제자리점프, 이동점프 범위
-			int randomX = (std::rand() % 100) + 100;
-			int randomY = (std::rand() % 100) + 100;
-
+			// 제자리점프 범위
+			int randomY = (std::rand() % 150) + 150;
 			Vector2 vel = Vector2(0.f, (float)-randomY);
-
-			// X축 랜덤 방향
-			int randomSign = std::rand() % 100;
-			if (randomSign % 2 == 0)
-				randomX *= -1;
-
-			// 제자리점프, 이동점프 랜덤 구현
-			int randomDir = std::rand() % 100;
-			if (randomDir % 2 == 0)
-				vel.x = (float)randomX;
-
 			mRigidBody->SetVelocity(vel);
 
 			mStateChangeDelay = 0.f;
@@ -722,22 +711,9 @@ namespace sy
 				mState = eMetaKnightState::Jump;
 				mRigidBody->SetGround(false);
 
-				// 제자리점프, 이동점프 범위
-				int randomX = (std::rand() % 100) + 100;
-				int randomY = (std::rand() % 100) + 100;
-
+				// 제자리점프 범위
+				int randomY = (std::rand() % 150) + 150;
 				Vector2 vel = Vector2(0.f, (float)-randomY);
-
-				// X축 랜덤 방향
-				int randomSign = std::rand() % 100;
-				if (randomSign % 2 == 0)
-					randomX *= -1;
-
-				// 제자리점프, 이동점프 랜덤 구현
-				int randomDir = std::rand() % 100;
-				if (randomDir % 2 == 0)
-					vel.x = (float)randomX;
-
 				mRigidBody->SetVelocity(vel);
 			}
 		}
@@ -987,6 +963,21 @@ namespace sy
 					mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
 
 				mState = eMetaKnightState::Drop;
+
+				// 제자리점프, 이동점프 범위
+				float Velx = 250.f;
+
+				Vector2 vel = mRigidBody->GetVelocity();
+
+				if (mDir == eDirection::RIGHT)
+					Velx *= -1;
+
+				// 제자리 Drop, 이동 Drop 랜덤 구현
+				int randomDir = std::rand() % 100;
+				if (randomDir % 2 == 0)
+					vel.x = Velx;				
+
+				mRigidBody->SetVelocity(vel);
 			}
 			else
 			{
@@ -1012,6 +1003,7 @@ namespace sy
 				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
 
 			mState = eMetaKnightState::Idle;
+			mRigidBody->SetVelocity(Vector2::Zero);
 		}
 	}
 
@@ -1045,6 +1037,21 @@ namespace sy
 					mAnimator->PlayAnimation(L"MetaKnight_Left_Drop", true);
 
 				mState = eMetaKnightState::Drop;
+
+				// 제자리점프, 이동점프 범위
+				float Velx = 250.f;
+
+				Vector2 vel = mRigidBody->GetVelocity();
+
+				if (mDir == eDirection::RIGHT)
+					Velx *= -1;
+
+				// 제자리 Drop, 이동 Drop 랜덤 구현
+				int randomDir = std::rand() % 100;
+				if (randomDir % 2 == 0)
+					vel.x = Velx;
+
+				mRigidBody->SetVelocity(vel);
 			}
 			else
 			{
@@ -1098,7 +1105,7 @@ namespace sy
 	{
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 5.f)
+		if (mStateChangeDelay > 3.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);

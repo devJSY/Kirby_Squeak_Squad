@@ -212,6 +212,12 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syMetaKnight_AttackArea.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syMetaKnight_SlashSkill.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syMetaKnight_TornadoSkill.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syMixItem.cpp"
 
 

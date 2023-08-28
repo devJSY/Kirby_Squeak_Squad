@@ -55,5 +55,8 @@ namespace sy
 		UINT mHeight;		 // 리소스 세로
 
 		Vector2 mScale;
+		float mblinkTime;
+		float mblinkAlpha;
+
 	};
 }
