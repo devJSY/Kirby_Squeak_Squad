@@ -57,7 +57,7 @@ namespace sy
 	
 		if (mType == eDanceSceneType::Level1_BossClear)
 		{
-			if (mPassedTime >= 2.4f && mbSoundPlay == false)
+			if (mPassedTime >= 2.5f && mbSoundPlay == false)
 			{
 				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
 				mbSoundPlay = true;
@@ -65,7 +65,7 @@ namespace sy
 		}
 		else if (mType == eDanceSceneType::Level6_BossClear)
 		{
-			if (mPassedTime >= 2.0f && mbSoundPlay == false)
+			if (mPassedTime >= 1.8f && mbSoundPlay == false)
 			{
 				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
 				mbSoundPlay = true;
@@ -73,7 +73,7 @@ namespace sy
 		}
 		else if (mType == eDanceSceneType::Level7_BossClear)
 		{
-			if (mPassedTime >= 2.0f && mbSoundPlay == false)
+			if (mPassedTime >= 1.9f && mbSoundPlay == false)
 			{
 				ResourceManager::Find<Sound>(L"BossClearSound")->Play(false);
 				mbSoundPlay = true;

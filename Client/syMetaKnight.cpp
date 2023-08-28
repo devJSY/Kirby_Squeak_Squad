@@ -108,9 +108,9 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkill", Vector2(1920.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkill", Vector2(1920.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
 					
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 11, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 6, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_3", Vector2(0.f, 960.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 15, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 11, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 6, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_3", Vector2(0.f, 960.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 15, Animationoffset);
 
 		mAnimator->SetAffectedCamera(true);
 		mAnimator->PlayAnimation(L"MetaKnight_AppearReady", true);
@@ -269,16 +269,19 @@ namespace sy
 
 		Damaged(DamageAmount);
 
+		mbDamaged = true;
+		mAnimator->SetBlink(true);
+
 		if (GetCurHP() <= 0.f)
 		{
+			mbDamaged = false;
+			mAnimator->SetBlink(false);
+
 			mState = eMetaKnightState::Dead1;
 			mAnimator->PlayAnimation(L"MetaKnight_Dead_1", false);
 
 			mState = eMetaKnightState::Dead1;
 		}
-
-		mbDamaged = true;
-		mAnimator->SetBlink(true);
 	}
 
 	void MetaKnight::CheckPixelCollision()
@@ -1122,6 +1125,9 @@ namespace sy
 		{
 			mAnimator->PlayAnimation(L"MetaKnight_Dead_2", false);
 			mState = eMetaKnightState::Dead2;
+
+			mRigidBody->SetVelocity(Vector2(70.f, -100.f));
+			mRigidBody->SetGround(false);
 		}
 	}
 
