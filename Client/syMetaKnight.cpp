@@ -14,6 +14,8 @@
 #include "syInput.h"
 #include "syCamera.h"
 #include "syMetaKnight_AttackArea.h"
+#include "syMetaKnight_SlashSkill.h"
+#include "syMetaKnight_TornadoSkill.h"
 
 namespace sy
 {
@@ -103,8 +105,8 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkillCharge", Vector2(0.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 4, Animationoffset);
 
-		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkill", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkill", Vector2(1440.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Right_Tex, L"MetaKnight_Right_TornadoSkill", Vector2(1920.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Left_Tex, L"MetaKnight_Left_TornadoSkill", Vector2(1920.f, 4320.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.1f, 1, Animationoffset);
 					
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_1", Vector2::Zero, Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 11, Animationoffset);
 		mAnimator->CreateAnimation(MetaKnight_Dead_Tex, L"MetaKnight_Dead_2", Vector2(0.f, 480.f), Vector2(480.f, 480.f), Vector2(480.f, 0.f), 0.08f, 6, Animationoffset);
@@ -515,6 +517,12 @@ namespace sy
 				MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
 				object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
 
+				Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+				Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+				MetaKnight_SlashSkill* SlashSkill = new MetaKnight_SlashSkill(this, Dir);
+				object::ActiveSceneAddGameObject(eLayerType::Effect, SlashSkill);
+
 				ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 			}
 
@@ -684,6 +692,12 @@ namespace sy
 						// 스킬 생성
 						MetaKnight_AttackArea* AttackArea = new MetaKnight_AttackArea(this, Vector2(40.f, 30.f));
 						object::ActiveSceneAddGameObject(eLayerType::Effect, AttackArea);
+
+						Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+						Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
+						MetaKnight_SlashSkill* SlashSkill = new MetaKnight_SlashSkill(this, Dir);
+						object::ActiveSceneAddGameObject(eLayerType::Effect, SlashSkill);
 
 						ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 					}
@@ -888,6 +902,9 @@ namespace sy
 			}
 			else
 			{
+				Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+				Vector2 Dir = PlayerPos - mTransform->GetPosition();
+
 				if (mSlashCount == 2)
 				{
 					if (mDir == eDirection::RIGHT)
@@ -896,6 +913,10 @@ namespace sy
 						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash2", false);
 
 					--mSlashCount;
+
+					MetaKnight_SlashSkill* SlashSkill = new MetaKnight_SlashSkill(this, Dir);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, SlashSkill);
+
 					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 				}
 				else if (mSlashCount == 1)
@@ -906,6 +927,10 @@ namespace sy
 						mAnimator->PlayAnimation(L"MetaKnight_Left_Slash1", false);
 
 					--mSlashCount;
+
+					MetaKnight_SlashSkill* SlashSkill = new MetaKnight_SlashSkill(this, Dir);
+					object::ActiveSceneAddGameObject(eLayerType::Effect, SlashSkill);
+
 					ResourceManager::Find<Sound>(L"MetaKnight_SlashSound")->Play(false);
 				}
 			}
@@ -1052,10 +1077,36 @@ namespace sy
 
 	void MetaKnight::TornadoSkillCharge()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 2.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_TornadoSkill", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_TornadoSkill", true);
+			
+			mState = eMetaKnightState::TornadoSkill;
+			mStateChangeDelay = 0.f;
+
+			MetaKnight_TornadoSkill* TornadoSkill = new MetaKnight_TornadoSkill(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, TornadoSkill);					
+		}
 	}
 
 	void MetaKnight::TornadoSkill()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 5.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"MetaKnight_Left_Idle", true);
+
+			mState = eMetaKnightState::Idle;
+		}
 	}
 
 	void MetaKnight::Dead1()

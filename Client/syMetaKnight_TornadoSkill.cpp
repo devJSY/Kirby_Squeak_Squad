@@ -8,6 +8,7 @@
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -39,6 +40,9 @@ namespace sy
 		mAnimator->CreateAnimation(MetaKnight_Tornado_Tex, L"MetaKnight_Tornado_Dead", Vector2(1620.f,0.f), Vector2(180.f, 450.f), Vector2(180.f, 0.f), 0.1f, 5, Animationoffset);
 
 		mAnimator->PlayAnimation(L"MetaKnight_Tornado_Active", true);
+
+		ResourceManager::Load<Sound>(L"MetaKnight_TornadoSound", L"..\\Resources\\Sound\\Effect\\MetaKnight\\MetaKnight_Tornado.wav")->Play(true);
+		ResourceManager::Find<Sound>(L"MetaKnight_TornadoSound")->SetVolume(100.f);
 	}
 
 	MetaKnight_TornadoSkill::~MetaKnight_TornadoSkill()
@@ -64,15 +68,16 @@ namespace sy
 		{
 			if (mAnimator->IsActiveAnimationComplete())
 			{
+				ResourceManager::Find<Sound>(L"MetaKnight_TornadoSound")->Stop(true);
 				Destroy(this);
 			}
 		}
 
 		Vector2 pos = mTransform->GetPosition();
 		if(mDir == eDirection::RIGHT)
-			pos.x += 100.f * Time::DeltaTime();
+			pos.x += 50.f * Time::DeltaTime();
 		else
-			pos.x -= 100.f * Time::DeltaTime();
+			pos.x -= 50.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 
 		Effects::Update();

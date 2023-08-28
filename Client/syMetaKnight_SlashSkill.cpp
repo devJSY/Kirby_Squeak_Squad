@@ -61,7 +61,7 @@ namespace sy
 
 		Vector2 pos = mTransform->GetPosition();
 		mMoveDir.Normalize();
-		pos += mMoveDir * 200.f * Time::DeltaTime();
+		pos += mMoveDir * 100.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 		
 		Effects::Update();
