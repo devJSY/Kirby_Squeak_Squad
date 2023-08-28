@@ -1086,7 +1086,7 @@ namespace sy
 	{
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 2.f)
+		if (mStateChangeDelay > 1.f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"MetaKnight_Right_TornadoSkill", true);
@@ -1105,7 +1105,7 @@ namespace sy
 	{
 		mStateChangeDelay += Time::DeltaTime();
 
-		if (mStateChangeDelay > 3.f)
+		if (mStateChangeDelay > 1.5f)
 		{
 			if (mDir == eDirection::RIGHT)
 				mAnimator->PlayAnimation(L"MetaKnight_Right_Idle", true);

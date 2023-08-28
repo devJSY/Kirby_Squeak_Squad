@@ -36,8 +36,8 @@ namespace sy
 
 		// 局聪皋捞记 积己
 		Vector2 Animationoffset = Vector2(0.f, 0.f);
-		mAnimator->CreateAnimation(MetaKnight_Tornado_Tex, L"MetaKnight_Tornado_Active", Vector2::Zero, Vector2(180.f, 450.f), Vector2(180.f, 0.f), 0.1f, 9, Animationoffset);
-		mAnimator->CreateAnimation(MetaKnight_Tornado_Tex, L"MetaKnight_Tornado_Dead", Vector2(1620.f,0.f), Vector2(180.f, 450.f), Vector2(180.f, 0.f), 0.1f, 5, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Tornado_Tex, L"MetaKnight_Tornado_Active", Vector2::Zero, Vector2(180.f, 450.f), Vector2(180.f, 0.f), 0.05f, 9, Animationoffset);
+		mAnimator->CreateAnimation(MetaKnight_Tornado_Tex, L"MetaKnight_Tornado_Dead", Vector2(1620.f,0.f), Vector2(180.f, 450.f), Vector2(180.f, 0.f), 0.05f, 5, Animationoffset);
 
 		mAnimator->PlayAnimation(L"MetaKnight_Tornado_Active", true);
 
@@ -58,7 +58,7 @@ namespace sy
 	{
 		mDuration += Time::DeltaTime();
 
-		if (mDuration > 3.f && mbActive)
+		if (mDuration > 1.5f && mbActive)
 		{
 			mAnimator->PlayAnimation(L"MetaKnight_Tornado_Dead", false);
 			mbActive = false;
@@ -75,9 +75,9 @@ namespace sy
 
 		Vector2 pos = mTransform->GetPosition();
 		if(mDir == eDirection::RIGHT)
-			pos.x += 50.f * Time::DeltaTime();
+			pos.x += 80.f * Time::DeltaTime();
 		else
-			pos.x -= 50.f * Time::DeltaTime();
+			pos.x -= 80.f * Time::DeltaTime();
 		mTransform->SetPosition(pos);
 
 		Effects::Update();
