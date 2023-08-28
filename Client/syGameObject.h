@@ -52,7 +52,7 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) {};
         virtual void OnCollisionExit(class Collider* other) {};
 
-        eGameObjectState GetGameObjectState() { return mGameObjectState; }
+        eGameObjectState GetGameObjectState() const { return mGameObjectState; }
 
     private:
         void SetPause() { mGameObjectState = eGameObjectState::Pause; }

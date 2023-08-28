@@ -16,11 +16,11 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		eAbilityType GetType() { return mType; }
+		eAbilityType GetType() const { return mType; }
 
-		UINT GetSlotNumber() { return mSlotNumber; }
+		UINT GetSlotNumber() const { return mSlotNumber; }
 		void SetSlotNumber(UINT idx) { mSlotNumber = idx; }
-		Vector2 GetSlotPos() { return mSlotPos; }
+		Vector2 GetSlotPos() const { return mSlotPos; }
 
 	private:
 		eAbilityType		mType;

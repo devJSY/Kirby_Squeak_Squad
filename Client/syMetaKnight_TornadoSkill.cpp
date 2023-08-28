@@ -22,7 +22,7 @@ namespace sy
 		, mbActive(true)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetPosition(Vector2(GetOwner()->GetComponent<Transform>()->GetPosition().x, 75.f));
+		mTransform->SetPosition(Vector2(GetOwner()->GetComponent<Transform>()->GetPosition().x, 80.f));
 
 		mDir = GetOwner()->GetComponent<Transform>()->GetDirection();
 		mTransform->SetDirection(mDir);

@@ -17,8 +17,8 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other) override;
 
-        bool IsExistTarget() { return mTarget != nullptr; }
-        bool IsInhaled() { return mbInhale; }
+        bool IsExistTarget() const { return mTarget != nullptr; }
+        bool IsInhaled() const { return mbInhale; }
         
     private:
         void SetTarget();

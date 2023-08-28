@@ -17,13 +17,13 @@ namespace sy
 		void AddForce(Vector2 force) { mForce += force; }
 		void SetMass(float mass) { mMass = mass; }
 		void SetGround(bool ground) { mbGround = ground; }
-		bool IsGround() { return mbGround; }
-		Vector2 GetVelocity() { return mVelocity; }
+		bool IsGround() const { return mbGround; }
+		Vector2 GetVelocity() const { return mVelocity; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
 		void SetLimitVelocity(Vector2 velocity) { mLimitedVelocty = velocity; }
 
 		void SetFloat(bool _float) { mbfloat = _float; }
-		bool Float() { return mbfloat; }
+		bool IsFloat() const { return mbfloat; }
 
 		void SetFriction(float friction) { mFriction = friction; }
 

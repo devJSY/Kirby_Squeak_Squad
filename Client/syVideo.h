@@ -14,7 +14,7 @@ namespace sy
 		virtual void Render(HDC hdc);
 
 		void SetSpeed(float speed) { mSpeed = speed; }
-		float GetSpeed() { return mSpeed; }
+		float GetSpeed() const { return mSpeed; }
 
 	private:
 		float mSpeed;

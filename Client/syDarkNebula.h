@@ -44,10 +44,10 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
-		virtual bool IsDamagedState() { return mbDamaged; }
-		virtual bool IsDeadState() { return mState == eDarkNebulaState::Dead; }
+		virtual bool IsDamagedState() const { return mbDamaged; }
+		virtual bool IsDeadState() const { return mState == eDarkNebulaState::Dead; }
 
-		eDarkNebulaState GetDarkNebulaState() { return mState; }
+		eDarkNebulaState GetDarkNebulaState() const { return mState; }
 
 	private:
 		void SetBossState();

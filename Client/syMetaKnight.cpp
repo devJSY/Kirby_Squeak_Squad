@@ -1121,7 +1121,7 @@ namespace sy
 
 	void MetaKnight::Dead1()
 	{
-		if (mAnimator->IsActiveAnimationComplete())
+		if (mAnimator->IsActiveAnimationComplete() && mRigidBody->IsGround())
 		{
 			mAnimator->PlayAnimation(L"MetaKnight_Dead_2", false);
 			mState = eMetaKnightState::Dead2;

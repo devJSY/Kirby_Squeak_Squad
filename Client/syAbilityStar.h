@@ -22,7 +22,7 @@ namespace sy
         virtual void Update();
         virtual void Render(HDC hdc);
 
-        eAbilityType GetAbilityType() { return mType; }
+        eAbilityType GetAbilityType() const { return mType; }
         void TakeInhaled() { mInhaled = true; }
 
         eAbilityStarState GetAbilityStarState() const { return mState; }

@@ -23,7 +23,7 @@ namespace sy
 		virtual void OnCollisionStay(class Collider* other)	{};
 		virtual void OnCollisionExit(class Collider* other) {};
 
-		Player* GetOwner() { return mOwner; }
+		Player* GetOwner() const { return mOwner; }
 
 	private:
 		Player* mOwner;

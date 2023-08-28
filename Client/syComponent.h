@@ -15,10 +15,10 @@ namespace sy
 		virtual void Render(HDC hdc);
 		
 		void SetOwner(class GameObject* owner) { mOwner = owner; }
-		class GameObject* GetOwner() { return mOwner; }
+		class GameObject* GetOwner() const { return mOwner; }
 
 	public:
-		enums::eComponentType GetCompType() { return mType; }
+		enums::eComponentType GetCompType() const { return mType; }
 
 	private:
 		const eComponentType mType;

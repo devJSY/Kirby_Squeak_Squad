@@ -29,8 +29,8 @@ namespace sy
 
         virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
         virtual void TakeInhaled(math::Vector2 InhaleDir) override;
-        virtual bool IsDamagedState() { return mState == eCrimpState::Damage; }
-        virtual bool IsDeadState() { return mState == eCrimpState::Dead; }
+        virtual bool IsDamagedState() const { return mState == eCrimpState::Damage; }
+        virtual bool IsDeadState() const { return mState == eCrimpState::Dead; }
 
     private:
         void Move();

@@ -32,13 +32,13 @@ namespace sy
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = false); // 루프 기본값 false
 
-		float GetAlpha() { return mAlpha; }
+		float GetAlpha() const { return mAlpha; }
 		void SetAlpha(float alpha) { mAlpha = alpha; }
-		bool GetBlink() { return mbBlink; }
+		bool GetBlink() const { return mbBlink; }
 		void SetBlink(bool blink) { mbBlink = blink; }
 
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
-		bool GetAffectedCamera() { return mbAffectedCamera; }
+		bool GetAffectedCamera() const { return mbAffectedCamera; }
 
 		bool IsActiveAnimationComplete() const { return mActiveAnimation->IsComplete(); }
 		int GetActiveAnimationIndex() const { return mActiveAnimation->GetIndex(); }
@@ -51,7 +51,7 @@ namespace sy
 			if (ani != nullptr) ani->SetBmpRGB(r, g, b);
 		}
 
-		Animation* GetActiveAnimation() { return mActiveAnimation; }
+		Animation* GetActiveAnimation() const { return mActiveAnimation; }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations; // 애니메이션들을 저장

@@ -25,21 +25,25 @@ namespace sy
 		void OncollisionStay(Collider* other);
 		void OncollisionExit(Collider* other);
 
-		Vector2 GetSize() { return mSize; }
+		Vector2 GetSize() const { return mSize; }
 		void SetSize(Vector2 size) { mSize = size; }
-		Vector2 GetOffset() { return mOffset; }
+
+		Vector2 GetOffset() const { return mOffset; }
 		void SetOffset(Vector2 offset) { mOffset = offset; }
-		Vector2 GetPosition() { return mPosition; }
+
+		Vector2 GetPosition() const { return mPosition; }
 		void SetPosition(Vector2 pos) { mPosition = pos; }
-		float GetRadius() { return mRadius; }
+
+		float GetRadius() const { return mRadius; }
 		void SetRadius(float radius) { mRadius = radius; }
-		UINT GetCollisionNumber() { return mCollisionNumber; }
+
+		UINT GetCollisionNumber() const { return mCollisionNumber; }
 
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
-		bool GetAffectedCamera() { return mbAffectedCamera; }
+		bool GetAffectedCamera() const { return mbAffectedCamera; }
 
 		void SetColliderType(eColliderType type) { mColliderType = type; }
-		eColliderType GetColliderType() { return mColliderType; }
+		eColliderType GetColliderType() const { return mColliderType; }
 
 	private:
 		static UINT mCollisionCount;

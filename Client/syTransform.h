@@ -16,11 +16,12 @@ namespace sy
 		virtual void Render(HDC hdc)  override;
 
 		void SetPosition(Vector2 position) { mPosition = position; }
-		Vector2 GetPosition() { return mPosition; }
-		void SetRotation(float rotate) { mRotation = rotate; }
-		float GetRotation() { return mRotation; }
+		Vector2 GetPosition() const { return mPosition; }
 
-		eDirection GetDirection() { return mDir; }
+		void SetRotation(float rotate) { mRotation = rotate; }
+		float GetRotation() const { return mRotation; }
+
+		eDirection GetDirection() const { return mDir; }
 		void SetDirection(eDirection dir) { mDir = dir; }
 
 	private:

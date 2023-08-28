@@ -18,14 +18,14 @@ namespace sy
 		void SetTexture(Texture* tex) { mTex = tex; }
 		void SetBmpRGB(BYTE r, BYTE g, BYTE b) { mBMPRGB = RGB(r, g, b); };
 
-		float GetAlpha() { return mAlpha; }
+		float GetAlpha() const { return mAlpha; }
 		void SetAlpha(float alpha) { mAlpha = alpha; }
 
 		void SetAffectedCamera(bool enable) { mbAffectedCamera = enable; }
-		bool GetAffectedCamera() { return mbAffectedCamera; }
+		bool GetAffectedCamera() const { return mbAffectedCamera; }
 
 		void SetRenderTrig(bool Trig) { mbRenderTrig = Trig; }
-		bool GetRenderTrig() { return mbRenderTrig; }
+		bool GetRenderTrig() const { return mbRenderTrig; }
 
 		void SetCameraSpeedRatio(Vector2 ratio) { mCameraSpeedRatio = ratio; }
 

@@ -18,7 +18,7 @@ namespace sy
 		void AddItem(eAbilityType type);
 		void AddMixItem();
 		void SetMixItem(InventoryItem* item) { mMixItem = item; }
-		bool IsFullSlot()
+		bool IsFullSlot() const
 		{
 			for (auto iter : mSlot)
 			{
@@ -28,11 +28,11 @@ namespace sy
 			return true;
 		}
 
-		InventoryItem* GetItem(UINT idx) { return mSlot[idx]; }
-		bool IsExistFocusItem() { return mFocusItem != nullptr; }
-		bool IsExistmMixItem() { return mMixItem != nullptr; }
+		InventoryItem* GetItem(UINT idx) const { return mSlot[idx]; }
+		bool IsExistFocusItem() const { return mFocusItem != nullptr; }
+		bool IsExistmMixItem() const { return mMixItem != nullptr; }
 
-		InventoryItem* GetFocusItem() { return mFocusItem; }
+		InventoryItem* GetFocusItem() const { return mFocusItem; }
 
 	private:
 		class Animator*					mAnimator;

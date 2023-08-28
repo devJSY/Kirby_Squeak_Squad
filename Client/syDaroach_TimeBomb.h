@@ -33,7 +33,7 @@ namespace sy
         void CheckPixelCollision();
 
     public:
-        eDaroachTimeBombState GetDaroachTimeBombState() { return mState; }
+        eDaroachTimeBombState GetDaroachTimeBombState() const { return mState; }
         void TakeInhaled() { mInhaled = true; }
 
     private:

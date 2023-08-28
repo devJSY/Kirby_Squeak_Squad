@@ -111,7 +111,7 @@ namespace sy
 	{
 		mDuration += Time::DeltaTime();
 
-		if (mDuration > 20.f && mbBGChange == false)
+		if (mDuration > 40.f && mbBGChange == false)
 		{
 			mbBGChange = true;
 			mBackGround->GetComponent<Animator>()->PlayAnimation(L"Meta_Knight_Stage_Final");

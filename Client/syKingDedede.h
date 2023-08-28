@@ -47,10 +47,10 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other) {};
 
 		virtual void TakeHit(int DamageAmount, math::Vector2 HitDir);
-		virtual bool IsDamagedState() { return mState == eKingDededeState::Damage; }
-		virtual bool IsDeadState() { return mState == eKingDededeState::Dead; }
+		virtual bool IsDamagedState() const { return mState == eKingDededeState::Damage; }
+		virtual bool IsDeadState() const { return mState == eKingDededeState::Dead; }
 
-		eKingDededeState GetKingDededeState() { return mState; }
+		eKingDededeState GetKingDededeState() const { return mState; }
 
 	private:
 		void CheckPixelCollision();

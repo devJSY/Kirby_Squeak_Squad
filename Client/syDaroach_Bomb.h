@@ -32,7 +32,7 @@ namespace sy
         void CheckPixelCollision();
 
     public:
-        eDaroachBombState GetDaroachBombState() { return mState; }
+        eDaroachBombState GetDaroachBombState() const { return mState; }
         void TakeInhaled() { mInhaled = true; }
  
     private:

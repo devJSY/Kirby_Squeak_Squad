@@ -34,28 +34,28 @@ namespace sy
 		void SetKirbyType(eAbilityType type);
 		void AddTransformEffect();
 
-		Kirby* GetActiveKirby() { return mKirbyType[(UINT)mAbilityType]; }
+		Kirby* GetActiveKirby() const { return mKirbyType[(UINT)mAbilityType]; }
 
 		void SetLevelEnter(bool enter) { mbLevelEnter = enter; }
-		bool GetLevelEnter() { return mbLevelEnter; }
+		bool GetLevelEnter() const { return mbLevelEnter; }
 
-		eAbilityType GetAbilityType() { return mAbilityType; }
+		eAbilityType GetAbilityType() const { return mAbilityType; }
 
 		void SetPlayerMode(ePlayerMode mode) { mMode = mode; }
-		ePlayerMode GetPlayerMode() { return mMode; }
+		ePlayerMode GetPlayerMode() const { return mMode; }
 
-		int GetMaxHP() { return mMaxHp; }
-		int GetCurHP() { return mCurHp; }
+		int GetMaxHP() const { return mMaxHp; }
+		int GetCurHP() const { return mCurHp; }
 		void SetHP(int hp) { mMaxHp = mCurHp = hp; }
-		int GetLife() { return mLife; }
+		int GetLife() const { return mLife; }
 
 		void SetHitEnemy(class Enemy* enemy) { mHitEnemy = enemy; }
-		Enemy* GetHitEnemy() { return mHitEnemy; }
+		Enemy* GetHitEnemy() const { return mHitEnemy; }
 
 		void Damaged(int amount) { mCurHp -= amount; }
 		void Recovery(int amount) { mCurHp += amount; }
 
-		bool IsDamaged() { return mbDamaged; }
+		bool IsDamaged() const { return mbDamaged; }
 
 	private:
 		std::vector<Kirby*>		mKirbyType;

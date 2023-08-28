@@ -49,7 +49,7 @@ namespace sy
 		virtual void OnCollisionExit(class Collider* other)	override;
 
 		void SetKirbyState(eWheelKirbyState state) { mState = state; }
-		eWheelKirbyState GetKirbyState() { return mState; }
+		eWheelKirbyState GetKirbyState() const { return mState; }
 
 		void SetOnLeftStop(bool trig) { mbOnLeftStop = trig; }
 		void SetOnRightStop(bool trig) { mbOnRightStop = trig; }

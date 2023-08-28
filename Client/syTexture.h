@@ -27,20 +27,21 @@ namespace sy
 			, float rotate = 0.0f
 			, bool blink = false);
 
-		UINT GetWidth() { return mWidth; }
+		UINT GetWidth() const { return mWidth; }
 		void SetWidth(UINT width) { mWidth = width; }
-		UINT GetHeight() { return mHeight; }
+		UINT GetHeight() const { return mHeight; }
 		void SetHeight(UINT height) { mHeight = height; }
 
-		HDC GetHdc() { return mHdc; }
-		eTextureType GetType() { return mType; }
+		eTextureType GetType() const { return mType; }
 		void SetType(eTextureType type) { mType = type; }
-		Gdiplus::Image* GetImage() { return mImage; }
+
+		HDC GetHdc() const { return mHdc; }
+		Gdiplus::Image* GetImage() const { return mImage; }
 		void SetHBitmap(HBITMAP bitmap) { mBitmap = bitmap; }
-		HBITMAP GetBitmap() { return mBitmap; }
+		HBITMAP GetBitmap() const  { return mBitmap; }
 		void SetHdc(HDC hdc) { mHdc = hdc; }
 
-		COLORREF GetTexturePixel(int x, int y) { return GetPixel(mHdc, x, y); }
+		COLORREF GetTexturePixel(int x, int y) const { return GetPixel(mHdc, x, y); }
 
 		void SetScale(Vector2 scale) { mScale = scale; }
 

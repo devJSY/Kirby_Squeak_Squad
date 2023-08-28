@@ -17,7 +17,7 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other) {};
         virtual void OnCollisionExit(class Collider* other) {};
 
-        GameObject* GetOwner() { return mOwner; }
+        GameObject* GetOwner() const { return mOwner; }
 
     private:
         GameObject* mOwner; // 이펙트를 생성한 오브젝트  

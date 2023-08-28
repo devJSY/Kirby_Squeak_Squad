@@ -23,10 +23,8 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other);
 
-        eStarState GetStarState() { return mState; }
-        void TakeInhaled() { mInhaled = true; }
         eStarState GetStarState() const { return mState; }
-
+        void TakeInhaled() { mInhaled = true; }
 
     private:
         void Active();
