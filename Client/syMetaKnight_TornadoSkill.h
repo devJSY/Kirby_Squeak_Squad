@@ -3,6 +3,12 @@
 
 namespace sy
 {
+    enum class eMetaKnight_TornadoSkillState
+    {
+        Active,
+        Dead,
+    };
+
     class MetaKnight;
     class MetaKnight_TornadoSkill : public Effects
     {
@@ -17,6 +23,14 @@ namespace sy
 
         virtual void OnCollisionEnter(class Collider* other);
         virtual void OnCollisionStay(class Collider* other);
+
+    private:
+        eMetaKnight_TornadoSkillState   mState;
+        class Transform*                mTransform;
+        class Animator*                 mAnimator;
+        eDirection                      mDir;
+        float                           mDuration;
+        bool                            mbActive;
     };
 }
 

@@ -19,7 +19,7 @@ namespace sy
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-		GetComponent<Collider>()->SetSize(Vector2(42.f, 73.5f));
+		AddComponent<Collider>()->SetSize(Vector2(42.f, 73.5f));
 
 		// 텍스쳐 로드
 		Texture* MetaKnight_SlashSkill_Right_Tex = ResourceManager::Load<Texture>(L"MetaKnight_SlashSkill_Right_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\MetaKnight_SlashSkill_Right.bmp");
