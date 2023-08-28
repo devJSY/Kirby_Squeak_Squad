@@ -858,6 +858,12 @@
     <ClInclude Include="syMetaKnight_AttackArea.h">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\MetaKnight_AttackArea</Filter>
     </ClInclude>
+    <ClInclude Include="syMetaKnight_SlashSkill.h">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\SlashSkill</Filter>
+    </ClInclude>
+    <ClInclude Include="syMetaKnight_TornadoSkill.h">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1255,6 +1261,12 @@
     </ClCompile>
     <ClCompile Include="syMetaKnight_AttackArea.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\MetaKnight_AttackArea</Filter>
+    </ClCompile>
+    <ClCompile Include="syMetaKnight_SlashSkill.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\SlashSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syMetaKnight_TornadoSkill.cpp">
+      <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
