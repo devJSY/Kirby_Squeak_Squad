@@ -378,9 +378,7 @@ namespace sy
 			|| mState == eDefaultKirbyState::Inhaled_Jump
 			|| mState == eDefaultKirbyState::Inhaled_Turn
 			|| mState == eDefaultKirbyState::Inhaled_Drop
-			|| mState == eDefaultKirbyState::Inhaled_Land
-			|| mState == eDefaultKirbyState::Inhaled_Down
-			|| mState == eDefaultKirbyState::Inhaled_Skill)
+			|| mState == eDefaultKirbyState::Inhaled_Land)
 		{
 			mState = eDefaultKirbyState::Inhaled_Damage;
 
@@ -2094,6 +2092,10 @@ namespace sy
 			{
 				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 
 		// Inhaled_Skill
@@ -2132,6 +2134,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 	}
 
@@ -2253,6 +2259,10 @@ namespace sy
 			{
 				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 
 		// Inhaled_Skill
@@ -2291,6 +2301,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 	}
 
@@ -2412,6 +2426,10 @@ namespace sy
 			{
 				SceneManager::GetInventory()->AddItem(mInhaledObjectInfo.AbilityType);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 
 		// Inhaled_Skill
@@ -2450,6 +2468,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 	}
 
@@ -2582,6 +2604,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 	}
 
@@ -2666,6 +2692,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 	}
 
@@ -2736,6 +2766,10 @@ namespace sy
 
 				rigidbody->SetVelocity(Dir);
 			}
+
+			// 흡수 오브젝트 정보 초기화
+			mInhaledObjectInfo.ObjType = InhaledObjectType::End;
+			mInhaledObjectInfo.AbilityType = eAbilityType::End;
 		}
 
 		if (mRigidBody->IsGround())

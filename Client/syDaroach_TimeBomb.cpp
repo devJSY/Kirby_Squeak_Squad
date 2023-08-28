@@ -43,9 +43,9 @@ namespace sy
 		Texture* Daroach_TimeBomb_Fire_Tex = ResourceManager::Load<Texture>(L"Daroach_TimeBomb_Fire_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_TimeBomb_Fire.bmp");
 		Texture* Daroach_TimeBomb_FireEnd_Tex = ResourceManager::Load<Texture>(L"Daroach_TimeBomb_FireEnd_Tex", L"..\\Resources\\Enemy\\Boss\\Daroach\\Daroach_TimeBomb_FireEnd.bmp");
 
-		mAnimator->CreateAnimation(Daroach_TimeBomb_Tex, L"Daroach_TimeBomb", Vector2::Zero, Vector2(32.f, 31.f), Vector2(32.f, 0.f), 0.1f, 4);
-		mAnimator->CreateAnimation(Daroach_TimeBomb_Fire_Tex, L"Daroach_TimeBomb_Fire", Vector2::Zero, Vector2(45.f, 112.f), Vector2(45.f, 0.f), 0.1f, 3, Vector2(0.f, -40.f));
-		mAnimator->CreateAnimation(Daroach_TimeBomb_FireEnd_Tex, L"Daroach_TimeBomb_FireEnd", Vector2::Zero, Vector2(58.f, 160.f), Vector2(58.f, 0.f), 0.1f, 4, Vector2(0.f, -64.f));
+		mAnimator->CreateAnimation(Daroach_TimeBomb_Tex, L"Daroach_TimeBomb", Vector2::Zero, Vector2(32.f, 31.f), Vector2(32.f, 0.f), 0.05f, 4);
+		mAnimator->CreateAnimation(Daroach_TimeBomb_Fire_Tex, L"Daroach_TimeBomb_Fire", Vector2::Zero, Vector2(45.f, 112.f), Vector2(45.f, 0.f), 0.05f, 3, Vector2(0.f, -40.f));
+		mAnimator->CreateAnimation(Daroach_TimeBomb_FireEnd_Tex, L"Daroach_TimeBomb_FireEnd", Vector2::Zero, Vector2(58.f, 160.f), Vector2(58.f, 0.f), 0.05f, 4, Vector2(0.f, -64.f));
 
 		mAnimator->PlayAnimation(L"Daroach_TimeBomb", true);
 
