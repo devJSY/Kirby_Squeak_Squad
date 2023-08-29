@@ -33,6 +33,7 @@ namespace sy
 
 		eInventoryItemType GetInventoryItemType() const { return mInventoryItemType; }
 		eAbilityType GetAbilityType() const { return mAbilityType; }
+		eItemType GetItemType() const { return mItemType; }
 
 		UINT GetSlotNumber() const { return mSlotNumber; }
 		void SetSlotNumber(UINT idx) { mSlotNumber = idx; }

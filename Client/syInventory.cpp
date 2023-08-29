@@ -74,7 +74,9 @@ namespace sy
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Ninja", L"..\\Resources\\Video\\Ninja", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Spark", L"..\\Resources\\Video\\Spark", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Sword", L"..\\Resources\\Video\\Sword", 0.03f);
-		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal", L"..\\Resources\\Video\\Heal", 0.03f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal_persimmon", L"..\\Resources\\Video\\Heal\\persimmon", 0.03f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal_Bacchus", L"..\\Resources\\Video\\Heal\\Bacchus", 0.03f);
+		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Heal_Omelet", L"..\\Resources\\Video\\Heal\\Omelet", 0.03f);
 		mAnimator->CreateAnimationFolder(L"Inventory_Transform_Non", L"..\\Resources\\Video\\Non", 0.03f);
 		mAnimator->SetAffectedCamera(false);
 
@@ -92,7 +94,7 @@ namespace sy
 		}
 
 		// 임시 믹스 효과 추가하기
-		if (Input::GetKeyDown(eKeyCode::T))
+		if (Input::GetKeyDown(eKeyCode::H))
 		{
 			AddItem(eItemType::Bacchus);
 			AddItem(eItemType::Omelet);
@@ -240,7 +242,13 @@ namespace sy
 								if (mFocusItem->GetInventoryItemType() == eInventoryItemType::AbilityItem)
 									SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetAbilityType());
 								else
+								{
 									SceneManager::GetPlayer()->Recovery(10);
+									if(mFocusItem->GetItemType() == eItemType::Bacchus)
+										SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal_Bacchus", false);
+									else if (mFocusItem->GetItemType() == eItemType::Omelet)
+										SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal_Omelet", false);
+								}
 							}
 						}
 					}

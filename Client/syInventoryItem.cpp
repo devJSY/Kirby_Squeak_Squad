@@ -116,6 +116,8 @@ namespace sy
 		Texture* Bubble_Tex = ResourceManager::Load<Texture>(L"Bubble_InventoryItem_Tex", L"..\\Resources\\UI\\Item_Bubble.bmp");
 		Texture* Items_Tex = ResourceManager::Load<Texture>(L"Items_Tex", L"..\\Resources\\Item\\Items.bmp");
 
+		Bubble_Tex->SetScale(Vector2(1.3f, 1.3f));
+
 		mBubbleAnimator = AddComponent<Animator>();
 		mItemAnimator = AddComponent<Animator>();
 

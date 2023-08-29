@@ -160,5 +160,13 @@ namespace sy
 		{
 			SceneManager::GetInventory()->AddItem(eAbilityType::Tornado);
 		}
+		else if (mType == eDanceSceneType::Level6_BossClear)
+		{
+			SceneManager::GetInventory()->AddItem(eItemType::Bacchus);
+		}
+		else if (mType == eDanceSceneType::Level7_BossClear)
+		{
+			SceneManager::GetInventory()->AddItem(eItemType::Omelet);
+		}
 	}
 }
