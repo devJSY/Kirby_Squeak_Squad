@@ -22,6 +22,7 @@
 #include "syTransformEffect.h"
 #include "syObject.h"
 #include "syCamera.h"
+#include "syInput.h"
 
 namespace sy
 {
@@ -99,6 +100,16 @@ namespace sy
 			{
 				mLife -= 1;
 			}		
+		}
+
+		if (Input::GetKeyDown(eKeyCode::ENTER))
+		{
+			mCurHp += 10;
+		}
+
+		if (mCurHp > 100)
+		{
+			mCurHp = 100;
 		}
 
 		if (mbDamaged)

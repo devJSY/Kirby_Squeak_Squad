@@ -15,7 +15,10 @@ namespace sy
 		, mRedTex(nullptr)
 		, mPinkTex(nullptr)
 		, mDecreaseHP(0.f)
+		, mIncreaseHP(0.f)
+		, mHpBarDelay(0.f)
 	{		
+		mIncreaseHP = (float)SceneManager::GetPlayer()->GetCurHP();
 	}
 
 	HPbarUI::~HPbarUI()
@@ -35,22 +38,27 @@ namespace sy
 
 	void HPbarUI::Update()
 	{
-		static float time = 0.f;
+		float PlayerCurHP = (float)SceneManager::GetPlayer()->GetCurHP();
 
-		time += Time::DeltaTime();
-
-		// 1초후에 감소
-		if (time > 1.f)
+		if (SceneManager::GetPlayer()->IsDamaged())
+			mHpBarDelay += Time::DeltaTime();
+		else
 		{
-			if ((int)mDecreaseHP > SceneManager::GetPlayer()->GetCurHP())
-				mDecreaseHP -= (float)Time::DeltaTime() * 15.f;
-			else
-			{
-				time = 0.f;
-				mDecreaseHP = (float)SceneManager::GetPlayer()->GetCurHP();
-			}
+			mDecreaseHP = mIncreaseHP;
+			mHpBarDelay = 0.f;
+		}
+		
+		// 1초후에 감소
+		if (mHpBarDelay > 1.f)
+		{
+			if ((int)mDecreaseHP > PlayerCurHP)
+				mDecreaseHP -= (float)Time::DeltaTime() * 15.f;	
 		}
 
+		if ((int)mIncreaseHP < PlayerCurHP)		
+			mIncreaseHP += (float)Time::DeltaTime() * 15.f;		
+		else		
+			mIncreaseHP = PlayerCurHP;		
 
 		UI::Update();
 	}
@@ -58,8 +66,6 @@ namespace sy
 	void HPbarUI::Render(HDC hdc)
 	{
 		Player* player = SceneManager::GetPlayer();
-		int hp = player->GetCurHP();
-		float fhp = (float)hp / player->GetMaxHP();
 		
 		TransparentBlt(hdc, 44, 176, mBarTex->GetWidth(), mBarTex->GetHeight(), mBarTex->GetHdc()
 			, 0, 0, mBarTex->GetWidth(), mBarTex->GetHeight(), RGB(255, 0, 255));
@@ -67,8 +73,8 @@ namespace sy
 		TransparentBlt(hdc, 50, 178, (int)(mRedTex->GetWidth() * (mDecreaseHP / player->GetMaxHP())), mRedTex->GetHeight(), mRedTex->GetHdc()
 			, 0, 0, (int)(mRedTex->GetWidth() * (mDecreaseHP / player->GetMaxHP())), mRedTex->GetHeight(), RGB(255, 0, 255));
 
-		TransparentBlt(hdc, 50, 178, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), mPinkTex->GetHdc()
-			, 0, 0, (int)(mPinkTex->GetWidth() * fhp), mPinkTex->GetHeight(), RGB(255, 0, 255));
+		TransparentBlt(hdc, 50, 178, (int)(mPinkTex->GetWidth() * (mIncreaseHP / player->GetMaxHP())), mPinkTex->GetHeight(), mPinkTex->GetHdc()
+			, 0, 0, (int)(mPinkTex->GetWidth() * (mIncreaseHP / player->GetMaxHP())), mPinkTex->GetHeight(), RGB(255, 0, 255));
 
 		UI::Render(hdc);
 	}

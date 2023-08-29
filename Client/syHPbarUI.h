@@ -20,6 +20,8 @@ namespace sy
 		Texture* mRedTex;
 
 		float	mDecreaseHP;
+		float	mIncreaseHP;
+		float	mHpBarDelay;
 	};
 
 }
