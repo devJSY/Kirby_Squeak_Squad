@@ -25,6 +25,7 @@
 #include "syCrimp.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
+#include "syPengy.h"
 
 #include "syBlockin.h"
 #include "sySirKibble.h"
@@ -47,8 +48,8 @@ namespace sy
 		Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
 		crimp->GetComponent<Transform>()->SetPosition(Vector2(362.f, 45.f));
 
-		WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee->GetComponent<Transform>()->SetPosition(Vector2(888.f, 45.f));
+		Pengy* pengy = object::Instantiate<Pengy>(eLayerType::Enemy);
+		pengy->GetComponent<Transform>()->SetPosition(Vector2(888.f, 45.f));
 
 		WaddleDee* waddleDee2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee2->GetComponent<Transform>()->SetPosition(Vector2(1180.f, 18.f));

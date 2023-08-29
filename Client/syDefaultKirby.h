@@ -150,5 +150,3 @@ namespace sy
 		InhaledObjectInfo			mInhaledObjectInfo;
 	};
 }
-
-

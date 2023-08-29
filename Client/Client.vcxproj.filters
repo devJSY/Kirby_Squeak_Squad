@@ -451,6 +451,21 @@
     <Filter Include="Contents\GameObject\InventoryItem\MixItem">
       <UniqueIdentifier>{d6885d57-56e6-48a3-a365-1643680ee515}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Sparky">
+      <UniqueIdentifier>{f1a28a6f-9378-44ee-b557-438f8c978134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\BioSpark">
+      <UniqueIdentifier>{99f1be7c-a298-4081-b6e5-9bc2990c0094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Twister">
+      <UniqueIdentifier>{a40e776c-6fdb-431c-869a-ead8b909c55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Pengy">
+      <UniqueIdentifier>{9d29ce5c-2c88-41bb-9fff-01213f86c49e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Pengy\Pengy_AttackArea">
+      <UniqueIdentifier>{013627e2-0b50-4e82-8b82-fb1ce1fd6dff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -864,6 +879,12 @@
     <ClInclude Include="syMetaKnight_TornadoSkill.h">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill</Filter>
     </ClInclude>
+    <ClInclude Include="syPengy.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Pengy</Filter>
+    </ClInclude>
+    <ClInclude Include="syPengy_AttackArea.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Pengy\Pengy_AttackArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1267,6 +1288,12 @@
     </ClCompile>
     <ClCompile Include="syMetaKnight_TornadoSkill.cpp">
       <Filter>Contents\GameObject\Enemy\Boss\MetaKnight\TornadoSkill</Filter>
+    </ClCompile>
+    <ClCompile Include="syPengy.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Pengy</Filter>
+    </ClCompile>
+    <ClCompile Include="syPengy_AttackArea.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Pengy\Pengy_AttackArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
