@@ -31,6 +31,7 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		eInventoryItemType GetInventoryItemType() const { return mInventoryItemType; }
 		eAbilityType GetAbilityType() const { return mAbilityType; }
 
 		UINT GetSlotNumber() const { return mSlotNumber; }

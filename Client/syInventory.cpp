@@ -237,7 +237,10 @@ namespace sy
 								&& SceneManager::GetPlayer()->GetActiveKirby()->IsTransformableCheck())
 							{				
 								Destroy(mFocusItem);
-								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetAbilityType());
+								if (mFocusItem->GetInventoryItemType() == eInventoryItemType::AbilityItem)
+									SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetAbilityType());
+								else
+									SceneManager::GetPlayer()->Recovery(10);
 							}
 						}
 					}

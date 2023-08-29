@@ -234,7 +234,9 @@ namespace sy
 			{
 				// 위치설정
 				// 화면크기 이동한 거리, 화면 비율만큼 계산
-				SceneManager::GetInventory()->SetMixItem(this);
+				if(SceneManager::GetInventory()->GetFocusItem()->GetInventoryItemType() == eInventoryItemType::AbilityItem
+					&& GetInventoryItemType() == eInventoryItemType::AbilityItem)
+					SceneManager::GetInventory()->SetMixItem(this);
 			}			
 		}
 
