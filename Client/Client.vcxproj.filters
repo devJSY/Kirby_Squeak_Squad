@@ -244,9 +244,6 @@
     <Filter Include="Contents\GameObject\InventoryItem">
       <UniqueIdentifier>{69c749c9-477d-43f3-8493-3b6c668fe1b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\MixItem">
-      <UniqueIdentifier>{d6885d57-56e6-48a3-a365-1643680ee515}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Effects\Landing_Effect">
       <UniqueIdentifier>{6a543664-a43b-4678-bc78-e2ea02ae28bc}</UniqueIdentifier>
     </Filter>
@@ -450,6 +447,9 @@
     </Filter>
     <Filter Include="Contents\GameObject\Enemy\Boss\MetaKnight\MetaKnight_AttackArea">
       <UniqueIdentifier>{16b7d379-53c2-4693-a01a-5d23a8ecb721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\InventoryItem\MixItem">
+      <UniqueIdentifier>{d6885d57-56e6-48a3-a365-1643680ee515}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -700,7 +700,7 @@
       <Filter>Contents\GameObject\InventoryItem</Filter>
     </ClInclude>
     <ClInclude Include="syMixItem.h">
-      <Filter>Contents\GameObject\MixItem</Filter>
+      <Filter>Contents\GameObject\InventoryItem\MixItem</Filter>
     </ClInclude>
     <ClInclude Include="syLanding_Effect.h">
       <Filter>Contents\GameObject\Effects\Landing_Effect</Filter>
@@ -1104,7 +1104,7 @@
       <Filter>Contents\GameObject\InventoryItem</Filter>
     </ClCompile>
     <ClCompile Include="syMixItem.cpp">
-      <Filter>Contents\GameObject\MixItem</Filter>
+      <Filter>Contents\GameObject\InventoryItem\MixItem</Filter>
     </ClCompile>
     <ClCompile Include="syLanding_Effect.cpp">
       <Filter>Contents\GameObject\Effects\Landing_Effect</Filter>

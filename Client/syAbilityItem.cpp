@@ -10,6 +10,7 @@
 #include "syRigidbody.h"
 #include "syTransform.h"
 #include "syDefaultKirby.h"
+#include "syInventoryItem.h"
 
 namespace sy
 {

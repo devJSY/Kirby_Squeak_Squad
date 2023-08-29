@@ -102,11 +102,6 @@ namespace sy
 			}		
 		}
 
-		if (Input::GetKeyDown(eKeyCode::ENTER))
-		{
-			mCurHp += 10;
-		}
-
 		if (mCurHp > 100)
 		{
 			mCurHp = 100;

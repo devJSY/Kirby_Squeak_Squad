@@ -1,5 +1,6 @@
 #pragma once
 #include "syGameObject.h"
+#include "syInventoryItem.h"
 
 namespace sy
 {
@@ -15,7 +16,8 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void AddItem(eAbilityType type);
+		void AddItem(eAbilityType AbilityType);
+		void AddItem(eItemType ItemType);
 		void AddMixItem();
 		void SetMixItem(InventoryItem* item) { mMixItem = item; }
 		bool IsFullSlot() const

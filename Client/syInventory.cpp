@@ -5,7 +5,6 @@
 #include "syTransform.h"
 #include "syApplication.h"
 #include "syAnimator.h"
-#include "syInventoryItem.h"
 #include "syObject.h"
 #include "syInput.h"
 #include "syCollider.h"
@@ -90,6 +89,13 @@ namespace sy
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			SceneManager::GetInventory()->AddMixItem();
+		}
+
+		// 임시 믹스 효과 추가하기
+		if (Input::GetKeyDown(eKeyCode::T))
+		{
+			AddItem(eItemType::Bacchus);
+			AddItem(eItemType::Omelet);
 		}
 
 		// Damage 애니메이션 재생 이후 재생
@@ -227,11 +233,11 @@ namespace sy
 						if (Length <= SlotRadius)
 						{
 							// 변신할 타입이 자기자신이 아니면서 변신가능한 상태이면 적용
-							if (mFocusItem->GetType() != SceneManager::GetPlayer()->GetAbilityType()
+							if (mFocusItem->GetAbilityType() != SceneManager::GetPlayer()->GetAbilityType()
 								&& SceneManager::GetPlayer()->GetActiveKirby()->IsTransformableCheck())
 							{				
 								Destroy(mFocusItem);
-								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetType());
+								SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetAbilityType());
 							}
 						}
 					}
@@ -362,15 +368,29 @@ namespace sy
 		}
 	}
 
-	void Inventory::AddItem(eAbilityType type)
+	void Inventory::AddItem(eAbilityType AbilityType)
 	{
 		for (size_t i = 0; i < 5; i++)
 		{
 			// 비어있는 슬롯에 생성
 			if (mSlot[i] == nullptr)
 			{
-				InventoryItem* item = new InventoryItem(type, (UINT)i);
-				mSlot[i] = item;				
+				InventoryItem* item = new InventoryItem(AbilityType, (UINT)i);
+				mSlot[i] = item;
+				break;
+			}
+		}
+	}
+
+	void Inventory::AddItem(eItemType ItemType)
+	{
+		for (size_t i = 0; i < 5; i++)
+		{
+			// 비어있는 슬롯에 생성
+			if (mSlot[i] == nullptr)
+			{
+				InventoryItem* item = new InventoryItem(ItemType, (UINT)i);
+				mSlot[i] = item;
 				break;
 			}
 		}
