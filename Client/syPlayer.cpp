@@ -23,6 +23,7 @@
 #include "syObject.h"
 #include "syCamera.h"
 #include "syInput.h"
+#include "syHPbarUI.h"
 
 namespace sy
 {
@@ -94,6 +95,7 @@ namespace sy
 		// 임시 체력 무제한처리
 		if (mCurHp <= 0.f)
 		{
+			SceneManager::GetHPbarUI()->SetIncreaseHP(100.f);
 			mCurHp = 100;
 
 			if (mLife > 0)

@@ -41,24 +41,33 @@ namespace sy
 		float PlayerCurHP = (float)SceneManager::GetPlayer()->GetCurHP();
 
 		if (SceneManager::GetPlayer()->IsDamaged())
-			mHpBarDelay += Time::DeltaTime();
-		else
 		{
-			mDecreaseHP = mIncreaseHP;
-			mHpBarDelay = 0.f;
+			mHpBarDelay += Time::DeltaTime();			
 		}
-		
-		// 1초후에 감소
+
+		// 체력 감소시 서서히 감소 하도록 설정
 		if (mHpBarDelay > 1.f)
 		{
 			if ((int)mDecreaseHP > PlayerCurHP)
-				mDecreaseHP -= (float)Time::DeltaTime() * 15.f;	
+				mDecreaseHP -= (float)Time::DeltaTime() * 15.f;
+			else
+			{
+				mHpBarDelay = 0.f;
+				mDecreaseHP = PlayerCurHP;
+			}
 		}
 
-		if ((int)mIncreaseHP < PlayerCurHP)		
-			mIncreaseHP += (float)Time::DeltaTime() * 15.f;		
-		else		
-			mIncreaseHP = PlayerCurHP;		
+		// 체력 회복시 서서히 증가하도록 설정
+		if ((int)mIncreaseHP < PlayerCurHP)
+			mIncreaseHP += (float)Time::DeltaTime() * 30.f;
+		else
+		{
+			mIncreaseHP = PlayerCurHP;
+			if ((int)mDecreaseHP < PlayerCurHP)
+			{
+				mDecreaseHP = mIncreaseHP;
+			}
+		}
 
 		UI::Update();
 	}

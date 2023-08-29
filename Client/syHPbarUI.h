@@ -14,6 +14,8 @@ namespace sy
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		void SetIncreaseHP(float hp) { mIncreaseHP = hp; }
+
 	private:
 		Texture* mBarTex;
 		Texture* mPinkTex;

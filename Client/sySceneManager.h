@@ -39,6 +39,7 @@ namespace sy
 
 		static Player* GetPlayer() { return mPlayer; }
 		static Inventory* GetInventory() { return mInventory; }
+		static HPbarUI* GetHPbarUI() { return mHPbarUI; }
 
 	private:
 		// 트리 자료구조

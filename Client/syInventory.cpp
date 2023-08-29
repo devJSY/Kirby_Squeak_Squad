@@ -12,6 +12,8 @@
 #include "syTime.h"
 #include "syMixItem.h"
 #include "syPlayer.h"
+#include "syResourceManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -242,12 +244,18 @@ namespace sy
 								if (mFocusItem->GetInventoryItemType() == eInventoryItemType::AbilityItem)
 									SceneManager::GetPlayer()->PlayerTransformations(mFocusItem->GetAbilityType());
 								else
-								{
-									SceneManager::GetPlayer()->Recovery(10);
-									if(mFocusItem->GetItemType() == eItemType::Bacchus)
+								{								
+									if (mFocusItem->GetItemType() == eItemType::Bacchus)
+									{
+										SceneManager::GetPlayer()->Recovery(25);
 										SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal_Bacchus", false);
+									}
 									else if (mFocusItem->GetItemType() == eItemType::Omelet)
+									{
+										SceneManager::GetPlayer()->Recovery(50);
 										SceneManager::GetInventory()->GetComponent<Animator>()->PlayAnimation(L"Inventory_Transform_Heal_Omelet", false);
+									}
+									ResourceManager::Find<Sound>(L"Transform_Sound")->Play(false);
 								}
 							}
 						}
