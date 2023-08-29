@@ -290,6 +290,9 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syLevel1_Stage4Scene.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySparky.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syStar_Effect.cpp"
 
 
