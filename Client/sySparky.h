@@ -5,10 +5,11 @@ namespace sy
 {
     enum class eSparkyState
     {
-        Move,
+        Idle,
         Jump,
-        SkillReady,
-        Skill,
+        Drop,
+        AttackReady,
+        Attack,
         Damage,
         Dead,
         Inhaled,
@@ -26,8 +27,6 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other);
-        virtual void OnCollisionStay(class Collider* other);
-        virtual void OnCollisionExit(class Collider* other);
 
         virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
         virtual void TakeInhaled(math::Vector2 InhaleDir) override;
@@ -37,10 +36,14 @@ namespace sy
         eSparkyState GetSparkyState() const { return mState; }
 
     private:
-        void Move();
+        void CheckPixelCollision();
+
+    private:
+        void Idle();
         void Jump();
-        void SkillReady();
-        void Skill();
+        void Drop();
+        void AttackReady();
+        void Attack();
         void Damage();
         void Dead();
         void Inhaled();
@@ -49,8 +52,11 @@ namespace sy
         eSparkyState	     mState;
         class Animator*      mAnimator;
         class Transform*     mTransform;
+        class Rigidbody*     mRigidBody;
+        eDirection			 mDir;
 
         float               mAttackDelay;
+        float				mStateChangeDelay;
     };
 }
 

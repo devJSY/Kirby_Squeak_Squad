@@ -466,6 +466,9 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\Pengy\Pengy_AttackArea">
       <UniqueIdentifier>{013627e2-0b50-4e82-8b82-fb1ce1fd6dff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\Sparky\Sparky_AttackArea">
+      <UniqueIdentifier>{02c5d407-dbec-4c41-b97f-ef8a0ff1230d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

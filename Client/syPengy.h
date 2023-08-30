@@ -26,8 +26,6 @@ namespace sy
         virtual void Render(HDC hdc);
 
         virtual void OnCollisionEnter(class Collider* other);
-        virtual void OnCollisionStay(class Collider* other) {};
-        virtual void OnCollisionExit(class Collider* other) {};
 
         virtual void TakeHit(int DamageAmount, math::Vector2 HitDir) override;
         virtual void TakeInhaled(math::Vector2 InhaleDir) override;

@@ -48,17 +48,20 @@ namespace sy
 		Crimp* crimp = object::Instantiate<Crimp>(eLayerType::Enemy);
 		crimp->GetComponent<Transform>()->SetPosition(Vector2(362.f, 45.f));
 
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(545.f, 110.f));
+
 		Pengy* pengy = object::Instantiate<Pengy>(eLayerType::Enemy);
 		pengy->GetComponent<Transform>()->SetPosition(Vector2(888.f, 45.f));
+
+		WaddleDee* waddleDee1 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+		waddleDee1->GetComponent<Transform>()->SetPosition(Vector2(1070.f, 130.f));
 
 		WaddleDee* waddleDee2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee2->GetComponent<Transform>()->SetPosition(Vector2(1180.f, 18.f));
 
 		WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(1368.f, 85.f));
-
-		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(545.f, 110.f));
 
 
 		// 백그라운드 설정
