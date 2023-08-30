@@ -4,6 +4,8 @@
 #include "syEnemy.h"
 #include "sySparky.h"
 #include "syPlayer.h"
+#include "syResourceManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -15,6 +17,8 @@ namespace sy
 		Collider* col = AddComponent<Collider>();
 		col->SetColliderType(eColliderType::Sphere);
 		col->SetRadius(20.f);
+
+		ResourceManager::Load<Sound>(L"SparkSound", L"..\\Resources\\Sound\\Effect\\Spark.wav")->Play(true);
 	}
 
 	Sparky_AttackArea::~Sparky_AttackArea()
@@ -36,6 +40,7 @@ namespace sy
 				|| mOwner->GetSparkyState() == eSparkyState::Attack))
 		{
 			Destroy(this);
+			ResourceManager::Find<Sound>(L"SparkSound")->Stop(true);
 		}
 
 		Effects::Update();

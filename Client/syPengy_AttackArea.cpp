@@ -4,6 +4,8 @@
 #include "syEnemy.h"
 #include "syPengy.h"
 #include "syPlayer.h"
+#include "syResourceManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -22,6 +24,8 @@ namespace sy
 			else			
 				col->SetOffset(Vector2(-35.f, 0.f));				
 		}
+
+		ResourceManager::Load<Sound>(L"IceSkill_Sound", L"..\\Resources\\Sound\\Effect\\IceSkill.wav")->Play(true);
 	}
 
 	Pengy_AttackArea::~Pengy_AttackArea()
@@ -43,6 +47,7 @@ namespace sy
 				|| mOwner->GetPengyState() == ePengyState::Attack))
 		{
 			Destroy(this);
+			ResourceManager::Find<Sound>(L"IceSkill_Sound")->Stop(true);
 		}
 
 		Effects::Update();
