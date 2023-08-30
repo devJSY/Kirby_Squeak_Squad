@@ -54,7 +54,7 @@ namespace sy
 		pengy->GetComponent<Transform>()->SetPosition(Vector2(118.f, 245.f));
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(118.f, 200.f));
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(100.f, 200.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
