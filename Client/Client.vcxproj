@@ -254,6 +254,7 @@
     <ClInclude Include="syTornadoKirby.h" />
     <ClInclude Include="syTornado_Effect.h" />
     <ClInclude Include="syTransformEffect.h" />
+    <ClInclude Include="syTwister.h" />
     <ClInclude Include="syVocalVolcanoScene.h" />
     <ClInclude Include="syWaddleDee.h" />
     <ClInclude Include="sySirKibble.h" />
@@ -399,6 +400,7 @@
     <ClCompile Include="syTornadoKirby.cpp" />
     <ClCompile Include="syTornado_Effect.cpp" />
     <ClCompile Include="syTransformEffect.cpp" />
+    <ClCompile Include="syTwister.cpp" />
     <ClCompile Include="syVocalVolcanoScene.cpp" />
     <ClCompile Include="syWaddleDee.cpp" />
     <ClCompile Include="sySirKibble.cpp" />

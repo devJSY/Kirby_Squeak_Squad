@@ -46,12 +46,12 @@ namespace sy
 		Vector2 Animationoffset = Vector2(0.f, 10.f);
 
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Idle", Vector2(256.f, 0.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 1.f, 1, Animationoffset);
-		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Idle", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Idle", Vector2(256.f, 0.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 1.f, 1, Animationoffset);
 
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Jump", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Jump", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 		
-		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Drop", Vector2(256.f, 0.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Drop", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Drop", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_AttackReady", Vector2(0.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.05f, 2, Animationoffset);
@@ -415,7 +415,7 @@ namespace sy
 		if (Len < 200.f && mStateChangeDelay > 1.f)
 		{
 			int randomJumpheight = (std::rand() % 100) + 100;
-			Vector2 vel = Vector2(0.f, -randomJumpheight);
+			Vector2 vel = Vector2(0.f, float(-randomJumpheight));
 
 			if (mDir == eDirection::RIGHT)
 			{

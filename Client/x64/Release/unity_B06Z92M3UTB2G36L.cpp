@@ -323,6 +323,9 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syTransformEffect.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syTwister.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syVocalVolcanoScene.cpp"
 
 
