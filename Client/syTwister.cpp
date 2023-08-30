@@ -105,6 +105,14 @@ namespace sy
 		if (player == nullptr)
 			return;
 
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
+
 		// 스킬 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
@@ -118,6 +126,14 @@ namespace sy
 		if (player == nullptr)
 			return;
 
+		// Inhale 상태에선 무시
+		DefaultKirby* kirby = dynamic_cast<DefaultKirby*>(player->GetActiveKirby());
+		if (kirby != nullptr)
+		{
+			if (kirby->GetKirbyState() == eDefaultKirbyState::Inhale_1 || kirby->GetKirbyState() == eDefaultKirbyState::Inhale_2)
+				return;
+		}
+
 		// 스킬 → 커비 방향
 		Vector2 Dir = player->GetComponent<Transform>()->GetPosition() - GetComponent<Transform>()->GetPosition();
 
@@ -126,9 +142,6 @@ namespace sy
 
 	void Twister::TakeHit(int DamageAmount, math::Vector2 HitDir)
 	{
-		if (mState == eTwisterState::Skill)
-			return;
-
 		Damaged(DamageAmount);
 
 		// 이미 데미지 상태면 애니메이션, 피격 넉백 처리하지않음
@@ -137,6 +150,7 @@ namespace sy
 
 		mState = eTwisterState::Damage;
 		mStateChangeDelay = 0.f;
+		mRigidBody->SetFloat(false);
 
 		if (HitDir != Vector2::Zero)
 		{
@@ -355,6 +369,7 @@ namespace sy
 
 			mState = eTwisterState::Skill;
 			mAttackDelay = 0.f;
+			mRigidBody->SetFloat(true);
 		}
 	}
 
@@ -371,12 +386,13 @@ namespace sy
 
 			mState = eTwisterState::Idle;
 			mStateChangeDelay = 0.f;
+			mRigidBody->SetFloat(false);
 		}
 
 		Vector2 pos = mTransform->GetPosition();
 		mSkillDir.Normalize();
-		pos += mSkillDir * 70.f * Time::DeltaTime();
-		mTransform->SetPosition(pos);
+		pos += mSkillDir * 100.f * Time::DeltaTime();
+		mTransform->SetPosition(pos);	
 	}
 
 	void Twister::Damage()
