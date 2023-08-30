@@ -9,6 +9,7 @@
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
 #include "syTime.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -56,6 +57,9 @@ namespace sy
 		mAnimator->CreateAnimation(Monster_Death_Tex, L"Twister_Death", Vector2::Zero, Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
 
 		mAnimator->PlayAnimation(L"Twister_Right_Idle", true);
+
+		ResourceManager::Load<Sound>(L"TornadoSkill_Sound", L"..\\Resources\\Sound\\Effect\\TornadoSkill.wav");
+
 
 		Enemy::Initialize();
 	}
@@ -370,6 +374,7 @@ namespace sy
 			mState = eTwisterState::Skill;
 			mAttackDelay = 0.f;
 			mRigidBody->SetFloat(true);
+			ResourceManager::Find<Sound>(L"TornadoSkill_Sound")->Play(false);
 		}
 	}
 

@@ -11,6 +11,8 @@
 #include "syTime.h"
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
+#include "sySound.h"
+#include "syHeavyKnight_AttackArea.h"
 
 namespace sy
 {
@@ -70,6 +72,7 @@ namespace sy
 
 		mAnimator->PlayAnimation(L"HeavyKnight_Right_Idle", true);
 
+		ResourceManager::Load<Sound>(L"SwordKirbyAttackSound", L"..\\Resources\\Sound\\Effect\\SwordKirbyAttack.wav");
 
 		Enemy::Initialize();
 	}
@@ -482,6 +485,10 @@ namespace sy
 			--mSlashCount;
 			mStateChangeDelay = 0.f;
 			mRigidBody->SetVelocity(vel);
+			ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
+
+			HeavyKnight_AttackArea* attackArea = new HeavyKnight_AttackArea(this);
+			object::ActiveSceneAddGameObject(eLayerType::Effect, attackArea);
 		}
 	}
 
@@ -519,6 +526,7 @@ namespace sy
 
 					--mSlashCount;
 					mRigidBody->SetVelocity(vel);
+					ResourceManager::Find<Sound>(L"SwordKirbyAttackSound")->Play(false);
 				}
 			}
 		}

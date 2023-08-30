@@ -107,6 +107,9 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syHeavyKnight.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syHeavyKnight_AttackArea.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syHotHead_Fire.cpp"
 
 

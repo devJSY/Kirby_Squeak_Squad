@@ -478,6 +478,9 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight">
       <UniqueIdentifier>{f41b0780-7cf3-4856-bbb8-e61fcc1520c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea">
+      <UniqueIdentifier>{48da6025-4efa-41b6-9e81-d2790ea3d3ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -909,6 +912,9 @@
     <ClInclude Include="syHeavyKnight.h">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight</Filter>
     </ClInclude>
+    <ClInclude Include="syHeavyKnight_AttackArea.h">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1330,6 +1336,9 @@
     </ClCompile>
     <ClCompile Include="syHeavyKnight.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight</Filter>
+    </ClCompile>
+    <ClCompile Include="syHeavyKnight_AttackArea.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
