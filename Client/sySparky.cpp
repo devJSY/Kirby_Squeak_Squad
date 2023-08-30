@@ -382,33 +382,186 @@ namespace sy
 
 	void Sparky::Idle()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+		mAttackDelay += Time::DeltaTime();
+
+		// 플레이어 방향을 바라보도록 설정
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 Dir = PlayerPos - mTransform->GetPosition();
+		if (Dir.x > 0.f)
+		{
+			if (mDir == eDirection::LEFT)
+			{
+				mAnimator->PlayAnimation(L"Sparky_Right_Idle", true);
+				mTransform->SetDirection(eDirection::RIGHT);
+				mDir = eDirection::RIGHT;
+			}
+		}
+		else
+		{
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"Sparky_Left_Idle", true);
+				mTransform->SetDirection(eDirection::LEFT);
+				mDir = eDirection::LEFT;
+			}
+		}
+
+		// Jump
+		if (mStateChangeDelay > 1.f)
+		{
+			Vector2 vel = Vector2(0.f, -200.f);
+
+			if (mDir == eDirection::RIGHT)
+			{
+				mAnimator->PlayAnimation(L"Sparky_Right_Jump", false);
+				vel.x += 50.f;
+			}
+			else
+			{
+				mAnimator->PlayAnimation(L"Sparky_Left_Jump", false);
+				vel.x -= 50.f;
+			}
+
+			mRigidBody->SetVelocity(vel);
+			mState = eSparkyState::Jump;
+			mStateChangeDelay = 0.f;
+		}
+
+		// 특정 조건일때 스킬 
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+
+		if (Len < 50.f && mAttackDelay > 1.f)
+		{
+			if (PlayerPos.x > mTransform->GetPosition().x)
+				mDir = eDirection::RIGHT;
+			else
+				mDir = eDirection::LEFT;
+
+			mTransform->SetDirection(mDir);
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_AttackReady", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_AttackReady", true);
+
+			mState = eSparkyState::AttackReady;
+			mAttackDelay = 0.f;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void Sparky::Jump()
 	{
+		Vector2 vel = mRigidBody->GetVelocity();
+
+		if (vel.y >= 0.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_Drop", true);
+
+			mState = eSparkyState::Drop;
+		}
 	}
 
 	void Sparky::Drop()
 	{
+		if (mRigidBody->IsGround())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_Idle", true);
+
+			mState = eSparkyState::Idle;
+			mRigidBody->SetVelocity(Vector2::Zero);
+		}
 	}
 
 	void Sparky::AttackReady()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 1.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_Attack", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_Attack", true);
+
+
+
+			mState = eSparkyState::Attack;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void Sparky::Attack()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 3.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_Drop", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_Drop", true);
+
+			mState = eSparkyState::Drop;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void Sparky::Damage()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (GetCurHP() <= 0.f)
+			{
+				mAnimator->PlayAnimation(L"Sparky_Death", false);
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+				mState = eSparkyState::Dead;
+			}
+			else
+			{
+				if (mDir == eDirection::RIGHT)
+					mAnimator->PlayAnimation(L"Sparky_Right_Drop", true);
+				else
+					mAnimator->PlayAnimation(L"Sparky_Left_Drop", true);
+
+				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+
+				mState = eSparkyState::Drop;
+			}
+		}
 	}
 
 	void Sparky::Dead()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			Destroy(this);
+		}
 	}
 
 	void Sparky::Inhaled()
 	{
+		mRigidBody->SetGround(true);
+
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"Sparky_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"Sparky_Left_Idle", true);
+
+			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
+
+			mState = eSparkyState::Idle;
+		}
 	}
 }
