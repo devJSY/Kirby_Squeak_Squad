@@ -25,6 +25,8 @@
 #include "syBlockin.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
+#include "syHeavyKnight.h"
+#include "syTwister.h"
 
 
 #include "sySirKibble.h"
@@ -60,7 +62,13 @@ namespace sy
 		waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(1218.f, 160.f));
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(726.f, 92.f));
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(800.f, 92.f));
+
+		HeavyKnight* heavyKnight = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
+		heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(700.f, 90.f));
+
+		Twister* twister = object::Instantiate<Twister>(eLayerType::Enemy);
+		twister->GetComponent<Transform>()->SetPosition(Vector2(1400.f, 80.f));
 
 
 		// 백그라운드 설정
