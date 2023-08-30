@@ -55,12 +55,6 @@ namespace sy
 		WaddleDee* waddleDee2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
 		waddleDee2->GetComponent<Transform>()->SetPosition(Vector2(1025.f, 46.f));
 
-		WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(1279.f, 79.f));
-
-		WaddleDee* waddleDee4 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-		waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(1218.f, 160.f));
-
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(800.f, 92.f));
 
@@ -70,6 +64,8 @@ namespace sy
 		Twister* twister = object::Instantiate<Twister>(eLayerType::Enemy);
 		twister->GetComponent<Transform>()->SetPosition(Vector2(1400.f, 80.f));
 
+		Twister* twister2 = object::Instantiate<Twister>(eLayerType::Enemy);
+		twister2->GetComponent<Transform>()->SetPosition(Vector2(1200.f, 79.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정

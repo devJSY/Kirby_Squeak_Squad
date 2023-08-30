@@ -406,7 +406,7 @@ namespace sy
 		{
 			if (GetCurHP() <= 0.f)
 			{
-				mAnimator->PlayAnimation(L"HotHead_Death", false);
+				mAnimator->PlayAnimation(L"Twister_Death", false);
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 				mState = eTwisterState::Dead;
 			}
@@ -415,7 +415,7 @@ namespace sy
 				if (mDir == eDirection::RIGHT)
 					mAnimator->PlayAnimation(L"Twister_Right_Idle", true);
 				else
-					mAnimator->PlayAnimation(L"Twisterd_Left_Idle", true);
+					mAnimator->PlayAnimation(L"Twister_Left_Idle", true);
 
 				mRigidBody->SetVelocity(Vector2(0.f, 0.f));
 

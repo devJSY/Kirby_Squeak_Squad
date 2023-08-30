@@ -26,6 +26,8 @@
 #include "syInput.h"
 #include "syWaddleDee.h"
 
+#include "syTwister.h"
+
 namespace sy
 {
 	AbilityTestScene::AbilityTestScene()
@@ -130,21 +132,25 @@ namespace sy
 		// Enemy Spawn
 		if (Input::GetKeyDown(eKeyCode::M))
 		{
-			WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDee->GetComponent<Transform>()->SetPosition(Vector2(80.f, 50.f));
-			waddleDee->Initialize();
+			//WaddleDee* waddleDee = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDee->GetComponent<Transform>()->SetPosition(Vector2(80.f, 50.f));
+			//waddleDee->Initialize();
 
-			WaddleDee* waddleDe2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDe2->GetComponent<Transform>()->SetPosition(Vector2(170.f, 50.f));
-			waddleDe2->Initialize();
+			//WaddleDee* waddleDe2 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDe2->GetComponent<Transform>()->SetPosition(Vector2(170.f, 50.f));
+			//waddleDe2->Initialize();
 
-			WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(40.f, 100.f));
-			waddleDee3->Initialize();
+			//WaddleDee* waddleDee3 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDee3->GetComponent<Transform>()->SetPosition(Vector2(40.f, 100.f));
+			//waddleDee3->Initialize();
 
-			WaddleDee* waddleDee4 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
-			waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
-			waddleDee4->Initialize();
+			//WaddleDee* waddleDee4 = object::Instantiate<WaddleDee>(eLayerType::Enemy);
+			//waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
+			//waddleDee4->Initialize();
+
+			Twister* twister = object::Instantiate<Twister>(eLayerType::Enemy);
+			twister->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
+			twister->Initialize();
 		}
 
 		Scene::Update();

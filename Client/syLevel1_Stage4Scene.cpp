@@ -23,6 +23,9 @@
 #include "syPrismPlainsScene.h"
 #include "syDanceScene.h"
 #include "sySirKibble.h"
+#include "syHeavyKnight.h"
+#include "syPengy.h"
+#include "syHotHead.h"
 
 namespace sy
 {
@@ -39,9 +42,19 @@ namespace sy
 	{
 		// 적 생성
 		SirKibble* sirKibble1 = object::Instantiate<SirKibble>(eLayerType::Enemy);
+		sirKibble1->GetComponent<Transform>()->SetPosition(Vector2(178.f, 122.f));
 
 		SirKibble* sirKibble2 = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirKibble2->GetComponent<Transform>()->SetPosition(Vector2(42.f, 169.f));
+
+		HeavyKnight* heavyKnight = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
+		heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(150.f, 280.f));
+
+		Pengy* pengy = object::Instantiate<Pengy>(eLayerType::Enemy);
+		pengy->GetComponent<Transform>()->SetPosition(Vector2(118.f, 245.f));
+
+		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(118.f, 200.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정
@@ -90,12 +103,6 @@ namespace sy
 
 		// 생성한 모든 오브젝트 초기화 
 		Scene::Initialize();
-
-		// Init 후 적 데이터 셋팅
-		Transform* sirKibble1tr = sirKibble1->GetComponent<Transform>();
-		sirKibble1tr->SetPosition(Vector2(178.f, 122.f));
-		sirKibble1tr->SetDirection(eDirection::LEFT);
-		sirKibble1->GetComponent<Animator>()->PlayAnimation(L"SirKibble_Left_Idle", true);
 	}
 
 	void Level1_Stage4Scene::Update()

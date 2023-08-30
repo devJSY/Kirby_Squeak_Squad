@@ -45,7 +45,7 @@ namespace sy
 		mRigidBody = AddComponent<Rigidbody>();
 
 		// 局聪皋捞记 积己
-		Vector2 Animationoffset = Vector2(0.f, 5.f);
+		Vector2 Animationoffset = Vector2(0.f, 10.f);
 
 		mAnimator->CreateAnimation(Pengy_Right_Tex, L"Pengy_Right_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(Pengy_Left_Tex, L"Pengy_Left_Idle", Vector2::Zero, Vector2(256.f, 256.f), Vector2(256.f, 0.f), 1.f, 1, Animationoffset);
