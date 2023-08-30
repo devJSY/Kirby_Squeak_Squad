@@ -6,6 +6,7 @@ namespace sy
     enum class eHeavyKnightState
     {
         Idle,
+        Walk,
         SlashReady,
         Slash,
         Damage,
@@ -41,6 +42,7 @@ namespace sy
 
     private:
         void Idle();
+        void Walk();
         void SlashReady();
         void Slash();
         void Damage();
@@ -56,6 +58,8 @@ namespace sy
 
         float                   mDirDuration;
         float                   mAttackDelay;
+        float				    mStateChangeDelay;
+        UINT					mSlashCount;
     };
 }
 

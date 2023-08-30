@@ -25,7 +25,9 @@
 #include "syForeGround.h"
 #include "syInput.h"
 #include "syWaddleDee.h"
-#include "syTwister.h"
+
+
+#include "syHeavyKnight.h"
 
 namespace sy
 {
@@ -147,9 +149,9 @@ namespace sy
 			//waddleDee4->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
 			//waddleDee4->Initialize();
 
-			Twister* twister = object::Instantiate<Twister>(eLayerType::Enemy);
-			twister->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
-			twister->Initialize();
+			HeavyKnight* heavyKnight = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
+			heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(230.f, 100.f));
+			heavyKnight->Initialize();
 		}
 
 		Scene::Update();

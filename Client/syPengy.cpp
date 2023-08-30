@@ -383,13 +383,6 @@ namespace sy
 
 	void Pengy::Walk()
 	{
-		if (GetCurHP() <= 0.f)
-		{
-			mAnimator->PlayAnimation(L"Pengy_Death", false);
-			mRigidBody->SetVelocity(Vector2(0.f, 0.f));
-			mState = ePengyState::Dead;
-		}
-
 		// ÁÂ¿ì ÀÌµ¿
 		Vector2 pos = mTransform->GetPosition();
 		if (mDir == eDirection::RIGHT)
