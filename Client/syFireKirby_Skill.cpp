@@ -51,7 +51,6 @@ namespace sy
 
 	FireKirby_Skill::~FireKirby_Skill()
 	{
-		ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);
 	}
 
 	void FireKirby_Skill::Initialize()

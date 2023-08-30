@@ -242,6 +242,12 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syNumberUI.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syPengy.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syPengy_AttackArea.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syPlacardUI.cpp"
 
 
@@ -282,6 +288,12 @@
 
 
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syLevel1_Stage4Scene.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySparky.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\sySparky_AttackArea.cpp"
 
 
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syStar_Effect.cpp"

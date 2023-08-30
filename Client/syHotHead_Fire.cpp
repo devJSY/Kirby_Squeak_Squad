@@ -7,6 +7,8 @@
 #include "syTransform.h"
 #include "syPlayer.h"
 #include "syHotHead.h"
+#include "syResourceManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -38,6 +40,7 @@ namespace sy
 		animator->CreateAnimation(Enemies_Left, L"HotHead_Fire_Left", Vector2(460.f, 3308.f), Vector2(24.f, 24.f), Vector2(-24.f, 0.f), 0.08f, 3);
 		
 		animator->PlayAnimation(L"HotHead_Fire_Right", true);
+		ResourceManager::Load<Sound>(L"FireSkill_Sound", L"..\\Resources\\Sound\\Effect\\FireSkill.wav")->Play(true);
 	}
 
 	HotHead_Fire::~HotHead_Fire()
@@ -62,6 +65,7 @@ namespace sy
 		if (hothead == nullptr || hothead->GetHotHeadState() != eHotHeadState::Attack)
 		{
 			Destroy(this);
+			ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);
 		}
 
 
