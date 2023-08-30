@@ -465,7 +465,7 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"Pengy_Left_Attack", true);
 
-			Pengy_AttackArea* AttackArea = new Pengy_AttackArea(this, Vector2(50.f, 30.f));
+			Pengy_AttackArea* AttackArea = new Pengy_AttackArea(this);
 			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, AttackArea);
 
 			mRigidBody->SetVelocity(Vector2(0.f, 0.f));

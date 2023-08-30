@@ -35,10 +35,7 @@
 #include "syWaddleDee.h"
 #include "syHotHead.h"
 #include "syHotHead_Fire.h"
-
-#include "syBlockin.h"
-#include "sySirKibble.h"
-#include "syCrimp.h"
+#include "sySparky.h"
 
 namespace sy
 {
@@ -65,6 +62,9 @@ namespace sy
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(1050.f, 100.f));
+
+		Sparky* sparky = object::Instantiate<Sparky>(eLayerType::Enemy);
+		sparky->GetComponent<Transform>()->SetPosition(Vector2(1470.f, 120.f));
 
 
 		// 백그라운드 설정

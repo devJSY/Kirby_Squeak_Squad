@@ -244,6 +244,7 @@
     <ClInclude Include="syLevel1_Stage3Scene.h" />
     <ClInclude Include="syLevel1_Stage4Scene.h" />
     <ClInclude Include="sySparky.h" />
+    <ClInclude Include="sySparky_AttackArea.h" />
     <ClInclude Include="syStar_Effect.h" />
     <ClInclude Include="syStepUI.h" />
     <ClInclude Include="syStarUI.h" />
@@ -388,6 +389,7 @@
     <ClCompile Include="syLevel1_Stage3Scene.cpp" />
     <ClCompile Include="syLevel1_Stage4Scene.cpp" />
     <ClCompile Include="sySparky.cpp" />
+    <ClCompile Include="sySparky_AttackArea.cpp" />
     <ClCompile Include="syStar_Effect.cpp" />
     <ClCompile Include="syStepUI.cpp" />
     <ClCompile Include="syStarUI.cpp" />

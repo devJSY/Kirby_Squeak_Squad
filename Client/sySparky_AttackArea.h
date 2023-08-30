@@ -5,13 +5,13 @@ namespace sy
 {
     using namespace math;
 
-    class Pengy;
-    class Pengy_AttackArea : public Effects
+    class Sparky;
+    class Sparky_AttackArea : public Effects
     {
-        friend class Pengy;
+        friend class Sparky;
     private:
-        Pengy_AttackArea(class Pengy* owner);
-        virtual ~Pengy_AttackArea();
+        Sparky_AttackArea(class Sparky* owner);
+        virtual ~Sparky_AttackArea();
 
         virtual void Initialize();
         virtual void Update();
@@ -21,6 +21,6 @@ namespace sy
         virtual void OnCollisionStay(class Collider* other);
 
     private:
-        Pengy* mOwner;
+        Sparky* mOwner;
     };
 }

@@ -891,6 +891,9 @@
     <ClInclude Include="sySparky.h">
       <Filter>Contents\GameObject\Enemy\Normal\Sparky</Filter>
     </ClInclude>
+    <ClInclude Include="sySparky_AttackArea.h">
+      <Filter>Contents\GameObject\Enemy\Normal\Sparky\Sparky_AttackArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1303,6 +1306,9 @@
     </ClCompile>
     <ClCompile Include="sySparky.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\Sparky</Filter>
+    </ClCompile>
+    <ClCompile Include="sySparky_AttackArea.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\Sparky\Sparky_AttackArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@
 #include "syPlayer.h"
 #include "syDefaultKirby.h"
 #include "syTime.h"
-#include "syPengy_AttackArea.h"
+#include "sySparky_AttackArea.h"
 
 namespace sy
 {
@@ -43,7 +43,7 @@ namespace sy
 		mRigidBody = AddComponent<Rigidbody>();
 
 		// 애니메이션 생성
-		Vector2 Animationoffset = Vector2(0.f, 5.f);
+		Vector2 Animationoffset = Vector2(0.f, 10.f);
 
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Idle", Vector2(256.f, 0.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 1.f, 1, Animationoffset);
 		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Idle", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 1.f, 1, Animationoffset);
@@ -54,11 +54,11 @@ namespace sy
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Drop", Vector2(256.f, 0.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Drop", Vector2::Zero, Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_AttackReady", Vector2(0.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
-		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_AttackReady", Vector2(0.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_AttackReady", Vector2(0.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.05f, 2, Animationoffset);
+		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_AttackReady", Vector2(0.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.05f, 2, Animationoffset);
 
-		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Attack", Vector2(0.f, 128.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 10, Animationoffset);
-		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Attack", Vector2(0.f, 128.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.1f, 10, Animationoffset);
+		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Attack", Vector2(0.f, 128.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.05f, 10, Animationoffset + Vector2(0.f, 10.f));
+		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Attack", Vector2(0.f, 128.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.05f, 10, Animationoffset + Vector2(0.f, 10.f));
 
 		mAnimator->CreateAnimation(Sparky_Right_Tex, L"Sparky_Right_Damage", Vector2(256.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.2f, 2, Animationoffset);
 		mAnimator->CreateAnimation(Sparky_Left_Tex, L"Sparky_Left_Damage", Vector2(256.f, 384.f), Vector2(128.f, 128.f), Vector2(128.f, 0.f), 0.2f, 2, Animationoffset);
@@ -407,10 +407,15 @@ namespace sy
 			}
 		}
 
+		// 특정 조건일때 스킬 
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+
 		// Jump
-		if (mStateChangeDelay > 1.f)
+		if (Len < 200.f && mStateChangeDelay > 1.f)
 		{
-			Vector2 vel = Vector2(0.f, -200.f);
+			int randomJumpheight = (std::rand() % 100) + 100;
+			Vector2 vel = Vector2(0.f, -randomJumpheight);
 
 			if (mDir == eDirection::RIGHT)
 			{
@@ -424,15 +429,13 @@ namespace sy
 			}
 
 			mRigidBody->SetVelocity(vel);
+			mRigidBody->SetGround(false);
 			mState = eSparkyState::Jump;
 			mStateChangeDelay = 0.f;
 		}
 
-		// 특정 조건일때 스킬 
-		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
-		Vector2 distance = PlayerPos - mTransform->GetPosition();
-		float Len = distance.Length();
 
+		// AttackReady
 		if (Len < 50.f && mAttackDelay > 1.f)
 		{
 			if (PlayerPos.x > mTransform->GetPosition().x)
@@ -493,7 +496,8 @@ namespace sy
 			else
 				mAnimator->PlayAnimation(L"Sparky_Left_Attack", true);
 
-
+			Sparky_AttackArea* AttackArea = new Sparky_AttackArea(this);
+			SceneManager::GetActiveScene()->AddGameObject(eLayerType::Effect, AttackArea);
 
 			mState = eSparkyState::Attack;
 			mStateChangeDelay = 0.f;

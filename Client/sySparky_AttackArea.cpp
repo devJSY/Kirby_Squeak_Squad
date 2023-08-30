@@ -1,46 +1,39 @@
-#include "syPengy_AttackArea.h"
+#include "sySparky_AttackArea.h"
 #include "syTransform.h"
 #include "syCollider.h"
 #include "syEnemy.h"
-#include "syPengy.h"
+#include "sySparky.h"
 #include "syPlayer.h"
 
 namespace sy
 {
-	Pengy_AttackArea::Pengy_AttackArea(Pengy* owner)
+	Sparky_AttackArea::Sparky_AttackArea(Sparky* owner)
 		: Effects(owner)
 		, mOwner(owner)
 	{
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 		Collider* col = AddComponent<Collider>();
-		col->SetSize(Vector2(50.f, 30.f));
-
-		if (mOwner != nullptr)
-		{
-			if (GetOwner()->GetComponent<Transform>()->GetDirection() == eDirection::RIGHT)			
-				col->SetOffset(Vector2(35.f, 0.f));			
-			else			
-				col->SetOffset(Vector2(-35.f, 0.f));				
-		}
+		col->SetColliderType(eColliderType::Sphere);
+		col->SetRadius(20.f);
 	}
 
-	Pengy_AttackArea::~Pengy_AttackArea()
+	Sparky_AttackArea::~Sparky_AttackArea()
 	{
 	}
 
-	void Pengy_AttackArea::Initialize()
+	void Sparky_AttackArea::Initialize()
 	{
 		Effects::Initialize();
 	}
 
-	void Pengy_AttackArea::Update()
+	void Sparky_AttackArea::Update()
 	{
 		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
-		// Pengy가 특정상태가 아니면 삭제
+		// Sparky가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
-			|| !(mOwner->GetPengyState() == ePengyState::AttackReady
-				|| mOwner->GetPengyState() == ePengyState::Attack))
+			|| !(mOwner->GetSparkyState() == eSparkyState::AttackReady
+				|| mOwner->GetSparkyState() == eSparkyState::Attack))
 		{
 			Destroy(this);
 		}
@@ -48,12 +41,12 @@ namespace sy
 		Effects::Update();
 	}
 
-	void Pengy_AttackArea::Render(HDC hdc)
+	void Sparky_AttackArea::Render(HDC hdc)
 	{
 		Effects::Render(hdc);
 	}
 
-	void Pengy_AttackArea::OnCollisionEnter(Collider* other)
+	void Sparky_AttackArea::OnCollisionEnter(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 
@@ -66,7 +59,7 @@ namespace sy
 		player->TakeHit(10, Dir);
 	}
 
-	void Pengy_AttackArea::OnCollisionStay(Collider* other)
+	void Sparky_AttackArea::OnCollisionStay(Collider* other)
 	{
 		Player* player = dynamic_cast<Player*>(other->GetOwner());
 
