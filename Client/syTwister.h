@@ -13,6 +13,7 @@ namespace sy
         End,
     };
 
+    // Tornado
     class Twister : public Enemy
     {
     public:

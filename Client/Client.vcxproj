@@ -180,6 +180,7 @@
     <ClInclude Include="syFireKirby.h" />
     <ClInclude Include="syFireKirby_Skill.h" />
     <ClInclude Include="syGambleGalaxyScene.h" />
+    <ClInclude Include="syHeavyKnight.h" />
     <ClInclude Include="syHotHead_Fire.h" />
     <ClInclude Include="syAbilityUI.h" />
     <ClInclude Include="syAnimation.h" />
@@ -327,6 +328,7 @@
     <ClCompile Include="syFireKirby.cpp" />
     <ClCompile Include="syFireKirby_Skill.cpp" />
     <ClCompile Include="syGambleGalaxyScene.cpp" />
+    <ClCompile Include="syHeavyKnight.cpp" />
     <ClCompile Include="syHotHead_Fire.cpp" />
     <ClCompile Include="syAbilityUI.cpp" />
     <ClCompile Include="syAnimation.cpp" />

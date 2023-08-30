@@ -13,7 +13,7 @@ namespace sy
         End,
     };
 
-
+    // Fire
     class HotHead : public Enemy
     {
     public:

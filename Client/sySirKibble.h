@@ -14,6 +14,7 @@ namespace sy
         End,
     };
 
+    // Cutter
 	class SirKibble : public Enemy
 	{
     public:

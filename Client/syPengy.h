@@ -15,6 +15,7 @@ namespace sy
         End,
     };
 
+    // Ice
     class Pengy : public Enemy
     {
     public:

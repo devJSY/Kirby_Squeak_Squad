@@ -16,6 +16,7 @@ namespace sy
         End,
     };
 
+    // Spark
     class Sparky : public Enemy
     {
     public:
