@@ -335,6 +335,12 @@ namespace sy
 
 		LevelSelectScene* scene = dynamic_cast<LevelSelectScene*>(SceneManager::GetScene(L"LevelSelectScene"));
 		scene->SetClearActiveUI(eLevelState::Level1);
+
+		// 강제 해금
+		scene->SetClearActiveUI(eLevelState::Level2);
+		scene->SetClearActiveUI(eLevelState::Level3);
+		scene->SetClearActiveUI(eLevelState::Level4);
+		scene->SetClearActiveUI(eLevelState::Level5);
 	}
 
 	void PrismPlainsScene::CreateDot()

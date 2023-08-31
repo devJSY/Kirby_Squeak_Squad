@@ -39,8 +39,6 @@ namespace sy
 
 	void Pengy_AttackArea::Update()
 	{
-		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-
 		// Pengy가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
 			|| !(mOwner->GetPengyState() == ePengyState::AttackReady
@@ -49,6 +47,8 @@ namespace sy
 			Destroy(this);
 			ResourceManager::Find<Sound>(L"IceSkill_Sound")->Stop(true);
 		}
+
+		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
 		Effects::Update();
 	}

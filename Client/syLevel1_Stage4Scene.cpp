@@ -26,6 +26,7 @@
 #include "syHeavyKnight.h"
 #include "syPengy.h"
 #include "syHotHead.h"
+#include "sySparky.h"
 
 namespace sy
 {
@@ -47,14 +48,14 @@ namespace sy
 		SirKibble* sirKibble2 = object::Instantiate<SirKibble>(eLayerType::Enemy);
 		sirKibble2->GetComponent<Transform>()->SetPosition(Vector2(42.f, 169.f));
 
-		HeavyKnight* heavyKnight = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
-		heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(150.f, 280.f));
+		Sparky* sparky = object::Instantiate<Sparky>(eLayerType::Enemy);
+		sparky->GetComponent<Transform>()->SetPosition(Vector2(116.f, 250.f));
 
 		Pengy* pengy = object::Instantiate<Pengy>(eLayerType::Enemy);
-		pengy->GetComponent<Transform>()->SetPosition(Vector2(118.f, 245.f));
+		pengy->GetComponent<Transform>()->SetPosition(Vector2(120.f, 280.f));
 
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
-		hotHead->GetComponent<Transform>()->SetPosition(Vector2(100.f, 200.f));
+		hotHead->GetComponent<Transform>()->SetPosition(Vector2(150.f, 280.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정

@@ -32,8 +32,6 @@ namespace sy
 
 	void Sparky_AttackArea::Update()
 	{
-		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-
 		// Sparky가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
 			|| !(mOwner->GetSparkyState() == eSparkyState::AttackReady
@@ -42,6 +40,8 @@ namespace sy
 			Destroy(this);
 			ResourceManager::Find<Sound>(L"SparkSound")->Stop(true);
 		}
+
+		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
 		Effects::Update();
 	}

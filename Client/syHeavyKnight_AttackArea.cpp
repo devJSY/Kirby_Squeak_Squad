@@ -37,8 +37,6 @@ namespace sy
 
 	void HeavyKnight_AttackArea::Update()
 	{
-		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
-
 		// HeavyKnight가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
 			|| !(mOwner->GetHeavyKnightState() == eHeavyKnightState::SlashReady
@@ -46,6 +44,8 @@ namespace sy
 		{
 			Destroy(this);
 		}
+
+		GetComponent<Transform>()->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
 
 		Effects::Update();
 	}

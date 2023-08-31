@@ -27,6 +27,7 @@
 #include "syHotHead_Fire.h"
 #include "syHeavyKnight.h"
 #include "syTwister.h"
+#include "syPengy.h"
 
 
 #include "sySirKibble.h"
@@ -58,14 +59,23 @@ namespace sy
 		HotHead* hotHead = object::Instantiate<HotHead>(eLayerType::Enemy);
 		hotHead->GetComponent<Transform>()->SetPosition(Vector2(800.f, 92.f));
 
+		Pengy* pengy = object::Instantiate<Pengy>(eLayerType::Enemy);
+		pengy->GetComponent<Transform>()->SetPosition(Vector2(410.f, 120.f));
+
 		HeavyKnight* heavyKnight = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
-		heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(700.f, 90.f));
+		heavyKnight->GetComponent<Transform>()->SetPosition(Vector2(620.f, 90.f));
+
+		HeavyKnight* heavyKnight2 = object::Instantiate<HeavyKnight>(eLayerType::Enemy);
+		heavyKnight2->GetComponent<Transform>()->SetPosition(Vector2(800.f, 90.f));
 
 		Twister* twister = object::Instantiate<Twister>(eLayerType::Enemy);
 		twister->GetComponent<Transform>()->SetPosition(Vector2(1400.f, 80.f));
 
 		Twister* twister2 = object::Instantiate<Twister>(eLayerType::Enemy);
 		twister2->GetComponent<Transform>()->SetPosition(Vector2(1200.f, 79.f));
+
+		Twister* twister3 = object::Instantiate<Twister>(eLayerType::Enemy);
+		twister3->GetComponent<Transform>()->SetPosition(Vector2(990.f, 60.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정

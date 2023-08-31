@@ -54,13 +54,6 @@ namespace sy
 
 	void HotHead_Fire::Update()
 	{
-		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
-		if (mDir == eDirection::RIGHT)
-			vec.x += 20.f;
-		else
-			vec.x -= 20.f;
-		mTransform->SetPosition(vec);
-
 		HotHead* hothead = dynamic_cast<HotHead*>(GetOwner());
 		if (hothead == nullptr || hothead->GetHotHeadState() != eHotHeadState::Attack)
 		{
@@ -68,6 +61,12 @@ namespace sy
 			ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);
 		}
 
+		Vector2 vec = GetOwner()->GetComponent<Transform>()->GetPosition();
+		if (mDir == eDirection::RIGHT)
+			vec.x += 20.f;
+		else
+			vec.x -= 20.f;
+		mTransform->SetPosition(vec);
 
 		Effects::Update();
 	}
