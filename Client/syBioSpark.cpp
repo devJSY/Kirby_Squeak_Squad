@@ -20,6 +20,7 @@ namespace sy
 		, mAnimator(nullptr)
 		, mTransform(nullptr)
 		, mRigidBody(nullptr)
+		, mCollider(nullptr)
 		, mDir(eDirection::RIGHT)
 		, mStateChangeDelay(0.f)
 	{
@@ -31,6 +32,45 @@ namespace sy
 
 	void BioSpark::Initialize()
 	{
+		Texture* BioSpark_Tex = ResourceManager::Load<Texture>(L"BioSpark_Tex", L"..\\Resources\\Enemy\\BioSpark\\BioSpark.bmp");
+		BioSpark_Tex->SetScale(Vector2(0.4f, 0.4f));
+
+		Texture* Monster_Death_Tex = ResourceManager::Load<Texture>(L"Monster_Death_Tex", L"..\\Resources\\Effect\\Monster_Death.bmp");
+
+		mAnimator = GetComponent<Animator>();
+		mTransform = GetComponent<Transform>();
+		mRigidBody = AddComponent<Rigidbody>();
+		mCollider = GetComponent<Collider>();
+
+		// 局聪皋捞记 积己
+		Vector2 Animationoffset = Vector2(0.f, 0.f);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Idle", Vector2::Zero, Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Idle", Vector2(0.f, 1440.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_ThrowShuriken", Vector2(0.f, 360.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.3f, 2, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_ThrowShuriken", Vector2(0.f, 1800.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.3f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Hide", Vector2(0.f, 540.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Hide", Vector2(0.f, 1980.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 1.f, 1, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Appear", Vector2(0.f, 720.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 3, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Appear", Vector2(0.f, 2160.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 3, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Hiding", Vector2(0.f, 900.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Hiding", Vector2(0.f, 2340.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Attack", Vector2(0.f, 1080.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 4, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Attack", Vector2(0.f, 2520.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 4, Animationoffset);
+
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Right_Damage", Vector2(0.f, 1260.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 2, Animationoffset);
+		mAnimator->CreateAnimation(BioSpark_Tex, L"BioSpark_Left_Damage", Vector2(0.f, 2700.f), Vector2(180.f, 180.f), Vector2(180.f, 0.f), 0.1f, 2, Animationoffset);
+
+		mAnimator->CreateAnimation(Monster_Death_Tex, L"HeavyKnight_Death", Vector2::Zero, Vector2(102.f, 102.f), Vector2(102.f, 0.f), 0.05f, 14);
+
+		mAnimator->PlayAnimation(L"HeavyKnight_Right_Idle", true);
+
+
 
 		Enemy::Initialize();
 	}
@@ -126,6 +166,8 @@ namespace sy
 			return;
 
 		mState = eBioSparkState::Damage;
+		mCollider->SetSize(Vector2(15.f, 15.f));
+		mCollider->SetOffset(Vector2::Zero);
 
 		if (HitDir != Vector2::Zero)
 		{
@@ -296,26 +338,134 @@ namespace sy
 
 	void BioSpark::Idle()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		if (mStateChangeDelay > 3.f)
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_BioSpark_Right_Hiding", false);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_BioSpark_Right_Hiding", false);
+
+			mState = eBioSparkState::Hiding;
+			mStateChangeDelay = 0.f;
+		}
+
+
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+		if (Len < 100.f && mStateChangeDelay > 1.f)
+		{
+			if (PlayerPos.x > mTransform->GetPosition().x)
+				mDir = eDirection::RIGHT;
+			else
+				mDir = eDirection::LEFT;
+
+			mTransform->SetDirection(mDir);
+
+			if (mDir == eDirection::RIGHT)
+			{
+				mCollider->SetOffset(Vector2(15.f, 0.f));
+				mAnimator->PlayAnimation(L"BioSpark_Right_Attack", false);
+			}
+			else
+			{
+				mCollider->SetOffset(Vector2(-15.f, 0.f));
+				mAnimator->PlayAnimation(L"BioSpark_Left_Attack", false);
+			}
+
+			mState = eBioSparkState::Attack;
+			mStateChangeDelay = 0.f;
+			mCollider->SetSize(Vector2(30.f, 15.f));			
+		}
 	}
 
 	void BioSpark::ThrowShuriken()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_Idle", true);
+
+			mState = eBioSparkState::Idle;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void BioSpark::Hide()
 	{
+		mStateChangeDelay += Time::DeltaTime();
+
+		Vector2 PlayerPos = SceneManager::GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 distance = PlayerPos - mTransform->GetPosition();
+		float Len = distance.Length();
+
+		if (Len < 100.f && mStateChangeDelay > 1.f)
+		{
+			if (PlayerPos.x > mTransform->GetPosition().x)
+				mDir = eDirection::RIGHT;
+			else
+				mDir = eDirection::LEFT;
+
+			mTransform->SetDirection(mDir);
+
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_Appear", false);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_Appear", false);
+
+			mState = eBioSparkState::Appear;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void BioSpark::Appear()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_ThrowShuriken", false);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_ThrowShuriken", false);
+
+			// 荐府八 积己
+
+			mState = eBioSparkState::ThrowShuriken;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void BioSpark::Hiding()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_Hide", true);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_Hide", true);
+
+			mState = eBioSparkState::Hide;
+			mStateChangeDelay = 0.f;
+		}
 	}
 
 	void BioSpark::Attack()
 	{
+		if (mAnimator->IsActiveAnimationComplete())
+		{
+			if (mDir == eDirection::RIGHT)
+				mAnimator->PlayAnimation(L"BioSpark_Right_Idle", true);
+			else
+				mAnimator->PlayAnimation(L"BioSpark_Left_Idle", true);
+				
+			mState = eBioSparkState::Idle;
+			mStateChangeDelay = 0.f;
+			mCollider->SetSize(Vector2(15.f, 15.f));
+			mCollider->SetOffset(Vector2::Zero);
+		}
 	}
 
 	void BioSpark::Damage()

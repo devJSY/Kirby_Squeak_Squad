@@ -58,6 +58,7 @@ namespace sy
         class Animator*     mAnimator;
         class Transform*    mTransform;
         class Rigidbody*    mRigidBody;
+        class Collider*     mCollider;
         eDirection			mDir;
 
         float				mStateChangeDelay;
