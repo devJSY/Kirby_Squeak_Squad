@@ -41,7 +41,7 @@ namespace sy
 	void MetaKnight::Initialize()
 	{
 		// 체력 설정
-		SetHP(900);
+		SetHP(800);
 
 		// 텍스쳐 로드
 		Texture* MetaKnight_Right_Tex = ResourceManager::Load<Texture>(L"MetaKnight_Right_Tex", L"..\\Resources\\Enemy\\Boss\\MetaKnight\\MetaKnight_Right.bmp");

@@ -17,6 +17,7 @@
 #include "syAnimator.h"
 #include "syTexture.h"
 #include "syResourceManager.h"
+#include "sySound.h"
 
 namespace sy
 {
@@ -53,10 +54,15 @@ namespace sy
 			animator->PlayAnimation(L"Inhale_Effect_Right", true);
 		else
 			animator->PlayAnimation(L"Inhale_Effect_Left", true);
+
+		ResourceManager::Load<Sound>(L"InhaleSkillSound", L"..\\Resources\\Sound\\Effect\\InhaleSkill.wav")->Play(true);
+		ResourceManager::Find<Sound>(L"InhaleSkillSound")->SetVolume(100.f);
 	}
 
 	Inhale_Effect::~Inhale_Effect()
 	{
+		ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
+
 		if (mTarget != nullptr)
 		{
 			Destroy(mTarget);

@@ -157,7 +157,6 @@ namespace sy
 		ResourceManager::Load<Sound>(L"BreathSound", L"..\\Resources\\Sound\\Effect\\Breath.wav");
 		ResourceManager::Load<Sound>(L"DamageSound", L"..\\Resources\\Sound\\Effect\\Damage.wav");
 		ResourceManager::Load<Sound>(L"FlySound", L"..\\Resources\\Sound\\Effect\\Fly.wav");
-		ResourceManager::Load<Sound>(L"InhaleSkillSound", L"..\\Resources\\Sound\\Effect\\InhaleSkill.wav");
 		ResourceManager::Load<Sound>(L"JumpSound", L"..\\Resources\\Sound\\Effect\\Jump.wav");
 		ResourceManager::Load<Sound>(L"LandSound", L"..\\Resources\\Sound\\Effect\\Land.wav");
 		ResourceManager::Load<Sound>(L"RunSound", L"..\\Resources\\Sound\\Effect\\Run.wav");
@@ -167,7 +166,6 @@ namespace sy
 		ResourceManager::Find<Sound>(L"BreathSound")->SetVolume(20.f);
 		ResourceManager::Find<Sound>(L"JumpSound")->SetVolume(100.f);
 		ResourceManager::Find<Sound>(L"FlySound")->SetVolume(100.f);
-		ResourceManager::Find<Sound>(L"InhaleSkillSound")->SetVolume(80.f);
 		ResourceManager::Find<Sound>(L"LandSound")->SetVolume(10.f);
 		ResourceManager::Find<Sound>(L"RunSound")->SetVolume(100.f);
 	}
@@ -967,10 +965,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -1094,9 +1088,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -1221,9 +1212,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 	}
 
@@ -1335,9 +1323,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1416,9 +1401,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1518,9 +1500,6 @@ namespace sy
 
 			mInhaleEffect = new Inhale_Effect(GetOwner());
 			object::ActiveSceneAddGameObject(eLayerType::Effect, mInhaleEffect);
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// Fly Start
@@ -1592,9 +1571,6 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_2;
 
 			inhaleTime = 0.f;
-
-			// 오디오 재생
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Play(true);
 		}
 
 		// 키입력이없으면서 타겟이 없을경우 Idle 로 변경
@@ -1608,9 +1584,6 @@ namespace sy
 			mState = eDefaultKirbyState::Idle;
 
 			inhaleTime = 0.f;
-
-			// 오디오 정지
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 몬스터를 먹으면 상태변환
@@ -1624,9 +1597,6 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
-
-			// 오디오 정지
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}
 
@@ -1646,9 +1616,6 @@ namespace sy
 			mState = eDefaultKirbyState::Inhale_3;
 
 			inhaleTime = 0.f;
-
-			// 오디오 정지
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 키입력이없으면서 타겟이 없을경우 Idle 로 변경
@@ -1662,9 +1629,6 @@ namespace sy
 			mState = eDefaultKirbyState::Idle;
 
 			inhaleTime = 0.f;
-
-			// 오디오 정지
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 
 		// 몬스터를 먹으면 상태변환
@@ -1678,9 +1642,6 @@ namespace sy
 			mState = eDefaultKirbyState::Inhaled;
 
 			inhaleTime = 0.f;
-
-			// 오디오 정지
-			ResourceManager::Find<Sound>(L"InhaleSkillSound")->Stop(true);
 		}
 	}
 
