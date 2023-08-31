@@ -481,6 +481,12 @@
     <Filter Include="Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea">
       <UniqueIdentifier>{48da6025-4efa-41b6-9e81-d2790ea3d3ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_Shuriken">
+      <UniqueIdentifier>{bfd05864-bebd-4397-8e50-3f2dc5ceb454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_AttackArea">
+      <UniqueIdentifier>{e7490da5-f646-494c-893e-736c803556a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -918,6 +924,12 @@
     <ClInclude Include="syBioSpark.h">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark</Filter>
     </ClInclude>
+    <ClInclude Include="syBioSpark_Shuriken.h">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="syBioSpark_AttackArea.h">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_AttackArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1345,6 +1357,12 @@
     </ClCompile>
     <ClCompile Include="syBioSpark.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark</Filter>
+    </ClCompile>
+    <ClCompile Include="syBioSpark_Shuriken.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="syBioSpark_AttackArea.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark\BioSpark_AttackArea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

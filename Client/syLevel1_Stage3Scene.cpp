@@ -28,10 +28,7 @@
 #include "syHeavyKnight.h"
 #include "syTwister.h"
 #include "syPengy.h"
-
-
-#include "sySirKibble.h"
-#include "syCrimp.h"
+#include "syBioSpark.h"
 
 namespace sy
 {
@@ -76,6 +73,12 @@ namespace sy
 
 		Twister* twister3 = object::Instantiate<Twister>(eLayerType::Enemy);
 		twister3->GetComponent<Transform>()->SetPosition(Vector2(990.f, 60.f));
+
+		BioSpark* bioSpark1 = object::Instantiate<BioSpark>(eLayerType::Enemy);
+		bioSpark1->GetComponent<Transform>()->SetPosition(Vector2(170.f, 60.f));
+
+		BioSpark* bioSpark2 = object::Instantiate<BioSpark>(eLayerType::Enemy);
+		bioSpark2->GetComponent<Transform>()->SetPosition(Vector2(1050.f, 60.f));
 
 		// 백그라운드 설정
 		Texture* tex = ResourceManager::Load<Texture>(L"World1_Backgrounds", L"..\\Resources\\Map\\World1_Backgrounds.bmp"); // 이미지 설정

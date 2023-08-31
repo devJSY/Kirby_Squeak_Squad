@@ -5,6 +5,12 @@
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syBioSpark.cpp"
 
 
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syBioSpark_AttackArea.cpp"
+
+
+#include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syBioSpark_Shuriken.cpp"
+
+
 #include "C:\Users\JSY\Desktop\Kirby_Squeak_Squad\Client\syBossEnemy.cpp"
 
 

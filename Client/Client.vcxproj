@@ -147,6 +147,8 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="syAbilityTestScene.h" />
     <ClInclude Include="syBioSpark.h" />
+    <ClInclude Include="syBioSpark_AttackArea.h" />
+    <ClInclude Include="syBioSpark_Shuriken.h" />
     <ClInclude Include="syBossEnemy.h" />
     <ClInclude Include="syCutterKirby_Skill.h" />
     <ClInclude Include="syAbilityItem.h" />
@@ -297,6 +299,8 @@
   <ItemGroup>
     <ClCompile Include="syAbilityTestScene.cpp" />
     <ClCompile Include="syBioSpark.cpp" />
+    <ClCompile Include="syBioSpark_AttackArea.cpp" />
+    <ClCompile Include="syBioSpark_Shuriken.cpp" />
     <ClCompile Include="syBossEnemy.cpp" />
     <ClCompile Include="syCutterKirby_Skill.cpp" />
     <ClCompile Include="syAbilityItem.cpp" />

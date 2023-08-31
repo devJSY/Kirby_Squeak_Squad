@@ -71,6 +71,7 @@ namespace sy
 		if (mState != eShurikenState::Dead && mStuckTarget != nullptr && mStuckTarget->GetGameObjectState() == eGameObjectState::Dead)
 		{
 			mAnimator->PlayAnimation(L"Destroy_Animation", false);
+			mStuckTarget = nullptr;
 			mState = eShurikenState::Dead;
 		}
 
@@ -241,7 +242,7 @@ namespace sy
 
 	void NinjaKirby_Shuriken::Move()
 	{
-		// 상하 이동
+		// 좌우 이동
 		Vector2 pos = mTransform->GetPosition();
 		if (mDir == eDirection::RIGHT)
 			pos.x += 300.f * Time::DeltaTime();
