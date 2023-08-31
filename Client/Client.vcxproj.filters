@@ -915,6 +915,9 @@
     <ClInclude Include="syHeavyKnight_AttackArea.h">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea</Filter>
     </ClInclude>
+    <ClInclude Include="syBioSpark.h">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -1339,6 +1342,9 @@
     </ClCompile>
     <ClCompile Include="syHeavyKnight_AttackArea.cpp">
       <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\HeavyKnight\HeavyKnight_AttackArea</Filter>
+    </ClCompile>
+    <ClCompile Include="syBioSpark.cpp">
+      <Filter>Contents\GameObject\Enemy\Normal\AbilityEnemy\BioSpark</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

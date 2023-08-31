@@ -2,7 +2,6 @@
 #include "syTexture.h"
 #include "syResourceManager.h"
 #include "syAnimator.h"
-#include "syHotHead_Fire.h"
 #include "syobject.h"
 #include "syTransform.h"
 #include "syInput.h"
