@@ -11,6 +11,7 @@
 #include "sySoundManager.h"
 #include "sySound.h"
 #include "syBossEnemy.h"
+#include "syHeavyKnight.h"
 
 namespace sy
 {
@@ -123,10 +124,21 @@ namespace sy
 			return;
 		}			
 
-		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
-		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
-		IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+		HeavyKnight* heavyKnight = dynamic_cast<HeavyKnight*>(other->GetOwner());
 
+		if (heavyKnight != nullptr)
+		{
+			IceEnemy = new Ice_Enemy(eIceEnemyType::Big);
+			object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
+			IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+
+		}
+		else
+		{
+			IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
+			object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
+			IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+		}
 		Destroy(other->GetOwner());
 	}
 
@@ -166,10 +178,22 @@ namespace sy
 			return;
 		}
 
-		IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
-		object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
-		IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+		HeavyKnight* heavyKnight = dynamic_cast<HeavyKnight*>(other->GetOwner());
 
+		if (heavyKnight != nullptr)
+		{
+			IceEnemy = new Ice_Enemy(eIceEnemyType::Big);
+			object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
+			IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+
+		}
+		else
+		{
+			IceEnemy = new Ice_Enemy(eIceEnemyType::Small);
+			object::ActiveSceneAddGameObject(eLayerType::Enemy, IceEnemy);
+			IceEnemy->GetComponent<Transform>()->SetPosition(other->GetOwner()->GetComponent<Transform>()->GetPosition());
+		}
+	
 		Destroy(other->GetOwner());
 	}
 }
