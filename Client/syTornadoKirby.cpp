@@ -163,7 +163,9 @@ namespace sy
 		else if (GetOwner()->GetPlayerMode() == ePlayerMode::PlayMode)
 		{
 			if (Input::GetKeyDown(eKeyCode::W) 
-				&& mState != eTornadoKirbyState::Skill)
+				&& mState != eTornadoKirbyState::Skill_Enter
+				&& mState != eTornadoKirbyState::Skill
+				&& mState != eTornadoKirbyState::Skill_Exit)
 			{
 				eDefaultKirbyState state = eDefaultKirbyState::Idle;
 
