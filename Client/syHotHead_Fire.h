@@ -19,6 +19,7 @@ namespace sy
         virtual void OnCollisionEnter(class Collider* other);
 
     private:
+        HotHead*            mOwner;
         class Transform*    mTransform;
         eDirection          mDir;
     };

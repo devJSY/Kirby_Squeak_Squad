@@ -14,6 +14,7 @@ namespace sy
 {
 	HotHead_Fire::HotHead_Fire(HotHead* owner)
 		: Effects(owner)
+		, mOwner(owner)
 		, mTransform(nullptr)
 		, mDir()
 	{
@@ -54,8 +55,9 @@ namespace sy
 
 	void HotHead_Fire::Update()
 	{
-		HotHead* hothead = dynamic_cast<HotHead*>(GetOwner());
-		if (hothead == nullptr || hothead->GetHotHeadState() != eHotHeadState::Attack)
+		if (mOwner == nullptr
+			|| mOwner->GetGameObjectState() == eGameObjectState::Dead
+			|| mOwner->GetHotHeadState() != eHotHeadState::Attack)
 		{
 			Destroy(this);
 			ResourceManager::Find<Sound>(L"FireSkill_Sound")->Stop(true);

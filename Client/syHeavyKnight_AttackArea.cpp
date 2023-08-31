@@ -39,6 +39,7 @@ namespace sy
 	{
 		// HeavyKnight가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
+			|| mOwner->GetGameObjectState() == eGameObjectState::Dead
 			|| !(mOwner->GetHeavyKnightState() == eHeavyKnightState::SlashReady
 				|| mOwner->GetHeavyKnightState() == eHeavyKnightState::Slash))
 		{

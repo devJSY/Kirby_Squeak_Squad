@@ -34,6 +34,7 @@ namespace sy
 	{
 		// Sparky가 특정상태가 아니면 삭제
 		if (mOwner == nullptr
+			|| mOwner->GetGameObjectState() == eGameObjectState::Dead
 			|| !(mOwner->GetSparkyState() == eSparkyState::AttackReady
 				|| mOwner->GetSparkyState() == eSparkyState::Attack))
 		{
