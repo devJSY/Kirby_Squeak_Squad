@@ -13,8 +13,8 @@
 - Swallow  - ↓ 
 - Portal - ↑
 - Inventory - Mouse
-- Level Unlock, Pixel Texture Render - T
 - Level Unlock - KeyPad 1 ~ 9
+- Level Clear Unlock, Pixel Texture Render - T
 - Add Random AbilityItem - R
 - Add Recovery item - H
 
