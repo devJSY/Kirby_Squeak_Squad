@@ -1,4 +1,31 @@
-# 📌 Kirby_Squeak_Squad 모작
+# 📌 Kirby_Squeak_Squad 
+
+
+# 📍 Youtube Link
+
+
+# 📍 Operation key
+
+- Move : ←, →
+- Release Transformations - W
+- Jump - A or D
+- Skill - S
+- Swallow  - ↓ 
+- Portal - ↑
+- Inventory - Mouse
+- Level Unlock, Pixel Texture Render - T
+- Level Unlock - KeyPad 1 ~ 9
+- Add Random AbilityItem - R
+- Add Recovery item - H
+
+- Skip Scene - MOUSE_MBTN or A or D
+
+# 📍 How to execute
+
+1. `<> Code ▼` Click
+2. Download ZIP
+3. Unzip
+4. Release → Client.exe execute
 
 # 📍 Inheritance Hierarchy
 
