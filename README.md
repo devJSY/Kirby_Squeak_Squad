@@ -7,18 +7,22 @@
 # 📍 Operation key
 
 - Move : ←, →
-- Release Transformations - W
-- Jump - A or D
-- Skill - S
-- Swallow  - ↓ 
-- Portal - ↑
-- Inventory - Mouse
-- Level Unlock - KeyPad 1 ~ 9
-- Level Clear Unlock, Pixel Texture Render - T
-- Add Random AbilityItem - R
-- Add Recovery item - H
+- Swallow : ↓ 
+- Portal : ↑
 
-- Skip Scene - MOUSE_MBTN or A or D
+- Release Transformations : W
+- Jump : A or D
+- Skill : S
+
+- Inventory : Mouse
+- Level Unlock : KeyPad 1 ~ 9
+- Level Clear Unlock, Pixel Texture Render : T
+
+- Add Random AbilityItem : R
+- Add Recovery item : H
+
+- Skip Scene : MOUSE_MBTN or A or D
+- Ability Test Room Monster Respawn : M
 
 # 📍 How to execute
 
