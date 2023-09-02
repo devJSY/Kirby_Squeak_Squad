@@ -137,7 +137,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // 해상도 256, 384
    sy::Application::Initialize(hWnd, { 256, 384 });
 
-
    if (!hWnd)
    {
       return FALSE;
