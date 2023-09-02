@@ -1,8 +1,13 @@
 # 📌 Kirby_Squeak_Squad 
 
+# 📍 Development Period
+
+- 2023-06-26 ~ 2023-08-31
+- 66 Days
 
 # 📍 Youtube Link
 
+[https://www.youtube.com/watch?v=U9areWMBVDg](https://www.youtube.com/watch?v=U9areWMBVDg)
 
 # 📍 Operation key
 
