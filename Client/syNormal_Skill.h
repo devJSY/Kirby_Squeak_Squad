@@ -22,9 +22,7 @@ namespace sy
         class Animator*     mAnimator;
         class Transform*    mTransform;
         eDirection          mDir;
-        bool                mbDestroy;
-      
+        bool                mbDestroy;      
 	};
-
 }
 

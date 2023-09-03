@@ -22,6 +22,5 @@ namespace sy
 
     private:
         class Transform* mTransform;
-
 	};
 }

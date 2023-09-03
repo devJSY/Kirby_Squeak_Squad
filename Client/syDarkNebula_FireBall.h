@@ -10,7 +10,6 @@ namespace sy
         End,
     };
 
-
     class DarkNebula;
 	class DarkNebula_FireBall : public Effects
 	{

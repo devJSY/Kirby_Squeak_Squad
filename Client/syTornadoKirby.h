@@ -25,7 +25,6 @@ namespace sy
 		End,
 	};
 
-
 	// A,D 점프 
 	// S 스킬
 	// W 변신능력 뱉기

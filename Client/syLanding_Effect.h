@@ -25,7 +25,6 @@ namespace sy
         class Transform*    mTransform;
         eLandingDir         mDir;
         float               mDuration;
-
 	};
 }
 

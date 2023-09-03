@@ -17,7 +17,6 @@ namespace sy
 		End,
 	};
 
-
 	class Ice_Enemy : public Enemy
 	{
 	public:

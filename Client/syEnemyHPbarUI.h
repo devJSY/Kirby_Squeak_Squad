@@ -29,5 +29,4 @@ namespace sy
 		bool		mbRenderTrig;
 		float		mUIActivetime;
 	};
-
 }

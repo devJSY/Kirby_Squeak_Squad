@@ -28,7 +28,6 @@ namespace sy
 		End,
 	};
 
-
     class DarkNebula : public BossEnemy
     {
 	public:
@@ -82,7 +81,6 @@ namespace sy
 
 		class DarkNebula_Border*	mBorder;
 		class DarkNebula_Eye*		mEye;
-
     };
 }
 

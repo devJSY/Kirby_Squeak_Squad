@@ -22,8 +22,7 @@ namespace sy
         eDirection          mDir;
         class Transform*    mTransform;
         class Rigidbody*    mRigidbody;
-        float               mDuration;
-    
+        float               mDuration;    
 	};
 }
 

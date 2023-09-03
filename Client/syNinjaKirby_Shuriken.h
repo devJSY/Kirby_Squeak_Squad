@@ -12,7 +12,6 @@ namespace sy
 		End,
 	};
 
-
     class NinjaKirby_Shuriken : public Effects
     {
     public:
@@ -43,7 +42,5 @@ namespace sy
         class GameObject*       mStuckTarget;
         math::Vector2           mStuckOffset;
         float                   mDuration;
-
-
     };
 }

@@ -18,7 +18,5 @@ namespace sy
     private:
         eDirection mDir;
         float      mColOffset;
-
 	};
-
 }

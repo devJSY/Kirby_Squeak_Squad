@@ -58,6 +58,5 @@ namespace sy
 		Vector2 mScale;
 		float mblinkTime;
 		float mblinkAlpha;
-
 	};
 }

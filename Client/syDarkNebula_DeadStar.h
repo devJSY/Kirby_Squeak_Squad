@@ -21,7 +21,6 @@ namespace sy
 		class Transform*	mTransform;
 		class Rigidbody*	mRigidbody;		
 		float				mDuration;
-
 	};
 }
 

@@ -44,6 +44,5 @@ namespace sy
         class Rigidbody*    mRigidBody;
         float				mDuration;
         bool				mInhaled;
-
 	};
 }

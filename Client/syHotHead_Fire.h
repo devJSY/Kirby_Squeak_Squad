@@ -23,6 +23,5 @@ namespace sy
         class Transform*    mTransform;
         eDirection          mDir;
     };
-
 }
 

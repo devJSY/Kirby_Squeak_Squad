@@ -18,6 +18,5 @@ namespace sy
 
     private:
         eDirection mDir;
-
     };
 }

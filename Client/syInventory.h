@@ -44,6 +44,5 @@ namespace sy
 		InventoryItem*					mMixItem;
 		float							mAngle;
 		std::vector<class MixItem*>		mMixItems;
-
 	};
 }
