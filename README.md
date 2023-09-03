@@ -22,7 +22,8 @@
 - Inventory : Mouse
 - Level Unlock : KeyPad 1 ~ 9
 - Level Clear Unlock, Pixel Texture Render : T
-
+- Collider Render : C
+ 
 - Add Random AbilityItem : R
 - Add Recovery item : H
 
